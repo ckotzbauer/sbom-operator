@@ -62,7 +62,7 @@ var _ = Describe("Registry", func() {
 
 	Describe("Storing image from DockerHub", func() {
 		It("should work correctly", func() {
-			testRegistry("hub", "ckotzbauer/integration-test-image:1.0.0")
+			testRegistry("hub", "docker.io/ckotzbauer/integration-test-image:1.0.0")
 		})
 	})
 
