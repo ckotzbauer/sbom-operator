@@ -14,3 +14,6 @@ fmt:
 # Run go vet against code
 vet:
 	go vet ./...
+
+test-registries:
+	go test github.com/ckotzbauer/sbom-git-operator/internal/registry

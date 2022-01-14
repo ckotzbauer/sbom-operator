@@ -5,6 +5,7 @@ go 1.17
 require (
 	github.com/docker/cli v20.10.12+incompatible
 	github.com/novln/docker-parser v1.0.0
+	github.com/onsi/ginkgo/v2 v2.0.0
 	github.com/sirupsen/logrus v1.8.1
 	k8s.io/api v0.23.1
 	k8s.io/apimachinery v0.23.1
@@ -51,6 +52,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
+	github.com/onsi/gomega v1.17.0
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/net v0.0.0-20211216030914-fe4d6282115f // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
