@@ -1,0 +1,21 @@
+{
+  "extends": [
+    "github>ckotzbauer/renovate-config:default",
+    "github>ckotzbauer/renovate-config:weekly"
+  ],
+  "packageRules": [
+    {
+      "matchPackageNames": [
+        "k8s.io/api",
+        "k8s.io/apimachinery",
+        "k8s.io/client-go"
+      ],
+      "reviewers": [
+        "ckotzbauer"
+      ],
+      "groupName": [
+        "Kubernetes versions"
+      ]
+    }
+  ]
+}

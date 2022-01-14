@@ -1,0 +1,47 @@
+project_name: sbom-git-operator
+before:
+  hooks:
+    - go mod tidy -compat=1.17
+builds:
+  - env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarm:
+      - "6"
+      - "7"
+    ignore:
+      - goos: linux
+        goarch: "386"
+    ldflags:
+      - -s -w -X main.Version={{.Version}} -X main.Commit={{.Commit}} -X main.Date={{.CommitDate}} -X main.BuiltBy=goreleaser
+    mod_timestamp: "{{.CommitTimestamp}}"
+    flags:
+      - -trimpath
+
+sboms:
+  - artifacts: archive
+    args: ["$artifact", "--file", "$document", "--output", "json"]
+
+snapshot:
+  name_template: "{{ .Version }}"
+
+release:
+  disable: true
+
+changelog:
+  skip: true
+
+source:
+  enabled: true
+
+signs:
+  - cmd: cosign
+    certificate: '${artifact}.pem'
+    args:
+      - sign-blob
+      - '--output-certificate=${certificate}'
+      - '--output-signature=${signature}'
+      - '${artifact}'
+    artifacts: all
+    output: true
