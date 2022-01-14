@@ -1,0 +1,16 @@
+name: Merge PRs
+on:
+  schedule:
+    - cron: "0 */6 * * *"
+jobs:
+  automerge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: automerge
+        uses: "pascalgn/automerge-action@04dfc9eae2586d19b7362d4f6413c48135d9c25a"
+        env:
+          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+          MERGE_LABELS: "approved,!work-in-progress,!hold"
+          MERGE_METHOD: "squash"
+          MERGE_DELETE_BRANCH: "true"
+          UPDATE_LABELS: "approved,!work-in-progress,!hold"

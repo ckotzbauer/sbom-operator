@@ -1,0 +1,14 @@
+{
+    "commands": [
+        { "command": "hold", "arg": "", "action": "add-label", "label": "hold" },
+        { "command": "hold", "arg": "cancel", "action": "remove-label", "label": "hold" },
+        { "command": "label", "arg": "(.*)", "action": "add-label", "label": "$1" },
+        { "command": "remove-label", "arg": "(.*)", "action": "remove-label", "label": "$1" },
+        { "command": "kind", "arg": "(bug|feature|documentation|test|cleanup|security)", "action": "add-label", "label": "kind/$1" },
+        { "command": "lifecycle", "arg": "(stale|frozen)", "action": "add-label", "label": "lifecycle/$1" },
+        { "command": "remove-lifecycle", "arg": "(stale|frozen)", "action": "remove-label", "label": "lifecycle/$1" }
+    ],
+    "allowedUsers": [
+        "ckotzbauer"
+    ]
+}
