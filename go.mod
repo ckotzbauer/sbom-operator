@@ -6,7 +6,10 @@ require (
 	github.com/docker/cli v20.10.12+incompatible
 	github.com/novln/docker-parser v1.0.0
 	github.com/onsi/ginkgo/v2 v2.0.0
+	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.8.1
+	github.com/spf13/cobra v1.3.0
+	github.com/spf13/viper v1.10.1
 	k8s.io/api v0.23.1
 	k8s.io/apimachinery v0.23.1
 	k8s.io/client-go v0.23.1
@@ -21,20 +24,31 @@ require (
 	github.com/docker/docker v20.10.12+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.6.4 // indirect
 	github.com/emirpasic/gods v1.12.0 // indirect
+	github.com/fsnotify/fsnotify v1.5.1 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
 	github.com/go-git/go-billy/v5 v5.3.1 // indirect
+	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/kevinburke/ssh_config v0.0.0-20201106050909-4977a11b4351 // indirect
 	github.com/klauspost/compress v1.13.6 // indirect
+	github.com/magiconair/properties v1.8.5 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
+	github.com/mitchellh/mapstructure v1.4.3 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.0.2-0.20211117181255-693428a734f5 // indirect
+	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect
+	github.com/spf13/afero v1.8.0 // indirect
+	github.com/spf13/cast v1.4.1 // indirect
+	github.com/spf13/jwalterweatherman v1.1.0 // indirect
+	github.com/subosito/gotenv v1.2.0 // indirect
 	github.com/vbatts/tar-split v0.11.2 // indirect
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
-	golang.org/x/crypto v0.0.0-20210817164053-32db794688a5 // indirect
+	golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa // indirect
 	golang.org/x/sync v0.0.0-20210220032951-036812b2e83c // indirect
+	gopkg.in/ini.v1 v1.66.2 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
 
@@ -53,10 +67,10 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/onsi/gomega v1.17.0
-	github.com/spf13/pflag v1.0.5 // indirect
+	github.com/spf13/pflag v1.0.5
 	golang.org/x/net v0.0.0-20211216030914-fe4d6282115f // indirect
 	golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8 // indirect
-	golang.org/x/sys v0.0.0-20211216021012-1d35b9e2eb4e // indirect
+	golang.org/x/sys v0.0.0-20220114195835-da31bd327af9 // indirect
 	golang.org/x/term v0.0.0-20210615171337-6886f2dfbf5b // indirect
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20210723032227-1f47c861a9ac // indirect

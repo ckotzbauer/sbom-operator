@@ -2,16 +2,15 @@ package main
 
 import (
 	"fmt"
-	"io"
 	"net/http"
 	"os"
 	"runtime"
 
-	config "github.com/ckotzbauer/sbom-git-operator/internal"
-	"github.com/ckotzbauer/sbom-git-operator/internal/git"
-	"github.com/ckotzbauer/sbom-git-operator/internal/kubernetes"
-	"github.com/ckotzbauer/sbom-git-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-git-operator/internal"
+	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/cobra"
+	"github.com/spf13/viper"
 )
 
 var (
@@ -20,17 +19,45 @@ var (
 	Commit  = "main"
 	Date    = ""
 	BuiltBy = ""
+
+	verbosity  string
+	daemonCron string
+
+	rootCmd = &cobra.Command{
+		Use:              "sbom-git-operator",
+		Short:            "An operator for cataloguing all k8s-cluster-images to git.",
+		PersistentPreRun: internal.BindFlags,
+		Run: func(cmd *cobra.Command, args []string) {
+			internal.SetUpLogs(os.Stdout, verbosity)
+			printVersion()
+
+			c := cron.New()
+			c.AddFunc(viper.GetString("cron"), func() { internal.RunBackgroundService() })
+			c.Start()
+
+			logrus.Info("Webserver is running at port 8080")
+			http.HandleFunc("/health", health)
+			logrus.WithError(http.ListenAndServe(":8080", nil)).Fatal("Starting webserver failed!")
+		},
+	}
 )
 
-func setUpLogs(out io.Writer, level string) error {
-	logrus.SetOutput(out)
-	lvl, err := logrus.ParseLevel(level)
-	if err != nil {
-		return err
-	}
+func init() {
+	cobra.OnInitialize(initConfig)
 
-	logrus.SetLevel(lvl)
-	return nil
+	rootCmd.PersistentFlags().StringVarP(&verbosity, "verbosity", "v", logrus.InfoLevel.String(), "Log-level (debug, info, warn, error, fatal, panic)")
+	rootCmd.PersistentFlags().StringVarP(&daemonCron, "cron", "c", "@hourly", "Backround-Service interval (CRON)")
+	rootCmd.PersistentFlags().String("git-workingtree", "/work", "Directory to place the git-repo.")
+	rootCmd.PersistentFlags().String("git-repository", "", "Git-Repository-URL (HTTPS).")
+	rootCmd.PersistentFlags().String("git-branch", "main", "Git-Branch to checkout.")
+	rootCmd.PersistentFlags().String("git-access-token", "", "Git-Access-Token.")
+	rootCmd.PersistentFlags().String("git-author-name", "", "Author name to use for Git-Commits.")
+	rootCmd.PersistentFlags().String("git-author-email", "", "Author email to use for Git-Commits.")
+}
+
+func initConfig() {
+	viper.SetEnvPrefix("SGO")
+	viper.AutomaticEnv()
 }
 
 func printVersion() {
@@ -47,27 +74,5 @@ func health(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	setUpLogs(os.Stdout, logrus.DebugLevel.String())
-	printVersion()
-
-	config.Init()
-
-	gitAccount := git.New(config.GitAccessToken, config.GitAuthorName, config.GitAuthorEmail)
-	gitAccount.Clone(config.GitRepository, config.GitWorkingTree, config.GitBranch)
-
-	client := kubernetes.NewClient()
-	pods := client.ListPods("monitoring")
-	logrus.Debugf("Discovered %v pods", len(pods))
-	digests := client.GetContainerDigests(pods)
-
-	for _, d := range digests {
-		syft.ExecuteSyft(d, config.GitWorkingTree)
-	}
-
-	gitAccount.CommitAll(config.GitWorkingTree, "Created new SBOMs")
-
-	logrus.Info("Webserver is running at port 8080")
-	http.HandleFunc("/health", health)
-	http.Handle("/", http.FileServer(http.Dir(config.GitWorkingTree)))
-	logrus.WithError(http.ListenAndServe(":8080", nil)).Fatal("Starting webserver failed!")
+	rootCmd.Execute()
 }
