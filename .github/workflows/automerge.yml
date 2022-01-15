@@ -14,3 +14,4 @@ jobs:
           MERGE_METHOD: "squash"
           MERGE_DELETE_BRANCH: "true"
           UPDATE_LABELS: "approved,!work-in-progress,!hold"
+
