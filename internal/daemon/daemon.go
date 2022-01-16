@@ -1,4 +1,4 @@
-package internal
+package daemon
 
 import (
 	"github.com/ckotzbauer/sbom-git-operator/internal/git"
@@ -15,12 +15,17 @@ func RunBackgroundService() {
 	gitAccount.Clone(viper.GetString("git-repository"), workingTree, viper.GetString("git-branch"))
 
 	client := kubernetes.NewClient()
-	pods := client.ListPods("monitoring")
-	logrus.Debugf("Discovered %v pods", len(pods))
-	digests := client.GetContainerDigests(pods)
+	namespaces := client.ListNamespaces(viper.GetString("namespace-label-selector"))
+	logrus.Debugf("Discovered %v namespaces", len(namespaces))
 
-	for _, d := range digests {
-		syft.ExecuteSyft(d, workingTree)
+	for _, ns := range namespaces {
+		pods := client.ListPods(ns.Name, viper.GetString("pod-label-selector"))
+		logrus.Debugf("Discovered %v pods in namespace %v", len(pods), ns.Name)
+		digests := client.GetContainerDigests(pods)
+
+		for _, d := range digests {
+			syft.ExecuteSyft(d, workingTree)
+		}
 	}
 
 	gitAccount.CommitAll(workingTree, "Created new SBOMs")

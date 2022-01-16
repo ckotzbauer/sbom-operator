@@ -8,6 +8,8 @@ import (
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
+
+	"github.com/ckotzbauer/sbom-git-operator/internal"
 )
 
 type ImageDigest struct {
@@ -36,8 +38,30 @@ func NewClient() *KubeClient {
 	return &KubeClient{Client: client}
 }
 
-func (client *KubeClient) ListPods(namespace string) []corev1.Pod {
-	list, err := client.Client.CoreV1().Pods(namespace).List(context.Background(), meta.ListOptions{})
+func prepareLabelSelector(selector string) meta.ListOptions {
+	listOptions := meta.ListOptions{}
+
+	if len(selector) > 0 {
+		listOptions.LabelSelector = internal.Unescape(selector)
+		logrus.Debugf("Applied labelSelector %v", listOptions.LabelSelector)
+	}
+
+	return listOptions
+}
+
+func (client *KubeClient) ListNamespaces(labelSelector string) []corev1.Namespace {
+	list, err := client.Client.CoreV1().Namespaces().List(context.Background(), prepareLabelSelector(labelSelector))
+
+	if err != nil {
+		logrus.WithError(err).Error("ListNamespaces errored!")
+		return []corev1.Namespace{}
+	}
+
+	return list.Items
+}
+
+func (client *KubeClient) ListPods(namespace, labelSelector string) []corev1.Pod {
+	list, err := client.Client.CoreV1().Pods(namespace).List(context.Background(), prepareLabelSelector(labelSelector))
 
 	if err != nil {
 		logrus.WithError(err).Error("ListPods errored!")
