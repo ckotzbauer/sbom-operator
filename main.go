@@ -5,11 +5,9 @@ import (
 	"net/http"
 	"os"
 	"runtime"
-	"time"
 
 	"github.com/ckotzbauer/sbom-git-operator/internal"
 	"github.com/ckotzbauer/sbom-git-operator/internal/daemon"
-	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -33,19 +31,7 @@ var (
 			internal.SetUpLogs(os.Stdout, verbosity)
 			printVersion()
 
-			cr := internal.Unescape(viper.GetString("cron"))
-			logrus.Debugf("Cron set to: %v", cr)
-			s, err := cron.Parse(cr)
-			if err != nil {
-				logrus.WithError(err).Fatal("Cron cannot be parsed")
-			}
-
-			nextRun := s.Next(time.Now())
-			logrus.Debugf("Next background-service run at: %v", nextRun)
-
-			c := cron.New()
-			c.AddFunc(cr, func() { daemon.RunBackgroundService() })
-			c.Start()
+			daemon.Start(viper.GetString("cron"))
 
 			logrus.Info("Webserver is running at port 8080")
 			http.HandleFunc("/health", health)
@@ -65,7 +51,7 @@ func init() {
 	rootCmd.PersistentFlags().String("git-access-token", "", "Git-Access-Token.")
 	rootCmd.PersistentFlags().String("git-author-name", "", "Author name to use for Git-Commits.")
 	rootCmd.PersistentFlags().String("git-author-email", "", "Author email to use for Git-Commits.")
-	rootCmd.PersistentFlags().String("pod-label-selector", "l", "Kubernetes Label-Selector for pods.")
+	rootCmd.PersistentFlags().String("pod-label-selector", "", "Kubernetes Label-Selector for pods.")
 	rootCmd.PersistentFlags().String("namespace-label-selector", "", "Kubernetes Label-Selector for namespaces.")
 }
 

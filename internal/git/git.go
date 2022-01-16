@@ -22,18 +22,32 @@ func New(token, name, email string) GitAccount {
 	return GitAccount{Token: token, Name: name, Email: email}
 }
 
-func (g *GitAccount) Clone(repo, path, branch string) {
-	// TODO: Detect if repo is already cloned and skip it in that case.
+func (g *GitAccount) alreadyCloned(path string) (*git.Repository, error) {
+	r, err := git.PlainOpen(path)
 
-	r, err := git.PlainClone(path, false, &git.CloneOptions{
-		URL:      repo,
-		Depth:    1,
-		Progress: os.Stdout,
-		Auth:     g.tokenAuth(),
-	})
+	if err == git.ErrRepositoryNotExists {
+		return nil, nil
+	}
+
+	return r, nil
+}
+
+func (g *GitAccount) PrepareRepository(repo, path, branch string) {
+	r, err := g.alreadyCloned(path)
+	cloned := false
+
+	if r == nil && err == nil {
+		cloned = true
+		r, err = git.PlainClone(path, false, &git.CloneOptions{
+			URL:      repo,
+			Depth:    1,
+			Progress: os.Stdout,
+			Auth:     g.tokenAuth(),
+		})
+	}
 
 	if err != nil {
-		logrus.WithError(err).Error("Clone failed")
+		logrus.WithError(err).Error("Open or clone failed")
 		return
 	}
 
@@ -53,30 +67,42 @@ func (g *GitAccount) Clone(repo, path, branch string) {
 		return
 	}
 
-	// TODO: msg="Pull failed" error="empty git-upload-pack given"
-	err = w.Pull(&git.PullOptions{
-		Auth: g.tokenAuth(),
-	})
+	if !cloned {
+		// TODO: msg="Pull failed" error="empty git-upload-pack given"
+		err = w.Pull(&git.PullOptions{
+			Auth: g.tokenAuth(),
+		})
 
-	if err != nil {
-		logrus.WithError(err).Error("Pull failed")
+		if err != nil {
+			logrus.WithError(err).Error("Pull failed")
+		}
 	}
 
-	logrus.Info("Git-Repository is prepared!")
+	logrus.Debug("Git-Repository is prepared!")
 }
 
-func (g *GitAccount) CommitAll(path, message string) {
+func (g *GitAccount) openExistingRepo(path string) (*git.Repository, *git.Worktree) {
 	r, err := git.PlainOpen(path)
 
 	if err != nil {
 		logrus.WithError(err).Error("Open failed")
-		return
+		return nil, nil
 	}
 
 	w, err := r.Worktree()
 
 	if err != nil {
 		logrus.WithError(err).Error("Worktree failed")
+		return nil, nil
+	}
+
+	return r, w
+}
+
+func (g *GitAccount) CommitAll(path, message string) {
+	r, w := g.openExistingRepo(path)
+
+	if r == nil && w == nil {
 		return
 	}
 
@@ -88,7 +114,7 @@ func (g *GitAccount) CommitAll(path, message string) {
 	}
 
 	if status.IsClean() {
-		logrus.Info("Git-Worktree is clean")
+		logrus.Debug("Git-Worktree is clean, skip commit")
 		return
 	}
 
@@ -99,6 +125,47 @@ func (g *GitAccount) CommitAll(path, message string) {
 		return
 	}
 
+	g.commitAndPush(w, r, message)
+}
+
+func (g *GitAccount) RemoveFile(workTree, path string) {
+	r, w := g.openExistingRepo(workTree)
+
+	if r == nil && w == nil {
+		return
+	}
+
+	_, err := w.Remove(path)
+
+	if err != nil {
+		logrus.WithError(err).Error("Remove failed")
+		return
+	}
+}
+
+func (g *GitAccount) CommitAndPush(path, message string) {
+	r, w := g.openExistingRepo(path)
+
+	if r == nil && w == nil {
+		return
+	}
+
+	status, err := w.Status()
+
+	if err != nil {
+		logrus.WithError(err).Error("Status failed")
+		return
+	}
+
+	if status.IsClean() {
+		logrus.Debug("Git-Worktree is clean, skip commit")
+		return
+	}
+
+	g.commitAndPush(w, r, message)
+}
+
+func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message string) {
 	commit, err := w.Commit(message, &git.CommitOptions{
 		Author: &object.Signature{
 			Name:  g.Name,

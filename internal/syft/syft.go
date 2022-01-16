@@ -13,13 +13,13 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) {
+func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) string {
 	name := strings.ReplaceAll(img.Digest, "@", "/")
 	name = strings.ReplaceAll(gitWorkingTree+"/"+name+"/sbom.json", ":", "_")
 
 	if pathExists(name) {
 		logrus.Debugf("Skip image %s", img.Digest)
-		return
+		return name
 	}
 
 	logrus.Debugf("Processing image %s", img.Digest)
@@ -32,7 +32,7 @@ func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) {
 
 	if err != nil {
 		logrus.WithError(err).Error("Image-Pull failed")
-		return
+		return name
 	}
 
 	cmd := exec.Command("syft", imagePath, "-o", "json")
@@ -44,7 +44,7 @@ func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) {
 
 	if err != nil {
 		logrus.WithError(err).WithField("stderr", errb.String()).Error("Syft stopped with error")
-		return
+		return name
 	}
 
 	dir := filepath.Dir(name)
@@ -52,7 +52,7 @@ func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) {
 
 	if err != nil {
 		logrus.WithError(err).Error("Directory could not be created")
-		return
+		return name
 	}
 
 	data := []byte(stdout)
@@ -61,6 +61,8 @@ func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) {
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
 	}
+
+	return name
 }
 
 func pathExists(path string) bool {

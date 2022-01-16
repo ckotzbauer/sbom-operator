@@ -43,7 +43,7 @@ func prepareLabelSelector(selector string) meta.ListOptions {
 
 	if len(selector) > 0 {
 		listOptions.LabelSelector = internal.Unescape(selector)
-		logrus.Debugf("Applied labelSelector %v", listOptions.LabelSelector)
+		logrus.Tracef("Applied labelSelector %v", listOptions.LabelSelector)
 	}
 
 	return listOptions
