@@ -18,7 +18,7 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Setup AWS CLI
-        uses: chrislennon/action-aws-cli@v1.1
+        uses: unfor19/install-aws-cli-action@v1
 
       - name: Prepare secrets
         shell: bash
