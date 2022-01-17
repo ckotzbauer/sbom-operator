@@ -42,7 +42,7 @@ jobs:
 
           kubectl create secret docker-registry ecr-secret \
             --docker-username=AWS \
-            --docker-password=$(aws ecr get-login-password) \
+            --docker-password="$(aws ecr get-login-password)" \
             --docker-server=055403865123.dkr.ecr.eu-central-1.amazonaws.com \
             --docker-email=${{ secrets.TEST_EMAIL }} \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ecr.yaml
@@ -56,7 +56,7 @@ jobs:
 
           kubectl create secret docker-registry gcr-secret \
             --docker-username=_json_key \
-            --docker-password=${{ secrets.TEST_GCR_PASSWORD }} \
+            --docker-password="${{ secrets.TEST_GCR_PASSWORD }}" \
             --docker-server=gcr.io \
             --docker-email=${{ secrets.TEST_EMAIL }} \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gcr.yaml
