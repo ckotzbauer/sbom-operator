@@ -52,10 +52,12 @@ jobs:
 
       - name: Prepare GAR secrets
         shell: bash
+        env:
+          TEST_GAR_PASSWORD: ${{ secrets.TEST_GAR_PASSWORD }}
         run: |
           kubectl create secret docker-registry gar-secret \
             --docker-username=_json_key \
-            --docker-password="${{ secrets.TEST_GAR_PASSWORD }}" \
+            --docker-password="$TEST_GAR_PASSWORD" \
             --docker-server=europe-west3-docker.pkg.dev \
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gar.yaml
