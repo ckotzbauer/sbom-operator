@@ -24,12 +24,8 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Prepare secrets
+      - name: Prepare ACR secrets
         shell: bash
-        env:
-          AWS_ACCESS_KEY_ID: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
-          AWS_SECRET_ACCESS_KEY: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
-          AWS_REGION: eu-central-1
         run: |
           mkdir auth
 
@@ -40,6 +36,13 @@ jobs:
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/acr.yaml
 
+      - name: Prepare ECR secrets
+        shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-central-1
+        run: |
           kubectl create secret docker-registry ecr-secret \
             --docker-username=AWS \
             --docker-password="$(aws ecr get-login-password)" \
@@ -47,6 +50,9 @@ jobs:
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ecr.yaml
 
+      - name: Prepare GAR secrets
+        shell: bash
+        run: |
           kubectl create secret docker-registry gar-secret \
             --docker-username=_json_key \
             --docker-password="${{ secrets.TEST_GAR_PASSWORD }}" \
@@ -54,6 +60,9 @@ jobs:
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gar.yaml
 
+      - name: Prepare GCR secrets
+        shell: bash
+        run: |
           kubectl create secret docker-registry gcr-secret \
             --docker-username=_json_key \
             --docker-password="${{ secrets.TEST_GCR_PASSWORD }}" \
@@ -61,6 +70,9 @@ jobs:
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gcr.yaml
 
+      - name: Prepare GHCR secrets
+        shell: bash
+        run: |
           kubectl create secret docker-registry ghcr-secret \
             --docker-username="${{ secrets.TEST_GHCR_USERNAME }}" \
             --docker-password="${{ secrets.TEST_GHCR_PASSWORD }}" \
@@ -68,6 +80,9 @@ jobs:
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ghcr.yaml
 
+      - name: Prepare Hub secrets
+        shell: bash
+        run: |
           kubectl create secret docker-registry hub-secret \
             --docker-username="${{ secrets.TEST_HUB_USERNAME }}" \
             --docker-password="${{ secrets.TEST_HUB_PASSWORD }}" \
