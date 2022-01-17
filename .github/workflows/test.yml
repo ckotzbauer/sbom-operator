@@ -4,38 +4,6 @@ on:
   push: {}
 
 jobs:
-  registry-unit-test:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Go
-        uses: actions/setup-go@v2
-        with:
-          go-version: '1.17'
-
-      - name: Checkout
-        uses: actions/checkout@v2
-
-      - name: Prepare secrets
-        run: |
-          mkdir auth
-          echo $ACR_SECRET > auth/acr.yaml
-          echo $ECR_SECRET > auth/ecr.yaml
-          echo $GAR_SECRET > auth/gar.yaml
-          echo $GCR_SECRET > auth/gcr.yaml
-          echo $GHCR_SECRET > auth/ghcr.yaml
-          echo $HUB_SECRET > auth/hub.yaml
-        env:
-          ACR_SECRET: ${{ secrets.ACR_TEST_SECRET }}
-          ECR_SECRET: ${{ secrets.ECR_TEST_SECRET }}
-          GAR_SECRET: ${{ secrets.GAR_TEST_SECRET }}
-          GCR_SECRET: ${{ secrets.GCR_TEST_SECRET }}
-          GHCR_SECRET: ${{ secrets.GHCR_TEST_SECRET }}
-          HUB_SECRET: ${{ secrets.HUB_TEST_SECRET }}
-
-      - name: Execute Registry-Tests
-        run: make test-registries
-
-
   build-image:
     runs-on: ubuntu-latest
     steps:

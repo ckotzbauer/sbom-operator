@@ -68,7 +68,7 @@ var _ = Describe("Registry", func() {
 
 	Describe("Storing image from GHCR", func() {
 		It("should work correctly", func() {
-			testRegistry("ghcr", "ghcr.io/ckotzbauer/sbom-git-operator/integration-test-image:1.0.0")
+			testRegistry("ghcr", "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0")
 		})
 	})
 })
