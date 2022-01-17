@@ -64,10 +64,12 @@ jobs:
 
       - name: Prepare GCR secrets
         shell: bash
+        env:
+          TEST_GCR_PASSWORD: ${{ secrets.TEST_GCR_PASSWORD }}
         run: |
           kubectl create secret docker-registry gcr-secret \
             --docker-username=_json_key \
-            --docker-password="${{ secrets.TEST_GCR_PASSWORD }}" \
+            --docker-password="$TEST_GCR_PASSWORD" \
             --docker-server=gcr.io \
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gcr.yaml
