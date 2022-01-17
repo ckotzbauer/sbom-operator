@@ -14,11 +14,15 @@ jobs:
         with:
           go-version: '1.17'
 
-      - name: Checkout
-        uses: actions/checkout@v2
-
       - name: Setup AWS CLI
         uses: unfor19/install-aws-cli-action@v1
+
+      - uses: azure/setup-kubectl@v1
+        with:
+          version: 'v1.23.1'
+
+      - name: Checkout
+        uses: actions/checkout@v2
 
       - name: Prepare secrets
         shell: bash
@@ -34,42 +38,42 @@ jobs:
             --docker-password=${{ secrets.TEST_ACR_PASSWORD }} \
             --docker-server=sbomgitoperator.azurecr.io \
             --docker-email=${{ secrets.TEST_EMAIL }} \
-            -o json | jq -r '.data.".dockerconfigjson"' > auth/acr.yaml
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/acr.yaml
 
           kubectl create secret docker-registry ecr-secret \
             --docker-username=AWS \
             --docker-password=$(aws ecr get-login-password) \
             --docker-server=055403865123.dkr.ecr.eu-central-1.amazonaws.com \
             --docker-email=${{ secrets.TEST_EMAIL }} \
-            -o json | jq -r '.data.".dockerconfigjson"' > auth/ecr.yaml
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ecr.yaml
 
           kubectl create secret docker-registry gar-secret \
             --docker-username=_json_key \
             --docker-password="${{ secrets.TEST_GAR_PASSWORD }}"" \
             --docker-server=europe-west3-docker.pkg.dev \
             --docker-email=${{ secrets.TEST_EMAIL }} \
-            -o json | jq -r '.data.".dockerconfigjson"' > auth/gar.yaml
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gar.yaml
 
           kubectl create secret docker-registry gcr-secret \
             --docker-username=_json_key \
             --docker-password=${{ secrets.TEST_GCR_PASSWORD }} \
             --docker-server=gcr.io \
             --docker-email=${{ secrets.TEST_EMAIL }} \
-            -o json | jq -r '.data.".dockerconfigjson"' > auth/gcr.yaml
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gcr.yaml
 
           kubectl create secret docker-registry ghcr-secret \
             --docker-username=${{ secrets.TEST_GHCR_USERNAME }} \
             --docker-password=${{ secrets.TEST_GHCR_PASSWORD }} \
             --docker-server=ghcr.io \
             --docker-email=${{ secrets.TEST_EMAIL }} \
-            -o json | jq -r '.data.".dockerconfigjson"' > auth/ghcr.yaml
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ghcr.yaml
 
           kubectl create secret docker-registry hub-secret \
             --docker-username=${{ secrets.TEST_HUB_USERNAME }} \
             --docker-password=${{ secrets.TEST_HUB_PASSWORD }} \
             --docker-server=docker.io \
             --docker-email=${{ secrets.TEST_EMAIL }} \
-            -o json | jq -r '.data.".dockerconfigjson"' > auth/hub.yaml
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/hub.yaml
 
       - name: Execute Registry-Tests
         run: make test-registries
