@@ -1,0 +1,73 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  labels:
+    app.kubernetes.io/name: sbom-git-operator
+  name: sbom-git-operator
+  namespace: infrastructure
+spec:
+  selector:
+    matchLabels:
+      app.kubernetes.io/name: sbom-git-operator
+  template:
+    metadata:
+      labels:
+        app.kubernetes.io/name: sbom-git-operator
+    spec:
+      containers:
+      - image: ghcr.io/ckotzbauer/sbom-git-operator:latest
+        name: operator
+        env:
+          - name: SGO_GIT_ACCESS_TOKEN
+            valueFrom:
+              secretKeyRef:
+                name: "sbom-git-operator"
+                key: "accessToken"
+        args:
+          - --cron="0 6 * * * *"
+          - --git-author-email=mybotuser@github.com
+          - --git-author-name=mybotuser
+          - --git-repository=https://github.com/myorg/my-sbom-repo
+          - --pod-label-selector=sbom-operator\=true
+        ports:
+        - containerPort: 8080
+          name: http
+          protocol: TCP
+        securityContext:
+          capabilities:
+            drop:
+            - ALL
+          privileged: false
+          readOnlyRootFilesystem: false
+          runAsNonRoot: true
+          runAsUser: 101
+        volumeMounts:
+          - mountPath: /work
+            name: work
+          - mountPath: /tmp
+            name: tmp
+        resources:
+          limits:
+            cpu: 500m
+            memory: 1Gi
+          requests:
+            cpu: 100m
+            memory: 100Mi
+        livenessProbe:
+          timeoutSeconds: 3
+          httpGet:
+            path: "/health"
+            port: 8080
+        readinessProbe:
+          timeoutSeconds: 3
+          httpGet:
+            path: "/health"
+            port: 8080
+      volumes:
+        - name: work
+          emptyDir: {}
+        - name: tmp
+          emptyDir: {}
+      securityContext:
+        fsGroup: 101
+      serviceAccountName: sbom-git-operator
