@@ -66,6 +66,12 @@ helm repo add ckotzbauer https://ckotzbauer.github.io/helm-charts
 helm install ckotzbauer/sbom-git-operator -f your-values.yaml
 ```
 
+## Security
+
+The docker-image is based on `scratch` to reduce the attack-surface and keep the image small. Furthermore the image and release-artifacts are signed with [cosign](https://github.com/sigstore/cosign). The release-process satisfies SLSA Level 2. Both, SLSA and the signatures are still experimental for this project.
+
+
+
 [Contributing](https://github.com/ckotzbauer/sbom-git-operator/blob/master/CONTRIBUTING.md)
 --------
 [License](https://github.com/ckotzbauer/sbom-git-operator/blob/master/LICENSE)
