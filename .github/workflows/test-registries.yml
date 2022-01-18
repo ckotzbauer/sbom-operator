@@ -90,7 +90,7 @@ jobs:
           kubectl create secret docker-registry hub-secret \
             --docker-username="${{ secrets.TEST_HUB_USERNAME }}" \
             --docker-password="${{ secrets.TEST_HUB_PASSWORD }}" \
-            --docker-server=index.docker.io \
+            --docker-server=https://index.docker.io/v1/ \
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/hub.yaml
 
