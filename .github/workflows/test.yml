@@ -40,9 +40,9 @@ jobs:
           load: true
           platforms: linux/amd64
           tags: |
-            ghcr.io/ckotzbauer/sbom-git-operator:latest
+            ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
         uses: azure/container-scan@v0
         with:
-          image-name: ghcr.io/ckotzbauer/sbom-git-operator
+          image-name: ghcr.io/ckotzbauer/sbom-operator

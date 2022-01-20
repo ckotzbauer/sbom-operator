@@ -1,9 +1,9 @@
 
-# SBOM-Git-Operator
+# sbom-operator
 
 > Catalogue all images of a Kubernetes cluster to Git with Syft.
 
-[![test](https://github.com/ckotzbauer/sbom-git-operator/actions/workflows/test.yml/badge.svg)](https://github.com/ckotzbauer/sbom-git-operator/actions/workflows/test.yml)
+[![test](https://github.com/ckotzbauer/sbom-operator/actions/workflows/test.yml/badge.svg)](https://github.com/ckotzbauer/sbom-operator/actions/workflows/test.yml)
 
 ## Motivation
 
@@ -64,7 +64,7 @@ Create a YAML file first with the required configurations or use helm-flags inst
 
 ```
 helm repo add ckotzbauer https://ckotzbauer.github.io/helm-charts
-helm install ckotzbauer/sbom-git-operator -f your-values.yaml
+helm install ckotzbauer/sbom-operator -f your-values.yaml
 ```
 
 ## Security
@@ -73,10 +73,10 @@ The docker-image is based on `scratch` to reduce the attack-surface and keep the
 
 
 
-[Contributing](https://github.com/ckotzbauer/sbom-git-operator/blob/master/CONTRIBUTING.md)
+[Contributing](https://github.com/ckotzbauer/sbom-operator/blob/master/CONTRIBUTING.md)
 --------
-[License](https://github.com/ckotzbauer/sbom-git-operator/blob/master/LICENSE)
+[License](https://github.com/ckotzbauer/sbom-operator/blob/master/LICENSE)
 --------
-[Changelog](https://github.com/ckotzbauer/sbom-git-operator/blob/master/CHANGELOG.md)
+[Changelog](https://github.com/ckotzbauer/sbom-operator/blob/master/CHANGELOG.md)
 --------
 

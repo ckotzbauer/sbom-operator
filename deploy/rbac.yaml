@@ -1,12 +1,12 @@
 apiVersion: v1
 kind: ServiceAccount
 metadata:
-  name: sbom-git-operator
+  name: sbom-operator
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
-  name: sbom-git-operator
+  name: sbom-operator
 rules:
 - apiGroups:
   - ""
@@ -25,11 +25,11 @@ rules:
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
-  name: sbom-git-operator
+  name: sbom-operator
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
-  name: sbom-git-operator
+  name: sbom-operator
 subjects:
 - kind: ServiceAccount
-  name: sbom-git-operator
+  name: sbom-operator

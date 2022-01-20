@@ -1,4 +1,4 @@
-project_name: sbom-git-operator
+project_name: sbom-operator
 before:
   hooks:
     - go mod tidy -compat=1.17

@@ -12,7 +12,7 @@ import (
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 
-	"github.com/ckotzbauer/sbom-git-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 
 	parser "github.com/novln/docker-parser"
 )

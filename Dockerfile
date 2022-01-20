@@ -24,6 +24,6 @@ ARG TARGETARCH
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
 COPY --from=alpine /usr/share/syft/syft /usr/bin/syft
-COPY dist/sbom-git-operator_${TARGETOS}_${TARGETARCH}/sbom-git-operator /usr/local/bin/sbom-git-operator
+COPY dist/sbom-operator_${TARGETOS}_${TARGETARCH}/sbom-operator /usr/local/bin/sbom-operator
 
-ENTRYPOINT ["/usr/local/bin/sbom-git-operator"]
+ENTRYPOINT ["/usr/local/bin/sbom-operator"]

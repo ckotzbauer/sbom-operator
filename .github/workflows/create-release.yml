@@ -15,9 +15,9 @@ jobs:
       version: ${{ github.event.inputs.version }}
       docker-platforms: linux/amd64,linux/arm64
       docker-tags: |
-        ghcr.io/ckotzbauer/sbom-git-operator:${{ github.event.inputs.version }}
-        ghcr.io/ckotzbauer/sbom-git-operator:latest
-      cosign-repository: ghcr.io/ckotzbauer/sbom-git-operator-metadata
+        ghcr.io/ckotzbauer/sbom-operator:${{ github.event.inputs.version }}
+        ghcr.io/ckotzbauer/sbom-operator:latest
+      cosign-repository: ghcr.io/ckotzbauer/sbom-operator-metadata
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
       pat: ${{ secrets.REPO_ACCESS }}

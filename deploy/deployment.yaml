@@ -2,26 +2,26 @@ apiVersion: apps/v1
 kind: Deployment
 metadata:
   labels:
-    app.kubernetes.io/name: sbom-git-operator
-  name: sbom-git-operator
+    app.kubernetes.io/name: sbom-operator
+  name: sbom-operator
   namespace: infrastructure
 spec:
   selector:
     matchLabels:
-      app.kubernetes.io/name: sbom-git-operator
+      app.kubernetes.io/name: sbom-operator
   template:
     metadata:
       labels:
-        app.kubernetes.io/name: sbom-git-operator
+        app.kubernetes.io/name: sbom-operator
     spec:
       containers:
-      - image: ghcr.io/ckotzbauer/sbom-git-operator:latest
+      - image: ghcr.io/ckotzbauer/sbom-operator:latest
         name: operator
         env:
           - name: SGO_GIT_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
-                name: "sbom-git-operator"
+                name: "sbom-operator"
                 key: "accessToken"
         args:
           # example values
@@ -72,4 +72,4 @@ spec:
           emptyDir: {}
       securityContext:
         fsGroup: 101
-      serviceAccountName: sbom-git-operator
+      serviceAccountName: sbom-operator

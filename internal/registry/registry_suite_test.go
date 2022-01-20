@@ -5,8 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ckotzbauer/sbom-git-operator/internal/kubernetes"
-	"github.com/ckotzbauer/sbom-git-operator/internal/registry"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
 )

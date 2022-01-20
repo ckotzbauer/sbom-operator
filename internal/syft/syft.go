@@ -9,8 +9,8 @@ import (
 	"path/filepath"
 	"strings"
 
-	"github.com/ckotzbauer/sbom-git-operator/internal/kubernetes"
-	"github.com/ckotzbauer/sbom-git-operator/internal/registry"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	"github.com/sirupsen/logrus"
 )
 

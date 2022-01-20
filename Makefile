@@ -16,4 +16,4 @@ vet:
 	go vet ./...
 
 test-registries:
-	go test github.com/ckotzbauer/sbom-git-operator/internal/registry
+	go test github.com/ckotzbauer/sbom-operator/internal/registry

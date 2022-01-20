@@ -1,4 +1,4 @@
-module github.com/ckotzbauer/sbom-git-operator
+module github.com/ckotzbauer/sbom-operator
 
 go 1.17
 

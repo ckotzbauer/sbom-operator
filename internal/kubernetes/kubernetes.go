@@ -9,7 +9,7 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 
-	"github.com/ckotzbauer/sbom-git-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal"
 )
 
 type ImageDigest struct {

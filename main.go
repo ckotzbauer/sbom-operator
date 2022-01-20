@@ -6,8 +6,8 @@ import (
 	"os"
 	"runtime"
 
-	"github.com/ckotzbauer/sbom-git-operator/internal"
-	"github.com/ckotzbauer/sbom-git-operator/internal/daemon"
+	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/daemon"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
@@ -24,7 +24,7 @@ var (
 	daemonCron string
 
 	rootCmd = &cobra.Command{
-		Use:              "sbom-git-operator",
+		Use:              "sbom-operator",
 		Short:            "An operator for cataloguing all k8s-cluster-images to git.",
 		PersistentPreRun: internal.BindFlags,
 		Run: func(cmd *cobra.Command, args []string) {
