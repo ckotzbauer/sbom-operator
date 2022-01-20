@@ -3,6 +3,7 @@ package daemon
 import (
 	"fmt"
 	"os"
+	"path"
 	"path/filepath"
 	"time"
 
@@ -44,6 +45,8 @@ func (c *CronService) printNextExecution() {
 func (c *CronService) runBackgroundService() {
 	logrus.Info("Execute background-service")
 	workingTree := viper.GetString("git-workingtree")
+	gitPath := viper.GetString("git-path")
+	workPath := path.Join(workingTree, gitPath)
 
 	gitAccount := git.New(viper.GetString("git-access-token"), viper.GetString("git-author-name"), viper.GetString("git-author-email"))
 	gitAccount.PrepareRepository(viper.GetString("git-repository"), workingTree, viper.GetString("git-branch"))
@@ -60,7 +63,7 @@ func (c *CronService) runBackgroundService() {
 		digests := client.GetContainerDigests(pods)
 
 		for _, d := range digests {
-			sbomPath := syft.ExecuteSyft(d, workingTree)
+			sbomPath := syft.ExecuteSyft(d, workingTree, gitPath)
 			processedSbomFiles = append(processedSbomFiles, sbomPath)
 		}
 
@@ -69,7 +72,7 @@ func (c *CronService) runBackgroundService() {
 
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
-	err := filepath.Walk(workingTree, deleteObsoleteFiles(workingTree, ignoreDirs, processedSbomFiles, gitAccount))
+	err := filepath.Walk(workPath, deleteObsoleteFiles(workingTree, ignoreDirs, processedSbomFiles, gitAccount))
 	if err != nil {
 		logrus.WithError(err).Error("Could not cleanup old SBOMs")
 	} else {
@@ -79,15 +82,15 @@ func (c *CronService) runBackgroundService() {
 	c.printNextExecution()
 }
 
-func deleteObsoleteFiles(workingTree string, ignoreDirs, processedSbomFiles []string, gitAccount git.GitAccount) filepath.WalkFunc {
-	return func(path string, info os.FileInfo, err error) error {
+func deleteObsoleteFiles(workPath string, ignoreDirs, processedSbomFiles []string, gitAccount git.GitAccount) filepath.WalkFunc {
+	return func(p string, info os.FileInfo, err error) error {
 		if err != nil {
-			logrus.WithError(err).Errorf("An error occurred while processing %s", path)
+			logrus.WithError(err).Errorf("An error occurred while processing %s", p)
 			return nil
 		}
 
 		if info.IsDir() {
-			dir := filepath.Base(path)
+			dir := filepath.Base(p)
 			for _, d := range ignoreDirs {
 				if d == dir {
 					return filepath.SkipDir
@@ -98,19 +101,19 @@ func deleteObsoleteFiles(workingTree string, ignoreDirs, processedSbomFiles []st
 		if info.Name() == "sbom.json" {
 			found := false
 			for _, f := range processedSbomFiles {
-				if f == path {
+				if f == p {
 					found = true
 					break
 				}
 			}
 
 			if !found {
-				rel, _ := filepath.Rel(workingTree, path)
-				gitAccount.RemoveFile(workingTree, rel)
+				rel, _ := filepath.Rel(workPath, p)
+				gitAccount.RemoveFile(workPath, rel)
 				if err != nil {
-					logrus.WithError(err).Errorf("File could not be deleted %s", path)
+					logrus.WithError(err).Errorf("File could not be deleted %s", p)
 				} else {
-					logrus.Debugf("Deleted old SBOM: %s", path)
+					logrus.Debugf("Deleted old SBOM: %s", p)
 				}
 			}
 		}

@@ -5,6 +5,7 @@ import (
 	"math/rand"
 	"os"
 	"os/exec"
+	"path"
 	"path/filepath"
 	"strings"
 
@@ -13,9 +14,9 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree string) string {
+func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree, gitPath string) string {
 	name := strings.ReplaceAll(img.Digest, "@", "/")
-	name = strings.ReplaceAll(gitWorkingTree+"/"+name+"/sbom.json", ":", "_")
+	name = strings.ReplaceAll(path.Join(gitWorkingTree, gitPath, name, "sbom.json"), ":", "_")
 
 	if pathExists(name) {
 		logrus.Debugf("Skip image %s", img.Digest)

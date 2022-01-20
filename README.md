@@ -43,6 +43,7 @@ All parameters are cli-flags.
 | `git-workingtree` | `false` | `/work` | Directory to place the git-repo. |
 | `git-repository` | `true` | `""` | Git-Repository-URL (HTTPS). |
 | `git-branch` | `false` | `main` | Git-Branch to checkout. |
+| `git-path` | `false` | `""` | Folder-Path inside the Git-Repository. |
 | `git-access-token` | `true` | `""` | Git-Personal-Access-Token with write-permissions. |
 | `git-author-name` | `true` | `""` | Author name to use for Git-Commits. |
 | `git-author-email` | `true` | `""` | Author email to use for Git-Commits. |

@@ -24,10 +24,12 @@ spec:
                 name: "sbom-git-operator"
                 key: "accessToken"
         args:
+          # example values
           - --cron="0 6 * * * *"
           - --git-author-email=mybotuser@github.com
           - --git-author-name=mybotuser
           - --git-repository=https://github.com/myorg/my-sbom-repo
+          - --git-path=dev-cluster/sboms
           - --pod-label-selector=sbom-operator\=true
         ports:
         - containerPort: 8080
@@ -38,7 +40,7 @@ spec:
             drop:
             - ALL
           privileged: false
-          readOnlyRootFilesystem: false
+          readOnlyRootFilesystem: true
           runAsNonRoot: true
           runAsUser: 101
         volumeMounts:

@@ -48,6 +48,7 @@ func init() {
 	rootCmd.PersistentFlags().String("git-workingtree", "/work", "Directory to place the git-repo.")
 	rootCmd.PersistentFlags().String("git-repository", "", "Git-Repository-URL (HTTPS).")
 	rootCmd.PersistentFlags().String("git-branch", "main", "Git-Branch to checkout.")
+	rootCmd.PersistentFlags().String("git-path", "", "Folder-Path inside the Git-Repository.")
 	rootCmd.PersistentFlags().String("git-access-token", "", "Git-Access-Token.")
 	rootCmd.PersistentFlags().String("git-author-name", "", "Author name to use for Git-Commits.")
 	rootCmd.PersistentFlags().String("git-author-email", "", "Author email to use for Git-Commits.")
@@ -69,8 +70,8 @@ func printVersion() {
 }
 
 func health(w http.ResponseWriter, req *http.Request) {
-	fmt.Fprint(w, "Running!")
 	w.WriteHeader(200)
+	fmt.Fprint(w, "Running!")
 }
 
 func main() {
