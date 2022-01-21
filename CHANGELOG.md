@@ -1,3 +1,32 @@
+## Version 0.2.0 (2022-01-21)
+
+### Features and improvements
+
+* [[`5caebcc9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5caebcc9)] - **feat**: add configurable sbom-format
+
+### Bug fixes
+
+* [[`891dfc7e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/891dfc7e)] - **fix**: remove whole directory on sbom-removal close #8
+
+### Build and testing
+
+* [[`ffea5729`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ffea5729)] - **build**: try to fix trigger
+
+### Documentation
+
+* [[`f865a13e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f865a13e)] - **doc**: add helm example values
+* [[`8199174a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8199174a)] - **doc**: several improvements ref: #11
+
+### Security
+
+* [[`b67cc1d0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b67cc1d0)] - **security**: update opencontainers&#x2F;image-spec
+
+### Common changes
+
+* [[`870f195b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/870f195b)] - **chore**: use syft version 0.36.0 on top layer
+* [[`96e043cc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/96e043cc)] - **chore**: change the way of install syft
+
+
 ## Version 0.1.0 (2022-01-20)
 
 ### Features and improvements
