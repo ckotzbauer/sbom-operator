@@ -119,7 +119,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 			return nil, err
 		}
 
-		creds := secret.Data[".dockerconfigjson"]
+		creds := secret.Data[corev1.DockerConfigJsonKey]
 
 		if len(creds) > 0 {
 			return creds, nil

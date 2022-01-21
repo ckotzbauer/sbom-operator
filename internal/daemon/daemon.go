@@ -44,16 +44,22 @@ func (c *CronService) printNextExecution() {
 
 func (c *CronService) runBackgroundService() {
 	logrus.Info("Execute background-service")
-	workingTree := viper.GetString("git-workingtree")
-	gitPath := viper.GetString("git-path")
-	format := viper.GetString("format")
+	workingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
+	gitPath := viper.GetString(internal.ConfigKeyGitPath)
+	format := viper.GetString(internal.ConfigKeyFormat)
 	workPath := path.Join(workingTree, gitPath)
 
-	gitAccount := git.New(viper.GetString("git-access-token"), viper.GetString("git-author-name"), viper.GetString("git-author-email"))
-	gitAccount.PrepareRepository(viper.GetString("git-repository"), workingTree, viper.GetString("git-branch"))
+	gitAccount := git.New(
+		viper.GetString(internal.ConfigKeyGitAccessToken),
+		viper.GetString(internal.ConfigKeyGitAuthorName),
+		viper.GetString(internal.ConfigKeyGitAuthorEmail))
+
+	gitAccount.PrepareRepository(
+		viper.GetString(internal.ConfigKeyGitRepository), workingTree,
+		viper.GetString(internal.ConfigKeyGitBranch))
 
 	client := kubernetes.NewClient()
-	namespaces := client.ListNamespaces(viper.GetString("namespace-label-selector"))
+	namespaces := client.ListNamespaces(viper.GetString(internal.ConfigKeyNamespaceLabelSelector))
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
 
 	processedSbomFiles := []string{}
@@ -61,7 +67,7 @@ func (c *CronService) runBackgroundService() {
 	sy := syft.New(workingTree, gitPath, format)
 
 	for _, ns := range namespaces {
-		pods := client.ListPods(ns.Name, viper.GetString("pod-label-selector"))
+		pods := client.ListPods(ns.Name, viper.GetString(internal.ConfigKeyPodLabelSelector))
 		logrus.Debugf("Discovered %v pods in namespace %v", len(pods), ns.Name)
 		digests := client.GetContainerDigests(pods)
 

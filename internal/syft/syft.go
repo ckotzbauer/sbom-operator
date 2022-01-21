@@ -2,13 +2,13 @@ package syft
 
 import (
 	"bytes"
-	"math/rand"
 	"os"
 	"os/exec"
 	"path"
 	"path/filepath"
 	"strings"
 
+	util "github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	"github.com/sirupsen/logrus"
@@ -33,14 +33,14 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 	filePath := strings.ReplaceAll(img.Digest, "@", "/")
 	filePath = strings.ReplaceAll(path.Join(s.GitWorkingTree, s.GitPath, filePath, fileName), ":", "_")
 
-	if pathExists(filePath) {
+	if util.PathExists(filePath) {
 		logrus.Debugf("Skip image %s", img.Digest)
 		return filePath
 	}
 
 	logrus.Debugf("Processing image %s", img.Digest)
 
-	workDir := "/tmp/" + randStringBytes(10)
+	workDir := "/tmp/" + util.RandStringBytes(10)
 	imagePath := workDir + "/image.tar.gz"
 	os.Mkdir(workDir, 0777)
 
@@ -100,19 +100,4 @@ func GetFileName(sbomFormat string) string {
 	default:
 		return "sbom.json"
 	}
-}
-
-func pathExists(path string) bool {
-	_, err := os.Stat(path)
-	return err == nil
-}
-
-const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
-
-func randStringBytes(n int) string {
-	b := make([]byte, n)
-	for i := range b {
-		b[i] = letterBytes[rand.Intn(len(letterBytes))]
-	}
-	return string(b)
 }

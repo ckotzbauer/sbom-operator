@@ -3,6 +3,8 @@ package internal
 import (
 	"fmt"
 	"io"
+	"math/rand"
+	"os"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -42,8 +44,26 @@ func SetUpLogs(out io.Writer, level string) {
 	}
 }
 
+// Unescape removes backslashes and double-quotes from strings
 func Unescape(s string) string {
 	s = strings.ReplaceAll(s, "\\", "")
 	s = strings.ReplaceAll(s, "\"", "")
 	return s
+}
+
+// PathExists checks if the specificed path exists on the FS
+func PathExists(path string) bool {
+	_, err := os.Stat(path)
+	return err == nil
+}
+
+const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"
+
+//  RandStringBytes generates a random string with the given length
+func RandStringBytes(n int) string {
+	b := make([]byte, n)
+	for i := range b {
+		b[i] = letterBytes[rand.Intn(len(letterBytes))]
+	}
+	return string(b)
 }

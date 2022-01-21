@@ -31,7 +31,7 @@ var (
 			internal.SetUpLogs(os.Stdout, verbosity)
 			printVersion()
 
-			daemon.Start(viper.GetString("cron"))
+			daemon.Start(viper.GetString(internal.ConfigKeyCron))
 
 			logrus.Info("Webserver is running at port 8080")
 			http.HandleFunc("/health", health)
@@ -43,18 +43,18 @@ var (
 func init() {
 	cobra.OnInitialize(initConfig)
 
-	rootCmd.PersistentFlags().StringVarP(&verbosity, "verbosity", "v", logrus.InfoLevel.String(), "Log-level (debug, info, warn, error, fatal, panic)")
-	rootCmd.PersistentFlags().StringVarP(&daemonCron, "cron", "c", "@hourly", "Backround-Service interval (CRON)")
-	rootCmd.PersistentFlags().String("format", "json", "SBOM-Format.")
-	rootCmd.PersistentFlags().String("git-workingtree", "/work", "Directory to place the git-repo.")
-	rootCmd.PersistentFlags().String("git-repository", "", "Git-Repository-URL (HTTPS).")
-	rootCmd.PersistentFlags().String("git-branch", "main", "Git-Branch to checkout.")
-	rootCmd.PersistentFlags().String("git-path", "", "Folder-Path inside the Git-Repository.")
-	rootCmd.PersistentFlags().String("git-access-token", "", "Git-Access-Token.")
-	rootCmd.PersistentFlags().String("git-author-name", "", "Author name to use for Git-Commits.")
-	rootCmd.PersistentFlags().String("git-author-email", "", "Author email to use for Git-Commits.")
-	rootCmd.PersistentFlags().String("pod-label-selector", "", "Kubernetes Label-Selector for pods.")
-	rootCmd.PersistentFlags().String("namespace-label-selector", "", "Kubernetes Label-Selector for namespaces.")
+	rootCmd.PersistentFlags().StringVarP(&verbosity, internal.ConfigKeyVerbosity, "v", logrus.InfoLevel.String(), "Log-level (debug, info, warn, error, fatal, panic)")
+	rootCmd.PersistentFlags().StringVarP(&daemonCron, internal.ConfigKeyCron, "c", "@hourly", "Backround-Service interval (CRON)")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyFormat, "json", "SBOM-Format.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitWorkingTree, "/work", "Directory to place the git-repo.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitRepository, "", "Git-Repository-URL (HTTPS).")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitBranch, "main", "Git-Branch to checkout.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitPath, "", "Folder-Path inside the Git-Repository.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitAccessToken, "", "Git-Access-Token.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitAuthorName, "", "Author name to use for Git-Commits.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyGitAuthorEmail, "", "Author email to use for Git-Commits.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyPodLabelSelector, "", "Kubernetes Label-Selector for pods.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyNamespaceLabelSelector, "", "Kubernetes Label-Selector for namespaces.")
 }
 
 func initConfig() {
