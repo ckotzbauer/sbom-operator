@@ -2,8 +2,8 @@ name: test-registries
 
 on:
   push:
-#    branches:
-#      - "main"
+    branches:
+      - "main"
 
 jobs:
   registry-unit-test:

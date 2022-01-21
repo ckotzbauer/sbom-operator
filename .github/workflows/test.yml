@@ -1,7 +1,9 @@
 name: test
 
 on:
-  push: {}
+  push:
+    branches:
+      - "**"
 
 jobs:
   build-image:
