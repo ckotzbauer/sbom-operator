@@ -1,13 +1,18 @@
 package syft
 
 import (
-	"bytes"
+	"fmt"
+	"github.com/anchore/syft/syft"
+	"github.com/anchore/syft/syft/format"
+	"github.com/anchore/syft/syft/pkg/cataloger"
+	"github.com/anchore/syft/syft/sbom"
 	"os"
-	"os/exec"
 	"path"
 	"path/filepath"
+	"runtime/debug"
 	"strings"
 
+	"github.com/anchore/syft/syft/source"
 	util "github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/registry"
@@ -51,17 +56,52 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 		return filePath
 	}
 
-	cmd := exec.Command("syft", imagePath, "-o", s.SbomFormat)
-	var errb bytes.Buffer
-	cmd.Stderr = &errb
-	stdout, err := cmd.Output()
+	src, cleanup, err := source.New(filepath.Join("oci-archive:", imagePath), nil, nil)
+	if err != nil {
+		panic(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err))
+	}
+	if cleanup != nil {
+		defer cleanup()
+	}
+
+	bi, ok := debug.ReadBuildInfo()
+	if !ok {
+		logrus.Warnf("failed to read build info")
+	}
+
+	descriptor := sbom.Descriptor{
+		Name: "syft",
+	}
+
+	for _, dep := range bi.Deps {
+		if strings.EqualFold("github.com/anchore/syft", dep.Path) {
+			descriptor.Version = dep.Version
+		}
+	}
+
+	result := sbom.SBOM{
+		Source: src.Metadata,
+		// TODO: we should have helper functions for getting this built from exported library functions
+	}
+
+	c := cataloger.DefaultConfig()
+	c.Search.Scope = source.SquashedScope
+	packageCatalog, relationships, theDistro, err := syft.CatalogPackages(src, c)
+	if err != nil {
+		panic(err)
+	}
+
+	result.Artifacts.PackageCatalog = packageCatalog
+	result.Artifacts.LinuxDistribution = theDistro
+	result.Relationships = relationships
+
+	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
+	b, err := syft.Encode(result, format.Option(s.SbomFormat))
+	if err != nil {
+		panic(err)
+	}
 
 	os.RemoveAll(workDir)
-
-	if err != nil {
-		logrus.WithError(err).WithField("stderr", errb.String()).Error("Syft stopped with error")
-		return filePath
-	}
 
 	dir := filepath.Dir(filePath)
 	err = os.MkdirAll(dir, 0777)
@@ -71,8 +111,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 		return filePath
 	}
 
-	data := []byte(stdout)
-	err = os.WriteFile(filePath, data, 0640)
+	err = os.WriteFile(filePath, b, 0640)
 
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
