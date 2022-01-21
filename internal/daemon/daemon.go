@@ -109,7 +109,8 @@ func deleteObsoleteFiles(workPath string, ignoreDirs, processedSbomFiles []strin
 
 			if !found {
 				rel, _ := filepath.Rel(workPath, p)
-				gitAccount.RemoveFile(workPath, rel)
+				dir := filepath.Dir(rel)
+				gitAccount.Remove(workPath, dir)
 				if err != nil {
 					logrus.WithError(err).Errorf("File could not be deleted %s", p)
 				} else {

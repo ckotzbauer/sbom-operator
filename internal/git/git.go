@@ -128,7 +128,7 @@ func (g *GitAccount) CommitAll(path, message string) {
 	g.commitAndPush(w, r, message)
 }
 
-func (g *GitAccount) RemoveFile(workTree, path string) {
+func (g *GitAccount) Remove(workTree, path string) {
 	r, w := g.openExistingRepo(workTree)
 
 	if r == nil && w == nil {
