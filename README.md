@@ -17,6 +17,7 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | access-manager  | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
+| 0.2.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
 | 0.1.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
 | main            | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
 
@@ -72,6 +73,26 @@ All parameters are cli-flags.
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 
 The flags can be configured as args or as environment-variables prefixed with `SGO_` to inject sensitive configs as secret values.
+
+#### Example Helm-Config
+
+```yaml
+args:
+  git-author-email: XXX
+  git-author-name: XXX
+  git-repository: https://github.com/XXX/XXX
+  git-path: dev-cluster/sboms
+  verbosity: debug
+  cron: "0 30 * * * *"
+
+envVars:
+  - name: SGO_GIT_ACCESS_TOKEN
+    valueFrom:
+      secretKeyRef:
+        name: "sbom-operator"
+        key: "accessToken"
+
+```
 
 
 ## Git folder-structure
