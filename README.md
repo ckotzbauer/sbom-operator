@@ -17,7 +17,8 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | access-manager  | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| main            | v0.23.1                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.1.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
+| main            | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
 
 However, the operator will work with more versions of Kubernetes in general.
 
@@ -31,6 +32,25 @@ These are officially tested (with authentication):
 - GCR (Google Container Registry)
 - GHCR (GitHub Container Registry)
 - DockerHub
+
+
+## Installation
+
+#### Manifests
+
+```
+kubectl apply -f deploy/
+```
+
+#### Helm-Chart
+
+Create a YAML file first with the required configurations or use helm-flags instead.
+
+```
+helm repo add ckotzbauer https://ckotzbauer.github.io/helm-charts
+helm install ckotzbauer/sbom-operator -f your-values.yaml
+```
+
 
 ## Configuration
 
@@ -50,26 +70,54 @@ All parameters are cli-flags.
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 
-## Installation
+The flags can be configured as args or as environment-variables prefixed with `SGO_` to inject sensitive configs as secret values.
 
-#### Manifests
 
-```
-kubectl apply -f deploy/
-```
+## Git folder-structure
 
-#### Helm-Chart
-
-Create a YAML file first with the required configurations or use helm-flags instead.
+Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 
+The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json`.
 
 ```
-helm repo add ckotzbauer https://ckotzbauer.github.io/helm-charts
-helm install ckotzbauer/sbom-operator -f your-values.yaml
+dev-cluster
+│
+└───sboms
+    │
+    └───docker.io
+    |   │
+    |   └───library
+    |       │
+    |       └───busybox
+    |           │
+    |           └───sha256_ae39a6f5...
+    |               │   sbom.json
+    |
+    └───ghcr.io
+        │
+        └───kyverno
+            │
+            └───kyverno
+            |   │
+            |   └───sha256_9e3f14e5...
+            |       │   sbom.json
+            |
+            └───kyvernopre
+                │
+                └───sha256_e48f87fd...
+                    │   sbom.json
+            |
+            └───policy-reporter
+                │
+                └───sha256_b70caa7a...
+                    │   sbom.json
 ```
+
 
 ## Security
 
-The docker-image is based on `scratch` to reduce the attack-surface and keep the image small. Furthermore the image and release-artifacts are signed with [cosign](https://github.com/sigstore/cosign). The release-process satisfies SLSA Level 2. Both, SLSA and the signatures are still experimental for this project.
+The docker-image is based on `scratch` to reduce the attack-surface and keep the image small. Furthermore the image and release-artifacts are signed 
+with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files. The release-process satisfies SLSA Level 2. 
+Both, SLSA and the signatures are still experimental for this project.
 
 
 
