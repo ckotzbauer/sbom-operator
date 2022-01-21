@@ -14,13 +14,28 @@ import (
 	"github.com/sirupsen/logrus"
 )
 
-func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree, gitPath string) string {
-	name := strings.ReplaceAll(img.Digest, "@", "/")
-	name = strings.ReplaceAll(path.Join(gitWorkingTree, gitPath, name, "sbom.json"), ":", "_")
+type Syft struct {
+	GitWorkingTree string
+	GitPath        string
+	SbomFormat     string
+}
 
-	if pathExists(name) {
+func New(gitWorkingTree, gitPath, sbomFormat string) Syft {
+	return Syft{
+		GitWorkingTree: gitWorkingTree,
+		GitPath:        gitPath,
+		SbomFormat:     sbomFormat,
+	}
+}
+
+func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
+	fileName := GetFileName(s.SbomFormat)
+	filePath := strings.ReplaceAll(img.Digest, "@", "/")
+	filePath = strings.ReplaceAll(path.Join(s.GitWorkingTree, s.GitPath, filePath, fileName), ":", "_")
+
+	if pathExists(filePath) {
 		logrus.Debugf("Skip image %s", img.Digest)
-		return name
+		return filePath
 	}
 
 	logrus.Debugf("Processing image %s", img.Digest)
@@ -33,10 +48,10 @@ func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree, gitPath string) str
 
 	if err != nil {
 		logrus.WithError(err).Error("Image-Pull failed")
-		return name
+		return filePath
 	}
 
-	cmd := exec.Command("syft", imagePath, "-o", "json")
+	cmd := exec.Command("syft", imagePath, "-o", s.SbomFormat)
 	var errb bytes.Buffer
 	cmd.Stderr = &errb
 	stdout, err := cmd.Output()
@@ -45,25 +60,46 @@ func ExecuteSyft(img kubernetes.ImageDigest, gitWorkingTree, gitPath string) str
 
 	if err != nil {
 		logrus.WithError(err).WithField("stderr", errb.String()).Error("Syft stopped with error")
-		return name
+		return filePath
 	}
 
-	dir := filepath.Dir(name)
+	dir := filepath.Dir(filePath)
 	err = os.MkdirAll(dir, 0777)
 
 	if err != nil {
 		logrus.WithError(err).Error("Directory could not be created")
-		return name
+		return filePath
 	}
 
 	data := []byte(stdout)
-	err = os.WriteFile(name, data, 0640)
+	err = os.WriteFile(filePath, data, 0640)
 
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
 	}
 
-	return name
+	return filePath
+}
+
+func GetFileName(sbomFormat string) string {
+	switch sbomFormat {
+	case "json":
+		return "sbom.json"
+	case "text":
+		return "sbom.txt"
+	case "cyclonedx":
+		return "sbom.xml"
+	case "cyclonedx-json":
+		return "sbom.json"
+	case "spdx":
+		return "sbom.spdx"
+	case "spdx-json":
+		return "sbom.json"
+	case "table":
+		return "sbom.txt"
+	default:
+		return "sbom.json"
+	}
 }
 
 func pathExists(path string) bool {

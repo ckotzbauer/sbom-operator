@@ -60,6 +60,7 @@ All parameters are cli-flags.
 |-----------|----------|---------|-------------|
 | `verbosity` | `false` | `info` | Log-level (debug, info, warn, error, fatal, panic) |
 | `cron` | `false` | `@hourly` | Backround-Service interval (CRON). All options from [github.com/robfig/cron](github.com/robfig/cron) are allowed |
+| `format` | `false` | `json` | SBOM-Format. |
 | `git-workingtree` | `false` | `/work` | Directory to place the git-repo. |
 | `git-repository` | `true` | `""` | Git-Repository-URL (HTTPS). |
 | `git-branch` | `false` | `main` | Git-Branch to checkout. |

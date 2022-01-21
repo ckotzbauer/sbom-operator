@@ -46,6 +46,7 @@ func (c *CronService) runBackgroundService() {
 	logrus.Info("Execute background-service")
 	workingTree := viper.GetString("git-workingtree")
 	gitPath := viper.GetString("git-path")
+	format := viper.GetString("format")
 	workPath := path.Join(workingTree, gitPath)
 
 	gitAccount := git.New(viper.GetString("git-access-token"), viper.GetString("git-author-name"), viper.GetString("git-author-email"))
@@ -57,13 +58,15 @@ func (c *CronService) runBackgroundService() {
 
 	processedSbomFiles := []string{}
 
+	sy := syft.New(workingTree, gitPath, format)
+
 	for _, ns := range namespaces {
 		pods := client.ListPods(ns.Name, viper.GetString("pod-label-selector"))
 		logrus.Debugf("Discovered %v pods in namespace %v", len(pods), ns.Name)
 		digests := client.GetContainerDigests(pods)
 
 		for _, d := range digests {
-			sbomPath := syft.ExecuteSyft(d, workingTree, gitPath)
+			sbomPath := sy.ExecuteSyft(d)
 			processedSbomFiles = append(processedSbomFiles, sbomPath)
 		}
 
@@ -72,7 +75,9 @@ func (c *CronService) runBackgroundService() {
 
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
-	err := filepath.Walk(workPath, deleteObsoleteFiles(workingTree, ignoreDirs, processedSbomFiles, gitAccount))
+	fileName := syft.GetFileName(format)
+
+	err := filepath.Walk(workPath, deleteObsoleteFiles(workingTree, fileName, ignoreDirs, processedSbomFiles, gitAccount))
 	if err != nil {
 		logrus.WithError(err).Error("Could not cleanup old SBOMs")
 	} else {
@@ -82,7 +87,7 @@ func (c *CronService) runBackgroundService() {
 	c.printNextExecution()
 }
 
-func deleteObsoleteFiles(workPath string, ignoreDirs, processedSbomFiles []string, gitAccount git.GitAccount) filepath.WalkFunc {
+func deleteObsoleteFiles(workPath, fileName string, ignoreDirs, processedSbomFiles []string, gitAccount git.GitAccount) filepath.WalkFunc {
 	return func(p string, info os.FileInfo, err error) error {
 		if err != nil {
 			logrus.WithError(err).Errorf("An error occurred while processing %s", p)
@@ -98,7 +103,7 @@ func deleteObsoleteFiles(workPath string, ignoreDirs, processedSbomFiles []strin
 			}
 		}
 
-		if info.Name() == "sbom.json" {
+		if info.Name() == fileName {
 			found := false
 			for _, f := range processedSbomFiles {
 				if f == p {

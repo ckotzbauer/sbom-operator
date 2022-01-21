@@ -45,6 +45,7 @@ func init() {
 
 	rootCmd.PersistentFlags().StringVarP(&verbosity, "verbosity", "v", logrus.InfoLevel.String(), "Log-level (debug, info, warn, error, fatal, panic)")
 	rootCmd.PersistentFlags().StringVarP(&daemonCron, "cron", "c", "@hourly", "Backround-Service interval (CRON)")
+	rootCmd.PersistentFlags().String("format", "json", "SBOM-Format.")
 	rootCmd.PersistentFlags().String("git-workingtree", "/work", "Directory to place the git-repo.")
 	rootCmd.PersistentFlags().String("git-repository", "", "Git-Repository-URL (HTTPS).")
 	rootCmd.PersistentFlags().String("git-branch", "main", "Git-Branch to checkout.")
