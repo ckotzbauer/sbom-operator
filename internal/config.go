@@ -4,6 +4,7 @@ var (
 	ConfigKeyVerbosity              = "verbosity"
 	ConfigKeyCron                   = "cron"
 	ConfigKeyFormat                 = "format"
+	ConfigKeyTargets                = "targets"
 	ConfigKeyGitWorkingTree         = "git-workingtree"
 	ConfigKeyGitRepository          = "git-repository"
 	ConfigKeyGitBranch              = "git-branch"
