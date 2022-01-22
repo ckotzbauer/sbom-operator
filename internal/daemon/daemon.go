@@ -14,16 +14,17 @@ import (
 
 type CronService struct {
 	cron    string
-	targets []string
+	targets []target.Target
 }
 
 func Start(cronTime string) {
 	cr := internal.Unescape(cronTime)
-	targets := viper.GetStringSlice(internal.ConfigKeyTargets)
+	targetKeys := viper.GetStringSlice(internal.ConfigKeyTargets)
 
 	logrus.Debugf("Cron set to: %v", cr)
-	logrus.Debugf("Targets set to: %v", targets)
+	logrus.Debugf("Targets set to: %v", targetKeys)
 
+	targets := initTargets(targetKeys)
 	cs := CronService{cron: cr, targets: targets}
 	cs.printNextExecution()
 
@@ -45,7 +46,10 @@ func (c *CronService) printNextExecution() {
 func (c *CronService) runBackgroundService() {
 	logrus.Info("Execute background-service")
 	format := viper.GetString(internal.ConfigKeyFormat)
-	targets := c.initTargets()
+
+	for _, t := range c.targets {
+		t.Initialize()
+	}
 
 	client := kubernetes.NewClient()
 	namespaces := client.ListNamespaces(viper.GetString(internal.ConfigKeyNamespaceLabelSelector))
@@ -64,25 +68,39 @@ func (c *CronService) runBackgroundService() {
 			processedSbomFiles = append(processedSbomFiles, sbomPath)
 		}
 
-		for _, t := range targets {
+		for _, t := range c.targets {
 			t.ProcessSboms(processedSbomFiles, ns.Name)
 		}
 	}
 
-	for _, t := range targets {
+	for _, t := range c.targets {
 		t.Cleanup()
 	}
 
 	c.printNextExecution()
 }
 
-func (c *CronService) initTargets() []target.Target {
+func initTargets(targetKeys []string) []target.Target {
 	targets := make([]target.Target, 0)
 
-	for _, ta := range c.targets {
+	for _, ta := range targetKeys {
+		var err error
+
 		if ta == "git" {
-			targets = append(targets, target.NewGitTarget())
+			t := target.NewGitTarget()
+			err = t.ValidateConfig()
+			targets = append(targets, t)
+		} else {
+			logrus.Fatalf("Unknown target %s", ta)
 		}
+
+		if err != nil {
+			logrus.WithError(err).Fatal("Config-Validation failed!")
+		}
+	}
+
+	if len(targets) == 0 {
+		logrus.Fatalf("Please specify at least one target.")
 	}
 
 	return targets

@@ -16,6 +16,8 @@ import (
 type GitTarget struct {
 	workingTree        string
 	workPath           string
+	repository         string
+	branch             string
 	gitAccount         git.GitAccount
 	processedSbomFiles []string
 }
@@ -23,17 +25,56 @@ type GitTarget struct {
 func NewGitTarget() *GitTarget {
 	workingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
 	workPath := path.Join(workingTree, viper.GetString(internal.ConfigKeyGitPath))
+	repository := viper.GetString(internal.ConfigKeyGitRepository)
+	branch := viper.GetString(internal.ConfigKeyGitBranch)
 
 	gitAccount := git.New(
 		viper.GetString(internal.ConfigKeyGitAccessToken),
 		viper.GetString(internal.ConfigKeyGitAuthorName),
 		viper.GetString(internal.ConfigKeyGitAuthorEmail))
 
-	gitAccount.PrepareRepository(
-		viper.GetString(internal.ConfigKeyGitRepository), workingTree,
-		viper.GetString(internal.ConfigKeyGitBranch))
+	return &GitTarget{
+		workingTree:        workingTree,
+		workPath:           workPath,
+		repository:         repository,
+		branch:             branch,
+		gitAccount:         gitAccount,
+		processedSbomFiles: []string{},
+	}
+}
 
-	return &GitTarget{workingTree: workingTree, workPath: workPath, gitAccount: gitAccount, processedSbomFiles: []string{}}
+func (g *GitTarget) ValidateConfig() error {
+	if g.workingTree == "" {
+		return fmt.Errorf("%s is empty", internal.ConfigKeyGitWorkingTree)
+	}
+
+	if g.repository == "" {
+		return fmt.Errorf("%s is empty", internal.ConfigKeyGitRepository)
+	}
+
+	if g.branch == "" {
+		return fmt.Errorf("%s is empty", internal.ConfigKeyGitBranch)
+	}
+
+	if g.gitAccount.Token == "" {
+		return fmt.Errorf("%s is empty", internal.ConfigKeyGitAccessToken)
+	}
+
+	if g.gitAccount.Name == "" {
+		return fmt.Errorf("%s is empty", internal.ConfigKeyGitAuthorName)
+	}
+
+	if g.gitAccount.Email == "" {
+		return fmt.Errorf("%s is empty", internal.ConfigKeyGitAuthorEmail)
+	}
+
+	return nil
+}
+
+func (g *GitTarget) Initialize() {
+	g.gitAccount.PrepareRepository(
+		g.repository, g.workingTree,
+		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
 func (g *GitTarget) ProcessSboms(sbomFiles []string, namespace string) {
