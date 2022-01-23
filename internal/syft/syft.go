@@ -2,15 +2,16 @@ package syft
 
 import (
 	"fmt"
-	"github.com/anchore/syft/syft"
-	"github.com/anchore/syft/syft/format"
-	"github.com/anchore/syft/syft/pkg/cataloger"
-	"github.com/anchore/syft/syft/sbom"
 	"os"
 	"path"
 	"path/filepath"
 	"runtime/debug"
 	"strings"
+
+	"github.com/anchore/syft/syft"
+	"github.com/anchore/syft/syft/format"
+	"github.com/anchore/syft/syft/pkg/cataloger"
+	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
 	util "github.com/ckotzbauer/sbom-operator/internal"
@@ -33,14 +34,14 @@ func New(gitWorkingTree, gitPath, sbomFormat string) Syft {
 	}
 }
 
-func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
+func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) (string, error) {
 	fileName := GetFileName(s.SbomFormat)
 	filePath := strings.ReplaceAll(img.Digest, "@", "/")
 	filePath = strings.ReplaceAll(path.Join(s.GitWorkingTree, s.GitPath, filePath, fileName), ":", "_")
 
 	if util.PathExists(filePath) {
 		logrus.Debugf("Skip image %s", img.Digest)
-		return filePath
+		return filePath, nil
 	}
 
 	logrus.Debugf("Processing image %s", img.Digest)
@@ -53,13 +54,15 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 
 	if err != nil {
 		logrus.WithError(err).Error("Image-Pull failed")
-		return filePath
+		return "", err
 	}
 
 	src, cleanup, err := source.New(filepath.Join("oci-archive:", imagePath), nil, nil)
 	if err != nil {
-		panic(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err))
+		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err)).Error("Source-Creation failed")
+		return "", err
 	}
+
 	if cleanup != nil {
 		defer cleanup()
 	}
@@ -80,7 +83,8 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 	}
 
 	result := sbom.SBOM{
-		Source: src.Metadata,
+		Source:     src.Metadata,
+		Descriptor: descriptor,
 		// TODO: we should have helper functions for getting this built from exported library functions
 	}
 
@@ -88,7 +92,8 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 	c.Search.Scope = source.SquashedScope
 	packageCatalog, relationships, theDistro, err := syft.CatalogPackages(src, c)
 	if err != nil {
-		panic(err)
+		logrus.WithError(err).Error("CatalogPackages failed")
+		return "", err
 	}
 
 	result.Artifacts.PackageCatalog = packageCatalog
@@ -98,26 +103,26 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) string {
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
 	b, err := syft.Encode(result, format.Option(s.SbomFormat))
 	if err != nil {
-		panic(err)
+		logrus.WithError(err).Error("Encoding of result failed")
+		return "", err
 	}
 
 	os.RemoveAll(workDir)
 
 	dir := filepath.Dir(filePath)
 	err = os.MkdirAll(dir, 0777)
-
 	if err != nil {
 		logrus.WithError(err).Error("Directory could not be created")
-		return filePath
+		return "", err
 	}
 
 	err = os.WriteFile(filePath, b, 0640)
-
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
+		return "", err
 	}
 
-	return filePath
+	return filePath, nil
 }
 
 func GetFileName(sbomFormat string) string {

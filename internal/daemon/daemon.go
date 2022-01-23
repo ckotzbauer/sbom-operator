@@ -64,8 +64,11 @@ func (c *CronService) runBackgroundService() {
 		processedSbomFiles := []string{}
 
 		for _, d := range digests {
-			sbomPath := sy.ExecuteSyft(d)
-			processedSbomFiles = append(processedSbomFiles, sbomPath)
+			sbomPath, err := sy.ExecuteSyft(d)
+			// Error is already handled from syft module.
+			if err == nil {
+				processedSbomFiles = append(processedSbomFiles, sbomPath)
+			}
 		}
 
 		for _, t := range c.targets {
