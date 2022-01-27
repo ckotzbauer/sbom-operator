@@ -56,28 +56,33 @@ func (c *CronService) runBackgroundService() {
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
 
 	sy := syft.New(viper.GetString(internal.ConfigKeyGitWorkingTree), viper.GetString(internal.ConfigKeyGitPath), format)
+	allImages := []string{}
 
 	for _, ns := range namespaces {
 		pods := client.ListPods(ns.Name, viper.GetString(internal.ConfigKeyPodLabelSelector))
 		logrus.Debugf("Discovered %v pods in namespace %v", len(pods), ns.Name)
-		digests := client.GetContainerDigests(pods)
-		processedSbomFiles := []string{}
 
-		for _, d := range digests {
-			sbomPath, err := sy.ExecuteSyft(d)
-			// Error is already handled from syft module.
-			if err == nil {
-				processedSbomFiles = append(processedSbomFiles, sbomPath)
+		for _, pod := range pods {
+			filteredDigests, allPodImages := client.GetContainerDigests(pod)
+			allImages = append(allImages, allPodImages...)
+
+			for _, d := range filteredDigests {
+				// TODO: Avoid duplicate scans of the same image in different pods.
+				_, err := sy.ExecuteSyft(d)
+				// Error is already handled from syft module.
+				if err == nil {
+					client.UpdatePodAnnotation(pod)
+				}
 			}
 		}
 
 		for _, t := range c.targets {
-			t.ProcessSboms(processedSbomFiles, ns.Name)
+			t.ProcessSboms(ns.Name)
 		}
 	}
 
 	for _, t := range c.targets {
-		t.Cleanup()
+		t.Cleanup(allImages)
 	}
 
 	c.printNextExecution()

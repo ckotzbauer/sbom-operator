@@ -2,6 +2,7 @@ package kubernetes
 
 import (
 	"context"
+	"fmt"
 
 	"github.com/sirupsen/logrus"
 	corev1 "k8s.io/api/core/v1"
@@ -20,6 +21,10 @@ type ImageDigest struct {
 type KubeClient struct {
 	Client *kubernetes.Clientset
 }
+
+var (
+	annotationTemplate = "ckotzbauer.sbom-operator.io/%s"
+)
 
 func NewClient() *KubeClient {
 	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
@@ -71,31 +76,93 @@ func (client *KubeClient) ListPods(namespace, labelSelector string) []corev1.Pod
 	return list.Items
 }
 
-func (client *KubeClient) GetContainerDigests(pods []corev1.Pod) []ImageDigest {
-	digests := []ImageDigest{}
+func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
+	newPod, err := client.Client.CoreV1().Pods(pod.Namespace).Get(context.Background(), pod.Name, meta.GetOptions{})
 
-	for _, p := range pods {
-		pullSecrets, err := client.loadSecrets(p.Namespace, p.Spec.ImagePullSecrets)
-
-		if err != nil {
-			logrus.WithError(err).Error("PullSecrets could not be retrieved!")
-			return []ImageDigest{}
-		}
-
-		for _, c := range p.Status.ContainerStatuses {
-			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-		}
-
-		for _, c := range p.Status.InitContainerStatuses {
-			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-		}
-
-		for _, c := range p.Status.EphemeralContainerStatuses {
-			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-		}
+	if err != nil {
+		logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.Namespace, pod.Name)
 	}
 
-	return removeDuplicateValues(digests)
+	ann := newPod.Annotations
+	if ann == nil {
+		ann = make(map[string]string)
+	}
+
+	for _, c := range pod.Status.ContainerStatuses {
+		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
+	}
+
+	for _, c := range pod.Status.InitContainerStatuses {
+		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
+	}
+
+	for _, c := range pod.Status.EphemeralContainerStatuses {
+		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
+	}
+
+	newPod.Annotations = ann
+
+	_, err = client.Client.CoreV1().Pods(newPod.Namespace).Update(context.Background(), newPod, meta.UpdateOptions{})
+	if err != nil {
+		logrus.WithError(err).Errorf("Pod %s/%s could not be updated!", pod.Namespace, pod.Name)
+	}
+}
+
+func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []string) {
+	digests := []ImageDigest{}
+	allImages := []string{}
+
+	annotations := pod.Annotations
+	pullSecrets, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
+
+	if err != nil {
+		logrus.WithError(err).Error("PullSecrets could not be retrieved!")
+		return []ImageDigest{}, []string{}
+	}
+
+	for _, c := range pod.Status.ContainerStatuses {
+		if !hasAnnotation(annotations, c) {
+			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
+		} else {
+			logrus.Debugf("Skip image %s", c.ImageID)
+		}
+
+		allImages = append(allImages, c.ImageID)
+	}
+
+	for _, c := range pod.Status.InitContainerStatuses {
+		if !hasAnnotation(annotations, c) {
+			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
+		} else {
+			logrus.Debugf("Skip image %s", c.ImageID)
+		}
+
+		allImages = append(allImages, c.ImageID)
+	}
+
+	for _, c := range pod.Status.EphemeralContainerStatuses {
+		if !hasAnnotation(annotations, c) {
+			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
+		} else {
+			logrus.Debugf("Skip image %s", c.ImageID)
+		}
+
+		allImages = append(allImages, c.ImageID)
+	}
+
+	return removeDuplicateValues(digests), allImages
+}
+
+func hasAnnotation(annotations map[string]string, status corev1.ContainerStatus) bool {
+	if annotations == nil {
+		return false
+	}
+
+	if val, ok := annotations[fmt.Sprintf(annotationTemplate, status.Name)]; ok {
+		return val == status.ImageID
+	}
+
+	return false
 }
 
 func removeDuplicateValues(slice []ImageDigest) []ImageDigest {

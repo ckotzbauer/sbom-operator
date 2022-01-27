@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"io"
 	"math/rand"
-	"os"
 	"strings"
 
 	"github.com/sirupsen/logrus"
@@ -49,12 +48,6 @@ func Unescape(s string) string {
 	s = strings.ReplaceAll(s, "\\", "")
 	s = strings.ReplaceAll(s, "\"", "")
 	return s
-}
-
-// PathExists checks if the specificed path exists on the FS
-func PathExists(path string) bool {
-	_, err := os.Stat(path)
-	return err == nil
 }
 
 const letterBytes = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"

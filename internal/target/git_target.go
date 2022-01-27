@@ -5,6 +5,7 @@ import (
 	"os"
 	"path"
 	"path/filepath"
+	"strings"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
@@ -14,12 +15,11 @@ import (
 )
 
 type GitTarget struct {
-	workingTree        string
-	workPath           string
-	repository         string
-	branch             string
-	gitAccount         git.GitAccount
-	processedSbomFiles []string
+	workingTree string
+	workPath    string
+	repository  string
+	branch      string
+	gitAccount  git.GitAccount
 }
 
 func NewGitTarget() *GitTarget {
@@ -34,12 +34,11 @@ func NewGitTarget() *GitTarget {
 		viper.GetString(internal.ConfigKeyGitAuthorEmail))
 
 	return &GitTarget{
-		workingTree:        workingTree,
-		workPath:           workPath,
-		repository:         repository,
-		branch:             branch,
-		gitAccount:         gitAccount,
-		processedSbomFiles: []string{},
+		workingTree: workingTree,
+		workPath:    workPath,
+		repository:  repository,
+		branch:      branch,
+		gitAccount:  gitAccount,
 	}
 }
 
@@ -77,19 +76,19 @@ func (g *GitTarget) Initialize() {
 		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
-func (g *GitTarget) ProcessSboms(sbomFiles []string, namespace string) {
+func (g *GitTarget) ProcessSboms(namespace string) {
 	g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOMs for pods in namespace %s", namespace))
-	g.processedSbomFiles = append(g.processedSbomFiles, sbomFiles...)
 }
 
-func (g *GitTarget) Cleanup() {
+func (g *GitTarget) Cleanup(allImages []string) {
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
 	format := viper.GetString(internal.ConfigKeyFormat)
 
 	fileName := syft.GetFileName(format)
+	allProcessedFiles := g.mapToFiles(allImages)
 
-	err := filepath.Walk(g.workPath, g.deleteObsoleteFiles(fileName, ignoreDirs))
+	err := filepath.Walk(g.workPath, g.deleteObsoleteFiles(fileName, ignoreDirs, allProcessedFiles))
 	if err != nil {
 		logrus.WithError(err).Error("Could not cleanup old SBOMs")
 	} else {
@@ -97,7 +96,25 @@ func (g *GitTarget) Cleanup() {
 	}
 }
 
-func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs []string) filepath.WalkFunc {
+func (g *GitTarget) mapToFiles(allImages []string) []string {
+	paths := []string{}
+
+	gitWorkingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
+	gitPath := viper.GetString(internal.ConfigKeyGitPath)
+	sbomFormat := viper.GetString(internal.ConfigKeyFormat)
+
+	// TODO: Refactor this, syft-package should not rely on git-logic.
+	for _, img := range allImages {
+		fileName := syft.GetFileName(sbomFormat)
+		filePath := strings.ReplaceAll(img, "@", "/")
+		filePath = strings.ReplaceAll(path.Join(gitWorkingTree, gitPath, filePath, fileName), ":", "_")
+		paths = append(paths, filePath)
+	}
+
+	return paths
+}
+
+func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs, allProcessedFiles []string) filepath.WalkFunc {
 	return func(p string, info os.FileInfo, err error) error {
 		if err != nil {
 			logrus.WithError(err).Errorf("An error occurred while processing %s", p)
@@ -115,7 +132,7 @@ func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs []string) fi
 
 		if info.Name() == fileName {
 			found := false
-			for _, f := range g.processedSbomFiles {
+			for _, f := range allProcessedFiles {
 				if f == p {
 					found = true
 					break
