@@ -39,11 +39,6 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) (string, error) {
 	filePath := strings.ReplaceAll(img.Digest, "@", "/")
 	filePath = strings.ReplaceAll(path.Join(s.GitWorkingTree, s.GitPath, filePath, fileName), ":", "_")
 
-	if util.PathExists(filePath) {
-		logrus.Debugf("Skip image %s", img.Digest)
-		return filePath, nil
-	}
-
 	logrus.Debugf("Processing image %s", img.Digest)
 
 	workDir := "/tmp/" + util.RandStringBytes(10)
@@ -57,7 +52,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) (string, error) {
 		return "", err
 	}
 
-	src, cleanup, err := source.New(filepath.Join("oci-archive:", imagePath), nil, nil)
+	src, cleanup, err := source.New(filepath.Join("file:", imagePath), nil, nil)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err)).Error("Source-Creation failed")
 		return "", err
