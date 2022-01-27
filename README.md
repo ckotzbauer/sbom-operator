@@ -64,12 +64,12 @@ All parameters are cli-flags.
 | `format` | `false` | `json` | SBOM-Format. |
 | `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git` |
 | `git-workingtree` | `false` | `/work` | Directory to place the git-repo. |
-| `git-repository` | `true` | `""` | Git-Repository-URL (HTTPS). |
+| `git-repository` | `true` when `git` target is used. | `""` | Git-Repository-URL (HTTPS). |
 | `git-branch` | `false` | `main` | Git-Branch to checkout. |
 | `git-path` | `false` | `""` | Folder-Path inside the Git-Repository. |
-| `git-access-token` | `true` | `""` | Git-Personal-Access-Token with write-permissions. |
-| `git-author-name` | `true` | `""` | Author name to use for Git-Commits. |
-| `git-author-email` | `true` | `""` | Author email to use for Git-Commits. |
+| `git-access-token` | `true` when `git` target is used. | `""` | Git-Personal-Access-Token with write-permissions. |
+| `git-author-name` | `true` when `git` target is used. | `""` | Author name to use for Git-Commits. |
+| `git-author-email` | `true` when `git` target is used. | `""` | Author email to use for Git-Commits. |
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 
