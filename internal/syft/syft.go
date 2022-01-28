@@ -52,7 +52,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) (string, error) {
 		return "", err
 	}
 
-	src, cleanup, err := source.New(filepath.Join("file:", imagePath), nil, nil)
+	src, cleanup, err := source.New(filepath.Join("docker-archive:", imagePath), nil, nil)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err)).Error("Source-Creation failed")
 		return "", err
