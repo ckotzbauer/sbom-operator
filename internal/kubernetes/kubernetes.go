@@ -7,6 +7,7 @@ import (
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	corev1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/api/errors"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
@@ -81,8 +82,9 @@ func (client *KubeClient) ListPods(namespace, labelSelector string) []corev1.Pod
 func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
 	newPod, err := client.Client.CoreV1().Pods(pod.Namespace).Get(context.Background(), pod.Name, meta.GetOptions{})
 
-	if err != nil {
+	if err != nil && !errors.IsNotFound(err) {
 		logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.Namespace, pod.Name)
+		return
 	}
 
 	ann := newPod.Annotations
@@ -122,34 +124,21 @@ func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []
 		return []ImageDigest{}, []string{}
 	}
 
-	for _, c := range pod.Status.ContainerStatuses {
-		if !client.hasAnnotation(annotations, c) {
-			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-		} else {
-			logrus.Debugf("Skip image %s", c.ImageID)
+	statuses := []corev1.ContainerStatus{}
+	statuses = append(statuses, pod.Status.ContainerStatuses...)
+	statuses = append(statuses, pod.Status.InitContainerStatuses...)
+	statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
+
+	for _, c := range statuses {
+		if c.ImageID != "" {
+			if !client.hasAnnotation(annotations, c) {
+				digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
+			} else {
+				logrus.Debugf("Skip image %s", c.ImageID)
+			}
+
+			allImages = append(allImages, c.ImageID)
 		}
-
-		allImages = append(allImages, c.ImageID)
-	}
-
-	for _, c := range pod.Status.InitContainerStatuses {
-		if !client.hasAnnotation(annotations, c) {
-			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-		} else {
-			logrus.Debugf("Skip image %s", c.ImageID)
-		}
-
-		allImages = append(allImages, c.ImageID)
-	}
-
-	for _, c := range pod.Status.EphemeralContainerStatuses {
-		if !client.hasAnnotation(annotations, c) {
-			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-		} else {
-			logrus.Debugf("Skip image %s", c.ImageID)
-		}
-
-		allImages = append(allImages, c.ImageID)
 	}
 
 	return removeDuplicateValues(digests), allImages
