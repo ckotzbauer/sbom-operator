@@ -127,8 +127,11 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
 	newPod, err := client.Client.CoreV1().Pods(pod.Namespace).Get(context.Background(), pod.Name, meta.GetOptions{})
 
-	if err != nil && !errors.IsNotFound(err) {
-		logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.Namespace, pod.Name)
+	if err != nil {
+		if !errors.IsNotFound(err) {
+			logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.Namespace, pod.Name)
+		}
+
 		return
 	}
 
