@@ -17,7 +17,7 @@ import (
 	parser "github.com/novln/docker-parser"
 )
 
-func SaveImage(imagePath, workDir string, image kubernetes.ContainerImage) error {
+func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
 
 	o := crane.GetOptions()

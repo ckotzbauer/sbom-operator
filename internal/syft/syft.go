@@ -14,10 +14,11 @@ import (
 	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
-	util "github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	"github.com/sirupsen/logrus"
+
+	parser "github.com/novln/docker-parser"
 )
 
 type Syft struct {
@@ -41,11 +42,14 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 
 	logrus.Infof("Processing image %s", img.ImageID)
 
-	workDir := "/tmp/" + util.RandStringBytes(10)
-	imagePath := workDir + "/image.tar.gz"
-	os.Mkdir(workDir, 0777)
+	fullRef, err := parser.Parse(img.ImageID)
+	if err != nil {
+		logrus.WithError(err).Errorf("Could not parse imageID %s", img.ImageID)
+		return "", err
+	}
 
-	err := registry.SaveImage(imagePath, workDir, img)
+	imagePath := "/tmp/" + strings.ReplaceAll(fullRef.Tag(), ":", "_") + ".tar.gz"
+	err = registry.SaveImage(imagePath, img)
 
 	if err != nil {
 		logrus.WithError(err).Error("Image-Pull failed")
@@ -102,7 +106,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		return "", err
 	}
 
-	os.RemoveAll(workDir)
+	os.Remove(imagePath)
 
 	dir := filepath.Dir(filePath)
 	err = os.MkdirAll(dir, 0777)

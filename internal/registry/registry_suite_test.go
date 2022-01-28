@@ -23,15 +23,15 @@ func testRegistry(name, image string) {
 	decoded, err := base64.StdEncoding.DecodeString(string(b))
 	Expect(err).To(BeNil())
 
-	os.Mkdir("/tmp/"+name, 0777)
-	err = registry.SaveImage("/tmp/"+name+"/image.tar.gz", "/tmp/"+name, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded)})
+	file := "/tmp/1.0.0.tar.gz"
+	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded)})
 
 	if err == nil {
-		stat, _ := os.Stat("/tmp/" + name + "/image.tar.gz")
+		stat, _ := os.Stat(file)
 		Expect(stat.Size()).To(BeEquivalentTo(2823168))
 	}
 
-	os.RemoveAll("/tmp/" + name)
+	os.Remove(file)
 	Expect(err).To(BeNil())
 }
 
