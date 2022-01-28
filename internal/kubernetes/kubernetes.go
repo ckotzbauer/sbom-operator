@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	corev1 "k8s.io/api/core/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
@@ -19,7 +20,8 @@ type ImageDigest struct {
 }
 
 type KubeClient struct {
-	Client *kubernetes.Clientset
+	Client            *kubernetes.Clientset
+	ignoreAnnotations bool
 }
 
 var (
@@ -40,7 +42,7 @@ func NewClient() *KubeClient {
 		logrus.WithError(err).Fatal("Could not create Kubernetes client from config!")
 	}
 
-	return &KubeClient{Client: client}
+	return &KubeClient{Client: client, ignoreAnnotations: viper.GetBool(internal.ConfigKeyIgnoreAnnotations)}
 }
 
 func prepareLabelSelector(selector string) meta.ListOptions {
@@ -121,7 +123,7 @@ func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []
 	}
 
 	for _, c := range pod.Status.ContainerStatuses {
-		if !hasAnnotation(annotations, c) {
+		if !client.hasAnnotation(annotations, c) {
 			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
 		} else {
 			logrus.Debugf("Skip image %s", c.ImageID)
@@ -131,7 +133,7 @@ func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []
 	}
 
 	for _, c := range pod.Status.InitContainerStatuses {
-		if !hasAnnotation(annotations, c) {
+		if !client.hasAnnotation(annotations, c) {
 			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
 		} else {
 			logrus.Debugf("Skip image %s", c.ImageID)
@@ -141,7 +143,7 @@ func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []
 	}
 
 	for _, c := range pod.Status.EphemeralContainerStatuses {
-		if !hasAnnotation(annotations, c) {
+		if !client.hasAnnotation(annotations, c) {
 			digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
 		} else {
 			logrus.Debugf("Skip image %s", c.ImageID)
@@ -153,8 +155,8 @@ func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []
 	return removeDuplicateValues(digests), allImages
 }
 
-func hasAnnotation(annotations map[string]string, status corev1.ContainerStatus) bool {
-	if annotations == nil {
+func (client *KubeClient) hasAnnotation(annotations map[string]string, status corev1.ContainerStatus) bool {
+	if annotations == nil || client.ignoreAnnotations {
 		return false
 	}
 

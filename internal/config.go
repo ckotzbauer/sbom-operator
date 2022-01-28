@@ -5,6 +5,7 @@ var (
 	ConfigKeyCron                   = "cron"
 	ConfigKeyFormat                 = "format"
 	ConfigKeyTargets                = "targets"
+	ConfigKeyIgnoreAnnotations      = "ignore-annotations"
 	ConfigKeyGitWorkingTree         = "git-workingtree"
 	ConfigKeyGitRepository          = "git-repository"
 	ConfigKeyGitBranch              = "git-branch"
