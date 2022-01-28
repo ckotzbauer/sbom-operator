@@ -3,7 +3,6 @@ package syft
 import (
 	"fmt"
 	"os"
-	"path"
 	"path/filepath"
 	"runtime/debug"
 	"strings"
@@ -22,24 +21,16 @@ import (
 )
 
 type Syft struct {
-	GitWorkingTree string
-	GitPath        string
-	SbomFormat     string
+	SbomFormat string
 }
 
-func New(gitWorkingTree, gitPath, sbomFormat string) Syft {
+func New(sbomFormat string) Syft {
 	return Syft{
-		GitWorkingTree: gitWorkingTree,
-		GitPath:        gitPath,
-		SbomFormat:     sbomFormat,
+		SbomFormat: sbomFormat,
 	}
 }
 
 func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
-	fileName := GetFileName(s.SbomFormat)
-	filePath := strings.ReplaceAll(img.ImageID, "@", "/")
-	filePath = strings.ReplaceAll(path.Join(s.GitWorkingTree, s.GitPath, filePath, fileName), ":", "_")
-
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	fullRef, err := parser.Parse(img.ImageID)
@@ -107,21 +98,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	}
 
 	os.Remove(imagePath)
-
-	dir := filepath.Dir(filePath)
-	err = os.MkdirAll(dir, 0777)
-	if err != nil {
-		logrus.WithError(err).Error("Directory could not be created")
-		return "", err
-	}
-
-	err = os.WriteFile(filePath, b, 0640)
-	if err != nil {
-		logrus.WithError(err).Error("SBOM could not be saved")
-		return "", err
-	}
-
-	return filePath, nil
+	return string(b), nil
 }
 
 func GetFileName(sbomFormat string) string {

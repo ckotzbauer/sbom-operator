@@ -20,6 +20,7 @@ type GitTarget struct {
 	repository  string
 	branch      string
 	gitAccount  git.GitAccount
+	sbomFormat  string
 }
 
 func NewGitTarget() *GitTarget {
@@ -27,6 +28,7 @@ func NewGitTarget() *GitTarget {
 	workPath := path.Join(workingTree, viper.GetString(internal.ConfigKeyGitPath))
 	repository := viper.GetString(internal.ConfigKeyGitRepository)
 	branch := viper.GetString(internal.ConfigKeyGitBranch)
+	format := viper.GetString(internal.ConfigKeyFormat)
 
 	gitAccount := git.New(
 		viper.GetString(internal.ConfigKeyGitAccessToken),
@@ -38,6 +40,7 @@ func NewGitTarget() *GitTarget {
 		workPath:    workPath,
 		repository:  repository,
 		branch:      branch,
+		sbomFormat:  format,
 		gitAccount:  gitAccount,
 	}
 }
@@ -76,16 +79,29 @@ func (g *GitTarget) Initialize() {
 		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
-func (g *GitTarget) ProcessSboms(imageID string) {
+func (g *GitTarget) ProcessSbom(imageID, sbom string) {
+	filePath := g.imageIDToFilePath(imageID)
+
+	dir := filepath.Dir(filePath)
+	err := os.MkdirAll(dir, 0777)
+	if err != nil {
+		logrus.WithError(err).Error("Directory could not be created")
+		return
+	}
+
+	err = os.WriteFile(filePath, []byte(sbom), 0640)
+	if err != nil {
+		logrus.WithError(err).Error("SBOM could not be saved")
+	}
+
 	g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
 func (g *GitTarget) Cleanup(allImages []string) {
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
-	format := viper.GetString(internal.ConfigKeyFormat)
 
-	fileName := syft.GetFileName(format)
+	fileName := syft.GetFileName(g.sbomFormat)
 	allProcessedFiles := g.mapToFiles(allImages)
 
 	err := filepath.Walk(g.workPath, g.deleteObsoleteFiles(fileName, ignoreDirs, allProcessedFiles))
@@ -98,20 +114,17 @@ func (g *GitTarget) Cleanup(allImages []string) {
 
 func (g *GitTarget) mapToFiles(allImages []string) []string {
 	paths := []string{}
-
-	gitWorkingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
-	gitPath := viper.GetString(internal.ConfigKeyGitPath)
-	sbomFormat := viper.GetString(internal.ConfigKeyFormat)
-
-	// TODO: Refactor this, syft-package should not rely on git-logic.
 	for _, img := range allImages {
-		fileName := syft.GetFileName(sbomFormat)
-		filePath := strings.ReplaceAll(img, "@", "/")
-		filePath = strings.ReplaceAll(path.Join(gitWorkingTree, gitPath, filePath, fileName), ":", "_")
-		paths = append(paths, filePath)
+		paths = append(paths, g.imageIDToFilePath(img))
 	}
 
 	return paths
+}
+
+func (g *GitTarget) imageIDToFilePath(id string) string {
+	fileName := syft.GetFileName(g.sbomFormat)
+	filePath := strings.ReplaceAll(id, "@", "/")
+	return strings.ReplaceAll(path.Join(g.workingTree, g.workPath, filePath, fileName), ":", "_")
 }
 
 func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs, allProcessedFiles []string) filepath.WalkFunc {

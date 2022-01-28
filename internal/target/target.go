@@ -3,6 +3,6 @@ package target
 type Target interface {
 	Initialize()
 	ValidateConfig() error
-	ProcessSboms(imageID string)
+	ProcessSbom(imageID, sbom string)
 	Cleanup(allImages []string)
 }

@@ -56,10 +56,10 @@ func (c *CronService) runBackgroundService() {
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
 	containerImages, allImages := k8s.LoadImageInfos(namespaces, viper.GetString(internal.ConfigKeyPodLabelSelector))
 
-	sy := syft.New(viper.GetString(internal.ConfigKeyGitWorkingTree), viper.GetString(internal.ConfigKeyGitPath), format)
+	sy := syft.New(format)
 
 	for _, image := range containerImages {
-		_, err := sy.ExecuteSyft(image)
+		sbom, err := sy.ExecuteSyft(image)
 		// Error is already handled from syft module.
 		if err == nil {
 			for _, pod := range image.Pods {
@@ -68,7 +68,7 @@ func (c *CronService) runBackgroundService() {
 		}
 
 		for _, t := range c.targets {
-			t.ProcessSboms(image.ImageID)
+			t.ProcessSbom(image.ImageID, sbom)
 		}
 	}
 
