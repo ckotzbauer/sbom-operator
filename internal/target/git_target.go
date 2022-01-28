@@ -76,8 +76,8 @@ func (g *GitTarget) Initialize() {
 		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
-func (g *GitTarget) ProcessSboms(namespace string) {
-	g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOMs for pods in namespace %s", namespace))
+func (g *GitTarget) ProcessSboms(imageID string) {
+	g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
 func (g *GitTarget) Cleanup(allImages []string) {

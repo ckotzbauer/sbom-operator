@@ -24,7 +24,7 @@ func testRegistry(name, image string) {
 	Expect(err).To(BeNil())
 
 	os.Mkdir("/tmp/"+name, 0777)
-	err = registry.SaveImage("/tmp/"+name+"/image.tar.gz", "/tmp/"+name, kubernetes.ImageDigest{Digest: image, Auth: []byte(decoded)})
+	err = registry.SaveImage("/tmp/"+name+"/image.tar.gz", "/tmp/"+name, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded)})
 
 	if err == nil {
 		stat, _ := os.Stat("/tmp/" + name + "/image.tar.gz")

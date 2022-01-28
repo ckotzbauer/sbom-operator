@@ -51,33 +51,24 @@ func (c *CronService) runBackgroundService() {
 		t.Initialize()
 	}
 
-	client := kubernetes.NewClient()
-	namespaces := client.ListNamespaces(viper.GetString(internal.ConfigKeyNamespaceLabelSelector))
+	k8s := kubernetes.NewClient()
+	namespaces := k8s.ListNamespaces(viper.GetString(internal.ConfigKeyNamespaceLabelSelector))
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
+	containerImages, allImages := k8s.LoadImageInfos(namespaces, viper.GetString(internal.ConfigKeyPodLabelSelector))
 
 	sy := syft.New(viper.GetString(internal.ConfigKeyGitWorkingTree), viper.GetString(internal.ConfigKeyGitPath), format)
-	allImages := []string{}
 
-	for _, ns := range namespaces {
-		pods := client.ListPods(ns.Name, viper.GetString(internal.ConfigKeyPodLabelSelector))
-		logrus.Debugf("Discovered %v pods in namespace %v", len(pods), ns.Name)
-
-		for _, pod := range pods {
-			filteredDigests, allPodImages := client.GetContainerDigests(pod)
-			allImages = append(allImages, allPodImages...)
-
-			for _, d := range filteredDigests {
-				// TODO: Avoid duplicate scans of the same image in different pods.
-				_, err := sy.ExecuteSyft(d)
-				// Error is already handled from syft module.
-				if err == nil {
-					client.UpdatePodAnnotation(pod)
-				}
+	for _, image := range containerImages {
+		_, err := sy.ExecuteSyft(image)
+		// Error is already handled from syft module.
+		if err == nil {
+			for _, pod := range image.Pods {
+				k8s.UpdatePodAnnotation(pod)
 			}
 		}
 
 		for _, t := range c.targets {
-			t.ProcessSboms(ns.Name)
+			t.ProcessSboms(image.ImageID)
 		}
 	}
 

@@ -15,9 +15,10 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 )
 
-type ImageDigest struct {
-	Digest string
-	Auth   []byte
+type ContainerImage struct {
+	ImageID string
+	Auth    []byte
+	Pods    []corev1.Pod
 }
 
 type KubeClient struct {
@@ -68,7 +69,7 @@ func (client *KubeClient) ListNamespaces(labelSelector string) []corev1.Namespac
 	return list.Items
 }
 
-func (client *KubeClient) ListPods(namespace, labelSelector string) []corev1.Pod {
+func (client *KubeClient) listPods(namespace, labelSelector string) []corev1.Pod {
 	list, err := client.Client.CoreV1().Pods(namespace).List(context.Background(), prepareLabelSelector(labelSelector))
 
 	if err != nil {
@@ -77,6 +78,50 @@ func (client *KubeClient) ListPods(namespace, labelSelector string) []corev1.Pod
 	}
 
 	return list.Items
+}
+
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []string) {
+	images := map[string]ContainerImage{}
+	allImages := []string{}
+
+	for _, ns := range namespaces {
+		pods := client.listPods(ns.Name, podLabelSelector)
+
+		for _, pod := range pods {
+			annotations := pod.Annotations
+			statuses := []corev1.ContainerStatus{}
+			statuses = append(statuses, pod.Status.ContainerStatuses...)
+			statuses = append(statuses, pod.Status.InitContainerStatuses...)
+			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
+
+			pullSecrets, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
+
+			if err != nil {
+				logrus.WithError(err).Errorf("PullSecrets could not be retrieved for pod %s/%s", ns.Name, pod.Name)
+				continue
+			}
+
+			for _, c := range statuses {
+				if c.ImageID != "" {
+					if !client.hasAnnotation(annotations, c) {
+						img, ok := images[c.ImageID]
+						if !ok {
+							img = ContainerImage{ImageID: c.ImageID, Auth: pullSecrets, Pods: []corev1.Pod{}}
+						}
+
+						img.Pods = append(img.Pods, pod)
+						images[c.ImageID] = img
+					} else {
+						logrus.Debugf("Skip image %s", c.ImageID)
+					}
+
+					allImages = append(allImages, c.ImageID)
+				}
+			}
+		}
+	}
+
+	return images, allImages
 }
 
 func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
@@ -112,38 +157,6 @@ func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
 	}
 }
 
-func (client *KubeClient) GetContainerDigests(pod corev1.Pod) ([]ImageDigest, []string) {
-	digests := []ImageDigest{}
-	allImages := []string{}
-
-	annotations := pod.Annotations
-	pullSecrets, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
-
-	if err != nil {
-		logrus.WithError(err).Error("PullSecrets could not be retrieved!")
-		return []ImageDigest{}, []string{}
-	}
-
-	statuses := []corev1.ContainerStatus{}
-	statuses = append(statuses, pod.Status.ContainerStatuses...)
-	statuses = append(statuses, pod.Status.InitContainerStatuses...)
-	statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
-
-	for _, c := range statuses {
-		if c.ImageID != "" {
-			if !client.hasAnnotation(annotations, c) {
-				digests = append(digests, ImageDigest{Digest: c.ImageID, Auth: pullSecrets})
-			} else {
-				logrus.Debugf("Skip image %s", c.ImageID)
-			}
-
-			allImages = append(allImages, c.ImageID)
-		}
-	}
-
-	return removeDuplicateValues(digests), allImages
-}
-
 func (client *KubeClient) hasAnnotation(annotations map[string]string, status corev1.ContainerStatus) bool {
 	if annotations == nil || client.ignoreAnnotations {
 		return false
@@ -154,19 +167,6 @@ func (client *KubeClient) hasAnnotation(annotations map[string]string, status co
 	}
 
 	return false
-}
-
-func removeDuplicateValues(slice []ImageDigest) []ImageDigest {
-	keys := make(map[string]bool)
-	list := []ImageDigest{}
-
-	for _, entry := range slice {
-		if _, value := keys[entry.Digest]; !value {
-			keys[entry.Digest] = true
-			list = append(list, entry)
-		}
-	}
-	return list
 }
 
 func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) ([]byte, error) {

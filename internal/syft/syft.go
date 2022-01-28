@@ -34,12 +34,12 @@ func New(gitWorkingTree, gitPath, sbomFormat string) Syft {
 	}
 }
 
-func (s *Syft) ExecuteSyft(img kubernetes.ImageDigest) (string, error) {
+func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	fileName := GetFileName(s.SbomFormat)
-	filePath := strings.ReplaceAll(img.Digest, "@", "/")
+	filePath := strings.ReplaceAll(img.ImageID, "@", "/")
 	filePath = strings.ReplaceAll(path.Join(s.GitWorkingTree, s.GitPath, filePath, fileName), ":", "_")
 
-	logrus.Debugf("Processing image %s", img.Digest)
+	logrus.Infof("Processing image %s", img.ImageID)
 
 	workDir := "/tmp/" + util.RandStringBytes(10)
 	imagePath := workDir + "/image.tar.gz"

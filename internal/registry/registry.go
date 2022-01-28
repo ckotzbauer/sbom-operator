@@ -17,7 +17,7 @@ import (
 	parser "github.com/novln/docker-parser"
 )
 
-func SaveImage(imagePath, workDir string, image kubernetes.ImageDigest) error {
+func SaveImage(imagePath, workDir string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
 
 	o := crane.GetOptions()
@@ -28,7 +28,7 @@ func SaveImage(imagePath, workDir string, image kubernetes.ImageDigest) error {
 			return err
 		}
 
-		fullRef, err := parser.Parse(image.Digest)
+		fullRef, err := parser.Parse(image.ImageID)
 		if err != nil {
 			return err
 		}
@@ -64,10 +64,10 @@ func SaveImage(imagePath, workDir string, image kubernetes.ImageDigest) error {
 		}
 	}
 
-	ref, err := name.ParseReference(image.Digest, o.Name...)
+	ref, err := name.ParseReference(image.ImageID, o.Name...)
 
 	if err != nil {
-		return fmt.Errorf("parsing reference %q: %w", image, err)
+		return fmt.Errorf("parsing reference %q: %w", image.ImageID, err)
 	}
 
 	rmt, err := remote.Get(ref, o.Remote...)
@@ -80,7 +80,7 @@ func SaveImage(imagePath, workDir string, image kubernetes.ImageDigest) error {
 		return err
 	}
 
-	imageMap[image.Digest] = img
+	imageMap[image.ImageID] = img
 
 	if err := crane.MultiSave(imageMap, imagePath); err != nil {
 		return fmt.Errorf("saving tarball %s: %w", imagePath, err)
