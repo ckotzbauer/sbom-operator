@@ -74,6 +74,8 @@ All parameters are cli-flags.
 | `git-author-email` | `true` when `git` target is used. | `""` | Author email to use for Git-Commits. |
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
+| `dtrack-base-url` | `true` when `dtrack` target is used | `""` | Dependency-Track base URL, e.g. 'https://dtrack.example.com' |
+| `dtrack-api-key` | `true` when `dtrack` target is used | `""` | Dependency-Track API key |
 
 The flags can be configured as args or as environment-variables prefixed with `SBOM_` to inject sensitive configs as secret values.
 

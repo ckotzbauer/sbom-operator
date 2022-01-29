@@ -89,6 +89,10 @@ func initTargets(targetKeys []string) []target.Target {
 			t := target.NewGitTarget()
 			err = t.ValidateConfig()
 			targets = append(targets, t)
+		} else if ta == "dtrack" {
+			t := target.NewDependencaTrackTarget()
+			err = t.ValidateConfig()
+			targets = append(targets, t)
 		} else {
 			logrus.Fatalf("Unknown target %s", ta)
 		}
