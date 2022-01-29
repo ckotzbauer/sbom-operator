@@ -6,7 +6,7 @@ require (
 	github.com/anchore/syft v0.36.0
 	github.com/docker/cli v20.10.12+incompatible
 	github.com/novln/docker-parser v1.0.0
-	github.com/onsi/ginkgo/v2 v2.1.0
+	github.com/onsi/ginkgo/v2 v2.1.1
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.3.0
