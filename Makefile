@@ -17,3 +17,6 @@ vet:
 
 test-registries:
 	go test github.com/ckotzbauer/sbom-operator/internal/registry
+
+test:
+	go test github.com/ckotzbauer/sbom-operator/internal/syft
