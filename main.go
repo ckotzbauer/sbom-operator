@@ -25,7 +25,7 @@ var (
 
 	rootCmd = &cobra.Command{
 		Use:              "sbom-operator",
-		Short:            "An operator for cataloguing all k8s-cluster-images to git.",
+		Short:            "An operator for cataloguing all k8s-cluster-images to multiple targets.",
 		PersistentPreRun: internal.BindFlags,
 		Run: func(cmd *cobra.Command, args []string) {
 			internal.SetUpLogs(os.Stdout, verbosity)

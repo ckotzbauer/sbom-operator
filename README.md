@@ -1,15 +1,15 @@
 
 # sbom-operator
 
-> Catalogue all images of a Kubernetes cluster to Git with Syft.
+> Catalogue all images of a Kubernetes cluster to multiple targets with Syft.
 
 [![test](https://github.com/ckotzbauer/sbom-operator/actions/workflows/test.yml/badge.svg)](https://github.com/ckotzbauer/sbom-operator/actions/workflows/test.yml)
 
 ## Motivation
 
 This operator maintains a central place to track all packages and software used in all those images in a Kubernetes cluster. For this a Software Bill of 
-Materials (SBOM) is generated from each image with Syft. They are all stored in a git-repository. With this it is possible to do further analysis, 
-vulnerability scans and much more in a single repository.
+Materials (SBOM) is generated from each image with Syft. They are all stored in one or more targets. Currently only Git is supported. With this it is 
+possible to do further analysis, vulnerability scans and much more in a single place.
 
 ## Kubernetes Compatibility
 
@@ -60,7 +60,8 @@ All parameters are cli-flags.
 | Parameter | Required | Default | Description |
 |-----------|----------|---------|-------------|
 | `verbosity` | `false` | `info` | Log-level (debug, info, warn, error, fatal, panic) |
-| `cron` | `false` | `@hourly` | Backround-Service interval (CRON). All options from [github.com/robfig/cron](github.com/robfig/cron) are allowed |
+| `cron` | `false` | `@hourly` | Backround-Service interval (CRON). All options from [github.com/robfig/cron](https://github.com/robfig/cron) are allowed |
+| `ignore-annotations` | `false` | `false` | Force analyzing of all images, including those from annotated pods. |
 | `format` | `false` | `json` | SBOM-Format. |
 | `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git` |
 | `git-workingtree` | `false` | `/work` | Directory to place the git-repo. |
@@ -79,6 +80,7 @@ The flags can be configured as args or as environment-variables prefixed with `S
 
 ```yaml
 args:
+  targets: git
   git-author-email: XXX
   git-author-name: XXX
   git-repository: https://github.com/XXX/XXX
@@ -96,10 +98,15 @@ envVars:
 ```
 
 
-## Git folder-structure
+## Targets
 
-Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 
-The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json`.
+It is possible to store the generated SBOMs to different targets (even multple at once). Currently the only available target is Git, but this will change soon.
+
+#### Git
+
+The operator will save all files with a specific folder structure as described below. When a `git-path` is configured, all folders above this path are not touched
+from the application. Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 
+The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json`. The file-extension may differ when another output-format is configured. A token-based authentication to the git-repository is used.
 
 ```
 dev-cluster
@@ -139,7 +146,8 @@ dev-cluster
 ## Security
 
 The docker-image is based on `scratch` to reduce the attack-surface and keep the image small. Furthermore the image and release-artifacts are signed 
-with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files. The release-process satisfies SLSA Level 2. 
+with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files. The release-process satisfies SLSA Level 2. All of those "metadata files" are 
+also stored in a dedicated repository `ghcr.io/ckotzbauer/sbom-operator-metadata`.
 Both, SLSA and the signatures are still experimental for this project.
 
 
