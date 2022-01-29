@@ -60,7 +60,7 @@ func init() {
 }
 
 func initConfig() {
-	viper.SetEnvPrefix("SGO")
+	viper.SetEnvPrefix("SBOM")
 	viper.AutomaticEnv()
 }
 

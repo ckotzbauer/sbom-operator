@@ -18,7 +18,7 @@ spec:
       - image: ghcr.io/ckotzbauer/sbom-operator:latest
         name: operator
         env:
-          - name: SGO_GIT_ACCESS_TOKEN
+          - name: SBOM_GIT_ACCESS_TOKEN
             valueFrom:
               secretKeyRef:
                 name: "sbom-operator"

@@ -74,7 +74,7 @@ All parameters are cli-flags.
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 
-The flags can be configured as args or as environment-variables prefixed with `SGO_` to inject sensitive configs as secret values.
+The flags can be configured as args or as environment-variables prefixed with `SBOM_` to inject sensitive configs as secret values.
 
 #### Example Helm-Config
 
@@ -89,7 +89,7 @@ args:
   cron: "0 30 * * * *"
 
 envVars:
-  - name: SGO_GIT_ACCESS_TOKEN
+  - name: SBOM_GIT_ACCESS_TOKEN
     valueFrom:
       secretKeyRef:
         name: "sbom-operator"

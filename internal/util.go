@@ -29,7 +29,7 @@ func BindFlags(cmd *cobra.Command, args []string) {
 // flagToEnvVar converts command flag name to equivalent environment variable name
 func flagToEnvVar(flag string) string {
 	envVarSuffix := strings.ToUpper(strings.ReplaceAll(flag, "-", "_"))
-	return fmt.Sprintf("%s_%s", "SGO", envVarSuffix)
+	return fmt.Sprintf("%s_%s", "SBOM", envVarSuffix)
 }
 
 //SetUpLogs set the log output ans the log level
