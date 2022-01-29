@@ -21,13 +21,20 @@ import (
 )
 
 type Syft struct {
-	SbomFormat string
+	sbomFormat     string
+	resolveVersion func() string
 }
 
 func New(sbomFormat string) Syft {
 	return Syft{
-		SbomFormat: sbomFormat,
+		sbomFormat:     sbomFormat,
+		resolveVersion: getSyftVersion,
 	}
+}
+
+func (s Syft) WithVersion(version string) Syft {
+	s.resolveVersion = func() string { return version }
+	return s
 }
 
 func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
@@ -57,24 +64,12 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		defer cleanup()
 	}
 
-	bi, ok := debug.ReadBuildInfo()
-	if !ok {
-		logrus.Warnf("failed to read build info")
-	}
-
-	descriptor := sbom.Descriptor{
-		Name: "syft",
-	}
-
-	for _, dep := range bi.Deps {
-		if strings.EqualFold("github.com/anchore/syft", dep.Path) {
-			descriptor.Version = dep.Version
-		}
-	}
-
 	result := sbom.SBOM{
-		Source:     src.Metadata,
-		Descriptor: descriptor,
+		Source: src.Metadata,
+		Descriptor: sbom.Descriptor{
+			Name:    "syft",
+			Version: s.resolveVersion(),
+		},
 		// TODO: we should have helper functions for getting this built from exported library functions
 	}
 
@@ -91,7 +86,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	result.Relationships = relationships
 
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
-	b, err := syft.Encode(result, format.Option(s.SbomFormat))
+	b, err := syft.Encode(result, format.Option(s.sbomFormat))
 	if err != nil {
 		logrus.WithError(err).Error("Encoding of result failed")
 		return "", err
@@ -120,4 +115,19 @@ func GetFileName(sbomFormat string) string {
 	default:
 		return "sbom.json"
 	}
+}
+
+func getSyftVersion() string {
+	bi, ok := debug.ReadBuildInfo()
+	if !ok {
+		logrus.Warnf("failed to read build info")
+	}
+
+	for _, dep := range bi.Deps {
+		if strings.EqualFold("github.com/anchore/syft", dep.Path) {
+			return dep.Version
+		}
+	}
+
+	return ""
 }
