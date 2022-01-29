@@ -5,7 +5,9 @@ go 1.17
 require (
 	github.com/anchore/syft v0.36.0
 	github.com/docker/cli v20.10.12+incompatible
+	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
+	github.com/nscuro/dtrack-client v0.3.0
 	github.com/onsi/ginkgo/v2 v2.1.1
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.8.1
@@ -44,7 +46,6 @@ require (
 	github.com/go-git/go-billy/v5 v5.3.1 // indirect
 	github.com/go-restruct/restruct v1.2.0-alpha // indirect
 	github.com/golang/snappy v0.0.3 // indirect
-	github.com/google/uuid v1.2.0 // indirect
 	github.com/hashicorp/errwrap v1.0.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.0 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
