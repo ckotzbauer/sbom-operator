@@ -5,11 +5,12 @@
 
 [![test](https://github.com/ckotzbauer/sbom-operator/actions/workflows/test.yml/badge.svg)](https://github.com/ckotzbauer/sbom-operator/actions/workflows/test.yml)
 
-## Motivation
+## Overview
 
 This operator maintains a central place to track all packages and software used in all those images in a Kubernetes cluster. For this a Software Bill of 
 Materials (SBOM) is generated from each image with Syft. They are all stored in one or more targets. Currently only Git is supported. With this it is 
-possible to do further analysis, vulnerability scans and much more in a single place.
+possible to do further analysis, vulnerability scans and much more in a single place. To prevent scans of images that have already been analyzed pods are annotated
+with the imageID of the already processed image.
 
 ## Kubernetes Compatibility
 
@@ -17,9 +18,9 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | access-manager  | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| 0.2.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.1.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
-| main            | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.2.0           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.1.0           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
+| main            | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
 
 However, the operator will work with more versions of Kubernetes in general.
 
