@@ -1,3 +1,61 @@
+## Version 0.3.0 (2022-01-29)
+
+### Features and improvements
+
+* [[`a93d296e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a93d296e)] - **feat**: add ignore-annotations flag ref: #18
+* [[`ed59b5aa`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ed59b5aa)] - **feat**: track process with annotations
+* [[`1c4e3968`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1c4e3968)] - **feat**: add target-validation handling
+* [[`23f5285e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/23f5285e)] - **feat**: some refactoring for multi-targets
+* [[`d699f346`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d699f346)] - **feat**: move git package
+* [[`57a69b00`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/57a69b00)] - **feat**: use syft module instead of binary
+
+### Bug fixes
+
+* [[`3aecc2d5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3aecc2d5)] - **fix**: make image-path reproducible
+* [[`484cc576`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/484cc576)] - **fix**: changed if-condition
+* [[`789e7446`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/789e7446)] - **fix**: small bugfixes
+* [[`bb68ee18`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bb68ee18)] - **fix**: use other source-hint
+* [[`9fab42bb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9fab42bb)] - **fix**: small syft fix
+
+### Cleanup and refactoring
+
+* [[`2e0c59e9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2e0c59e9)] - **cleanup**: change env-prefix to SBOM
+* [[`188dfd99`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/188dfd99)] - **cleanup**: finalized target-decoupling
+* [[`94a7246e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/94a7246e)] - **cleanup**: refactored logic to avoid duplicate scans
+* [[`41d33fae`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/41d33fae)] - **cleanup**: small refactoring
+* [[`bfe062a2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bfe062a2)] - **cleanup**: some refactoring
+
+### Build and testing
+
+* [[`87beaa7e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/87beaa7e)] - **build**: also run unit-tests
+* [[`35be5e6c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/35be5e6c)] - **test**: added syft tests
+
+### Documentation
+
+* [[`70428c73`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/70428c73)] - **doc**: fixes
+* [[`9f6c877e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9f6c877e)] - **doc**: several doc updates
+* [[`3c60ff84`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3c60ff84)] - **doc**: some clarifications
+* [[`4b5d9d37`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4b5d9d37)] - **doc**: add parameter
+
+### Dependency updates
+
+* [[`ed732dc9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ed732dc9)] - **deps**: go mod tidy for ginkgo
+* [[`cbb928fa`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cbb928fa)] - **deps**: update module github.com&#x2F;onsi&#x2F;ginkgo&#x2F;v2 to v2.1.1
+* [[`e6d642f3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e6d642f3)] - **deps**: go mod tidy for gomega
+* [[`c23777a2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c23777a2)] - **deps**: update module github.com&#x2F;onsi&#x2F;gomega to v1.18.1
+* [[`9b23b29a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9b23b29a)] - **deps**: update kubernetes versions to v0.23.3 (#19)
+* [[`b91489ad`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b91489ad)] - **deps**: fix go.sum
+* [[`383874c1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/383874c1)] - **deps**: update module github.com&#x2F;onsi&#x2F;gomega to v1.18.0
+* [[`741d0ca9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/741d0ca9)] - **deps**: fix go.sum
+* [[`2a0f035a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2a0f035a)] - **deps**: update module github.com&#x2F;onsi&#x2F;ginkgo&#x2F;v2 to v2.1.0
+* [[`c6702897`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c6702897)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.5.0
+
+### Common changes
+
+* [[`a30856d5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a30856d5)] - **chore**: go mod tidy
+* [[`4996730f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4996730f)] - **chore**: Create FUNDING.yml
+
+
 ## Version 0.2.0 (2022-01-21)
 
 ### Features and improvements
