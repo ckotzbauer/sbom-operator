@@ -25,7 +25,7 @@ type GitTarget struct {
 
 func NewGitTarget() *GitTarget {
 	workingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
-	workPath := path.Join(workingTree, viper.GetString(internal.ConfigKeyGitPath))
+	workPath := viper.GetString(internal.ConfigKeyGitPath)
 	repository := viper.GetString(internal.ConfigKeyGitRepository)
 	branch := viper.GetString(internal.ConfigKeyGitBranch)
 	format := viper.GetString(internal.ConfigKeyFormat)
@@ -104,7 +104,7 @@ func (g *GitTarget) Cleanup(allImages []string) {
 	fileName := syft.GetFileName(g.sbomFormat)
 	allProcessedFiles := g.mapToFiles(allImages)
 
-	err := filepath.Walk(g.workPath, g.deleteObsoleteFiles(fileName, ignoreDirs, allProcessedFiles))
+	err := filepath.Walk(filepath.Join(g.workingTree, g.workPath), g.deleteObsoleteFiles(fileName, ignoreDirs, allProcessedFiles))
 	if err != nil {
 		logrus.WithError(err).Error("Could not cleanup old SBOMs")
 	} else {
