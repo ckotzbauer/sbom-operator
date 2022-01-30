@@ -1,3 +1,10 @@
+## Version 0.3.1 (2022-01-30)
+
+### Bug fixes
+
+* [[`d1b47e06`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d1b47e06)] - **fix**: remove duplicate path-join fix: #23
+
+
 ## Version 0.3.0 (2022-01-29)
 
 ### Features and improvements
