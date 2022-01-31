@@ -16,6 +16,7 @@ import (
 )
 
 type ContainerImage struct {
+	Image   string
 	ImageID string
 	Auth    []byte
 	Pods    []corev1.Pod
@@ -106,7 +107,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 					if !client.hasAnnotation(annotations, c) {
 						img, ok := images[c.ImageID]
 						if !ok {
-							img = ContainerImage{ImageID: c.ImageID, Auth: pullSecrets, Pods: []corev1.Pod{}}
+							img = ContainerImage{Image: c.Image, ImageID: c.ImageID, Auth: pullSecrets, Pods: []corev1.Pod{}}
 						}
 
 						img.Pods = append(img.Pods, pod)

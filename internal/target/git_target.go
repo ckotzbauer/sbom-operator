@@ -8,6 +8,7 @@ import (
 	"strings"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target/git"
 	"github.com/sirupsen/logrus"
@@ -79,7 +80,8 @@ func (g *GitTarget) Initialize() {
 		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
-func (g *GitTarget) ProcessSbom(imageID, sbom string) {
+func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
+	imageID := image.ImageID
 	filePath := g.imageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
