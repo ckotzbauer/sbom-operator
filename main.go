@@ -57,8 +57,8 @@ func init() {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitAuthorEmail, "", "Author email to use for Git-Commits.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyPodLabelSelector, "", "Kubernetes Label-Selector for pods.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyNamespaceLabelSelector, "", "Kubernetes Label-Selector for namespaces.")
-	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencaTrackBaseUrl, "", "Dependency-Track base URL, e.g. 'https://dtrack.example.com'")
-	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencaTrackApiKey, "", "Dependency-Track API key")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackBaseUrl, "", "Dependency-Track base URL, e.g. 'https://dtrack.example.com'")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackApiKey, "", "Dependency-Track API key")
 }
 
 func initConfig() {

@@ -14,32 +14,32 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 )
 
-type DependencaTrackTarget struct {
+type DependencyTrackTarget struct {
 	baseUrl        string
 	apiKey         string
 	imageToProject map[string]uuid.UUID
 }
 
-func NewDependencaTrackTarget() *DependencaTrackTarget {
-	baseUrl := viper.GetString(internal.ConfigKeyDependencaTrackBaseUrl)
-	apiKey := viper.GetString(internal.ConfigKeyDependencaTrackApiKey)
-	return &DependencaTrackTarget{
+func NewDependencyTrackTarget() *DependencyTrackTarget {
+	baseUrl := viper.GetString(internal.ConfigKeyDependencyTrackBaseUrl)
+	apiKey := viper.GetString(internal.ConfigKeyDependencyTrackApiKey)
+	return &DependencyTrackTarget{
 		baseUrl: baseUrl,
 		apiKey:  apiKey,
 	}
 }
 
-func (g *DependencaTrackTarget) ValidateConfig() error {
+func (g *DependencyTrackTarget) ValidateConfig() error {
 	if g.baseUrl == "" {
-		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencaTrackBaseUrl)
+		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackBaseUrl)
 	}
 	if g.apiKey == "" {
-		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencaTrackApiKey)
+		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackApiKey)
 	}
 	return nil
 }
 
-func (g *DependencaTrackTarget) Initialize() {
+func (g *DependencyTrackTarget) Initialize() {
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
 	g.imageToProject = make(map[string]uuid.UUID)
 
@@ -71,7 +71,7 @@ func (g *DependencaTrackTarget) Initialize() {
 	}
 }
 
-func (g *DependencaTrackTarget) ProcessSbom(imageID, sbom string) {
+func (g *DependencyTrackTarget) ProcessSbom(imageID, sbom string) {
 	if sbom == "" {
 		logrus.Infof("Empty SBOM - skip image (image=%s)", imageID)
 		return
@@ -119,6 +119,6 @@ func (g *DependencaTrackTarget) ProcessSbom(imageID, sbom string) {
 	logrus.Infof("Uploaded SBOM (upload-token=%s)", uploadToken)
 }
 
-func (g *DependencaTrackTarget) Cleanup(allImages []string) {
+func (g *DependencyTrackTarget) Cleanup(allImages []string) {
 	g.imageToProject = nil
 }
