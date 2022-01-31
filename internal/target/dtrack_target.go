@@ -44,15 +44,12 @@ func (g *DependencyTrackTarget) Initialize() {
 func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
 	fullRef, err := parser.Parse(image.Image)
 	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse imageID %s", image.ImageID)
+		logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
 		return
 	}
 
 	imageName := fullRef.Repository()
 	tagName := fullRef.Tag()
-	if tagName == "" {
-		tagName = "latest"
-	}
 
 	if sbom == "" {
 		logrus.Infof("Empty SBOM - skip image (image=%s)", image.ImageID)
