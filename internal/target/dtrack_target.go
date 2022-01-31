@@ -4,20 +4,19 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
-	"strings"
 
-	"github.com/google/uuid"
+	parser "github.com/novln/docker-parser"
 	dtrack "github.com/nscuro/dtrack-client"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 )
 
 type DependencyTrackTarget struct {
-	baseUrl        string
-	apiKey         string
-	imageToProject map[string]uuid.UUID
+	baseUrl string
+	apiKey  string
 }
 
 func NewDependencyTrackTarget() *DependencyTrackTarget {
@@ -40,79 +39,35 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 }
 
 func (g *DependencyTrackTarget) Initialize() {
-	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
-	g.imageToProject = make(map[string]uuid.UUID)
-
-	const pageSize = 10
-	pageNumber := 1
-	for {
-		projectsPage, err := client.Project.GetAll(context.TODO(), dtrack.PageOptions{
-			PageNumber: pageNumber,
-			PageSize:   pageSize,
-		})
-		if err != nil {
-			logrus.Errorf("Could not fetch projects: %v", err)
-			return
-		}
-
-		for _, project := range projectsPage.Projects {
-			for _, property := range project.Properties {
-				if property.Name == "image-name" {
-					g.imageToProject[property.Value] = project.UUID
-				}
-			}
-		}
-
-		if pageNumber*pageSize >= projectsPage.TotalCount {
-			break
-		}
-
-		pageNumber++
-	}
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(imageID, sbom string) {
+func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
+	fullRef, err := parser.Parse(image.Image)
+	if err != nil {
+		logrus.WithError(err).Errorf("Could not parse imageID %s", image.ImageID)
+		return
+	}
+
+	imageName := fullRef.Repository()
+	tagName := fullRef.Tag()
+	if tagName == "" {
+		tagName = "latest"
+	}
+
 	if sbom == "" {
-		logrus.Infof("Empty SBOM - skip image (image=%s)", imageID)
+		logrus.Infof("Empty SBOM - skip image (image=%s)", image.ImageID)
 		return
 	}
 
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
-	logrus.Infof("Sending SBOM to Dependency Track (image=%s)", imageID)
 
-	if !strings.ContainsRune(imageID, '@') {
-		logrus.Warnf("Image id %s does not contain an @sha256", imageID)
-		return
-	}
-	imageSplit := strings.Split(imageID, "@")
-	imageName := imageSplit[0]
-
-	projectId := g.imageToProject[imageName]
-	if projectId == uuid.Nil {
-		project, err := client.Project.Create(context.TODO(),
-			dtrack.Project{
-				Active:     true,
-				Classifier: "APPLICATION",
-				Name:       imageName,
-				Properties: []dtrack.ProjectProperty{
-					{Name: "image-name", Group: "container", Value: imageName, Type: "STRING"},
-				},
-				// TODO check if to add PURL: "pkg:docker/" + imageID,
-			})
-		if err != nil {
-			logrus.Errorf("Could not create project (%s): %v", imageName, err)
-		}
-		projectId = project.UUID
-		g.imageToProject[imageName] = projectId
-	}
-
-	if projectId == uuid.Nil {
-		logrus.Warnf("No project id for image %s", imageName)
-		return
-	}
+	logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", imageName, tagName)
 
 	sbomBase64 := base64.StdEncoding.EncodeToString([]byte(sbom))
-	uploadToken, err := client.BOM.Upload(context.TODO(), dtrack.BOMUploadRequest{ProjectUUID: &projectId, BOM: sbomBase64, AutoCreate: false})
+	uploadToken, err := client.BOM.Upload(
+		context.TODO(),
+		dtrack.BOMUploadRequest{ProjectName: imageName, ProjectVersion: tagName, AutoCreate: true, BOM: sbomBase64},
+	)
 	if err != nil {
 		logrus.Errorf("Could not upload BOM: %v", err)
 	}
@@ -120,5 +75,4 @@ func (g *DependencyTrackTarget) ProcessSbom(imageID, sbom string) {
 }
 
 func (g *DependencyTrackTarget) Cleanup(allImages []string) {
-	g.imageToProject = nil
 }

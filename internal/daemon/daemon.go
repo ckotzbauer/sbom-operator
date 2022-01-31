@@ -68,7 +68,7 @@ func (c *CronService) runBackgroundService() {
 		}
 
 		for _, t := range c.targets {
-			t.ProcessSbom(image.ImageID, sbom)
+			t.ProcessSbom(image, sbom)
 		}
 	}
 
