@@ -41,21 +41,33 @@ func (g *DependencaTrackTarget) ValidateConfig() error {
 
 func (g *DependencaTrackTarget) Initialize() {
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
-	projectsPage, err := client.Project.GetAll(context.TODO(), dtrack.PageOptions{
-		PageNumber: 1,
-		PageSize:   10,
-	})
-	if err != nil {
-		logrus.Errorf("Could not fetch projects: %v", err)
-	}
-
 	g.imageToProject = make(map[string]uuid.UUID)
-	for _, project := range projectsPage.Projects {
-		for _, property := range project.Properties {
-			if property.Name == "image-name" {
-				g.imageToProject[property.Value] = project.UUID
+
+	const pageSize = 10
+	pageNumber := 1
+	for {
+		projectsPage, err := client.Project.GetAll(context.TODO(), dtrack.PageOptions{
+			PageNumber: pageNumber,
+			PageSize:   pageSize,
+		})
+		if err != nil {
+			logrus.Errorf("Could not fetch projects: %v", err)
+			return
+		}
+
+		for _, project := range projectsPage.Projects {
+			for _, property := range project.Properties {
+				if property.Name == "image-name" {
+					g.imageToProject[property.Value] = project.UUID
+				}
 			}
 		}
+
+		if pageNumber*pageSize >= projectsPage.TotalCount {
+			break
+		}
+
+		pageNumber++
 	}
 }
 
