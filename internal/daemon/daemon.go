@@ -90,7 +90,7 @@ func initTargets(targetKeys []string) []target.Target {
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "dtrack" {
-			t := target.NewDependencaTrackTarget()
+			t := target.NewDependencyTrackTarget()
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else {

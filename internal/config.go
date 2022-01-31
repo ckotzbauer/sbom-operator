@@ -15,6 +15,6 @@ var (
 	ConfigKeyGitAuthorEmail         = "git-author-email"
 	ConfigKeyPodLabelSelector       = "pod-label-selector"
 	ConfigKeyNamespaceLabelSelector = "namespace-label-selector"
-	ConfigKeyDependencaTrackBaseUrl = "dtrack-base-url"
-	ConfigKeyDependencaTrackApiKey  = "dtrack-api-key"
+	ConfigKeyDependencyTrackBaseUrl = "dtrack-base-url"
+	ConfigKeyDependencyTrackApiKey  = "dtrack-api-key"
 )
