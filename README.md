@@ -16,11 +16,13 @@ with the imageID of the already processed image.
 
 The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide forwards & backwards compatibility of one minor version between client and server:
 
-| access-manager  | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
+| sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| 0.2.0           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.1.0           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
 | main            | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.4.0           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.3.1           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.2.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.1.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
 
 However, the operator will work with more versions of Kubernetes in general.
 
