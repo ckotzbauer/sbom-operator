@@ -8,8 +8,8 @@
 ## Overview
 
 This operator maintains a central place to track all packages and software used in all those images in a Kubernetes cluster. For this a Software Bill of 
-Materials (SBOM) is generated from each image with Syft. They are all stored in one or more targets. Currently only Git is supported. With this it is 
-possible to do further analysis, vulnerability scans and much more in a single place. To prevent scans of images that have already been analyzed pods are annotated
+Materials (SBOM) is generated from each image with Syft. They are all stored in one or more targets. Currently Git and Dependency Track is supported. 
+With this it is possible to do further analysis, vulnerability scans and much more in a single place. To prevent scans of images that have already been analyzed pods are annotated
 with the imageID of the already processed image.
 
 ## Kubernetes Compatibility
@@ -66,7 +66,7 @@ All parameters are cli-flags.
 | `cron` | `false` | `@hourly` | Backround-Service interval (CRON). All options from [github.com/robfig/cron](https://github.com/robfig/cron) are allowed |
 | `ignore-annotations` | `false` | `false` | Force analyzing of all images, including those from annotated pods. |
 | `format` | `false` | `json` | SBOM-Format. |
-| `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git` |
+| `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack` |
 | `git-workingtree` | `false` | `/work` | Directory to place the git-repo. |
 | `git-repository` | `true` when `git` target is used. | `""` | Git-Repository-URL (HTTPS). |
 | `git-branch` | `false` | `main` | Git-Branch to checkout. |
@@ -105,7 +105,13 @@ envVars:
 
 ## Targets
 
-It is possible to store the generated SBOMs to different targets (even multple at once). Currently the only available target is Git, but this will change soon.
+It is possible to store the generated SBOMs to different targets (even multple at once).
+
+#### Dependency Track
+
+Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version. 
+The `autoCreate` option of DT is used. You have to set the `--format` flag to `cyclonedx` with this target.
+
 
 #### Git
 
