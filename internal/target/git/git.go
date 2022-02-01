@@ -1,6 +1,7 @@
 package git
 
 import (
+	"errors"
 	"os"
 	"time"
 
@@ -73,8 +74,9 @@ func (g *GitAccount) PrepareRepository(repo, path, branch string) {
 			Auth: g.tokenAuth(),
 		})
 
-		if err != nil {
+		if err != nil && !errors.Is(err, git.NoErrAlreadyUpToDate) {
 			logrus.WithError(err).Error("Pull failed")
+			return
 		}
 	}
 
