@@ -17,6 +17,8 @@ type CronService struct {
 	targets []target.Target
 }
 
+var running = false
+
 func Start(cronTime string) {
 	cr := internal.Unescape(cronTime)
 	targetKeys := viper.GetStringSlice(internal.ConfigKeyTargets)
@@ -44,6 +46,12 @@ func (c *CronService) printNextExecution() {
 }
 
 func (c *CronService) runBackgroundService() {
+	if running {
+		return
+	}
+
+	running = true
+
 	logrus.Info("Execute background-service")
 	format := viper.GetString(internal.ConfigKeyFormat)
 
@@ -84,6 +92,7 @@ func (c *CronService) runBackgroundService() {
 	}
 
 	c.printNextExecution()
+	running = false
 }
 
 func initTargets(targetKeys []string) []target.Target {
