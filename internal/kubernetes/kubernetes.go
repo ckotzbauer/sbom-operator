@@ -180,7 +180,15 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 			return nil, err
 		}
 
-		creds := secret.Data[corev1.DockerConfigJsonKey]
+		var creds []byte
+
+		if secret.Type == corev1.SecretTypeDockerConfigJson {
+			creds = secret.Data[corev1.DockerConfigJsonKey]
+		} else if secret.Type == corev1.SecretTypeDockercfg {
+			creds = secret.Data[corev1.DockerConfigKey]
+		} else {
+			return nil, fmt.Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
+		}
 
 		if len(creds) > 0 {
 			return creds, nil
