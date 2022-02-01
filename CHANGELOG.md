@@ -1,3 +1,35 @@
+## Version 0.4.0 (2022-02-01)
+
+### Features and improvements
+
+* [[`492e99ed`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/492e99ed)] - **feat**: add version, use project auto-creation
+* [[`549443d1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/549443d1)] - **feat**: basic implementation for Dependency Track
+
+### Bug fixes
+
+* [[`67ff2fe7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/67ff2fe7)] - **fix**: ignore &quot;already up-to-date&quot;
+* [[`b384003b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b384003b)] - **fix**: avoid concurrent runs
+* [[`40024547`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/40024547)] - **fix**: improve target error-handling
+* [[`d3a5768a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d3a5768a)] - **fix**: also respect dockercfg secret-type close #26
+* [[`347b8430`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/347b8430)] - **fix**: add missing rbac-rules close #24
+
+### Build and testing
+
+* [[`e731e895`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e731e895)] - **build**: also build on PRs
+
+### Documentation
+
+* [[`9d5a1bc1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9d5a1bc1)] - **doc**: added dtrack docs
+* [[`0e36dbe4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0e36dbe4)] - **doc**: improve version docs
+
+### Common changes
+
+* [[`43c84015`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/43c84015)] - **chore**: Fix logging and remove fallback (not needed)
+* [[`7fbd4c89`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7fbd4c89)] - **chore**: Fixed typos Dependenca -&gt; Dependency
+* [[`1fa44d04`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1fa44d04)] - **chore**: Load all projects with paging
+* [[`9eff773e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9eff773e)] - **chore**: add target-labels
+
+
 ## Version 0.3.1 (2022-01-30)
 
 ### Bug fixes
