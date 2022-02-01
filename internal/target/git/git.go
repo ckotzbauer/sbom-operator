@@ -99,33 +99,33 @@ func (g *GitAccount) openExistingRepo(path string) (*git.Repository, *git.Worktr
 	return r, w
 }
 
-func (g *GitAccount) CommitAll(path, message string) {
+func (g *GitAccount) CommitAll(path, message string) error {
 	r, w := g.openExistingRepo(path)
 
 	if r == nil && w == nil {
-		return
+		return nil
 	}
 
 	status, err := w.Status()
 
 	if err != nil {
 		logrus.WithError(err).Error("Status failed")
-		return
+		return err
 	}
 
 	if status.IsClean() {
 		logrus.Debug("Git-Worktree is clean, skip commit")
-		return
+		return nil
 	}
 
 	_, err = w.Add(".")
 
 	if err != nil {
 		logrus.WithError(err).Error("Add failed")
-		return
+		return err
 	}
 
-	g.commitAndPush(w, r, message)
+	return g.commitAndPush(w, r, message)
 }
 
 func (g *GitAccount) Remove(workTree, path string) {
@@ -143,29 +143,29 @@ func (g *GitAccount) Remove(workTree, path string) {
 	}
 }
 
-func (g *GitAccount) CommitAndPush(path, message string) {
+func (g *GitAccount) CommitAndPush(path, message string) error {
 	r, w := g.openExistingRepo(path)
 
 	if r == nil && w == nil {
-		return
+		return nil
 	}
 
 	status, err := w.Status()
 
 	if err != nil {
 		logrus.WithError(err).Error("Status failed")
-		return
+		return err
 	}
 
 	if status.IsClean() {
 		logrus.Debug("Git-Worktree is clean, skip commit")
-		return
+		return nil
 	}
 
-	g.commitAndPush(w, r, message)
+	return g.commitAndPush(w, r, message)
 }
 
-func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message string) {
+func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message string) error {
 	commit, err := w.Commit(message, &git.CommitOptions{
 		Author: &object.Signature{
 			Name:  g.Name,
@@ -178,7 +178,7 @@ func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message s
 
 	if err != nil {
 		logrus.WithError(err).Error("Commit failed")
-		return
+		return err
 	}
 
 	err = r.Push(&git.PushOptions{
@@ -187,9 +187,11 @@ func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message s
 
 	if err != nil {
 		logrus.WithError(err).Error("Push failed")
+		return err
 	}
 
 	logrus.Info("Push was successful")
+	return nil
 }
 
 func (g *GitAccount) tokenAuth() transport.AuthMethod {

@@ -41,11 +41,11 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() {
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
+func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
 	fullRef, err := parser.Parse(image.Image)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
-		return
+		return nil
 	}
 
 	imageName := fullRef.Repository()
@@ -53,7 +53,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 
 	if sbom == "" {
 		logrus.Infof("Empty SBOM - skip image (image=%s)", image.ImageID)
-		return
+		return nil
 	}
 
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
@@ -67,8 +67,11 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 	)
 	if err != nil {
 		logrus.Errorf("Could not upload BOM: %v", err)
+		return err
 	}
+
 	logrus.Infof("Uploaded SBOM (upload-token=%s)", uploadToken)
+	return nil
 }
 
 func (g *DependencyTrackTarget) Cleanup(allImages []string) {

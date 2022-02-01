@@ -80,7 +80,7 @@ func (g *GitTarget) Initialize() {
 		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
-func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
+func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
 	imageID := image.ImageID
 	filePath := g.imageIDToFilePath(imageID)
 
@@ -88,7 +88,7 @@ func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
 	err := os.MkdirAll(dir, 0777)
 	if err != nil {
 		logrus.WithError(err).Error("Directory could not be created")
-		return
+		return err
 	}
 
 	err = os.WriteFile(filePath, []byte(sbom), 0640)
@@ -96,7 +96,7 @@ func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) {
 		logrus.WithError(err).Error("SBOM could not be saved")
 	}
 
-	g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
+	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
 func (g *GitTarget) Cleanup(allImages []string) {

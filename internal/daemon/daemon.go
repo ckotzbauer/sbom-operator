@@ -60,15 +60,22 @@ func (c *CronService) runBackgroundService() {
 
 	for _, image := range containerImages {
 		sbom, err := sy.ExecuteSyft(image)
-		// Error is already handled from syft module.
-		if err == nil {
+		if err != nil {
+			// Error is already handled from syft module.
+			continue
+		}
+
+		errOccurred := false
+
+		for _, t := range c.targets {
+			err = t.ProcessSbom(image, sbom)
+			errOccurred = errOccurred || err != nil
+		}
+
+		if !errOccurred {
 			for _, pod := range image.Pods {
 				k8s.UpdatePodAnnotation(pod)
 			}
-		}
-
-		for _, t := range c.targets {
-			t.ProcessSbom(image, sbom)
 		}
 	}
 

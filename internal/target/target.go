@@ -7,6 +7,6 @@ import (
 type Target interface {
 	Initialize()
 	ValidateConfig() error
-	ProcessSbom(imageID kubernetes.ContainerImage, sbom string)
+	ProcessSbom(image kubernetes.ContainerImage, sbom string) error
 	Cleanup(allImages []string)
 }
