@@ -5,6 +5,7 @@ import (
 	"fmt"
 
 	"github.com/docker/cli/cli/config"
+	"github.com/docker/cli/cli/config/configfile"
 	"github.com/docker/cli/cli/config/types"
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/crane"
@@ -23,7 +24,16 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	o := crane.GetOptions()
 
 	if len(image.Auth) > 0 {
-		cf, err := config.LoadFromReader(bytes.NewReader(image.Auth))
+		var cf *configfile.ConfigFile
+		var err error
+
+		if image.LegacyAuth {
+			cf = configfile.New("")
+			err = cf.LegacyLoadFromReader(bytes.NewReader(image.Auth))
+		} else {
+			cf, err = config.LoadFromReader(bytes.NewReader(image.Auth))
+		}
+
 		if err != nil {
 			return err
 		}

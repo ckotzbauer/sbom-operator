@@ -94,5 +94,19 @@ jobs:
             --docker-email="${{ secrets.TEST_EMAIL }}" \
             -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/hub.yaml
 
+      - name: Prepare legacy Hub secrets
+        shell: bash
+        run: |
+          cat << EOF > .dockercfg
+          {
+              "https://index.docker.io/v1/": { "username": "${{ secrets.TEST_HUB_USERNAME }}", "password": "${{ secrets.TEST_HUB_PASSWORD }}" }
+          }
+          EOF
+
+          kubectl create secret generic hub-secret \
+            --from-file=.dockercfg \
+            --type=kubernetes.io/dockercfg \
+            -o json --dry-run=client | jq -r '.data.".dockercfg"' > auth/legacy-hub.yaml
+
       - name: Execute Registry-Tests
         run: make test-registries

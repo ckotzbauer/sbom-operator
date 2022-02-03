@@ -16,10 +16,11 @@ import (
 )
 
 type ContainerImage struct {
-	Image   string
-	ImageID string
-	Auth    []byte
-	Pods    []corev1.Pod
+	Image      string
+	ImageID    string
+	Auth       []byte
+	LegacyAuth bool
+	Pods       []corev1.Pod
 }
 
 type KubeClient struct {
@@ -95,7 +96,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 			statuses = append(statuses, pod.Status.InitContainerStatuses...)
 			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
 
-			pullSecrets, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
+			pullSecrets, legacy, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
 
 			if err != nil {
 				logrus.WithError(err).Errorf("PullSecrets could not be retrieved for pod %s/%s", ns.Name, pod.Name)
@@ -107,7 +108,13 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 					if !client.hasAnnotation(annotations, c) {
 						img, ok := images[c.ImageID]
 						if !ok {
-							img = ContainerImage{Image: c.Image, ImageID: c.ImageID, Auth: pullSecrets, Pods: []corev1.Pod{}}
+							img = ContainerImage{
+								Image:      c.Image,
+								ImageID:    c.ImageID,
+								Auth:       pullSecrets,
+								LegacyAuth: legacy,
+								Pods:       []corev1.Pod{},
+							}
 						}
 
 						img.Pods = append(img.Pods, pod)
@@ -173,28 +180,30 @@ func (client *KubeClient) hasAnnotation(annotations map[string]string, status co
 	return false
 }
 
-func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) ([]byte, error) {
+func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) ([]byte, bool, error) {
 	// TODO: Support all secrets which are referenced as imagePullSecrets instead of only the first one.
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			return nil, err
+			return nil, false, err
 		}
 
 		var creds []byte
+		legacy := false
 
 		if secret.Type == corev1.SecretTypeDockerConfigJson {
 			creds = secret.Data[corev1.DockerConfigJsonKey]
 		} else if secret.Type == corev1.SecretTypeDockercfg {
 			creds = secret.Data[corev1.DockerConfigKey]
+			legacy = true
 		} else {
-			return nil, fmt.Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
+			return nil, false, fmt.Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
 		}
 
 		if len(creds) > 0 {
-			return creds, nil
+			return creds, legacy, nil
 		}
 	}
 
-	return nil, nil
+	return nil, false, nil
 }

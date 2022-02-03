@@ -16,7 +16,7 @@ func TestRegistry(t *testing.T) {
 	RunSpecs(t, "Registry Suite")
 }
 
-func testRegistry(name, image string) {
+func testRegistry(name, image string, legacy bool) {
 	b, err := os.ReadFile("../../auth/" + name + ".yaml")
 	Expect(err).To(BeNil())
 
@@ -24,7 +24,7 @@ func testRegistry(name, image string) {
 	Expect(err).To(BeNil())
 
 	file := "/tmp/1.0.0.tar.gz"
-	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded)})
+	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded), LegacyAuth: legacy})
 
 	if err == nil {
 		stat, _ := os.Stat(file)
@@ -38,37 +38,43 @@ func testRegistry(name, image string) {
 var _ = Describe("Registry", func() {
 	Describe("Storing image from GCR", func() {
 		It("should work correctly", func() {
-			testRegistry("gcr", "gcr.io/sbom-git-operator/integration-test-image:1.0.0")
+			testRegistry("gcr", "gcr.io/sbom-git-operator/integration-test-image:1.0.0", false)
 		})
 	})
 
 	Describe("Storing image from GAR", func() {
 		It("should work correctly", func() {
-			testRegistry("gar", "europe-west3-docker.pkg.dev/sbom-git-operator/sbom-git-operator/integration-test-image:1.0.0")
+			testRegistry("gar", "europe-west3-docker.pkg.dev/sbom-git-operator/sbom-git-operator/integration-test-image:1.0.0", false)
 		})
 	})
 
 	Describe("Storing image from ECR", func() {
 		It("should work correctly", func() {
-			testRegistry("ecr", "055403865123.dkr.ecr.eu-central-1.amazonaws.com/sbom-git-operator/integration-test-image:1.0.0")
+			testRegistry("ecr", "055403865123.dkr.ecr.eu-central-1.amazonaws.com/sbom-git-operator/integration-test-image:1.0.0", false)
 		})
 	})
 
 	Describe("Storing image from ACR", func() {
 		It("should work correctly", func() {
-			testRegistry("acr", "sbomgitoperator.azurecr.io/integration-test-image:1.0.0")
+			testRegistry("acr", "sbomgitoperator.azurecr.io/integration-test-image:1.0.0", false)
 		})
 	})
 
 	Describe("Storing image from DockerHub", func() {
 		It("should work correctly", func() {
-			testRegistry("hub", "docker.io/ckotzbauer/integration-test-image:1.0.0")
+			testRegistry("hub", "docker.io/ckotzbauer/integration-test-image:1.0.0", false)
 		})
 	})
 
 	Describe("Storing image from GHCR", func() {
 		It("should work correctly", func() {
-			testRegistry("ghcr", "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0")
+			testRegistry("ghcr", "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0", false)
+		})
+	})
+
+	Describe("Storing image from DockerHub - legacy .dockercfg", func() {
+		It("should work correctly", func() {
+			testRegistry("legacy-hub", "docker.io/ckotzbauer/integration-test-image:1.0.0", true)
 		})
 	})
 })
