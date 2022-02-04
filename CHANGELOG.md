@@ -1,3 +1,11 @@
+## Version 0.4.1 (2022-02-04)
+
+### Bug fixes
+
+* [[`6519b666`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6519b666)] - **fix**: change legacy-support for .dockercfg
+* [[`92c41c6e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/92c41c6e)] - **fix**: add support for legacy .dockercfg close #26
+
+
 ## Version 0.4.0 (2022-02-01)
 
 ### Features and improvements

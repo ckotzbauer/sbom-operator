@@ -8,6 +8,7 @@ require (
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.3.0
 	github.com/onsi/ginkgo/v2 v2.1.1
+	github.com/pkg/errors v0.9.1
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.3.0
@@ -67,7 +68,6 @@ require (
 	github.com/opencontainers/image-spec v1.0.2 // indirect
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/pierrec/lz4/v4 v4.1.2 // indirect
-	github.com/pkg/errors v0.9.1 // indirect
 	github.com/scylladb/go-set v1.0.2 // indirect
 	github.com/sergi/go-diff v1.1.0 // indirect
 	github.com/spdx/tools-golang v0.1.0 // indirect
