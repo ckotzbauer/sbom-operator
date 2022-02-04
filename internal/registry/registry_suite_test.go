@@ -72,9 +72,9 @@ var _ = Describe("Registry", func() {
 		})
 	})
 
-	Describe("Storing image from DockerHub - legacy .dockercfg", func() {
+	Describe("Storing image from GHCR - legacy .dockercfg", func() {
 		It("should work correctly", func() {
-			testRegistry("legacy-hub", "docker.io/ckotzbauer/integration-test-image:1.0.0", true)
+			testRegistry("legacy-ghcr", "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0", true)
 		})
 	})
 })

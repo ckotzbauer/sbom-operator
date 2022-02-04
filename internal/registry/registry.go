@@ -29,7 +29,7 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 
 		if image.LegacyAuth {
 			cf = configfile.New("")
-			err = cf.LegacyLoadFromReader(bytes.NewReader(image.Auth))
+			err = LegacyLoadFromReader(bytes.NewReader(image.Auth), cf)
 		} else {
 			cf, err = config.LoadFromReader(bytes.NewReader(image.Auth))
 		}
