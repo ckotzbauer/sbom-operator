@@ -740,6 +740,8 @@ github.com/novln/docker-parser v1.0.0 h1:PjEBd9QnKixcWczNGyEdfUrP6GR0YUilAqG7Wks
 github.com/novln/docker-parser v1.0.0/go.mod h1:oCeM32fsoUwkwByB5wVjsrsVQySzPWkl3JdlTn1txpE=
 github.com/nscuro/dtrack-client v0.3.0 h1:d0mlxHzgUA4HDtrGMlaseWZsu28zKf0Wgy30XYN5oxE=
 github.com/nscuro/dtrack-client v0.3.0/go.mod h1:g/zi6OOaWuk0Uhhq6APF3fet7QGHeK+OTBBfalnBGBA=
+github.com/nscuro/dtrack-client v0.4.0 h1:6eopdeS+3Wxd/ma+SASin8UgBxDDW890c0pW6pGE0m8=
+github.com/nscuro/dtrack-client v0.4.0/go.mod h1:TWRwZIZhFwCmaeUFLU+g7nkkvd9LToLlJpLQGJaeD9M=
 github.com/nwaples/rardecode v1.1.0 h1:vSxaY8vQhOcVr4mm5e8XllHWTiM4JF507A0Katqw7MQ=
 github.com/nwaples/rardecode v1.1.0/go.mod h1:5DzqNKiOdpKKBH87u8VlvAnPZMXcGRhxWkRpHbbfGS0=
 github.com/nxadm/tail v1.4.4/go.mod h1:kenIhsEOeOJmVchQTgglprH7qJGnHDVpk1VPCcaMI8A=
