@@ -54,11 +54,11 @@ var _ = Describe("Registry", func() {
 		})
 	})
 
-	Describe("Storing image from ACR", func() {
+	/*Describe("Storing image from ACR", func() {
 		It("should work correctly", func() {
 			testRegistry("acr", "sbomgitoperator.azurecr.io/integration-test-image:1.0.0", false)
 		})
-	})
+	})*/
 
 	Describe("Storing image from DockerHub", func() {
 		It("should work correctly", func() {
