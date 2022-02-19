@@ -24,17 +24,17 @@ jobs:
       - name: Checkout
         uses: actions/checkout@v2
 
-      - name: Prepare ACR secrets
-        shell: bash
-        run: |
-          mkdir auth
-
-          kubectl create secret docker-registry acr-secret \
-            --docker-username="${{ secrets.TEST_ACR_USERNAME }}" \
-            --docker-password="${{ secrets.TEST_ACR_PASSWORD }}" \
-            --docker-server=sbomgitoperator.azurecr.io \
-            --docker-email="${{ secrets.TEST_EMAIL }}" \
-            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/acr.yaml
+#      - name: Prepare ACR secrets
+#        shell: bash
+#        run: |
+#          mkdir auth
+#
+#          kubectl create secret docker-registry acr-secret \
+#            --docker-username="${{ secrets.TEST_ACR_USERNAME }}" \
+#            --docker-password="${{ secrets.TEST_ACR_PASSWORD }}" \
+#            --docker-server=sbomgitoperator.azurecr.io \
+#            --docker-email="${{ secrets.TEST_EMAIL }}" \
+#            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/acr.yaml
 
       - name: Prepare ECR secrets
         shell: bash

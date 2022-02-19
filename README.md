@@ -30,7 +30,7 @@ However, the operator will work with more versions of Kubernetes in general.
 
 The operator relies on the [go-containeregistry](https://github.com/google/go-containerregistry) library to download images. It should work with most registries. 
 These are officially tested (with authentication):
-- ACR (Azure Container Registry)
+- ACR (Azure Container Registry) (currently not unit-tested)
 - ECR (Amazon Elastic Container Registry)
 - GAR (Google Artifact Registry)
 - GCR (Google Container Registry)
