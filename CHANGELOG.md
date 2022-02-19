@@ -1,3 +1,32 @@
+## Version 0.5.0 (2022-02-19)
+
+### Build and testing
+
+* [[`fe403ec2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fe403ec2)] - **test**: also disable test-code
+* [[`93802fc9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/93802fc9)] - **test**: add mkdir
+* [[`4ea3e2e6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4ea3e2e6)] - **test**: disable ACR tests
+* [[`f09877de`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f09877de)] - **test**: updated sbom-fixtures
+
+### Documentation
+
+* [[`005df7da`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/005df7da)] - **doc**: updates
+
+### Dependency updates
+
+* [[`66798cdc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/66798cdc)] - **deps**: update docker&#x2F;distribution
+* [[`0186c68a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0186c68a)] - **deps**: go mod tidy
+* [[`25b3df43`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/25b3df43)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.38.0
+* [[`6463901f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6463901f)] - **deps**: go mod tidy
+* [[`046ad445`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/046ad445)] - **deps**: update module github.com&#x2F;onsi&#x2F;ginkgo&#x2F;v2 to v2.1.3
+* [[`7446b45f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7446b45f)] - **deps**: update pascalgn&#x2F;automerge-action commit hash to 0ba0473 (#32)
+* [[`f283ebe2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f283ebe2)] - **deps**: update pascalgn&#x2F;size-label-action commit hash to a4655c4 (#33)
+* [[`73470b9b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/73470b9b)] - **deps**: update kubernetes versions to v0.23.4 (#34)
+* [[`07ae35f4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/07ae35f4)] - **deps**: update module github.com&#x2F;nscuro&#x2F;dtrack-client to v0.5.0 (#36)
+* [[`417fea63`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/417fea63)] - **deps**: update module github.com&#x2F;onsi&#x2F;ginkgo&#x2F;v2 to v2.1.2 (#31)
+* [[`030155ff`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/030155ff)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.6.0 (#28)
+* [[`be071dd1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/be071dd1)] - **deps**: update module github.com&#x2F;nscuro&#x2F;dtrack-client to v0.4.0 (#30)
+
+
 ## Version 0.4.1 (2022-02-04)
 
 ### Bug fixes
