@@ -31,7 +31,7 @@
    "cpes": [
     "cpe:2.3:a:adduser:adduser:3.118:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/adduser@3.118?arch=all",
+   "purl": "pkg:deb/debian/adduser@3.118?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "adduser",
@@ -725,7 +725,7 @@
    "cpes": [
     "cpe:2.3:a:apt:apt:2.2.4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/apt@2.2.4?arch=amd64",
+   "purl": "pkg:deb/debian/apt@2.2.4?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "apt",
@@ -2343,7 +2343,7 @@
     "cpe:2.3:a:base:base-files:11.1\\+deb11u2:*:*:*:*:*:*:*",
     "cpe:2.3:a:base:base_files:11.1\\+deb11u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/base-files@11.1+deb11u2?arch=amd64",
+   "purl": "pkg:deb/debian/base-files@11.1+deb11u2?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "base-files",
@@ -2662,7 +2662,7 @@
     "cpe:2.3:a:base:base-passwd:3.5.51:*:*:*:*:*:*:*",
     "cpe:2.3:a:base:base_passwd:3.5.51:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/base-passwd@3.5.51?arch=amd64",
+   "purl": "pkg:deb/debian/base-passwd@3.5.51?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "base-passwd",
@@ -2843,7 +2843,7 @@
    "cpes": [
     "cpe:2.3:a:bash:bash:5.1-2\\+b3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/bash@5.1-2+b3?arch=amd64",
+   "purl": "pkg:deb/debian/bash@5.1-2+b3?arch=amd64&upstream=bash@5.1-2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "bash",
@@ -3443,7 +3443,7 @@
    "cpes": [
     "cpe:2.3:a:bsdutils:bsdutils:1\\:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/bsdutils@1:2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/bsdutils@1:2.36.1-8+deb11u1?arch=amd64&upstream=util-linux@2.36.1-8+deb11u1&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "bsdutils",
@@ -3667,7 +3667,7 @@
     "cpe:2.3:a:ca:ca-certificates:20210119:*:*:*:*:*:*:*",
     "cpe:2.3:a:ca:ca_certificates:20210119:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/ca-certificates@20210119?arch=all",
+   "purl": "pkg:deb/debian/ca-certificates@20210119?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "ca-certificates",
@@ -4876,7 +4876,7 @@
    "cpes": [
     "cpe:2.3:a:coreutils:coreutils:8.32-4\\+b1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/coreutils@8.32-4+b1?arch=amd64",
+   "purl": "pkg:deb/debian/coreutils@8.32-4+b1?arch=amd64&upstream=coreutils@8.32-4&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "coreutils",
@@ -7042,7 +7042,7 @@
    "cpes": [
     "cpe:2.3:a:curl:curl:7.74.0-1.3\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/curl@7.74.0-1.3+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/curl@7.74.0-1.3+deb11u1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "curl",
@@ -7146,7 +7146,7 @@
    "cpes": [
     "cpe:2.3:a:dash:dash:0.5.11\\+git20200708\\+dd9ef66-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/dash@0.5.11+git20200708+dd9ef66-5?arch=amd64",
+   "purl": "pkg:deb/debian/dash@0.5.11+git20200708+dd9ef66-5?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "dash",
@@ -7271,7 +7271,7 @@
    "cpes": [
     "cpe:2.3:a:debconf:debconf:1.5.77:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/debconf@1.5.77?arch=all",
+   "purl": "pkg:deb/debian/debconf@1.5.77?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "debconf",
@@ -8405,7 +8405,7 @@
     "cpe:2.3:a:debian:debian-archive-keyring:2021.1.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:debian:debian_archive_keyring:2021.1.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all",
+   "purl": "pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "debian-archive-keyring",
@@ -8630,7 +8630,7 @@
    "cpes": [
     "cpe:2.3:a:debianutils:debianutils:4.11.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/debianutils@4.11.2?arch=amd64",
+   "purl": "pkg:deb/debian/debianutils@4.11.2?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "debianutils",
@@ -9224,7 +9224,7 @@
    "cpes": [
     "cpe:2.3:a:diffutils:diffutils:1\\:3.7-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/diffutils@1:3.7-5?arch=amd64",
+   "purl": "pkg:deb/debian/diffutils@1:3.7-5?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "diffutils",
@@ -9649,7 +9649,7 @@
    "cpes": [
     "cpe:2.3:a:dpkg:dpkg:1.20.9:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/dpkg@1.20.9?arch=amd64",
+   "purl": "pkg:deb/debian/dpkg@1.20.9?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "dpkg",
@@ -10935,7 +10935,7 @@
    "cpes": [
     "cpe:2.3:a:e2fsprogs:e2fsprogs:1.46.2-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64",
+   "purl": "pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "e2fsprogs",
@@ -11433,7 +11433,7 @@
    "cpes": [
     "cpe:2.3:a:findutils:findutils:4.8.0-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/findutils@4.8.0-1?arch=amd64",
+   "purl": "pkg:deb/debian/findutils@4.8.0-1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "findutils",
@@ -11921,7 +11921,7 @@
     "cpe:2.3:a:fontconfig:fontconfig-config:2.13.1-4.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:fontconfig:fontconfig_config:2.13.1-4.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/fontconfig-config@2.13.1-4.2?arch=all",
+   "purl": "pkg:deb/debian/fontconfig-config@2.13.1-4.2?arch=all&upstream=fontconfig&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "fontconfig-config",
@@ -12321,7 +12321,7 @@
     "cpe:2.3:a:fonts:fonts-dejavu-core:2.37-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:fonts:fonts_dejavu_core:2.37-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/fonts-dejavu-core@2.37-2?arch=all",
+   "purl": "pkg:deb/debian/fonts-dejavu-core@2.37-2?arch=all&upstream=fonts-dejavu&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "fonts-dejavu-core",
@@ -12592,7 +12592,7 @@
     "cpe:2.3:a:gcc:gcc-10-base:10.2.1-6:*:*:*:*:*:*:*",
     "cpe:2.3:a:gcc:gcc_10_base:10.2.1-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gcc-10-base@10.2.1-6?arch=amd64",
+   "purl": "pkg:deb/debian/gcc-10-base@10.2.1-6?arch=amd64&upstream=gcc-10&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gcc-10-base",
@@ -12680,7 +12680,7 @@
     "cpe:2.3:a:gcc:gcc-9-base:9.3.0-22:*:*:*:*:*:*:*",
     "cpe:2.3:a:gcc:gcc_9_base:9.3.0-22:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gcc-9-base@9.3.0-22?arch=amd64",
+   "purl": "pkg:deb/debian/gcc-9-base@9.3.0-22?arch=amd64&upstream=gcc-9&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gcc-9-base",
@@ -12760,7 +12760,7 @@
     "cpe:2.3:a:gettext:gettext-base:0.21-4:*:*:*:*:*:*:*",
     "cpe:2.3:a:gettext:gettext_base:0.21-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gettext-base@0.21-4?arch=amd64",
+   "purl": "pkg:deb/debian/gettext-base@0.21-4?arch=amd64&upstream=gettext&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gettext-base",
@@ -13300,7 +13300,7 @@
    "cpes": [
     "cpe:2.3:a:gpgv:gpgv:2.2.27-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gpgv@2.2.27-2?arch=amd64",
+   "purl": "pkg:deb/debian/gpgv@2.2.27-2?arch=amd64&upstream=gnupg2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gpgv",
@@ -13390,7 +13390,7 @@
    "cpes": [
     "cpe:2.3:a:grep:grep:3.6-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/grep@3.6-1?arch=amd64",
+   "purl": "pkg:deb/debian/grep@3.6-1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "grep",
@@ -13899,7 +13899,7 @@
    "cpes": [
     "cpe:2.3:a:gzip:gzip:1.10-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gzip@1.10-4?arch=amd64",
+   "purl": "pkg:deb/debian/gzip@1.10-4?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gzip",
@@ -14172,7 +14172,7 @@
    "cpes": [
     "cpe:2.3:a:hostname:hostname:3.23:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/hostname@3.23?arch=amd64",
+   "purl": "pkg:deb/debian/hostname@3.23?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "hostname",
@@ -14256,7 +14256,7 @@
     "cpe:2.3:a:init:init-system-helpers:1.60:*:*:*:*:*:*:*",
     "cpe:2.3:a:init:init_system_helpers:1.60:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/init-system-helpers@1.60?arch=all",
+   "purl": "pkg:deb/debian/init-system-helpers@1.60?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "init-system-helpers",
@@ -14420,7 +14420,7 @@
    "cpes": [
     "cpe:2.3:a:libacl1:libacl1:2.2.53-10:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libacl1@2.2.53-10?arch=amd64",
+   "purl": "pkg:deb/debian/libacl1@2.2.53-10?arch=amd64&upstream=acl&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libacl1",
@@ -14499,7 +14499,7 @@
     "cpe:2.3:a:libapt:libapt-pkg6.0:2.2.4:*:*:*:*:*:*:*",
     "cpe:2.3:a:libapt:libapt_pkg6.0:2.2.4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libapt-pkg6.0@2.2.4?arch=amd64",
+   "purl": "pkg:deb/debian/libapt-pkg6.0@2.2.4?arch=amd64&upstream=apt&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libapt-pkg6.0",
@@ -14923,7 +14923,7 @@
    "cpes": [
     "cpe:2.3:a:libattr1:libattr1:1\\:2.4.48-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libattr1@1:2.4.48-6?arch=amd64",
+   "purl": "pkg:deb/debian/libattr1@1:2.4.48-6?arch=amd64&upstream=attr&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libattr1",
@@ -15015,7 +15015,7 @@
     "cpe:2.3:a:libaudit:libaudit-common:1\\:3.0-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libaudit:libaudit_common:1\\:3.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libaudit-common@1:3.0-2?arch=all",
+   "purl": "pkg:deb/debian/libaudit-common@1:3.0-2?arch=all&upstream=audit&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libaudit-common",
@@ -15098,7 +15098,7 @@
    "cpes": [
     "cpe:2.3:a:libaudit1:libaudit1:1\\:3.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libaudit1@1:3.0-2?arch=amd64",
+   "purl": "pkg:deb/debian/libaudit1@1:3.0-2?arch=amd64&upstream=audit&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libaudit1",
@@ -15186,7 +15186,7 @@
    "cpes": [
     "cpe:2.3:a:libblkid1:libblkid1:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libblkid1@2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libblkid1@2.36.1-8+deb11u1?arch=amd64&upstream=util-linux&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libblkid1",
@@ -15259,7 +15259,7 @@
    "cpes": [
     "cpe:2.3:a:libbrotli1:libbrotli1:1.0.9-2\\+b2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libbrotli1@1.0.9-2+b2?arch=amd64",
+   "purl": "pkg:deb/debian/libbrotli1@1.0.9-2+b2?arch=amd64&upstream=brotli@1.0.9-2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libbrotli1",
@@ -15371,7 +15371,7 @@
    "cpes": [
     "cpe:2.3:a:libbsd0:libbsd0:0.11.3-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libbsd0@0.11.3-1?arch=amd64",
+   "purl": "pkg:deb/debian/libbsd0@0.11.3-1?arch=amd64&upstream=libbsd&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libbsd0",
@@ -15450,7 +15450,7 @@
     "cpe:2.3:a:libbz2:libbz2-1.0:1.0.8-4:*:*:*:*:*:*:*",
     "cpe:2.3:a:libbz2:libbz2_1.0:1.0.8-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libbz2-1.0@1.0.8-4?arch=amd64",
+   "purl": "pkg:deb/debian/libbz2-1.0@1.0.8-4?arch=amd64&upstream=bzip2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libbz2-1.0",
@@ -15533,7 +15533,7 @@
     "cpe:2.3:a:libc:libc-bin:2.31-13\\+deb11u2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libc:libc_bin:2.31-13\\+deb11u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libc-bin@2.31-13+deb11u2?arch=amd64",
+   "purl": "pkg:deb/debian/libc-bin@2.31-13+deb11u2?arch=amd64&upstream=glibc&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libc-bin",
@@ -15883,7 +15883,7 @@
    "cpes": [
     "cpe:2.3:a:libc6:libc6:2.31-13\\+deb11u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libc6@2.31-13+deb11u2?arch=amd64",
+   "purl": "pkg:deb/debian/libc6@2.31-13+deb11u2?arch=amd64&upstream=glibc&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libc6",
@@ -18211,7 +18211,7 @@
     "cpe:2.3:a:libcap:libcap-ng0:0.7.9-2.2\\+b1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libcap:libcap_ng0:0.7.9-2.2\\+b1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libcap-ng0@0.7.9-2.2+b1?arch=amd64",
+   "purl": "pkg:deb/debian/libcap-ng0@0.7.9-2.2+b1?arch=amd64&upstream=libcap-ng@0.7.9-2.2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libcap-ng0",
@@ -18295,7 +18295,7 @@
     "cpe:2.3:a:libcom:libcom-err2:1.46.2-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libcom:libcom_err2:1.46.2-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libcom-err2@1.46.2-2?arch=amd64",
+   "purl": "pkg:deb/debian/libcom-err2@1.46.2-2?arch=amd64&upstream=e2fsprogs&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libcom-err2",
@@ -18358,7 +18358,7 @@
    "cpes": [
     "cpe:2.3:a:libcrypt1:libcrypt1:1\\:4.4.18-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libcrypt1@1:4.4.18-4?arch=amd64",
+   "purl": "pkg:deb/debian/libcrypt1@1:4.4.18-4?arch=amd64&upstream=libxcrypt&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libcrypt1",
@@ -18436,7 +18436,7 @@
    "cpes": [
     "cpe:2.3:a:libcurl4:libcurl4:7.74.0-1.3\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libcurl4@7.74.0-1.3+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libcurl4@7.74.0-1.3+deb11u1?arch=amd64&upstream=curl&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libcurl4",
@@ -18515,7 +18515,7 @@
    "cpes": [
     "cpe:2.3:a:libdb5.3:libdb5.3:5.3.28\\+dfsg1-0.8:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.8?arch=amd64",
+   "purl": "pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.8?arch=amd64&upstream=db5.3&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libdb5.3",
@@ -18594,7 +18594,7 @@
    "cpes": [
     "cpe:2.3:a:libdebconfclient0:libdebconfclient0:0.260:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libdebconfclient0@0.260?arch=amd64",
+   "purl": "pkg:deb/debian/libdebconfclient0@0.260?arch=amd64&upstream=cdebconf&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libdebconfclient0",
@@ -18659,7 +18659,7 @@
    "cpes": [
     "cpe:2.3:a:libdeflate0:libdeflate0:1.7-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libdeflate0@1.7-1?arch=amd64",
+   "purl": "pkg:deb/debian/libdeflate0@1.7-1?arch=amd64&upstream=libdeflate&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libdeflate0",
@@ -18724,7 +18724,7 @@
    "cpes": [
     "cpe:2.3:a:libexpat1:libexpat1:2.2.10-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libexpat1@2.2.10-2?arch=amd64",
+   "purl": "pkg:deb/debian/libexpat1@2.2.10-2?arch=amd64&upstream=expat&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libexpat1",
@@ -18814,7 +18814,7 @@
    "cpes": [
     "cpe:2.3:a:libext2fs2:libext2fs2:1.46.2-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libext2fs2@1.46.2-2?arch=amd64",
+   "purl": "pkg:deb/debian/libext2fs2@1.46.2-2?arch=amd64&upstream=e2fsprogs&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libext2fs2",
@@ -18887,7 +18887,7 @@
    "cpes": [
     "cpe:2.3:a:libffi7:libffi7:3.3-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libffi7@3.3-6?arch=amd64",
+   "purl": "pkg:deb/debian/libffi7@3.3-6?arch=amd64&upstream=libffi&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libffi7",
@@ -18950,7 +18950,7 @@
    "cpes": [
     "cpe:2.3:a:libfontconfig1:libfontconfig1:2.13.1-4.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libfontconfig1@2.13.1-4.2?arch=amd64",
+   "purl": "pkg:deb/debian/libfontconfig1@2.13.1-4.2?arch=amd64&upstream=fontconfig&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libfontconfig1",
@@ -19038,7 +19038,7 @@
    "cpes": [
     "cpe:2.3:a:libfreetype6:libfreetype6:2.10.4\\+dfsg-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libfreetype6@2.10.4+dfsg-1?arch=amd64",
+   "purl": "pkg:deb/debian/libfreetype6@2.10.4+dfsg-1?arch=amd64&upstream=freetype&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libfreetype6",
@@ -19129,7 +19129,7 @@
     "cpe:2.3:a:libgcc:libgcc-s1:10.2.1-6:*:*:*:*:*:*:*",
     "cpe:2.3:a:libgcc:libgcc_s1:10.2.1-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgcc-s1@10.2.1-6?arch=amd64",
+   "purl": "pkg:deb/debian/libgcc-s1@10.2.1-6?arch=amd64&upstream=gcc-10&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgcc-s1",
@@ -19187,7 +19187,7 @@
    "cpes": [
     "cpe:2.3:a:libgcrypt20:libgcrypt20:1.8.7-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64",
+   "purl": "pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgcrypt20",
@@ -19301,7 +19301,7 @@
    "cpes": [
     "cpe:2.3:a:libgd3:libgd3:2.3.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgd3@2.3.0-2?arch=amd64",
+   "purl": "pkg:deb/debian/libgd3@2.3.0-2?arch=amd64&upstream=libgd2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgd3",
@@ -19384,7 +19384,7 @@
    "cpes": [
     "cpe:2.3:a:libgeoip1:libgeoip1:1.6.12-7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgeoip1@1.6.12-7?arch=amd64",
+   "purl": "pkg:deb/debian/libgeoip1@1.6.12-7?arch=amd64&upstream=geoip&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgeoip1",
@@ -19484,7 +19484,7 @@
    "cpes": [
     "cpe:2.3:a:libgmp10:libgmp10:2\\:6.2.1\\+dfsg-1\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgmp10@2:6.2.1+dfsg-1+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libgmp10@2:6.2.1+dfsg-1+deb11u1?arch=amd64&upstream=gmp&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgmp10",
@@ -19577,7 +19577,7 @@
    "cpes": [
     "cpe:2.3:a:libgnutls30:libgnutls30:3.7.1-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgnutls30@3.7.1-5?arch=amd64",
+   "purl": "pkg:deb/debian/libgnutls30@3.7.1-5?arch=amd64&upstream=gnutls28&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgnutls30",
@@ -19828,7 +19828,7 @@
     "cpe:2.3:a:libgpg:libgpg-error0:1.38-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libgpg:libgpg_error0:1.38-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgpg-error0@1.38-2?arch=amd64",
+   "purl": "pkg:deb/debian/libgpg-error0@1.38-2?arch=amd64&upstream=libgpg-error&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgpg-error0",
@@ -19918,7 +19918,7 @@
     "cpe:2.3:a:libgssapi:libgssapi-krb5-2:1.18.3-6\\+deb11u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libgssapi:libgssapi_krb5_2:1.18.3-6\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgssapi-krb5-2@1.18.3-6+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libgssapi-krb5-2@1.18.3-6+deb11u1?arch=amd64&upstream=krb5&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgssapi-krb5-2",
@@ -20001,7 +20001,7 @@
    "cpes": [
     "cpe:2.3:a:libhogweed6:libhogweed6:3.7.3-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libhogweed6@3.7.3-1?arch=amd64",
+   "purl": "pkg:deb/debian/libhogweed6@3.7.3-1?arch=amd64&upstream=nettle&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libhogweed6",
@@ -20072,7 +20072,7 @@
    "cpes": [
     "cpe:2.3:a:libicu67:libicu67:67.1-7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libicu67@67.1-7?arch=amd64",
+   "purl": "pkg:deb/debian/libicu67@67.1-7?arch=amd64&upstream=icu&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libicu67",
@@ -20196,7 +20196,7 @@
     "cpe:2.3:a:libidn2:libidn2-0:2.3.0-5:*:*:*:*:*:*:*",
     "cpe:2.3:a:libidn2:libidn2_0:2.3.0-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libidn2-0@2.3.0-5?arch=amd64",
+   "purl": "pkg:deb/debian/libidn2-0@2.3.0-5?arch=amd64&upstream=libidn2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libidn2-0",
@@ -20475,7 +20475,7 @@
    "cpes": [
     "cpe:2.3:a:libintl:libintl:0.21:*:*:*:*:*:*:*"
    ],
-   "purl": "",
+   "purl": "pkg:maven/libintl/libintl@0.21",
    "metadataType": "JavaMetadata",
    "metadata": {
     "virtualPath": "/usr/share/java/libintl-0.21.jar",
@@ -20515,7 +20515,7 @@
    "cpes": [
     "cpe:2.3:a:libjbig0:libjbig0:2.1-3.1\\+b2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libjbig0@2.1-3.1+b2?arch=amd64",
+   "purl": "pkg:deb/debian/libjbig0@2.1-3.1+b2?arch=amd64&upstream=jbigkit@2.1-3.1&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libjbig0",
@@ -20605,7 +20605,7 @@
     "cpe:2.3:a:libjpeg62:libjpeg62-turbo:1\\:2.0.6-4:*:*:*:*:*:*:*",
     "cpe:2.3:a:libjpeg62:libjpeg62_turbo:1\\:2.0.6-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libjpeg62-turbo@1:2.0.6-4?arch=amd64",
+   "purl": "pkg:deb/debian/libjpeg62-turbo@1:2.0.6-4?arch=amd64&upstream=libjpeg-turbo&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libjpeg62-turbo",
@@ -20686,7 +20686,7 @@
    "cpes": [
     "cpe:2.3:a:libk5crypto3:libk5crypto3:1.18.3-6\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libk5crypto3@1.18.3-6+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libk5crypto3@1.18.3-6+deb11u1?arch=amd64&upstream=krb5&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libk5crypto3",
@@ -20754,7 +20754,7 @@
    "cpes": [
     "cpe:2.3:a:libkeyutils1:libkeyutils1:1.6.1-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libkeyutils1@1.6.1-2?arch=amd64",
+   "purl": "pkg:deb/debian/libkeyutils1@1.6.1-2?arch=amd64&upstream=keyutils&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libkeyutils1",
@@ -20824,7 +20824,7 @@
     "cpe:2.3:a:libkrb5:libkrb5-3:1.18.3-6\\+deb11u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libkrb5:libkrb5_3:1.18.3-6\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libkrb5-3@1.18.3-6+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libkrb5-3@1.18.3-6+deb11u1?arch=amd64&upstream=krb5&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libkrb5-3",
@@ -20921,7 +20921,7 @@
    "cpes": [
     "cpe:2.3:a:libkrb5support0:libkrb5support0:1.18.3-6\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libkrb5support0@1.18.3-6+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libkrb5support0@1.18.3-6+deb11u1?arch=amd64&upstream=krb5&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libkrb5support0",
@@ -20993,7 +20993,7 @@
     "cpe:2.3:a:libldap:libldap-2.4-2:2.4.57\\+dfsg-3:*:*:*:*:*:*:*",
     "cpe:2.3:a:libldap:libldap_2.4_2:2.4.57\\+dfsg-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libldap-2.4-2@2.4.57+dfsg-3?arch=amd64",
+   "purl": "pkg:deb/debian/libldap-2.4-2@2.4.57+dfsg-3?arch=amd64&upstream=openldap&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libldap-2.4-2",
@@ -21097,7 +21097,7 @@
     "cpe:2.3:a:liblz4:liblz4-1:1.9.3-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:liblz4:liblz4_1:1.9.3-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/liblz4-1@1.9.3-2?arch=amd64",
+   "purl": "pkg:deb/debian/liblz4-1@1.9.3-2?arch=amd64&upstream=lz4&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "liblz4-1",
@@ -21175,7 +21175,7 @@
    "cpes": [
     "cpe:2.3:a:liblzma5:liblzma5:5.2.5-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/liblzma5@5.2.5-2?arch=amd64",
+   "purl": "pkg:deb/debian/liblzma5@5.2.5-2?arch=amd64&upstream=xz-utils&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "liblzma5",
@@ -21280,7 +21280,7 @@
    "cpes": [
     "cpe:2.3:a:libmd0:libmd0:1.0.3-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libmd0@1.0.3-3?arch=amd64",
+   "purl": "pkg:deb/debian/libmd0@1.0.3-3?arch=amd64&upstream=libmd&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libmd0",
@@ -21368,7 +21368,7 @@
    "cpes": [
     "cpe:2.3:a:libmount1:libmount1:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libmount1@2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libmount1@2.36.1-8+deb11u1?arch=amd64&upstream=util-linux&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libmount1",
@@ -21451,7 +21451,7 @@
    "cpes": [
     "cpe:2.3:a:libnettle8:libnettle8:3.7.3-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libnettle8@3.7.3-1?arch=amd64",
+   "purl": "pkg:deb/debian/libnettle8@3.7.3-1?arch=amd64&upstream=nettle&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libnettle8",
@@ -21551,7 +21551,7 @@
     "cpe:2.3:a:libnghttp2:libnghttp2-14:1.43.0-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libnghttp2:libnghttp2_14:1.43.0-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libnghttp2-14@1.43.0-1?arch=amd64",
+   "purl": "pkg:deb/debian/libnghttp2-14@1.43.0-1?arch=amd64&upstream=nghttp2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libnghttp2-14",
@@ -21653,7 +21653,7 @@
    "cpes": [
     "cpe:2.3:a:libnsl2:libnsl2:1.3.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libnsl2@1.3.0-2?arch=amd64",
+   "purl": "pkg:deb/debian/libnsl2@1.3.0-2?arch=amd64&upstream=libnsl&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libnsl2",
@@ -21735,7 +21735,7 @@
     "cpe:2.3:a:libp11:libp11-kit0:0.23.22-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libp11:libp11_kit0:0.23.22-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64",
+   "purl": "pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64&upstream=p11-kit&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libp11-kit0",
@@ -21825,7 +21825,7 @@
     "cpe:2.3:a:libpam:libpam-modules:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpam:libpam_modules:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64&upstream=pam&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam-modules",
@@ -22771,7 +22771,7 @@
     "cpe:2.3:a:libpam:libpam-modules-bin:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpam:libpam_modules_bin:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64&upstream=pam&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam-modules-bin",
@@ -22941,7 +22941,7 @@
     "cpe:2.3:a:libpam:libpam-runtime:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpam:libpam_runtime:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all",
+   "purl": "pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all&upstream=pam&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam-runtime",
@@ -23830,7 +23830,7 @@
    "cpes": [
     "cpe:2.3:a:libpam0g:libpam0g:1.4.0-9\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64&upstream=pam&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam0g",
@@ -23974,7 +23974,7 @@
     "cpe:2.3:a:libpcre2:libpcre2-8-0:10.36-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpcre2:libpcre2_8_0:10.36-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpcre2-8-0@10.36-2?arch=amd64",
+   "purl": "pkg:deb/debian/libpcre2-8-0@10.36-2?arch=amd64&upstream=pcre2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpcre2-8-0",
@@ -24053,7 +24053,7 @@
    "cpes": [
     "cpe:2.3:a:libpcre3:libpcre3:2\\:8.39-13:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpcre3@2:8.39-13?arch=amd64",
+   "purl": "pkg:deb/debian/libpcre3@2:8.39-13?arch=amd64&upstream=pcre3&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpcre3",
@@ -24185,7 +24185,7 @@
     "cpe:2.3:a:libpng16:libpng16-16:1.6.37-3:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpng16:libpng16_16:1.6.37-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpng16-16@1.6.37-3?arch=amd64",
+   "purl": "pkg:deb/debian/libpng16-16@1.6.37-3?arch=amd64&upstream=libpng1.6&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpng16-16",
@@ -24299,7 +24299,7 @@
    "cpes": [
     "cpe:2.3:a:libpsl5:libpsl5:0.21.0-1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpsl5@0.21.0-1.2?arch=amd64",
+   "purl": "pkg:deb/debian/libpsl5@0.21.0-1.2?arch=amd64&upstream=libpsl&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpsl5",
@@ -24373,7 +24373,7 @@
    "cpes": [
     "cpe:2.3:a:libreadline8:libreadline8:8.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libreadline8@8.1-1?arch=amd64",
+   "purl": "pkg:deb/debian/libreadline8@8.1-1?arch=amd64&upstream=readline&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libreadline8",
@@ -24487,7 +24487,7 @@
    "cpes": [
     "cpe:2.3:a:librtmp1:librtmp1:2.4\\+20151223.gitfa8646d.1-2\\+b2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/librtmp1@2.4+20151223.gitfa8646d.1-2+b2?arch=amd64",
+   "purl": "pkg:deb/debian/librtmp1@2.4+20151223.gitfa8646d.1-2+b2?arch=amd64&upstream=rtmpdump@2.4+20151223.gitfa8646d.1-2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "librtmp1",
@@ -24575,7 +24575,7 @@
     "cpe:2.3:a:libsasl2:libsasl2-2:2.1.27\\+dfsg-2.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libsasl2:libsasl2_2:2.1.27\\+dfsg-2.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsasl2-2@2.1.27+dfsg-2.1?arch=amd64",
+   "purl": "pkg:deb/debian/libsasl2-2@2.1.27+dfsg-2.1?arch=amd64&upstream=cyrus-sasl2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsasl2-2",
@@ -24683,7 +24683,7 @@
     "cpe:2.3:a:libsasl2:libsasl2-modules-db:2.1.27\\+dfsg-2.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libsasl2:libsasl2_modules_db:2.1.27\\+dfsg-2.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsasl2-modules-db@2.1.27+dfsg-2.1?arch=amd64",
+   "purl": "pkg:deb/debian/libsasl2-modules-db@2.1.27+dfsg-2.1?arch=amd64&upstream=cyrus-sasl2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsasl2-modules-db",
@@ -24764,7 +24764,7 @@
    "cpes": [
     "cpe:2.3:a:libseccomp2:libseccomp2:2.5.1-1\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libseccomp2@2.5.1-1+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libseccomp2@2.5.1-1+deb11u1?arch=amd64&upstream=libseccomp&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libseccomp2",
@@ -24838,7 +24838,7 @@
    "cpes": [
     "cpe:2.3:a:libselinux1:libselinux1:3.1-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libselinux1@3.1-3?arch=amd64",
+   "purl": "pkg:deb/debian/libselinux1@3.1-3?arch=amd64&upstream=libselinux&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libselinux1",
@@ -24913,7 +24913,7 @@
     "cpe:2.3:a:libsemanage:libsemanage-common:3.1-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libsemanage:libsemanage_common:3.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsemanage-common@3.1-1?arch=all",
+   "purl": "pkg:deb/debian/libsemanage-common@3.1-1?arch=all&upstream=libsemanage&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsemanage-common",
@@ -24995,7 +24995,7 @@
    "cpes": [
     "cpe:2.3:a:libsemanage1:libsemanage1:3.1-1\\+b2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64",
+   "purl": "pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64&upstream=libsemanage@3.1-1&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsemanage1",
@@ -25069,7 +25069,7 @@
    "cpes": [
     "cpe:2.3:a:libsepol1:libsepol1:3.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsepol1@3.1-1?arch=amd64",
+   "purl": "pkg:deb/debian/libsepol1@3.1-1?arch=amd64&upstream=libsepol&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsepol1",
@@ -25149,7 +25149,7 @@
    "cpes": [
     "cpe:2.3:a:libsmartcols1:libsmartcols1:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsmartcols1@2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libsmartcols1@2.36.1-8+deb11u1?arch=amd64&upstream=util-linux&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsmartcols1",
@@ -25220,7 +25220,7 @@
    "cpes": [
     "cpe:2.3:a:libss2:libss2:1.46.2-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libss2@1.46.2-2?arch=amd64",
+   "purl": "pkg:deb/debian/libss2@1.46.2-2?arch=amd64&upstream=e2fsprogs&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libss2",
@@ -25290,7 +25290,7 @@
     "cpe:2.3:a:libssh2:libssh2-1:1.9.0-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libssh2:libssh2_1:1.9.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libssh2-1@1.9.0-2?arch=amd64",
+   "purl": "pkg:deb/debian/libssh2-1@1.9.0-2?arch=amd64&upstream=libssh2&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libssh2-1",
@@ -25377,7 +25377,7 @@
    "cpes": [
     "cpe:2.3:a:libssl1.1:libssl1.1:1.1.1k-1\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libssl1.1@1.1.1k-1+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libssl1.1@1.1.1k-1+deb11u1?arch=amd64&upstream=openssl&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libssl1.1",
@@ -25487,7 +25487,7 @@
    "cpes": [
     "cpe:2.3:a:libstdc\\+\\+6:libstdc\\+\\+6:10.2.1-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libstdc++6@10.2.1-6?arch=amd64",
+   "purl": "pkg:deb/debian/libstdc++6@10.2.1-6?arch=amd64&upstream=gcc-10&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libstdc++6",
@@ -25582,7 +25582,7 @@
    "cpes": [
     "cpe:2.3:a:libsystemd0:libsystemd0:247.3-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsystemd0@247.3-6?arch=amd64",
+   "purl": "pkg:deb/debian/libsystemd0@247.3-6?arch=amd64&upstream=systemd&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsystemd0",
@@ -25655,7 +25655,7 @@
     "cpe:2.3:a:libtasn1:libtasn1-6:4.16.0-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libtasn1:libtasn1_6:4.16.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtasn1-6@4.16.0-2?arch=amd64",
+   "purl": "pkg:deb/debian/libtasn1-6@4.16.0-2?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtasn1-6",
@@ -25752,7 +25752,7 @@
    "cpes": [
     "cpe:2.3:a:libtiff5:libtiff5:4.2.0-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtiff5@4.2.0-1?arch=amd64",
+   "purl": "pkg:deb/debian/libtiff5@4.2.0-1?arch=amd64&upstream=tiff&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtiff5",
@@ -25827,7 +25827,7 @@
    "cpes": [
     "cpe:2.3:a:libtinfo6:libtinfo6:6.2\\+20201114-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtinfo6@6.2+20201114-2?arch=amd64",
+   "purl": "pkg:deb/debian/libtinfo6@6.2+20201114-2?arch=amd64&upstream=ncurses&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtinfo6",
@@ -25935,7 +25935,7 @@
     "cpe:2.3:a:libtirpc:libtirpc-common:1.3.1-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libtirpc:libtirpc_common:1.3.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtirpc-common@1.3.1-1?arch=all",
+   "purl": "pkg:deb/debian/libtirpc-common@1.3.1-1?arch=all&upstream=libtirpc&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtirpc-common",
@@ -26018,7 +26018,7 @@
    "cpes": [
     "cpe:2.3:a:libtirpc3:libtirpc3:1.3.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtirpc3@1.3.1-1?arch=amd64",
+   "purl": "pkg:deb/debian/libtirpc3@1.3.1-1?arch=amd64&upstream=libtirpc&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtirpc3",
@@ -26097,7 +26097,7 @@
    "cpes": [
     "cpe:2.3:a:libudev1:libudev1:247.3-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libudev1@247.3-6?arch=amd64",
+   "purl": "pkg:deb/debian/libudev1@247.3-6?arch=amd64&upstream=systemd&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libudev1",
@@ -26171,7 +26171,7 @@
    "cpes": [
     "cpe:2.3:a:libunistring2:libunistring2:0.9.10-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64",
+   "purl": "pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64&upstream=libunistring&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libunistring2",
@@ -26259,7 +26259,7 @@
    "cpes": [
     "cpe:2.3:a:libuuid1:libuuid1:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libuuid1@2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/libuuid1@2.36.1-8+deb11u1?arch=amd64&upstream=util-linux&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libuuid1",
@@ -26332,7 +26332,7 @@
    "cpes": [
     "cpe:2.3:a:libwebp6:libwebp6:0.6.1-2.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libwebp6@0.6.1-2.1?arch=amd64",
+   "purl": "pkg:deb/debian/libwebp6@0.6.1-2.1?arch=amd64&upstream=libwebp&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libwebp6",
@@ -26408,7 +26408,7 @@
     "cpe:2.3:a:libx11:libx11-6:2\\:1.7.2-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libx11:libx11_6:2\\:1.7.2-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libx11-6@2:1.7.2-1?arch=amd64",
+   "purl": "pkg:deb/debian/libx11-6@2:1.7.2-1?arch=amd64&upstream=libx11&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libx11-6",
@@ -26508,7 +26508,7 @@
     "cpe:2.3:a:libx11:libx11-data:2\\:1.7.2-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libx11:libx11_data:2\\:1.7.2-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libx11-data@2:1.7.2-1?arch=all",
+   "purl": "pkg:deb/debian/libx11-data@2:1.7.2-1?arch=all&upstream=libx11&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libx11-data",
@@ -28107,7 +28107,7 @@
    "cpes": [
     "cpe:2.3:a:libxau6:libxau6:1\\:1.0.9-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxau6@1:1.0.9-1?arch=amd64",
+   "purl": "pkg:deb/debian/libxau6@1:1.0.9-1?arch=amd64&upstream=libxau&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxau6",
@@ -28178,7 +28178,7 @@
    "cpes": [
     "cpe:2.3:a:libxcb1:libxcb1:1.14-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxcb1@1.14-3?arch=amd64",
+   "purl": "pkg:deb/debian/libxcb1@1.14-3?arch=amd64&upstream=libxcb&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxcb1",
@@ -28249,7 +28249,7 @@
    "cpes": [
     "cpe:2.3:a:libxdmcp6:libxdmcp6:1\\:1.1.2-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxdmcp6@1:1.1.2-3?arch=amd64",
+   "purl": "pkg:deb/debian/libxdmcp6@1:1.1.2-3?arch=amd64&upstream=libxdmcp&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxdmcp6",
@@ -28323,7 +28323,7 @@
    "cpes": [
     "cpe:2.3:a:libxml2:libxml2:2.9.10\\+dfsg-6.7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxml2@2.9.10+dfsg-6.7?arch=amd64",
+   "purl": "pkg:deb/debian/libxml2@2.9.10+dfsg-6.7?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxml2",
@@ -28426,7 +28426,7 @@
    "cpes": [
     "cpe:2.3:a:libxpm4:libxpm4:1\\:3.5.12-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxpm4@1:3.5.12-1?arch=amd64",
+   "purl": "pkg:deb/debian/libxpm4@1:3.5.12-1?arch=amd64&upstream=libxpm&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxpm4",
@@ -28497,7 +28497,7 @@
    "cpes": [
     "cpe:2.3:a:libxslt1.1:libxslt1.1:1.1.34-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxslt1.1@1.1.34-4?arch=amd64",
+   "purl": "pkg:deb/debian/libxslt1.1@1.1.34-4?arch=amd64&upstream=libxslt&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxslt1.1",
@@ -28635,7 +28635,7 @@
    "cpes": [
     "cpe:2.3:a:libxxhash0:libxxhash0:0.8.0-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libxxhash0@0.8.0-2?arch=amd64",
+   "purl": "pkg:deb/debian/libxxhash0@0.8.0-2?arch=amd64&upstream=xxhash&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libxxhash0",
@@ -28711,7 +28711,7 @@
    "cpes": [
     "cpe:2.3:a:libzstd1:libzstd1:1.4.8\\+dfsg-2.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libzstd1@1.4.8+dfsg-2.1?arch=amd64",
+   "purl": "pkg:deb/debian/libzstd1@1.4.8+dfsg-2.1?arch=amd64&upstream=libzstd&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libzstd1",
@@ -28788,7 +28788,7 @@
    "cpes": [
     "cpe:2.3:a:login:login:1\\:4.8.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/login@1:4.8.1-1?arch=amd64",
+   "purl": "pkg:deb/debian/login@1:4.8.1-1?arch=amd64&upstream=shadow&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "login",
@@ -29862,7 +29862,7 @@
    "cpes": [
     "cpe:2.3:a:logsave:logsave:1.46.2-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/logsave@1.46.2-2?arch=amd64",
+   "purl": "pkg:deb/debian/logsave@1.46.2-2?arch=amd64&upstream=e2fsprogs&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "logsave",
@@ -29941,7 +29941,7 @@
     "cpe:2.3:a:lsb:lsb-base:11.1.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:lsb:lsb_base:11.1.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/lsb-base@11.1.0?arch=all",
+   "purl": "pkg:deb/debian/lsb-base@11.1.0?arch=all&upstream=lsb&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "lsb-base",
@@ -30030,7 +30030,7 @@
    "cpes": [
     "cpe:2.3:a:mawk:mawk:1.3.4.20200120-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/mawk@1.3.4.20200120-2?arch=amd64",
+   "purl": "pkg:deb/debian/mawk@1.3.4.20200120-2?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "mawk",
@@ -30222,7 +30222,7 @@
    "cpes": [
     "cpe:2.3:a:mount:mount:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/mount@2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/mount@2.36.1-8+deb11u1?arch=amd64&upstream=util-linux&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "mount",
@@ -30458,7 +30458,7 @@
     "cpe:2.3:a:ncurses:ncurses-base:6.2\\+20201114-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:ncurses:ncurses_base:6.2\\+20201114-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/ncurses-base@6.2+20201114-2?arch=all",
+   "purl": "pkg:deb/debian/ncurses-base@6.2+20201114-2?arch=all&upstream=ncurses&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "ncurses-base",
@@ -30914,7 +30914,7 @@
     "cpe:2.3:a:ncurses:ncurses-bin:6.2\\+20201114-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:ncurses:ncurses_bin:6.2\\+20201114-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/ncurses-bin@6.2+20201114-2?arch=amd64",
+   "purl": "pkg:deb/debian/ncurses-bin@6.2+20201114-2?arch=amd64&upstream=ncurses&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "ncurses-bin",
@@ -31149,7 +31149,7 @@
    "cpes": [
     "cpe:2.3:a:nginx:nginx:1.21.6-1\\~bullseye:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/nginx@1.21.6-1~bullseye?arch=amd64",
+   "purl": "pkg:deb/debian/nginx@1.21.6-1~bullseye?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "nginx",
@@ -31389,7 +31389,7 @@
     "cpe:2.3:a:nginx:nginx-module-geoip:1.21.6-1\\~bullseye:*:*:*:*:*:*:*",
     "cpe:2.3:a:nginx:nginx_module_geoip:1.21.6-1\\~bullseye:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/nginx-module-geoip@1.21.6-1~bullseye?arch=amd64",
+   "purl": "pkg:deb/debian/nginx-module-geoip@1.21.6-1~bullseye?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "nginx-module-geoip",
@@ -31497,7 +31497,7 @@
     "cpe:2.3:a:nginx:nginx-module-image-filter:1.21.6-1\\~bullseye:*:*:*:*:*:*:*",
     "cpe:2.3:a:nginx:nginx_module_image_filter:1.21.6-1\\~bullseye:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/nginx-module-image-filter@1.21.6-1~bullseye?arch=amd64",
+   "purl": "pkg:deb/debian/nginx-module-image-filter@1.21.6-1~bullseye?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "nginx-module-image-filter",
@@ -31585,7 +31585,7 @@
     "cpe:2.3:a:nginx:nginx-module-njs:1.21.6\\+0.7.2-1\\~bullseye:*:*:*:*:*:*:*",
     "cpe:2.3:a:nginx:nginx_module_njs:1.21.6\\+0.7.2-1\\~bullseye:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/nginx-module-njs@1.21.6+0.7.2-1~bullseye?arch=amd64",
+   "purl": "pkg:deb/debian/nginx-module-njs@1.21.6+0.7.2-1~bullseye?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "nginx-module-njs",
@@ -31697,7 +31697,7 @@
     "cpe:2.3:a:nginx:nginx-module-xslt:1.21.6-1\\~bullseye:*:*:*:*:*:*:*",
     "cpe:2.3:a:nginx:nginx_module_xslt:1.21.6-1\\~bullseye:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/nginx-module-xslt@1.21.6-1~bullseye?arch=amd64",
+   "purl": "pkg:deb/debian/nginx-module-xslt@1.21.6-1~bullseye?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "nginx-module-xslt",
@@ -31780,7 +31780,7 @@
    "cpes": [
     "cpe:2.3:a:openssl:openssl:1.1.1k-1\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/openssl@1.1.1k-1+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/openssl@1.1.1k-1+deb11u1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "openssl",
@@ -32537,7 +32537,7 @@
    "cpes": [
     "cpe:2.3:a:passwd:passwd:1\\:4.8.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/passwd@1:4.8.1-1?arch=amd64",
+   "purl": "pkg:deb/debian/passwd@1:4.8.1-1?arch=amd64&upstream=shadow&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "passwd",
@@ -34799,7 +34799,7 @@
     "cpe:2.3:a:perl:perl-base:5.32.1-4\\+deb11u2:*:*:*:*:*:*:*",
     "cpe:2.3:a:perl:perl_base:5.32.1-4\\+deb11u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/perl-base@5.32.1-4+deb11u2?arch=amd64",
+   "purl": "pkg:deb/debian/perl-base@5.32.1-4+deb11u2?arch=amd64&upstream=perl&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "perl-base",
@@ -39790,7 +39790,7 @@
     "cpe:2.3:a:readline:readline-common:8.1-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:readline:readline_common:8.1-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/readline-common@8.1-1?arch=all",
+   "purl": "pkg:deb/debian/readline-common@8.1-1?arch=all&upstream=readline&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "readline-common",
@@ -39903,7 +39903,7 @@
    "cpes": [
     "cpe:2.3:a:sed:sed:4.7-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/sed@4.7-1?arch=amd64",
+   "purl": "pkg:deb/debian/sed@4.7-1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "sed",
@@ -40369,7 +40369,7 @@
     "cpe:2.3:a:sensible:sensible-utils:0.0.14:*:*:*:*:*:*:*",
     "cpe:2.3:a:sensible:sensible_utils:0.0.14:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/sensible-utils@0.0.14?arch=all",
+   "purl": "pkg:deb/debian/sensible-utils@0.0.14?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "sensible-utils",
@@ -40544,7 +40544,7 @@
     "cpe:2.3:a:sysvinit:sysvinit-utils:2.96-7:*:*:*:*:*:*:*",
     "cpe:2.3:a:sysvinit:sysvinit_utils:2.96-7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/sysvinit-utils@2.96-7?arch=amd64",
+   "purl": "pkg:deb/debian/sysvinit-utils@2.96-7?arch=amd64&upstream=sysvinit&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "sysvinit-utils",
@@ -40666,7 +40666,7 @@
    "cpes": [
     "cpe:2.3:a:tar:tar:1.34\\+dfsg-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/tar@1.34+dfsg-1?arch=amd64",
+   "purl": "pkg:deb/debian/tar@1.34+dfsg-1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "tar",
@@ -41129,7 +41129,7 @@
    "cpes": [
     "cpe:2.3:a:tzdata:tzdata:2021a-1\\+deb11u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/tzdata@2021a-1+deb11u2?arch=all",
+   "purl": "pkg:deb/debian/tzdata@2021a-1+deb11u2?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "tzdata",
@@ -50550,7 +50550,7 @@
    "cpes": [
     "cpe:2.3:a:ucf:ucf:3.0043:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/ucf@3.0043?arch=all",
+   "purl": "pkg:deb/debian/ucf@3.0043?arch=all&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "ucf",
@@ -50951,7 +50951,7 @@
     "cpe:2.3:a:util:util-linux:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:util:util_linux:2.36.1-8\\+deb11u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/util-linux@2.36.1-8+deb11u1?arch=amd64",
+   "purl": "pkg:deb/debian/util-linux@2.36.1-8+deb11u1?arch=amd64&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "util-linux",
@@ -53376,7 +53376,7 @@
    "cpes": [
     "cpe:2.3:a:zlib1g:zlib1g:1\\:1.2.11.dfsg-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/zlib1g@1:1.2.11.dfsg-2?arch=amd64",
+   "purl": "pkg:deb/debian/zlib1g@1:1.2.11.dfsg-2?arch=amd64&upstream=zlib&distro=debian-11",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "zlib1g",
@@ -96191,7 +96191,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.36.0",
+  "version": "0.38.0",
   "configuration": {
    "configPath": "",
    "output": [
