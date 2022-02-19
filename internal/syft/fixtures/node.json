@@ -1,7 +1,7 @@
 {
  "artifacts": [
   {
-   "id": "11cd3578e062ef7f",
+   "id": "94ec80f9f3f113f4",
    "name": "@gar/promisify",
    "version": "1.1.2",
    "type": "npm",
@@ -20,9 +20,11 @@
     "cpe:2.3:a:\\@gar\\/promisify:\\@gar\\/promisify:1.1.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@gar\\/promisify:1.1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@gar%2Fpromisify@1.1.2",
+   "purl": "pkg:npm/@gar/promisify@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@gar/promisify",
+    "version": "1.1.2",
     "author": "Gar <gar+npm@danger.computer>",
     "licenses": [
      "MIT"
@@ -33,7 +35,7 @@
    }
   },
   {
-   "id": "382598a8dd93c02e",
+   "id": "1c0bd633b75a0d48",
    "name": "@isaacs/string-locale-compare",
    "version": "1.1.0",
    "type": "npm",
@@ -62,9 +64,11 @@
     "cpe:2.3:a:*:\\@isaacs\\/string-locale-compare:1.1.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@isaacs\\/string_locale_compare:1.1.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@isaacs%2Fstring-locale-compare@1.1.0",
+   "purl": "pkg:npm/@isaacs/string-locale-compare@1.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@isaacs/string-locale-compare",
+    "version": "1.1.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -75,7 +79,7 @@
    }
   },
   {
-   "id": "79bf7e3fba64f584",
+   "id": "d3dfafcfe3620097",
    "name": "@npmcli/arborist",
    "version": "4.0.3",
    "type": "npm",
@@ -94,9 +98,11 @@
     "cpe:2.3:a:\\@npmcli\\/arborist:\\@npmcli\\/arborist:4.0.3:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/arborist:4.0.3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Farborist@4.0.3",
+   "purl": "pkg:npm/@npmcli/arborist@4.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/arborist",
+    "version": "4.0.3",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -107,7 +113,7 @@
    }
   },
   {
-   "id": "15b6d8b67fe2b5e2",
+   "id": "4d9a6e7764797f10",
    "name": "@npmcli/ci-detect",
    "version": "1.4.0",
    "type": "npm",
@@ -132,9 +138,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/ci-detect:1.4.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/ci_detect:1.4.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fci-detect@1.4.0",
+   "purl": "pkg:npm/@npmcli/ci-detect@1.4.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/ci-detect",
+    "version": "1.4.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -145,7 +153,7 @@
    }
   },
   {
-   "id": "75d28ea7e4969d1b",
+   "id": "b5b7bbcf21cdae4a",
    "name": "@npmcli/config",
    "version": "2.3.0",
    "type": "npm",
@@ -164,9 +172,11 @@
     "cpe:2.3:a:\\@npmcli\\/config:\\@npmcli\\/config:2.3.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/config:2.3.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fconfig@2.3.0",
+   "purl": "pkg:npm/@npmcli/config@2.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/config",
+    "version": "2.3.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -177,7 +187,7 @@
    }
   },
   {
-   "id": "fb9f5ac65296ebc7",
+   "id": "ce3fc1ddcb6a5f65",
    "name": "@npmcli/disparity-colors",
    "version": "1.0.1",
    "type": "npm",
@@ -202,9 +212,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/disparity-colors:1.0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/disparity_colors:1.0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fdisparity-colors@1.0.1",
+   "purl": "pkg:npm/@npmcli/disparity-colors@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/disparity-colors",
+    "version": "1.0.1",
     "author": "npm Inc. <support@npmjs.com>",
     "licenses": [
      "ISC"
@@ -215,7 +227,7 @@
    }
   },
   {
-   "id": "603b67c7b778012d",
+   "id": "8e2427a2a77e38dc",
    "name": "@npmcli/fs",
    "version": "1.0.0",
    "type": "npm",
@@ -234,9 +246,11 @@
     "cpe:2.3:a:\\@npmcli\\/fs:\\@npmcli\\/fs:1.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/fs:1.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Ffs@1.0.0",
+   "purl": "pkg:npm/@npmcli/fs@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/fs",
+    "version": "1.0.0",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -247,7 +261,7 @@
    }
   },
   {
-   "id": "a17a590e95c14b19",
+   "id": "1a365b67e9cc26df",
    "name": "@npmcli/git",
    "version": "2.1.0",
    "type": "npm",
@@ -266,9 +280,11 @@
     "cpe:2.3:a:\\@npmcli\\/git:\\@npmcli\\/git:2.1.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/git:2.1.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fgit@2.1.0",
+   "purl": "pkg:npm/@npmcli/git@2.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/git",
+    "version": "2.1.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -279,7 +295,7 @@
    }
   },
   {
-   "id": "f7cabb7c90cb1866",
+   "id": "a42102e6d4838ddb",
    "name": "@npmcli/installed-package-contents",
    "version": "1.0.7",
    "type": "npm",
@@ -308,9 +324,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/installed-package-contents:1.0.7:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/installed_package_contents:1.0.7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Finstalled-package-contents@1.0.7",
+   "purl": "pkg:npm/@npmcli/installed-package-contents@1.0.7",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/installed-package-contents",
+    "version": "1.0.7",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -321,7 +339,7 @@
    }
   },
   {
-   "id": "9a460df522ab9d3",
+   "id": "7c7aebecbdab7274",
    "name": "@npmcli/map-workspaces",
    "version": "2.0.0",
    "type": "npm",
@@ -346,9 +364,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/map-workspaces:2.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/map_workspaces:2.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fmap-workspaces@2.0.0",
+   "purl": "pkg:npm/@npmcli/map-workspaces@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/map-workspaces",
+    "version": "2.0.0",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -359,7 +379,7 @@
    }
   },
   {
-   "id": "136daa16c977aad9",
+   "id": "db7baeb3eeed88d8",
    "name": "@npmcli/metavuln-calculator",
    "version": "2.0.0",
    "type": "npm",
@@ -384,9 +404,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/metavuln-calculator:2.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/metavuln_calculator:2.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fmetavuln-calculator@2.0.0",
+   "purl": "pkg:npm/@npmcli/metavuln-calculator@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/metavuln-calculator",
+    "version": "2.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -397,7 +419,7 @@
    }
   },
   {
-   "id": "8bfdcfb62edbd673",
+   "id": "290e59cfaf33b99c",
    "name": "@npmcli/move-file",
    "version": "1.1.2",
    "type": "npm",
@@ -422,9 +444,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/move-file:1.1.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/move_file:1.1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fmove-file@1.1.2",
+   "purl": "pkg:npm/@npmcli/move-file@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/move-file",
+    "version": "1.1.2",
     "author": "",
     "licenses": [
      "MIT"
@@ -435,7 +459,7 @@
    }
   },
   {
-   "id": "f9f9931d48c4255e",
+   "id": "27a174e6b184fa30",
    "name": "@npmcli/name-from-folder",
    "version": "1.0.1",
    "type": "npm",
@@ -464,9 +488,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/name-from-folder:1.0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/name_from_folder:1.0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fname-from-folder@1.0.1",
+   "purl": "pkg:npm/@npmcli/name-from-folder@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/name-from-folder",
+    "version": "1.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -477,7 +503,7 @@
    }
   },
   {
-   "id": "92e8777f3de3e016",
+   "id": "b08bf5be65d2ad66",
    "name": "@npmcli/node-gyp",
    "version": "1.0.2",
    "type": "npm",
@@ -502,9 +528,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/node-gyp:1.0.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/node_gyp:1.0.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fnode-gyp@1.0.2",
+   "purl": "pkg:npm/@npmcli/node-gyp@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/node-gyp",
+    "version": "1.0.2",
     "author": "Brian Jenkins <bonkydog@bonkydog.com>",
     "licenses": [
      "ISC"
@@ -515,7 +543,7 @@
    }
   },
   {
-   "id": "1405096e7f4d4d88",
+   "id": "e6aa32f9c35b7725",
    "name": "@npmcli/package-json",
    "version": "1.0.1",
    "type": "npm",
@@ -540,9 +568,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/package-json:1.0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/package_json:1.0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fpackage-json@1.0.1",
+   "purl": "pkg:npm/@npmcli/package-json@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/package-json",
+    "version": "1.0.1",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -553,7 +583,7 @@
    }
   },
   {
-   "id": "7016dc956ce7c8c2",
+   "id": "b5ee62aa2ba04f84",
    "name": "@npmcli/promise-spawn",
    "version": "1.3.2",
    "type": "npm",
@@ -578,9 +608,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/promise-spawn:1.3.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/promise_spawn:1.3.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Fpromise-spawn@1.3.2",
+   "purl": "pkg:npm/@npmcli/promise-spawn@1.3.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/promise-spawn",
+    "version": "1.3.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -591,7 +623,7 @@
    }
   },
   {
-   "id": "47eb560eaa700202",
+   "id": "1940d960654bd80b",
    "name": "@npmcli/run-script",
    "version": "2.0.0",
    "type": "npm",
@@ -616,9 +648,11 @@
     "cpe:2.3:a:*:\\@npmcli\\/run-script:2.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/run_script:2.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli%2Frun-script@2.0.0",
+   "purl": "pkg:npm/@npmcli/run-script@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@npmcli/run-script",
+    "version": "2.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -629,7 +663,7 @@
    }
   },
   {
-   "id": "be6e0d5ee814e7dd",
+   "id": "bd99ac7dcb81fce3",
    "name": "@tootallnate/once",
    "version": "1.1.2",
    "type": "npm",
@@ -648,9 +682,11 @@
     "cpe:2.3:a:\\@tootallnate\\/once:\\@tootallnate\\/once:1.1.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@tootallnate\\/once:1.1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@tootallnate%2Fonce@1.1.2",
+   "purl": "pkg:npm/@tootallnate/once@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "@tootallnate/once",
+    "version": "1.1.2",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
     "licenses": [
      "MIT"
@@ -661,7 +697,7 @@
    }
   },
   {
-   "id": "39334a3e3997edac",
+   "id": "528688bfaca540e8",
    "name": "abbrev",
    "version": "1.1.1",
    "type": "npm",
@@ -683,6 +719,8 @@
    "purl": "pkg:npm/abbrev@1.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "abbrev",
+    "version": "1.1.1",
     "author": "Isaac Z. Schlueter <i@izs.me>",
     "licenses": [
      "ISC"
@@ -723,7 +761,7 @@
    "cpes": [
     "cpe:2.3:a:adduser:adduser:3.118:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/adduser@3.118?arch=all",
+   "purl": "pkg:deb/debian/adduser@3.118?arch=all&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "adduser",
@@ -1386,7 +1424,7 @@
    }
   },
   {
-   "id": "b4e3d35477ec8a35",
+   "id": "3e33e48ab6686848",
    "name": "agent-base",
    "version": "6.0.2",
    "type": "npm",
@@ -1414,6 +1452,8 @@
    "purl": "pkg:npm/agent-base@6.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "agent-base",
+    "version": "6.0.2",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
     "licenses": [
      "MIT"
@@ -1424,7 +1464,7 @@
    }
   },
   {
-   "id": "96a4c15dbd3337e7",
+   "id": "715efd8d922aacfa",
    "name": "agentkeepalive",
    "version": "4.1.4",
    "type": "npm",
@@ -1446,6 +1486,8 @@
    "purl": "pkg:npm/agentkeepalive@4.1.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "agentkeepalive",
+    "version": "4.1.4",
     "author": "fengmk2 <fengmk2@gmail.com> (https://fengmk2.com)",
     "licenses": [
      "MIT"
@@ -1456,7 +1498,7 @@
    }
   },
   {
-   "id": "7a5a811fc062ba29",
+   "id": "c9522b766056b33",
    "name": "aggregate-error",
    "version": "3.1.0",
    "type": "npm",
@@ -1484,6 +1526,8 @@
    "purl": "pkg:npm/aggregate-error@3.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "aggregate-error",
+    "version": "3.1.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -1494,7 +1538,7 @@
    }
   },
   {
-   "id": "2012b8763687d7a6",
+   "id": "16290409221c6597",
    "name": "ansi-regex",
    "version": "2.1.1",
    "type": "npm",
@@ -1522,6 +1566,8 @@
    "purl": "pkg:npm/ansi-regex@2.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansi-regex",
+    "version": "2.1.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -1532,7 +1578,7 @@
    }
   },
   {
-   "id": "f5aa1284a6f19ac9",
+   "id": "6270b5e0e0cd748",
    "name": "ansi-regex",
    "version": "3.0.0",
    "type": "npm",
@@ -1560,6 +1606,8 @@
    "purl": "pkg:npm/ansi-regex@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansi-regex",
+    "version": "3.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -1570,7 +1618,7 @@
    }
   },
   {
-   "id": "6ad305763c84c9c3",
+   "id": "35df86ea4f4ffaf4",
    "name": "ansi-regex",
    "version": "5.0.0",
    "type": "npm",
@@ -1598,6 +1646,8 @@
    "purl": "pkg:npm/ansi-regex@5.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansi-regex",
+    "version": "5.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -1608,7 +1658,7 @@
    }
   },
   {
-   "id": "fc24d79ef4ef1ac7",
+   "id": "9886b5c0f7c0bb4",
    "name": "ansi-regex",
    "version": "5.0.1",
    "type": "npm",
@@ -1636,6 +1686,8 @@
    "purl": "pkg:npm/ansi-regex@5.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansi-regex",
+    "version": "5.0.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -1646,7 +1698,7 @@
    }
   },
   {
-   "id": "3826111862ed2854",
+   "id": "33f9649e6511dd38",
    "name": "ansi-styles",
    "version": "4.3.0",
    "type": "npm",
@@ -1674,6 +1726,8 @@
    "purl": "pkg:npm/ansi-styles@4.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansi-styles",
+    "version": "4.3.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -1684,7 +1738,7 @@
    }
   },
   {
-   "id": "39fc671ae597086c",
+   "id": "2f7e9ade8efd540b",
    "name": "ansicolors",
    "version": "0.3.2",
    "type": "npm",
@@ -1706,6 +1760,8 @@
    "purl": "pkg:npm/ansicolors@0.3.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansicolors",
+    "version": "0.3.2",
     "author": "Thorsten Lorenz <thlorenz@gmx.de> (thlorenz.com)",
     "licenses": [
      "MIT"
@@ -1716,7 +1772,7 @@
    }
   },
   {
-   "id": "95143ad43d446556",
+   "id": "89b886e7e4b97f25",
    "name": "ansistyles",
    "version": "0.1.3",
    "type": "npm",
@@ -1738,6 +1794,8 @@
    "purl": "pkg:npm/ansistyles@0.1.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ansistyles",
+    "version": "0.1.3",
     "author": "Thorsten Lorenz <thlorenz@gmx.de> (thlorenz.com)",
     "licenses": [
      "MIT"
@@ -1748,7 +1806,7 @@
    }
   },
   {
-   "id": "4935878c4a4f1e83",
+   "id": "c0cbe7c83a94e4d7",
    "name": "aproba",
    "version": "1.2.0",
    "type": "npm",
@@ -1770,6 +1828,8 @@
    "purl": "pkg:npm/aproba@1.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "aproba",
+    "version": "1.2.0",
     "author": "Rebecca Turner <me@re-becca.org>",
     "licenses": [
      "ISC"
@@ -1780,7 +1840,7 @@
    }
   },
   {
-   "id": "fc5e2c652cc67665",
+   "id": "ad4f3d80ad8ac6ab",
    "name": "aproba",
    "version": "2.0.0",
    "type": "npm",
@@ -1802,6 +1862,8 @@
    "purl": "pkg:npm/aproba@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "aproba",
+    "version": "2.0.0",
     "author": "Rebecca Turner <me@re-becca.org>",
     "licenses": [
      "ISC"
@@ -1843,7 +1905,7 @@
    "cpes": [
     "cpe:2.3:a:apt:apt:1.8.2.3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/apt@1.8.2.3?arch=amd64",
+   "purl": "pkg:deb/debian/apt@1.8.2.3?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "apt",
@@ -3394,7 +3456,7 @@
    }
   },
   {
-   "id": "f1723cbb32b7de9",
+   "id": "9a825589ebb215de",
    "name": "archy",
    "version": "1.0.0",
    "type": "npm",
@@ -3416,6 +3478,8 @@
    "purl": "pkg:npm/archy@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "archy",
+    "version": "1.0.0",
     "author": "James Halliday <mail@substack.net> (http://substack.net)",
     "licenses": [
      "MIT"
@@ -3426,7 +3490,7 @@
    }
   },
   {
-   "id": "960feb6cfb2ea42a",
+   "id": "a17a02c3579a691d",
    "name": "are-we-there-yet",
    "version": "1.1.6",
    "type": "npm",
@@ -3462,6 +3526,8 @@
    "purl": "pkg:npm/are-we-there-yet@1.1.6",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "are-we-there-yet",
+    "version": "1.1.6",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -3472,7 +3538,7 @@
    }
   },
   {
-   "id": "4361ea969e9bfcd9",
+   "id": "c7ddd226ee541ca3",
    "name": "are-we-there-yet",
    "version": "2.0.0",
    "type": "npm",
@@ -3508,6 +3574,8 @@
    "purl": "pkg:npm/are-we-there-yet@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "are-we-there-yet",
+    "version": "2.0.0",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -3518,7 +3586,7 @@
    }
   },
   {
-   "id": "c022a591944e3ae5",
+   "id": "f02f1975df7c1ed3",
    "name": "asap",
    "version": "2.0.6",
    "type": "npm",
@@ -3540,6 +3608,8 @@
    "purl": "pkg:npm/asap@2.0.6",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "asap",
+    "version": "2.0.6",
     "author": "",
     "licenses": [
      "MIT"
@@ -3550,7 +3620,7 @@
    }
   },
   {
-   "id": "c2971b58dca112d1",
+   "id": "6b4291322943e821",
    "name": "balanced-match",
    "version": "1.0.2",
    "type": "npm",
@@ -3578,6 +3648,8 @@
    "purl": "pkg:npm/balanced-match@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "balanced-match",
+    "version": "1.0.2",
     "author": "Julian Gruber <mail@juliangruber.com> (http://juliangruber.com)",
     "licenses": [
      "MIT"
@@ -3623,7 +3695,7 @@
     "cpe:2.3:a:base:base-files:10.3\\+deb10u11:*:*:*:*:*:*:*",
     "cpe:2.3:a:base:base_files:10.3\\+deb10u11:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/base-files@10.3+deb10u11?arch=amd64",
+   "purl": "pkg:deb/debian/base-files@10.3+deb10u11?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "base-files",
@@ -3942,7 +4014,7 @@
     "cpe:2.3:a:base:base-passwd:3.5.46:*:*:*:*:*:*:*",
     "cpe:2.3:a:base:base_passwd:3.5.46:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/base-passwd@3.5.46?arch=amd64",
+   "purl": "pkg:deb/debian/base-passwd@3.5.46?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "base-passwd",
@@ -4123,7 +4195,7 @@
    "cpes": [
     "cpe:2.3:a:bash:bash:5.0-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/bash@5.0-4?arch=amd64",
+   "purl": "pkg:deb/debian/bash@5.0-4?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "bash",
@@ -4666,7 +4738,7 @@
    }
   },
   {
-   "id": "8670a00738e275d3",
+   "id": "41592318bff9737d",
    "name": "bin-links",
    "version": "2.3.0",
    "type": "npm",
@@ -4694,6 +4766,8 @@
    "purl": "pkg:npm/bin-links@2.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "bin-links",
+    "version": "2.3.0",
     "author": "",
     "licenses": [
      "ISC"
@@ -4704,7 +4778,7 @@
    }
   },
   {
-   "id": "5b6a2bb74b22a250",
+   "id": "778245582c71f973",
    "name": "binary-extensions",
    "version": "2.2.0",
    "type": "npm",
@@ -4732,6 +4806,8 @@
    "purl": "pkg:npm/binary-extensions@2.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "binary-extensions",
+    "version": "2.2.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -4742,7 +4818,7 @@
    }
   },
   {
-   "id": "e28f38c0b89821e9",
+   "id": "78d1e8ad7ded6c74",
    "name": "brace-expansion",
    "version": "1.1.11",
    "type": "npm",
@@ -4770,6 +4846,8 @@
    "purl": "pkg:npm/brace-expansion@1.1.11",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "brace-expansion",
+    "version": "1.1.11",
     "author": "Julian Gruber <mail@juliangruber.com> (http://juliangruber.com)",
     "licenses": [
      "MIT"
@@ -4821,7 +4899,7 @@
    "cpes": [
     "cpe:2.3:a:bsdutils:bsdutils:1\\:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64&upstream=util-linux@2.33.1-0.1&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "bsdutils",
@@ -4988,7 +5066,7 @@
    }
   },
   {
-   "id": "5b0dc4253fca7ae1",
+   "id": "9aa30b28b43625c9",
    "name": "builtins",
    "version": "1.0.3",
    "type": "npm",
@@ -5010,6 +5088,8 @@
    "purl": "pkg:npm/builtins@1.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "builtins",
+    "version": "1.0.3",
     "author": "",
     "licenses": [
      "MIT"
@@ -5020,7 +5100,7 @@
    }
   },
   {
-   "id": "6559f03fcfe7aa12",
+   "id": "458316b76ed125b3",
    "name": "cacache",
    "version": "15.3.0",
    "type": "npm",
@@ -5042,6 +5122,8 @@
    "purl": "pkg:npm/cacache@15.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "cacache",
+    "version": "15.3.0",
     "author": "",
     "licenses": [
      "ISC"
@@ -5052,7 +5134,7 @@
    }
   },
   {
-   "id": "23eef4813ae49fb6",
+   "id": "8dcf797795a4cb65",
    "name": "chalk",
    "version": "4.1.2",
    "type": "npm",
@@ -5074,6 +5156,8 @@
    "purl": "pkg:npm/chalk@4.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "chalk",
+    "version": "4.1.2",
     "author": "",
     "licenses": [
      "MIT"
@@ -5084,7 +5168,7 @@
    }
   },
   {
-   "id": "ac717497636743bd",
+   "id": "683c25ae63116f39",
    "name": "chownr",
    "version": "2.0.0",
    "type": "npm",
@@ -5106,6 +5190,8 @@
    "purl": "pkg:npm/chownr@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "chownr",
+    "version": "2.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -5116,7 +5202,7 @@
    }
   },
   {
-   "id": "aabde49bf762c2f",
+   "id": "a442b6fb58f1a6b6",
    "name": "cidr-regex",
    "version": "3.1.1",
    "type": "npm",
@@ -5144,6 +5230,8 @@
    "purl": "pkg:npm/cidr-regex@3.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "cidr-regex",
+    "version": "3.1.1",
     "author": "silverwind <me@silverwind.io>",
     "licenses": [
      "BSD-2-Clause"
@@ -5154,7 +5242,7 @@
    }
   },
   {
-   "id": "e7dacb910000c097",
+   "id": "b65dcbd881962e8d",
    "name": "clean-stack",
    "version": "2.2.0",
    "type": "npm",
@@ -5182,6 +5270,8 @@
    "purl": "pkg:npm/clean-stack@2.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "clean-stack",
+    "version": "2.2.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -5192,7 +5282,7 @@
    }
   },
   {
-   "id": "7b1bb0751512d5f4",
+   "id": "a1ba86a3e796b5a4",
    "name": "cli-columns",
    "version": "4.0.0",
    "type": "npm",
@@ -5220,6 +5310,8 @@
    "purl": "pkg:npm/cli-columns@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "cli-columns",
+    "version": "4.0.0",
     "author": "Shannon Moeller <me@shannonmoeller> (http://shannonmoeller.com)",
     "licenses": [
      "MIT"
@@ -5230,7 +5322,7 @@
    }
   },
   {
-   "id": "22cc2e77c265f668",
+   "id": "220a5f08ea11f80e",
    "name": "cli-table3",
    "version": "0.6.0",
    "type": "npm",
@@ -5258,6 +5350,8 @@
    "purl": "pkg:npm/cli-table3@0.6.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "cli-table3",
+    "version": "0.6.0",
     "author": "James Talmage",
     "licenses": [
      "MIT"
@@ -5268,7 +5362,7 @@
    }
   },
   {
-   "id": "ee2aee748fe117cb",
+   "id": "27e3861f4c83b0cb",
    "name": "clone",
    "version": "1.0.4",
    "type": "npm",
@@ -5290,6 +5384,8 @@
    "purl": "pkg:npm/clone@1.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "clone",
+    "version": "1.0.4",
     "author": "Paul Vorbach <paul@vorba.ch> (http://paul.vorba.ch/)",
     "licenses": [
      "MIT"
@@ -5300,7 +5396,7 @@
    }
   },
   {
-   "id": "f5e943d62b35799a",
+   "id": "85490e2471c9bd6f",
    "name": "cmd-shim",
    "version": "4.1.0",
    "type": "npm",
@@ -5328,6 +5424,8 @@
    "purl": "pkg:npm/cmd-shim@4.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "cmd-shim",
+    "version": "4.1.0",
     "author": "",
     "licenses": [
      "ISC"
@@ -5338,7 +5436,7 @@
    }
   },
   {
-   "id": "259dab8d8cf2caf",
+   "id": "89c17517d37c36b8",
    "name": "code-point-at",
    "version": "1.1.0",
    "type": "npm",
@@ -5370,6 +5468,8 @@
    "purl": "pkg:npm/code-point-at@1.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "code-point-at",
+    "version": "1.1.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -5380,7 +5480,7 @@
    }
   },
   {
-   "id": "ff2eefc5a1cfb67e",
+   "id": "5baee6c6c1e8d809",
    "name": "color-convert",
    "version": "2.0.1",
    "type": "npm",
@@ -5408,6 +5508,8 @@
    "purl": "pkg:npm/color-convert@2.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "color-convert",
+    "version": "2.0.1",
     "author": "Heather Arthur <fayearthur@gmail.com>",
     "licenses": [
      "MIT"
@@ -5418,7 +5520,7 @@
    }
   },
   {
-   "id": "d302643fc066cefb",
+   "id": "4d9941ec168798bb",
    "name": "color-name",
    "version": "1.1.4",
    "type": "npm",
@@ -5446,6 +5548,8 @@
    "purl": "pkg:npm/color-name@1.1.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "color-name",
+    "version": "1.1.4",
     "author": "DY <dfcreative@gmail.com>",
     "licenses": [
      "MIT"
@@ -5456,7 +5560,7 @@
    }
   },
   {
-   "id": "a56816ef0ac4ce1a",
+   "id": "da22cd266d83c18b",
    "name": "color-support",
    "version": "1.1.3",
    "type": "npm",
@@ -5484,6 +5588,8 @@
    "purl": "pkg:npm/color-support@1.1.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "color-support",
+    "version": "1.1.3",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -5494,7 +5600,7 @@
    }
   },
   {
-   "id": "99bf76e8cbee467",
+   "id": "ec898b6ae0178310",
    "name": "colors",
    "version": "1.4.0",
    "type": "npm",
@@ -5516,6 +5622,8 @@
    "purl": "pkg:npm/colors@1.4.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "colors",
+    "version": "1.4.0",
     "author": "Marak Squires",
     "licenses": [
      "MIT"
@@ -5526,7 +5634,7 @@
    }
   },
   {
-   "id": "b7f53be5e87e96d8",
+   "id": "e59e623fe24cf073",
    "name": "columnify",
    "version": "1.5.4",
    "type": "npm",
@@ -5548,6 +5656,8 @@
    "purl": "pkg:npm/columnify@1.5.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "columnify",
+    "version": "1.5.4",
     "author": "Tim Oxley",
     "licenses": [
      "MIT"
@@ -5558,7 +5668,7 @@
    }
   },
   {
-   "id": "807e90d10072d27f",
+   "id": "8bab87d8011d9b3e",
    "name": "common-ancestor-path",
    "version": "1.0.1",
    "type": "npm",
@@ -5590,6 +5700,8 @@
    "purl": "pkg:npm/common-ancestor-path@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "common-ancestor-path",
+    "version": "1.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -5600,7 +5712,7 @@
    }
   },
   {
-   "id": "43d49668b9f03bb",
+   "id": "e2341b44190ecda0",
    "name": "concat-map",
    "version": "0.0.1",
    "type": "npm",
@@ -5628,6 +5740,8 @@
    "purl": "pkg:npm/concat-map@0.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "concat-map",
+    "version": "0.0.1",
     "author": "James Halliday <mail@substack.net> (http://substack.net)",
     "licenses": [
      "MIT"
@@ -5638,7 +5752,7 @@
    }
   },
   {
-   "id": "ffdb216b1a235a92",
+   "id": "cbf3ff47d518445b",
    "name": "console-control-strings",
    "version": "1.1.0",
    "type": "npm",
@@ -5670,6 +5784,8 @@
    "purl": "pkg:npm/console-control-strings@1.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "console-control-strings",
+    "version": "1.1.0",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
     "licenses": [
      "ISC"
@@ -5680,7 +5796,7 @@
    }
   },
   {
-   "id": "8130c3265ca15b98",
+   "id": "b51491080fd72d42",
    "name": "corepack",
    "version": "0.10.0",
    "type": "npm",
@@ -5702,6 +5818,8 @@
    "purl": "pkg:npm/corepack@0.10.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "corepack",
+    "version": "0.10.0",
     "author": "",
     "licenses": [
      "MIT"
@@ -5738,7 +5856,7 @@
    "cpes": [
     "cpe:2.3:a:coreutils:coreutils:8.30-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/coreutils@8.30-3?arch=amd64",
+   "purl": "pkg:deb/debian/coreutils@8.30-3?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "coreutils",
@@ -7875,7 +7993,7 @@
    "cpes": [
     "cpe:2.3:a:dash:dash:0.5.10.2-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/dash@0.5.10.2-5?arch=amd64",
+   "purl": "pkg:deb/debian/dash@0.5.10.2-5?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "dash",
@@ -8000,7 +8118,7 @@
    "cpes": [
     "cpe:2.3:a:debconf:debconf:1.5.71\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/debconf@1.5.71+deb10u1?arch=all",
+   "purl": "pkg:deb/debian/debconf@1.5.71+deb10u1?arch=all&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "debconf",
@@ -9134,7 +9252,7 @@
     "cpe:2.3:a:debian:debian-archive-keyring:2019.1\\+deb10u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:debian:debian_archive_keyring:2019.1\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/debian-archive-keyring@2019.1+deb10u1?arch=all",
+   "purl": "pkg:deb/debian/debian-archive-keyring@2019.1+deb10u1?arch=all&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "debian-archive-keyring",
@@ -9359,7 +9477,7 @@
    "cpes": [
     "cpe:2.3:a:debianutils:debianutils:4.8.6.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/debianutils@4.8.6.1?arch=amd64",
+   "purl": "pkg:deb/debian/debianutils@4.8.6.1?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "debianutils",
@@ -9926,7 +10044,7 @@
    }
   },
   {
-   "id": "8366410f283c23e2",
+   "id": "d26859e804a5ad95",
    "name": "debug",
    "version": "4.3.2",
    "type": "npm",
@@ -9948,6 +10066,8 @@
    "purl": "pkg:npm/debug@4.3.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "debug",
+    "version": "4.3.2",
     "author": "TJ Holowaychuk <tj@vision-media.ca>",
     "licenses": [
      "MIT"
@@ -9958,7 +10078,7 @@
    }
   },
   {
-   "id": "c84f9a557a2567de",
+   "id": "c3b1032d4358096c",
    "name": "debuglog",
    "version": "1.0.1",
    "type": "npm",
@@ -9980,6 +10100,8 @@
    "purl": "pkg:npm/debuglog@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "debuglog",
+    "version": "1.0.1",
     "author": "Sam Roberts <sam@strongloop.com>",
     "licenses": [
      "MIT"
@@ -9990,7 +10112,7 @@
    }
   },
   {
-   "id": "a3a181f9688e5405",
+   "id": "6e3430ec53a6e49a",
    "name": "defaults",
    "version": "1.0.3",
    "type": "npm",
@@ -10012,6 +10134,8 @@
    "purl": "pkg:npm/defaults@1.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "defaults",
+    "version": "1.0.3",
     "author": "Elijah Insua <tmpvar@gmail.com>",
     "licenses": [
      "MIT"
@@ -10022,7 +10146,7 @@
    }
   },
   {
-   "id": "35a5ed2d47893b52",
+   "id": "596a6a74f8a21343",
    "name": "delegates",
    "version": "1.0.0",
    "type": "npm",
@@ -10044,6 +10168,8 @@
    "purl": "pkg:npm/delegates@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "delegates",
+    "version": "1.0.0",
     "author": "",
     "licenses": [
      "MIT"
@@ -10054,7 +10180,7 @@
    }
   },
   {
-   "id": "ae0b40d8ecdd418a",
+   "id": "9dfec1696638897",
    "name": "depd",
    "version": "1.1.2",
    "type": "npm",
@@ -10076,6 +10202,8 @@
    "purl": "pkg:npm/depd@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "depd",
+    "version": "1.1.2",
     "author": "Douglas Christopher Wilson <doug@somethingdoug.com>",
     "licenses": [
      "MIT"
@@ -10086,7 +10214,7 @@
    }
   },
   {
-   "id": "c4e526b36aab81ab",
+   "id": "63c3aeaaa6ce03a0",
    "name": "dezalgo",
    "version": "1.0.3",
    "type": "npm",
@@ -10108,6 +10236,8 @@
    "purl": "pkg:npm/dezalgo@1.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "dezalgo",
+    "version": "1.0.3",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -10118,7 +10248,7 @@
    }
   },
   {
-   "id": "172cfaf32e4e08ae",
+   "id": "caca0725bea3b45f",
    "name": "diff",
    "version": "5.0.0",
    "type": "npm",
@@ -10140,6 +10270,8 @@
    "purl": "pkg:npm/diff@5.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "diff",
+    "version": "5.0.0",
     "author": "",
     "licenses": [
      "BSD-3-Clause"
@@ -10177,7 +10309,7 @@
    "cpes": [
     "cpe:2.3:a:diffutils:diffutils:1\\:3.7-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/diffutils@1:3.7-3?arch=amd64",
+   "purl": "pkg:deb/debian/diffutils@1:3.7-3?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "diffutils",
@@ -10602,7 +10734,7 @@
    "cpes": [
     "cpe:2.3:a:dpkg:dpkg:1.19.7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/dpkg@1.19.7?arch=amd64",
+   "purl": "pkg:deb/debian/dpkg@1.19.7?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "dpkg",
@@ -11672,7 +11804,7 @@
    "cpes": [
     "cpe:2.3:a:e2fsprogs:e2fsprogs:1.44.5-1\\+deb10u3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/e2fsprogs@1.44.5-1+deb10u3?arch=amd64",
+   "purl": "pkg:deb/debian/e2fsprogs@1.44.5-1+deb10u3?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "e2fsprogs",
@@ -12047,7 +12179,7 @@
    }
   },
   {
-   "id": "58aff350b96b5765",
+   "id": "35cc8b1a2386e338",
    "name": "emoji-regex",
    "version": "8.0.0",
    "type": "npm",
@@ -12075,6 +12207,8 @@
    "purl": "pkg:npm/emoji-regex@8.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "emoji-regex",
+    "version": "8.0.0",
     "author": "Mathias Bynens (https://mathiasbynens.be/)",
     "licenses": [
      "MIT"
@@ -12085,7 +12219,7 @@
    }
   },
   {
-   "id": "82e90b84e271e2d9",
+   "id": "cf74ecc19bd2dc78",
    "name": "encoding",
    "version": "0.1.13",
    "type": "npm",
@@ -12107,6 +12241,8 @@
    "purl": "pkg:npm/encoding@0.1.13",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "encoding",
+    "version": "0.1.13",
     "author": "Andris Reinman",
     "licenses": [
      "MIT"
@@ -12117,7 +12253,7 @@
    }
   },
   {
-   "id": "3b8b79b5e281e140",
+   "id": "78c1684a47533b4e",
    "name": "env-paths",
    "version": "2.2.1",
    "type": "npm",
@@ -12145,6 +12281,8 @@
    "purl": "pkg:npm/env-paths@2.2.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "env-paths",
+    "version": "2.2.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -12155,7 +12293,7 @@
    }
   },
   {
-   "id": "abb1ba4a0ff394d9",
+   "id": "efefdf7eb7d8ca3e",
    "name": "err-code",
    "version": "2.0.3",
    "type": "npm",
@@ -12183,6 +12321,8 @@
    "purl": "pkg:npm/err-code@2.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "err-code",
+    "version": "2.0.3",
     "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
     "licenses": [
      "MIT"
@@ -12193,7 +12333,7 @@
    }
   },
   {
-   "id": "5c910491a938d919",
+   "id": "e3e09311180e09d4",
    "name": "fastest-levenshtein",
    "version": "1.0.12",
    "type": "npm",
@@ -12221,6 +12361,8 @@
    "purl": "pkg:npm/fastest-levenshtein@1.0.12",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "fastest-levenshtein",
+    "version": "1.0.12",
     "author": "Kasper U. Weihe",
     "licenses": [
      "MIT"
@@ -12272,7 +12414,7 @@
    "cpes": [
     "cpe:2.3:a:fdisk:fdisk:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/fdisk@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/fdisk@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "fdisk",
@@ -12410,7 +12552,7 @@
    "cpes": [
     "cpe:2.3:a:findutils:findutils:4.6.0\\+git\\+20190209-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/findutils@4.6.0+git+20190209-2?arch=amd64",
+   "purl": "pkg:deb/debian/findutils@4.6.0+git+20190209-2?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "findutils",
@@ -12865,7 +13007,7 @@
    }
   },
   {
-   "id": "cb0c816b2efaa4d8",
+   "id": "284237ca61f19693",
    "name": "fs-minipass",
    "version": "2.1.0",
    "type": "npm",
@@ -12893,6 +13035,8 @@
    "purl": "pkg:npm/fs-minipass@2.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "fs-minipass",
+    "version": "2.1.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -12903,7 +13047,7 @@
    }
   },
   {
-   "id": "d99194e588cbcb58",
+   "id": "2fe6b1a5781b96fc",
    "name": "fs.realpath",
    "version": "1.0.0",
    "type": "npm",
@@ -12925,6 +13069,8 @@
    "purl": "pkg:npm/fs.realpath@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "fs.realpath",
+    "version": "1.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -12935,7 +13081,7 @@
    }
   },
   {
-   "id": "1588351f2542b6e",
+   "id": "8c8b031c5acfff3b",
    "name": "function-bind",
    "version": "1.1.1",
    "type": "npm",
@@ -12963,6 +13109,8 @@
    "purl": "pkg:npm/function-bind@1.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "function-bind",
+    "version": "1.1.1",
     "author": "Raynos <raynos2@gmail.com>",
     "licenses": [
      "MIT"
@@ -12973,7 +13121,7 @@
    }
   },
   {
-   "id": "1f3614be2d820253",
+   "id": "f52da8f5f4846aac",
    "name": "gauge",
    "version": "2.7.4",
    "type": "npm",
@@ -12995,6 +13143,8 @@
    "purl": "pkg:npm/gauge@2.7.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "gauge",
+    "version": "2.7.4",
     "author": "Rebecca Turner <me@re-becca.org>",
     "licenses": [
      "ISC"
@@ -13005,7 +13155,7 @@
    }
   },
   {
-   "id": "b8c11b6b2890348d",
+   "id": "94630f65cbffb74b",
    "name": "gauge",
    "version": "3.0.1",
    "type": "npm",
@@ -13027,6 +13177,8 @@
    "purl": "pkg:npm/gauge@3.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "gauge",
+    "version": "3.0.1",
     "author": "Rebecca Turner <me@re-becca.org>",
     "licenses": [
      "ISC"
@@ -13077,7 +13229,7 @@
     "cpe:2.3:a:gcc:gcc-8-base:8.3.0-6:*:*:*:*:*:*:*",
     "cpe:2.3:a:gcc:gcc_8_base:8.3.0-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64",
+   "purl": "pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64&upstream=gcc-8&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gcc-8-base",
@@ -13124,7 +13276,7 @@
    }
   },
   {
-   "id": "395e24035b9dcf45",
+   "id": "ebfd81840751943e",
    "name": "glob",
    "version": "7.2.0",
    "type": "npm",
@@ -13146,6 +13298,8 @@
    "purl": "pkg:npm/glob@7.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "glob",
+    "version": "7.2.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -13193,7 +13347,7 @@
    "cpes": [
     "cpe:2.3:a:gpgv:gpgv:2.2.12-1\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gpgv@2.2.12-1+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/gpgv@2.2.12-1+deb10u1?arch=amd64&upstream=gnupg2&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gpgv",
@@ -13256,7 +13410,7 @@
    }
   },
   {
-   "id": "14620b07c096bd75",
+   "id": "2aeb0540b65d51d4",
    "name": "graceful-fs",
    "version": "4.2.8",
    "type": "npm",
@@ -13284,6 +13438,8 @@
    "purl": "pkg:npm/graceful-fs@4.2.8",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "graceful-fs",
+    "version": "4.2.8",
     "author": "",
     "licenses": [
      "ISC"
@@ -13321,7 +13477,7 @@
    "cpes": [
     "cpe:2.3:a:grep:grep:3.3-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/grep@3.3-1?arch=amd64",
+   "purl": "pkg:deb/debian/grep@3.3-1?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "grep",
@@ -13818,7 +13974,7 @@
    "cpes": [
     "cpe:2.3:a:gzip:gzip:1.9-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/gzip@1.9-3?arch=amd64",
+   "purl": "pkg:deb/debian/gzip@1.9-3?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "gzip",
@@ -14065,7 +14221,7 @@
    }
   },
   {
-   "id": "55553592935b9256",
+   "id": "e117e3fd290f3cf",
    "name": "has",
    "version": "1.0.3",
    "type": "npm",
@@ -14087,6 +14243,8 @@
    "purl": "pkg:npm/has@1.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "has",
+    "version": "1.0.3",
     "author": "Thiago de Arruda <tpadilha84@gmail.com>",
     "licenses": [
      "MIT"
@@ -14097,7 +14255,7 @@
    }
   },
   {
-   "id": "dacdf19a8f19342c",
+   "id": "3f8e9ec1b760f5fa",
    "name": "has-flag",
    "version": "4.0.0",
    "type": "npm",
@@ -14125,6 +14283,8 @@
    "purl": "pkg:npm/has-flag@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "has-flag",
+    "version": "4.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -14135,7 +14295,7 @@
    }
   },
   {
-   "id": "8ec3bb938ae90190",
+   "id": "80a71ffdab90d9d7",
    "name": "has-unicode",
    "version": "2.0.1",
    "type": "npm",
@@ -14163,6 +14323,8 @@
    "purl": "pkg:npm/has-unicode@2.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "has-unicode",
+    "version": "2.0.1",
     "author": "Rebecca Turner <me@re-becca.org>",
     "licenses": [
      "ISC"
@@ -14173,7 +14335,7 @@
    }
   },
   {
-   "id": "7bd767b445319b8d",
+   "id": "9bb7e0add6fd1a58",
    "name": "hosted-git-info",
    "version": "4.0.2",
    "type": "npm",
@@ -14205,6 +14367,8 @@
    "purl": "pkg:npm/hosted-git-info@4.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "hosted-git-info",
+    "version": "4.0.2",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org)",
     "licenses": [
      "ISC"
@@ -14241,7 +14405,7 @@
    "cpes": [
     "cpe:2.3:a:hostname:hostname:3.21:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/hostname@3.21?arch=amd64",
+   "purl": "pkg:deb/debian/hostname@3.21?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "hostname",
@@ -14288,7 +14452,7 @@
    }
   },
   {
-   "id": "3b724175ea989463",
+   "id": "8ed112b51209cd31",
    "name": "http-cache-semantics",
    "version": "4.1.0",
    "type": "npm",
@@ -14320,6 +14484,8 @@
    "purl": "pkg:npm/http-cache-semantics@4.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "http-cache-semantics",
+    "version": "4.1.0",
     "author": "Kornel Lesiński <kornel@geekhood.net> (https://kornel.ski/)",
     "licenses": [
      "BSD-2-Clause"
@@ -14330,7 +14496,7 @@
    }
   },
   {
-   "id": "789c8dd60c6d87",
+   "id": "cf60300f9fbc0bf6",
    "name": "http-proxy-agent",
    "version": "4.0.1",
    "type": "npm",
@@ -14362,6 +14528,8 @@
    "purl": "pkg:npm/http-proxy-agent@4.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "http-proxy-agent",
+    "version": "4.0.1",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
     "licenses": [
      "MIT"
@@ -14372,7 +14540,7 @@
    }
   },
   {
-   "id": "84cd6652b0f5e872",
+   "id": "568ab4e35b2d1061",
    "name": "https-proxy-agent",
    "version": "5.0.0",
    "type": "npm",
@@ -14404,6 +14572,8 @@
    "purl": "pkg:npm/https-proxy-agent@5.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "https-proxy-agent",
+    "version": "5.0.0",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
     "licenses": [
      "MIT"
@@ -14414,7 +14584,7 @@
    }
   },
   {
-   "id": "7bee4bed663c0ae6",
+   "id": "fd43153ec6b3fba",
    "name": "humanize-ms",
    "version": "1.2.1",
    "type": "npm",
@@ -14442,6 +14612,8 @@
    "purl": "pkg:npm/humanize-ms@1.2.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "humanize-ms",
+    "version": "1.2.1",
     "author": "dead-horse <dead_horse@qq.com> (http://deadhorse.me)",
     "licenses": [
      "MIT"
@@ -14452,7 +14624,7 @@
    }
   },
   {
-   "id": "5c5a3b22dd0aa571",
+   "id": "a7f16b0baff70db8",
    "name": "iconv-lite",
    "version": "0.6.3",
    "type": "npm",
@@ -14480,6 +14652,8 @@
    "purl": "pkg:npm/iconv-lite@0.6.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "iconv-lite",
+    "version": "0.6.3",
     "author": "Alexander Shtuchkin <ashtuchkin@gmail.com>",
     "licenses": [
      "MIT"
@@ -14490,7 +14664,7 @@
    }
   },
   {
-   "id": "4231d5eaecfcf4d1",
+   "id": "6b4cd26333545d0",
    "name": "ignore-walk",
    "version": "4.0.1",
    "type": "npm",
@@ -14518,6 +14692,8 @@
    "purl": "pkg:npm/ignore-walk@4.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ignore-walk",
+    "version": "4.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -14528,7 +14704,7 @@
    }
   },
   {
-   "id": "bdc306d280a0480a",
+   "id": "d33a8107c94b5dda",
    "name": "imurmurhash",
    "version": "0.1.4",
    "type": "npm",
@@ -14550,6 +14726,8 @@
    "purl": "pkg:npm/imurmurhash@0.1.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "imurmurhash",
+    "version": "0.1.4",
     "author": "Jens Taylor <jensyt@gmail.com> (https://github.com/homebrewing)",
     "licenses": [
      "MIT"
@@ -14560,7 +14738,7 @@
    }
   },
   {
-   "id": "a68f2f1ed416090",
+   "id": "6aa34a7d6d05901d",
    "name": "indent-string",
    "version": "4.0.0",
    "type": "npm",
@@ -14588,6 +14766,8 @@
    "purl": "pkg:npm/indent-string@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "indent-string",
+    "version": "4.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -14598,7 +14778,7 @@
    }
   },
   {
-   "id": "233eeb37aab483d5",
+   "id": "b1265ad9ef9bcac1",
    "name": "infer-owner",
    "version": "1.0.4",
    "type": "npm",
@@ -14626,6 +14806,8 @@
    "purl": "pkg:npm/infer-owner@1.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "infer-owner",
+    "version": "1.0.4",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -14636,7 +14818,7 @@
    }
   },
   {
-   "id": "50ac65e535e9425b",
+   "id": "e4794f2d9e723b91",
    "name": "inflight",
    "version": "1.0.6",
    "type": "npm",
@@ -14658,6 +14840,8 @@
    "purl": "pkg:npm/inflight@1.0.6",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "inflight",
+    "version": "1.0.6",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -14668,7 +14852,7 @@
    }
   },
   {
-   "id": "ab209346f2d5bb89",
+   "id": "f9c635bb41b302b7",
    "name": "inherits",
    "version": "2.0.4",
    "type": "npm",
@@ -14690,6 +14874,8 @@
    "purl": "pkg:npm/inherits@2.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "inherits",
+    "version": "2.0.4",
     "author": "",
     "licenses": [
      "ISC"
@@ -14700,7 +14886,7 @@
    }
   },
   {
-   "id": "a7c5b9173c2ecf25",
+   "id": "1c594a7b0a837e83",
    "name": "ini",
    "version": "2.0.0",
    "type": "npm",
@@ -14722,6 +14908,8 @@
    "purl": "pkg:npm/ini@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ini",
+    "version": "2.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -14732,7 +14920,7 @@
    }
   },
   {
-   "id": "cc63074fdd097e4",
+   "id": "71428152ae61be06",
    "name": "init-package-json",
    "version": "2.0.5",
    "type": "npm",
@@ -14764,6 +14952,8 @@
    "purl": "pkg:npm/init-package-json@2.0.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "init-package-json",
+    "version": "2.0.5",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -14811,7 +15001,7 @@
     "cpe:2.3:a:init:init-system-helpers:1.56\\+nmu1:*:*:*:*:*:*:*",
     "cpe:2.3:a:init:init_system_helpers:1.56\\+nmu1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/init-system-helpers@1.56+nmu1?arch=all",
+   "purl": "pkg:deb/debian/init-system-helpers@1.56+nmu1?arch=all&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "init-system-helpers",
@@ -14954,7 +15144,7 @@
    }
   },
   {
-   "id": "1bfe44f1785c7d81",
+   "id": "74b48435ba1ce4ad",
    "name": "ip",
    "version": "1.1.5",
    "type": "npm",
@@ -14976,6 +15166,8 @@
    "purl": "pkg:npm/ip@1.1.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ip",
+    "version": "1.1.5",
     "author": "Fedor Indutny <fedor@indutny.com>",
     "licenses": [
      "MIT"
@@ -14986,7 +15178,7 @@
    }
   },
   {
-   "id": "c7f11785f2d9c73c",
+   "id": "c06b90ff89c0f48a",
    "name": "ip-regex",
    "version": "4.3.0",
    "type": "npm",
@@ -15014,6 +15206,8 @@
    "purl": "pkg:npm/ip-regex@4.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ip-regex",
+    "version": "4.3.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -15024,7 +15218,7 @@
    }
   },
   {
-   "id": "721918d6e5a4ec5f",
+   "id": "8cf4d6c1e2d77603",
    "name": "is-cidr",
    "version": "4.0.2",
    "type": "npm",
@@ -15052,6 +15246,8 @@
    "purl": "pkg:npm/is-cidr@4.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-cidr",
+    "version": "4.0.2",
     "author": "silverwind <me@silverwind.io>",
     "licenses": [
      "BSD-2-Clause"
@@ -15062,7 +15258,7 @@
    }
   },
   {
-   "id": "81d62573948e4ff0",
+   "id": "7d376fe7e1706b5d",
    "name": "is-core-module",
    "version": "2.7.0",
    "type": "npm",
@@ -15094,6 +15290,8 @@
    "purl": "pkg:npm/is-core-module@2.7.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-core-module",
+    "version": "2.7.0",
     "author": "Jordan Harband <ljharb@gmail.com>",
     "licenses": [
      "MIT"
@@ -15104,7 +15302,7 @@
    }
   },
   {
-   "id": "42210316875e5584",
+   "id": "246e6470b9036994",
    "name": "is-fullwidth-code-point",
    "version": "1.0.0",
    "type": "npm",
@@ -15140,6 +15338,8 @@
    "purl": "pkg:npm/is-fullwidth-code-point@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-fullwidth-code-point",
+    "version": "1.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -15150,7 +15350,7 @@
    }
   },
   {
-   "id": "401a4afe18bed557",
+   "id": "1d35e0ffc639efdf",
    "name": "is-fullwidth-code-point",
    "version": "2.0.0",
    "type": "npm",
@@ -15186,6 +15386,8 @@
    "purl": "pkg:npm/is-fullwidth-code-point@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-fullwidth-code-point",
+    "version": "2.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -15196,7 +15398,7 @@
    }
   },
   {
-   "id": "ab2a9a2130902015",
+   "id": "4538bad03f681f40",
    "name": "is-fullwidth-code-point",
    "version": "3.0.0",
    "type": "npm",
@@ -15232,6 +15434,8 @@
    "purl": "pkg:npm/is-fullwidth-code-point@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-fullwidth-code-point",
+    "version": "3.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -15242,7 +15446,7 @@
    }
   },
   {
-   "id": "eb87a6431374d0cb",
+   "id": "dce5dcc09f20ca66",
    "name": "is-fullwidth-code-point",
    "version": "3.0.0",
    "type": "npm",
@@ -15278,6 +15482,8 @@
    "purl": "pkg:npm/is-fullwidth-code-point@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-fullwidth-code-point",
+    "version": "3.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -15288,7 +15494,7 @@
    }
   },
   {
-   "id": "fa7c127ac5c2f4c8",
+   "id": "6ba4a9ff18f3a157",
    "name": "is-lambda",
    "version": "1.0.1",
    "type": "npm",
@@ -15316,6 +15522,8 @@
    "purl": "pkg:npm/is-lambda@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-lambda",
+    "version": "1.0.1",
     "author": "Thomas Watson Steen <w@tson.dk> (https://twitter.com/wa7son)",
     "licenses": [
      "MIT"
@@ -15326,7 +15534,7 @@
    }
   },
   {
-   "id": "a94d391255dde311",
+   "id": "772bd241301facaa",
    "name": "is-typedarray",
    "version": "1.0.0",
    "type": "npm",
@@ -15354,6 +15562,8 @@
    "purl": "pkg:npm/is-typedarray@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "is-typedarray",
+    "version": "1.0.0",
     "author": "Hugh Kennedy <hughskennedy@gmail.com> (http://hughsk.io/)",
     "licenses": [
      "MIT"
@@ -15364,7 +15574,7 @@
    }
   },
   {
-   "id": "f2b3b84e5b2c34b5",
+   "id": "cafce18676c98ff2",
    "name": "isexe",
    "version": "2.0.0",
    "type": "npm",
@@ -15386,6 +15596,8 @@
    "purl": "pkg:npm/isexe@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "isexe",
+    "version": "2.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -15396,7 +15608,7 @@
    }
   },
   {
-   "id": "fd57c71f88a0cfd9",
+   "id": "c40a9c8d32b1d4da",
    "name": "json-parse-even-better-errors",
    "version": "2.3.1",
    "type": "npm",
@@ -15436,6 +15648,8 @@
    "purl": "pkg:npm/json-parse-even-better-errors@2.3.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "json-parse-even-better-errors",
+    "version": "2.3.1",
     "author": "Kat Marchán <kzm@zkat.tech>",
     "licenses": [
      "MIT"
@@ -15446,7 +15660,7 @@
    }
   },
   {
-   "id": "86f3e908062c4cce",
+   "id": "7585a9f8101b98bb",
    "name": "json-stringify-nice",
    "version": "1.1.4",
    "type": "npm",
@@ -15478,6 +15692,8 @@
    "purl": "pkg:npm/json-stringify-nice@1.1.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "json-stringify-nice",
+    "version": "1.1.4",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -15488,7 +15704,7 @@
    }
   },
   {
-   "id": "bdae01a0e93e8b05",
+   "id": "3efead92501f9c5d",
    "name": "jsonparse",
    "version": "1.3.1",
    "type": "npm",
@@ -15510,6 +15726,8 @@
    "purl": "pkg:npm/jsonparse@1.3.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "jsonparse",
+    "version": "1.3.1",
     "author": "Tim Caswell <tim@creationix.com>",
     "licenses": [
      "MIT"
@@ -15520,7 +15738,7 @@
    }
   },
   {
-   "id": "2389f1def14fbc7a",
+   "id": "ca064d92b154227e",
    "name": "just-diff",
    "version": "3.1.1",
    "type": "npm",
@@ -15548,6 +15766,8 @@
    "purl": "pkg:npm/just-diff@3.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "just-diff",
+    "version": "3.1.1",
     "author": "Angus Croll",
     "licenses": [
      "MIT"
@@ -15558,7 +15778,7 @@
    }
   },
   {
-   "id": "8f51e90faa4ce353",
+   "id": "e5d5c71432b8cb28",
    "name": "just-diff-apply",
    "version": "3.0.0",
    "type": "npm",
@@ -15590,6 +15810,8 @@
    "purl": "pkg:npm/just-diff-apply@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "just-diff-apply",
+    "version": "3.0.0",
     "author": "Angus Croll",
     "licenses": [
      "MIT"
@@ -15629,7 +15851,7 @@
    "cpes": [
     "cpe:2.3:a:libacl1:libacl1:2.2.53-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libacl1@2.2.53-4?arch=amd64",
+   "purl": "pkg:deb/debian/libacl1@2.2.53-4?arch=amd64&upstream=acl&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libacl1",
@@ -15708,7 +15930,7 @@
     "cpe:2.3:a:libapt:libapt-pkg5.0:1.8.2.3:*:*:*:*:*:*:*",
     "cpe:2.3:a:libapt:libapt_pkg5.0:1.8.2.3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libapt-pkg5.0@1.8.2.3?arch=amd64",
+   "purl": "pkg:deb/debian/libapt-pkg5.0@1.8.2.3?arch=amd64&upstream=apt&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libapt-pkg5.0",
@@ -16132,7 +16354,7 @@
    "cpes": [
     "cpe:2.3:a:libattr1:libattr1:1\\:2.4.48-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libattr1@1:2.4.48-4?arch=amd64",
+   "purl": "pkg:deb/debian/libattr1@1:2.4.48-4?arch=amd64&upstream=attr&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libattr1",
@@ -16224,7 +16446,7 @@
     "cpe:2.3:a:libaudit:libaudit-common:1\\:2.8.4-3:*:*:*:*:*:*:*",
     "cpe:2.3:a:libaudit:libaudit_common:1\\:2.8.4-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libaudit-common@1:2.8.4-3?arch=all",
+   "purl": "pkg:deb/debian/libaudit-common@1:2.8.4-3?arch=all&upstream=audit&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libaudit-common",
@@ -16307,7 +16529,7 @@
    "cpes": [
     "cpe:2.3:a:libaudit1:libaudit1:1\\:2.8.4-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libaudit1@1:2.8.4-3?arch=amd64",
+   "purl": "pkg:deb/debian/libaudit1@1:2.8.4-3?arch=amd64&upstream=audit&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libaudit1",
@@ -16395,7 +16617,7 @@
    "cpes": [
     "cpe:2.3:a:libblkid1:libblkid1:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libblkid1@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/libblkid1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libblkid1",
@@ -16474,7 +16696,7 @@
     "cpe:2.3:a:libbz2:libbz2-1.0:1.0.6-9.2\\~deb10u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libbz2:libbz2_1.0:1.0.6-9.2\\~deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libbz2-1.0@1.0.6-9.2~deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/libbz2-1.0@1.0.6-9.2~deb10u1?arch=amd64&upstream=bzip2&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libbz2-1.0",
@@ -16557,7 +16779,7 @@
     "cpe:2.3:a:libc:libc-bin:2.28-10:*:*:*:*:*:*:*",
     "cpe:2.3:a:libc:libc_bin:2.28-10:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libc-bin@2.28-10?arch=amd64",
+   "purl": "pkg:deb/debian/libc-bin@2.28-10?arch=amd64&upstream=glibc&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libc-bin",
@@ -16907,7 +17129,7 @@
    "cpes": [
     "cpe:2.3:a:libc6:libc6:2.28-10:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libc6@2.28-10?arch=amd64",
+   "purl": "pkg:deb/debian/libc6@2.28-10?arch=amd64&upstream=glibc&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libc6",
@@ -19259,7 +19481,7 @@
     "cpe:2.3:a:libcap:libcap-ng0:0.7.9-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libcap:libcap_ng0:0.7.9-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libcap-ng0@0.7.9-2?arch=amd64",
+   "purl": "pkg:deb/debian/libcap-ng0@0.7.9-2?arch=amd64&upstream=libcap-ng&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libcap-ng0",
@@ -19335,7 +19557,7 @@
     "cpe:2.3:a:libcom:libcom-err2:1.44.5-1\\+deb10u3:*:*:*:*:*:*:*",
     "cpe:2.3:a:libcom:libcom_err2:1.44.5-1\\+deb10u3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libcom-err2@1.44.5-1+deb10u3?arch=amd64",
+   "purl": "pkg:deb/debian/libcom-err2@1.44.5-1+deb10u3?arch=amd64&upstream=e2fsprogs&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libcom-err2",
@@ -19398,7 +19620,7 @@
    "cpes": [
     "cpe:2.3:a:libdb5.3:libdb5.3:5.3.28\\+dfsg1-0.5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.5?arch=amd64",
+   "purl": "pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.5?arch=amd64&upstream=db5.3&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libdb5.3",
@@ -19477,7 +19699,7 @@
    "cpes": [
     "cpe:2.3:a:libdebconfclient0:libdebconfclient0:0.249:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libdebconfclient0@0.249?arch=amd64",
+   "purl": "pkg:deb/debian/libdebconfclient0@0.249?arch=amd64&upstream=cdebconf&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libdebconfclient0",
@@ -19543,7 +19765,7 @@
    "cpes": [
     "cpe:2.3:a:libext2fs2:libext2fs2:1.44.5-1\\+deb10u3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libext2fs2@1.44.5-1+deb10u3?arch=amd64",
+   "purl": "pkg:deb/debian/libext2fs2@1.44.5-1+deb10u3?arch=amd64&upstream=e2fsprogs&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libext2fs2",
@@ -19631,7 +19853,7 @@
    "cpes": [
     "cpe:2.3:a:libfdisk1:libfdisk1:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libfdisk1@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/libfdisk1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libfdisk1",
@@ -19704,7 +19926,7 @@
    "cpes": [
     "cpe:2.3:a:libffi6:libffi6:3.2.1-9:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libffi6@3.2.1-9?arch=amd64",
+   "purl": "pkg:deb/debian/libffi6@3.2.1-9?arch=amd64&upstream=libffi&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libffi6",
@@ -19774,7 +19996,7 @@
    "cpes": [
     "cpe:2.3:a:libgcc1:libgcc1:1\\:8.3.0-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64",
+   "purl": "pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64&upstream=gcc-8@8.3.0-6&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgcc1",
@@ -19832,7 +20054,7 @@
    "cpes": [
     "cpe:2.3:a:libgcrypt20:libgcrypt20:1.8.4-5\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgcrypt20@1.8.4-5+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/libgcrypt20@1.8.4-5+deb10u1?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgcrypt20",
@@ -19940,7 +20162,7 @@
    "cpes": [
     "cpe:2.3:a:libgmp10:libgmp10:2\\:6.1.2\\+dfsg-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgmp10@2:6.1.2+dfsg-4?arch=amd64",
+   "purl": "pkg:deb/debian/libgmp10@2:6.1.2+dfsg-4?arch=amd64&upstream=gmp&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgmp10",
@@ -20022,7 +20244,7 @@
    "cpes": [
     "cpe:2.3:a:libgnutls30:libgnutls30:3.6.7-4\\+deb10u7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgnutls30@3.6.7-4+deb10u7?arch=amd64",
+   "purl": "pkg:deb/debian/libgnutls30@3.6.7-4+deb10u7?arch=amd64&upstream=gnutls28&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgnutls30",
@@ -20281,7 +20503,7 @@
     "cpe:2.3:a:libgpg:libgpg-error0:1.35-1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libgpg:libgpg_error0:1.35-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgpg-error0@1.35-1?arch=amd64",
+   "purl": "pkg:deb/debian/libgpg-error0@1.35-1?arch=amd64&upstream=libgpg-error&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgpg-error0",
@@ -20371,7 +20593,7 @@
    "cpes": [
     "cpe:2.3:a:libhogweed4:libhogweed4:3.4.1-1\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libhogweed4@3.4.1-1+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/libhogweed4@3.4.1-1+deb10u1?arch=amd64&upstream=nettle&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libhogweed4",
@@ -20431,7 +20653,7 @@
     "cpe:2.3:a:libidn2:libidn2-0:2.0.5-1\\+deb10u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libidn2:libidn2_0:2.0.5-1\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libidn2-0@2.0.5-1+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/libidn2-0@2.0.5-1+deb10u1?arch=amd64&upstream=libidn2&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libidn2-0",
@@ -20719,7 +20941,7 @@
     "cpe:2.3:a:liblz4:liblz4-1:1.8.3-1\\+deb10u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:liblz4:liblz4_1:1.8.3-1\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/liblz4-1@1.8.3-1+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/liblz4-1@1.8.3-1+deb10u1?arch=amd64&upstream=lz4&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "liblz4-1",
@@ -20797,7 +21019,7 @@
    "cpes": [
     "cpe:2.3:a:liblzma5:liblzma5:5.2.4-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/liblzma5@5.2.4-1?arch=amd64",
+   "purl": "pkg:deb/debian/liblzma5@5.2.4-1?arch=amd64&upstream=xz-utils&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "liblzma5",
@@ -20909,7 +21131,7 @@
    "cpes": [
     "cpe:2.3:a:libmount1:libmount1:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libmount1@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/libmount1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libmount1",
@@ -20980,7 +21202,7 @@
    "cpes": [
     "cpe:2.3:a:libncursesw6:libncursesw6:6.1\\+20181013-2\\+deb10u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libncursesw6@6.1+20181013-2+deb10u2?arch=amd64",
+   "purl": "pkg:deb/debian/libncursesw6@6.1+20181013-2+deb10u2?arch=amd64&upstream=ncurses&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libncursesw6",
@@ -21062,7 +21284,7 @@
    "cpes": [
     "cpe:2.3:a:libnettle6:libnettle6:3.4.1-1\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libnettle6@3.4.1-1+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/libnettle6@3.4.1-1+deb10u1?arch=amd64&upstream=nettle&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libnettle6",
@@ -21125,7 +21347,7 @@
    }
   },
   {
-   "id": "6b49b3b97a50228c",
+   "id": "eb371f8eb5c99778",
    "name": "libnpmaccess",
    "version": "4.0.3",
    "type": "npm",
@@ -21147,6 +21369,8 @@
    "purl": "pkg:npm/libnpmaccess@4.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmaccess",
+    "version": "4.0.3",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -21157,7 +21381,7 @@
    }
   },
   {
-   "id": "1a359ee7d3185183",
+   "id": "40aba889bc91c3fa",
    "name": "libnpmdiff",
    "version": "2.0.4",
    "type": "npm",
@@ -21179,6 +21403,8 @@
    "purl": "pkg:npm/libnpmdiff@2.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmdiff",
+    "version": "2.0.4",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -21189,7 +21415,7 @@
    }
   },
   {
-   "id": "4779e11160939070",
+   "id": "d2c29a1f0cfeb0ff",
    "name": "libnpmexec",
    "version": "3.0.1",
    "type": "npm",
@@ -21211,6 +21437,8 @@
    "purl": "pkg:npm/libnpmexec@3.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmexec",
+    "version": "3.0.1",
     "author": "GitHub Inc.",
     "licenses": [
      "ISC"
@@ -21221,7 +21449,7 @@
    }
   },
   {
-   "id": "b2298eb576e56512",
+   "id": "ef4cb663d5c1e64f",
    "name": "libnpmfund",
    "version": "2.0.1",
    "type": "npm",
@@ -21243,6 +21471,8 @@
    "purl": "pkg:npm/libnpmfund@2.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmfund",
+    "version": "2.0.1",
     "author": "npm Inc. <support@npmjs.com>",
     "licenses": [
      "ISC"
@@ -21253,7 +21483,7 @@
    }
   },
   {
-   "id": "c5011428fe91f0b6",
+   "id": "e6cf74e74f4f6337",
    "name": "libnpmhook",
    "version": "6.0.3",
    "type": "npm",
@@ -21275,6 +21505,8 @@
    "purl": "pkg:npm/libnpmhook@6.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmhook",
+    "version": "6.0.3",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -21285,7 +21517,7 @@
    }
   },
   {
-   "id": "e4957103e074bdf2",
+   "id": "9e187dce1da06297",
    "name": "libnpmorg",
    "version": "2.0.3",
    "type": "npm",
@@ -21307,6 +21539,8 @@
    "purl": "pkg:npm/libnpmorg@2.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmorg",
+    "version": "2.0.3",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -21317,7 +21551,7 @@
    }
   },
   {
-   "id": "b9aecb7a994d126d",
+   "id": "8c2d924de7e42269",
    "name": "libnpmpack",
    "version": "3.0.0",
    "type": "npm",
@@ -21339,6 +21573,8 @@
    "purl": "pkg:npm/libnpmpack@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmpack",
+    "version": "3.0.0",
     "author": "npm Inc. <support@npmjs.com>",
     "licenses": [
      "ISC"
@@ -21349,7 +21585,7 @@
    }
   },
   {
-   "id": "676dc27453e48ef2",
+   "id": "ad1bf1510703ab79",
    "name": "libnpmpublish",
    "version": "4.0.2",
    "type": "npm",
@@ -21371,6 +21607,8 @@
    "purl": "pkg:npm/libnpmpublish@4.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmpublish",
+    "version": "4.0.2",
     "author": "npm Inc. <support@npmjs.com>",
     "licenses": [
      "ISC"
@@ -21381,7 +21619,7 @@
    }
   },
   {
-   "id": "7ecf7dc5d415e113",
+   "id": "266d3295ff49b5fe",
    "name": "libnpmsearch",
    "version": "3.1.2",
    "type": "npm",
@@ -21403,6 +21641,8 @@
    "purl": "pkg:npm/libnpmsearch@3.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmsearch",
+    "version": "3.1.2",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -21413,7 +21653,7 @@
    }
   },
   {
-   "id": "8862b1b6ab86ebcc",
+   "id": "93ba8fe120279446",
    "name": "libnpmteam",
    "version": "2.0.4",
    "type": "npm",
@@ -21435,6 +21675,8 @@
    "purl": "pkg:npm/libnpmteam@2.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmteam",
+    "version": "2.0.4",
     "author": "Kat Marchán <kzm@zkat.tech>",
     "licenses": [
      "ISC"
@@ -21445,7 +21687,7 @@
    }
   },
   {
-   "id": "80bd4fe454dc43ac",
+   "id": "4ccc570dcd9f2d4d",
    "name": "libnpmversion",
    "version": "2.0.1",
    "type": "npm",
@@ -21467,6 +21709,8 @@
    "purl": "pkg:npm/libnpmversion@2.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "libnpmversion",
+    "version": "2.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -21512,7 +21756,7 @@
     "cpe:2.3:a:libp11:libp11-kit0:0.23.15-2\\+deb10u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:libp11:libp11_kit0:0.23.15-2\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libp11-kit0@0.23.15-2+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/libp11-kit0@0.23.15-2+deb10u1?arch=amd64&upstream=p11-kit&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libp11-kit0",
@@ -21602,7 +21846,7 @@
     "cpe:2.3:a:libpam:libpam-modules:1.3.1-5:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpam:libpam_modules:1.3.1-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam-modules@1.3.1-5?arch=amd64",
+   "purl": "pkg:deb/debian/libpam-modules@1.3.1-5?arch=amd64&upstream=pam&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam-modules",
@@ -22508,7 +22752,7 @@
     "cpe:2.3:a:libpam:libpam-modules-bin:1.3.1-5:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpam:libpam_modules_bin:1.3.1-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam-modules-bin@1.3.1-5?arch=amd64",
+   "purl": "pkg:deb/debian/libpam-modules-bin@1.3.1-5?arch=amd64&upstream=pam&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam-modules-bin",
@@ -22678,7 +22922,7 @@
     "cpe:2.3:a:libpam:libpam-runtime:1.3.1-5:*:*:*:*:*:*:*",
     "cpe:2.3:a:libpam:libpam_runtime:1.3.1-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam-runtime@1.3.1-5?arch=all",
+   "purl": "pkg:deb/debian/libpam-runtime@1.3.1-5?arch=all&upstream=pam&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam-runtime",
@@ -23687,7 +23931,7 @@
    "cpes": [
     "cpe:2.3:a:libpam0g:libpam0g:1.3.1-5:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpam0g@1.3.1-5?arch=amd64",
+   "purl": "pkg:deb/debian/libpam0g@1.3.1-5?arch=amd64&upstream=pam&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpam0g",
@@ -23822,7 +24066,7 @@
    "cpes": [
     "cpe:2.3:a:libpcre3:libpcre3:2\\:8.39-12:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libpcre3@2:8.39-12?arch=amd64",
+   "purl": "pkg:deb/debian/libpcre3@2:8.39-12?arch=amd64&upstream=pcre3&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libpcre3",
@@ -23943,7 +24187,7 @@
    "cpes": [
     "cpe:2.3:a:libseccomp2:libseccomp2:2.3.3-4:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libseccomp2@2.3.3-4?arch=amd64",
+   "purl": "pkg:deb/debian/libseccomp2@2.3.3-4?arch=amd64&upstream=libseccomp&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libseccomp2",
@@ -24017,7 +24261,7 @@
    "cpes": [
     "cpe:2.3:a:libselinux1:libselinux1:2.8-1\\+b1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64",
+   "purl": "pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64&upstream=libselinux@2.8-1&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libselinux1",
@@ -24100,7 +24344,7 @@
     "cpe:2.3:a:libsemanage:libsemanage-common:2.8-2:*:*:*:*:*:*:*",
     "cpe:2.3:a:libsemanage:libsemanage_common:2.8-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsemanage-common@2.8-2?arch=all",
+   "purl": "pkg:deb/debian/libsemanage-common@2.8-2?arch=all&upstream=libsemanage&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsemanage-common",
@@ -24174,7 +24418,7 @@
    "cpes": [
     "cpe:2.3:a:libsemanage1:libsemanage1:2.8-2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsemanage1@2.8-2?arch=amd64",
+   "purl": "pkg:deb/debian/libsemanage1@2.8-2?arch=amd64&upstream=libsemanage&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsemanage1",
@@ -24240,7 +24484,7 @@
    "cpes": [
     "cpe:2.3:a:libsepol1:libsepol1:2.8-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsepol1@2.8-1?arch=amd64",
+   "purl": "pkg:deb/debian/libsepol1@2.8-1?arch=amd64&upstream=libsepol&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsepol1",
@@ -24320,7 +24564,7 @@
    "cpes": [
     "cpe:2.3:a:libsmartcols1:libsmartcols1:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsmartcols1@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/libsmartcols1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsmartcols1",
@@ -24391,7 +24635,7 @@
    "cpes": [
     "cpe:2.3:a:libss2:libss2:1.44.5-1\\+deb10u3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libss2@1.44.5-1+deb10u3?arch=amd64",
+   "purl": "pkg:deb/debian/libss2@1.44.5-1+deb10u3?arch=amd64&upstream=e2fsprogs&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libss2",
@@ -24461,7 +24705,7 @@
    "cpes": [
     "cpe:2.3:a:libstdc\\+\\+6:libstdc\\+\\+6:8.3.0-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libstdc++6@8.3.0-6?arch=amd64",
+   "purl": "pkg:deb/debian/libstdc++6@8.3.0-6?arch=amd64&upstream=gcc-8&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libstdc++6",
@@ -24556,7 +24800,7 @@
    "cpes": [
     "cpe:2.3:a:libsystemd0:libsystemd0:241-7\\~deb10u8:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libsystemd0@241-7~deb10u8?arch=amd64",
+   "purl": "pkg:deb/debian/libsystemd0@241-7~deb10u8?arch=amd64&upstream=systemd&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libsystemd0",
@@ -24629,7 +24873,7 @@
     "cpe:2.3:a:libtasn1:libtasn1-6:4.13-3:*:*:*:*:*:*:*",
     "cpe:2.3:a:libtasn1:libtasn1_6:4.13-3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtasn1-6@4.13-3?arch=amd64",
+   "purl": "pkg:deb/debian/libtasn1-6@4.13-3?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtasn1-6",
@@ -24724,7 +24968,7 @@
    "cpes": [
     "cpe:2.3:a:libtinfo6:libtinfo6:6.1\\+20181013-2\\+deb10u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libtinfo6@6.1+20181013-2+deb10u2?arch=amd64",
+   "purl": "pkg:deb/debian/libtinfo6@6.1+20181013-2+deb10u2?arch=amd64&upstream=ncurses&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libtinfo6",
@@ -24827,7 +25071,7 @@
    "cpes": [
     "cpe:2.3:a:libudev1:libudev1:241-7\\~deb10u8:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libudev1@241-7~deb10u8?arch=amd64",
+   "purl": "pkg:deb/debian/libudev1@241-7~deb10u8?arch=amd64&upstream=systemd&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libudev1",
@@ -24901,7 +25145,7 @@
    "cpes": [
     "cpe:2.3:a:libunistring2:libunistring2:0.9.10-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libunistring2@0.9.10-1?arch=amd64",
+   "purl": "pkg:deb/debian/libunistring2@0.9.10-1?arch=amd64&upstream=libunistring&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libunistring2",
@@ -24989,7 +25233,7 @@
    "cpes": [
     "cpe:2.3:a:libuuid1:libuuid1:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libuuid1@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/libuuid1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libuuid1",
@@ -25066,7 +25310,7 @@
    "cpes": [
     "cpe:2.3:a:libzstd1:libzstd1:1.3.8\\+dfsg-3\\+deb10u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libzstd1@1.3.8+dfsg-3+deb10u2?arch=amd64",
+   "purl": "pkg:deb/debian/libzstd1@1.3.8+dfsg-3+deb10u2?arch=amd64&upstream=libzstd&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libzstd1",
@@ -25143,7 +25387,7 @@
    "cpes": [
     "cpe:2.3:a:login:login:1\\:4.5-1.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/login@1:4.5-1.1?arch=amd64",
+   "purl": "pkg:deb/debian/login@1:4.5-1.1?arch=amd64&upstream=shadow&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "login",
@@ -26238,7 +26482,7 @@
    }
   },
   {
-   "id": "65881b50e106718e",
+   "id": "f6c3ce8b29417a91",
    "name": "lru-cache",
    "version": "6.0.0",
    "type": "npm",
@@ -26266,6 +26510,8 @@
    "purl": "pkg:npm/lru-cache@6.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "lru-cache",
+    "version": "6.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me>",
     "licenses": [
      "ISC"
@@ -26308,7 +26554,7 @@
     "cpe:2.3:a:lsb:lsb-base:10.2019051400:*:*:*:*:*:*:*",
     "cpe:2.3:a:lsb:lsb_base:10.2019051400:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/lsb-base@10.2019051400?arch=all",
+   "purl": "pkg:deb/debian/lsb-base@10.2019051400?arch=all&upstream=lsb&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "lsb-base",
@@ -26371,7 +26617,7 @@
    }
   },
   {
-   "id": "bc08431ac5fc2476",
+   "id": "bc4ce8ad95cbbaf2",
    "name": "make-fetch-happen",
    "version": "9.1.0",
    "type": "npm",
@@ -26403,6 +26649,8 @@
    "purl": "pkg:npm/make-fetch-happen@9.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "make-fetch-happen",
+    "version": "9.1.0",
     "author": "Kat Marchán <kzm@zkat.tech>",
     "licenses": [
      "ISC"
@@ -26439,7 +26687,7 @@
    "cpes": [
     "cpe:2.3:a:mawk:mawk:1.3.3-17\\+b3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64",
+   "purl": "pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64&upstream=mawk@1.3.3-17&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "mawk",
@@ -26598,7 +26846,7 @@
    }
   },
   {
-   "id": "2323591111c2758a",
+   "id": "8c28b7a1c9a7c523",
    "name": "minimatch",
    "version": "3.0.4",
    "type": "npm",
@@ -26620,6 +26868,8 @@
    "purl": "pkg:npm/minimatch@3.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minimatch",
+    "version": "3.0.4",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
     "licenses": [
      "ISC"
@@ -26630,7 +26880,7 @@
    }
   },
   {
-   "id": "b8b395dcf7fca9d",
+   "id": "88492bdafc80038",
    "name": "minipass",
    "version": "3.1.5",
    "type": "npm",
@@ -26652,6 +26902,8 @@
    "purl": "pkg:npm/minipass@3.1.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass",
+    "version": "3.1.5",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -26662,7 +26914,7 @@
    }
   },
   {
-   "id": "9584910e6f3ab4d3",
+   "id": "e660594996c62ac9",
    "name": "minipass-collect",
    "version": "1.0.2",
    "type": "npm",
@@ -26690,6 +26942,8 @@
    "purl": "pkg:npm/minipass-collect@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass-collect",
+    "version": "1.0.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -26700,7 +26954,7 @@
    }
   },
   {
-   "id": "8c5c2ac8ef75bf5e",
+   "id": "50b0ad0ee19c3c38",
    "name": "minipass-fetch",
    "version": "1.4.1",
    "type": "npm",
@@ -26728,6 +26982,8 @@
    "purl": "pkg:npm/minipass-fetch@1.4.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass-fetch",
+    "version": "1.4.1",
     "author": "",
     "licenses": [
      "MIT"
@@ -26738,7 +26994,7 @@
    }
   },
   {
-   "id": "67430f484819f9a1",
+   "id": "82357d379959e64a",
    "name": "minipass-flush",
    "version": "1.0.5",
    "type": "npm",
@@ -26766,6 +27022,8 @@
    "purl": "pkg:npm/minipass-flush@1.0.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass-flush",
+    "version": "1.0.5",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -26776,7 +27034,7 @@
    }
   },
   {
-   "id": "d5aaaf13388405b4",
+   "id": "6ac32987e57fdae",
    "name": "minipass-json-stream",
    "version": "1.0.1",
    "type": "npm",
@@ -26808,6 +27066,8 @@
    "purl": "pkg:npm/minipass-json-stream@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass-json-stream",
+    "version": "1.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "MIT"
@@ -26818,7 +27078,7 @@
    }
   },
   {
-   "id": "59e6a139a3aa73e8",
+   "id": "325335d149a3bd81",
    "name": "minipass-pipeline",
    "version": "1.2.4",
    "type": "npm",
@@ -26846,6 +27106,8 @@
    "purl": "pkg:npm/minipass-pipeline@1.2.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass-pipeline",
+    "version": "1.2.4",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -26856,7 +27118,7 @@
    }
   },
   {
-   "id": "5230f6e79d3d5722",
+   "id": "d5f3e80432a2c611",
    "name": "minipass-sized",
    "version": "1.0.3",
    "type": "npm",
@@ -26884,6 +27146,8 @@
    "purl": "pkg:npm/minipass-sized@1.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minipass-sized",
+    "version": "1.0.3",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -26894,7 +27158,7 @@
    }
   },
   {
-   "id": "708cfff5948fbf9d",
+   "id": "591f0ceb3129388f",
    "name": "minizlib",
    "version": "2.1.2",
    "type": "npm",
@@ -26916,6 +27180,8 @@
    "purl": "pkg:npm/minizlib@2.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "minizlib",
+    "version": "2.1.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "MIT"
@@ -26926,7 +27192,7 @@
    }
   },
   {
-   "id": "a4734f56d8ea2485",
+   "id": "d6040d1c1e028fe8",
    "name": "mkdirp",
    "version": "1.0.4",
    "type": "npm",
@@ -26948,6 +27214,8 @@
    "purl": "pkg:npm/mkdirp@1.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "mkdirp",
+    "version": "1.0.4",
     "author": "",
     "licenses": [
      "MIT"
@@ -26958,7 +27226,7 @@
    }
   },
   {
-   "id": "446c4779dda14f58",
+   "id": "248779266aa9909",
    "name": "mkdirp-infer-owner",
    "version": "2.0.0",
    "type": "npm",
@@ -26990,6 +27258,8 @@
    "purl": "pkg:npm/mkdirp-infer-owner@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "mkdirp-infer-owner",
+    "version": "2.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -27041,7 +27311,7 @@
    "cpes": [
     "cpe:2.3:a:mount:mount:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/mount@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/mount@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "mount",
@@ -27240,7 +27510,7 @@
    }
   },
   {
-   "id": "403a9f858566a1ac",
+   "id": "7b31834dc1dd3a1a",
    "name": "ms",
    "version": "2.1.2",
    "type": "npm",
@@ -27262,6 +27532,8 @@
    "purl": "pkg:npm/ms@2.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ms",
+    "version": "2.1.2",
     "author": "",
     "licenses": [
      "MIT"
@@ -27272,7 +27544,7 @@
    }
   },
   {
-   "id": "301cf6a76fcbeb3c",
+   "id": "dc553bdf0315ca61",
    "name": "ms",
    "version": "2.1.3",
    "type": "npm",
@@ -27294,6 +27566,8 @@
    "purl": "pkg:npm/ms@2.1.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ms",
+    "version": "2.1.3",
     "author": "",
     "licenses": [
      "MIT"
@@ -27304,7 +27578,7 @@
    }
   },
   {
-   "id": "c75243293b98875c",
+   "id": "e8ec214c55bbc879",
    "name": "mute-stream",
    "version": "0.0.8",
    "type": "npm",
@@ -27332,6 +27606,8 @@
    "purl": "pkg:npm/mute-stream@0.0.8",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "mute-stream",
+    "version": "0.0.8",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -27375,7 +27651,7 @@
     "cpe:2.3:a:ncurses:ncurses-base:6.1\\+20181013-2\\+deb10u2:*:*:*:*:*:*:*",
     "cpe:2.3:a:ncurses:ncurses_base:6.1\\+20181013-2\\+deb10u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/ncurses-base@6.1+20181013-2+deb10u2?arch=all",
+   "purl": "pkg:deb/debian/ncurses-base@6.1+20181013-2+deb10u2?arch=all&upstream=ncurses&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "ncurses-base",
@@ -27811,7 +28087,7 @@
     "cpe:2.3:a:ncurses:ncurses-bin:6.1\\+20181013-2\\+deb10u2:*:*:*:*:*:*:*",
     "cpe:2.3:a:ncurses:ncurses_bin:6.1\\+20181013-2\\+deb10u2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/ncurses-bin@6.1+20181013-2+deb10u2?arch=amd64",
+   "purl": "pkg:deb/debian/ncurses-bin@6.1+20181013-2+deb10u2?arch=amd64&upstream=ncurses&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "ncurses-bin",
@@ -28018,7 +28294,7 @@
    }
   },
   {
-   "id": "36f1791562c163e7",
+   "id": "6de85d5fd23b48e8",
    "name": "negotiator",
    "version": "0.6.2",
    "type": "npm",
@@ -28040,6 +28316,8 @@
    "purl": "pkg:npm/negotiator@0.6.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "negotiator",
+    "version": "0.6.2",
     "author": "",
     "licenses": [
      "MIT"
@@ -28050,7 +28328,7 @@
    }
   },
   {
-   "id": "e2c8c0aabe0a856b",
+   "id": "944d6d36b2adfc7a",
    "name": "node-gyp",
    "version": "8.3.0",
    "type": "npm",
@@ -28078,6 +28356,8 @@
    "purl": "pkg:npm/node-gyp@8.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "node-gyp",
+    "version": "8.3.0",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://tootallnate.net)",
     "licenses": [
      "MIT"
@@ -28088,7 +28368,7 @@
    }
   },
   {
-   "id": "dd728b487ce8e59d",
+   "id": "ef7fa82e8bcb412b",
    "name": "nopt",
    "version": "5.0.0",
    "type": "npm",
@@ -28110,6 +28390,8 @@
    "purl": "pkg:npm/nopt@5.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "nopt",
+    "version": "5.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28120,7 +28402,7 @@
    }
   },
   {
-   "id": "8db90875ecf1c842",
+   "id": "7dafbcb2b8600897",
    "name": "normalize-package-data",
    "version": "3.0.3",
    "type": "npm",
@@ -28152,6 +28434,8 @@
    "purl": "pkg:npm/normalize-package-data@3.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "normalize-package-data",
+    "version": "3.0.3",
     "author": "Meryn Stol <merynstol@gmail.com>",
     "licenses": [
      "BSD-2-Clause"
@@ -28162,7 +28446,7 @@
    }
   },
   {
-   "id": "1784d4cbe8361689",
+   "id": "79e4e541812f6cf8",
    "name": "npm",
    "version": "8.1.2",
    "type": "npm",
@@ -28184,6 +28468,8 @@
    "purl": "pkg:npm/npm@8.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm",
+    "version": "8.1.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
     "licenses": [
      "Artistic-2.0"
@@ -28194,7 +28480,7 @@
    }
   },
   {
-   "id": "3e52aad9ba878980",
+   "id": "dc948f10616b982d",
    "name": "npm-audit-report",
    "version": "2.1.5",
    "type": "npm",
@@ -28226,6 +28512,8 @@
    "purl": "pkg:npm/npm-audit-report@2.1.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-audit-report",
+    "version": "2.1.5",
     "author": "Adam Baldwin",
     "licenses": [
      "ISC"
@@ -28236,7 +28524,7 @@
    }
   },
   {
-   "id": "4c004d110fc341a6",
+   "id": "876093fbc173c466",
    "name": "npm-bundled",
    "version": "1.1.2",
    "type": "npm",
@@ -28264,6 +28552,8 @@
    "purl": "pkg:npm/npm-bundled@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-bundled",
+    "version": "1.1.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28274,7 +28564,7 @@
    }
   },
   {
-   "id": "f5bb7902bb4b930d",
+   "id": "b3b2c40ba7d746e9",
    "name": "npm-init",
    "version": "0.0.0",
    "type": "npm",
@@ -28302,6 +28592,8 @@
    "purl": "pkg:npm/npm-init@0.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-init",
+    "version": "0.0.0",
     "author": "",
     "licenses": [
      "BSD"
@@ -28312,7 +28604,7 @@
    }
   },
   {
-   "id": "396a9fb6f37ac4b8",
+   "id": "e163a0ee5fc0e692",
    "name": "npm-install-checks",
    "version": "4.0.0",
    "type": "npm",
@@ -28344,6 +28636,8 @@
    "purl": "pkg:npm/npm-install-checks@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-install-checks",
+    "version": "4.0.0",
     "author": "",
     "licenses": [
      "BSD-2-Clause"
@@ -28354,7 +28648,7 @@
    }
   },
   {
-   "id": "3a53d02cc548cce1",
+   "id": "e7ee0fc76131a389",
    "name": "npm-normalize-package-bin",
    "version": "1.0.1",
    "type": "npm",
@@ -28390,6 +28684,8 @@
    "purl": "pkg:npm/npm-normalize-package-bin@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-normalize-package-bin",
+    "version": "1.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -28400,7 +28696,7 @@
    }
   },
   {
-   "id": "ff2fca08194caa81",
+   "id": "8a3ada309cf62c06",
    "name": "npm-package-arg",
    "version": "8.1.5",
    "type": "npm",
@@ -28432,6 +28728,8 @@
    "purl": "pkg:npm/npm-package-arg@8.1.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-package-arg",
+    "version": "8.1.5",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28442,7 +28740,7 @@
    }
   },
   {
-   "id": "bf29ba107b02e05d",
+   "id": "714d21944a0f72fa",
    "name": "npm-packlist",
    "version": "3.0.0",
    "type": "npm",
@@ -28470,6 +28768,8 @@
    "purl": "pkg:npm/npm-packlist@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-packlist",
+    "version": "3.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28480,7 +28780,7 @@
    }
   },
   {
-   "id": "d7803d5c7dd71b4e",
+   "id": "c80fef333c290038",
    "name": "npm-pick-manifest",
    "version": "6.1.1",
    "type": "npm",
@@ -28512,6 +28812,8 @@
    "purl": "pkg:npm/npm-pick-manifest@6.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-pick-manifest",
+    "version": "6.1.1",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -28522,7 +28824,7 @@
    }
   },
   {
-   "id": "e6be7033ceee4ff0",
+   "id": "b9fde5c4587da58",
    "name": "npm-profile",
    "version": "5.0.4",
    "type": "npm",
@@ -28550,6 +28852,8 @@
    "purl": "pkg:npm/npm-profile@5.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-profile",
+    "version": "5.0.4",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
     "licenses": [
      "ISC"
@@ -28560,7 +28864,7 @@
    }
   },
   {
-   "id": "4802ec54d39091f9",
+   "id": "f63d267c2e7b951c",
    "name": "npm-registry-fetch",
    "version": "11.0.0",
    "type": "npm",
@@ -28592,6 +28896,8 @@
    "purl": "pkg:npm/npm-registry-fetch@11.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-registry-fetch",
+    "version": "11.0.0",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -28602,7 +28908,7 @@
    }
   },
   {
-   "id": "85efdc43f7d4f83a",
+   "id": "ec6538370a854375",
    "name": "npm-user-validate",
    "version": "1.0.1",
    "type": "npm",
@@ -28634,6 +28940,8 @@
    "purl": "pkg:npm/npm-user-validate@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npm-user-validate",
+    "version": "1.0.1",
     "author": "Robert Kowalski <rok@kowalski.gd>",
     "licenses": [
      "BSD-2-Clause"
@@ -28644,7 +28952,7 @@
    }
   },
   {
-   "id": "b1278f7d02c95941",
+   "id": "18951abd724a91e8",
    "name": "npmlog",
    "version": "4.1.2",
    "type": "npm",
@@ -28666,6 +28974,8 @@
    "purl": "pkg:npm/npmlog@4.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npmlog",
+    "version": "4.1.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28676,7 +28986,7 @@
    }
   },
   {
-   "id": "900a0c8024f6d3c2",
+   "id": "f8b1926485be99e7",
    "name": "npmlog",
    "version": "5.0.1",
    "type": "npm",
@@ -28698,6 +29008,8 @@
    "purl": "pkg:npm/npmlog@5.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "npmlog",
+    "version": "5.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28708,7 +29020,7 @@
    }
   },
   {
-   "id": "963a02f438846019",
+   "id": "402ee7bb9cebf742",
    "name": "number-is-nan",
    "version": "1.0.1",
    "type": "npm",
@@ -28740,6 +29052,8 @@
    "purl": "pkg:npm/number-is-nan@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "number-is-nan",
+    "version": "1.0.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -28750,7 +29064,7 @@
    }
   },
   {
-   "id": "1a44df497b636e52",
+   "id": "5c67d1cbc1aeab24",
    "name": "object-assign",
    "version": "4.1.1",
    "type": "npm",
@@ -28778,6 +29092,8 @@
    "purl": "pkg:npm/object-assign@4.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "object-assign",
+    "version": "4.1.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -28788,7 +29104,7 @@
    }
   },
   {
-   "id": "d580f0ca4259336b",
+   "id": "f84cc822e69a694a",
    "name": "once",
    "version": "1.4.0",
    "type": "npm",
@@ -28810,6 +29126,8 @@
    "purl": "pkg:npm/once@1.4.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "once",
+    "version": "1.4.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -28820,7 +29138,7 @@
    }
   },
   {
-   "id": "260fbc24413ee517",
+   "id": "cb5fa74c0ccd0815",
    "name": "opener",
    "version": "1.5.2",
    "type": "npm",
@@ -28842,6 +29160,8 @@
    "purl": "pkg:npm/opener@1.5.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "opener",
+    "version": "1.5.2",
     "author": "Domenic Denicola <d@domenic.me> (https://domenic.me/)",
     "licenses": [
      "(WTFPL OR MIT)"
@@ -28852,7 +29172,7 @@
    }
   },
   {
-   "id": "bb2046c727d58d92",
+   "id": "49d1d76a2c187b22",
    "name": "p-map",
    "version": "4.0.0",
    "type": "npm",
@@ -28880,6 +29200,8 @@
    "purl": "pkg:npm/p-map@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "p-map",
+    "version": "4.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (https://sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -28890,7 +29212,7 @@
    }
   },
   {
-   "id": "fac6bd483a5e6ecb",
+   "id": "c8f70adb1d8773d2",
    "name": "pacote",
    "version": "12.0.2",
    "type": "npm",
@@ -28912,6 +29234,8 @@
    "purl": "pkg:npm/pacote@12.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "pacote",
+    "version": "12.0.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -28922,7 +29246,7 @@
    }
   },
   {
-   "id": "8e0441b06b9c9e99",
+   "id": "9e3a3d5e1195ee52",
    "name": "parse-conflict-json",
    "version": "1.1.1",
    "type": "npm",
@@ -28954,6 +29278,8 @@
    "purl": "pkg:npm/parse-conflict-json@1.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "parse-conflict-json",
+    "version": "1.1.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -28994,7 +29320,7 @@
    "cpes": [
     "cpe:2.3:a:passwd:passwd:1\\:4.5-1.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/passwd@1:4.5-1.1?arch=amd64",
+   "purl": "pkg:deb/debian/passwd@1:4.5-1.1?arch=amd64&upstream=shadow&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "passwd",
@@ -31521,7 +31847,7 @@
    }
   },
   {
-   "id": "5b07ba7db21e798",
+   "id": "34dc88c73cdb4e4c",
    "name": "path-is-absolute",
    "version": "1.0.1",
    "type": "npm",
@@ -31553,6 +31879,8 @@
    "purl": "pkg:npm/path-is-absolute@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "path-is-absolute",
+    "version": "1.0.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -31619,7 +31947,7 @@
     "cpe:2.3:a:perl:perl-base:5.28.1-6\\+deb10u1:*:*:*:*:*:*:*",
     "cpe:2.3:a:perl:perl_base:5.28.1-6\\+deb10u1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/perl-base@5.28.1-6+deb10u1?arch=amd64",
+   "purl": "pkg:deb/debian/perl-base@5.28.1-6+deb10u1?arch=amd64&upstream=perl&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "perl-base",
@@ -36114,7 +36442,7 @@
    }
   },
   {
-   "id": "add13fd687379008",
+   "id": "ceb2bb57bc2d0e0f",
    "name": "proc-log",
    "version": "1.0.0",
    "type": "npm",
@@ -36142,6 +36470,8 @@
    "purl": "pkg:npm/proc-log@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "proc-log",
+    "version": "1.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -36152,7 +36482,7 @@
    }
   },
   {
-   "id": "d69a3fc742e6553c",
+   "id": "53394066f88f8760",
    "name": "promise-all-reject-late",
    "version": "1.0.1",
    "type": "npm",
@@ -36188,6 +36518,8 @@
    "purl": "pkg:npm/promise-all-reject-late@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "promise-all-reject-late",
+    "version": "1.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -36198,7 +36530,7 @@
    }
   },
   {
-   "id": "ca6ba4cdc13cfa3b",
+   "id": "c0ba2bc5b5184d54",
    "name": "promise-call-limit",
    "version": "1.0.1",
    "type": "npm",
@@ -36230,6 +36562,8 @@
    "purl": "pkg:npm/promise-call-limit@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "promise-call-limit",
+    "version": "1.0.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -36240,7 +36574,7 @@
    }
   },
   {
-   "id": "877d636faf15438",
+   "id": "67724f5c32189912",
    "name": "promise-inflight",
    "version": "1.0.1",
    "type": "npm",
@@ -36268,6 +36602,8 @@
    "purl": "pkg:npm/promise-inflight@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "promise-inflight",
+    "version": "1.0.1",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
     "licenses": [
      "ISC"
@@ -36278,7 +36614,7 @@
    }
   },
   {
-   "id": "ef2fd10c45624bc6",
+   "id": "f2c1670e8dcb8bd1",
    "name": "promise-retry",
    "version": "2.0.1",
    "type": "npm",
@@ -36306,6 +36642,8 @@
    "purl": "pkg:npm/promise-retry@2.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "promise-retry",
+    "version": "2.0.1",
     "author": "IndigoUnited <hello@indigounited.com> (http://indigounited.com)",
     "licenses": [
      "MIT"
@@ -36316,7 +36654,7 @@
    }
   },
   {
-   "id": "199c402d3718a544",
+   "id": "add2bd3c4e7e2dd0",
    "name": "promzard",
    "version": "0.3.0",
    "type": "npm",
@@ -36338,6 +36676,8 @@
    "purl": "pkg:npm/promzard@0.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "promzard",
+    "version": "0.3.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -36348,7 +36688,7 @@
    }
   },
   {
-   "id": "6e0087e8b9a6b927",
+   "id": "cdd262f9b8afdf90",
    "name": "qrcode-terminal",
    "version": "0.12.0",
    "type": "npm",
@@ -36376,6 +36716,8 @@
    "purl": "pkg:npm/qrcode-terminal@0.12.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "qrcode-terminal",
+    "version": "0.12.0",
     "author": "",
     "licenses": [
      "Apache 2.0"
@@ -36386,7 +36728,7 @@
    }
   },
   {
-   "id": "b4b1facf6f14bfdd",
+   "id": "26e8236a34e9e778",
    "name": "read",
    "version": "1.0.7",
    "type": "npm",
@@ -36408,6 +36750,8 @@
    "purl": "pkg:npm/read@1.0.7",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "read",
+    "version": "1.0.7",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -36418,7 +36762,7 @@
    }
   },
   {
-   "id": "41fddfad0f1f5cc8",
+   "id": "10ffe2542f3a2236",
    "name": "read-cmd-shim",
    "version": "2.0.0",
    "type": "npm",
@@ -36450,6 +36794,8 @@
    "purl": "pkg:npm/read-cmd-shim@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "read-cmd-shim",
+    "version": "2.0.0",
     "author": "",
     "licenses": [
      "ISC"
@@ -36460,7 +36806,7 @@
    }
   },
   {
-   "id": "6af36e9cc59574e0",
+   "id": "de5d1041a9099e20",
    "name": "read-package-json",
    "version": "4.1.1",
    "type": "npm",
@@ -36492,6 +36838,8 @@
    "purl": "pkg:npm/read-package-json@4.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "read-package-json",
+    "version": "4.1.1",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -36502,7 +36850,7 @@
    }
   },
   {
-   "id": "984d6d57c35ca7f1",
+   "id": "3fd6d7106c4c4f12",
    "name": "read-package-json-fast",
    "version": "2.0.3",
    "type": "npm",
@@ -36538,6 +36886,8 @@
    "purl": "pkg:npm/read-package-json-fast@2.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "read-package-json-fast",
+    "version": "2.0.3",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -36548,7 +36898,7 @@
    }
   },
   {
-   "id": "c1ee802cf6f6cc78",
+   "id": "11045fb8c6fd6ea2",
    "name": "readable-stream",
    "version": "3.6.0",
    "type": "npm",
@@ -36576,6 +36926,8 @@
    "purl": "pkg:npm/readable-stream@3.6.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "readable-stream",
+    "version": "3.6.0",
     "author": "",
     "licenses": [
      "MIT"
@@ -36586,7 +36938,7 @@
    }
   },
   {
-   "id": "ecb48a87c70ddfb2",
+   "id": "b722f0d3e5c04a20",
    "name": "readdir-scoped-modules",
    "version": "1.1.0",
    "type": "npm",
@@ -36618,6 +36970,8 @@
    "purl": "pkg:npm/readdir-scoped-modules@1.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "readdir-scoped-modules",
+    "version": "1.1.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -36628,7 +36982,7 @@
    }
   },
   {
-   "id": "9c154a86ba3e1c1f",
+   "id": "cbc2208a4843e840",
    "name": "retry",
    "version": "0.12.0",
    "type": "npm",
@@ -36650,6 +37004,8 @@
    "purl": "pkg:npm/retry@0.12.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "retry",
+    "version": "0.12.0",
     "author": "Tim Koschützki <tim@debuggable.com> (http://debuggable.com/)",
     "licenses": [
      "MIT"
@@ -36660,7 +37016,7 @@
    }
   },
   {
-   "id": "ec413fa5f7b8cace",
+   "id": "309100afd567be4a",
    "name": "rimraf",
    "version": "3.0.2",
    "type": "npm",
@@ -36682,6 +37038,8 @@
    "purl": "pkg:npm/rimraf@3.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "rimraf",
+    "version": "3.0.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -36692,7 +37050,7 @@
    }
   },
   {
-   "id": "a1ae7a6e612c6dc5",
+   "id": "fcb7a0dedbd60cd5",
    "name": "safe-buffer",
    "version": "5.2.1",
    "type": "npm",
@@ -36720,6 +37078,8 @@
    "purl": "pkg:npm/safe-buffer@5.2.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "safe-buffer",
+    "version": "5.2.1",
     "author": "Feross Aboukhadijeh <feross@feross.org> (https://feross.org)",
     "licenses": [
      "MIT"
@@ -36730,7 +37090,7 @@
    }
   },
   {
-   "id": "af7122fe242bb5ce",
+   "id": "6c5c6cccf43d92de",
    "name": "safer-buffer",
    "version": "2.1.2",
    "type": "npm",
@@ -36758,6 +37118,8 @@
    "purl": "pkg:npm/safer-buffer@2.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "safer-buffer",
+    "version": "2.1.2",
     "author": "Nikita Skovoroda <chalkerx@gmail.com> (https://github.com/ChALkeR)",
     "licenses": [
      "MIT"
@@ -36794,7 +37156,7 @@
    "cpes": [
     "cpe:2.3:a:sed:sed:4.7-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/sed@4.7-1?arch=amd64",
+   "purl": "pkg:deb/debian/sed@4.7-1?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "sed",
@@ -37225,7 +37587,7 @@
    }
   },
   {
-   "id": "7a7ebea9ab5a969c",
+   "id": "8ab9256b0a482451",
    "name": "semver",
    "version": "7.3.5",
    "type": "npm",
@@ -37247,6 +37609,8 @@
    "purl": "pkg:npm/semver@7.3.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "semver",
+    "version": "7.3.5",
     "author": "",
     "licenses": [
      "ISC"
@@ -37257,7 +37621,7 @@
    }
   },
   {
-   "id": "b93c21aafcfdf769",
+   "id": "a05693ddaeb8d027",
    "name": "set-blocking",
    "version": "2.0.0",
    "type": "npm",
@@ -37285,6 +37649,8 @@
    "purl": "pkg:npm/set-blocking@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "set-blocking",
+    "version": "2.0.0",
     "author": "Ben Coe <ben@npmjs.com>",
     "licenses": [
      "ISC"
@@ -37295,7 +37661,7 @@
    }
   },
   {
-   "id": "5fe154b1b28dca62",
+   "id": "acb6f6d0d7e6d043",
    "name": "signal-exit",
    "version": "3.0.3",
    "type": "npm",
@@ -37323,6 +37689,8 @@
    "purl": "pkg:npm/signal-exit@3.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "signal-exit",
+    "version": "3.0.3",
     "author": "Ben Coe <ben@npmjs.com>",
     "licenses": [
      "ISC"
@@ -37333,7 +37701,7 @@
    }
   },
   {
-   "id": "51902f4b7763f28e",
+   "id": "5e6cee452744b1a3",
    "name": "smart-buffer",
    "version": "4.2.0",
    "type": "npm",
@@ -37361,6 +37729,8 @@
    "purl": "pkg:npm/smart-buffer@4.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "smart-buffer",
+    "version": "4.2.0",
     "author": "Josh Glazebrook",
     "licenses": [
      "MIT"
@@ -37371,7 +37741,7 @@
    }
   },
   {
-   "id": "f50ef8b8a217b5a0",
+   "id": "47b54a92ec8f0d27",
    "name": "socks",
    "version": "2.6.1",
    "type": "npm",
@@ -37393,6 +37763,8 @@
    "purl": "pkg:npm/socks@2.6.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "socks",
+    "version": "2.6.1",
     "author": "Josh Glazebrook",
     "licenses": [
      "MIT"
@@ -37403,7 +37775,7 @@
    }
   },
   {
-   "id": "4ac57bcce9dde171",
+   "id": "b8662874d5107492",
    "name": "socks-proxy-agent",
    "version": "6.1.0",
    "type": "npm",
@@ -37435,6 +37807,8 @@
    "purl": "pkg:npm/socks-proxy-agent@6.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "socks-proxy-agent",
+    "version": "6.1.0",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
     "licenses": [
      "MIT"
@@ -37445,7 +37819,7 @@
    }
   },
   {
-   "id": "61aab50c73a3876d",
+   "id": "580759f3b9d11748",
    "name": "spdx-correct",
    "version": "3.1.1",
    "type": "npm",
@@ -37473,6 +37847,8 @@
    "purl": "pkg:npm/spdx-correct@3.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "spdx-correct",
+    "version": "3.1.1",
     "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com)",
     "licenses": [
      "Apache-2.0"
@@ -37483,7 +37859,7 @@
    }
   },
   {
-   "id": "c79eb807f031f4b2",
+   "id": "9905f96040f75775",
    "name": "spdx-exceptions",
    "version": "2.3.0",
    "type": "npm",
@@ -37511,6 +37887,8 @@
    "purl": "pkg:npm/spdx-exceptions@2.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "spdx-exceptions",
+    "version": "2.3.0",
     "author": "The Linux Foundation",
     "licenses": [
      "CC-BY-3.0"
@@ -37521,7 +37899,7 @@
    }
   },
   {
-   "id": "3e7b3c1852f65422",
+   "id": "26eac69876b4ed5d",
    "name": "spdx-expression-parse",
    "version": "3.0.1",
    "type": "npm",
@@ -37553,6 +37931,8 @@
    "purl": "pkg:npm/spdx-expression-parse@3.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "spdx-expression-parse",
+    "version": "3.0.1",
     "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com)",
     "licenses": [
      "MIT"
@@ -37563,7 +37943,7 @@
    }
   },
   {
-   "id": "bd64b60e3e70944b",
+   "id": "10a0b998a86f7d3a",
    "name": "spdx-license-ids",
    "version": "3.0.10",
    "type": "npm",
@@ -37595,6 +37975,8 @@
    "purl": "pkg:npm/spdx-license-ids@3.0.10",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "spdx-license-ids",
+    "version": "3.0.10",
     "author": "Shinnosuke Watanabe (https://github.com/shinnn)",
     "licenses": [
      "CC0-1.0"
@@ -37605,7 +37987,7 @@
    }
   },
   {
-   "id": "b65344f84daa634b",
+   "id": "10fc332152bd9310",
    "name": "ssri",
    "version": "8.0.1",
    "type": "npm",
@@ -37627,6 +38009,8 @@
    "purl": "pkg:npm/ssri@8.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "ssri",
+    "version": "8.0.1",
     "author": "Kat Marchán <kzm@sykosomatic.org>",
     "licenses": [
      "ISC"
@@ -37637,7 +38021,7 @@
    }
   },
   {
-   "id": "8073b72d5de0c24e",
+   "id": "5c893555d51a2634",
    "name": "string-width",
    "version": "1.0.2",
    "type": "npm",
@@ -37665,6 +38049,8 @@
    "purl": "pkg:npm/string-width@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "string-width",
+    "version": "1.0.2",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37675,7 +38061,7 @@
    }
   },
   {
-   "id": "d8ff6e3e4422fb00",
+   "id": "d6d8e7fcb6029ebe",
    "name": "string-width",
    "version": "2.1.1",
    "type": "npm",
@@ -37703,6 +38089,8 @@
    "purl": "pkg:npm/string-width@2.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "string-width",
+    "version": "2.1.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37713,7 +38101,7 @@
    }
   },
   {
-   "id": "36cf82e4ed2a46c3",
+   "id": "e8cbb57789fc457b",
    "name": "string-width",
    "version": "4.2.2",
    "type": "npm",
@@ -37741,6 +38129,8 @@
    "purl": "pkg:npm/string-width@4.2.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "string-width",
+    "version": "4.2.2",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37751,7 +38141,7 @@
    }
   },
   {
-   "id": "8b89770770dc6d08",
+   "id": "f294592d600f3a06",
    "name": "string-width",
    "version": "4.2.3",
    "type": "npm",
@@ -37779,6 +38169,8 @@
    "purl": "pkg:npm/string-width@4.2.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "string-width",
+    "version": "4.2.3",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37789,7 +38181,7 @@
    }
   },
   {
-   "id": "c99d9f7735a60a64",
+   "id": "48afaa024bb2d7f9",
    "name": "string_decoder",
    "version": "1.3.0",
    "type": "npm",
@@ -37817,6 +38209,8 @@
    "purl": "pkg:npm/string_decoder@1.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "string_decoder",
+    "version": "1.3.0",
     "author": "",
     "licenses": [
      "MIT"
@@ -37827,7 +38221,7 @@
    }
   },
   {
-   "id": "40dba2c26b4b913b",
+   "id": "5870a265d113d189",
    "name": "stringify-package",
    "version": "1.0.1",
    "type": "npm",
@@ -37855,6 +38249,8 @@
    "purl": "pkg:npm/stringify-package@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "stringify-package",
+    "version": "1.0.1",
     "author": "Kat Marchán <kzm@zkat.tech>",
     "licenses": [
      "ISC"
@@ -37865,7 +38261,7 @@
    }
   },
   {
-   "id": "4c5f8c2a6bb62fed",
+   "id": "7ae6c2a41c6bb886",
    "name": "strip-ansi",
    "version": "3.0.1",
    "type": "npm",
@@ -37893,6 +38289,8 @@
    "purl": "pkg:npm/strip-ansi@3.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "strip-ansi",
+    "version": "3.0.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37903,7 +38301,7 @@
    }
   },
   {
-   "id": "8f378f0b527c7d96",
+   "id": "c1097cb753ad113",
    "name": "strip-ansi",
    "version": "4.0.0",
    "type": "npm",
@@ -37931,6 +38329,8 @@
    "purl": "pkg:npm/strip-ansi@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "strip-ansi",
+    "version": "4.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37941,7 +38341,7 @@
    }
   },
   {
-   "id": "a00e29842b5e40ce",
+   "id": "d00eb0cce24c0ee2",
    "name": "strip-ansi",
    "version": "6.0.0",
    "type": "npm",
@@ -37969,6 +38369,8 @@
    "purl": "pkg:npm/strip-ansi@6.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "strip-ansi",
+    "version": "6.0.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -37979,7 +38381,7 @@
    }
   },
   {
-   "id": "2ade11c8ae465e95",
+   "id": "ec70b9b752eec60e",
    "name": "strip-ansi",
    "version": "6.0.1",
    "type": "npm",
@@ -38007,6 +38409,8 @@
    "purl": "pkg:npm/strip-ansi@6.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "strip-ansi",
+    "version": "6.0.1",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -38017,7 +38421,7 @@
    }
   },
   {
-   "id": "d1d31b8abbf817e1",
+   "id": "b114f2614215e7b5",
    "name": "supports-color",
    "version": "7.2.0",
    "type": "npm",
@@ -38045,6 +38449,8 @@
    "purl": "pkg:npm/supports-color@7.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "supports-color",
+    "version": "7.2.0",
     "author": "Sindre Sorhus <sindresorhus@gmail.com> (sindresorhus.com)",
     "licenses": [
      "MIT"
@@ -38087,7 +38493,7 @@
     "cpe:2.3:a:sysvinit:sysvinit-utils:2.93-8:*:*:*:*:*:*:*",
     "cpe:2.3:a:sysvinit:sysvinit_utils:2.93-8:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/sysvinit-utils@2.93-8?arch=amd64",
+   "purl": "pkg:deb/debian/sysvinit-utils@2.93-8?arch=amd64&upstream=sysvinit&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "sysvinit-utils",
@@ -38225,7 +38631,7 @@
    "cpes": [
     "cpe:2.3:a:tar:tar:1.30\\+dfsg-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/tar@1.30+dfsg-6?arch=amd64",
+   "purl": "pkg:deb/debian/tar@1.30+dfsg-6?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "tar",
@@ -38664,7 +39070,7 @@
    }
   },
   {
-   "id": "651e774bda966aa",
+   "id": "d94287947d5461f9",
    "name": "tar",
    "version": "6.1.11",
    "type": "npm",
@@ -38686,6 +39092,8 @@
    "purl": "pkg:npm/tar@6.1.11",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "tar",
+    "version": "6.1.11",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -38696,7 +39104,7 @@
    }
   },
   {
-   "id": "141532cec5b3bd84",
+   "id": "1d44209f29e1c62",
    "name": "text-table",
    "version": "0.2.0",
    "type": "npm",
@@ -38724,6 +39132,8 @@
    "purl": "pkg:npm/text-table@0.2.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "text-table",
+    "version": "0.2.0",
     "author": "James Halliday <mail@substack.net> (http://substack.net)",
     "licenses": [
      "MIT"
@@ -38734,7 +39144,7 @@
    }
   },
   {
-   "id": "f7d77bfd37d86a6f",
+   "id": "9381355a3b2fd48b",
    "name": "tiny-relative-date",
    "version": "1.3.0",
    "type": "npm",
@@ -38766,6 +39176,8 @@
    "purl": "pkg:npm/tiny-relative-date@1.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "tiny-relative-date",
+    "version": "1.3.0",
     "author": "Joseph Wynn <joseph@wildlyinaccurate.com> (https://wildlyinaccurate.com/)",
     "licenses": [
      "MIT"
@@ -38776,7 +39188,7 @@
    }
   },
   {
-   "id": "e2e7cf06dc5dabb9",
+   "id": "9af67fa8995beb77",
    "name": "treeverse",
    "version": "1.0.4",
    "type": "npm",
@@ -38798,6 +39210,8 @@
    "purl": "pkg:npm/treeverse@1.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "treeverse",
+    "version": "1.0.4",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -38808,7 +39222,7 @@
    }
   },
   {
-   "id": "f618f72c8c022423",
+   "id": "f7b90ffc80c14438",
    "name": "typedarray-to-buffer",
    "version": "3.1.5",
    "type": "npm",
@@ -38840,6 +39254,8 @@
    "purl": "pkg:npm/typedarray-to-buffer@3.1.5",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "typedarray-to-buffer",
+    "version": "3.1.5",
     "author": "Feross Aboukhadijeh <feross@feross.org> (http://feross.org/)",
     "licenses": [
      "MIT"
@@ -38874,7 +39290,7 @@
    "cpes": [
     "cpe:2.3:a:tzdata:tzdata:2021a-0\\+deb10u3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/tzdata@2021a-0+deb10u3?arch=all",
+   "purl": "pkg:deb/debian/tzdata@2021a-0+deb10u3?arch=all&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "tzdata",
@@ -45153,7 +45569,7 @@
    }
   },
   {
-   "id": "4d5e94340b779309",
+   "id": "8aa4cf876d218034",
    "name": "unique-filename",
    "version": "1.1.1",
    "type": "npm",
@@ -45181,6 +45597,8 @@
    "purl": "pkg:npm/unique-filename@1.1.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "unique-filename",
+    "version": "1.1.1",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
     "licenses": [
      "ISC"
@@ -45191,7 +45609,7 @@
    }
   },
   {
-   "id": "ca05373203686958",
+   "id": "17c1024a9519a091",
    "name": "unique-slug",
    "version": "2.0.2",
    "type": "npm",
@@ -45219,6 +45637,8 @@
    "purl": "pkg:npm/unique-slug@2.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "unique-slug",
+    "version": "2.0.2",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org)",
     "licenses": [
      "ISC"
@@ -45229,7 +45649,7 @@
    }
   },
   {
-   "id": "c6cb35bc760b8cbc",
+   "id": "88060a2445553c9c",
    "name": "util-deprecate",
    "version": "1.0.2",
    "type": "npm",
@@ -45257,6 +45677,8 @@
    "purl": "pkg:npm/util-deprecate@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "util-deprecate",
+    "version": "1.0.2",
     "author": "Nathan Rajlich <nathan@tootallnate.net> (http://n8.io/)",
     "licenses": [
      "MIT"
@@ -45317,7 +45739,7 @@
     "cpe:2.3:a:util:util-linux:2.33.1-0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:util:util_linux:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/util-linux@2.33.1-0.1?arch=amd64",
+   "purl": "pkg:deb/debian/util-linux@2.33.1-0.1?arch=amd64&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "util-linux",
@@ -47708,7 +48130,7 @@
    }
   },
   {
-   "id": "ce926d1f129b662d",
+   "id": "46fe4c544fb530be",
    "name": "validate-npm-package-license",
    "version": "3.0.4",
    "type": "npm",
@@ -47744,6 +48166,8 @@
    "purl": "pkg:npm/validate-npm-package-license@3.0.4",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "validate-npm-package-license",
+    "version": "3.0.4",
     "author": "Kyle E. Mitchell <kyle@kemitchell.com> (https://kemitchell.com)",
     "licenses": [
      "Apache-2.0"
@@ -47754,7 +48178,7 @@
    }
   },
   {
-   "id": "26835a5e5df12b15",
+   "id": "9422124cae505733",
    "name": "validate-npm-package-name",
    "version": "3.0.0",
    "type": "npm",
@@ -47790,6 +48214,8 @@
    "purl": "pkg:npm/validate-npm-package-name@3.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "validate-npm-package-name",
+    "version": "3.0.0",
     "author": "zeke",
     "licenses": [
      "ISC"
@@ -47800,7 +48226,7 @@
    }
   },
   {
-   "id": "6bcf3d614c8a8024",
+   "id": "34e2534bbc74f996",
    "name": "walk-up-path",
    "version": "1.0.0",
    "type": "npm",
@@ -47832,6 +48258,8 @@
    "purl": "pkg:npm/walk-up-path@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "walk-up-path",
+    "version": "1.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (https://izs.me)",
     "licenses": [
      "ISC"
@@ -47842,7 +48270,7 @@
    }
   },
   {
-   "id": "49fbd64b85f58ae0",
+   "id": "f8c641f5954ca41d",
    "name": "wcwidth",
    "version": "1.0.1",
    "type": "npm",
@@ -47864,6 +48292,8 @@
    "purl": "pkg:npm/wcwidth@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "wcwidth",
+    "version": "1.0.1",
     "author": "Tim Oxley",
     "licenses": [
      "MIT"
@@ -47874,7 +48304,7 @@
    }
   },
   {
-   "id": "5fd29f49cb3673c8",
+   "id": "4c117857f2e2166a",
    "name": "which",
    "version": "2.0.2",
    "type": "npm",
@@ -47896,6 +48326,8 @@
    "purl": "pkg:npm/which@2.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "which",
+    "version": "2.0.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me)",
     "licenses": [
      "ISC"
@@ -47906,7 +48338,7 @@
    }
   },
   {
-   "id": "cb6057026b1bc9e8",
+   "id": "1311d41ad235e969",
    "name": "wide-align",
    "version": "1.1.3",
    "type": "npm",
@@ -47934,6 +48366,8 @@
    "purl": "pkg:npm/wide-align@1.1.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "wide-align",
+    "version": "1.1.3",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org/)",
     "licenses": [
      "ISC"
@@ -47944,7 +48378,7 @@
    }
   },
   {
-   "id": "f7accdfcfb5118c4",
+   "id": "a57a3e1c164c3adf",
    "name": "wrappy",
    "version": "1.0.2",
    "type": "npm",
@@ -47966,6 +48400,8 @@
    "purl": "pkg:npm/wrappy@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "wrappy",
+    "version": "1.0.2",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -47976,7 +48412,7 @@
    }
   },
   {
-   "id": "11c947b2eeafe4b4",
+   "id": "9438cacf4d4db072",
    "name": "write-file-atomic",
    "version": "3.0.3",
    "type": "npm",
@@ -48008,6 +48444,8 @@
    "purl": "pkg:npm/write-file-atomic@3.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "write-file-atomic",
+    "version": "3.0.3",
     "author": "Rebecca Turner <me@re-becca.org> (http://re-becca.org)",
     "licenses": [
      "ISC"
@@ -48018,7 +48456,7 @@
    }
   },
   {
-   "id": "56054288f345a0ff",
+   "id": "5e8d31fd0099574c",
    "name": "yallist",
    "version": "4.0.0",
    "type": "npm",
@@ -48040,6 +48478,8 @@
    "purl": "pkg:npm/yallist@4.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "yallist",
+    "version": "4.0.0",
     "author": "Isaac Z. Schlueter <i@izs.me> (http://blog.izs.me/)",
     "licenses": [
      "ISC"
@@ -48050,7 +48490,7 @@
    }
   },
   {
-   "id": "993ba8123c1eeb6b",
+   "id": "fa31e20370c72381",
    "name": "yarn",
    "version": "1.22.15",
    "type": "npm",
@@ -48072,6 +48512,8 @@
    "purl": "pkg:npm/yarn@1.22.15",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
+    "name": "yarn",
+    "version": "1.22.15",
     "author": "",
     "licenses": [
      "BSD-2-Clause"
@@ -48108,7 +48550,7 @@
    "cpes": [
     "cpe:2.3:a:zlib1g:zlib1g:1\\:1.2.11.dfsg-1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/zlib1g@1:1.2.11.dfsg-1?arch=amd64",
+   "purl": "pkg:deb/debian/zlib1g@1:1.2.11.dfsg-1?arch=amd64&upstream=zlib&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "zlib1g",
@@ -78872,7 +79314,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.36.0",
+  "version": "0.38.0",
   "configuration": {
    "configPath": "",
    "output": [

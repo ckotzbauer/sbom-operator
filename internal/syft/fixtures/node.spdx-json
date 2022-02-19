@@ -3,18 +3,18 @@
  "name": "node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-01-29T15:51:08.351596975Z",
+  "created": "2022-02-19T08:28:06.112917408Z",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.36.0"
+   "Tool: syft-0.38.0"
   ],
-  "licenseListVersion": "3.15"
+  "licenseListVersion": "3.16"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec-0a9cdf85-4bfe-46fa-aa4a-6e9e92ce04d8",
+ "documentNamespace": "https://anchore.com/syft/image/node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec-2386356e-78f6-41f4-b2f7-371a1f3c193c",
  "packages": [
   {
-   "SPDXID": "SPDXRef-11cd3578e062ef7f",
+   "SPDXID": "SPDXRef-94ec80f9f3f113f4",
    "name": "@gar/promisify",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/wraithgar/gar-promisify.git",
@@ -31,7 +31,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@gar%2Fpromisify@1.1.2",
+     "referenceLocator": "pkg:npm/@gar/promisify@1.1.2",
      "referenceType": "purl"
     }
    ],
@@ -42,7 +42,7 @@
    "versionInfo": "1.1.2"
   },
   {
-   "SPDXID": "SPDXRef-382598a8dd93c02e",
+   "SPDXID": "SPDXRef-1c0bd633b75a0d48",
    "name": "@isaacs/string-locale-compare",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/string-locale-compare",
@@ -109,7 +109,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@isaacs%2Fstring-locale-compare@1.1.0",
+     "referenceLocator": "pkg:npm/@isaacs/string-locale-compare@1.1.0",
      "referenceType": "purl"
     }
    ],
@@ -120,7 +120,7 @@
    "versionInfo": "1.1.0"
   },
   {
-   "SPDXID": "SPDXRef-79bf7e3fba64f584",
+   "SPDXID": "SPDXRef-d3dfafcfe3620097",
    "name": "@npmcli/arborist",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/arborist",
@@ -137,7 +137,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Farborist@4.0.3",
+     "referenceLocator": "pkg:npm/@npmcli/arborist@4.0.3",
      "referenceType": "purl"
     }
    ],
@@ -148,7 +148,7 @@
    "versionInfo": "4.0.3"
   },
   {
-   "SPDXID": "SPDXRef-15b6d8b67fe2b5e2",
+   "SPDXID": "SPDXRef-4d9a6e7764797f10",
    "name": "@npmcli/ci-detect",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/ci-detect.git",
@@ -195,7 +195,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fci-detect@1.4.0",
+     "referenceLocator": "pkg:npm/@npmcli/ci-detect@1.4.0",
      "referenceType": "purl"
     }
    ],
@@ -206,7 +206,7 @@
    "versionInfo": "1.4.0"
   },
   {
-   "SPDXID": "SPDXRef-75d28ea7e4969d1b",
+   "SPDXID": "SPDXRef-b5b7bbcf21cdae4a",
    "name": "@npmcli/config",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/config",
@@ -223,7 +223,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fconfig@2.3.0",
+     "referenceLocator": "pkg:npm/@npmcli/config@2.3.0",
      "referenceType": "purl"
     }
    ],
@@ -234,7 +234,7 @@
    "versionInfo": "2.3.0"
   },
   {
-   "SPDXID": "SPDXRef-fb9f5ac65296ebc7",
+   "SPDXID": "SPDXRef-ce3fc1ddcb6a5f65",
    "name": "@npmcli/disparity-colors",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/disparity-colors",
@@ -281,7 +281,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fdisparity-colors@1.0.1",
+     "referenceLocator": "pkg:npm/@npmcli/disparity-colors@1.0.1",
      "referenceType": "purl"
     }
    ],
@@ -292,7 +292,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-603b67c7b778012d",
+   "SPDXID": "SPDXRef-8e2427a2a77e38dc",
    "name": "@npmcli/fs",
    "licenseConcluded": "ISC",
    "downloadLocation": "NONE",
@@ -309,7 +309,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Ffs@1.0.0",
+     "referenceLocator": "pkg:npm/@npmcli/fs@1.0.0",
      "referenceType": "purl"
     }
    ],
@@ -320,7 +320,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-a17a590e95c14b19",
+   "SPDXID": "SPDXRef-1a365b67e9cc26df",
    "name": "@npmcli/git",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/git",
@@ -337,7 +337,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fgit@2.1.0",
+     "referenceLocator": "pkg:npm/@npmcli/git@2.1.0",
      "referenceType": "purl"
     }
    ],
@@ -348,7 +348,7 @@
    "versionInfo": "2.1.0"
   },
   {
-   "SPDXID": "SPDXRef-f7cabb7c90cb1866",
+   "SPDXID": "SPDXRef-a42102e6d4838ddb",
    "name": "@npmcli/installed-package-contents",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/installed-package-contents",
@@ -415,7 +415,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Finstalled-package-contents@1.0.7",
+     "referenceLocator": "pkg:npm/@npmcli/installed-package-contents@1.0.7",
      "referenceType": "purl"
     }
    ],
@@ -426,7 +426,7 @@
    "versionInfo": "1.0.7"
   },
   {
-   "SPDXID": "SPDXRef-9a460df522ab9d3",
+   "SPDXID": "SPDXRef-7c7aebecbdab7274",
    "name": "@npmcli/map-workspaces",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/map-workspaces",
@@ -473,7 +473,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fmap-workspaces@2.0.0",
+     "referenceLocator": "pkg:npm/@npmcli/map-workspaces@2.0.0",
      "referenceType": "purl"
     }
    ],
@@ -484,7 +484,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-136daa16c977aad9",
+   "SPDXID": "SPDXRef-db7baeb3eeed88d8",
    "name": "@npmcli/metavuln-calculator",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/metavuln-calculator",
@@ -531,7 +531,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fmetavuln-calculator@2.0.0",
+     "referenceLocator": "pkg:npm/@npmcli/metavuln-calculator@2.0.0",
      "referenceType": "purl"
     }
    ],
@@ -542,7 +542,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-8bfdcfb62edbd673",
+   "SPDXID": "SPDXRef-290e59cfaf33b99c",
    "name": "@npmcli/move-file",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/npm/move-file",
@@ -589,7 +589,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fmove-file@1.1.2",
+     "referenceLocator": "pkg:npm/@npmcli/move-file@1.1.2",
      "referenceType": "purl"
     }
    ],
@@ -599,7 +599,7 @@
    "versionInfo": "1.1.2"
   },
   {
-   "SPDXID": "SPDXRef-f9f9931d48c4255e",
+   "SPDXID": "SPDXRef-27a174e6b184fa30",
    "name": "@npmcli/name-from-folder",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/name-from-folder",
@@ -666,7 +666,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fname-from-folder@1.0.1",
+     "referenceLocator": "pkg:npm/@npmcli/name-from-folder@1.0.1",
      "referenceType": "purl"
     }
    ],
@@ -677,7 +677,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-92e8777f3de3e016",
+   "SPDXID": "SPDXRef-b08bf5be65d2ad66",
    "name": "@npmcli/node-gyp",
    "licenseConcluded": "ISC",
    "downloadLocation": "NONE",
@@ -724,7 +724,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fnode-gyp@1.0.2",
+     "referenceLocator": "pkg:npm/@npmcli/node-gyp@1.0.2",
      "referenceType": "purl"
     }
    ],
@@ -735,7 +735,7 @@
    "versionInfo": "1.0.2"
   },
   {
-   "SPDXID": "SPDXRef-1405096e7f4d4d88",
+   "SPDXID": "SPDXRef-e6aa32f9c35b7725",
    "name": "@npmcli/package-json",
    "licenseConcluded": "ISC",
    "downloadLocation": "NONE",
@@ -782,7 +782,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fpackage-json@1.0.1",
+     "referenceLocator": "pkg:npm/@npmcli/package-json@1.0.1",
      "referenceType": "purl"
     }
    ],
@@ -793,7 +793,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-7016dc956ce7c8c2",
+   "SPDXID": "SPDXRef-b5ee62aa2ba04f84",
    "name": "@npmcli/promise-spawn",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/promise-spawn",
@@ -840,7 +840,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Fpromise-spawn@1.3.2",
+     "referenceLocator": "pkg:npm/@npmcli/promise-spawn@1.3.2",
      "referenceType": "purl"
     }
    ],
@@ -851,7 +851,7 @@
    "versionInfo": "1.3.2"
   },
   {
-   "SPDXID": "SPDXRef-47eb560eaa700202",
+   "SPDXID": "SPDXRef-1940d960654bd80b",
    "name": "@npmcli/run-script",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/run-script.git",
@@ -898,7 +898,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@npmcli%2Frun-script@2.0.0",
+     "referenceLocator": "pkg:npm/@npmcli/run-script@2.0.0",
      "referenceType": "purl"
     }
    ],
@@ -909,7 +909,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-be6e0d5ee814e7dd",
+   "SPDXID": "SPDXRef-bd99ac7dcb81fce3",
    "name": "@tootallnate/once",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/TooTallNate/once.git",
@@ -926,7 +926,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:npm/@tootallnate%2Fonce@1.1.2",
+     "referenceLocator": "pkg:npm/@tootallnate/once@1.1.2",
      "referenceType": "purl"
     }
    ],
@@ -937,7 +937,7 @@
    "versionInfo": "1.1.2"
   },
   {
-   "SPDXID": "SPDXRef-39334a3e3997edac",
+   "SPDXID": "SPDXRef-528688bfaca540e8",
    "name": "abbrev",
    "licenseConcluded": "ISC",
    "downloadLocation": "http://github.com/isaacs/abbrev-js",
@@ -977,7 +977,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/adduser@3.118?arch=all",
+     "referenceLocator": "pkg:deb/debian/adduser@3.118?arch=all&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -988,7 +988,7 @@
    "versionInfo": "3.118"
   },
   {
-   "SPDXID": "SPDXRef-b4e3d35477ec8a35",
+   "SPDXID": "SPDXRef-3e33e48ab6686848",
    "name": "agent-base",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/TooTallNate/node-agent-base.git",
@@ -1046,7 +1046,7 @@
    "versionInfo": "6.0.2"
   },
   {
-   "SPDXID": "SPDXRef-96a4c15dbd3337e7",
+   "SPDXID": "SPDXRef-715efd8d922aacfa",
    "name": "agentkeepalive",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/node-modules/agentkeepalive.git",
@@ -1074,7 +1074,7 @@
    "versionInfo": "4.1.4"
   },
   {
-   "SPDXID": "SPDXRef-7a5a811fc062ba29",
+   "SPDXID": "SPDXRef-c9522b766056b33",
    "name": "aggregate-error",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/aggregate-error",
@@ -1132,7 +1132,7 @@
    "versionInfo": "3.1.0"
   },
   {
-   "SPDXID": "SPDXRef-2012b8763687d7a6",
+   "SPDXID": "SPDXRef-16290409221c6597",
    "name": "ansi-regex",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/ansi-regex",
@@ -1190,7 +1190,7 @@
    "versionInfo": "2.1.1"
   },
   {
-   "SPDXID": "SPDXRef-f5aa1284a6f19ac9",
+   "SPDXID": "SPDXRef-6270b5e0e0cd748",
    "name": "ansi-regex",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/ansi-regex",
@@ -1248,7 +1248,7 @@
    "versionInfo": "3.0.0"
   },
   {
-   "SPDXID": "SPDXRef-6ad305763c84c9c3",
+   "SPDXID": "SPDXRef-35df86ea4f4ffaf4",
    "name": "ansi-regex",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/ansi-regex",
@@ -1306,7 +1306,7 @@
    "versionInfo": "5.0.0"
   },
   {
-   "SPDXID": "SPDXRef-fc24d79ef4ef1ac7",
+   "SPDXID": "SPDXRef-9886b5c0f7c0bb4",
    "name": "ansi-regex",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/ansi-regex",
@@ -1364,7 +1364,7 @@
    "versionInfo": "5.0.1"
   },
   {
-   "SPDXID": "SPDXRef-3826111862ed2854",
+   "SPDXID": "SPDXRef-33f9649e6511dd38",
    "name": "ansi-styles",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/ansi-styles",
@@ -1422,7 +1422,7 @@
    "versionInfo": "4.3.0"
   },
   {
-   "SPDXID": "SPDXRef-39fc671ae597086c",
+   "SPDXID": "SPDXRef-2f7e9ade8efd540b",
    "name": "ansicolors",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/thlorenz/ansicolors.git",
@@ -1450,7 +1450,7 @@
    "versionInfo": "0.3.2"
   },
   {
-   "SPDXID": "SPDXRef-95143ad43d446556",
+   "SPDXID": "SPDXRef-89b886e7e4b97f25",
    "name": "ansistyles",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/thlorenz/ansistyles.git",
@@ -1478,7 +1478,7 @@
    "versionInfo": "0.1.3"
   },
   {
-   "SPDXID": "SPDXRef-4935878c4a4f1e83",
+   "SPDXID": "SPDXRef-c0cbe7c83a94e4d7",
    "name": "aproba",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/aproba",
@@ -1507,7 +1507,7 @@
    "versionInfo": "1.2.0"
   },
   {
-   "SPDXID": "SPDXRef-fc5e2c652cc67665",
+   "SPDXID": "SPDXRef-ad4f3d80ad8ac6ab",
    "name": "aproba",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/aproba",
@@ -1548,7 +1548,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/apt@1.8.2.3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/apt@1.8.2.3?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -1559,7 +1559,7 @@
    "versionInfo": "1.8.2.3"
   },
   {
-   "SPDXID": "SPDXRef-f1723cbb32b7de9",
+   "SPDXID": "SPDXRef-9a825589ebb215de",
    "name": "archy",
    "licenseConcluded": "MIT",
    "downloadLocation": "http://github.com/substack/node-archy.git",
@@ -1587,7 +1587,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-960feb6cfb2ea42a",
+   "SPDXID": "SPDXRef-a17a02c3579a691d",
    "name": "are-we-there-yet",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/are-we-there-yet.git",
@@ -1686,7 +1686,7 @@
    "versionInfo": "1.1.6"
   },
   {
-   "SPDXID": "SPDXRef-4361ea969e9bfcd9",
+   "SPDXID": "SPDXRef-c7ddd226ee541ca3",
    "name": "are-we-there-yet",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/are-we-there-yet.git",
@@ -1785,7 +1785,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-c022a591944e3ae5",
+   "SPDXID": "SPDXRef-f02f1975df7c1ed3",
    "name": "asap",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/kriskowal/asap.git",
@@ -1812,7 +1812,7 @@
    "versionInfo": "2.0.6"
   },
   {
-   "SPDXID": "SPDXRef-c2971b58dca112d1",
+   "SPDXID": "SPDXRef-6b4291322943e821",
    "name": "balanced-match",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/juliangruber/balanced-match.git",
@@ -1908,7 +1908,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/base-files@10.3+deb10u11?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/base-files@10.3+deb10u11?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -1956,7 +1956,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/base-passwd@3.5.46?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/base-passwd@3.5.46?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -1979,7 +1979,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/bash@5.0-4?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/bash@5.0-4?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -1990,7 +1990,7 @@
    "versionInfo": "5.0-4"
   },
   {
-   "SPDXID": "SPDXRef-8670a00738e275d3",
+   "SPDXID": "SPDXRef-41592318bff9737d",
    "name": "bin-links",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/npm/bin-links.git",
@@ -2047,7 +2047,7 @@
    "versionInfo": "2.3.0"
   },
   {
-   "SPDXID": "SPDXRef-5b6a2bb74b22a250",
+   "SPDXID": "SPDXRef-778245582c71f973",
    "name": "binary-extensions",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/binary-extensions",
@@ -2105,7 +2105,7 @@
    "versionInfo": "2.2.0"
   },
   {
-   "SPDXID": "SPDXRef-e28f38c0b89821e9",
+   "SPDXID": "SPDXRef-78d1e8ad7ded6c74",
    "name": "brace-expansion",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/juliangruber/brace-expansion.git",
@@ -2176,7 +2176,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64&upstream=util-linux@2.33.1-0.1&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -2187,7 +2187,7 @@
    "versionInfo": "1:2.33.1-0.1"
   },
   {
-   "SPDXID": "SPDXRef-5b0dc4253fca7ae1",
+   "SPDXID": "SPDXRef-9aa30b28b43625c9",
    "name": "builtins",
    "licenseConcluded": "MIT",
    "downloadLocation": "juliangruber/builtins",
@@ -2214,7 +2214,7 @@
    "versionInfo": "1.0.3"
   },
   {
-   "SPDXID": "SPDXRef-6559f03fcfe7aa12",
+   "SPDXID": "SPDXRef-458316b76ed125b3",
    "name": "cacache",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/cacache",
@@ -2241,7 +2241,7 @@
    "versionInfo": "15.3.0"
   },
   {
-   "SPDXID": "SPDXRef-23eef4813ae49fb6",
+   "SPDXID": "SPDXRef-8dcf797795a4cb65",
    "name": "chalk",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/chalk",
@@ -2268,7 +2268,7 @@
    "versionInfo": "4.1.2"
   },
   {
-   "SPDXID": "SPDXRef-ac717497636743bd",
+   "SPDXID": "SPDXRef-683c25ae63116f39",
    "name": "chownr",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/chownr.git",
@@ -2296,7 +2296,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-aabde49bf762c2f",
+   "SPDXID": "SPDXRef-a442b6fb58f1a6b6",
    "name": "cidr-regex",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "silverwind/cidr-regex",
@@ -2354,7 +2354,7 @@
    "versionInfo": "3.1.1"
   },
   {
-   "SPDXID": "SPDXRef-e7dacb910000c097",
+   "SPDXID": "SPDXRef-b65dcbd881962e8d",
    "name": "clean-stack",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/clean-stack",
@@ -2412,7 +2412,7 @@
    "versionInfo": "2.2.0"
   },
   {
-   "SPDXID": "SPDXRef-7b1bb0751512d5f4",
+   "SPDXID": "SPDXRef-a1ba86a3e796b5a4",
    "name": "cli-columns",
    "licenseConcluded": "MIT",
    "downloadLocation": "shannonmoeller/cli-columns",
@@ -2471,7 +2471,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-22cc2e77c265f668",
+   "SPDXID": "SPDXRef-220a5f08ea11f80e",
    "name": "cli-table3",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/cli-table/cli-table3.git",
@@ -2530,7 +2530,7 @@
    "versionInfo": "0.6.0"
   },
   {
-   "SPDXID": "SPDXRef-ee2aee748fe117cb",
+   "SPDXID": "SPDXRef-27e3861f4c83b0cb",
    "name": "clone",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/pvorb/node-clone.git",
@@ -2558,7 +2558,7 @@
    "versionInfo": "1.0.4"
   },
   {
-   "SPDXID": "SPDXRef-f5e943d62b35799a",
+   "SPDXID": "SPDXRef-85490e2471c9bd6f",
    "name": "cmd-shim",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/cmd-shim.git",
@@ -2615,7 +2615,7 @@
    "versionInfo": "4.1.0"
   },
   {
-   "SPDXID": "SPDXRef-259dab8d8cf2caf",
+   "SPDXID": "SPDXRef-89c17517d37c36b8",
    "name": "code-point-at",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/code-point-at",
@@ -2693,7 +2693,7 @@
    "versionInfo": "1.1.0"
   },
   {
-   "SPDXID": "SPDXRef-ff2eefc5a1cfb67e",
+   "SPDXID": "SPDXRef-5baee6c6c1e8d809",
    "name": "color-convert",
    "licenseConcluded": "MIT",
    "downloadLocation": "Qix-/color-convert",
@@ -2751,7 +2751,7 @@
    "versionInfo": "2.0.1"
   },
   {
-   "SPDXID": "SPDXRef-d302643fc066cefb",
+   "SPDXID": "SPDXRef-4d9941ec168798bb",
    "name": "color-name",
    "licenseConcluded": "MIT",
    "downloadLocation": "git@github.com:colorjs/color-name.git",
@@ -2810,7 +2810,7 @@
    "versionInfo": "1.1.4"
   },
   {
-   "SPDXID": "SPDXRef-a56816ef0ac4ce1a",
+   "SPDXID": "SPDXRef-da22cd266d83c18b",
    "name": "color-support",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/color-support.git",
@@ -2868,7 +2868,7 @@
    "versionInfo": "1.1.3"
   },
   {
-   "SPDXID": "SPDXRef-99bf76e8cbee467",
+   "SPDXID": "SPDXRef-ec898b6ae0178310",
    "name": "colors",
    "licenseConcluded": "MIT",
    "downloadLocation": "http://github.com/Marak/colors.js.git",
@@ -2897,7 +2897,7 @@
    "versionInfo": "1.4.0"
   },
   {
-   "SPDXID": "SPDXRef-b7f53be5e87e96d8",
+   "SPDXID": "SPDXRef-e59e623fe24cf073",
    "name": "columnify",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/timoxley/columnify.git",
@@ -2926,7 +2926,7 @@
    "versionInfo": "1.5.4"
   },
   {
-   "SPDXID": "SPDXRef-807e90d10072d27f",
+   "SPDXID": "SPDXRef-8bab87d8011d9b3e",
    "name": "common-ancestor-path",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/common-ancestor-path",
@@ -3004,7 +3004,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-43d49668b9f03bb",
+   "SPDXID": "SPDXRef-e2341b44190ecda0",
    "name": "concat-map",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/substack/node-concat-map.git",
@@ -3062,7 +3062,7 @@
    "versionInfo": "0.0.1"
   },
   {
-   "SPDXID": "SPDXRef-ffdb216b1a235a92",
+   "SPDXID": "SPDXRef-cbf3ff47d518445b",
    "name": "console-control-strings",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/console-control-strings",
@@ -3140,7 +3140,7 @@
    "versionInfo": "1.1.0"
   },
   {
-   "SPDXID": "SPDXRef-8130c3265ca15b98",
+   "SPDXID": "SPDXRef-b51491080fd72d42",
    "name": "corepack",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/nodejs/corepack.git",
@@ -3180,7 +3180,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/coreutils@8.30-3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/coreutils@8.30-3?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3203,7 +3203,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/dash@0.5.10.2-5?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/dash@0.5.10.2-5?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3226,7 +3226,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/debconf@1.5.71+deb10u1?arch=all",
+     "referenceLocator": "pkg:deb/debian/debconf@1.5.71+deb10u1?arch=all&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3294,7 +3294,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/debian-archive-keyring@2019.1+deb10u1?arch=all",
+     "referenceLocator": "pkg:deb/debian/debian-archive-keyring@2019.1+deb10u1?arch=all&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3317,7 +3317,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/debianutils@4.8.6.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/debianutils@4.8.6.1?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3328,7 +3328,7 @@
    "versionInfo": "4.8.6.1"
   },
   {
-   "SPDXID": "SPDXRef-8366410f283c23e2",
+   "SPDXID": "SPDXRef-d26859e804a5ad95",
    "name": "debug",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/visionmedia/debug.git",
@@ -3356,7 +3356,7 @@
    "versionInfo": "4.3.2"
   },
   {
-   "SPDXID": "SPDXRef-c84f9a557a2567de",
+   "SPDXID": "SPDXRef-c3b1032d4358096c",
    "name": "debuglog",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/sam-github/node-debuglog.git",
@@ -3384,7 +3384,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-a3a181f9688e5405",
+   "SPDXID": "SPDXRef-6e3430ec53a6e49a",
    "name": "defaults",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/tmpvar/defaults.git",
@@ -3412,7 +3412,7 @@
    "versionInfo": "1.0.3"
   },
   {
-   "SPDXID": "SPDXRef-35a5ed2d47893b52",
+   "SPDXID": "SPDXRef-596a6a74f8a21343",
    "name": "delegates",
    "licenseConcluded": "MIT",
    "downloadLocation": "visionmedia/node-delegates",
@@ -3439,7 +3439,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-ae0b40d8ecdd418a",
+   "SPDXID": "SPDXRef-9dfec1696638897",
    "name": "depd",
    "licenseConcluded": "MIT",
    "downloadLocation": "dougwilson/nodejs-depd",
@@ -3467,7 +3467,7 @@
    "versionInfo": "1.1.2"
   },
   {
-   "SPDXID": "SPDXRef-c4e526b36aab81ab",
+   "SPDXID": "SPDXRef-63c3aeaaa6ce03a0",
    "name": "dezalgo",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/dezalgo",
@@ -3496,7 +3496,7 @@
    "versionInfo": "1.0.3"
   },
   {
-   "SPDXID": "SPDXRef-172cfaf32e4e08ae",
+   "SPDXID": "SPDXRef-caca0725bea3b45f",
    "name": "diff",
    "licenseConcluded": "BSD-3-Clause",
    "downloadLocation": "git://github.com/kpdecker/jsdiff.git",
@@ -3535,7 +3535,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/diffutils@1:3.7-3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/diffutils@1:3.7-3?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3558,7 +3558,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/dpkg@1.19.7?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/dpkg@1.19.7?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3581,7 +3581,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/e2fsprogs@1.44.5-1+deb10u3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/e2fsprogs@1.44.5-1+deb10u3?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3592,7 +3592,7 @@
    "versionInfo": "1.44.5-1+deb10u3"
   },
   {
-   "SPDXID": "SPDXRef-58aff350b96b5765",
+   "SPDXID": "SPDXRef-35cc8b1a2386e338",
    "name": "emoji-regex",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/mathiasbynens/emoji-regex.git",
@@ -3651,7 +3651,7 @@
    "versionInfo": "8.0.0"
   },
   {
-   "SPDXID": "SPDXRef-82e90b84e271e2d9",
+   "SPDXID": "SPDXRef-cf74ecc19bd2dc78",
    "name": "encoding",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/andris9/encoding.git",
@@ -3679,7 +3679,7 @@
    "versionInfo": "0.1.13"
   },
   {
-   "SPDXID": "SPDXRef-3b8b79b5e281e140",
+   "SPDXID": "SPDXRef-78c1684a47533b4e",
    "name": "env-paths",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/env-paths",
@@ -3737,7 +3737,7 @@
    "versionInfo": "2.2.1"
   },
   {
-   "SPDXID": "SPDXRef-abb1ba4a0ff394d9",
+   "SPDXID": "SPDXRef-efefdf7eb7d8ca3e",
    "name": "err-code",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/IndigoUnited/js-err-code.git",
@@ -3795,7 +3795,7 @@
    "versionInfo": "2.0.3"
   },
   {
-   "SPDXID": "SPDXRef-5c910491a938d919",
+   "SPDXID": "SPDXRef-e3e09311180e09d4",
    "name": "fastest-levenshtein",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/ka-weihe/fastest-levenshtein.git",
@@ -3866,7 +3866,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/fdisk@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/fdisk@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3889,7 +3889,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/findutils@4.6.0+git+20190209-2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/findutils@4.6.0+git+20190209-2?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -3900,7 +3900,7 @@
    "versionInfo": "4.6.0+git+20190209-2"
   },
   {
-   "SPDXID": "SPDXRef-cb0c816b2efaa4d8",
+   "SPDXID": "SPDXRef-284237ca61f19693",
    "name": "fs-minipass",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/fs-minipass.git",
@@ -3959,7 +3959,7 @@
    "versionInfo": "2.1.0"
   },
   {
-   "SPDXID": "SPDXRef-d99194e588cbcb58",
+   "SPDXID": "SPDXRef-2fe6b1a5781b96fc",
    "name": "fs.realpath",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/fs.realpath.git",
@@ -3987,7 +3987,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-1588351f2542b6e",
+   "SPDXID": "SPDXRef-8c8b031c5acfff3b",
    "name": "function-bind",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/Raynos/function-bind.git",
@@ -4046,7 +4046,7 @@
    "versionInfo": "1.1.1"
   },
   {
-   "SPDXID": "SPDXRef-1f3614be2d820253",
+   "SPDXID": "SPDXRef-f52da8f5f4846aac",
    "name": "gauge",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/gauge",
@@ -4075,7 +4075,7 @@
    "versionInfo": "2.7.4"
   },
   {
-   "SPDXID": "SPDXRef-b8c11b6b2890348d",
+   "SPDXID": "SPDXRef-94630f65cbffb74b",
    "name": "gauge",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/gauge",
@@ -4161,7 +4161,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64&upstream=gcc-8&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -4172,7 +4172,7 @@
    "versionInfo": "8.3.0-6"
   },
   {
-   "SPDXID": "SPDXRef-395e24035b9dcf45",
+   "SPDXID": "SPDXRef-ebfd81840751943e",
    "name": "glob",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/node-glob.git",
@@ -4212,7 +4212,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/gpgv@2.2.12-1+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/gpgv@2.2.12-1+deb10u1?arch=amd64&upstream=gnupg2&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -4223,7 +4223,7 @@
    "versionInfo": "2.2.12-1+deb10u1"
   },
   {
-   "SPDXID": "SPDXRef-14620b07c096bd75",
+   "SPDXID": "SPDXRef-2aeb0540b65d51d4",
    "name": "graceful-fs",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/isaacs/node-graceful-fs",
@@ -4292,7 +4292,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/grep@3.3-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/grep@3.3-1?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -4315,7 +4315,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/gzip@1.9-3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/gzip@1.9-3?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -4326,7 +4326,7 @@
    "versionInfo": "1.9-3"
   },
   {
-   "SPDXID": "SPDXRef-55553592935b9256",
+   "SPDXID": "SPDXRef-e117e3fd290f3cf",
    "name": "has",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/tarruda/has.git",
@@ -4355,7 +4355,7 @@
    "versionInfo": "1.0.3"
   },
   {
-   "SPDXID": "SPDXRef-dacdf19a8f19342c",
+   "SPDXID": "SPDXRef-3f8e9ec1b760f5fa",
    "name": "has-flag",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/has-flag",
@@ -4413,7 +4413,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-8ec3bb938ae90190",
+   "SPDXID": "SPDXRef-80a71ffdab90d9d7",
    "name": "has-unicode",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/has-unicode",
@@ -4472,7 +4472,7 @@
    "versionInfo": "2.0.1"
   },
   {
-   "SPDXID": "SPDXRef-7bd767b445319b8d",
+   "SPDXID": "SPDXRef-9bb7e0add6fd1a58",
    "name": "hosted-git-info",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/hosted-git-info.git",
@@ -4563,7 +4563,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/hostname@3.21?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/hostname@3.21?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -4574,7 +4574,7 @@
    "versionInfo": "3.21"
   },
   {
-   "SPDXID": "SPDXRef-3b724175ea989463",
+   "SPDXID": "SPDXRef-8ed112b51209cd31",
    "name": "http-cache-semantics",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "https://github.com/kornelski/http-cache-semantics.git",
@@ -4652,7 +4652,7 @@
    "versionInfo": "4.1.0"
   },
   {
-   "SPDXID": "SPDXRef-789c8dd60c6d87",
+   "SPDXID": "SPDXRef-cf60300f9fbc0bf6",
    "name": "http-proxy-agent",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/TooTallNate/node-http-proxy-agent.git",
@@ -4730,7 +4730,7 @@
    "versionInfo": "4.0.1"
   },
   {
-   "SPDXID": "SPDXRef-84cd6652b0f5e872",
+   "SPDXID": "SPDXRef-568ab4e35b2d1061",
    "name": "https-proxy-agent",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/TooTallNate/node-https-proxy-agent.git",
@@ -4808,7 +4808,7 @@
    "versionInfo": "5.0.0"
   },
   {
-   "SPDXID": "SPDXRef-7bee4bed663c0ae6",
+   "SPDXID": "SPDXRef-fd43153ec6b3fba",
    "name": "humanize-ms",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/node-modules/humanize-ms",
@@ -4866,7 +4866,7 @@
    "versionInfo": "1.2.1"
   },
   {
-   "SPDXID": "SPDXRef-5c5a3b22dd0aa571",
+   "SPDXID": "SPDXRef-a7f16b0baff70db8",
    "name": "iconv-lite",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/ashtuchkin/iconv-lite.git",
@@ -4925,7 +4925,7 @@
    "versionInfo": "0.6.3"
   },
   {
-   "SPDXID": "SPDXRef-4231d5eaecfcf4d1",
+   "SPDXID": "SPDXRef-6b4cd26333545d0",
    "name": "ignore-walk",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/ignore-walk.git",
@@ -4983,7 +4983,7 @@
    "versionInfo": "4.0.1"
   },
   {
-   "SPDXID": "SPDXRef-bdc306d280a0480a",
+   "SPDXID": "SPDXRef-d33a8107c94b5dda",
    "name": "imurmurhash",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/jensyt/imurmurhash-js",
@@ -5012,7 +5012,7 @@
    "versionInfo": "0.1.4"
   },
   {
-   "SPDXID": "SPDXRef-a68f2f1ed416090",
+   "SPDXID": "SPDXRef-6aa34a7d6d05901d",
    "name": "indent-string",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/indent-string",
@@ -5070,7 +5070,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-233eeb37aab483d5",
+   "SPDXID": "SPDXRef-b1265ad9ef9bcac1",
    "name": "infer-owner",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/infer-owner",
@@ -5128,7 +5128,7 @@
    "versionInfo": "1.0.4"
   },
   {
-   "SPDXID": "SPDXRef-50ac65e535e9425b",
+   "SPDXID": "SPDXRef-e4794f2d9e723b91",
    "name": "inflight",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/inflight.git",
@@ -5157,7 +5157,7 @@
    "versionInfo": "1.0.6"
   },
   {
-   "SPDXID": "SPDXRef-ab209346f2d5bb89",
+   "SPDXID": "SPDXRef-f9c635bb41b302b7",
    "name": "inherits",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/inherits",
@@ -5184,7 +5184,7 @@
    "versionInfo": "2.0.4"
   },
   {
-   "SPDXID": "SPDXRef-a7c5b9173c2ecf25",
+   "SPDXID": "SPDXRef-1c594a7b0a837e83",
    "name": "ini",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/ini.git",
@@ -5212,7 +5212,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-cc63074fdd097e4",
+   "SPDXID": "SPDXRef-71428152ae61be06",
    "name": "init-package-json",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/init-package-json.git",
@@ -5347,7 +5347,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/init-system-helpers@1.56+nmu1?arch=all",
+     "referenceLocator": "pkg:deb/debian/init-system-helpers@1.56+nmu1?arch=all&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -5358,7 +5358,7 @@
    "versionInfo": "1.56+nmu1"
   },
   {
-   "SPDXID": "SPDXRef-1bfe44f1785c7d81",
+   "SPDXID": "SPDXRef-74b48435ba1ce4ad",
    "name": "ip",
    "licenseConcluded": "MIT",
    "downloadLocation": "http://github.com/indutny/node-ip.git",
@@ -5387,7 +5387,7 @@
    "versionInfo": "1.1.5"
   },
   {
-   "SPDXID": "SPDXRef-c7f11785f2d9c73c",
+   "SPDXID": "SPDXRef-c06b90ff89c0f48a",
    "name": "ip-regex",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/ip-regex",
@@ -5445,7 +5445,7 @@
    "versionInfo": "4.3.0"
   },
   {
-   "SPDXID": "SPDXRef-721918d6e5a4ec5f",
+   "SPDXID": "SPDXRef-8cf4d6c1e2d77603",
    "name": "is-cidr",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "silverwind/is-cidr",
@@ -5503,7 +5503,7 @@
    "versionInfo": "4.0.2"
   },
   {
-   "SPDXID": "SPDXRef-81d62573948e4ff0",
+   "SPDXID": "SPDXRef-7d376fe7e1706b5d",
    "name": "is-core-module",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/inspect-js/is-core-module.git",
@@ -5582,7 +5582,7 @@
    "versionInfo": "2.7.0"
   },
   {
-   "SPDXID": "SPDXRef-42210316875e5584",
+   "SPDXID": "SPDXRef-246e6470b9036994",
    "name": "is-fullwidth-code-point",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/is-fullwidth-code-point",
@@ -5680,7 +5680,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-401a4afe18bed557",
+   "SPDXID": "SPDXRef-1d35e0ffc639efdf",
    "name": "is-fullwidth-code-point",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/is-fullwidth-code-point",
@@ -5778,7 +5778,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-ab2a9a2130902015",
+   "SPDXID": "SPDXRef-4538bad03f681f40",
    "name": "is-fullwidth-code-point",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/is-fullwidth-code-point",
@@ -5876,7 +5876,7 @@
    "versionInfo": "3.0.0"
   },
   {
-   "SPDXID": "SPDXRef-eb87a6431374d0cb",
+   "SPDXID": "SPDXRef-dce5dcc09f20ca66",
    "name": "is-fullwidth-code-point",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/is-fullwidth-code-point",
@@ -5974,7 +5974,7 @@
    "versionInfo": "3.0.0"
   },
   {
-   "SPDXID": "SPDXRef-fa7c127ac5c2f4c8",
+   "SPDXID": "SPDXRef-6ba4a9ff18f3a157",
    "name": "is-lambda",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/watson/is-lambda.git",
@@ -6033,7 +6033,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-a94d391255dde311",
+   "SPDXID": "SPDXRef-772bd241301facaa",
    "name": "is-typedarray",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/hughsk/is-typedarray.git",
@@ -6092,7 +6092,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-f2b3b84e5b2c34b5",
+   "SPDXID": "SPDXRef-cafce18676c98ff2",
    "name": "isexe",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/isexe.git",
@@ -6121,7 +6121,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-fd57c71f88a0cfd9",
+   "SPDXID": "SPDXRef-c40a9c8d32b1d4da",
    "name": "json-parse-even-better-errors",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/npm/json-parse-even-better-errors",
@@ -6239,7 +6239,7 @@
    "versionInfo": "2.3.1"
   },
   {
-   "SPDXID": "SPDXRef-86f3e908062c4cce",
+   "SPDXID": "SPDXRef-7585a9f8101b98bb",
    "name": "json-stringify-nice",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/isaacs/json-stringify-nice",
@@ -6317,7 +6317,7 @@
    "versionInfo": "1.1.4"
   },
   {
-   "SPDXID": "SPDXRef-bdae01a0e93e8b05",
+   "SPDXID": "SPDXRef-3efead92501f9c5d",
    "name": "jsonparse",
    "licenseConcluded": "MIT",
    "downloadLocation": "http://github.com/creationix/jsonparse.git",
@@ -6345,7 +6345,7 @@
    "versionInfo": "1.3.1"
   },
   {
-   "SPDXID": "SPDXRef-2389f1def14fbc7a",
+   "SPDXID": "SPDXRef-ca064d92b154227e",
    "name": "just-diff",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/angus-c/just",
@@ -6403,7 +6403,7 @@
    "versionInfo": "3.1.1"
   },
   {
-   "SPDXID": "SPDXRef-8f51e90faa4ce353",
+   "SPDXID": "SPDXRef-e5d5c71432b8cb28",
    "name": "just-diff-apply",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/angus-c/just",
@@ -6493,7 +6493,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libacl1@2.2.53-4?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libacl1@2.2.53-4?arch=amd64&upstream=acl&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6541,7 +6541,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libapt-pkg5.0@1.8.2.3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libapt-pkg5.0@1.8.2.3?arch=amd64&upstream=apt&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6564,7 +6564,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libattr1@1:2.4.48-4?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libattr1@1:2.4.48-4?arch=amd64&upstream=attr&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6612,7 +6612,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libaudit-common@1:2.8.4-3?arch=all",
+     "referenceLocator": "pkg:deb/debian/libaudit-common@1:2.8.4-3?arch=all&upstream=audit&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6635,7 +6635,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libaudit1@1:2.8.4-3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libaudit1@1:2.8.4-3?arch=amd64&upstream=audit&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6658,7 +6658,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libblkid1@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libblkid1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6706,7 +6706,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libbz2-1.0@1.0.6-9.2~deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libbz2-1.0@1.0.6-9.2~deb10u1?arch=amd64&upstream=bzip2&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6754,7 +6754,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libc-bin@2.28-10?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libc-bin@2.28-10?arch=amd64&upstream=glibc&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6777,7 +6777,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libc6@2.28-10?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libc6@2.28-10?arch=amd64&upstream=glibc&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6825,7 +6825,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libcap-ng0@0.7.9-2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libcap-ng0@0.7.9-2?arch=amd64&upstream=libcap-ng&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6873,7 +6873,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libcom-err2@1.44.5-1+deb10u3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libcom-err2@1.44.5-1+deb10u3?arch=amd64&upstream=e2fsprogs&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6896,7 +6896,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.5?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.5?arch=amd64&upstream=db5.3&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6919,7 +6919,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libdebconfclient0@0.249?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libdebconfclient0@0.249?arch=amd64&upstream=cdebconf&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6942,7 +6942,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libext2fs2@1.44.5-1+deb10u3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libext2fs2@1.44.5-1+deb10u3?arch=amd64&upstream=e2fsprogs&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6965,7 +6965,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libfdisk1@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libfdisk1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -6988,7 +6988,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libffi6@3.2.1-9?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libffi6@3.2.1-9?arch=amd64&upstream=libffi&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7011,7 +7011,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64&upstream=gcc-8@8.3.0-6&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7034,7 +7034,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libgcrypt20@1.8.4-5+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libgcrypt20@1.8.4-5+deb10u1?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7057,7 +7057,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libgmp10@2:6.1.2+dfsg-4?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libgmp10@2:6.1.2+dfsg-4?arch=amd64&upstream=gmp&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7080,7 +7080,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libgnutls30@3.6.7-4+deb10u7?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libgnutls30@3.6.7-4+deb10u7?arch=amd64&upstream=gnutls28&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7128,7 +7128,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libgpg-error0@1.35-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libgpg-error0@1.35-1?arch=amd64&upstream=libgpg-error&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7151,7 +7151,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libhogweed4@3.4.1-1+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libhogweed4@3.4.1-1+deb10u1?arch=amd64&upstream=nettle&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7199,7 +7199,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libidn2-0@2.0.5-1+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libidn2-0@2.0.5-1+deb10u1?arch=amd64&upstream=libidn2&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7247,7 +7247,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/liblz4-1@1.8.3-1+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/liblz4-1@1.8.3-1+deb10u1?arch=amd64&upstream=lz4&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7270,7 +7270,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/liblzma5@5.2.4-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/liblzma5@5.2.4-1?arch=amd64&upstream=xz-utils&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7293,7 +7293,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libmount1@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libmount1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7316,7 +7316,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libncursesw6@6.1+20181013-2+deb10u2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libncursesw6@6.1+20181013-2+deb10u2?arch=amd64&upstream=ncurses&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7339,7 +7339,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libnettle6@3.4.1-1+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libnettle6@3.4.1-1+deb10u1?arch=amd64&upstream=nettle&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7350,7 +7350,7 @@
    "versionInfo": "3.4.1-1+deb10u1"
   },
   {
-   "SPDXID": "SPDXRef-6b49b3b97a50228c",
+   "SPDXID": "SPDXRef-eb371f8eb5c99778",
    "name": "libnpmaccess",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmaccess.git",
@@ -7379,7 +7379,7 @@
    "versionInfo": "4.0.3"
   },
   {
-   "SPDXID": "SPDXRef-1a359ee7d3185183",
+   "SPDXID": "SPDXRef-40aba889bc91c3fa",
    "name": "libnpmdiff",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmdiff",
@@ -7407,7 +7407,7 @@
    "versionInfo": "2.0.4"
   },
   {
-   "SPDXID": "SPDXRef-4779e11160939070",
+   "SPDXID": "SPDXRef-d2c29a1f0cfeb0ff",
    "name": "libnpmexec",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmexec",
@@ -7435,7 +7435,7 @@
    "versionInfo": "3.0.1"
   },
   {
-   "SPDXID": "SPDXRef-b2298eb576e56512",
+   "SPDXID": "SPDXRef-ef4cb663d5c1e64f",
    "name": "libnpmfund",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmfund",
@@ -7463,7 +7463,7 @@
    "versionInfo": "2.0.1"
   },
   {
-   "SPDXID": "SPDXRef-c5011428fe91f0b6",
+   "SPDXID": "SPDXRef-e6cf74e74f4f6337",
    "name": "libnpmhook",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmhook",
@@ -7491,7 +7491,7 @@
    "versionInfo": "6.0.3"
   },
   {
-   "SPDXID": "SPDXRef-e4957103e074bdf2",
+   "SPDXID": "SPDXRef-9e187dce1da06297",
    "name": "libnpmorg",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmorg.git",
@@ -7520,7 +7520,7 @@
    "versionInfo": "2.0.3"
   },
   {
-   "SPDXID": "SPDXRef-b9aecb7a994d126d",
+   "SPDXID": "SPDXRef-8c2d924de7e42269",
    "name": "libnpmpack",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmpack.git",
@@ -7549,7 +7549,7 @@
    "versionInfo": "3.0.0"
   },
   {
-   "SPDXID": "SPDXRef-676dc27453e48ef2",
+   "SPDXID": "SPDXRef-ad1bf1510703ab79",
    "name": "libnpmpublish",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmpublish.git",
@@ -7578,7 +7578,7 @@
    "versionInfo": "4.0.2"
   },
   {
-   "SPDXID": "SPDXRef-7ecf7dc5d415e113",
+   "SPDXID": "SPDXRef-266d3295ff49b5fe",
    "name": "libnpmsearch",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmsearch.git",
@@ -7607,7 +7607,7 @@
    "versionInfo": "3.1.2"
   },
   {
-   "SPDXID": "SPDXRef-8862b1b6ab86ebcc",
+   "SPDXID": "SPDXRef-93ba8fe120279446",
    "name": "libnpmteam",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/libnpmteam.git",
@@ -7636,7 +7636,7 @@
    "versionInfo": "2.0.4"
   },
   {
-   "SPDXID": "SPDXRef-80bd4fe454dc43ac",
+   "SPDXID": "SPDXRef-4ccc570dcd9f2d4d",
    "name": "libnpmversion",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/libnpmversion",
@@ -7701,7 +7701,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libp11-kit0@0.23.15-2+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libp11-kit0@0.23.15-2+deb10u1?arch=amd64&upstream=p11-kit&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7749,7 +7749,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libpam-modules@1.3.1-5?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libpam-modules@1.3.1-5?arch=amd64&upstream=pam&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7817,7 +7817,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libpam-modules-bin@1.3.1-5?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libpam-modules-bin@1.3.1-5?arch=amd64&upstream=pam&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7865,7 +7865,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libpam-runtime@1.3.1-5?arch=all",
+     "referenceLocator": "pkg:deb/debian/libpam-runtime@1.3.1-5?arch=all&upstream=pam&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7888,7 +7888,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libpam0g@1.3.1-5?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libpam0g@1.3.1-5?arch=amd64&upstream=pam&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7911,7 +7911,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libpcre3@2:8.39-12?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libpcre3@2:8.39-12?arch=amd64&upstream=pcre3&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7934,7 +7934,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libseccomp2@2.3.3-4?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libseccomp2@2.3.3-4?arch=amd64&upstream=libseccomp&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -7957,7 +7957,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64&upstream=libselinux@2.8-1&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8005,7 +8005,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libsemanage-common@2.8-2?arch=all",
+     "referenceLocator": "pkg:deb/debian/libsemanage-common@2.8-2?arch=all&upstream=libsemanage&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8028,7 +8028,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libsemanage1@2.8-2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libsemanage1@2.8-2?arch=amd64&upstream=libsemanage&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8051,7 +8051,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libsepol1@2.8-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libsepol1@2.8-1?arch=amd64&upstream=libsepol&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8074,7 +8074,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libsmartcols1@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libsmartcols1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8097,7 +8097,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libss2@1.44.5-1+deb10u3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libss2@1.44.5-1+deb10u3?arch=amd64&upstream=e2fsprogs&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8120,7 +8120,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libstdc++6@8.3.0-6?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libstdc++6@8.3.0-6?arch=amd64&upstream=gcc-8&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8143,7 +8143,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libsystemd0@241-7~deb10u8?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libsystemd0@241-7~deb10u8?arch=amd64&upstream=systemd&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8191,7 +8191,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libtasn1-6@4.13-3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libtasn1-6@4.13-3?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8214,7 +8214,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libtinfo6@6.1+20181013-2+deb10u2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libtinfo6@6.1+20181013-2+deb10u2?arch=amd64&upstream=ncurses&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8237,7 +8237,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libudev1@241-7~deb10u8?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libudev1@241-7~deb10u8?arch=amd64&upstream=systemd&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8260,7 +8260,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libunistring2@0.9.10-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libunistring2@0.9.10-1?arch=amd64&upstream=libunistring&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8283,7 +8283,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libuuid1@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libuuid1@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8306,7 +8306,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/libzstd1@1.3.8+dfsg-3+deb10u2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/libzstd1@1.3.8+dfsg-3+deb10u2?arch=amd64&upstream=libzstd&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8329,7 +8329,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/login@1:4.5-1.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/login@1:4.5-1.1?arch=amd64&upstream=shadow&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8340,7 +8340,7 @@
    "versionInfo": "1:4.5-1.1"
   },
   {
-   "SPDXID": "SPDXRef-65881b50e106718e",
+   "SPDXID": "SPDXRef-f6c3ce8b29417a91",
    "name": "lru-cache",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/node-lru-cache.git",
@@ -8435,7 +8435,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/lsb-base@10.2019051400?arch=all",
+     "referenceLocator": "pkg:deb/debian/lsb-base@10.2019051400?arch=all&upstream=lsb&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8446,7 +8446,7 @@
    "versionInfo": "10.2019051400"
   },
   {
-   "SPDXID": "SPDXRef-bc08431ac5fc2476",
+   "SPDXID": "SPDXRef-bc4ce8ad95cbbaf2",
    "name": "make-fetch-happen",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/make-fetch-happen",
@@ -8536,7 +8536,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64&upstream=mawk@1.3.3-17&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -8547,7 +8547,7 @@
    "versionInfo": "1.3.3-17+b3"
   },
   {
-   "SPDXID": "SPDXRef-2323591111c2758a",
+   "SPDXID": "SPDXRef-8c28b7a1c9a7c523",
    "name": "minimatch",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/minimatch.git",
@@ -8575,7 +8575,7 @@
    "versionInfo": "3.0.4"
   },
   {
-   "SPDXID": "SPDXRef-b8b395dcf7fca9d",
+   "SPDXID": "SPDXRef-88492bdafc80038",
    "name": "minipass",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/minipass.git",
@@ -8603,7 +8603,7 @@
    "versionInfo": "3.1.5"
   },
   {
-   "SPDXID": "SPDXRef-9584910e6f3ab4d3",
+   "SPDXID": "SPDXRef-e660594996c62ac9",
    "name": "minipass-collect",
    "licenseConcluded": "ISC",
    "downloadLocation": "NONE",
@@ -8661,7 +8661,7 @@
    "versionInfo": "1.0.2"
   },
   {
-   "SPDXID": "SPDXRef-8c5c2ac8ef75bf5e",
+   "SPDXID": "SPDXRef-50b0ad0ee19c3c38",
    "name": "minipass-fetch",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/npm/minipass-fetch.git",
@@ -8718,7 +8718,7 @@
    "versionInfo": "1.4.1"
   },
   {
-   "SPDXID": "SPDXRef-67430f484819f9a1",
+   "SPDXID": "SPDXRef-82357d379959e64a",
    "name": "minipass-flush",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/minipass-flush.git",
@@ -8776,7 +8776,7 @@
    "versionInfo": "1.0.5"
   },
   {
-   "SPDXID": "SPDXRef-d5aaaf13388405b4",
+   "SPDXID": "SPDXRef-6ac32987e57fdae",
    "name": "minipass-json-stream",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/npm/minipass-json-stream.git",
@@ -8854,7 +8854,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-59e6a139a3aa73e8",
+   "SPDXID": "SPDXRef-325335d149a3bd81",
    "name": "minipass-pipeline",
    "licenseConcluded": "ISC",
    "downloadLocation": "NONE",
@@ -8912,7 +8912,7 @@
    "versionInfo": "1.2.4"
   },
   {
-   "SPDXID": "SPDXRef-5230f6e79d3d5722",
+   "SPDXID": "SPDXRef-d5f3e80432a2c611",
    "name": "minipass-sized",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/minipass-sized.git",
@@ -8970,7 +8970,7 @@
    "versionInfo": "1.0.3"
   },
   {
-   "SPDXID": "SPDXRef-708cfff5948fbf9d",
+   "SPDXID": "SPDXRef-591f0ceb3129388f",
    "name": "minizlib",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/isaacs/minizlib.git",
@@ -8998,7 +8998,7 @@
    "versionInfo": "2.1.2"
   },
   {
-   "SPDXID": "SPDXRef-a4734f56d8ea2485",
+   "SPDXID": "SPDXRef-d6040d1c1e028fe8",
    "name": "mkdirp",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/isaacs/node-mkdirp.git",
@@ -9025,7 +9025,7 @@
    "versionInfo": "1.0.4"
   },
   {
-   "SPDXID": "SPDXRef-446c4779dda14f58",
+   "SPDXID": "SPDXRef-248779266aa9909",
    "name": "mkdirp-infer-owner",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/mkdirp-infer-owner",
@@ -9115,7 +9115,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/mount@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/mount@2.33.1-0.1?arch=amd64&upstream=util-linux&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -9126,7 +9126,7 @@
    "versionInfo": "2.33.1-0.1"
   },
   {
-   "SPDXID": "SPDXRef-403a9f858566a1ac",
+   "SPDXID": "SPDXRef-7b31834dc1dd3a1a",
    "name": "ms",
    "licenseConcluded": "MIT",
    "downloadLocation": "zeit/ms",
@@ -9153,7 +9153,7 @@
    "versionInfo": "2.1.2"
   },
   {
-   "SPDXID": "SPDXRef-301cf6a76fcbeb3c",
+   "SPDXID": "SPDXRef-dc553bdf0315ca61",
    "name": "ms",
    "licenseConcluded": "MIT",
    "downloadLocation": "vercel/ms",
@@ -9180,7 +9180,7 @@
    "versionInfo": "2.1.3"
   },
   {
-   "SPDXID": "SPDXRef-c75243293b98875c",
+   "SPDXID": "SPDXRef-e8ec214c55bbc879",
    "name": "mute-stream",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/mute-stream",
@@ -9275,7 +9275,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/ncurses-base@6.1+20181013-2+deb10u2?arch=all",
+     "referenceLocator": "pkg:deb/debian/ncurses-base@6.1+20181013-2+deb10u2?arch=all&upstream=ncurses&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -9323,7 +9323,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/ncurses-bin@6.1+20181013-2+deb10u2?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/ncurses-bin@6.1+20181013-2+deb10u2?arch=amd64&upstream=ncurses&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -9334,7 +9334,7 @@
    "versionInfo": "6.1+20181013-2+deb10u2"
   },
   {
-   "SPDXID": "SPDXRef-36f1791562c163e7",
+   "SPDXID": "SPDXRef-6de85d5fd23b48e8",
    "name": "negotiator",
    "licenseConcluded": "MIT",
    "downloadLocation": "jshttp/negotiator",
@@ -9361,7 +9361,7 @@
    "versionInfo": "0.6.2"
   },
   {
-   "SPDXID": "SPDXRef-e2c8c0aabe0a856b",
+   "SPDXID": "SPDXRef-944d6d36b2adfc7a",
    "name": "node-gyp",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/nodejs/node-gyp.git",
@@ -9419,7 +9419,7 @@
    "versionInfo": "8.3.0"
   },
   {
-   "SPDXID": "SPDXRef-dd728b487ce8e59d",
+   "SPDXID": "SPDXRef-ef7fa82e8bcb412b",
    "name": "nopt",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/nopt.git",
@@ -9447,7 +9447,7 @@
    "versionInfo": "5.0.0"
   },
   {
-   "SPDXID": "SPDXRef-8db90875ecf1c842",
+   "SPDXID": "SPDXRef-7dafbcb2b8600897",
    "name": "normalize-package-data",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "git://github.com/npm/normalize-package-data.git",
@@ -9525,7 +9525,7 @@
    "versionInfo": "3.0.3"
   },
   {
-   "SPDXID": "SPDXRef-1784d4cbe8361689",
+   "SPDXID": "SPDXRef-79e4e541812f6cf8",
    "name": "npm",
    "licenseConcluded": "Artistic-2.0",
    "downloadLocation": "https://github.com/npm/cli",
@@ -9554,7 +9554,7 @@
    "versionInfo": "8.1.2"
   },
   {
-   "SPDXID": "SPDXRef-3e52aad9ba878980",
+   "SPDXID": "SPDXRef-dc948f10616b982d",
    "name": "npm-audit-report",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/npm-audit-report.git",
@@ -9633,7 +9633,7 @@
    "versionInfo": "2.1.5"
   },
   {
-   "SPDXID": "SPDXRef-4c004d110fc341a6",
+   "SPDXID": "SPDXRef-876093fbc173c466",
    "name": "npm-bundled",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/npm-bundled.git",
@@ -9691,7 +9691,7 @@
    "versionInfo": "1.1.2"
   },
   {
-   "SPDXID": "SPDXRef-f5bb7902bb4b930d",
+   "SPDXID": "SPDXRef-b3b2c40ba7d746e9",
    "name": "npm-init",
    "licenseConcluded": "NOASSERTION",
    "downloadLocation": "NONE",
@@ -9748,7 +9748,7 @@
    "versionInfo": "0.0.0"
   },
   {
-   "SPDXID": "SPDXRef-396a9fb6f37ac4b8",
+   "SPDXID": "SPDXRef-e163a0ee5fc0e692",
    "name": "npm-install-checks",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "git://github.com/npm/npm-install-checks.git",
@@ -9825,7 +9825,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-3a53d02cc548cce1",
+   "SPDXID": "SPDXRef-e7ee0fc76131a389",
    "name": "npm-normalize-package-bin",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/npm-normalize-package-bin",
@@ -9923,7 +9923,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-ff2fca08194caa81",
+   "SPDXID": "SPDXRef-8a3ada309cf62c06",
    "name": "npm-package-arg",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/npm-package-arg",
@@ -10002,7 +10002,7 @@
    "versionInfo": "8.1.5"
   },
   {
-   "SPDXID": "SPDXRef-bf29ba107b02e05d",
+   "SPDXID": "SPDXRef-714d21944a0f72fa",
    "name": "npm-packlist",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/npm-packlist.git",
@@ -10060,7 +10060,7 @@
    "versionInfo": "3.0.0"
   },
   {
-   "SPDXID": "SPDXRef-d7803d5c7dd71b4e",
+   "SPDXID": "SPDXRef-c80fef333c290038",
    "name": "npm-pick-manifest",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/npm-pick-manifest",
@@ -10138,7 +10138,7 @@
    "versionInfo": "6.1.1"
   },
   {
-   "SPDXID": "SPDXRef-e6be7033ceee4ff0",
+   "SPDXID": "SPDXRef-b9fde5c4587da58",
    "name": "npm-profile",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/npm-profile.git",
@@ -10196,7 +10196,7 @@
    "versionInfo": "5.0.4"
   },
   {
-   "SPDXID": "SPDXRef-4802ec54d39091f9",
+   "SPDXID": "SPDXRef-f63d267c2e7b951c",
    "name": "npm-registry-fetch",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/npm-registry-fetch",
@@ -10274,7 +10274,7 @@
    "versionInfo": "11.0.0"
   },
   {
-   "SPDXID": "SPDXRef-85efdc43f7d4f83a",
+   "SPDXID": "SPDXRef-ec6538370a854375",
    "name": "npm-user-validate",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "git://github.com/npm/npm-user-validate.git",
@@ -10352,7 +10352,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-b1278f7d02c95941",
+   "SPDXID": "SPDXRef-18951abd724a91e8",
    "name": "npmlog",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/npmlog.git",
@@ -10380,7 +10380,7 @@
    "versionInfo": "4.1.2"
   },
   {
-   "SPDXID": "SPDXRef-900a0c8024f6d3c2",
+   "SPDXID": "SPDXRef-f8b1926485be99e7",
    "name": "npmlog",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/npmlog.git",
@@ -10408,7 +10408,7 @@
    "versionInfo": "5.0.1"
   },
   {
-   "SPDXID": "SPDXRef-963a02f438846019",
+   "SPDXID": "SPDXRef-402ee7bb9cebf742",
    "name": "number-is-nan",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/number-is-nan",
@@ -10486,7 +10486,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-1a44df497b636e52",
+   "SPDXID": "SPDXRef-5c67d1cbc1aeab24",
    "name": "object-assign",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/object-assign",
@@ -10544,7 +10544,7 @@
    "versionInfo": "4.1.1"
   },
   {
-   "SPDXID": "SPDXRef-d580f0ca4259336b",
+   "SPDXID": "SPDXRef-f84cc822e69a694a",
    "name": "once",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/once",
@@ -10572,7 +10572,7 @@
    "versionInfo": "1.4.0"
   },
   {
-   "SPDXID": "SPDXRef-260fbc24413ee517",
+   "SPDXID": "SPDXRef-cb5fa74c0ccd0815",
    "name": "opener",
    "licenseConcluded": "NOASSERTION",
    "downloadLocation": "domenic/opener",
@@ -10600,7 +10600,7 @@
    "versionInfo": "1.5.2"
   },
   {
-   "SPDXID": "SPDXRef-bb2046c727d58d92",
+   "SPDXID": "SPDXRef-49d1d76a2c187b22",
    "name": "p-map",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/p-map",
@@ -10658,7 +10658,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-fac6bd483a5e6ecb",
+   "SPDXID": "SPDXRef-c8f70adb1d8773d2",
    "name": "pacote",
    "licenseConcluded": "ISC",
    "downloadLocation": "git@github.com:npm/pacote",
@@ -10686,7 +10686,7 @@
    "versionInfo": "12.0.2"
   },
   {
-   "SPDXID": "SPDXRef-8e0441b06b9c9e99",
+   "SPDXID": "SPDXRef-9e3a3d5e1195ee52",
    "name": "parse-conflict-json",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/parse-conflict-json.git",
@@ -10776,7 +10776,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/passwd@1:4.5-1.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/passwd@1:4.5-1.1?arch=amd64&upstream=shadow&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -10787,7 +10787,7 @@
    "versionInfo": "1:4.5-1.1"
   },
   {
-   "SPDXID": "SPDXRef-5b07ba7db21e798",
+   "SPDXID": "SPDXRef-34dc88c73cdb4e4c",
    "name": "path-is-absolute",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/path-is-absolute",
@@ -10902,7 +10902,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/perl-base@5.28.1-6+deb10u1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/perl-base@5.28.1-6+deb10u1?arch=amd64&upstream=perl&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -10913,7 +10913,7 @@
    "versionInfo": "5.28.1-6+deb10u1"
   },
   {
-   "SPDXID": "SPDXRef-add13fd687379008",
+   "SPDXID": "SPDXRef-ceb2bb57bc2d0e0f",
    "name": "proc-log",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/proc-log",
@@ -10971,7 +10971,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-d69a3fc742e6553c",
+   "SPDXID": "SPDXRef-53394066f88f8760",
    "name": "promise-all-reject-late",
    "licenseConcluded": "ISC",
    "downloadLocation": "NONE",
@@ -11069,7 +11069,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-ca6ba4cdc13cfa3b",
+   "SPDXID": "SPDXRef-c0ba2bc5b5184d54",
    "name": "promise-call-limit",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/promise-call-limit",
@@ -11147,7 +11147,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-877d636faf15438",
+   "SPDXID": "SPDXRef-67724f5c32189912",
    "name": "promise-inflight",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/iarna/promise-inflight.git",
@@ -11206,7 +11206,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-ef2fd10c45624bc6",
+   "SPDXID": "SPDXRef-f2c1670e8dcb8bd1",
    "name": "promise-retry",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/IndigoUnited/node-promise-retry.git",
@@ -11264,7 +11264,7 @@
    "versionInfo": "2.0.1"
   },
   {
-   "SPDXID": "SPDXRef-199c402d3718a544",
+   "SPDXID": "SPDXRef-add2bd3c4e7e2dd0",
    "name": "promzard",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/promzard",
@@ -11292,7 +11292,7 @@
    "versionInfo": "0.3.0"
   },
   {
-   "SPDXID": "SPDXRef-6e0087e8b9a6b927",
+   "SPDXID": "SPDXRef-cdd262f9b8afdf90",
    "name": "qrcode-terminal",
    "licenseConcluded": "NOASSERTION",
    "downloadLocation": "https://github.com/gtanner/qrcode-terminal",
@@ -11350,7 +11350,7 @@
    "versionInfo": "0.12.0"
   },
   {
-   "SPDXID": "SPDXRef-b4b1facf6f14bfdd",
+   "SPDXID": "SPDXRef-26e8236a34e9e778",
    "name": "read",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/read.git",
@@ -11378,7 +11378,7 @@
    "versionInfo": "1.0.7"
   },
   {
-   "SPDXID": "SPDXRef-41fddfad0f1f5cc8",
+   "SPDXID": "SPDXRef-10ffe2542f3a2236",
    "name": "read-cmd-shim",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/read-cmd-shim.git",
@@ -11456,7 +11456,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-6af36e9cc59574e0",
+   "SPDXID": "SPDXRef-de5d1041a9099e20",
    "name": "read-package-json",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/read-package-json.git",
@@ -11534,7 +11534,7 @@
    "versionInfo": "4.1.1"
   },
   {
-   "SPDXID": "SPDXRef-984d6d57c35ca7f1",
+   "SPDXID": "SPDXRef-3fd6d7106c4c4f12",
    "name": "read-package-json-fast",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/read-package-json-fast.git",
@@ -11632,7 +11632,7 @@
    "versionInfo": "2.0.3"
   },
   {
-   "SPDXID": "SPDXRef-c1ee802cf6f6cc78",
+   "SPDXID": "SPDXRef-11045fb8c6fd6ea2",
    "name": "readable-stream",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/nodejs/readable-stream",
@@ -11689,7 +11689,7 @@
    "versionInfo": "3.6.0"
   },
   {
-   "SPDXID": "SPDXRef-ecb48a87c70ddfb2",
+   "SPDXID": "SPDXRef-b722f0d3e5c04a20",
    "name": "readdir-scoped-modules",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/readdir-scoped-modules",
@@ -11768,7 +11768,7 @@
    "versionInfo": "1.1.0"
   },
   {
-   "SPDXID": "SPDXRef-9c154a86ba3e1c1f",
+   "SPDXID": "SPDXRef-cbc2208a4843e840",
    "name": "retry",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/tim-kos/node-retry.git",
@@ -11797,7 +11797,7 @@
    "versionInfo": "0.12.0"
   },
   {
-   "SPDXID": "SPDXRef-ec413fa5f7b8cace",
+   "SPDXID": "SPDXRef-309100afd567be4a",
    "name": "rimraf",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/rimraf.git",
@@ -11825,7 +11825,7 @@
    "versionInfo": "3.0.2"
   },
   {
-   "SPDXID": "SPDXRef-a1ae7a6e612c6dc5",
+   "SPDXID": "SPDXRef-fcb7a0dedbd60cd5",
    "name": "safe-buffer",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/feross/safe-buffer.git",
@@ -11884,7 +11884,7 @@
    "versionInfo": "5.2.1"
   },
   {
-   "SPDXID": "SPDXRef-af7122fe242bb5ce",
+   "SPDXID": "SPDXRef-6c5c6cccf43d92de",
    "name": "safer-buffer",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/ChALkeR/safer-buffer.git",
@@ -11954,7 +11954,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/sed@4.7-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/sed@4.7-1?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -11965,7 +11965,7 @@
    "versionInfo": "4.7-1"
   },
   {
-   "SPDXID": "SPDXRef-7a7ebea9ab5a969c",
+   "SPDXID": "SPDXRef-8ab9256b0a482451",
    "name": "semver",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/node-semver",
@@ -11992,7 +11992,7 @@
    "versionInfo": "7.3.5"
   },
   {
-   "SPDXID": "SPDXRef-b93c21aafcfdf769",
+   "SPDXID": "SPDXRef-a05693ddaeb8d027",
    "name": "set-blocking",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/yargs/set-blocking.git",
@@ -12051,7 +12051,7 @@
    "versionInfo": "2.0.0"
   },
   {
-   "SPDXID": "SPDXRef-5fe154b1b28dca62",
+   "SPDXID": "SPDXRef-acb6f6d0d7e6d043",
    "name": "signal-exit",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/tapjs/signal-exit.git",
@@ -12110,7 +12110,7 @@
    "versionInfo": "3.0.3"
   },
   {
-   "SPDXID": "SPDXRef-51902f4b7763f28e",
+   "SPDXID": "SPDXRef-5e6cee452744b1a3",
    "name": "smart-buffer",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/JoshGlazebrook/smart-buffer.git",
@@ -12169,7 +12169,7 @@
    "versionInfo": "4.2.0"
   },
   {
-   "SPDXID": "SPDXRef-f50ef8b8a217b5a0",
+   "SPDXID": "SPDXRef-47b54a92ec8f0d27",
    "name": "socks",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/JoshGlazebrook/socks.git",
@@ -12198,7 +12198,7 @@
    "versionInfo": "2.6.1"
   },
   {
-   "SPDXID": "SPDXRef-4ac57bcce9dde171",
+   "SPDXID": "SPDXRef-b8662874d5107492",
    "name": "socks-proxy-agent",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/TooTallNate/node-socks-proxy-agent.git",
@@ -12276,7 +12276,7 @@
    "versionInfo": "6.1.0"
   },
   {
-   "SPDXID": "SPDXRef-61aab50c73a3876d",
+   "SPDXID": "SPDXRef-580759f3b9d11748",
    "name": "spdx-correct",
    "licenseConcluded": "Apache-2.0",
    "downloadLocation": "jslicense/spdx-correct.js",
@@ -12334,7 +12334,7 @@
    "versionInfo": "3.1.1"
   },
   {
-   "SPDXID": "SPDXRef-c79eb807f031f4b2",
+   "SPDXID": "SPDXRef-9905f96040f75775",
    "name": "spdx-exceptions",
    "licenseConcluded": "CC-BY-3.0",
    "downloadLocation": "kemitchell/spdx-exceptions.json",
@@ -12392,7 +12392,7 @@
    "versionInfo": "2.3.0"
   },
   {
-   "SPDXID": "SPDXRef-3e7b3c1852f65422",
+   "SPDXID": "SPDXRef-26eac69876b4ed5d",
    "name": "spdx-expression-parse",
    "licenseConcluded": "MIT",
    "downloadLocation": "jslicense/spdx-expression-parse.js",
@@ -12470,7 +12470,7 @@
    "versionInfo": "3.0.1"
   },
   {
-   "SPDXID": "SPDXRef-bd64b60e3e70944b",
+   "SPDXID": "SPDXRef-10a0b998a86f7d3a",
    "name": "spdx-license-ids",
    "licenseConcluded": "CC0-1.0",
    "downloadLocation": "jslicense/spdx-license-ids",
@@ -12548,7 +12548,7 @@
    "versionInfo": "3.0.10"
   },
   {
-   "SPDXID": "SPDXRef-b65344f84daa634b",
+   "SPDXID": "SPDXRef-10fc332152bd9310",
    "name": "ssri",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/ssri",
@@ -12576,7 +12576,7 @@
    "versionInfo": "8.0.1"
   },
   {
-   "SPDXID": "SPDXRef-8073b72d5de0c24e",
+   "SPDXID": "SPDXRef-5c893555d51a2634",
    "name": "string-width",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/string-width",
@@ -12634,7 +12634,7 @@
    "versionInfo": "1.0.2"
   },
   {
-   "SPDXID": "SPDXRef-d8ff6e3e4422fb00",
+   "SPDXID": "SPDXRef-d6d8e7fcb6029ebe",
    "name": "string-width",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/string-width",
@@ -12692,7 +12692,7 @@
    "versionInfo": "2.1.1"
   },
   {
-   "SPDXID": "SPDXRef-36cf82e4ed2a46c3",
+   "SPDXID": "SPDXRef-e8cbb57789fc457b",
    "name": "string-width",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/string-width",
@@ -12750,7 +12750,7 @@
    "versionInfo": "4.2.2"
   },
   {
-   "SPDXID": "SPDXRef-8b89770770dc6d08",
+   "SPDXID": "SPDXRef-f294592d600f3a06",
    "name": "string-width",
    "licenseConcluded": "MIT",
    "downloadLocation": "sindresorhus/string-width",
@@ -12808,7 +12808,7 @@
    "versionInfo": "4.2.3"
   },
   {
-   "SPDXID": "SPDXRef-c99d9f7735a60a64",
+   "SPDXID": "SPDXRef-48afaa024bb2d7f9",
    "name": "string_decoder",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/nodejs/string_decoder.git",
@@ -12866,7 +12866,7 @@
    "versionInfo": "1.3.0"
   },
   {
-   "SPDXID": "SPDXRef-40dba2c26b4b913b",
+   "SPDXID": "SPDXRef-5870a265d113d189",
    "name": "stringify-package",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/stringify-package.git",
@@ -12925,7 +12925,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-4c5f8c2a6bb62fed",
+   "SPDXID": "SPDXRef-7ae6c2a41c6bb886",
    "name": "strip-ansi",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/strip-ansi",
@@ -12983,7 +12983,7 @@
    "versionInfo": "3.0.1"
   },
   {
-   "SPDXID": "SPDXRef-8f378f0b527c7d96",
+   "SPDXID": "SPDXRef-c1097cb753ad113",
    "name": "strip-ansi",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/strip-ansi",
@@ -13041,7 +13041,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-a00e29842b5e40ce",
+   "SPDXID": "SPDXRef-d00eb0cce24c0ee2",
    "name": "strip-ansi",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/strip-ansi",
@@ -13099,7 +13099,7 @@
    "versionInfo": "6.0.0"
   },
   {
-   "SPDXID": "SPDXRef-2ade11c8ae465e95",
+   "SPDXID": "SPDXRef-ec70b9b752eec60e",
    "name": "strip-ansi",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/strip-ansi",
@@ -13157,7 +13157,7 @@
    "versionInfo": "6.0.1"
   },
   {
-   "SPDXID": "SPDXRef-d1d31b8abbf817e1",
+   "SPDXID": "SPDXRef-b114f2614215e7b5",
    "name": "supports-color",
    "licenseConcluded": "MIT",
    "downloadLocation": "chalk/supports-color",
@@ -13252,7 +13252,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/sysvinit-utils@2.93-8?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/sysvinit-utils@2.93-8?arch=amd64&upstream=sysvinit&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -13275,7 +13275,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/tar@1.30+dfsg-6?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/tar@1.30+dfsg-6?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -13286,7 +13286,7 @@
    "versionInfo": "1.30+dfsg-6"
   },
   {
-   "SPDXID": "SPDXRef-651e774bda966aa",
+   "SPDXID": "SPDXRef-d94287947d5461f9",
    "name": "tar",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/node-tar.git",
@@ -13314,7 +13314,7 @@
    "versionInfo": "6.1.11"
   },
   {
-   "SPDXID": "SPDXRef-141532cec5b3bd84",
+   "SPDXID": "SPDXRef-1d44209f29e1c62",
    "name": "text-table",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/substack/text-table.git",
@@ -13373,7 +13373,7 @@
    "versionInfo": "0.2.0"
   },
   {
-   "SPDXID": "SPDXRef-f7d77bfd37d86a6f",
+   "SPDXID": "SPDXRef-9381355a3b2fd48b",
    "name": "tiny-relative-date",
    "licenseConcluded": "MIT",
    "downloadLocation": "https://github.com/wildlyinaccurate/relative-date.git",
@@ -13451,7 +13451,7 @@
    "versionInfo": "1.3.0"
   },
   {
-   "SPDXID": "SPDXRef-e2e7cf06dc5dabb9",
+   "SPDXID": "SPDXRef-9af67fa8995beb77",
    "name": "treeverse",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/npm/treeverse.git",
@@ -13479,7 +13479,7 @@
    "versionInfo": "1.0.4"
   },
   {
-   "SPDXID": "SPDXRef-f618f72c8c022423",
+   "SPDXID": "SPDXRef-f7b90ffc80c14438",
    "name": "typedarray-to-buffer",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/feross/typedarray-to-buffer.git",
@@ -13570,7 +13570,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/tzdata@2021a-0+deb10u3?arch=all",
+     "referenceLocator": "pkg:deb/debian/tzdata@2021a-0+deb10u3?arch=all&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -13581,7 +13581,7 @@
    "versionInfo": "2021a-0+deb10u3"
   },
   {
-   "SPDXID": "SPDXRef-4d5e94340b779309",
+   "SPDXID": "SPDXRef-8aa4cf876d218034",
    "name": "unique-filename",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/unique-filename.git",
@@ -13640,7 +13640,7 @@
    "versionInfo": "1.1.1"
   },
   {
-   "SPDXID": "SPDXRef-ca05373203686958",
+   "SPDXID": "SPDXRef-17c1024a9519a091",
    "name": "unique-slug",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/iarna/unique-slug.git",
@@ -13698,7 +13698,7 @@
    "versionInfo": "2.0.2"
   },
   {
-   "SPDXID": "SPDXRef-c6cb35bc760b8cbc",
+   "SPDXID": "SPDXRef-88060a2445553c9c",
    "name": "util-deprecate",
    "licenseConcluded": "MIT",
    "downloadLocation": "git://github.com/TooTallNate/util-deprecate.git",
@@ -13794,7 +13794,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/util-linux@2.33.1-0.1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/util-linux@2.33.1-0.1?arch=amd64&distro=debian-10",
      "referenceType": "purl"
     }
    ],
@@ -13805,7 +13805,7 @@
    "versionInfo": "2.33.1-0.1"
   },
   {
-   "SPDXID": "SPDXRef-ce926d1f129b662d",
+   "SPDXID": "SPDXRef-46fe4c544fb530be",
    "name": "validate-npm-package-license",
    "licenseConcluded": "Apache-2.0",
    "downloadLocation": "kemitchell/validate-npm-package-license.js",
@@ -13903,7 +13903,7 @@
    "versionInfo": "3.0.4"
   },
   {
-   "SPDXID": "SPDXRef-26835a5e5df12b15",
+   "SPDXID": "SPDXRef-9422124cae505733",
    "name": "validate-npm-package-name",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/validate-npm-package-name",
@@ -14002,7 +14002,7 @@
    "versionInfo": "3.0.0"
   },
   {
-   "SPDXID": "SPDXRef-6bcf3d614c8a8024",
+   "SPDXID": "SPDXRef-34e2534bbc74f996",
    "name": "walk-up-path",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/walk-up-path",
@@ -14080,7 +14080,7 @@
    "versionInfo": "1.0.0"
   },
   {
-   "SPDXID": "SPDXRef-49fbd64b85f58ae0",
+   "SPDXID": "SPDXRef-f8c641f5954ca41d",
    "name": "wcwidth",
    "licenseConcluded": "MIT",
    "downloadLocation": "git+https://github.com/timoxley/wcwidth.git",
@@ -14109,7 +14109,7 @@
    "versionInfo": "1.0.1"
   },
   {
-   "SPDXID": "SPDXRef-5fd29f49cb3673c8",
+   "SPDXID": "SPDXRef-4c117857f2e2166a",
    "name": "which",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/isaacs/node-which.git",
@@ -14137,7 +14137,7 @@
    "versionInfo": "2.0.2"
   },
   {
-   "SPDXID": "SPDXRef-cb6057026b1bc9e8",
+   "SPDXID": "SPDXRef-1311d41ad235e969",
    "name": "wide-align",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/iarna/wide-align",
@@ -14195,7 +14195,7 @@
    "versionInfo": "1.1.3"
   },
   {
-   "SPDXID": "SPDXRef-f7accdfcfb5118c4",
+   "SPDXID": "SPDXRef-a57a3e1c164c3adf",
    "name": "wrappy",
    "licenseConcluded": "ISC",
    "downloadLocation": "https://github.com/npm/wrappy",
@@ -14224,7 +14224,7 @@
    "versionInfo": "1.0.2"
   },
   {
-   "SPDXID": "SPDXRef-11c947b2eeafe4b4",
+   "SPDXID": "SPDXRef-9438cacf4d4db072",
    "name": "write-file-atomic",
    "licenseConcluded": "ISC",
    "downloadLocation": "git://github.com/npm/write-file-atomic.git",
@@ -14303,7 +14303,7 @@
    "versionInfo": "3.0.3"
   },
   {
-   "SPDXID": "SPDXRef-56054288f345a0ff",
+   "SPDXID": "SPDXRef-5e8d31fd0099574c",
    "name": "yallist",
    "licenseConcluded": "ISC",
    "downloadLocation": "git+https://github.com/isaacs/yallist.git",
@@ -14331,7 +14331,7 @@
    "versionInfo": "4.0.0"
   },
   {
-   "SPDXID": "SPDXRef-993ba8123c1eeb6b",
+   "SPDXID": "SPDXRef-fa31e20370c72381",
    "name": "yarn",
    "licenseConcluded": "BSD-2-Clause",
    "downloadLocation": "yarnpkg/yarn",
@@ -14370,7 +14370,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:deb/debian/zlib1g@1:1.2.11.dfsg-1?arch=amd64",
+     "referenceLocator": "pkg:deb/debian/zlib1g@1:1.2.11.dfsg-1?arch=amd64&upstream=zlib&distro=debian-10",
      "referenceType": "purl"
     }
    ],

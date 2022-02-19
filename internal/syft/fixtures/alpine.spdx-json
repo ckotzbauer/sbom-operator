@@ -3,15 +3,15 @@
  "name": "alpine@sha256-21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-01-29T15:50:25.588524281Z",
+  "created": "2022-02-19T08:25:08.75938419Z",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.36.0"
+   "Tool: syft-0.38.0"
   ],
-  "licenseListVersion": "3.15"
+  "licenseListVersion": "3.16"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300-7797eb93-197a-4056-b476-298595405445",
+ "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300-99495679-311d-4586-b8b3-cffb065ad59e",
  "packages": [
   {
    "SPDXID": "SPDXRef-8039c8621bcc1383",
@@ -52,7 +52,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/alpine-baselayout@3.2.0-r18?arch=x86_64",
+     "referenceLocator": "pkg:alpine/alpine-baselayout@3.2.0-r18?arch=x86_64&upstream=alpine-baselayout&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -101,7 +101,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/alpine-keys@2.4-r1?arch=x86_64",
+     "referenceLocator": "pkg:alpine/alpine-keys@2.4-r1?arch=x86_64&upstream=alpine-keys&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -150,7 +150,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/apk-tools@2.12.7-r3?arch=x86_64",
+     "referenceLocator": "pkg:alpine/apk-tools@2.12.7-r3?arch=x86_64&upstream=apk-tools&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -174,7 +174,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/busybox@1.34.1-r3?arch=x86_64",
+     "referenceLocator": "pkg:alpine/busybox@1.34.1-r3?arch=x86_64&upstream=busybox&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -243,7 +243,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/ca-certificates-bundle@20191127-r7?arch=x86_64",
+     "referenceLocator": "pkg:alpine/ca-certificates-bundle@20191127-r7?arch=x86_64&upstream=ca-certificates&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -292,7 +292,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/libc-utils@0.7.2-r3?arch=x86_64",
+     "referenceLocator": "pkg:alpine/libc-utils@0.7.2-r3?arch=x86_64&upstream=libc-dev&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -316,7 +316,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/libcrypto1.1@1.1.1l-r7?arch=x86_64",
+     "referenceLocator": "pkg:alpine/libcrypto1.1@1.1.1l-r7?arch=x86_64&upstream=openssl&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -340,7 +340,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/libretls@3.3.4-r2?arch=x86_64",
+     "referenceLocator": "pkg:alpine/libretls@3.3.4-r2?arch=x86_64&upstream=libretls&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -364,7 +364,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/libssl1.1@1.1.1l-r7?arch=x86_64",
+     "referenceLocator": "pkg:alpine/libssl1.1@1.1.1l-r7?arch=x86_64&upstream=openssl&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -388,7 +388,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/musl@1.2.2-r7?arch=x86_64",
+     "referenceLocator": "pkg:alpine/musl@1.2.2-r7?arch=x86_64&upstream=musl&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -437,7 +437,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/musl-utils@1.2.2-r7?arch=x86_64",
+     "referenceLocator": "pkg:alpine/musl-utils@1.2.2-r7?arch=x86_64&upstream=musl&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -461,7 +461,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/scanelf@1.3.3-r0?arch=x86_64",
+     "referenceLocator": "pkg:alpine/scanelf@1.3.3-r0?arch=x86_64&upstream=pax-utils&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -510,7 +510,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/ssl_client@1.34.1-r3?arch=x86_64",
+     "referenceLocator": "pkg:alpine/ssl_client@1.34.1-r3?arch=x86_64&upstream=busybox&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],
@@ -534,7 +534,7 @@
     },
     {
      "referenceCategory": "PACKAGE_MANAGER",
-     "referenceLocator": "pkg:alpine/zlib@1.2.11-r3?arch=x86_64",
+     "referenceLocator": "pkg:alpine/zlib@1.2.11-r3?arch=x86_64&upstream=zlib&distro=alpine-3.15.0",
      "referenceType": "purl"
     }
    ],

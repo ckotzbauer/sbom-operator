@@ -1,15 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:2e4ee286-d490-4ffe-8085-b9fb9bc81fb1" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:1d519c5e-a48d-4031-b82e-97ec167976d2" version="1">
   <metadata>
-    <timestamp>2022-01-29T16:44:39+01:00</timestamp>
+    <timestamp>2022-02-19T09:27:36+01:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.36.0</version>
+        <version>0.38.0</version>
       </tool>
     </tools>
-    <component type="container">
+    <component bom-ref="36cc3d123ca150cc" type="container">
       <name>node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec</name>
       <version>sha256:590fb448ee7c2acc777f02e7d4e8639d042d8628bc82c574f4e2c7503725ab9c</version>
     </component>
@@ -25,7 +25,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@gar\/promisify:\@gar\/promisify:1.1.2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@gar%2Fpromisify@1.1.2</purl>
+      <purl>pkg:npm/@gar/promisify@1.1.2</purl>
       <externalReferences>
         <reference type="distribution">
           <url>https://github.com/wraithgar/gar-promisify.git</url>
@@ -50,7 +50,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@isaacs\/string-locale-compare:\@isaacs\/string-locale-compare:1.1.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@isaacs%2Fstring-locale-compare@1.1.0</purl>
+      <purl>pkg:npm/@isaacs/string-locale-compare@1.1.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/isaacs/string-locale-compare</url>
@@ -75,7 +75,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/arborist:\@npmcli\/arborist:4.0.3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Farborist@4.0.3</purl>
+      <purl>pkg:npm/@npmcli/arborist@4.0.3</purl>
       <externalReferences>
         <reference type="distribution">
           <url>https://github.com/npm/arborist</url>
@@ -100,7 +100,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/ci-detect:\@npmcli\/ci-detect:1.4.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fci-detect@1.4.0</purl>
+      <purl>pkg:npm/@npmcli/ci-detect@1.4.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/ci-detect.git</url>
@@ -125,7 +125,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/config:\@npmcli\/config:2.3.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fconfig@2.3.0</purl>
+      <purl>pkg:npm/@npmcli/config@2.3.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/config</url>
@@ -150,7 +150,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/disparity-colors:\@npmcli\/disparity-colors:1.0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fdisparity-colors@1.0.1</purl>
+      <purl>pkg:npm/@npmcli/disparity-colors@1.0.1</purl>
       <externalReferences>
         <reference type="distribution">
           <url>https://github.com/npm/disparity-colors</url>
@@ -175,7 +175,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/fs:\@npmcli\/fs:1.0.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Ffs@1.0.0</purl>
+      <purl>pkg:npm/@npmcli/fs@1.0.0</purl>
       <properties>
         <property name="foundBy">javascript-package-cataloger</property>
         <property name="language">javascript</property>
@@ -195,7 +195,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/git:\@npmcli\/git:2.1.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fgit@2.1.0</purl>
+      <purl>pkg:npm/@npmcli/git@2.1.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/git</url>
@@ -220,7 +220,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/installed-package-contents:\@npmcli\/installed-package-contents:1.0.7:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Finstalled-package-contents@1.0.7</purl>
+      <purl>pkg:npm/@npmcli/installed-package-contents@1.0.7</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/installed-package-contents</url>
@@ -245,7 +245,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/map-workspaces:\@npmcli\/map-workspaces:2.0.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fmap-workspaces@2.0.0</purl>
+      <purl>pkg:npm/@npmcli/map-workspaces@2.0.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>https://github.com/npm/map-workspaces</url>
@@ -270,7 +270,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/metavuln-calculator:\@npmcli\/metavuln-calculator:2.0.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fmetavuln-calculator@2.0.0</purl>
+      <purl>pkg:npm/@npmcli/metavuln-calculator@2.0.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>https://github.com/npm/metavuln-calculator</url>
@@ -294,7 +294,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/move-file:\@npmcli\/move-file:1.1.2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fmove-file@1.1.2</purl>
+      <purl>pkg:npm/@npmcli/move-file@1.1.2</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/move-file</url>
@@ -319,7 +319,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/name-from-folder:\@npmcli\/name-from-folder:1.0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fname-from-folder@1.0.1</purl>
+      <purl>pkg:npm/@npmcli/name-from-folder@1.0.1</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/name-from-folder</url>
@@ -344,7 +344,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/node-gyp:\@npmcli\/node-gyp:1.0.2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fnode-gyp@1.0.2</purl>
+      <purl>pkg:npm/@npmcli/node-gyp@1.0.2</purl>
       <properties>
         <property name="foundBy">javascript-package-cataloger</property>
         <property name="language">javascript</property>
@@ -364,7 +364,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/package-json:\@npmcli\/package-json:1.0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fpackage-json@1.0.1</purl>
+      <purl>pkg:npm/@npmcli/package-json@1.0.1</purl>
       <properties>
         <property name="foundBy">javascript-package-cataloger</property>
         <property name="language">javascript</property>
@@ -384,7 +384,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/promise-spawn:\@npmcli\/promise-spawn:1.3.2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Fpromise-spawn@1.3.2</purl>
+      <purl>pkg:npm/@npmcli/promise-spawn@1.3.2</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/promise-spawn</url>
@@ -409,7 +409,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@npmcli\/run-script:\@npmcli\/run-script:2.0.0:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@npmcli%2Frun-script@2.0.0</purl>
+      <purl>pkg:npm/@npmcli/run-script@2.0.0</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git+https://github.com/npm/run-script.git</url>
@@ -434,7 +434,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:\@tootallnate\/once:\@tootallnate\/once:1.1.2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:npm/@tootallnate%2Fonce@1.1.2</purl>
+      <purl>pkg:npm/@tootallnate/once@1.1.2</purl>
       <externalReferences>
         <reference type="distribution">
           <url>git://github.com/TooTallNate/once.git</url>
@@ -484,7 +484,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:adduser:adduser:3.118:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/adduser@3.118?arch=all</purl>
+      <purl>pkg:deb/debian/adduser@3.118?arch=all&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -816,7 +816,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:apt:apt:1.8.2.3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/apt@1.8.2.3?arch=amd64</purl>
+      <purl>pkg:deb/debian/apt@1.8.2.3?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -970,7 +970,7 @@
       <name>base-files</name>
       <version>10.3+deb10u11</version>
       <cpe>cpe:2.3:a:base-files:base-files:10.3\+deb10u11:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/base-files@10.3+deb10u11?arch=amd64</purl>
+      <purl>pkg:deb/debian/base-files@10.3+deb10u11?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -996,7 +996,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:base-passwd:base-passwd:3.5.46:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/base-passwd@3.5.46?arch=amd64</purl>
+      <purl>pkg:deb/debian/base-passwd@3.5.46?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1020,7 +1020,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:bash:bash:5.0-4:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/bash@5.0-4?arch=amd64</purl>
+      <purl>pkg:deb/debian/bash@5.0-4?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1162,7 +1162,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:bsdutils:bsdutils:1\:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64&amp;upstream=util-linux@2.33.1-0.1&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1701,7 +1701,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:coreutils:coreutils:8.30-3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/coreutils@8.30-3?arch=amd64</purl>
+      <purl>pkg:deb/debian/coreutils@8.30-3?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1720,7 +1720,7 @@
       <name>dash</name>
       <version>0.5.10.2-5</version>
       <cpe>cpe:2.3:a:dash:dash:0.5.10.2-5:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/dash@0.5.10.2-5?arch=amd64</purl>
+      <purl>pkg:deb/debian/dash@0.5.10.2-5?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1744,7 +1744,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:debconf:debconf:1.5.71\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/debconf@1.5.71+deb10u1?arch=all</purl>
+      <purl>pkg:deb/debian/debconf@1.5.71+deb10u1?arch=all&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1765,7 +1765,7 @@
       <name>debian-archive-keyring</name>
       <version>2019.1+deb10u1</version>
       <cpe>cpe:2.3:a:debian-archive-keyring:debian-archive-keyring:2019.1\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/debian-archive-keyring@2019.1+deb10u1?arch=all</purl>
+      <purl>pkg:deb/debian/debian-archive-keyring@2019.1+deb10u1?arch=all&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1786,7 +1786,7 @@
       <name>debianutils</name>
       <version>4.8.6.1</version>
       <cpe>cpe:2.3:a:debianutils:debianutils:4.8.6.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/debianutils@4.8.6.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/debianutils@4.8.6.1?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -1981,7 +1981,7 @@
       <name>diffutils</name>
       <version>1:3.7-3</version>
       <cpe>cpe:2.3:a:diffutils:diffutils:1\:3.7-3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/diffutils@1:3.7-3?arch=amd64</purl>
+      <purl>pkg:deb/debian/diffutils@1:3.7-3?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2011,7 +2011,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:dpkg:dpkg:1.19.7:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/dpkg@1.19.7?arch=amd64</purl>
+      <purl>pkg:deb/debian/dpkg@1.19.7?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2040,7 +2040,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:e2fsprogs:e2fsprogs:1.44.5-1\+deb10u3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/e2fsprogs@1.44.5-1+deb10u3?arch=amd64</purl>
+      <purl>pkg:deb/debian/e2fsprogs@1.44.5-1+deb10u3?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2236,7 +2236,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:fdisk:fdisk:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/fdisk@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/fdisk@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2264,7 +2264,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:findutils:findutils:4.6.0\+git\+20190209-2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/findutils@4.6.0+git+20190209-2?arch=amd64</purl>
+      <purl>pkg:deb/debian/findutils@4.6.0+git+20190209-2?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2431,7 +2431,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gcc-8-base:gcc-8-base:8.3.0-6:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64</purl>
+      <purl>pkg:deb/debian/gcc-8-base@8.3.0-6?arch=amd64&amp;upstream=gcc-8&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2502,7 +2502,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gpgv:gpgv:2.2.12-1\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/gpgv@2.2.12-1+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/gpgv@2.2.12-1+deb10u1?arch=amd64&amp;upstream=gnupg2&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2554,7 +2554,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:grep:grep:3.3-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/grep@3.3-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/grep@3.3-1?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2573,7 +2573,7 @@
       <name>gzip</name>
       <version>1.9-3</version>
       <cpe>cpe:2.3:a:gzip:gzip:1.9-3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/gzip@1.9-3?arch=amd64</purl>
+      <purl>pkg:deb/debian/gzip@1.9-3?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -2706,7 +2706,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:hostname:hostname:3.21:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/hostname@3.21?arch=amd64</purl>
+      <purl>pkg:deb/debian/hostname@3.21?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3069,7 +3069,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:init-system-helpers:init-system-helpers:1.56\+nmu1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/init-system-helpers@1.56+nmu1?arch=all</purl>
+      <purl>pkg:deb/debian/init-system-helpers@1.56+nmu1?arch=all&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3517,7 +3517,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libacl1:libacl1:2.2.53-4:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libacl1@2.2.53-4?arch=amd64</purl>
+      <purl>pkg:deb/debian/libacl1@2.2.53-4?arch=amd64&amp;upstream=acl&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3542,7 +3542,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libapt-pkg5.0:libapt-pkg5.0:1.8.2.3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libapt-pkg5.0@1.8.2.3?arch=amd64</purl>
+      <purl>pkg:deb/debian/libapt-pkg5.0@1.8.2.3?arch=amd64&amp;upstream=apt&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3576,7 +3576,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libattr1:libattr1:1\:2.4.48-4:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libattr1@1:2.4.48-4?arch=amd64</purl>
+      <purl>pkg:deb/debian/libattr1@1:2.4.48-4?arch=amd64&amp;upstream=attr&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3609,7 +3609,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libaudit-common:libaudit-common:1\:2.8.4-3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libaudit-common@1:2.8.4-3?arch=all</purl>
+      <purl>pkg:deb/debian/libaudit-common@1:2.8.4-3?arch=all&amp;upstream=audit&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3642,7 +3642,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libaudit1:libaudit1:1\:2.8.4-3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libaudit1@1:2.8.4-3?arch=amd64</purl>
+      <purl>pkg:deb/debian/libaudit1@1:2.8.4-3?arch=amd64&amp;upstream=audit&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3706,7 +3706,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libblkid1:libblkid1:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libblkid1@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libblkid1@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3731,7 +3731,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libbz2-1.0:libbz2-1.0:1.0.6-9.2\~deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libbz2-1.0@1.0.6-9.2~deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libbz2-1.0@1.0.6-9.2~deb10u1?arch=amd64&amp;upstream=bzip2&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3759,7 +3759,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libc-bin:libc-bin:2.28-10:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libc-bin@2.28-10?arch=amd64</purl>
+      <purl>pkg:deb/debian/libc-bin@2.28-10?arch=amd64&amp;upstream=glibc&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3789,7 +3789,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libc6:libc6:2.28-10:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libc6@2.28-10?arch=amd64</purl>
+      <purl>pkg:deb/debian/libc6@2.28-10?arch=amd64&amp;upstream=glibc&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3822,7 +3822,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libcap-ng0:libcap-ng0:0.7.9-2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libcap-ng0@0.7.9-2?arch=amd64</purl>
+      <purl>pkg:deb/debian/libcap-ng0@0.7.9-2?arch=amd64&amp;upstream=libcap-ng&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3842,7 +3842,7 @@
       <name>libcom-err2</name>
       <version>1.44.5-1+deb10u3</version>
       <cpe>cpe:2.3:a:libcom-err2:libcom-err2:1.44.5-1\+deb10u3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libcom-err2@1.44.5-1+deb10u3?arch=amd64</purl>
+      <purl>pkg:deb/debian/libcom-err2@1.44.5-1+deb10u3?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3862,7 +3862,7 @@
       <name>libdb5.3</name>
       <version>5.3.28+dfsg1-0.5</version>
       <cpe>cpe:2.3:a:libdb5.3:libdb5.3:5.3.28\+dfsg1-0.5:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.5?arch=amd64</purl>
+      <purl>pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.5?arch=amd64&amp;upstream=db5.3&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3882,7 +3882,7 @@
       <name>libdebconfclient0</name>
       <version>0.249</version>
       <cpe>cpe:2.3:a:libdebconfclient0:libdebconfclient0:0.249:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libdebconfclient0@0.249?arch=amd64</purl>
+      <purl>pkg:deb/debian/libdebconfclient0@0.249?arch=amd64&amp;upstream=cdebconf&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3910,7 +3910,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libext2fs2:libext2fs2:1.44.5-1\+deb10u3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libext2fs2@1.44.5-1+deb10u3?arch=amd64</purl>
+      <purl>pkg:deb/debian/libext2fs2@1.44.5-1+deb10u3?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3974,7 +3974,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libfdisk1:libfdisk1:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libfdisk1@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libfdisk1@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -3994,7 +3994,7 @@
       <name>libffi6</name>
       <version>3.2.1-9</version>
       <cpe>cpe:2.3:a:libffi6:libffi6:3.2.1-9:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libffi6@3.2.1-9?arch=amd64</purl>
+      <purl>pkg:deb/debian/libffi6@3.2.1-9?arch=amd64&amp;upstream=libffi&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4025,7 +4025,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgcc1:libgcc1:1\:8.3.0-6:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64</purl>
+      <purl>pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64&amp;upstream=gcc-8@8.3.0-6&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4051,7 +4051,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgcrypt20:libgcrypt20:1.8.4-5\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libgcrypt20@1.8.4-5+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libgcrypt20@1.8.4-5+deb10u1?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4081,7 +4081,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgmp10:libgmp10:2\:6.1.2\+dfsg-4:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libgmp10@2:6.1.2+dfsg-4?arch=amd64</purl>
+      <purl>pkg:deb/debian/libgmp10@2:6.1.2+dfsg-4?arch=amd64&amp;upstream=gmp&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4115,7 +4115,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgnutls30:libgnutls30:3.6.7-4\+deb10u7:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libgnutls30@3.6.7-4+deb10u7?arch=amd64</purl>
+      <purl>pkg:deb/debian/libgnutls30@3.6.7-4+deb10u7?arch=amd64&amp;upstream=gnutls28&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4152,7 +4152,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgpg-error0:libgpg-error0:1.35-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libgpg-error0@1.35-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libgpg-error0@1.35-1?arch=amd64&amp;upstream=libgpg-error&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4189,7 +4189,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libhogweed4:libhogweed4:3.4.1-1\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libhogweed4@3.4.1-1+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libhogweed4@3.4.1-1+deb10u1?arch=amd64&amp;upstream=nettle&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4229,7 +4229,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libidn2-0:libidn2-0:2.0.5-1\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libidn2-0@2.0.5-1+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libidn2-0@2.0.5-1+deb10u1?arch=amd64&amp;upstream=libidn2&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4260,7 +4260,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:liblz4-1:liblz4-1:1.8.3-1\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/liblz4-1@1.8.3-1+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/liblz4-1@1.8.3-1+deb10u1?arch=amd64&amp;upstream=lz4&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4300,7 +4300,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:liblzma5:liblzma5:5.2.4-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/liblzma5@5.2.4-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/liblzma5@5.2.4-1?arch=amd64&amp;upstream=xz-utils&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4364,7 +4364,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libmount1:libmount1:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libmount1@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libmount1@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4384,7 +4384,7 @@
       <name>libncursesw6</name>
       <version>6.1+20181013-2+deb10u2</version>
       <cpe>cpe:2.3:a:libncursesw6:libncursesw6:6.1\+20181013-2\+deb10u2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libncursesw6@6.1+20181013-2+deb10u2?arch=amd64</purl>
+      <purl>pkg:deb/debian/libncursesw6@6.1+20181013-2+deb10u2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4421,7 +4421,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libnettle6:libnettle6:3.4.1-1\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libnettle6@3.4.1-1+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libnettle6@3.4.1-1+deb10u1?arch=amd64&amp;upstream=nettle&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4742,7 +4742,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libp11-kit0:libp11-kit0:0.23.15-2\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libp11-kit0@0.23.15-2+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libp11-kit0@0.23.15-2+deb10u1?arch=amd64&amp;upstream=p11-kit&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4762,7 +4762,7 @@
       <name>libpam-modules</name>
       <version>1.3.1-5</version>
       <cpe>cpe:2.3:a:libpam-modules:libpam-modules:1.3.1-5:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libpam-modules@1.3.1-5?arch=amd64</purl>
+      <purl>pkg:deb/debian/libpam-modules@1.3.1-5?arch=amd64&amp;upstream=pam&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4784,7 +4784,7 @@
       <name>libpam-modules-bin</name>
       <version>1.3.1-5</version>
       <cpe>cpe:2.3:a:libpam-modules-bin:libpam-modules-bin:1.3.1-5:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libpam-modules-bin@1.3.1-5?arch=amd64</purl>
+      <purl>pkg:deb/debian/libpam-modules-bin@1.3.1-5?arch=amd64&amp;upstream=pam&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4804,7 +4804,7 @@
       <name>libpam-runtime</name>
       <version>1.3.1-5</version>
       <cpe>cpe:2.3:a:libpam-runtime:libpam-runtime:1.3.1-5:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libpam-runtime@1.3.1-5?arch=all</purl>
+      <purl>pkg:deb/debian/libpam-runtime@1.3.1-5?arch=all&amp;upstream=pam&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4826,7 +4826,7 @@
       <name>libpam0g</name>
       <version>1.3.1-5</version>
       <cpe>cpe:2.3:a:libpam0g:libpam0g:1.3.1-5:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libpam0g@1.3.1-5?arch=amd64</purl>
+      <purl>pkg:deb/debian/libpam0g@1.3.1-5?arch=amd64&amp;upstream=pam&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4846,7 +4846,7 @@
       <name>libpcre3</name>
       <version>2:8.39-12</version>
       <cpe>cpe:2.3:a:libpcre3:libpcre3:2\:8.39-12:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libpcre3@2:8.39-12?arch=amd64</purl>
+      <purl>pkg:deb/debian/libpcre3@2:8.39-12?arch=amd64&amp;upstream=pcre3&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4871,7 +4871,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libseccomp2:libseccomp2:2.3.3-4:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libseccomp2@2.3.3-4?arch=amd64</purl>
+      <purl>pkg:deb/debian/libseccomp2@2.3.3-4?arch=amd64&amp;upstream=libseccomp&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4899,7 +4899,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libselinux1:libselinux1:2.8-1\+b1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64&amp;upstream=libselinux@2.8-1&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4920,7 +4920,7 @@
       <name>libsemanage-common</name>
       <version>2.8-2</version>
       <cpe>cpe:2.3:a:libsemanage-common:libsemanage-common:2.8-2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libsemanage-common@2.8-2?arch=all</purl>
+      <purl>pkg:deb/debian/libsemanage-common@2.8-2?arch=all&amp;upstream=libsemanage&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4942,7 +4942,7 @@
       <name>libsemanage1</name>
       <version>2.8-2</version>
       <cpe>cpe:2.3:a:libsemanage1:libsemanage1:2.8-2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libsemanage1@2.8-2?arch=amd64</purl>
+      <purl>pkg:deb/debian/libsemanage1@2.8-2?arch=amd64&amp;upstream=libsemanage&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -4962,7 +4962,7 @@
       <name>libsepol1</name>
       <version>2.8-1</version>
       <cpe>cpe:2.3:a:libsepol1:libsepol1:2.8-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libsepol1@2.8-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libsepol1@2.8-1?arch=amd64&amp;upstream=libsepol&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5026,7 +5026,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libsmartcols1:libsmartcols1:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libsmartcols1@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libsmartcols1@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5046,7 +5046,7 @@
       <name>libss2</name>
       <version>1.44.5-1+deb10u3</version>
       <cpe>cpe:2.3:a:libss2:libss2:1.44.5-1\+deb10u3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libss2@1.44.5-1+deb10u3?arch=amd64</purl>
+      <purl>pkg:deb/debian/libss2@1.44.5-1+deb10u3?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5077,7 +5077,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libstdc\+\+6:libstdc\+\+6:8.3.0-6:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libstdc++6@8.3.0-6?arch=amd64</purl>
+      <purl>pkg:deb/debian/libstdc++6@8.3.0-6?arch=amd64&amp;upstream=gcc-8&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5114,7 +5114,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libsystemd0:libsystemd0:241-7\~deb10u8:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libsystemd0@241-7~deb10u8?arch=amd64</purl>
+      <purl>pkg:deb/debian/libsystemd0@241-7~deb10u8?arch=amd64&amp;upstream=systemd&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5145,7 +5145,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libtasn1-6:libtasn1-6:4.13-3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libtasn1-6@4.13-3?arch=amd64</purl>
+      <purl>pkg:deb/debian/libtasn1-6@4.13-3?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5164,7 +5164,7 @@
       <name>libtinfo6</name>
       <version>6.1+20181013-2+deb10u2</version>
       <cpe>cpe:2.3:a:libtinfo6:libtinfo6:6.1\+20181013-2\+deb10u2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libtinfo6@6.1+20181013-2+deb10u2?arch=amd64</purl>
+      <purl>pkg:deb/debian/libtinfo6@6.1+20181013-2+deb10u2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5201,7 +5201,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libudev1:libudev1:241-7\~deb10u8:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libudev1@241-7~deb10u8?arch=amd64</purl>
+      <purl>pkg:deb/debian/libudev1@241-7~deb10u8?arch=amd64&amp;upstream=systemd&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5247,7 +5247,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libunistring2:libunistring2:0.9.10-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libunistring2@0.9.10-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libunistring2@0.9.10-1?arch=amd64&amp;upstream=libunistring&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5311,7 +5311,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libuuid1:libuuid1:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libuuid1@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/libuuid1@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5345,7 +5345,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libzstd1:libzstd1:1.3.8\+dfsg-3\+deb10u2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/libzstd1@1.3.8+dfsg-3+deb10u2?arch=amd64</purl>
+      <purl>pkg:deb/debian/libzstd1@1.3.8+dfsg-3+deb10u2?arch=amd64&amp;upstream=libzstd&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5370,7 +5370,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:login:login:1\:4.5-1.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/login@1:4.5-1.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/login@1:4.5-1.1?arch=amd64&amp;upstream=shadow&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5425,7 +5425,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:lsb-base:lsb-base:10.2019051400:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/lsb-base@10.2019051400?arch=all</purl>
+      <purl>pkg:deb/debian/lsb-base@10.2019051400?arch=all&amp;upstream=lsb&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5475,7 +5475,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:mawk:mawk:1.3.3-17\+b3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64</purl>
+      <purl>pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64&amp;upstream=mawk@1.3.3-17&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5803,7 +5803,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:mount:mount:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/mount@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/mount@2.33.1-0.1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5896,7 +5896,7 @@
       <name>ncurses-base</name>
       <version>6.1+20181013-2+deb10u2</version>
       <cpe>cpe:2.3:a:ncurses-base:ncurses-base:6.1\+20181013-2\+deb10u2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/ncurses-base@6.1+20181013-2+deb10u2?arch=all</purl>
+      <purl>pkg:deb/debian/ncurses-base@6.1+20181013-2+deb10u2?arch=all&amp;upstream=ncurses&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -5918,7 +5918,7 @@
       <name>ncurses-bin</name>
       <version>6.1+20181013-2+deb10u2</version>
       <cpe>cpe:2.3:a:ncurses-bin:ncurses-bin:6.1\+20181013-2\+deb10u2:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/ncurses-bin@6.1+20181013-2+deb10u2?arch=amd64</purl>
+      <purl>pkg:deb/debian/ncurses-bin@6.1+20181013-2+deb10u2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -6559,7 +6559,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:passwd:passwd:1\:4.5-1.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/passwd@1:4.5-1.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/passwd@1:4.5-1.1?arch=amd64&amp;upstream=shadow&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -6632,7 +6632,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:perl-base:perl-base:5.28.1-6\+deb10u1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/perl-base@5.28.1-6+deb10u1?arch=amd64</purl>
+      <purl>pkg:deb/debian/perl-base@5.28.1-6+deb10u1?arch=amd64&amp;upstream=perl&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -7087,7 +7087,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:sed:sed:4.7-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/sed@4.7-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/sed@4.7-1?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -7680,7 +7680,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:sysvinit-utils:sysvinit-utils:2.93-8:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/sysvinit-utils@2.93-8?arch=amd64</purl>
+      <purl>pkg:deb/debian/sysvinit-utils@2.93-8?arch=amd64&amp;upstream=sysvinit&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -7708,7 +7708,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:tar:tar:1.30\+dfsg-6:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/tar@1.30+dfsg-6?arch=amd64</purl>
+      <purl>pkg:deb/debian/tar@1.30+dfsg-6?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -7858,7 +7858,7 @@
       <name>tzdata</name>
       <version>2021a-0+deb10u3</version>
       <cpe>cpe:2.3:a:tzdata:tzdata:2021a-0\+deb10u3:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/tzdata@2021a-0+deb10u3?arch=all</purl>
+      <purl>pkg:deb/debian/tzdata@2021a-0+deb10u3?arch=all&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -8002,7 +8002,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:util-linux:util-linux:2.33.1-0.1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/util-linux@2.33.1-0.1?arch=amd64</purl>
+      <purl>pkg:deb/debian/util-linux@2.33.1-0.1?arch=amd64&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
@@ -8289,7 +8289,7 @@
         </license>
       </licenses>
       <cpe>cpe:2.3:a:zlib1g:zlib1g:1\:1.2.11.dfsg-1:*:*:*:*:*:*:*</cpe>
-      <purl>pkg:deb/debian/zlib1g@1:1.2.11.dfsg-1?arch=amd64</purl>
+      <purl>pkg:deb/debian/zlib1g@1:1.2.11.dfsg-1?arch=amd64&amp;upstream=zlib&amp;distro=debian-10</purl>
       <properties>
         <property name="foundBy">dpkgdb-cataloger</property>
         <property name="type">deb</property>
