@@ -43,6 +43,8 @@ jobs:
           AWS_SECRET_ACCESS_KEY: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
           AWS_REGION: eu-central-1
         run: |
+         mkdir auth
+
           kubectl create secret docker-registry ecr-secret \
             --docker-username=AWS \
             --docker-password="$(aws ecr get-login-password)" \
