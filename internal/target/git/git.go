@@ -41,7 +41,6 @@ func (g *GitAccount) PrepareRepository(repo, path, branch string) {
 		cloned = true
 		r, err = git.PlainClone(path, false, &git.CloneOptions{
 			URL:      repo,
-			Depth:    1,
 			Progress: os.Stdout,
 			Auth:     g.tokenAuth(),
 		})
@@ -69,9 +68,9 @@ func (g *GitAccount) PrepareRepository(repo, path, branch string) {
 	}
 
 	if !cloned {
-		// TODO: msg="Pull failed" error="empty git-upload-pack given"
 		err = w.Pull(&git.PullOptions{
-			Auth: g.tokenAuth(),
+			Auth:          g.tokenAuth(),
+			ReferenceName: plumbing.NewBranchReferenceName(branch),
 		})
 
 		if err != nil && !errors.Is(err, git.NoErrAlreadyUpToDate) {
