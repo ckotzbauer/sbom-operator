@@ -79314,7 +79314,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.38.0",
+  "version": "0.39.3",
   "configuration": {
    "configPath": "",
    "output": [
@@ -79385,7 +79385,10 @@
     "insecure-use-http": false,
     "auth": []
    },
-   "exclude": []
+   "exclude": [],
+   "attest": {
+    "key": "cosign.key"
+   }
   }
  },
  "schema": {

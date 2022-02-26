@@ -3,15 +3,15 @@
  "name": "node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-02-19T08:28:06.112917408Z",
+  "created": "2022-02-26T14:41:24.328767297Z",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.38.0"
+   "Tool: syft-0.39.3"
   ],
   "licenseListVersion": "3.16"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec-2386356e-78f6-41f4-b2f7-371a1f3c193c",
+ "documentNamespace": "https://anchore.com/syft/image/node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec-8318ee15-bd6f-4dae-87be-a8234795db17",
  "packages": [
   {
    "SPDXID": "SPDXRef-94ec80f9f3f113f4",
