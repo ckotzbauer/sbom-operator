@@ -49,6 +49,7 @@ jobs:
             ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
-        uses: azure/container-scan@v0
+        uses: ckotzbauer/actions-toolkit/grype@0.7.0
         with:
-          image-name: ghcr.io/ckotzbauer/sbom-operator
+          scan-target: ghcr.io/ckotzbauer/sbom-operator
+          fail-on: "medium"
