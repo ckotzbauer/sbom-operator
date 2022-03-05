@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:eb229ee0-e0e0-413e-8ef7-7c52eb02eaab" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.3" serialNumber="urn:uuid:62bf5f2d-7ebf-42a2-8a19-2caca0a40bc5" version="1">
   <metadata>
-    <timestamp>2022-02-26T15:39:16+01:00</timestamp>
+    <timestamp>2022-03-05T10:37:54+01:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.39.3</version>
+        <version>0.40.1</version>
       </tool>
     </tools>
     <component bom-ref="27f24e002ab47c1b" type="container">
@@ -33,17 +33,22 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">alpine-baselayout</property>
-        <property name="size">21101</property>
-        <property name="installedSize">413696</property>
-        <property name="pullDependencies">/bin/sh so:libc.musl-x86_64.so.1</property>
-        <property name="pullChecksum">Q1EymS6rAgmGs7XYhqdyEoiWgEZ6A=</property>
-        <property name="gitCommitOfApkPort">dfa1379357a321e638feef1cd8d55ab03d020f45</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine-baselayout:alpine_baselayout:3.2.0-r18:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine_baselayout:alpine-baselayout:3.2.0-r18:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine_baselayout:alpine_baselayout:3.2.0-r18:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine:alpine-baselayout:3.2.0-r18:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine:alpine_baselayout:3.2.0-r18:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">dfa1379357a321e638feef1cd8d55ab03d020f45</property>
+        <property name="syft:metadata:installedSize">413696</property>
+        <property name="syft:metadata:originPackage">alpine-baselayout</property>
+        <property name="syft:metadata:pullChecksum">Q1EymS6rAgmGs7XYhqdyEoiWgEZ6A=</property>
+        <property name="syft:metadata:pullDependencies">/bin/sh so:libc.musl-x86_64.so.1</property>
+        <property name="syft:metadata:size">21101</property>
       </properties>
     </component>
     <component type="library">
@@ -64,16 +69,21 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">alpine-keys</property>
-        <property name="size">13362</property>
-        <property name="installedSize">159744</property>
-        <property name="pullChecksum">Q1kDF2stKo3e/RumlA8ZrRfCwdSv8=</property>
-        <property name="gitCommitOfApkPort">aab68f8c9ab434a46710de8e12fb3206e2930a59</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine-keys:alpine_keys:2.4-r1:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine_keys:alpine-keys:2.4-r1:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine_keys:alpine_keys:2.4-r1:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine:alpine-keys:2.4-r1:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:alpine:alpine_keys:2.4-r1:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">aab68f8c9ab434a46710de8e12fb3206e2930a59</property>
+        <property name="syft:metadata:installedSize">159744</property>
+        <property name="syft:metadata:originPackage">alpine-keys</property>
+        <property name="syft:metadata:pullChecksum">Q1kDF2stKo3e/RumlA8ZrRfCwdSv8=</property>
+        <property name="syft:metadata:size">13362</property>
       </properties>
     </component>
     <component type="library">
@@ -94,17 +104,22 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">apk-tools</property>
-        <property name="size">120377</property>
-        <property name="installedSize">311296</property>
-        <property name="pullDependencies">musl>=1.2 ca-certificates-bundle so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1 so:libssl.so.1.1 so:libz.so.1</property>
-        <property name="pullChecksum">Q13fPd+FRXaLwyNklVn+quFWDyknM=</property>
-        <property name="gitCommitOfApkPort">1ac3c1bb29eeff083c621cf6b27ad12ab93cb73a</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:apk-tools:apk_tools:2.12.7-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:apk_tools:apk-tools:2.12.7-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:apk_tools:apk_tools:2.12.7-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:apk:apk-tools:2.12.7-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:apk:apk_tools:2.12.7-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">1ac3c1bb29eeff083c621cf6b27ad12ab93cb73a</property>
+        <property name="syft:metadata:installedSize">311296</property>
+        <property name="syft:metadata:originPackage">apk-tools</property>
+        <property name="syft:metadata:pullChecksum">Q13fPd+FRXaLwyNklVn+quFWDyknM=</property>
+        <property name="syft:metadata:pullDependencies">musl>=1.2 ca-certificates-bundle so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1 so:libssl.so.1.1 so:libz.so.1</property>
+        <property name="syft:metadata:size">120377</property>
       </properties>
     </component>
     <component type="library">
@@ -125,17 +140,17 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">busybox</property>
-        <property name="size">500579</property>
-        <property name="installedSize">946176</property>
-        <property name="pullDependencies">so:libc.musl-x86_64.so.1</property>
-        <property name="pullChecksum">Q1oAjRcfdHXkV5YB3yqCyKwRRIiD8=</property>
-        <property name="gitCommitOfApkPort">2493d4c71a0bd6bbccf8a966c0a9cb25d17882a3</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">2493d4c71a0bd6bbccf8a966c0a9cb25d17882a3</property>
+        <property name="syft:metadata:installedSize">946176</property>
+        <property name="syft:metadata:originPackage">busybox</property>
+        <property name="syft:metadata:pullChecksum">Q1oAjRcfdHXkV5YB3yqCyKwRRIiD8=</property>
+        <property name="syft:metadata:pullDependencies">so:libc.musl-x86_64.so.1</property>
+        <property name="syft:metadata:size">500579</property>
       </properties>
     </component>
     <component type="library">
@@ -159,16 +174,25 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">ca-certificates</property>
-        <property name="size">124726</property>
-        <property name="installedSize">233472</property>
-        <property name="pullChecksum">Q1IAKpBYM7zucdVHSzbIt1m0yAfOA=</property>
-        <property name="gitCommitOfApkPort">670bf5a8cc5bc605eede8ca2fd55b50a5c9f8660</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca-certificates-bundle:ca_certificates_bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca_certificates_bundle:ca-certificates-bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca_certificates_bundle:ca_certificates_bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca-certificates:ca-certificates-bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca-certificates:ca_certificates_bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca_certificates:ca-certificates-bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca_certificates:ca_certificates_bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca:ca-certificates-bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ca:ca_certificates_bundle:20191127-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">670bf5a8cc5bc605eede8ca2fd55b50a5c9f8660</property>
+        <property name="syft:metadata:installedSize">233472</property>
+        <property name="syft:metadata:originPackage">ca-certificates</property>
+        <property name="syft:metadata:pullChecksum">Q1IAKpBYM7zucdVHSzbIt1m0yAfOA=</property>
+        <property name="syft:metadata:size">124726</property>
       </properties>
     </component>
     <component type="library">
@@ -192,17 +216,22 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">libc-dev</property>
-        <property name="size">1485</property>
-        <property name="installedSize">4096</property>
-        <property name="pullDependencies">musl-utils</property>
-        <property name="pullChecksum">Q1eY3j67V/Pij0CAgHRpNfIToJlyI=</property>
-        <property name="gitCommitOfApkPort">60424133be2e79bbfeff3d58147a22886f817ce2</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:libc-utils:libc_utils:0.7.2-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:libc_utils:libc-utils:0.7.2-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:libc_utils:libc_utils:0.7.2-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:libc:libc-utils:0.7.2-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:libc:libc_utils:0.7.2-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">60424133be2e79bbfeff3d58147a22886f817ce2</property>
+        <property name="syft:metadata:installedSize">4096</property>
+        <property name="syft:metadata:originPackage">libc-dev</property>
+        <property name="syft:metadata:pullChecksum">Q1eY3j67V/Pij0CAgHRpNfIToJlyI=</property>
+        <property name="syft:metadata:pullDependencies">musl-utils</property>
+        <property name="syft:metadata:size">1485</property>
       </properties>
     </component>
     <component type="library">
@@ -223,17 +252,17 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">openssl</property>
-        <property name="size">1207585</property>
-        <property name="installedSize">2740224</property>
-        <property name="pullDependencies">so:libc.musl-x86_64.so.1</property>
-        <property name="pullChecksum">Q1KsBvLeWBvZ6Q2do9oyZ6WZYba8Q=</property>
-        <property name="gitCommitOfApkPort">d206261d3031d1f359370a5f7c363d8623a1487f</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">d206261d3031d1f359370a5f7c363d8623a1487f</property>
+        <property name="syft:metadata:installedSize">2740224</property>
+        <property name="syft:metadata:originPackage">openssl</property>
+        <property name="syft:metadata:pullChecksum">Q1KsBvLeWBvZ6Q2do9oyZ6WZYba8Q=</property>
+        <property name="syft:metadata:pullDependencies">so:libc.musl-x86_64.so.1</property>
+        <property name="syft:metadata:size">1207585</property>
       </properties>
     </component>
     <component type="library">
@@ -254,17 +283,17 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">libretls</property>
-        <property name="size">29183</property>
-        <property name="installedSize">86016</property>
-        <property name="pullDependencies">ca-certificates-bundle so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1 so:libssl.so.1.1</property>
-        <property name="pullChecksum">Q1UQjutTNeqKQgMlKQyyZFnumOg3c=</property>
-        <property name="gitCommitOfApkPort">670bf5a8cc5bc605eede8ca2fd55b50a5c9f8660</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">670bf5a8cc5bc605eede8ca2fd55b50a5c9f8660</property>
+        <property name="syft:metadata:installedSize">86016</property>
+        <property name="syft:metadata:originPackage">libretls</property>
+        <property name="syft:metadata:pullChecksum">Q1UQjutTNeqKQgMlKQyyZFnumOg3c=</property>
+        <property name="syft:metadata:pullDependencies">ca-certificates-bundle so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1 so:libssl.so.1.1</property>
+        <property name="syft:metadata:size">29183</property>
       </properties>
     </component>
     <component type="library">
@@ -285,17 +314,17 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">openssl</property>
-        <property name="size">213157</property>
-        <property name="installedSize">540672</property>
-        <property name="pullDependencies">so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1</property>
-        <property name="pullChecksum">Q1N9b+1WSISp1N+g+5q6zxC5pdT0U=</property>
-        <property name="gitCommitOfApkPort">d206261d3031d1f359370a5f7c363d8623a1487f</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">d206261d3031d1f359370a5f7c363d8623a1487f</property>
+        <property name="syft:metadata:installedSize">540672</property>
+        <property name="syft:metadata:originPackage">openssl</property>
+        <property name="syft:metadata:pullChecksum">Q1N9b+1WSISp1N+g+5q6zxC5pdT0U=</property>
+        <property name="syft:metadata:pullDependencies">so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1</property>
+        <property name="syft:metadata:size">213157</property>
       </properties>
     </component>
     <component type="library">
@@ -316,16 +345,16 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">musl</property>
-        <property name="size">383152</property>
-        <property name="installedSize">622592</property>
-        <property name="pullChecksum">Q1Deb0jNytkrjPW4N/eKLZ43BwOlw=</property>
-        <property name="gitCommitOfApkPort">bf5bbfdbf780092f387b7abe401fbfceda90c84d</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">bf5bbfdbf780092f387b7abe401fbfceda90c84d</property>
+        <property name="syft:metadata:installedSize">622592</property>
+        <property name="syft:metadata:originPackage">musl</property>
+        <property name="syft:metadata:pullChecksum">Q1Deb0jNytkrjPW4N/eKLZ43BwOlw=</property>
+        <property name="syft:metadata:size">383152</property>
       </properties>
     </component>
     <component type="library">
@@ -346,17 +375,22 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">musl</property>
-        <property name="size">36723</property>
-        <property name="installedSize">143360</property>
-        <property name="pullDependencies">scanelf so:libc.musl-x86_64.so.1</property>
-        <property name="pullChecksum">Q1P50cfJiSsHoqsYRTyOEOlJiLn3o=</property>
-        <property name="gitCommitOfApkPort">bf5bbfdbf780092f387b7abe401fbfceda90c84d</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:musl-utils:musl_utils:1.2.2-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:musl_utils:musl-utils:1.2.2-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:musl_utils:musl_utils:1.2.2-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:musl:musl-utils:1.2.2-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:musl:musl_utils:1.2.2-r7:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">bf5bbfdbf780092f387b7abe401fbfceda90c84d</property>
+        <property name="syft:metadata:installedSize">143360</property>
+        <property name="syft:metadata:originPackage">musl</property>
+        <property name="syft:metadata:pullChecksum">Q1P50cfJiSsHoqsYRTyOEOlJiLn3o=</property>
+        <property name="syft:metadata:pullDependencies">scanelf so:libc.musl-x86_64.so.1</property>
+        <property name="syft:metadata:size">36723</property>
       </properties>
     </component>
     <component type="library">
@@ -377,17 +411,17 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">pax-utils</property>
-        <property name="size">36830</property>
-        <property name="installedSize">94208</property>
-        <property name="pullDependencies">so:libc.musl-x86_64.so.1</property>
-        <property name="pullChecksum">Q11/dZDkUIcKT3lnHCNpsxtbsHNJo=</property>
-        <property name="gitCommitOfApkPort">86b3d4fbb0a760febf3476f9a58abf8d0f728d5c</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">86b3d4fbb0a760febf3476f9a58abf8d0f728d5c</property>
+        <property name="syft:metadata:installedSize">94208</property>
+        <property name="syft:metadata:originPackage">pax-utils</property>
+        <property name="syft:metadata:pullChecksum">Q11/dZDkUIcKT3lnHCNpsxtbsHNJo=</property>
+        <property name="syft:metadata:pullDependencies">so:libc.musl-x86_64.so.1</property>
+        <property name="syft:metadata:size">36830</property>
       </properties>
     </component>
     <component type="library">
@@ -408,17 +442,22 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">busybox</property>
-        <property name="size">4711</property>
-        <property name="installedSize">28672</property>
-        <property name="pullDependencies">so:libc.musl-x86_64.so.1 so:libtls.so.2</property>
-        <property name="pullChecksum">Q1KgMIw8nvX1hxPUkROpGS24yUf4M=</property>
-        <property name="gitCommitOfApkPort">2493d4c71a0bd6bbccf8a966c0a9cb25d17882a3</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:cpe23">cpe:2.3:a:ssl-client:ssl_client:1.34.1-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ssl_client:ssl-client:1.34.1-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ssl_client:ssl_client:1.34.1-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ssl:ssl-client:1.34.1-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:cpe23">cpe:2.3:a:ssl:ssl_client:1.34.1-r3:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">2493d4c71a0bd6bbccf8a966c0a9cb25d17882a3</property>
+        <property name="syft:metadata:installedSize">28672</property>
+        <property name="syft:metadata:originPackage">busybox</property>
+        <property name="syft:metadata:pullChecksum">Q1KgMIw8nvX1hxPUkROpGS24yUf4M=</property>
+        <property name="syft:metadata:pullDependencies">so:libc.musl-x86_64.so.1 so:libtls.so.2</property>
+        <property name="syft:metadata:size">4711</property>
       </properties>
     </component>
     <component type="library">
@@ -439,17 +478,17 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="foundBy">apkdb-cataloger</property>
-        <property name="type">apk</property>
-        <property name="metadataType">ApkMetadata</property>
-        <property name="path">/lib/apk/db/installed</property>
-        <property name="layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
-        <property name="originPackage">zlib</property>
-        <property name="size">51742</property>
-        <property name="installedSize">110592</property>
-        <property name="pullDependencies">so:libc.musl-x86_64.so.1</property>
-        <property name="pullChecksum">Q1WBo+57JldlVe0iVt2n8IP6+vNGE=</property>
-        <property name="gitCommitOfApkPort">388a4fb3640f8ccbd18e105df3ad741dca4247e1-dirty</property>
+        <property name="syft:package:foundBy">apkdb-cataloger</property>
+        <property name="syft:package:metadataType">ApkMetadata</property>
+        <property name="syft:package:type">apk</property>
+        <property name="syft:location:0:layerID">sha256:8d3ac3489996423f53d6087c81180006263b79f206d3fdec9e66f0e27ceb8759</property>
+        <property name="syft:location:0:path">/lib/apk/db/installed</property>
+        <property name="syft:metadata:gitCommitOfApkPort">388a4fb3640f8ccbd18e105df3ad741dca4247e1-dirty</property>
+        <property name="syft:metadata:installedSize">110592</property>
+        <property name="syft:metadata:originPackage">zlib</property>
+        <property name="syft:metadata:pullChecksum">Q1WBo+57JldlVe0iVt2n8IP6+vNGE=</property>
+        <property name="syft:metadata:pullDependencies">so:libc.musl-x86_64.so.1</property>
+        <property name="syft:metadata:size">51742</property>
       </properties>
     </component>
     <component type="operating-system">
@@ -466,9 +505,9 @@
         </reference>
       </externalReferences>
       <properties>
-        <property name="prettyName">Alpine Linux v3.15</property>
-        <property name="id">alpine</property>
-        <property name="versionID">3.15.0</property>
+        <property name="syft:distro:id">alpine</property>
+        <property name="syft:distro:prettyName">Alpine Linux v3.15</property>
+        <property name="syft:distro:versionID">3.15.0</property>
       </properties>
     </component>
   </components>

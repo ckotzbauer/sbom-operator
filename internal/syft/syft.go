@@ -54,7 +54,13 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		return "", err
 	}
 
-	src, cleanup, err := source.New(filepath.Join("docker-archive:", imagePath), nil, nil)
+	input, err := source.ParseInput(filepath.Join("docker-archive:", imagePath), false)
+	if err != nil {
+		logrus.WithError(fmt.Errorf("failed to parse input %s: %w", imagePath, err)).Error("Input-Parsing failed")
+		return "", err
+	}
+
+	src, cleanup, err := source.New(*input, nil, nil)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err)).Error("Source-Creation failed")
 		return "", err

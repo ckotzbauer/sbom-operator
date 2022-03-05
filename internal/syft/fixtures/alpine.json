@@ -2991,7 +2991,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.39.3",
+  "version": "0.40.1",
   "configuration": {
    "configPath": "",
    "output": [
