@@ -1,3 +1,36 @@
+## Version 0.6.0 (2022-03-05)
+
+### Bug fixes
+
+* [[`a18233fb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a18233fb)] - **fix**: fix git-pull error
+
+### Build and testing
+
+* [[`d37c684e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d37c684e)] - **build**: ignore several cves
+* [[`785c5c72`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/785c5c72)] - **build**: use grype for cve-scan
+
+### Documentation
+
+* [[`fe5b3bf4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fe5b3bf4)] - **doc**: fix versions [skip ci]
+* [[`e78a0b54`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e78a0b54)] - **doc**: update versions [skip ci]
+
+### Security
+
+* [[`4f7fdeee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4f7fdeee)] - **security**: update containerd (GHSA-crp2-qrr5-8pq7)
+
+### Dependency updates
+
+* [[`34849c73`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/34849c73)] - **deps**: update to syft@0.40.1
+* [[`e8d2f030`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e8d2f030)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.40.1
+* [[`3e2a6554`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3e2a6554)] - **deps**: update actions&#x2F;setup-go action to v3
+* [[`889b81b2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/889b81b2)] - **deps**: update actions&#x2F;stale action to v5
+* [[`51cf1180`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/51cf1180)] - **deps**: bump azure&#x2F;setup-kubectl from 2.0 to 2.1
+* [[`b5a4e8af`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b5a4e8af)] - **deps**: bump actions&#x2F;checkout from 2 to 3
+* [[`0fb9645c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0fb9645c)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.7.0 (#39)
+* [[`726ade99`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/726ade99)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.39.3 (#38)
+* [[`f2d51ba7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f2d51ba7)] - **deps**: bump actions&#x2F;setup-node from 2.5.1 to 3.0.0
+
+
 ## Version 0.5.0 (2022-02-19)
 
 ### Build and testing
