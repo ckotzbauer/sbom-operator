@@ -53,3 +53,4 @@ jobs:
         with:
           scan-target: ghcr.io/ckotzbauer/sbom-operator
           fail-on: "medium"
+          config-file: ".github/grype.yaml"
