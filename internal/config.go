@@ -17,4 +17,5 @@ var (
 	ConfigKeyNamespaceLabelSelector = "namespace-label-selector"
 	ConfigKeyDependencyTrackBaseUrl = "dtrack-base-url"
 	ConfigKeyDependencyTrackApiKey  = "dtrack-api-key"
+	ConfigKeyKubernetesClusterId    = "kubernetes-cluster-id"
 )
