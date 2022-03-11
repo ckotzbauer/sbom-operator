@@ -103,7 +103,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 	return nil
 }
 
-func (g *DependencyTrackTarget) Cleanup(allImages []string) {
+func (g *DependencyTrackTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
 
 	var (
@@ -113,9 +113,9 @@ func (g *DependencyTrackTarget) Cleanup(allImages []string) {
 
 	allImageRefs := make([]parser.Reference, len(allImages))
 	for _, image := range allImages {
-		ref, err := parser.Parse(image)
+		ref, err := parser.Parse(image.Image)
 		if err != nil {
-			logrus.WithError(err).Errorf("Could not parse image %s", image)
+			logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
 			continue
 		}
 		allImageRefs = append(allImageRefs, *ref)
@@ -136,7 +136,7 @@ func (g *DependencyTrackTarget) Cleanup(allImages []string) {
 
 			// Image used in current cluster
 			for _, image := range allImages {
-				if image == currentImageName {
+				if image.Image == currentImageName {
 					continue projectLoop
 				}
 			}

@@ -82,9 +82,9 @@ func (client *KubeClient) listPods(namespace, labelSelector string) []corev1.Pod
 	return list.Items
 }
 
-func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []string) {
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []ContainerImage) {
 	images := map[string]ContainerImage{}
-	allImages := []string{}
+	allImages := []ContainerImage{}
 
 	for _, ns := range namespaces {
 		pods := client.listPods(ns.Name, podLabelSelector)
@@ -119,11 +119,17 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 
 						img.Pods = append(img.Pods, pod)
 						images[c.ImageID] = img
+						allImages = append(allImages, img)
 					} else {
 						logrus.Debugf("Skip image %s", c.ImageID)
+						allImages = append(allImages, ContainerImage{
+							Image:      c.Image,
+							ImageID:    c.ImageID,
+							Auth:       pullSecrets,
+							LegacyAuth: legacy,
+							Pods:       []corev1.Pod{},
+						})
 					}
-
-					allImages = append(allImages, c.ImageID)
 				}
 			}
 		}
