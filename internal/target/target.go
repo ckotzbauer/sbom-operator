@@ -8,5 +8,5 @@ type Target interface {
 	Initialize()
 	ValidateConfig() error
 	ProcessSbom(image kubernetes.ContainerImage, sbom string) error
-	Cleanup(allImages []string)
+	Cleanup(allImages []kubernetes.ContainerImage)
 }

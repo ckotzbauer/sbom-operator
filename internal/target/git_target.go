@@ -99,7 +99,7 @@ func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) er
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) Cleanup(allImages []string) {
+func (g *GitTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
 
@@ -114,10 +114,10 @@ func (g *GitTarget) Cleanup(allImages []string) {
 	}
 }
 
-func (g *GitTarget) mapToFiles(allImages []string) []string {
+func (g *GitTarget) mapToFiles(allImages []kubernetes.ContainerImage) []string {
 	paths := []string{}
 	for _, img := range allImages {
-		paths = append(paths, g.imageIDToFilePath(img))
+		paths = append(paths, g.imageIDToFilePath(img.ImageID))
 	}
 
 	return paths
