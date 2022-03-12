@@ -1,3 +1,34 @@
+## Version 0.7.0 (2022-03-12)
+
+### Features and improvements
+
+* [[`2fedd5e1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2fedd5e1)] - **feat**: delete unused images from Dependency Track
+
+### Bug fixes
+
+* [[`151dde7a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/151dde7a)] - **fix**: rename fixtures
+* [[`9fa77304`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9fa77304)] - **fix**: issue with image cleanup
+
+### Documentation
+
+* [[`4863e43a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4863e43a)] - **doc**: add new version
+
+### Dependency updates
+
+* [[`404a60fe`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/404a60fe)] - **deps**: update to syft@0.41.4
+* [[`4b74df4f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4b74df4f)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.41.4
+* [[`2a52b94a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2a52b94a)] - **deps**: update module github.com&#x2F;docker&#x2F;cli to v20.10.13 (#48)
+* [[`280975c3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/280975c3)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.9.0 (#49)
+* [[`4fdc6734`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4fdc6734)] - **deps**: update module github.com&#x2F;spf13&#x2F;cobra to v1.4.0 (#51)
+* [[`209fa941`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/209fa941)] - **deps**: update lannonbr&#x2F;issue-label-manager-action action to v3.0.1 (#45)
+* [[`47ee9f1d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/47ee9f1d)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.8.0 (#46)
+
+### Common changes
+
+* [[`9ea6b1ef`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9ea6b1ef)] - **chore**: pin dockerimage
+* [[`5f0574f4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5f0574f4)] - **chore**: pin golang version
+
+
 ## Version 0.6.0 (2022-03-05)
 
 ### Bug fixes
