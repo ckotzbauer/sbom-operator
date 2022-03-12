@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/anchore/syft/syft"
-	"github.com/anchore/syft/syft/format"
 	"github.com/anchore/syft/syft/pkg/cataloger"
 	"github.com/anchore/syft/syft/sbom"
 
@@ -54,7 +53,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		return "", err
 	}
 
-	input, err := source.ParseInput(filepath.Join("docker-archive:", imagePath), false)
+	input, err := source.ParseInput(filepath.Join("docker-archive:", imagePath), "", false)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to parse input %s: %w", imagePath, err)).Error("Input-Parsing failed")
 		return "", err
@@ -92,7 +91,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	result.Relationships = relationships
 
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
-	b, err := syft.Encode(result, format.Option(s.sbomFormat))
+	b, err := syft.Encode(result, syft.FormatByName(s.sbomFormat))
 	if err != nil {
 		logrus.WithError(err).Error("Encoding of result failed")
 		return "", err
@@ -110,11 +109,11 @@ func GetFileName(sbomFormat string) string {
 		return "sbom.txt"
 	case "cyclonedx":
 		return "sbom.xml"
-	case "cyclonedx-json":
+	case "cyclonedxjson":
 		return "sbom.json"
 	case "spdx":
 		return "sbom.spdx"
-	case "spdx-json":
+	case "spdxjson":
 		return "sbom.json"
 	case "table":
 		return "sbom.txt"

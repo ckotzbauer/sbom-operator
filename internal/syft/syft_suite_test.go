@@ -90,7 +90,7 @@ func testCyclonedxSbom(name, imageID string) {
 }
 
 func testSpdxSbom(name, imageID string) {
-	format := "spdx-json"
+	format := "spdxjson"
 	s := syft.New(format).WithVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
 	Expect(err).NotTo(HaveOccurred())
