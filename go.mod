@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.17
 
 require (
-	github.com/anchore/syft v0.40.1
+	github.com/anchore/syft v0.41.4
 	github.com/docker/cli v20.10.13+incompatible
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.5.0
