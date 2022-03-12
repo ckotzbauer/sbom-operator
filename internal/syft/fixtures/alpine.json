@@ -2978,7 +2978,9 @@
    "config": "eyJhcmNoaXRlY3R1cmUiOiJhbWQ2NCIsImNvbmZpZyI6eyJIb3N0bmFtZSI6IiIsIkRvbWFpbm5hbWUiOiIiLCJVc2VyIjoiIiwiQXR0YWNoU3RkaW4iOmZhbHNlLCJBdHRhY2hTdGRvdXQiOmZhbHNlLCJBdHRhY2hTdGRlcnIiOmZhbHNlLCJUdHkiOmZhbHNlLCJPcGVuU3RkaW4iOmZhbHNlLCJTdGRpbk9uY2UiOmZhbHNlLCJFbnYiOlsiUEFUSD0vdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91c3IvYmluOi9zYmluOi9iaW4iXSwiQ21kIjpbIi9iaW4vc2giXSwiSW1hZ2UiOiJzaGEyNTY6Yjc0NzUzNGFlMjlkMDhjMGM4NGNjNDMyNmNhZjA0ZTg3M2M2ZDAyYmI2N2NkOWM3NjQ0YmUyYjRmYThkMmYzMSIsIlZvbHVtZXMiOm51bGwsIldvcmtpbmdEaXIiOiIiLCJFbnRyeXBvaW50IjpudWxsLCJPbkJ1aWxkIjpudWxsLCJMYWJlbHMiOm51bGx9LCJjb250YWluZXIiOiI0MjkyZThlZDJlZjJiNmRjNGJiYWY4ZTFjZGEwY2I1Zjk1Yjk2YWRjNGFhMmRhM2QxNTE4MWI1NGQwN2EwYjM0IiwiY29udGFpbmVyX2NvbmZpZyI6eyJIb3N0bmFtZSI6IjQyOTJlOGVkMmVmMiIsIkRvbWFpbm5hbWUiOiIiLCJVc2VyIjoiIiwiQXR0YWNoU3RkaW4iOmZhbHNlLCJBdHRhY2hTdGRvdXQiOmZhbHNlLCJBdHRhY2hTdGRlcnIiOmZhbHNlLCJUdHkiOmZhbHNlLCJPcGVuU3RkaW4iOmZhbHNlLCJTdGRpbk9uY2UiOmZhbHNlLCJFbnYiOlsiUEFUSD0vdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91c3IvYmluOi9zYmluOi9iaW4iXSwiQ21kIjpbIi9iaW4vc2giLCItYyIsIiMobm9wKSAiLCJDTUQgW1wiL2Jpbi9zaFwiXSJdLCJJbWFnZSI6InNoYTI1NjpiNzQ3NTM0YWUyOWQwOGMwYzg0Y2M0MzI2Y2FmMDRlODczYzZkMDJiYjY3Y2Q5Yzc2NDRiZTJiNGZhOGQyZjMxIiwiVm9sdW1lcyI6bnVsbCwiV29ya2luZ0RpciI6IiIsIkVudHJ5cG9pbnQiOm51bGwsIk9uQnVpbGQiOm51bGwsIkxhYmVscyI6e319LCJjcmVhdGVkIjoiMjAyMS0xMS0yNFQyMDoxOTo0MC40ODMzNjc1NDZaIiwiZG9ja2VyX3ZlcnNpb24iOiIyMC4xMC43IiwiaGlzdG9yeSI6W3siY3JlYXRlZCI6IjIwMjEtMTEtMjRUMjA6MTk6NDAuMTk5NzAwOTQ2WiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jICMobm9wKSBBREQgZmlsZTo5MjMzZjZmMjIzN2Q3OTY1OWE5NTIxZjdlMzkwZGYyMTdjZWM0OWYxYThhYTNhMTIxNDdiYmNhMTk1NmFjZGI5IGluIC8gIn0seyJjcmVhdGVkIjoiMjAyMS0xMS0yNFQyMDoxOTo0MC40ODMzNjc1NDZaIiwiY3JlYXRlZF9ieSI6Ii9iaW4vc2ggLWMgIyhub3ApICBDTUQgW1wiL2Jpbi9zaFwiXSIsImVtcHR5X2xheWVyIjp0cnVlfV0sIm9zIjoibGludXgiLCJyb290ZnMiOnsidHlwZSI6ImxheWVycyIsImRpZmZfaWRzIjpbInNoYTI1Njo4ZDNhYzM0ODk5OTY0MjNmNTNkNjA4N2M4MTE4MDAwNjI2M2I3OWYyMDZkM2ZkZWM5ZTY2ZjBlMjdjZWI4NzU5Il19fQ==",
    "repoDigests": [
     "index.docker.io/library/alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300"
-   ]
+   ],
+   "architecture": "",
+   "os": ""
   }
  },
  "distro": {
@@ -2991,7 +2993,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.40.1",
+  "version": "0.41.4",
   "configuration": {
    "configPath": "",
    "output": [
@@ -3065,11 +3067,12 @@
    "exclude": [],
    "attest": {
     "key": "cosign.key"
-   }
+   },
+   "platform": ""
   }
  },
  "schema": {
-  "version": "3.0.1",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.0.1.json"
+  "version": "3.1.0",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.1.0.json"
  }
 }
