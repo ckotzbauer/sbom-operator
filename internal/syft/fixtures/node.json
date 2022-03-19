@@ -20,7 +20,7 @@
     "cpe:2.3:a:\\@gar\\/promisify:\\@gar\\/promisify:1.1.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@gar\\/promisify:1.1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@gar/promisify@1.1.2",
+   "purl": "pkg:npm/%40gar/promisify@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@gar/promisify",
@@ -64,7 +64,7 @@
     "cpe:2.3:a:*:\\@isaacs\\/string-locale-compare:1.1.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@isaacs\\/string_locale_compare:1.1.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@isaacs/string-locale-compare@1.1.0",
+   "purl": "pkg:npm/%40isaacs/string-locale-compare@1.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@isaacs/string-locale-compare",
@@ -98,7 +98,7 @@
     "cpe:2.3:a:\\@npmcli\\/arborist:\\@npmcli\\/arborist:4.0.3:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/arborist:4.0.3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/arborist@4.0.3",
+   "purl": "pkg:npm/%40npmcli/arborist@4.0.3",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/arborist",
@@ -138,7 +138,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/ci-detect:1.4.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/ci_detect:1.4.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/ci-detect@1.4.0",
+   "purl": "pkg:npm/%40npmcli/ci-detect@1.4.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/ci-detect",
@@ -172,7 +172,7 @@
     "cpe:2.3:a:\\@npmcli\\/config:\\@npmcli\\/config:2.3.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/config:2.3.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/config@2.3.0",
+   "purl": "pkg:npm/%40npmcli/config@2.3.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/config",
@@ -212,7 +212,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/disparity-colors:1.0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/disparity_colors:1.0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/disparity-colors@1.0.1",
+   "purl": "pkg:npm/%40npmcli/disparity-colors@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/disparity-colors",
@@ -246,7 +246,7 @@
     "cpe:2.3:a:\\@npmcli\\/fs:\\@npmcli\\/fs:1.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/fs:1.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/fs@1.0.0",
+   "purl": "pkg:npm/%40npmcli/fs@1.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/fs",
@@ -280,7 +280,7 @@
     "cpe:2.3:a:\\@npmcli\\/git:\\@npmcli\\/git:2.1.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/git:2.1.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/git@2.1.0",
+   "purl": "pkg:npm/%40npmcli/git@2.1.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/git",
@@ -324,7 +324,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/installed-package-contents:1.0.7:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/installed_package_contents:1.0.7:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/installed-package-contents@1.0.7",
+   "purl": "pkg:npm/%40npmcli/installed-package-contents@1.0.7",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/installed-package-contents",
@@ -364,7 +364,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/map-workspaces:2.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/map_workspaces:2.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/map-workspaces@2.0.0",
+   "purl": "pkg:npm/%40npmcli/map-workspaces@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/map-workspaces",
@@ -404,7 +404,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/metavuln-calculator:2.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/metavuln_calculator:2.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/metavuln-calculator@2.0.0",
+   "purl": "pkg:npm/%40npmcli/metavuln-calculator@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/metavuln-calculator",
@@ -444,7 +444,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/move-file:1.1.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/move_file:1.1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/move-file@1.1.2",
+   "purl": "pkg:npm/%40npmcli/move-file@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/move-file",
@@ -488,7 +488,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/name-from-folder:1.0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/name_from_folder:1.0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/name-from-folder@1.0.1",
+   "purl": "pkg:npm/%40npmcli/name-from-folder@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/name-from-folder",
@@ -528,7 +528,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/node-gyp:1.0.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/node_gyp:1.0.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/node-gyp@1.0.2",
+   "purl": "pkg:npm/%40npmcli/node-gyp@1.0.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/node-gyp",
@@ -568,7 +568,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/package-json:1.0.1:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/package_json:1.0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/package-json@1.0.1",
+   "purl": "pkg:npm/%40npmcli/package-json@1.0.1",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/package-json",
@@ -608,7 +608,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/promise-spawn:1.3.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/promise_spawn:1.3.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/promise-spawn@1.3.2",
+   "purl": "pkg:npm/%40npmcli/promise-spawn@1.3.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/promise-spawn",
@@ -648,7 +648,7 @@
     "cpe:2.3:a:*:\\@npmcli\\/run-script:2.0.0:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@npmcli\\/run_script:2.0.0:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@npmcli/run-script@2.0.0",
+   "purl": "pkg:npm/%40npmcli/run-script@2.0.0",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@npmcli/run-script",
@@ -682,7 +682,7 @@
     "cpe:2.3:a:\\@tootallnate\\/once:\\@tootallnate\\/once:1.1.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:\\@tootallnate\\/once:1.1.2:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:npm/@tootallnate/once@1.1.2",
+   "purl": "pkg:npm/%40tootallnate/once@1.1.2",
    "metadataType": "NpmPackageJsonMetadata",
    "metadata": {
     "name": "@tootallnate/once",
@@ -4899,7 +4899,7 @@
    "cpes": [
     "cpe:2.3:a:bsdutils:bsdutils:1\\:2.33.1-0.1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64&upstream=util-linux@2.33.1-0.1&distro=debian-10",
+   "purl": "pkg:deb/debian/bsdutils@1:2.33.1-0.1?arch=amd64&upstream=util-linux%402.33.1-0.1&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "bsdutils",
@@ -19996,7 +19996,7 @@
    "cpes": [
     "cpe:2.3:a:libgcc1:libgcc1:1\\:8.3.0-6:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64&upstream=gcc-8@8.3.0-6&distro=debian-10",
+   "purl": "pkg:deb/debian/libgcc1@1:8.3.0-6?arch=amd64&upstream=gcc-8%408.3.0-6&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libgcc1",
@@ -24261,7 +24261,7 @@
    "cpes": [
     "cpe:2.3:a:libselinux1:libselinux1:2.8-1\\+b1:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64&upstream=libselinux@2.8-1&distro=debian-10",
+   "purl": "pkg:deb/debian/libselinux1@2.8-1+b1?arch=amd64&upstream=libselinux%402.8-1&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "libselinux1",
@@ -26687,7 +26687,7 @@
    "cpes": [
     "cpe:2.3:a:mawk:mawk:1.3.3-17\\+b3:*:*:*:*:*:*:*"
    ],
-   "purl": "pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64&upstream=mawk@1.3.3-17&distro=debian-10",
+   "purl": "pkg:deb/debian/mawk@1.3.3-17+b3?arch=amd64&upstream=mawk%401.3.3-17&distro=debian-10",
    "metadataType": "DpkgMetadata",
    "metadata": {
     "package": "mawk",
@@ -79316,7 +79316,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.41.4",
+  "version": "0.42.0",
   "configuration": {
    "configPath": "",
    "output": [
@@ -79395,7 +79395,7 @@
   }
  },
  "schema": {
-  "version": "3.1.0",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.1.0.json"
+  "version": "3.1.1",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.1.1.json"
  }
 }
