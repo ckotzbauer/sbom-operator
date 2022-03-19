@@ -12,7 +12,7 @@ jobs:
       - name: Install Go
         uses: actions/setup-go@v3
         with:
-          go-version: '1.17.8'
+          go-version: '1.18.0'
 
       - name: Setup AWS CLI
         uses: unfor19/install-aws-cli-action@v1
