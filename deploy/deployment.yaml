@@ -4,7 +4,7 @@ metadata:
   labels:
     app.kubernetes.io/name: sbom-operator
   name: sbom-operator
-  namespace: infrastructure
+  namespace: default
 spec:
   selector:
     matchLabels:
