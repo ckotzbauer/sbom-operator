@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/anchore/syft v0.42.0
-	github.com/docker/cli v20.10.13+incompatible
+	github.com/docker/cli v20.10.14+incompatible
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.5.0
 	github.com/onsi/ginkgo/v2 v2.1.3
