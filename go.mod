@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.18
 
 require (
-	github.com/anchore/syft v0.42.0
+	github.com/anchore/syft v0.42.4
 	github.com/docker/cli v20.10.14+incompatible
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.5.0
@@ -28,7 +28,7 @@ require (
 	github.com/anchore/go-rpmdb v0.0.0-20210914181456-a9c52348da63 // indirect
 	github.com/anchore/go-version v1.2.2-0.20200701162849-18adb9c92b9b // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20220314153042-1bcd40e5206b // indirect
-	github.com/anchore/stereoscope v0.0.0-20220315185520-25183ec78f40 // indirect
+	github.com/anchore/stereoscope v0.0.0-20220323180633-4bdc70599cde // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.0.2 // indirect
 	github.com/containerd/containerd v1.6.1 // indirect
@@ -71,7 +71,7 @@ require (
 	github.com/pelletier/go-toml v1.9.4 // indirect
 	github.com/pierrec/lz4/v4 v4.1.2 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/scylladb/go-set v1.0.2 // indirect
+	github.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/spdx/tools-golang v0.2.0 // indirect
 	github.com/spf13/afero v1.8.0 // indirect
