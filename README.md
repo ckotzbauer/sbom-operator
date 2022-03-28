@@ -164,7 +164,7 @@ The docker-image is based on `scratch` to reduce the attack-surface and keep the
 with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files. The release-process satisfies SLSA Level 2. All of those "metadata files" are 
 also stored in a dedicated repository `ghcr.io/ckotzbauer/sbom-operator-metadata`.
 Both, SLSA and the signatures are still experimental for this project.
-
+When discovering security issues please refer to the [Security process](https://github.com/ckotzbauer/.github/blob/main/SECURITY.md).
 
 
 [Contributing](https://github.com/ckotzbauer/sbom-operator/blob/master/CONTRIBUTING.md)
@@ -174,3 +174,11 @@ Both, SLSA and the signatures are still experimental for this project.
 [Changelog](https://github.com/ckotzbauer/sbom-operator/blob/master/CHANGELOG.md)
 --------
 
+
+## Contributing
+
+Please refer to the [Contribution guildelines](https://github.com/ckotzbauer/.github/blob/main/CONTRIBUTING.md).
+
+## Code of conduct
+
+Please refer to the [Conduct guildelines](https://github.com/ckotzbauer/.github/blob/main/CODE_OF_CONDUCT.md).
