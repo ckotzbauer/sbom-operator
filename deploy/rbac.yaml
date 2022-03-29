@@ -2,13 +2,11 @@ apiVersion: v1
 kind: ServiceAccount
 metadata:
   name: sbom-operator
-  namespace: default
 ---
 apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRole
 metadata:
   name: sbom-operator
-  namespace: default
 rules:
 - apiGroups:
   - ""
@@ -35,7 +33,6 @@ apiVersion: rbac.authorization.k8s.io/v1
 kind: ClusterRoleBinding
 metadata:
   name: sbom-operator
-  namespace: default
 roleRef:
   apiGroup: rbac.authorization.k8s.io
   kind: ClusterRole
@@ -43,3 +40,4 @@ roleRef:
 subjects:
 - kind: ServiceAccount
   name: sbom-operator
+  namespace: default
