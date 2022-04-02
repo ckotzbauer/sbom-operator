@@ -153,10 +153,14 @@ github.com/anchore/stereoscope v0.0.0-20220315185520-25183ec78f40 h1:OSyFMZgEwQW
 github.com/anchore/stereoscope v0.0.0-20220315185520-25183ec78f40/go.mod h1:OVVJ4y/L26pspeeHNvNa7GeQfoLPWxJe13iODl9x5l4=
 github.com/anchore/stereoscope v0.0.0-20220323180633-4bdc70599cde h1:yOi6g1D2q3WwzID0QQyF+x9VkzUyGSJy3cEYbp7ZOyk=
 github.com/anchore/stereoscope v0.0.0-20220323180633-4bdc70599cde/go.mod h1:OVVJ4y/L26pspeeHNvNa7GeQfoLPWxJe13iODl9x5l4=
+github.com/anchore/stereoscope v0.0.0-20220330165332-7fc73ee7b0f0 h1:mObz7bepZ6DtbIrsB2mxuOE9XEYmVtA/P/EDlKwfbjs=
+github.com/anchore/stereoscope v0.0.0-20220330165332-7fc73ee7b0f0/go.mod h1:yoCLUZY0k/pYLNIy0L80p2Ko0PKVNXm8rHtgxp4OiSc=
 github.com/anchore/syft v0.42.0 h1:xHy7Viga48U80NwVBaSv9x63ygk/Bqja8Dr/P8F4nUg=
 github.com/anchore/syft v0.42.0/go.mod h1:zmU1U+xOgPbQ1h0vS11/A/05b2RH8vlXXvyT2kzCFbQ=
 github.com/anchore/syft v0.42.4 h1:mQTRJ7a5cHHeIX1C8YTzGcEDVodXBpdsUZMBdM85VVA=
 github.com/anchore/syft v0.42.4/go.mod h1:P0IlaDduxKg6TokCCP6kmc/r5/8fJ9mjRRmsEU1KXjk=
+github.com/anchore/syft v0.43.0 h1:9w52VCgSutRL08ojztoXwG6/KdOjS3w+5ePZqJNGx5o=
+github.com/anchore/syft v0.43.0/go.mod h1:Po6PO927XnrHzrs8qshOjAfb/wBmu4cXEeO7FmlWFgk=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.2/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
