@@ -1,7 +1,7 @@
 {
  "artifacts": [
   {
-   "id": "8039c8621bcc1383",
+   "id": "9f527213f4d2a873",
    "name": "alpine-baselayout",
    "version": "3.2.0-r18",
    "type": "apk",
@@ -481,7 +481,7 @@
    }
   },
   {
-   "id": "3d3291eb8618fa18",
+   "id": "1a72ca3b88e1b67e",
    "name": "alpine-keys",
    "version": "2.4-r1",
    "type": "apk",
@@ -917,7 +917,7 @@
    }
   },
   {
-   "id": "c6ad3558cb43652d",
+   "id": "1c6e057c6965bdd6",
    "name": "apk-tools",
    "version": "2.12.7-r3",
    "type": "apk",
@@ -1014,7 +1014,7 @@
    }
   },
   {
-   "id": "17e5e1b6cd4f5164",
+   "id": "2e32896982ce9587",
    "name": "busybox",
    "version": "1.34.1-r3",
    "type": "apk",
@@ -1180,7 +1180,7 @@
    }
   },
   {
-   "id": "d1376d5cbde151d9",
+   "id": "9bb0a989e24e7661",
    "name": "ca-certificates-bundle",
    "version": "20191127-r7",
    "type": "apk",
@@ -1256,7 +1256,7 @@
    }
   },
   {
-   "id": "b761092ffe6ce0a9",
+   "id": "e87a79fdaecaabd2",
    "name": "libc-utils",
    "version": "0.7.2-r3",
    "type": "apk",
@@ -1301,7 +1301,7 @@
    }
   },
   {
-   "id": "6889eb78355a9a3b",
+   "id": "873ddd0587a8ac17",
    "name": "libcrypto1.1",
    "version": "1.1.1l-r7",
    "type": "apk",
@@ -1462,7 +1462,7 @@
    }
   },
   {
-   "id": "6637f737cd0334ce",
+   "id": "484b9eacc3ccdd48",
    "name": "libretls",
    "version": "3.3.4-r2",
    "type": "apk",
@@ -1531,7 +1531,7 @@
    }
   },
   {
-   "id": "76dc00216ec296ab",
+   "id": "7d62dc5b1a20803f",
    "name": "libssl1.1",
    "version": "1.1.1l-r7",
    "type": "apk",
@@ -1599,7 +1599,7 @@
    }
   },
   {
-   "id": "ec2a646ba3cd32de",
+   "id": "20dc20cbb6dbea6",
    "name": "musl",
    "version": "1.2.2-r7",
    "type": "apk",
@@ -1661,7 +1661,7 @@
    }
   },
   {
-   "id": "888b372633696dcd",
+   "id": "35c3680577fae0df",
    "name": "musl-utils",
    "version": "1.2.2-r7",
    "type": "apk",
@@ -1766,7 +1766,7 @@
    }
   },
   {
-   "id": "15d55c01ab61749b",
+   "id": "f2d426372356602d",
    "name": "scanelf",
    "version": "1.3.3-r0",
    "type": "apk",
@@ -1821,7 +1821,7 @@
    }
   },
   {
-   "id": "e12490edfe88e0bd",
+   "id": "38bc092600723894",
    "name": "ssl_client",
    "version": "1.34.1-r3",
    "type": "apk",
@@ -1881,7 +1881,7 @@
    }
   },
   {
-   "id": "a03db0a57edf636a",
+   "id": "50d3560550c47774",
    "name": "zlib",
    "version": "1.2.11-r3",
    "type": "apk",
@@ -1945,502 +1945,502 @@
  ],
  "artifactRelationships": [
   {
-   "parent": "ec2a646ba3cd32de",
+   "parent": "20dc20cbb6dbea6",
    "child": "e322847d6485c76d",
    "type": "contains"
   },
   {
-   "parent": "ec2a646ba3cd32de",
+   "parent": "20dc20cbb6dbea6",
    "child": "e322847d6485c76d",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "988a54d89f5c4c09",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "988a54d89f5c4c09",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "cd1c702a19149d7d",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "be5355441673f6dc",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "e7d6b30bf31f933a",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "e6d162458c0b30b0",
    "type": "contains"
   },
   {
-   "parent": "17e5e1b6cd4f5164",
+   "parent": "2e32896982ce9587",
    "child": "d5ee1ce0839cb21a",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "2eaa15c5fc625ebe",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "a53373020dfa8bb4",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "2c0eaf2a7d7dbad",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "f3ee626693308800",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "38605c90f707fb90",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "60fa740c32339374",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "420fa6f3289d6ee6",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "ae2cba512a3f4065",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "24d0f8d913cd9906",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "d41a5f82a774a6a1",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "dc65dbf355556024",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "b3a5f05adcd1cf82",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "b499705c36475f74",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "2e3613b244458b5a",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "64b20ab568341372",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "84fd54b3f2a2e825",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "32701f6d1e056c29",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "5e12c5188eeb9cb3",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "9ab25fdcabefa4ac",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "18d9a7fcef583aeb",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "93b858998f2c7034",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "fb021b79aa9cd553",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "82fda88ae28dd50",
    "type": "contains"
   },
   {
-   "parent": "8039c8621bcc1383",
+   "parent": "9f527213f4d2a873",
    "child": "13d6d27618d264f7",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "8ec9dcf9b3d1d7ce",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "39dcc03ca17480ca",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "4d646d694b6380fc",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "395f72182f48f77c",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "496698ff67ca49fc",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "66756a275982c586",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "187efc434122356a",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "add734ec170033bd",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "59d943ecba7b9db1",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "27d8de5355fdb7ba",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "ff0560ee36b984a7",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "66756a275982c586",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "2c8a8c151837aa6e",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "79cc1d44454e11b9",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "abfd85d1b45289dc",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "56080e31fd12fe67",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "7803dc5a1a496765",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "ccc2b3e76affde68",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "3562d93285c5a3c5",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "57149f915867bf12",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "2363acec0a71a382",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "2dac0f0b0463195c",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "187efc434122356a",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "f059a81847acaad9",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "27d8de5355fdb7ba",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "3562d93285c5a3c5",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "27d8de5355fdb7ba",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "2dac0f0b0463195c",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "abfd85d1b45289dc",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "2c8a8c151837aa6e",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "57149f915867bf12",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "56080e31fd12fe67",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "f059a81847acaad9",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "79cc1d44454e11b9",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "2363acec0a71a382",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "add734ec170033bd",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "59d943ecba7b9db1",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "ccc2b3e76affde68",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "add734ec170033bd",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "ff0560ee36b984a7",
    "type": "contains"
   },
   {
-   "parent": "3d3291eb8618fa18",
+   "parent": "1a72ca3b88e1b67e",
    "child": "7803dc5a1a496765",
    "type": "contains"
   },
   {
-   "parent": "d1376d5cbde151d9",
+   "parent": "9bb0a989e24e7661",
    "child": "b7cfa7f53a05225f",
    "type": "contains"
   },
   {
-   "parent": "d1376d5cbde151d9",
+   "parent": "9bb0a989e24e7661",
    "child": "b7cfa7f53a05225f",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "b7cfa7f53a05225f",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "d1029b42eed49dbe",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "5f7354d1f6e1cdce",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "1a7b85af7f458360",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "a00e69b6cf4b0ef0",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "4862e08252039e5",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "f57c06db35618298",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "ba1b2107c3063563",
    "type": "contains"
   },
   {
-   "parent": "6889eb78355a9a3b",
+   "parent": "873ddd0587a8ac17",
    "child": "a00e69b6cf4b0ef0",
    "type": "contains"
   },
   {
-   "parent": "76dc00216ec296ab",
+   "parent": "7d62dc5b1a20803f",
    "child": "a64a40d78e73f3bd",
    "type": "contains"
   },
   {
-   "parent": "76dc00216ec296ab",
+   "parent": "7d62dc5b1a20803f",
    "child": "a64a40d78e73f3bd",
    "type": "contains"
   },
   {
-   "parent": "6637f737cd0334ce",
+   "parent": "484b9eacc3ccdd48",
    "child": "81250f1630c1a804",
    "type": "contains"
   },
   {
-   "parent": "6637f737cd0334ce",
+   "parent": "484b9eacc3ccdd48",
    "child": "81250f1630c1a804",
    "type": "contains"
   },
   {
-   "parent": "e12490edfe88e0bd",
+   "parent": "38bc092600723894",
    "child": "711694a1725d661e",
    "type": "contains"
   },
   {
-   "parent": "a03db0a57edf636a",
+   "parent": "50d3560550c47774",
    "child": "bfd3d0235da50adb",
    "type": "contains"
   },
   {
-   "parent": "a03db0a57edf636a",
+   "parent": "50d3560550c47774",
    "child": "bfd3d0235da50adb",
    "type": "contains"
   },
   {
-   "parent": "c6ad3558cb43652d",
+   "parent": "1c6e057c6965bdd6",
    "child": "5f14b5421fba85af",
    "type": "contains"
   },
   {
-   "parent": "c6ad3558cb43652d",
+   "parent": "1c6e057c6965bdd6",
    "child": "d72447617fa2b70c",
    "type": "contains"
   },
   {
-   "parent": "15d55c01ab61749b",
+   "parent": "f2d426372356602d",
    "child": "7516f5d905deb6db",
    "type": "contains"
   },
   {
-   "parent": "888b372633696dcd",
+   "parent": "35c3680577fae0df",
    "child": "d59e19c68624688f",
    "type": "contains"
   },
   {
-   "parent": "888b372633696dcd",
+   "parent": "35c3680577fae0df",
    "child": "757b30be1d3baa0b",
    "type": "contains"
   },
   {
-   "parent": "888b372633696dcd",
+   "parent": "35c3680577fae0df",
    "child": "780fcf6f56cca2e0",
    "type": "contains"
   },
   {
-   "parent": "888b372633696dcd",
+   "parent": "35c3680577fae0df",
    "child": "ab2d028a906db5df",
    "type": "contains"
   },
   {
-   "parent": "888b372633696dcd",
+   "parent": "35c3680577fae0df",
    "child": "8e69e89855b5ae0f",
    "type": "contains"
   }
@@ -2993,7 +2993,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.42.0",
+  "version": "0.43.0",
   "configuration": {
    "configPath": "",
    "output": [
@@ -3072,7 +3072,7 @@
   }
  },
  "schema": {
-  "version": "3.1.1",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.1.1.json"
+  "version": "3.2.2",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.2.2.json"
  }
 }
