@@ -14,3 +14,6 @@ on:
 jobs:
   label-issues:
     uses: ckotzbauer/actions-toolkit/.github/workflows/label-issues.yml@0.10.1
+    with:
+      token: ${{ secrets.GITHUB_TOKEN }}
+
