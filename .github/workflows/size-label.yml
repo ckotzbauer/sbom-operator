@@ -1,14 +1,8 @@
-name: Label size of PRs 
+name: size-label
 on:
   pull_request_target:
     types: [opened, reopened, synchronize]
+
 jobs:
   size-label:
-    runs-on: ubuntu-latest
-    steps:
-      - name: size-label
-        uses: pascalgn/size-label-action@a4655c448bb838e8d73b81e97fd0831bb4cbda1e
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
-          IGNORED: ".*\npackage-lock.json\ndist/**"
-
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-size-label.yml@0.10.1

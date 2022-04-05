@@ -1,4 +1,4 @@
-name: Create default labels
+name: create-default-labels
 on:
   push:
     branches:
@@ -6,15 +6,7 @@ on:
     paths:
       - ".github/labels.json"
   workflow_dispatch: {}
-jobs:
-  labels:
-    name: DefaultLabelsActions
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v3
-      - uses: lannonbr/issue-label-manager-action@3.0.1
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        with:
-          delete: true
 
+jobs:
+  size-label:
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-create-default-labels.yml@0.10.1

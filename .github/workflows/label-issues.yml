@@ -1,4 +1,4 @@
-name: Label Issues
+name: label-issues
 on:
   issue_comment:
     types:
@@ -10,12 +10,7 @@ on:
   issues:
     types:
       - opened
+
 jobs:
-  label:
-    runs-on: ubuntu-latest
-    steps:
-      - uses: "actions/checkout@v3"
-      - name: label
-        uses: ckotzbauer/label-command-action@v2
-        env:
-          GITHUB_TOKEN: "${{ secrets.GITHUB_TOKEN }}"
+  label-issues:
+    uses: ckotzbauer/actions-toolkit/.github/workflows/label-issues.yml@0.10.1
