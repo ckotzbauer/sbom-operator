@@ -1,19 +1,10 @@
-name: Close stale issues
+name: stale
 on:
   schedule:
   - cron: "0 0 * * *"
+
 jobs:
   stale:
-    runs-on: ubuntu-latest
-    steps:
-    - uses: actions/stale@v5
-      with:
-        repo-token: ${{ secrets.GITHUB_TOKEN }}
-        stale-issue-message: 'This issue is stale because it has been open 90 days with no activity. Remove stale label with `/remove-lifecycle stale` or comment or this will be closed in 5 days.'
-        stale-pr-message: 'This pull request is stale because it has been open 90 days with no activity. Remove stale label with `/remove-lifecycle stale` or comment or this will be closed in 5 days.'
-        stale-issue-label: 'lifecycle/stale'
-        exempt-issue-labels: 'work-in-progress,lifecycle/frozen'
-        stale-pr-label: 'lifecycle/stale'
-        exempt-pr-labels: 'work-in-progress,lifecycle/frozen'
-        days-before-stale: 90
-        days-before-close: 5
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-stale.yml@0.10.1
+    with:
+      token: ${{ secrets.GITHUB_TOKEN }}
