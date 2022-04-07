@@ -3,6 +3,7 @@ package kubernetes
 import (
 	"context"
 	"fmt"
+	"strings"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -105,12 +106,15 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 
 			for _, c := range statuses {
 				if c.ImageID != "" {
+					imageIDSlice := strings.Split(c.ImageID, "://")
+					trimmedImageID := imageIDSlice[len(imageIDSlice)-1]
+
 					if !client.hasAnnotation(annotations, c) {
-						img, ok := images[c.ImageID]
+						img, ok := images[trimmedImageID]
 						if !ok {
 							img = ContainerImage{
 								Image:      c.Image,
-								ImageID:    c.ImageID,
+								ImageID:    trimmedImageID,
 								Auth:       pullSecrets,
 								LegacyAuth: legacy,
 								Pods:       []corev1.Pod{},
@@ -118,13 +122,13 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 						}
 
 						img.Pods = append(img.Pods, pod)
-						images[c.ImageID] = img
+						images[trimmedImageID] = img
 						allImages = append(allImages, img)
 					} else {
-						logrus.Debugf("Skip image %s", c.ImageID)
+						logrus.Debugf("Skip image %s", trimmedImageID)
 						allImages = append(allImages, ContainerImage{
 							Image:      c.Image,
-							ImageID:    c.ImageID,
+							ImageID:    trimmedImageID,
 							Auth:       pullSecrets,
 							LegacyAuth: legacy,
 							Pods:       []corev1.Pod{},
