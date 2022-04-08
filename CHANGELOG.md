@@ -1,3 +1,53 @@
+## Version 0.8.0 (2022-04-08)
+
+### Features and improvements
+
+* [[`e7b902a6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e7b902a6)] - **feat**: update to go@1.18.0
+
+### Bug fixes
+
+* [[`0b446e1e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0b446e1e)] - **fix**: fix parsing of image id&#39;s for container runtimes which include a prefix before the image id
+* [[`f495819e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f495819e)] - **fix**: add namespace close #56
+
+### Build and testing
+
+* [[`fc495e8f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fc495e8f)] - **build**: use reusable-workflows [6]
+* [[`ccff3ee5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ccff3ee5)] - **build**: use reusable-workflows [5]
+* [[`90e363d6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/90e363d6)] - **build**: use reusable-workflows [4]
+* [[`2f110068`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2f110068)] - **build**: use reusable-workflows [3]
+* [[`2acc90b8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2acc90b8)] - **build**: use reusable-workflows [2]
+* [[`b0cba49c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b0cba49c)] - **build**: use reusable-workflows [1]
+* [[`585cf4ba`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/585cf4ba)] - **test**: update fixtures
+* [[`1b46b79e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1b46b79e)] - **test**: update syft-fixtures
+
+### Documentation
+
+* [[`6e44f2ee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6e44f2ee)] - **doc**: update version [skip ci]
+
+### Dependency updates
+
+* [[`1af69827`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1af69827)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.43.0
+* [[`4bc434a9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4bc434a9)] - **deps**: update actions&#x2F;setup-node action to v3.1.0
+* [[`18984bb1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/18984bb1)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.10.1
+* [[`bbc680b5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bbc680b5)] - **deps**: update alpine digest to f22945d
+* [[`3df42d43`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3df42d43)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.42.4 (#59)
+* [[`53febe7a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/53febe7a)] - **deps**: update alpine digest to ceeae28 (#58)
+* [[`4da4adf7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4da4adf7)] - **deps**: update module github.com&#x2F;docker&#x2F;cli to v20.10.14 (#60)
+* [[`c1c1ffda`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c1c1ffda)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.10.0 (#61)
+* [[`2cd77243`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2cd77243)] - **deps**: update module github.com&#x2F;onsi&#x2F;gomega to v1.19.0 (#62)
+* [[`ec4fa537`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ec4fa537)] - **deps**: bump pascalgn&#x2F;automerge-action
+* [[`8e229eaa`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8e229eaa)] - **deps**: update ckotzbauer&#x2F;label-command-action action to v2
+* [[`08b2d4e8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/08b2d4e8)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.42.0
+* [[`70834f7b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/70834f7b)] - **deps**: update alpine digest to d6d0a0e (#52)
+* [[`d39e8e1d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d39e8e1d)] - **deps**: update kubernetes versions to v0.23.5 (#53)
+
+### Common changes
+
+* [[`2a339356`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2a339356)] - **chore**: fix rbac for correct install
+* [[`7cfcee04`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7cfcee04)] - **chore**: remove dependabot [skip ci]
+* [[`3814029f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3814029f)] - **chore**: update community-files [skip ci]
+
+
 ## Version 0.7.0 (2022-03-12)
 
 ### Features and improvements
