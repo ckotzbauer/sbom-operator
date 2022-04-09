@@ -9,7 +9,7 @@ on:
 
 jobs:
   size-label:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-create-default-labels.yml@0.10.1
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-create-default-labels.yml@0.12.1
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
