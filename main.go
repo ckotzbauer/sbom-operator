@@ -60,6 +60,9 @@ func init() {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackBaseUrl, "", "Dependency-Track base URL, e.g. 'https://dtrack.example.com'")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackApiKey, "", "Dependency-Track API key")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyKubernetesClusterId, "default", "Kubernetes Cluster ID")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImage, "", "Custom Job-Image")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImagePullSecret, "", "Custom Job-Image-Pull-Secret")
+	rootCmd.PersistentFlags().Int64(internal.ConfigKeyJobTimeout, 60*60, "Job-Timeout")
 }
 
 func initConfig() {

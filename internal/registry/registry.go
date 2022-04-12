@@ -24,42 +24,12 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	o := crane.GetOptions()
 
 	if len(image.Auth) > 0 {
-		var cf *configfile.ConfigFile
-		var err error
-
-		if image.LegacyAuth {
-			cf = configfile.New("")
-			err = LegacyLoadFromReader(bytes.NewReader(image.Auth), cf)
-		} else {
-			cf, err = config.LoadFromReader(bytes.NewReader(image.Auth))
-		}
-
-		if err != nil {
-			return err
-		}
-
-		fullRef, err := parser.Parse(image.ImageID)
-		if err != nil {
-			return err
-		}
-
-		reg, err := name.NewRegistry(fullRef.Registry())
-		if err != nil {
-			return err
-		}
-
-		regKey := reg.RegistryStr()
-
-		if regKey == name.DefaultRegistry {
-			regKey = authn.DefaultAuthKey
-		}
-
-		cfg, err := cf.GetAuthConfig(regKey)
-		if err != nil {
-			return err
-		}
-
+		cfg, err := ResolveAuthConfig(image)
 		empty := types.AuthConfig{}
+
+		if err != nil {
+			return err
+		}
 
 		if cfg != empty {
 			o.Remote = []remote.Option{
@@ -97,4 +67,43 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	}
 
 	return nil
+}
+
+func ResolveAuthConfig(image kubernetes.ContainerImage) (types.AuthConfig, error) {
+	var cf *configfile.ConfigFile
+	var err error
+
+	if image.LegacyAuth {
+		cf = configfile.New("")
+		err = LegacyLoadFromReader(bytes.NewReader(image.Auth), cf)
+	} else {
+		cf, err = config.LoadFromReader(bytes.NewReader(image.Auth))
+	}
+
+	if err != nil {
+		return types.AuthConfig{}, err
+	}
+
+	fullRef, err := parser.Parse(image.ImageID)
+	if err != nil {
+		return types.AuthConfig{}, err
+	}
+
+	reg, err := name.NewRegistry(fullRef.Registry())
+	if err != nil {
+		return types.AuthConfig{}, err
+	}
+
+	regKey := reg.RegistryStr()
+
+	if regKey == name.DefaultRegistry {
+		regKey = authn.DefaultAuthKey
+	}
+
+	cfg, err := cf.GetAuthConfig(regKey)
+	if err != nil {
+		return types.AuthConfig{}, err
+	}
+
+	return cfg, nil
 }

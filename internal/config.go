@@ -18,4 +18,7 @@ var (
 	ConfigKeyDependencyTrackBaseUrl = "dtrack-base-url"
 	ConfigKeyDependencyTrackApiKey  = "dtrack-api-key"
 	ConfigKeyKubernetesClusterId    = "kubernetes-cluster-id"
+	ConfigKeyJobImage               = "job-image"
+	ConfigKeyJobImagePullSecret     = "job-image-pull-secret"
+	ConfigKeyJobTimeout             = "job-timeout"
 )
