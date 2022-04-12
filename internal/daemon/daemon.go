@@ -4,6 +4,7 @@ import (
 	"time"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/job"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
@@ -24,9 +25,13 @@ func Start(cronTime string) {
 	targetKeys := viper.GetStringSlice(internal.ConfigKeyTargets)
 
 	logrus.Debugf("Cron set to: %v", cr)
-	logrus.Debugf("Targets set to: %v", targetKeys)
+	targets := make([]target.Target, 0)
 
-	targets := initTargets(targetKeys)
+	if !hasJobImage() {
+		logrus.Debugf("Targets set to: %v", targetKeys)
+		targets = initTargets(targetKeys)
+	}
+
 	cs := CronService{cron: cr, targets: targets}
 	cs.printNextExecution()
 
@@ -55,8 +60,10 @@ func (c *CronService) runBackgroundService() {
 	logrus.Info("Execute background-service")
 	format := viper.GetString(internal.ConfigKeyFormat)
 
-	for _, t := range c.targets {
-		t.Initialize()
+	if !hasJobImage() {
+		for _, t := range c.targets {
+			t.Initialize()
+		}
 	}
 
 	k8s := kubernetes.NewClient()
@@ -64,6 +71,18 @@ func (c *CronService) runBackgroundService() {
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
 	containerImages, allImages := k8s.LoadImageInfos(namespaces, viper.GetString(internal.ConfigKeyPodLabelSelector))
 
+	if !hasJobImage() {
+		c.executeSyftScans(format, k8s, containerImages, allImages)
+	} else {
+		executeJobImage(k8s, containerImages)
+	}
+
+	c.printNextExecution()
+	running = false
+}
+
+func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient,
+	containerImages map[string]kubernetes.ContainerImage, allImages []kubernetes.ContainerImage) {
 	sy := syft.New(format)
 
 	for _, image := range containerImages {
@@ -90,9 +109,22 @@ func (c *CronService) runBackgroundService() {
 	for _, t := range c.targets {
 		t.Cleanup(allImages)
 	}
+}
 
-	c.printNextExecution()
-	running = false
+func executeJobImage(k8s *kubernetes.KubeClient, containerImages map[string]kubernetes.ContainerImage) {
+	j, err := job.StartJob(k8s, containerImages)
+	if err != nil {
+		// Already handled from job-module
+		return
+	}
+
+	if job.WaitForJob(k8s, j) {
+		for _, i := range containerImages {
+			for _, pod := range i.Pods {
+				k8s.UpdatePodAnnotation(pod)
+			}
+		}
+	}
 }
 
 func initTargets(targetKeys []string) []target.Target {
@@ -123,4 +155,8 @@ func initTargets(targetKeys []string) []target.Target {
 	}
 
 	return targets
+}
+
+func hasJobImage() bool {
+	return viper.GetString(internal.ConfigKeyJobImage) != ""
 }

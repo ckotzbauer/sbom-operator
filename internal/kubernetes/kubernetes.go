@@ -3,13 +3,16 @@ package kubernetes
 import (
 	"context"
 	"fmt"
+	"os"
 	"strings"
 
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
+	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
+	types "k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 
@@ -31,6 +34,8 @@ type KubeClient struct {
 
 var (
 	annotationTemplate = "ckotzbauer.sbom-operator.io/%s"
+	jobSecretName      = "sbom-operator-job-config"
+	JobName            = "sbom-operator-job"
 )
 
 func NewClient() *KubeClient {
@@ -216,4 +221,105 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 	}
 
 	return nil, false, nil
+}
+
+func (client *KubeClient) CreateJobSecret(namespace, suffix string, data []byte) error {
+	m := make(map[string][]byte)
+	m["image-config.json"] = data
+	vTrue := true
+	vFalse := false
+
+	s := &corev1.Secret{
+		ObjectMeta: meta.ObjectMeta{
+			Namespace: namespace,
+			Name:      fmt.Sprintf("%s-%s", jobSecretName, suffix),
+			OwnerReferences: []meta.OwnerReference{
+				{
+					APIVersion:         "v1",
+					Kind:               "Pod",
+					Name:               os.Getenv("POD_NAME"),
+					UID:                types.UID(os.Getenv("POD_UID")),
+					BlockOwnerDeletion: &vTrue,
+					Controller:         &vFalse,
+				},
+			},
+		},
+		Data: m,
+	}
+
+	_, err := client.Client.CoreV1().Secrets(namespace).Create(context.Background(), s, meta.CreateOptions{})
+	return err
+}
+
+func (client *KubeClient) CreateJob(namespace, suffix, image, pullSecrets string, timeout int64, envs map[string]string) (*batchv1.Job, error) {
+	backoffLimit := int32(0)
+	vTrue := true
+	vFalse := false
+
+	j := &batchv1.Job{
+		ObjectMeta: meta.ObjectMeta{
+			Namespace: namespace,
+			Name:      fmt.Sprintf("%s-%s", JobName, suffix),
+			OwnerReferences: []meta.OwnerReference{
+				{
+					APIVersion:         "v1",
+					Kind:               "Pod",
+					Name:               os.Getenv("POD_NAME"),
+					UID:                types.UID(os.Getenv("POD_UID")),
+					BlockOwnerDeletion: &vTrue,
+					Controller:         &vFalse,
+				},
+			},
+		},
+		Spec: batchv1.JobSpec{
+			BackoffLimit:          &backoffLimit,
+			ActiveDeadlineSeconds: &timeout,
+			Template: corev1.PodTemplateSpec{
+				ObjectMeta: meta.ObjectMeta{
+					Name: JobName,
+				},
+				Spec: corev1.PodSpec{
+					Containers: []corev1.Container{
+						{
+							Name:  "sbom",
+							Image: image,
+							Env:   mapToEnvVars(envs),
+							SecurityContext: &corev1.SecurityContext{
+								Privileged: &vTrue,
+							},
+							VolumeMounts: []corev1.VolumeMount{
+								{
+									Name:      "config",
+									MountPath: "/sbom",
+								},
+							},
+						},
+					},
+					RestartPolicy:    corev1.RestartPolicyNever,
+					ImagePullSecrets: []corev1.LocalObjectReference{{Name: pullSecrets}},
+					Volumes: []corev1.Volume{
+						{
+							Name: "config",
+							VolumeSource: corev1.VolumeSource{
+								Secret: &corev1.SecretVolumeSource{
+									SecretName: fmt.Sprintf("%s-%s", jobSecretName, suffix),
+								},
+							},
+						},
+					},
+				},
+			},
+		},
+	}
+
+	return client.Client.BatchV1().Jobs(namespace).Create(context.Background(), j, meta.CreateOptions{})
+}
+
+func mapToEnvVars(m map[string]string) []corev1.EnvVar {
+	vars := make([]corev1.EnvVar, 0)
+	for k, v := range m {
+		vars = append(vars, corev1.EnvVar{Name: k, Value: v})
+	}
+
+	return vars
 }

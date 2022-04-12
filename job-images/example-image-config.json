@@ -1,0 +1,14 @@
+[
+    {
+        "registry-host": "ghcr.io",
+        "registry-user": "",
+        "registry-password": "",
+        "image": "ghcr.io/ckotzbauer/sbom-operator:0.8.0"
+    },
+    {
+        "registry-host": "docker.io",
+        "registry-user": "",
+        "registry-password": "",
+        "image": "docker.io/alpine:3.15.4"
+    }
+]
