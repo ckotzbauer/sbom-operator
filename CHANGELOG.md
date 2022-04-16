@@ -1,3 +1,22 @@
+## Version 0.9.0 (2022-04-16)
+
+### Build and testing
+
+* [[`0db018a4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0db018a4)] - **build**: update to go 1.18.1
+
+### Documentation
+
+* [[`f10035d9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f10035d9)] - **doc**: update version-table [skip ci]
+
+### Dependency updates
+
+* [[`4476caf7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4476caf7)] - **deps**: fix syft-update
+* [[`f4ff8e50`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f4ff8e50)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.44.1
+* [[`609032bd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/609032bd)] - **deps**: update module github.com&#x2F;spf13&#x2F;viper to v1.11.0
+* [[`fb99dbc9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fb99dbc9)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.12.1
+* [[`ee2fe84d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ee2fe84d)] - **deps**: update alpine digest to 4edbd2b
+
+
 ## Version 0.8.0 (2022-04-08)
 
 ### Features and improvements
