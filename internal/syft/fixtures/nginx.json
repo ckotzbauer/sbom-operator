@@ -20484,7 +20484,13 @@
       "Created-By": "11.0.10 (Debian)",
       "Manifest-Version": "1.0"
      }
-    }
+    },
+    "digest": [
+     {
+      "algorithm": "sha1",
+      "value": "568f3f90c3d6aced58de033a3547ccd2e4e088e8"
+     }
+    ]
    }
   },
   {
@@ -96193,7 +96199,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.43.0",
+  "version": "0.44.1",
   "configuration": {
    "configPath": "",
    "output": [
