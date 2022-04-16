@@ -3,15 +3,15 @@
  "name": "nginx@sha256-2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-04-02T12:38:49.306653606Z",
+  "created": "2022-04-16T10:36:51.967812426Z",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.43.0"
+   "Tool: syft-0.44.1"
   ],
   "licenseListVersion": "3.16"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/nginx@sha256-2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767-4af7d886-f6df-4b39-b0fe-380ef5956642",
+ "documentNamespace": "https://anchore.com/syft/image/nginx@sha256-2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767-f1a5bbce-a167-43f8-b890-b53914eac8cb",
  "packages": [
   {
    "SPDXID": "SPDXRef-a124711c55c5b5ec",
@@ -2040,6 +2040,12 @@
    "SPDXID": "SPDXRef-f24853b33867d342",
    "name": "libintl",
    "licenseConcluded": "NONE",
+   "checksums": [
+    {
+     "algorithm": "SHA1",
+     "checksumValue": "568f3f90c3d6aced58de033a3547ccd2e4e088e8"
+    }
+   ],
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -2053,7 +2059,7 @@
      "referenceType": "purl"
     }
    ],
-   "filesAnalyzed": false,
+   "filesAnalyzed": true,
    "licenseDeclared": "NONE",
    "sourceInfo": "acquired package info from installed java archive: /usr/share/java/libintl-0.21.jar",
    "versionInfo": "0.21"
