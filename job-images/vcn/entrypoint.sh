@@ -31,7 +31,7 @@ for img in $(echo "${CONFIG}" | jq -r '.[] | @base64'); do
     fi
 
     docker pull "${IMAGE}" -q
-    vcn notarize --bom "docker://${IMAGE}"
+    vcn notarize --bom "docker://${IMAGE}" "${VCN_EXTRA_ARGS:-''}"
     docker rm -f $(docker ps -aq)
     docker rmi "${IMAGE}"
 
