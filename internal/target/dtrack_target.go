@@ -12,7 +12,6 @@ import (
 	"github.com/spf13/viper"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 )
 
 type DependencyTrackTarget struct {
@@ -50,7 +49,7 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() {
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
+func (g *DependencyTrackTarget) ProcessSbom(image internal.ContainerImage, sbom string) error {
 	imageRef, err := parser.Parse(image.Image)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
@@ -103,7 +102,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 	return nil
 }
 
-func (g *DependencyTrackTarget) Cleanup(allImages []kubernetes.ContainerImage) {
+func (g *DependencyTrackTarget) Cleanup(allImages []internal.ContainerImage) {
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
 
 	var (

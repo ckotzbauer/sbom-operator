@@ -66,6 +66,8 @@ func (c *CronService) runBackgroundService() {
 
 	sy := syft.New(format)
 
+	// TODO: Collect other scanItems than images here and call "ExecuteSyft" with them.
+
 	for _, image := range containerImages {
 		sbom, err := sy.ExecuteSyft(image)
 		if err != nil {

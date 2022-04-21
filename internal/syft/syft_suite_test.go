@@ -6,7 +6,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -49,7 +49,7 @@ func marshalCyclonedx(x interface{}) []byte {
 func testJsonSbom(name, imageID string) {
 	format := "json"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
+	sbom, err := s.ExecuteSyft(internal.ContainerImage{ImageID: imageID, Auth: []byte{}})
 	Expect(err).NotTo(HaveOccurred())
 
 	var output syftJsonOutput
@@ -72,7 +72,7 @@ func testJsonSbom(name, imageID string) {
 func testCyclonedxSbom(name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
+	sbom, err := s.ExecuteSyft(internal.ContainerImage{ImageID: imageID, Auth: []byte{}})
 	Expect(err).NotTo(HaveOccurred())
 
 	var output syftCyclonedxOutput
@@ -92,7 +92,7 @@ func testCyclonedxSbom(name, imageID string) {
 func testSpdxSbom(name, imageID string) {
 	format := "spdxjson"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
+	sbom, err := s.ExecuteSyft(internal.ContainerImage{ImageID: imageID, Auth: []byte{}})
 	Expect(err).NotTo(HaveOccurred())
 
 	var output syftSpdxOutput

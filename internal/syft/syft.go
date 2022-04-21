@@ -2,7 +2,6 @@ package syft
 
 import (
 	"fmt"
-	"os"
 	"path/filepath"
 	"runtime/debug"
 	"strings"
@@ -12,7 +11,7 @@ import (
 	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	"github.com/sirupsen/logrus"
 
@@ -36,32 +35,35 @@ func (s Syft) WithVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
-	logrus.Infof("Processing image %s", img.ImageID)
+func (s *Syft) ExecuteSyft(item internal.ScanItem) (string, error) {
+	logrus.Infof("Processing item %s", item.Identifier())
 
-	fullRef, err := parser.Parse(img.ImageID)
-	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse imageID %s", img.ImageID)
-		return "", err
+	// TODO: extract this logic to a pre-step
+	if img, ok := item.(internal.ContainerImage); ok {
+		fullRef, err := parser.Parse(item.Identifier())
+		if err != nil {
+			logrus.WithError(err).Errorf("Could not parse imageID %s", item.Identifier())
+			return "", err
+		}
+
+		imagePath := "/tmp/" + strings.ReplaceAll(fullRef.Tag(), ":", "_") + ".tar.gz"
+		err = registry.SaveImage(imagePath, img)
+
+		if err != nil {
+			logrus.WithError(err).Error("Image-Pull failed")
+			return "", err
+		}
 	}
 
-	imagePath := "/tmp/" + strings.ReplaceAll(fullRef.Tag(), ":", "_") + ".tar.gz"
-	err = registry.SaveImage(imagePath, img)
-
+	input, err := source.ParseInput(filepath.Join(fmt.Sprintf("%s:", item.Type()), item.FilePath()), "", false)
 	if err != nil {
-		logrus.WithError(err).Error("Image-Pull failed")
-		return "", err
-	}
-
-	input, err := source.ParseInput(filepath.Join("docker-archive:", imagePath), "", false)
-	if err != nil {
-		logrus.WithError(fmt.Errorf("failed to parse input %s: %w", imagePath, err)).Error("Input-Parsing failed")
+		logrus.WithError(fmt.Errorf("failed to parse input %s: %w", item.FilePath(), err)).Error("Input-Parsing failed")
 		return "", err
 	}
 
 	src, cleanup, err := source.New(*input, nil, nil)
 	if err != nil {
-		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err)).Error("Source-Creation failed")
+		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", item.FilePath(), err)).Error("Source-Creation failed")
 		return "", err
 	}
 
@@ -97,7 +99,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		return "", err
 	}
 
-	os.Remove(imagePath)
+	item.Cleanup()
 	return string(b), nil
 }
 

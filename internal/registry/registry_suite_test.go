@@ -5,7 +5,7 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	. "github.com/onsi/ginkgo/v2"
 	. "github.com/onsi/gomega"
@@ -24,7 +24,7 @@ func testRegistry(name, image string, legacy bool) {
 	Expect(err).To(BeNil())
 
 	file := "/tmp/1.0.0.tar.gz"
-	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded), LegacyAuth: legacy})
+	err = registry.SaveImage(file, internal.ContainerImage{ImageID: image, Auth: []byte(decoded), LegacyAuth: legacy})
 
 	if err == nil {
 		stat, _ := os.Stat(file)

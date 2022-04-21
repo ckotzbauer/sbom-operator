@@ -4,6 +4,7 @@ import (
 	"bytes"
 	"fmt"
 
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/docker/cli/cli/config"
 	"github.com/docker/cli/cli/config/configfile"
 	"github.com/docker/cli/cli/config/types"
@@ -13,12 +14,10 @@ import (
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
 
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
-
 	parser "github.com/novln/docker-parser"
 )
 
-func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
+func SaveImage(imagePath string, image internal.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
 
 	o := crane.GetOptions()

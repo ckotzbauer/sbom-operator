@@ -5,6 +5,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	corev1 "k8s.io/api/core/v1"
@@ -12,17 +13,7 @@ import (
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
-
-	"github.com/ckotzbauer/sbom-operator/internal"
 )
-
-type ContainerImage struct {
-	Image      string
-	ImageID    string
-	Auth       []byte
-	LegacyAuth bool
-	Pods       []corev1.Pod
-}
 
 type KubeClient struct {
 	Client            *kubernetes.Clientset
@@ -83,9 +74,9 @@ func (client *KubeClient) listPods(namespace, labelSelector string) []corev1.Pod
 	return list.Items
 }
 
-func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []ContainerImage) {
-	images := map[string]ContainerImage{}
-	allImages := []ContainerImage{}
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]internal.ContainerImage, []internal.ContainerImage) {
+	images := map[string]internal.ContainerImage{}
+	allImages := []internal.ContainerImage{}
 
 	for _, ns := range namespaces {
 		pods := client.listPods(ns.Name, podLabelSelector)
@@ -112,7 +103,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 					if !client.hasAnnotation(annotations, c) {
 						img, ok := images[trimmedImageID]
 						if !ok {
-							img = ContainerImage{
+							img = internal.ContainerImage{
 								Image:      c.Image,
 								ImageID:    trimmedImageID,
 								Auth:       pullSecrets,
@@ -126,7 +117,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 						allImages = append(allImages, img)
 					} else {
 						logrus.Debugf("Skip image %s", trimmedImageID)
-						allImages = append(allImages, ContainerImage{
+						allImages = append(allImages, internal.ContainerImage{
 							Image:      c.Image,
 							ImageID:    trimmedImageID,
 							Auth:       pullSecrets,

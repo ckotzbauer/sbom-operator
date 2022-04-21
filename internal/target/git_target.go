@@ -8,7 +8,6 @@ import (
 	"strings"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target/git"
 	"github.com/sirupsen/logrus"
@@ -80,7 +79,7 @@ func (g *GitTarget) Initialize() {
 		viper.GetString(internal.ConfigKeyGitBranch))
 }
 
-func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
+func (g *GitTarget) ProcessSbom(image internal.ContainerImage, sbom string) error {
 	imageID := image.ImageID
 	filePath := g.imageIDToFilePath(imageID)
 
@@ -99,7 +98,7 @@ func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) er
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) Cleanup(allImages []kubernetes.ContainerImage) {
+func (g *GitTarget) Cleanup(allImages []internal.ContainerImage) {
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
 
@@ -114,7 +113,7 @@ func (g *GitTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 	}
 }
 
-func (g *GitTarget) mapToFiles(allImages []kubernetes.ContainerImage) []string {
+func (g *GitTarget) mapToFiles(allImages []internal.ContainerImage) []string {
 	paths := []string{}
 	for _, img := range allImages {
 		paths = append(paths, g.imageIDToFilePath(img.ImageID))
