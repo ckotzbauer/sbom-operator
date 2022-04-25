@@ -3,12 +3,26 @@
         "registry-host": "ghcr.io",
         "registry-user": "",
         "registry-password": "",
-        "image": "ghcr.io/ckotzbauer/sbom-operator:0.8.0"
+        "image": "ghcr.io/ckotzbauer/sbom-operator:0.8.0",
+        "pods": [
+            {
+                "pod": "sbom-operator-5d45c5d7f4-jflnq",
+                "namespace": "sbom",
+                "cluster": "default"
+            }
+        ]
     },
     {
         "registry-host": "docker.io",
         "registry-user": "",
         "registry-password": "",
-        "image": "docker.io/alpine:3.15.4"
+        "image": "docker.io/alpine:3.15.4",
+        "pods": [
+            {
+                "pod": "test-pod",
+                "namespace": "default",
+                "cluster": "default"
+            }
+        ]
     }
 ]

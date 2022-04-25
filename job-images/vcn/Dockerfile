@@ -1,6 +1,7 @@
+FROM codenotary/vcn:0.9.13 as vcn
 FROM docker:20.10.14-dind
 
-COPY vcn-v0.9.14-linux-amd64 /usr/local/bin/vcn
+COPY --from=vcn /bin/vcn /bin/vcn
 COPY entrypoint.sh /
 
 RUN mkdir .vcn && \

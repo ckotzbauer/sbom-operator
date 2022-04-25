@@ -22,6 +22,7 @@ for img in $(echo "${CONFIG}" | jq -r '.[] | @base64'); do
     USER=$(_jq '."registry-user"')
     PASSWORD=$(_jq '."registry-password"')
     IMAGE=$(_jq '."image"')
+    PODS=$(_jq '."pods"')
     echo "Process image ${IMAGE}"
 
     if [ ! -z "${USER}" ] && [ ! -z "${PASSWORD}" ]
@@ -30,8 +31,16 @@ for img in $(echo "${CONFIG}" | jq -r '.[] | @base64'); do
         docker login -u "${USER}" -p "${PASSWORD}" "${HOST}"
     fi
 
+    # Join Pods, Namespaces and Clusters with "," and form the attributes for notarization.
+    POD_STRING=$(echo $PODS | jq -r '[.[].pod] | join(",")')
+    NAMESPACE_STRING=$(echo $PODS | jq -r '[.[].namespace] | join(",")')
+    CLUSTER_STRING=$(echo $PODS | jq -r '[.[].cluster] | join(",")')
+
+    VCN_ATTR="--attr pod=${POD_STRING} --attr namespace=${NAMESPACE_STRING} --attr cluster=${CLUSTER_STRING}"
+    VCN_ARGS=("${VCN_ATTR}" "${VCN_EXTRA_ARGS:-""}" --bom docker://"${IMAGE}")
+
     docker pull "${IMAGE}" -q
-    vcn notarize --bom "docker://${IMAGE}" "${VCN_EXTRA_ARGS:-''}"
+    vcn notarize ${VCN_ARGS[@]}
     docker rm -f $(docker ps -aq)
     docker rmi "${IMAGE}"
 

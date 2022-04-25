@@ -8,6 +8,7 @@ import (
 	"time"
 
 	batchv1 "k8s.io/api/batch/v1"
+	corev1 "k8s.io/api/core/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
@@ -17,11 +18,18 @@ import (
 	"github.com/spf13/viper"
 )
 
+type imagePod struct {
+	Pod       string `json:"pod"`
+	Namespace string `json:"namespace"`
+	Cluster   string `json:"cluster"`
+}
+
 type imageConfig struct {
-	Host     string `json:"registry-host"`
-	User     string `json:"registry-user"`
-	Password string `json:"registry-password"`
-	Image    string `json:"image"`
+	Host     string     `json:"registry-host"`
+	User     string     `json:"registry-user"`
+	Password string     `json:"registry-password"`
+	Image    string     `json:"image"`
+	Pods     []imagePod `json:"pods"`
 }
 
 func StartJob(k8s *kubernetes.KubeClient, images map[string]kubernetes.ContainerImage) (*batchv1.Job, error) {
@@ -43,6 +51,7 @@ func StartJob(k8s *kubernetes.KubeClient, images map[string]kubernetes.Container
 			User:     cfg.Username,
 			Password: cfg.Password,
 			Image:    image.ImageID,
+			Pods:     convertPods(image.Pods),
 		})
 	}
 
@@ -110,4 +119,18 @@ func getJobEnvs() map[string]string {
 	}
 
 	return m
+}
+
+func convertPods(pods []corev1.Pod) []imagePod {
+	ips := make([]imagePod, 0)
+
+	for _, p := range pods {
+		ips = append(ips, imagePod{
+			Pod:       p.Name,
+			Namespace: p.Namespace,
+			Cluster:   viper.GetString(internal.ConfigKeyKubernetesClusterId),
+		})
+	}
+
+	return ips
 }
