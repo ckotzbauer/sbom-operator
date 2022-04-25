@@ -4,7 +4,7 @@ import (
 	"context"
 	"encoding/json"
 	"os"
-	"strings"
+	"regexp"
 	"time"
 
 	batchv1 "k8s.io/api/batch/v1"
@@ -109,12 +109,15 @@ func generateObjectSuffix() string {
 
 func getJobEnvs() map[string]string {
 	m := make(map[string]string)
+	re := regexp.MustCompile(`SBOM_JOB_(?P<Key>[A-Za-z0-9-_\.]*)=(?P<Value>[A-Za-z0-9-_\.=]*)`)
 
 	for _, v := range os.Environ() {
-		splitted := strings.Split(v, "=")
-		if strings.HasPrefix(splitted[0], "SBOM_JOB_") {
-			key := strings.Replace(splitted[0], "SBOM_JOB_", "", 1)
-			m[key] = splitted[1]
+		matches := re.FindStringSubmatch(v)
+		if len(matches) > 1 {
+			index := re.SubexpIndex("Key")
+			key := matches[index]
+			index = re.SubexpIndex("Value")
+			m[key] = matches[index]
 		}
 	}
 
