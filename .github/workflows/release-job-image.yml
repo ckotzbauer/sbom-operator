@@ -1,0 +1,93 @@
+name: Release Job-Image
+
+on:
+  workflow_call:
+    inputs:
+      branch:
+        required: false
+        default: main
+        type: string
+      version:
+        required: true
+        type: string
+      artifact-path:
+        required: false
+        default: ""
+        type: string
+      docker-tags:
+        required: false
+        type: string
+        default: ""
+      docker-platforms:
+        required: false
+        default: linux/amd64
+        type: string
+      cosign-repository:
+        required: false
+        default: ""
+        type: string
+      job-image:
+        required: true
+        default: ""
+        type: string
+    secrets:
+      token:
+        required: true
+      pat:
+        required: true
+      ghcr-password:
+        required: false
+
+jobs:
+  release-job-image:
+    permissions:
+      id-token: write
+      contents: write
+      packages: write
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@2541b1294d2704b0964813337f33b291d3f8596b
+        with:
+          fetch-depth: 0
+          token: ${{ secrets.pat }}
+
+      - name: Setup Cosign
+        uses: sigstore/cosign-installer@61420c1ef90639d8db96dbbd356250d7b9b05acc
+
+      - name: Setup Syft
+        uses: ckotzbauer/actions-toolkit/setup-syft@0.13.0-alpha.0
+
+      - name: Build and push image
+        uses: ckotzbauer/actions-toolkit/docker@0.13.0-alpha.0
+        with:
+          ghcr-password: ${{ secrets.ghcr-password }}
+          dockerhub-user: ${{ secrets.dockerhub-user }}
+          dockerhub-password: ${{ secrets.dockerhub-password }}
+          context: job-images/${{ inputs.job-image }}
+          push: true
+          sign: true
+          verify: true
+          cosign-repository: ${{ inputs.cosign-repository }}
+          platforms: ${{ inputs.docker-platforms }}
+          tags: ${{ inputs.docker-tags }}
+
+      - name: Generate SBOM
+        uses: ckotzbauer/actions-toolkit/sbom@0.13.0-alpha.0
+        with:
+          images: ${{ inputs.docker-tags }}
+          sign: true
+          verify: true
+          attest: true
+          cosign-repository: ${{ inputs.cosign-repository }}
+
+      - name: Generate Provenance
+        uses: ckotzbauer/actions-toolkit/slsa-provenance@0.13.0-alpha.0
+        with:
+          action-sha: "0.13.0-alpha.0"
+          images: ${{ inputs.docker-tags }}
+          artifact-path: ${{ inputs.artifact-path }}
+          sign: true
+          verify: true
+          attest: true
+          cosign-repository: ${{ inputs.cosign-repository }}
