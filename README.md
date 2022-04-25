@@ -18,7 +18,8 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| main            | v0.23.5                             | 1.22.x, 1.23.x, 1.24.x            |
+| main            | v0.23.6                             | 1.22.x, 1.23.x, 1.24.x            |
+| 0.10.0          | v0.23.6                             | 1.22.x, 1.23.x, 1.24.x            |
 | 0.9.0           | v0.23.5                             | 1.22.x, 1.23.x, 1.24.x            |
 | 0.8.0           | v0.23.5                             | 1.22.x, 1.23.x, 1.24.x            |
 | 0.7.0           | v0.23.4                             | 1.22.x, 1.23.x, 1.24.x            |
@@ -83,7 +84,10 @@ All parameters are cli-flags.
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 | `dtrack-base-url` | `true` when `dtrack` target is used | `""` | Dependency-Track base URL, e.g. 'https://dtrack.example.com' |
 | `dtrack-api-key` | `true` when `dtrack` target is used | `""` | Dependency-Track API key |
-| `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track)
+| `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
+| `job-image` | `false` | `""` | Job-Image to process images with instead of Syft |
+| `job-image-pull-secret` | `false` | `""` | Pre-existing pull-secret-name for private job-images |
+| `job-timeout` | `false` | `3600` | Job-Timeout in seconds (`activeDeadlineSeconds`) |
 
 The flags can be configured as args or as environment-variables prefixed with `SBOM_` to inject sensitive configs as secret values.
 
@@ -158,6 +162,26 @@ dev-cluster
                 └───sha256_b70caa7a...
                     │   sbom.json
 ```
+
+## Job-Images
+
+If you don't want to use Syft to analyze your images, you can give the Job-Image feature a try. The operator creates a Kubernetes-Job
+which does the analysis with any possible tool inside. There's no target-handling done by the operator, the tool from the job has to process
+the SBOMs on its own. Currently there are two possible integrations:
+
+| Tool | Description |
+| ---- | ----------- |
+| [Codenotary CAS](job-images/cas/README.md) | The Community Attestation Service from Codenotary can notarize your images in the Codenotary Cloud. (free) |
+| [Codenotary VCN](job-images/vcn/README.md) | The VCN-Tool from Codenotary can notarize your images in the Codenotary Cloud. (chargeable) |
+
+This feature is built as generic approach. Any image which follows [these specs](job-images/SPEC.md) can be used as job-image.
+
+Manifest:
+```yaml
+--job-image=ghcr.io/ckotzbauer/sbom-operator/cas:<TAG>
+```
+
+All operator-environment variables prefixed with `SBOM_JOB_` are passed to the Kubernetes job.
 
 
 ## Security
