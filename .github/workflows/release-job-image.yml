@@ -10,10 +10,6 @@ on:
       version:
         required: true
         type: string
-      artifact-path:
-        required: false
-        default: ""
-        type: string
       docker-tags:
         required: false
         type: string
@@ -86,7 +82,7 @@ jobs:
         with:
           action-sha: "0.13.0-alpha.0"
           images: ${{ inputs.docker-tags }}
-          artifact-path: ${{ inputs.artifact-path }}
+          artifact-path: job-images/${{ inputs.job-image }}
           sign: true
           verify: true
           attest: true
