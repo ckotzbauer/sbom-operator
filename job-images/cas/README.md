@@ -48,6 +48,7 @@ for the analyze-result, as the Codenotary Attestation Service is doing this for 
 
 ## Notes
 
+- The CAS-Job-Image is only available for amd64.
 - The Pod-Name, Pod-Namespace and the cluster-name are stored as notarization-attributes.
 - Environment variables from on the operator prefixed with `SBOM_JOB_` are passed to the job without the prefix.
 - Use the `SBOM_JOB_CAS_EXTRA_ARGS` env to pass custom flags to the `cas notarize` command.
