@@ -1,3 +1,36 @@
+## Version 0.10.0-beta.0 (2022-04-26)
+
+### Features and improvements
+
+* [[`411a9472`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/411a9472)] - **feat**: add Codenotary CAS support
+* [[`91ced753`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/91ced753)] - **feat**: add vcn-metadata-attributes
+* [[`4017697d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4017697d)] - **feat**: allow optional extra-args to VCN
+* [[`e0acaea3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e0acaea3)] - **feat**: add external job-delegation for vcn
+
+### Bug fixes
+
+* [[`2917d79b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2917d79b)] - **fix**: split by regex
+
+### Build and testing
+
+* [[`ffc3025f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ffc3025f)] - **build**: fix artifact-path
+* [[`c9284846`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c9284846)] - **build**: add job-image-workflow
+
+### Documentation
+
+* [[`2cf4d68b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2cf4d68b)] - **doc**: add amd64 note
+* [[`cb42f105`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cb42f105)] - **doc**: improvements to job-image docs
+* [[`a129503c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a129503c)] - **doc**: add job-docs
+
+### Dependency updates
+
+* [[`42a92388`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/42a92388)] - **deps**: update kubernetes versions to v0.23.6
+
+### Common changes
+
+* [[`a502a2eb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a502a2eb)] - **chore**: split deploy-manifests
+
+
 ## Version 0.9.0 (2022-04-16)
 
 ### Build and testing
