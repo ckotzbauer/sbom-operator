@@ -1,3 +1,10 @@
+## Version 0.10.0-beta.1 (2022-04-26)
+
+### Bug fixes
+
+* [[`4e2dee4f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4e2dee4f)] - **fix**: try to add chmod statement
+
+
 ## Version 0.10.0-beta.0 (2022-04-26)
 
 ### Features and improvements
