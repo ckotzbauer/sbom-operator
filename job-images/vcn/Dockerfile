@@ -5,6 +5,7 @@ COPY --from=vcn /bin/vcn /bin/vcn
 COPY entrypoint.sh /
 
 RUN mkdir .vcn && \
-    apk add --no-cache jq bash
+    apk add --no-cache jq bash && \
+    chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]

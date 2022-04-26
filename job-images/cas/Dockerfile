@@ -5,6 +5,7 @@ COPY --from=cas /bin/cas /bin/cas
 COPY entrypoint.sh /
 
 RUN mkdir .cas && \
-    apk add --no-cache jq bash
+    apk add --no-cache jq bash && \
+    chmod +x /entrypoint.sh
 
 ENTRYPOINT ["/entrypoint.sh"]
