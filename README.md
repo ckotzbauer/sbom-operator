@@ -49,7 +49,7 @@ These are officially tested (with authentication):
 #### Manifests
 
 ```
-kubectl apply -f deploy/
+kubectl apply -f deploy/standard/
 ```
 
 #### Helm-Chart
@@ -176,9 +176,18 @@ the SBOMs on its own. Currently there are two possible integrations:
 
 This feature is built as generic approach. Any image which follows [these specs](job-images/SPEC.md) can be used as job-image.
 
-Manifest:
+e.g. Manifest (`deploy/job-image`):
 ```yaml
 --job-image=ghcr.io/ckotzbauer/sbom-operator/cas:<TAG>
+```
+
+e.g. Helm:
+```yaml
+jobImageMode: true
+
+envVars:
+  - name: SBOM_JOB_CAS_API_KEY
+    value: "<KEY>"
 ```
 
 All operator-environment variables prefixed with `SBOM_JOB_` are passed to the Kubernetes job.

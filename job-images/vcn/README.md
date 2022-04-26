@@ -8,7 +8,7 @@ This Job-Image notarizes your images with VCN.
 ## Usage
 
 1. Reach out to Codenotary to get an API-Key for the VCN tool. If you're searching for the free Attestation Service from Codenotary
-use the CAS-Image instead.
+use the [CAS-Image](../cas/README.md) instead.
 2. Add the following flag to the operator-installation.
 
 Manifest:
@@ -18,6 +18,8 @@ Manifest:
 
 Helm:
 ```yaml
+jobImageMode: true
+
 args:
   job-image: ghcr.io/ckotzbauer/sbom-operator/vcn:<TAG>
 ```

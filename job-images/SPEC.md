@@ -17,7 +17,7 @@
 
 - There is a container image available which consists of the CLI-Tool and an entrypoint-script.
 - The entrypoint-script satisfies the following requirements:
-    - Takes a JSON-file at `/sbom/image-config.json` with the details of the images to catalogue.
+    - Takes a JSON-file at `/sbom/image-config.json` with the details of the images to catalogue. (see the [example](example-image-config.json))
     - Prepares anything at start which is needed to process.
     - Processes all images defined in `/sbom/image-config.json` in a loop with the CLI-Tool.
     - Cleans up all images downloaded and stops possible daemons (the container should die gracefully at the end)
@@ -28,7 +28,7 @@
 
 ## Integration with the SBOM-Operator
 
-- The operator whill skip SBOM generation with Syft and target-handling when there's a job-image specified.
+- The operator will skip SBOM generation with Syft and target-handling when there's a job-image specified.
 - The `image-config.json` will be generated from the images detected for scanning.
 - The config will be created as Kubernetes-Secret with a specific name.
 - The operator creates a Kubernetes-Job with the secret mounted at `/sbom/image-config.json`.

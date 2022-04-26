@@ -32,6 +32,8 @@ env:
 
 Helm:
 ```yaml
+jobImageMode: true
+
 envVars:
   - name: SBOM_JOB_CAS_API_KEY
     value: "<KEY>"
