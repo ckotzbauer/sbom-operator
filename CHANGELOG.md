@@ -1,3 +1,10 @@
+## Version 0.10.0 (2022-04-27)
+
+### Common changes
+
+* [[`30b81d96`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/30b81d96)] - **chore**: remove some example-values [skip ci]
+
+
 ## Version 0.10.0-beta.2 (2022-04-27)
 
 ### Bug fixes
