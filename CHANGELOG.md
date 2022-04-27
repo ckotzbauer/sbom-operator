@@ -1,3 +1,10 @@
+## Version 0.10.0-beta.2 (2022-04-27)
+
+### Bug fixes
+
+* [[`35a78e84`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/35a78e84)] - **fix**: use empty array without a secret-name
+
+
 ## Version 0.10.0-beta.1 (2022-04-26)
 
 ### Bug fixes
