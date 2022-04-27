@@ -296,7 +296,7 @@ func (client *KubeClient) CreateJob(namespace, suffix, image, pullSecrets string
 						},
 					},
 					RestartPolicy:    corev1.RestartPolicyNever,
-					ImagePullSecrets: []corev1.LocalObjectReference{{Name: pullSecrets}},
+					ImagePullSecrets: createPullSecrets(pullSecrets),
 					Volumes: []corev1.Volume{
 						{
 							Name: "config",
@@ -313,6 +313,16 @@ func (client *KubeClient) CreateJob(namespace, suffix, image, pullSecrets string
 	}
 
 	return client.Client.BatchV1().Jobs(namespace).Create(context.Background(), j, meta.CreateOptions{})
+}
+
+func createPullSecrets(name string) []corev1.LocalObjectReference {
+	refs := make([]corev1.LocalObjectReference, 0)
+
+	if name != "" {
+		refs = append(refs, corev1.LocalObjectReference{Name: name})
+	}
+
+	return refs
 }
 
 func mapToEnvVars(m map[string]string) []corev1.EnvVar {
