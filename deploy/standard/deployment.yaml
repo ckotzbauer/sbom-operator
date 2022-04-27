@@ -29,8 +29,8 @@ spec:
           - --git-author-email=mybotuser@github.com
           - --git-author-name=mybotuser
           - --git-repository=https://github.com/myorg/my-sbom-repo
-          - --git-path=dev-cluster/sboms
-          - --pod-label-selector=sbom-operator\=true
+          #- --git-path=dev-cluster/sboms
+          #- --pod-label-selector=sbom-operator\=true
         ports:
         - containerPort: 8080
           name: http

@@ -37,7 +37,7 @@ spec:
           # example values
           - --cron="0 6 * * * *"
           - --job-image=ghcr.io/ckotzbauer/sbom-operator/cas:0.10.0
-          - --pod-label-selector=sbom-operator\=true
+          #- --pod-label-selector=sbom-operator\=true
         ports:
         - containerPort: 8080
           name: http
