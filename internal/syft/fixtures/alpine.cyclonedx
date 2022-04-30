@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:876b6eb1-de87-4254-8e24-6db08ed8b86c" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:661b018e-4e5f-4085-b05a-bb9915915967" version="1">
   <metadata>
-    <timestamp>2022-04-16T12:36:07+02:00</timestamp>
+    <timestamp>2022-04-30T09:58:13+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.44.1</version>
+        <version>0.45.0</version>
       </tool>
     </tools>
     <component bom-ref="27f24e002ab47c1b" type="container">
@@ -15,7 +15,7 @@
     </component>
   </metadata>
   <components>
-    <component bom-ref="pkg:alpine/alpine-baselayout@3.2.0-r18?arch=x86_64&amp;upstream=alpine-baselayout&amp;distro=alpine-3.15.0&amp;syft-id=9f527213f4d2a873" type="library">
+    <component bom-ref="pkg:alpine/alpine-baselayout@3.2.0-r18?arch=x86_64&amp;upstream=alpine-baselayout&amp;distro=alpine-3.15.0&amp;package-id=9f527213f4d2a873" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>alpine-baselayout</name>
       <version>3.2.0-r18</version>
@@ -51,7 +51,7 @@
         <property name="syft:metadata:size">21101</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/alpine-keys@2.4-r1?arch=x86_64&amp;upstream=alpine-keys&amp;distro=alpine-3.15.0&amp;syft-id=1a72ca3b88e1b67e" type="library">
+    <component bom-ref="pkg:alpine/alpine-keys@2.4-r1?arch=x86_64&amp;upstream=alpine-keys&amp;distro=alpine-3.15.0&amp;package-id=1a72ca3b88e1b67e" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>alpine-keys</name>
       <version>2.4-r1</version>
@@ -86,7 +86,7 @@
         <property name="syft:metadata:size">13362</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/apk-tools@2.12.7-r3?arch=x86_64&amp;upstream=apk-tools&amp;distro=alpine-3.15.0&amp;syft-id=1c6e057c6965bdd6" type="library">
+    <component bom-ref="pkg:alpine/apk-tools@2.12.7-r3?arch=x86_64&amp;upstream=apk-tools&amp;distro=alpine-3.15.0&amp;package-id=1c6e057c6965bdd6" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>apk-tools</name>
       <version>2.12.7-r3</version>
@@ -118,11 +118,11 @@
         <property name="syft:metadata:installedSize">311296</property>
         <property name="syft:metadata:originPackage">apk-tools</property>
         <property name="syft:metadata:pullChecksum">Q13fPd+FRXaLwyNklVn+quFWDyknM=</property>
-        <property name="syft:metadata:pullDependencies">musl>=1.2 ca-certificates-bundle so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1 so:libssl.so.1.1 so:libz.so.1</property>
+        <property name="syft:metadata:pullDependencies">musl&gt;=1.2 ca-certificates-bundle so:libc.musl-x86_64.so.1 so:libcrypto.so.1.1 so:libssl.so.1.1 so:libz.so.1</property>
         <property name="syft:metadata:size">120377</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/busybox@1.34.1-r3?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.15.0&amp;syft-id=2e32896982ce9587" type="library">
+    <component bom-ref="pkg:alpine/busybox@1.34.1-r3?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.15.0&amp;package-id=2e32896982ce9587" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>busybox</name>
       <version>1.34.1-r3</version>
@@ -153,7 +153,7 @@
         <property name="syft:metadata:size">500579</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/ca-certificates-bundle@20191127-r7?arch=x86_64&amp;upstream=ca-certificates&amp;distro=alpine-3.15.0&amp;syft-id=9bb0a989e24e7661" type="library">
+    <component bom-ref="pkg:alpine/ca-certificates-bundle@20191127-r7?arch=x86_64&amp;upstream=ca-certificates&amp;distro=alpine-3.15.0&amp;package-id=9bb0a989e24e7661" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>ca-certificates-bundle</name>
       <version>20191127-r7</version>
@@ -195,7 +195,7 @@
         <property name="syft:metadata:size">124726</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/libc-utils@0.7.2-r3?arch=x86_64&amp;upstream=libc-dev&amp;distro=alpine-3.15.0&amp;syft-id=e87a79fdaecaabd2" type="library">
+    <component bom-ref="pkg:alpine/libc-utils@0.7.2-r3?arch=x86_64&amp;upstream=libc-dev&amp;distro=alpine-3.15.0&amp;package-id=e87a79fdaecaabd2" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>libc-utils</name>
       <version>0.7.2-r3</version>
@@ -234,7 +234,7 @@
         <property name="syft:metadata:size">1485</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/libcrypto1.1@1.1.1l-r7?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.15.0&amp;syft-id=873ddd0587a8ac17" type="library">
+    <component bom-ref="pkg:alpine/libcrypto1.1@1.1.1l-r7?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.15.0&amp;package-id=873ddd0587a8ac17" type="library">
       <publisher>Timo Teras &lt;timo.teras@iki.fi&gt;</publisher>
       <name>libcrypto1.1</name>
       <version>1.1.1l-r7</version>
@@ -265,7 +265,7 @@
         <property name="syft:metadata:size">1207585</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/libretls@3.3.4-r2?arch=x86_64&amp;upstream=libretls&amp;distro=alpine-3.15.0&amp;syft-id=484b9eacc3ccdd48" type="library">
+    <component bom-ref="pkg:alpine/libretls@3.3.4-r2?arch=x86_64&amp;upstream=libretls&amp;distro=alpine-3.15.0&amp;package-id=484b9eacc3ccdd48" type="library">
       <publisher>Ariadne Conill &lt;ariadne@dereferenced.org&gt;</publisher>
       <name>libretls</name>
       <version>3.3.4-r2</version>
@@ -296,7 +296,7 @@
         <property name="syft:metadata:size">29183</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/libssl1.1@1.1.1l-r7?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.15.0&amp;syft-id=7d62dc5b1a20803f" type="library">
+    <component bom-ref="pkg:alpine/libssl1.1@1.1.1l-r7?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.15.0&amp;package-id=7d62dc5b1a20803f" type="library">
       <publisher>Timo Teras &lt;timo.teras@iki.fi&gt;</publisher>
       <name>libssl1.1</name>
       <version>1.1.1l-r7</version>
@@ -327,7 +327,7 @@
         <property name="syft:metadata:size">213157</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/musl@1.2.2-r7?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.15.0&amp;syft-id=20dc20cbb6dbea6" type="library">
+    <component bom-ref="pkg:alpine/musl@1.2.2-r7?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.15.0&amp;package-id=20dc20cbb6dbea6" type="library">
       <publisher>Timo Teräs &lt;timo.teras@iki.fi&gt;</publisher>
       <name>musl</name>
       <version>1.2.2-r7</version>
@@ -357,7 +357,7 @@
         <property name="syft:metadata:size">383152</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/musl-utils@1.2.2-r7?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.15.0&amp;syft-id=35c3680577fae0df" type="library">
+    <component bom-ref="pkg:alpine/musl-utils@1.2.2-r7?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.15.0&amp;package-id=35c3680577fae0df" type="library">
       <publisher>Timo Teräs &lt;timo.teras@iki.fi&gt;</publisher>
       <name>musl-utils</name>
       <version>1.2.2-r7</version>
@@ -393,7 +393,7 @@
         <property name="syft:metadata:size">36723</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/scanelf@1.3.3-r0?arch=x86_64&amp;upstream=pax-utils&amp;distro=alpine-3.15.0&amp;syft-id=f2d426372356602d" type="library">
+    <component bom-ref="pkg:alpine/scanelf@1.3.3-r0?arch=x86_64&amp;upstream=pax-utils&amp;distro=alpine-3.15.0&amp;package-id=f2d426372356602d" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>scanelf</name>
       <version>1.3.3-r0</version>
@@ -424,7 +424,7 @@
         <property name="syft:metadata:size">36830</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/ssl_client@1.34.1-r3?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.15.0&amp;syft-id=38bc092600723894" type="library">
+    <component bom-ref="pkg:alpine/ssl_client@1.34.1-r3?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.15.0&amp;package-id=38bc092600723894" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>ssl_client</name>
       <version>1.34.1-r3</version>
@@ -460,7 +460,7 @@
         <property name="syft:metadata:size">4711</property>
       </properties>
     </component>
-    <component bom-ref="pkg:alpine/zlib@1.2.11-r3?arch=x86_64&amp;upstream=zlib&amp;distro=alpine-3.15.0&amp;syft-id=50d3560550c47774" type="library">
+    <component bom-ref="pkg:alpine/zlib@1.2.11-r3?arch=x86_64&amp;upstream=zlib&amp;distro=alpine-3.15.0&amp;package-id=50d3560550c47774" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>zlib</name>
       <version>1.2.11-r3</version>

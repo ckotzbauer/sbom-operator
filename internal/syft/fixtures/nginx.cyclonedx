@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:ef8ad0e2-1f8c-4b2e-9d32-a7d349cd5634" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:ff7d48e2-0b78-4b65-8dda-b9f2b79f18f5" version="1">
   <metadata>
-    <timestamp>2022-04-16T12:36:38+02:00</timestamp>
+    <timestamp>2022-04-30T09:58:49+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.44.1</version>
+        <version>0.45.0</version>
       </tool>
     </tools>
     <component bom-ref="bed2b68c44140e08" type="container">
@@ -15,7 +15,7 @@
     </component>
   </metadata>
   <components>
-    <component bom-ref="pkg:deb/debian/adduser@3.118?arch=all&amp;distro=debian-11&amp;syft-id=a124711c55c5b5ec" type="library">
+    <component bom-ref="pkg:deb/debian/adduser@3.118?arch=all&amp;distro=debian-11&amp;package-id=a124711c55c5b5ec" type="library">
       <publisher>Debian Adduser Developers &lt;adduser@packages.debian.org&gt;</publisher>
       <name>adduser</name>
       <version>3.118</version>
@@ -41,7 +41,7 @@
         <property name="syft:metadata:installedSize">849</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/apt@2.2.4?arch=amd64&amp;distro=debian-11&amp;syft-id=aa414cb26ab3bbca" type="library">
+    <component bom-ref="pkg:deb/debian/apt@2.2.4?arch=amd64&amp;distro=debian-11&amp;package-id=aa414cb26ab3bbca" type="library">
       <publisher>APT Development Team &lt;deity@lists.debian.org&gt;</publisher>
       <name>apt</name>
       <version>2.2.4</version>
@@ -67,7 +67,7 @@
         <property name="syft:metadata:installedSize">4337</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/base-files@11.1+deb11u2?arch=amd64&amp;distro=debian-11&amp;syft-id=7415243847bcd458" type="library">
+    <component bom-ref="pkg:deb/debian/base-files@11.1+deb11u2?arch=amd64&amp;distro=debian-11&amp;package-id=7415243847bcd458" type="library">
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>base-files</name>
       <version>11.1+deb11u2</version>
@@ -93,7 +93,7 @@
         <property name="syft:metadata:installedSize">340</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/base-passwd@3.5.51?arch=amd64&amp;distro=debian-11&amp;syft-id=4b06cb374332f86a" type="library">
+    <component bom-ref="pkg:deb/debian/base-passwd@3.5.51?arch=amd64&amp;distro=debian-11&amp;package-id=4b06cb374332f86a" type="library">
       <publisher>Colin Watson &lt;cjwatson@debian.org&gt;</publisher>
       <name>base-passwd</name>
       <version>3.5.51</version>
@@ -122,7 +122,7 @@
         <property name="syft:metadata:installedSize">243</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/bash@5.1-2+b3?arch=amd64&amp;upstream=bash%405.1-2&amp;distro=debian-11&amp;syft-id=d060c19498dee5d9" type="library">
+    <component bom-ref="pkg:deb/debian/bash@5.1-2+b3?arch=amd64&amp;upstream=bash%405.1-2&amp;distro=debian-11&amp;package-id=d060c19498dee5d9" type="library">
       <publisher>Matthias Klose &lt;doko@debian.org&gt;</publisher>
       <name>bash</name>
       <version>5.1-2+b3</version>
@@ -150,7 +150,7 @@
         <property name="syft:metadata:sourceVersion">5.1-2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/bsdutils@1:2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux%402.36.1-8+deb11u1&amp;distro=debian-11&amp;syft-id=f277da72145fb122" type="library">
+    <component bom-ref="pkg:deb/debian/bsdutils@1:2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux%402.36.1-8+deb11u1&amp;distro=debian-11&amp;package-id=f277da72145fb122" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>bsdutils</name>
       <version>1:2.36.1-8+deb11u1</version>
@@ -215,7 +215,7 @@
         <property name="syft:metadata:sourceVersion">2.36.1-8+deb11u1</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/ca-certificates@20210119?arch=all&amp;distro=debian-11&amp;syft-id=4932f34e82ba94bf" type="library">
+    <component bom-ref="pkg:deb/debian/ca-certificates@20210119?arch=all&amp;distro=debian-11&amp;package-id=4932f34e82ba94bf" type="library">
       <publisher>Julien Cristau &lt;jcristau@debian.org&gt;</publisher>
       <name>ca-certificates</name>
       <version>20210119</version>
@@ -250,7 +250,7 @@
         <property name="syft:metadata:installedSize">382</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/coreutils@8.32-4+b1?arch=amd64&amp;upstream=coreutils%408.32-4&amp;distro=debian-11&amp;syft-id=5ea1df19e7f98d54" type="library">
+    <component bom-ref="pkg:deb/debian/coreutils@8.32-4+b1?arch=amd64&amp;upstream=coreutils%408.32-4&amp;distro=debian-11&amp;package-id=5ea1df19e7f98d54" type="library">
       <publisher>Michael Stone &lt;mstone@debian.org&gt;</publisher>
       <name>coreutils</name>
       <version>8.32-4+b1</version>
@@ -276,7 +276,7 @@
         <property name="syft:metadata:sourceVersion">8.32-4</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/curl@7.74.0-1.3+deb11u1?arch=amd64&amp;distro=debian-11&amp;syft-id=6affc4fec38d9428" type="library">
+    <component bom-ref="pkg:deb/debian/curl@7.74.0-1.3+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=6affc4fec38d9428" type="library">
       <publisher>Alessandro Ghedini &lt;ghedo@debian.org&gt;</publisher>
       <name>curl</name>
       <version>7.74.0-1.3+deb11u1</version>
@@ -309,7 +309,7 @@
         <property name="syft:metadata:installedSize">426</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/dash@0.5.11+git20200708+dd9ef66-5?arch=amd64&amp;distro=debian-11&amp;syft-id=f1bb94f1de148c52" type="library">
+    <component bom-ref="pkg:deb/debian/dash@0.5.11+git20200708+dd9ef66-5?arch=amd64&amp;distro=debian-11&amp;package-id=f1bb94f1de148c52" type="library">
       <publisher>Andrej Shadura &lt;andrewsh@debian.org&gt;</publisher>
       <name>dash</name>
       <version>0.5.11+git20200708+dd9ef66-5</version>
@@ -348,7 +348,7 @@
         <property name="syft:metadata:installedSize">221</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/debconf@1.5.77?arch=all&amp;distro=debian-11&amp;syft-id=bbadd8ec8c7191de" type="library">
+    <component bom-ref="pkg:deb/debian/debconf@1.5.77?arch=all&amp;distro=debian-11&amp;package-id=bbadd8ec8c7191de" type="library">
       <publisher>Debconf Developers &lt;debconf-devel@lists.alioth.debian.org&gt;</publisher>
       <name>debconf</name>
       <version>1.5.77</version>
@@ -374,7 +374,7 @@
         <property name="syft:metadata:installedSize">517</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all&amp;distro=debian-11&amp;syft-id=87c7296dad941a8e" type="library">
+    <component bom-ref="pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all&amp;distro=debian-11&amp;package-id=87c7296dad941a8e" type="library">
       <publisher>Debian Release Team &lt;packages@release.debian.org&gt;</publisher>
       <name>debian-archive-keyring</name>
       <version>2021.1.1</version>
@@ -404,7 +404,7 @@
         <property name="syft:metadata:installedSize">234</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/debianutils@4.11.2?arch=amd64&amp;distro=debian-11&amp;syft-id=8f8ec2bbbfdd75a3" type="library">
+    <component bom-ref="pkg:deb/debian/debianutils@4.11.2?arch=amd64&amp;distro=debian-11&amp;package-id=8f8ec2bbbfdd75a3" type="library">
       <publisher>Clint Adams &lt;clint@debian.org&gt;</publisher>
       <name>debianutils</name>
       <version>4.11.2</version>
@@ -428,7 +428,7 @@
         <property name="syft:metadata:installedSize">230</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/diffutils@1:3.7-5?arch=amd64&amp;distro=debian-11&amp;syft-id=3396b2091eb738df" type="library">
+    <component bom-ref="pkg:deb/debian/diffutils@1:3.7-5?arch=amd64&amp;distro=debian-11&amp;package-id=3396b2091eb738df" type="library">
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>diffutils</name>
       <version>1:3.7-5</version>
@@ -447,7 +447,7 @@
         <property name="syft:metadata:installedSize">1598</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/dpkg@1.20.9?arch=amd64&amp;distro=debian-11&amp;syft-id=2ed1301c16c25a31" type="library">
+    <component bom-ref="pkg:deb/debian/dpkg@1.20.9?arch=amd64&amp;distro=debian-11&amp;package-id=2ed1301c16c25a31" type="library">
       <publisher>Dpkg Developers &lt;debian-dpkg@lists.debian.org&gt;</publisher>
       <name>dpkg</name>
       <version>1.20.9</version>
@@ -479,7 +479,7 @@
         <property name="syft:metadata:installedSize">6874</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64&amp;distro=debian-11&amp;syft-id=529fb29c48e0a3a0" type="library">
+    <component bom-ref="pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64&amp;distro=debian-11&amp;package-id=529fb29c48e0a3a0" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>e2fsprogs</name>
       <version>1.46.2-2</version>
@@ -508,7 +508,7 @@
         <property name="syft:metadata:installedSize">1511</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/findutils@4.8.0-1?arch=amd64&amp;distro=debian-11&amp;syft-id=f32a2bdab270e8bf" type="library">
+    <component bom-ref="pkg:deb/debian/findutils@4.8.0-1?arch=amd64&amp;distro=debian-11&amp;package-id=f32a2bdab270e8bf" type="library">
       <publisher>Andreas Metzler &lt;ametzler@debian.org&gt;</publisher>
       <name>findutils</name>
       <version>4.8.0-1</version>
@@ -535,7 +535,7 @@
         <property name="syft:metadata:installedSize">1959</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/fontconfig-config@2.13.1-4.2?arch=all&amp;upstream=fontconfig&amp;distro=debian-11&amp;syft-id=4476174070b15d88" type="library">
+    <component bom-ref="pkg:deb/debian/fontconfig-config@2.13.1-4.2?arch=all&amp;upstream=fontconfig&amp;distro=debian-11&amp;package-id=4476174070b15d88" type="library">
       <publisher>Debian freedesktop.org maintainers &lt;pkg-freedesktop-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>fontconfig-config</name>
       <version>2.13.1-4.2</version>
@@ -562,7 +562,7 @@
         <property name="syft:metadata:source">fontconfig</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/fonts-dejavu-core@2.37-2?arch=all&amp;upstream=fonts-dejavu&amp;distro=debian-11&amp;syft-id=16c100737263f237" type="library">
+    <component bom-ref="pkg:deb/debian/fonts-dejavu-core@2.37-2?arch=all&amp;upstream=fonts-dejavu&amp;distro=debian-11&amp;package-id=16c100737263f237" type="library">
       <publisher>Debian Fonts Task Force &lt;debian-fonts@lists.debian.org&gt;</publisher>
       <name>fonts-dejavu-core</name>
       <version>2.37-2</version>
@@ -601,7 +601,7 @@
         <property name="syft:metadata:source">fonts-dejavu</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gcc-10-base@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;syft-id=3cdf11976de03f14" type="library">
+    <component bom-ref="pkg:deb/debian/gcc-10-base@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=3cdf11976de03f14" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>gcc-10-base</name>
       <version>10.2.1-6</version>
@@ -641,7 +641,7 @@
         <property name="syft:metadata:source">gcc-10</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gcc-9-base@9.3.0-22?arch=amd64&amp;upstream=gcc-9&amp;distro=debian-11&amp;syft-id=fa0987b9eb161d04" type="library">
+    <component bom-ref="pkg:deb/debian/gcc-9-base@9.3.0-22?arch=amd64&amp;upstream=gcc-9&amp;distro=debian-11&amp;package-id=fa0987b9eb161d04" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>gcc-9-base</name>
       <version>9.3.0-22</version>
@@ -684,7 +684,7 @@
         <property name="syft:metadata:source">gcc-9</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gettext-base@0.21-4?arch=amd64&amp;upstream=gettext&amp;distro=debian-11&amp;syft-id=c93a10c9a8f0dd4a" type="library">
+    <component bom-ref="pkg:deb/debian/gettext-base@0.21-4?arch=amd64&amp;upstream=gettext&amp;distro=debian-11&amp;package-id=c93a10c9a8f0dd4a" type="library">
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>gettext-base</name>
       <version>0.21-4</version>
@@ -709,7 +709,7 @@
         <property name="syft:metadata:source">gettext</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gpgv@2.2.27-2?arch=amd64&amp;upstream=gnupg2&amp;distro=debian-11&amp;syft-id=e0b857b3f10270e4" type="library">
+    <component bom-ref="pkg:deb/debian/gpgv@2.2.27-2?arch=amd64&amp;upstream=gnupg2&amp;distro=debian-11&amp;package-id=e0b857b3f10270e4" type="library">
       <publisher>Debian GnuPG Maintainers &lt;pkg-gnupg-maint@lists.alioth.debian.org&gt;</publisher>
       <name>gpgv</name>
       <version>2.2.27-2</version>
@@ -755,7 +755,7 @@
         <property name="syft:metadata:source">gnupg2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/grep@3.6-1?arch=amd64&amp;distro=debian-11&amp;syft-id=5bce38ab7e035050" type="library">
+    <component bom-ref="pkg:deb/debian/grep@3.6-1?arch=amd64&amp;distro=debian-11&amp;package-id=5bce38ab7e035050" type="library">
       <publisher>Anibal Monsalve Salazar &lt;anibal@debian.org&gt;</publisher>
       <name>grep</name>
       <version>3.6-1</version>
@@ -782,7 +782,7 @@
         <property name="syft:metadata:installedSize">1091</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gzip@1.10-4?arch=amd64&amp;distro=debian-11&amp;syft-id=16df667f8911e107" type="library">
+    <component bom-ref="pkg:deb/debian/gzip@1.10-4?arch=amd64&amp;distro=debian-11&amp;package-id=16df667f8911e107" type="library">
       <publisher>Milan Kupcevic &lt;milan@debian.org&gt;</publisher>
       <name>gzip</name>
       <version>1.10-4</version>
@@ -809,7 +809,7 @@
         <property name="syft:metadata:installedSize">242</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/hostname@3.23?arch=amd64&amp;distro=debian-11&amp;syft-id=7a0895692bf8e5c4" type="library">
+    <component bom-ref="pkg:deb/debian/hostname@3.23?arch=amd64&amp;distro=debian-11&amp;package-id=7a0895692bf8e5c4" type="library">
       <publisher>Michael Meskes &lt;meskes@debian.org&gt;</publisher>
       <name>hostname</name>
       <version>3.23</version>
@@ -833,7 +833,7 @@
         <property name="syft:metadata:installedSize">50</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/init-system-helpers@1.60?arch=all&amp;distro=debian-11&amp;syft-id=fd4f5e16fb283f4" type="library">
+    <component bom-ref="pkg:deb/debian/init-system-helpers@1.60?arch=all&amp;distro=debian-11&amp;package-id=fd4f5e16fb283f4" type="library">
       <publisher>Debian systemd Maintainers &lt;pkg-systemd-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>init-system-helpers</name>
       <version>1.60</version>
@@ -872,7 +872,7 @@
         <property name="syft:metadata:installedSize">131</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libacl1@2.2.53-10?arch=amd64&amp;upstream=acl&amp;distro=debian-11&amp;syft-id=e0a83b52220f81d5" type="library">
+    <component bom-ref="pkg:deb/debian/libacl1@2.2.53-10?arch=amd64&amp;upstream=acl&amp;distro=debian-11&amp;package-id=e0a83b52220f81d5" type="library">
       <publisher>Guillem Jover &lt;guillem@debian.org&gt;</publisher>
       <name>libacl1</name>
       <version>2.2.53-10</version>
@@ -906,7 +906,7 @@
         <property name="syft:metadata:source">acl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libapt-pkg6.0@2.2.4?arch=amd64&amp;upstream=apt&amp;distro=debian-11&amp;syft-id=c9f0db5ec0cd299a" type="library">
+    <component bom-ref="pkg:deb/debian/libapt-pkg6.0@2.2.4?arch=amd64&amp;upstream=apt&amp;distro=debian-11&amp;package-id=c9f0db5ec0cd299a" type="library">
       <publisher>APT Development Team &lt;deity@lists.debian.org&gt;</publisher>
       <name>libapt-pkg6.0</name>
       <version>2.2.4</version>
@@ -936,7 +936,7 @@
         <property name="syft:metadata:source">apt</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libattr1@1:2.4.48-6?arch=amd64&amp;upstream=attr&amp;distro=debian-11&amp;syft-id=2e9da59fcfb0bc5" type="library">
+    <component bom-ref="pkg:deb/debian/libattr1@1:2.4.48-6?arch=amd64&amp;upstream=attr&amp;distro=debian-11&amp;package-id=2e9da59fcfb0bc5" type="library">
       <publisher>Guillem Jover &lt;guillem@debian.org&gt;</publisher>
       <name>libattr1</name>
       <version>1:2.4.48-6</version>
@@ -972,7 +972,7 @@
         <property name="syft:metadata:source">attr</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libaudit-common@1:3.0-2?arch=all&amp;upstream=audit&amp;distro=debian-11&amp;syft-id=125cb964c8647790" type="library">
+    <component bom-ref="pkg:deb/debian/libaudit-common@1:3.0-2?arch=all&amp;upstream=audit&amp;distro=debian-11&amp;package-id=125cb964c8647790" type="library">
       <publisher>Laurent Bigonville &lt;bigon@debian.org&gt;</publisher>
       <name>libaudit-common</name>
       <version>1:3.0-2</version>
@@ -1010,7 +1010,7 @@
         <property name="syft:metadata:source">audit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libaudit1@1:3.0-2?arch=amd64&amp;upstream=audit&amp;distro=debian-11&amp;syft-id=da1eb1a6ba858ec9" type="library">
+    <component bom-ref="pkg:deb/debian/libaudit1@1:3.0-2?arch=amd64&amp;upstream=audit&amp;distro=debian-11&amp;package-id=da1eb1a6ba858ec9" type="library">
       <publisher>Laurent Bigonville &lt;bigon@debian.org&gt;</publisher>
       <name>libaudit1</name>
       <version>1:3.0-2</version>
@@ -1041,7 +1041,7 @@
         <property name="syft:metadata:source">audit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libblkid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;syft-id=a73a7e87322fd73a" type="library">
+    <component bom-ref="pkg:deb/debian/libblkid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=a73a7e87322fd73a" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libblkid1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -1105,7 +1105,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libbrotli1@1.0.9-2+b2?arch=amd64&amp;upstream=brotli%401.0.9-2&amp;distro=debian-11&amp;syft-id=a8a8c3e14200d4b7" type="library">
+    <component bom-ref="pkg:deb/debian/libbrotli1@1.0.9-2+b2?arch=amd64&amp;upstream=brotli%401.0.9-2&amp;distro=debian-11&amp;package-id=a8a8c3e14200d4b7" type="library">
       <publisher>Tomasz Buchert &lt;tomasz@debian.org&gt;</publisher>
       <name>libbrotli1</name>
       <version>1.0.9-2+b2</version>
@@ -1131,7 +1131,7 @@
         <property name="syft:metadata:sourceVersion">1.0.9-2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libbsd0@0.11.3-1?arch=amd64&amp;upstream=libbsd&amp;distro=debian-11&amp;syft-id=737dc091651c6d2c" type="library">
+    <component bom-ref="pkg:deb/debian/libbsd0@0.11.3-1?arch=amd64&amp;upstream=libbsd&amp;distro=debian-11&amp;package-id=737dc091651c6d2c" type="library">
       <publisher>Guillem Jover &lt;guillem@debian.org&gt;</publisher>
       <name>libbsd0</name>
       <version>0.11.3-1</version>
@@ -1168,7 +1168,7 @@
         <property name="syft:metadata:source">libbsd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libbz2-1.0@1.0.8-4?arch=amd64&amp;upstream=bzip2&amp;distro=debian-11&amp;syft-id=6c83d71086c360b5" type="library">
+    <component bom-ref="pkg:deb/debian/libbz2-1.0@1.0.8-4?arch=amd64&amp;upstream=bzip2&amp;distro=debian-11&amp;package-id=6c83d71086c360b5" type="library">
       <publisher>Anibal Monsalve Salazar &lt;anibal@debian.org&gt;</publisher>
       <name>libbz2-1.0</name>
       <version>1.0.8-4</version>
@@ -1198,7 +1198,7 @@
         <property name="syft:metadata:source">bzip2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libc-bin@2.31-13+deb11u2?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;syft-id=d7cc5a0a86f04389" type="library">
+    <component bom-ref="pkg:deb/debian/libc-bin@2.31-13+deb11u2?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;package-id=d7cc5a0a86f04389" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>libc-bin</name>
       <version>2.31-13+deb11u2</version>
@@ -1233,7 +1233,7 @@
         <property name="syft:metadata:source">glibc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libc6@2.31-13+deb11u2?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;syft-id=d03e4c5f0a92ac84" type="library">
+    <component bom-ref="pkg:deb/debian/libc6@2.31-13+deb11u2?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;package-id=d03e4c5f0a92ac84" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>libc6</name>
       <version>2.31-13+deb11u2</version>
@@ -1263,7 +1263,7 @@
         <property name="syft:metadata:source">glibc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libcap-ng0@0.7.9-2.2+b1?arch=amd64&amp;upstream=libcap-ng%400.7.9-2.2&amp;distro=debian-11&amp;syft-id=d96dcd0201234163" type="library">
+    <component bom-ref="pkg:deb/debian/libcap-ng0@0.7.9-2.2+b1?arch=amd64&amp;upstream=libcap-ng%400.7.9-2.2&amp;distro=debian-11&amp;package-id=d96dcd0201234163" type="library">
       <publisher>Pierre Chifflier &lt;pollux@debian.org&gt;</publisher>
       <name>libcap-ng0</name>
       <version>0.7.9-2.2+b1</version>
@@ -1300,7 +1300,7 @@
         <property name="syft:metadata:sourceVersion">0.7.9-2.2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libcom-err2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;syft-id=baa17fa24974defd" type="library">
+    <component bom-ref="pkg:deb/debian/libcom-err2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=baa17fa24974defd" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>libcom-err2</name>
       <version>1.46.2-2</version>
@@ -1325,7 +1325,7 @@
         <property name="syft:metadata:source">e2fsprogs</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libcrypt1@1:4.4.18-4?arch=amd64&amp;upstream=libxcrypt&amp;distro=debian-11&amp;syft-id=99995fa478d99713" type="library">
+    <component bom-ref="pkg:deb/debian/libcrypt1@1:4.4.18-4?arch=amd64&amp;upstream=libxcrypt&amp;distro=debian-11&amp;package-id=99995fa478d99713" type="library">
       <publisher>Marco d&#39;Itri &lt;md@linux.it&gt;</publisher>
       <name>libcrypt1</name>
       <version>1:4.4.18-4</version>
@@ -1345,7 +1345,7 @@
         <property name="syft:metadata:source">libxcrypt</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libcurl4@7.74.0-1.3+deb11u1?arch=amd64&amp;upstream=curl&amp;distro=debian-11&amp;syft-id=7ce4c3b1e9715201" type="library">
+    <component bom-ref="pkg:deb/debian/libcurl4@7.74.0-1.3+deb11u1?arch=amd64&amp;upstream=curl&amp;distro=debian-11&amp;package-id=7ce4c3b1e9715201" type="library">
       <publisher>Alessandro Ghedini &lt;ghedo@debian.org&gt;</publisher>
       <name>libcurl4</name>
       <version>7.74.0-1.3+deb11u1</version>
@@ -1379,7 +1379,7 @@
         <property name="syft:metadata:source">curl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.8?arch=amd64&amp;upstream=db5.3&amp;distro=debian-11&amp;syft-id=8bfc69ad307dcdcd" type="library">
+    <component bom-ref="pkg:deb/debian/libdb5.3@5.3.28+dfsg1-0.8?arch=amd64&amp;upstream=db5.3&amp;distro=debian-11&amp;package-id=8bfc69ad307dcdcd" type="library">
       <publisher>Debian Berkeley DB Team &lt;team+bdb@tracker.debian.org&gt;</publisher>
       <name>libdb5.3</name>
       <version>5.3.28+dfsg1-0.8</version>
@@ -1399,7 +1399,7 @@
         <property name="syft:metadata:source">db5.3</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libdebconfclient0@0.260?arch=amd64&amp;upstream=cdebconf&amp;distro=debian-11&amp;syft-id=c56a3b6958349ec4" type="library">
+    <component bom-ref="pkg:deb/debian/libdebconfclient0@0.260?arch=amd64&amp;upstream=cdebconf&amp;distro=debian-11&amp;package-id=c56a3b6958349ec4" type="library">
       <publisher>Debian Install System Team &lt;debian-boot@lists.debian.org&gt;</publisher>
       <name>libdebconfclient0</name>
       <version>0.260</version>
@@ -1419,7 +1419,7 @@
         <property name="syft:metadata:source">cdebconf</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libdeflate0@1.7-1?arch=amd64&amp;upstream=libdeflate&amp;distro=debian-11&amp;syft-id=15fd424a98e8c78a" type="library">
+    <component bom-ref="pkg:deb/debian/libdeflate0@1.7-1?arch=amd64&amp;upstream=libdeflate&amp;distro=debian-11&amp;package-id=15fd424a98e8c78a" type="library">
       <publisher>Debian Med Packaging Team &lt;debian-med-packaging@lists.alioth.debian.org&gt;</publisher>
       <name>libdeflate0</name>
       <version>1.7-1</version>
@@ -1439,7 +1439,7 @@
         <property name="syft:metadata:source">libdeflate</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libexpat1@2.2.10-2?arch=amd64&amp;upstream=expat&amp;distro=debian-11&amp;syft-id=eb3f12c801013744" type="library">
+    <component bom-ref="pkg:deb/debian/libexpat1@2.2.10-2?arch=amd64&amp;upstream=expat&amp;distro=debian-11&amp;package-id=eb3f12c801013744" type="library">
       <publisher>Laszlo Boszormenyi (GCS) &lt;gcs@debian.org&gt;</publisher>
       <name>libexpat1</name>
       <version>2.2.10-2</version>
@@ -1464,7 +1464,7 @@
         <property name="syft:metadata:source">expat</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libext2fs2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;syft-id=69de4a92ec80854d" type="library">
+    <component bom-ref="pkg:deb/debian/libext2fs2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=69de4a92ec80854d" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>libext2fs2</name>
       <version>1.46.2-2</version>
@@ -1492,7 +1492,7 @@
         <property name="syft:metadata:source">e2fsprogs</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libffi7@3.3-6?arch=amd64&amp;upstream=libffi&amp;distro=debian-11&amp;syft-id=389fc122d555059f" type="library">
+    <component bom-ref="pkg:deb/debian/libffi7@3.3-6?arch=amd64&amp;upstream=libffi&amp;distro=debian-11&amp;package-id=389fc122d555059f" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libffi7</name>
       <version>3.3-6</version>
@@ -1512,7 +1512,7 @@
         <property name="syft:metadata:source">libffi</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libfontconfig1@2.13.1-4.2?arch=amd64&amp;upstream=fontconfig&amp;distro=debian-11&amp;syft-id=889f9d0caf1f5222" type="library">
+    <component bom-ref="pkg:deb/debian/libfontconfig1@2.13.1-4.2?arch=amd64&amp;upstream=fontconfig&amp;distro=debian-11&amp;package-id=889f9d0caf1f5222" type="library">
       <publisher>Debian freedesktop.org maintainers &lt;pkg-freedesktop-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libfontconfig1</name>
       <version>2.13.1-4.2</version>
@@ -1532,7 +1532,7 @@
         <property name="syft:metadata:source">fontconfig</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libfreetype6@2.10.4+dfsg-1?arch=amd64&amp;upstream=freetype&amp;distro=debian-11&amp;syft-id=add4f013ef1efc30" type="library">
+    <component bom-ref="pkg:deb/debian/libfreetype6@2.10.4+dfsg-1?arch=amd64&amp;upstream=freetype&amp;distro=debian-11&amp;package-id=add4f013ef1efc30" type="library">
       <publisher>Hugh McMaster &lt;hugh.mcmaster@outlook.com&gt;</publisher>
       <name>libfreetype6</name>
       <version>2.10.4+dfsg-1</version>
@@ -1593,7 +1593,7 @@
         <property name="syft:metadata:source">freetype</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgcc-s1@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;syft-id=352e69adb0683b92" type="library">
+    <component bom-ref="pkg:deb/debian/libgcc-s1@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=352e69adb0683b92" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libgcc-s1</name>
       <version>10.2.1-6</version>
@@ -1629,7 +1629,7 @@
         <property name="syft:metadata:source">gcc-10</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64&amp;distro=debian-11&amp;syft-id=e3ab61bc63d33d56" type="library">
+    <component bom-ref="pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64&amp;distro=debian-11&amp;package-id=e3ab61bc63d33d56" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libgcrypt20</name>
       <version>1.8.7-6</version>
@@ -1653,7 +1653,7 @@
         <property name="syft:metadata:installedSize">1355</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgd3@2.3.0-2?arch=amd64&amp;upstream=libgd2&amp;distro=debian-11&amp;syft-id=5b4feba98e2fbc55" type="library">
+    <component bom-ref="pkg:deb/debian/libgd3@2.3.0-2?arch=amd64&amp;upstream=libgd2&amp;distro=debian-11&amp;package-id=5b4feba98e2fbc55" type="library">
       <publisher>GD Team &lt;team+gd@tracker.debian.org&gt;</publisher>
       <name>libgd3</name>
       <version>2.3.0-2</version>
@@ -1693,7 +1693,7 @@
         <property name="syft:metadata:source">libgd2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgeoip1@1.6.12-7?arch=amd64&amp;upstream=geoip&amp;distro=debian-11&amp;syft-id=9002a34773325a1c" type="library">
+    <component bom-ref="pkg:deb/debian/libgeoip1@1.6.12-7?arch=amd64&amp;upstream=geoip&amp;distro=debian-11&amp;package-id=9002a34773325a1c" type="library">
       <publisher>Patrick Matthäi &lt;pmatthaei@debian.org&gt;</publisher>
       <name>libgeoip1</name>
       <version>1.6.12-7</version>
@@ -1724,7 +1724,7 @@
         <property name="syft:metadata:source">geoip</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgmp10@2:6.2.1+dfsg-1+deb11u1?arch=amd64&amp;upstream=gmp&amp;distro=debian-11&amp;syft-id=57115b2699bb339" type="library">
+    <component bom-ref="pkg:deb/debian/libgmp10@2:6.2.1+dfsg-1+deb11u1?arch=amd64&amp;upstream=gmp&amp;distro=debian-11&amp;package-id=57115b2699bb339" type="library">
       <publisher>Debian Science Team &lt;debian-science-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libgmp10</name>
       <version>2:6.2.1+dfsg-1+deb11u1</version>
@@ -1755,7 +1755,7 @@
         <property name="syft:metadata:source">gmp</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgnutls30@3.7.1-5?arch=amd64&amp;upstream=gnutls28&amp;distro=debian-11&amp;syft-id=3bbda69652f4fca4" type="library">
+    <component bom-ref="pkg:deb/debian/libgnutls30@3.7.1-5?arch=amd64&amp;upstream=gnutls28&amp;distro=debian-11&amp;package-id=3bbda69652f4fca4" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libgnutls30</name>
       <version>3.7.1-5</version>
@@ -1792,7 +1792,7 @@
         <property name="syft:metadata:source">gnutls28</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgpg-error0@1.38-2?arch=amd64&amp;upstream=libgpg-error&amp;distro=debian-11&amp;syft-id=677aef193106482b" type="library">
+    <component bom-ref="pkg:deb/debian/libgpg-error0@1.38-2?arch=amd64&amp;upstream=libgpg-error&amp;distro=debian-11&amp;package-id=677aef193106482b" type="library">
       <publisher>Debian GnuPG Maintainers &lt;pkg-gnupg-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libgpg-error0</name>
       <version>1.38-2</version>
@@ -1834,7 +1834,7 @@
         <property name="syft:metadata:source">libgpg-error</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgssapi-krb5-2@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;syft-id=36af90253b600b64" type="library">
+    <component bom-ref="pkg:deb/debian/libgssapi-krb5-2@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=36af90253b600b64" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libgssapi-krb5-2</name>
       <version>1.18.3-6+deb11u1</version>
@@ -1868,7 +1868,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libhogweed6@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;syft-id=d1c80e04153ae86f" type="library">
+    <component bom-ref="pkg:deb/debian/libhogweed6@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;package-id=d1c80e04153ae86f" type="library">
       <publisher>Magnus Holmgren &lt;holmgren@debian.org&gt;</publisher>
       <name>libhogweed6</name>
       <version>3.7.3-1</version>
@@ -1908,7 +1908,7 @@
         <property name="syft:metadata:source">nettle</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libicu67@67.1-7?arch=amd64&amp;upstream=icu&amp;distro=debian-11&amp;syft-id=865912b631767102" type="library">
+    <component bom-ref="pkg:deb/debian/libicu67@67.1-7?arch=amd64&amp;upstream=icu&amp;distro=debian-11&amp;package-id=865912b631767102" type="library">
       <publisher>Laszlo Boszormenyi (GCS) &lt;gcs@debian.org&gt;</publisher>
       <name>libicu67</name>
       <version>67.1-7</version>
@@ -1928,7 +1928,7 @@
         <property name="syft:metadata:source">icu</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libidn2-0@2.3.0-5?arch=amd64&amp;upstream=libidn2&amp;distro=debian-11&amp;syft-id=a8db53ebfc253c16" type="library">
+    <component bom-ref="pkg:deb/debian/libidn2-0@2.3.0-5?arch=amd64&amp;upstream=libidn2&amp;distro=debian-11&amp;package-id=a8db53ebfc253c16" type="library">
       <publisher>Debian Libidn team &lt;help-libidn@gnu.org&gt;</publisher>
       <name>libidn2-0</name>
       <version>2.3.0-5</version>
@@ -1973,7 +1973,7 @@
         <property name="syft:metadata:source">libidn2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:maven/libintl/libintl@0.21?syft-id=f24853b33867d342" type="library">
+    <component bom-ref="pkg:maven/libintl/libintl@0.21?package-id=f24853b33867d342" type="library">
       <name>libintl</name>
       <version>0.21</version>
       <cpe>cpe:2.3:a:libintl:libintl:0.21:*:*:*:*:*:*:*</cpe>
@@ -1996,7 +1996,7 @@
         <property name="syft:metadata:virtualPath">/usr/share/java/libintl-0.21.jar</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libjbig0@2.1-3.1+b2?arch=amd64&amp;upstream=jbigkit%402.1-3.1&amp;distro=debian-11&amp;syft-id=a9f622da54ffe9f0" type="library">
+    <component bom-ref="pkg:deb/debian/libjbig0@2.1-3.1+b2?arch=amd64&amp;upstream=jbigkit%402.1-3.1&amp;distro=debian-11&amp;package-id=a9f622da54ffe9f0" type="library">
       <publisher>Michael van der Kolff &lt;mvanderkolff@gmail.com&gt;</publisher>
       <name>libjbig0</name>
       <version>2.1-3.1+b2</version>
@@ -2025,7 +2025,7 @@
         <property name="syft:metadata:sourceVersion">2.1-3.1</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libjpeg62-turbo@1:2.0.6-4?arch=amd64&amp;upstream=libjpeg-turbo&amp;distro=debian-11&amp;syft-id=72a51f62b0e29fa9" type="library">
+    <component bom-ref="pkg:deb/debian/libjpeg62-turbo@1:2.0.6-4?arch=amd64&amp;upstream=libjpeg-turbo&amp;distro=debian-11&amp;package-id=72a51f62b0e29fa9" type="library">
       <publisher>Ondřej Surý &lt;ondrej@debian.org&gt;</publisher>
       <name>libjpeg62-turbo</name>
       <version>1:2.0.6-4</version>
@@ -2058,7 +2058,7 @@
         <property name="syft:metadata:source">libjpeg-turbo</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libk5crypto3@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;syft-id=422e998f61a81734" type="library">
+    <component bom-ref="pkg:deb/debian/libk5crypto3@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=422e998f61a81734" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libk5crypto3</name>
       <version>1.18.3-6+deb11u1</version>
@@ -2083,7 +2083,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libkeyutils1@1.6.1-2?arch=amd64&amp;upstream=keyutils&amp;distro=debian-11&amp;syft-id=bbf061999ae08758" type="library">
+    <component bom-ref="pkg:deb/debian/libkeyutils1@1.6.1-2?arch=amd64&amp;upstream=keyutils&amp;distro=debian-11&amp;package-id=bbf061999ae08758" type="library">
       <publisher>Christian Kastner &lt;ckk@debian.org&gt;</publisher>
       <name>libkeyutils1</name>
       <version>1.6.1-2</version>
@@ -2117,7 +2117,7 @@
         <property name="syft:metadata:source">keyutils</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libkrb5-3@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;syft-id=ff21f7a518cbf6e7" type="library">
+    <component bom-ref="pkg:deb/debian/libkrb5-3@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=ff21f7a518cbf6e7" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libkrb5-3</name>
       <version>1.18.3-6+deb11u1</version>
@@ -2147,7 +2147,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libkrb5support0@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;syft-id=a64cff3d5807ece2" type="library">
+    <component bom-ref="pkg:deb/debian/libkrb5support0@1.18.3-6+deb11u1?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=a64cff3d5807ece2" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libkrb5support0</name>
       <version>1.18.3-6+deb11u1</version>
@@ -2172,7 +2172,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libldap-2.4-2@2.4.57+dfsg-3?arch=amd64&amp;upstream=openldap&amp;distro=debian-11&amp;syft-id=78b0eb41245bc203" type="library">
+    <component bom-ref="pkg:deb/debian/libldap-2.4-2@2.4.57+dfsg-3?arch=amd64&amp;upstream=openldap&amp;distro=debian-11&amp;package-id=78b0eb41245bc203" type="library">
       <publisher>Debian OpenLDAP Maintainers &lt;pkg-openldap-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libldap-2.4-2</name>
       <version>2.4.57+dfsg-3</version>
@@ -2201,7 +2201,7 @@
         <property name="syft:metadata:source">openldap</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/liblz4-1@1.9.3-2?arch=amd64&amp;upstream=lz4&amp;distro=debian-11&amp;syft-id=6372d748473ab2a2" type="library">
+    <component bom-ref="pkg:deb/debian/liblz4-1@1.9.3-2?arch=amd64&amp;upstream=lz4&amp;distro=debian-11&amp;package-id=6372d748473ab2a2" type="library">
       <publisher>Nobuhiro Iwamatsu &lt;iwamatsu@debian.org&gt;</publisher>
       <name>liblz4-1</name>
       <version>1.9.3-2</version>
@@ -2237,7 +2237,7 @@
         <property name="syft:metadata:source">lz4</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/liblzma5@5.2.5-2?arch=amd64&amp;upstream=xz-utils&amp;distro=debian-11&amp;syft-id=44131f236e63c8e7" type="library">
+    <component bom-ref="pkg:deb/debian/liblzma5@5.2.5-2?arch=amd64&amp;upstream=xz-utils&amp;distro=debian-11&amp;package-id=44131f236e63c8e7" type="library">
       <publisher>Jonathan Nieder &lt;jrnieder@gmail.com&gt;</publisher>
       <name>liblzma5</name>
       <version>5.2.5-2</version>
@@ -2277,7 +2277,7 @@
         <property name="syft:metadata:source">xz-utils</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libmd0@1.0.3-3?arch=amd64&amp;upstream=libmd&amp;distro=debian-11&amp;syft-id=7baddf842fccc6ac" type="library">
+    <component bom-ref="pkg:deb/debian/libmd0@1.0.3-3?arch=amd64&amp;upstream=libmd&amp;distro=debian-11&amp;package-id=7baddf842fccc6ac" type="library">
       <publisher>Guillem Jover &lt;guillem@debian.org&gt;</publisher>
       <name>libmd0</name>
       <version>1.0.3-3</version>
@@ -2314,7 +2314,7 @@
         <property name="syft:metadata:source">libmd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libmount1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;syft-id=8d0189ae4d84d16" type="library">
+    <component bom-ref="pkg:deb/debian/libmount1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=8d0189ae4d84d16" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libmount1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -2378,7 +2378,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libnettle8@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;syft-id=bda9c00ca69e11a8" type="library">
+    <component bom-ref="pkg:deb/debian/libnettle8@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;package-id=bda9c00ca69e11a8" type="library">
       <publisher>Magnus Holmgren &lt;holmgren@debian.org&gt;</publisher>
       <name>libnettle8</name>
       <version>3.7.3-1</version>
@@ -2418,7 +2418,7 @@
         <property name="syft:metadata:source">nettle</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libnghttp2-14@1.43.0-1?arch=amd64&amp;upstream=nghttp2&amp;distro=debian-11&amp;syft-id=706d0b055b41596b" type="library">
+    <component bom-ref="pkg:deb/debian/libnghttp2-14@1.43.0-1?arch=amd64&amp;upstream=nghttp2&amp;distro=debian-11&amp;package-id=706d0b055b41596b" type="library">
       <publisher>Tomasz Buchert &lt;tomasz@debian.org&gt;</publisher>
       <name>libnghttp2-14</name>
       <version>1.43.0-1</version>
@@ -2457,7 +2457,7 @@
         <property name="syft:metadata:source">nghttp2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libnsl2@1.3.0-2?arch=amd64&amp;upstream=libnsl&amp;distro=debian-11&amp;syft-id=b3ecde50c64e6f4d" type="library">
+    <component bom-ref="pkg:deb/debian/libnsl2@1.3.0-2?arch=amd64&amp;upstream=libnsl&amp;distro=debian-11&amp;package-id=b3ecde50c64e6f4d" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>libnsl2</name>
       <version>1.3.0-2</version>
@@ -2497,7 +2497,7 @@
         <property name="syft:metadata:source">libnsl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64&amp;upstream=p11-kit&amp;distro=debian-11&amp;syft-id=addea27288da0292" type="library">
+    <component bom-ref="pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64&amp;upstream=p11-kit&amp;distro=debian-11&amp;package-id=addea27288da0292" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libp11-kit0</name>
       <version>0.23.22-1</version>
@@ -2530,7 +2530,7 @@
         <property name="syft:metadata:source">p11-kit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;syft-id=dbf0d9a6d8661817" type="library">
+    <component bom-ref="pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=dbf0d9a6d8661817" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-modules</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2557,7 +2557,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;syft-id=6196393100a266d5" type="library">
+    <component bom-ref="pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=6196393100a266d5" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-modules-bin</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2586,7 +2586,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all&amp;upstream=pam&amp;distro=debian-11&amp;syft-id=62db6ed4651db63c" type="library">
+    <component bom-ref="pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all&amp;upstream=pam&amp;distro=debian-11&amp;package-id=62db6ed4651db63c" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-runtime</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2613,7 +2613,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;syft-id=4e92ce4a0cadd805" type="library">
+    <component bom-ref="pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=4e92ce4a0cadd805" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam0g</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2633,7 +2633,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpcre2-8-0@10.36-2?arch=amd64&amp;upstream=pcre2&amp;distro=debian-11&amp;syft-id=ad5c00ece43a385b" type="library">
+    <component bom-ref="pkg:deb/debian/libpcre2-8-0@10.36-2?arch=amd64&amp;upstream=pcre2&amp;distro=debian-11&amp;package-id=ad5c00ece43a385b" type="library">
       <publisher>Matthew Vernon &lt;matthew@debian.org&gt;</publisher>
       <name>libpcre2-8-0</name>
       <version>10.36-2</version>
@@ -2662,7 +2662,7 @@
         <property name="syft:metadata:source">pcre2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpcre3@2:8.39-13?arch=amd64&amp;upstream=pcre3&amp;distro=debian-11&amp;syft-id=9bfc1facaf92a9e8" type="library">
+    <component bom-ref="pkg:deb/debian/libpcre3@2:8.39-13?arch=amd64&amp;upstream=pcre3&amp;distro=debian-11&amp;package-id=9bfc1facaf92a9e8" type="library">
       <publisher>Matthew Vernon &lt;matthew@debian.org&gt;</publisher>
       <name>libpcre3</name>
       <version>2:8.39-13</version>
@@ -2682,7 +2682,7 @@
         <property name="syft:metadata:source">pcre3</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpng16-16@1.6.37-3?arch=amd64&amp;upstream=libpng1.6&amp;distro=debian-11&amp;syft-id=f867a818b899a809" type="library">
+    <component bom-ref="pkg:deb/debian/libpng16-16@1.6.37-3?arch=amd64&amp;upstream=libpng1.6&amp;distro=debian-11&amp;package-id=f867a818b899a809" type="library">
       <publisher>Maintainers of libpng1.6 packages &lt;libpng1.6@packages.debian.org&gt;</publisher>
       <name>libpng16-16</name>
       <version>1.6.37-3</version>
@@ -2724,7 +2724,7 @@
         <property name="syft:metadata:source">libpng1.6</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpsl5@0.21.0-1.2?arch=amd64&amp;upstream=libpsl&amp;distro=debian-11&amp;syft-id=765ef20aed5ddd31" type="library">
+    <component bom-ref="pkg:deb/debian/libpsl5@0.21.0-1.2?arch=amd64&amp;upstream=libpsl&amp;distro=debian-11&amp;package-id=765ef20aed5ddd31" type="library">
       <publisher>Tim Rühsen &lt;tim.ruehsen@gmx.de&gt;</publisher>
       <name>libpsl5</name>
       <version>0.21.0-1.2</version>
@@ -2749,7 +2749,7 @@
         <property name="syft:metadata:source">libpsl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libreadline8@8.1-1?arch=amd64&amp;upstream=readline&amp;distro=debian-11&amp;syft-id=a1ba6d0f43e9c188" type="library">
+    <component bom-ref="pkg:deb/debian/libreadline8@8.1-1?arch=amd64&amp;upstream=readline&amp;distro=debian-11&amp;package-id=a1ba6d0f43e9c188" type="library">
       <publisher>Matthias Klose &lt;doko@debian.org&gt;</publisher>
       <name>libreadline8</name>
       <version>8.1-1</version>
@@ -2774,7 +2774,7 @@
         <property name="syft:metadata:source">readline</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/librtmp1@2.4+20151223.gitfa8646d.1-2+b2?arch=amd64&amp;upstream=rtmpdump%402.4+20151223.gitfa8646d.1-2&amp;distro=debian-11&amp;syft-id=cfa17bca9fc30d68" type="library">
+    <component bom-ref="pkg:deb/debian/librtmp1@2.4+20151223.gitfa8646d.1-2+b2?arch=amd64&amp;upstream=rtmpdump%402.4+20151223.gitfa8646d.1-2&amp;distro=debian-11&amp;package-id=cfa17bca9fc30d68" type="library">
       <publisher>Debian Multimedia Maintainers &lt;debian-multimedia@lists.debian.org&gt;</publisher>
       <name>librtmp1</name>
       <version>2.4+20151223.gitfa8646d.1-2+b2</version>
@@ -2803,7 +2803,7 @@
         <property name="syft:metadata:sourceVersion">2.4+20151223.gitfa8646d.1-2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsasl2-2@2.1.27+dfsg-2.1?arch=amd64&amp;upstream=cyrus-sasl2&amp;distro=debian-11&amp;syft-id=e91af912b1d7f523" type="library">
+    <component bom-ref="pkg:deb/debian/libsasl2-2@2.1.27+dfsg-2.1?arch=amd64&amp;upstream=cyrus-sasl2&amp;distro=debian-11&amp;package-id=e91af912b1d7f523" type="library">
       <publisher>Debian Cyrus Team &lt;team+cyrus@tracker.debian.org&gt;</publisher>
       <name>libsasl2-2</name>
       <version>2.1.27+dfsg-2.1</version>
@@ -2839,7 +2839,7 @@
         <property name="syft:metadata:source">cyrus-sasl2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsasl2-modules-db@2.1.27+dfsg-2.1?arch=amd64&amp;upstream=cyrus-sasl2&amp;distro=debian-11&amp;syft-id=e80b4282380c1f69" type="library">
+    <component bom-ref="pkg:deb/debian/libsasl2-modules-db@2.1.27+dfsg-2.1?arch=amd64&amp;upstream=cyrus-sasl2&amp;distro=debian-11&amp;package-id=e80b4282380c1f69" type="library">
       <publisher>Debian Cyrus Team &lt;team+cyrus@tracker.debian.org&gt;</publisher>
       <name>libsasl2-modules-db</name>
       <version>2.1.27+dfsg-2.1</version>
@@ -2879,7 +2879,7 @@
         <property name="syft:metadata:source">cyrus-sasl2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libseccomp2@2.5.1-1+deb11u1?arch=amd64&amp;upstream=libseccomp&amp;distro=debian-11&amp;syft-id=dc08faabe8c53d70" type="library">
+    <component bom-ref="pkg:deb/debian/libseccomp2@2.5.1-1+deb11u1?arch=amd64&amp;upstream=libseccomp&amp;distro=debian-11&amp;package-id=dc08faabe8c53d70" type="library">
       <publisher>Kees Cook &lt;kees@debian.org&gt;</publisher>
       <name>libseccomp2</name>
       <version>2.5.1-1+deb11u1</version>
@@ -2904,7 +2904,7 @@
         <property name="syft:metadata:source">libseccomp</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libselinux1@3.1-3?arch=amd64&amp;upstream=libselinux&amp;distro=debian-11&amp;syft-id=c22e716b79ae3091" type="library">
+    <component bom-ref="pkg:deb/debian/libselinux1@3.1-3?arch=amd64&amp;upstream=libselinux&amp;distro=debian-11&amp;package-id=c22e716b79ae3091" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libselinux1</name>
       <version>3.1-3</version>
@@ -2932,7 +2932,7 @@
         <property name="syft:metadata:source">libselinux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsemanage-common@3.1-1?arch=all&amp;upstream=libsemanage&amp;distro=debian-11&amp;syft-id=69e74fba97dd00a1" type="library">
+    <component bom-ref="pkg:deb/debian/libsemanage-common@3.1-1?arch=all&amp;upstream=libsemanage&amp;distro=debian-11&amp;package-id=69e74fba97dd00a1" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsemanage-common</name>
       <version>3.1-1</version>
@@ -2959,7 +2959,7 @@
         <property name="syft:metadata:source">libsemanage</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64&amp;upstream=libsemanage%403.1-1&amp;distro=debian-11&amp;syft-id=3ceab259adb7a79e" type="library">
+    <component bom-ref="pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64&amp;upstream=libsemanage%403.1-1&amp;distro=debian-11&amp;package-id=3ceab259adb7a79e" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsemanage1</name>
       <version>3.1-1+b2</version>
@@ -2980,7 +2980,7 @@
         <property name="syft:metadata:sourceVersion">3.1-1</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsepol1@3.1-1?arch=amd64&amp;upstream=libsepol&amp;distro=debian-11&amp;syft-id=e9dd9e853016e5ac" type="library">
+    <component bom-ref="pkg:deb/debian/libsepol1@3.1-1?arch=amd64&amp;upstream=libsepol&amp;distro=debian-11&amp;package-id=e9dd9e853016e5ac" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsepol1</name>
       <version>3.1-1</version>
@@ -3000,7 +3000,7 @@
         <property name="syft:metadata:source">libsepol</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsmartcols1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;syft-id=7665905243694a74" type="library">
+    <component bom-ref="pkg:deb/debian/libsmartcols1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=7665905243694a74" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libsmartcols1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -3064,7 +3064,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libss2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;syft-id=f23e5139ba9365a3" type="library">
+    <component bom-ref="pkg:deb/debian/libss2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=f23e5139ba9365a3" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>libss2</name>
       <version>1.46.2-2</version>
@@ -3084,7 +3084,7 @@
         <property name="syft:metadata:source">e2fsprogs</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libssh2-1@1.9.0-2?arch=amd64&amp;upstream=libssh2&amp;distro=debian-11&amp;syft-id=5a655866eefe5378" type="library">
+    <component bom-ref="pkg:deb/debian/libssh2-1@1.9.0-2?arch=amd64&amp;upstream=libssh2&amp;distro=debian-11&amp;package-id=5a655866eefe5378" type="library">
       <publisher>Nicolas Mora &lt;babelouest@debian.org&gt;</publisher>
       <name>libssh2-1</name>
       <version>1.9.0-2</version>
@@ -3109,7 +3109,7 @@
         <property name="syft:metadata:source">libssh2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libssl1.1@1.1.1k-1+deb11u1?arch=amd64&amp;upstream=openssl&amp;distro=debian-11&amp;syft-id=227afd12f0324913" type="library">
+    <component bom-ref="pkg:deb/debian/libssl1.1@1.1.1k-1+deb11u1?arch=amd64&amp;upstream=openssl&amp;distro=debian-11&amp;package-id=227afd12f0324913" type="library">
       <publisher>Debian OpenSSL Team &lt;pkg-openssl-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libssl1.1</name>
       <version>1.1.1k-1+deb11u1</version>
@@ -3129,7 +3129,7 @@
         <property name="syft:metadata:source">openssl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libstdc++6@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;syft-id=d513aaad772e74ad" type="library">
+    <component bom-ref="pkg:deb/debian/libstdc++6@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=d513aaad772e74ad" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libstdc++6</name>
       <version>10.2.1-6</version>
@@ -3160,7 +3160,7 @@
         <property name="syft:metadata:source">gcc-10</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsystemd0@247.3-6?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;syft-id=d4712010498529c8" type="library">
+    <component bom-ref="pkg:deb/debian/libsystemd0@247.3-6?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;package-id=d4712010498529c8" type="library">
       <publisher>Debian systemd Maintainers &lt;pkg-systemd-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libsystemd0</name>
       <version>247.3-6</version>
@@ -3197,7 +3197,7 @@
         <property name="syft:metadata:source">systemd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtasn1-6@4.16.0-2?arch=amd64&amp;distro=debian-11&amp;syft-id=1199338f3c44b5f9" type="library">
+    <component bom-ref="pkg:deb/debian/libtasn1-6@4.16.0-2?arch=amd64&amp;distro=debian-11&amp;package-id=1199338f3c44b5f9" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libtasn1-6</name>
       <version>4.16.0-2</version>
@@ -3232,7 +3232,7 @@
         <property name="syft:metadata:installedSize">124</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtiff5@4.2.0-1?arch=amd64&amp;upstream=tiff&amp;distro=debian-11&amp;syft-id=3728abee23f481b5" type="library">
+    <component bom-ref="pkg:deb/debian/libtiff5@4.2.0-1?arch=amd64&amp;upstream=tiff&amp;distro=debian-11&amp;package-id=3728abee23f481b5" type="library">
       <publisher>Laszlo Boszormenyi (GCS) &lt;gcs@debian.org&gt;</publisher>
       <name>libtiff5</name>
       <version>4.2.0-1</version>
@@ -3252,7 +3252,7 @@
         <property name="syft:metadata:source">tiff</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtinfo6@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;syft-id=76649c61c5e6520b" type="library">
+    <component bom-ref="pkg:deb/debian/libtinfo6@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=76649c61c5e6520b" type="library">
       <publisher>Craig Small &lt;csmall@debian.org&gt;</publisher>
       <name>libtinfo6</name>
       <version>6.2+20201114-2</version>
@@ -3280,7 +3280,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtirpc-common@1.3.1-1?arch=all&amp;upstream=libtirpc&amp;distro=debian-11&amp;syft-id=6d92751678b5973c" type="library">
+    <component bom-ref="pkg:deb/debian/libtirpc-common@1.3.1-1?arch=all&amp;upstream=libtirpc&amp;distro=debian-11&amp;package-id=6d92751678b5973c" type="library">
       <publisher>Josue Ortega &lt;josue@debian.org&gt;</publisher>
       <name>libtirpc-common</name>
       <version>1.3.1-1</version>
@@ -3318,7 +3318,7 @@
         <property name="syft:metadata:source">libtirpc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtirpc3@1.3.1-1?arch=amd64&amp;upstream=libtirpc&amp;distro=debian-11&amp;syft-id=8246189b2a3e8d54" type="library">
+    <component bom-ref="pkg:deb/debian/libtirpc3@1.3.1-1?arch=amd64&amp;upstream=libtirpc&amp;distro=debian-11&amp;package-id=8246189b2a3e8d54" type="library">
       <publisher>Josue Ortega &lt;josue@debian.org&gt;</publisher>
       <name>libtirpc3</name>
       <version>1.3.1-1</version>
@@ -3349,7 +3349,7 @@
         <property name="syft:metadata:source">libtirpc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libudev1@247.3-6?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;syft-id=80917e57675c692" type="library">
+    <component bom-ref="pkg:deb/debian/libudev1@247.3-6?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;package-id=80917e57675c692" type="library">
       <publisher>Debian systemd Maintainers &lt;pkg-systemd-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libudev1</name>
       <version>247.3-6</version>
@@ -3386,7 +3386,7 @@
         <property name="syft:metadata:source">systemd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64&amp;upstream=libunistring&amp;distro=debian-11&amp;syft-id=4dbb87951d2cf1f5" type="library">
+    <component bom-ref="pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64&amp;upstream=libunistring&amp;distro=debian-11&amp;package-id=4dbb87951d2cf1f5" type="library">
       <publisher>Jörg Frings-Fürst &lt;debian@jff.email&gt;</publisher>
       <name>libunistring2</name>
       <version>0.9.10-4</version>
@@ -3432,7 +3432,7 @@
         <property name="syft:metadata:source">libunistring</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libuuid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;syft-id=1d48540a3383b13" type="library">
+    <component bom-ref="pkg:deb/debian/libuuid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=1d48540a3383b13" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libuuid1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -3496,7 +3496,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libwebp6@0.6.1-2.1?arch=amd64&amp;upstream=libwebp&amp;distro=debian-11&amp;syft-id=b3f7d1fc4a69eced" type="library">
+    <component bom-ref="pkg:deb/debian/libwebp6@0.6.1-2.1?arch=amd64&amp;upstream=libwebp&amp;distro=debian-11&amp;package-id=b3f7d1fc4a69eced" type="library">
       <publisher>Jeff Breidenbach &lt;jab@debian.org&gt;</publisher>
       <name>libwebp6</name>
       <version>0.6.1-2.1</version>
@@ -3521,7 +3521,7 @@
         <property name="syft:metadata:source">libwebp</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libx11-6@2:1.7.2-1?arch=amd64&amp;upstream=libx11&amp;distro=debian-11&amp;syft-id=3da10439a87ea980" type="library">
+    <component bom-ref="pkg:deb/debian/libx11-6@2:1.7.2-1?arch=amd64&amp;upstream=libx11&amp;distro=debian-11&amp;package-id=3da10439a87ea980" type="library">
       <publisher>Debian X Strike Force &lt;debian-x@lists.debian.org&gt;</publisher>
       <name>libx11-6</name>
       <version>2:1.7.2-1</version>
@@ -3546,7 +3546,7 @@
         <property name="syft:metadata:source">libx11</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libx11-data@2:1.7.2-1?arch=all&amp;upstream=libx11&amp;distro=debian-11&amp;syft-id=a2318ae0a252fe5" type="library">
+    <component bom-ref="pkg:deb/debian/libx11-data@2:1.7.2-1?arch=all&amp;upstream=libx11&amp;distro=debian-11&amp;package-id=a2318ae0a252fe5" type="library">
       <publisher>Debian X Strike Force &lt;debian-x@lists.debian.org&gt;</publisher>
       <name>libx11-data</name>
       <version>2:1.7.2-1</version>
@@ -3571,7 +3571,7 @@
         <property name="syft:metadata:source">libx11</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxau6@1:1.0.9-1?arch=amd64&amp;upstream=libxau&amp;distro=debian-11&amp;syft-id=1edad5568198edbf" type="library">
+    <component bom-ref="pkg:deb/debian/libxau6@1:1.0.9-1?arch=amd64&amp;upstream=libxau&amp;distro=debian-11&amp;package-id=1edad5568198edbf" type="library">
       <publisher>Debian X Strike Force &lt;debian-x@lists.debian.org&gt;</publisher>
       <name>libxau6</name>
       <version>1:1.0.9-1</version>
@@ -3591,7 +3591,7 @@
         <property name="syft:metadata:source">libxau</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxcb1@1.14-3?arch=amd64&amp;upstream=libxcb&amp;distro=debian-11&amp;syft-id=49dbf89d961347d7" type="library">
+    <component bom-ref="pkg:deb/debian/libxcb1@1.14-3?arch=amd64&amp;upstream=libxcb&amp;distro=debian-11&amp;package-id=49dbf89d961347d7" type="library">
       <publisher>Debian X Strike Force &lt;debian-x@lists.debian.org&gt;</publisher>
       <name>libxcb1</name>
       <version>1.14-3</version>
@@ -3611,7 +3611,7 @@
         <property name="syft:metadata:source">libxcb</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxdmcp6@1:1.1.2-3?arch=amd64&amp;upstream=libxdmcp&amp;distro=debian-11&amp;syft-id=1651698e63c5dd0a" type="library">
+    <component bom-ref="pkg:deb/debian/libxdmcp6@1:1.1.2-3?arch=amd64&amp;upstream=libxdmcp&amp;distro=debian-11&amp;package-id=1651698e63c5dd0a" type="library">
       <publisher>Debian X Strike Force &lt;debian-x@lists.debian.org&gt;</publisher>
       <name>libxdmcp6</name>
       <version>1:1.1.2-3</version>
@@ -3631,7 +3631,7 @@
         <property name="syft:metadata:source">libxdmcp</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxml2@2.9.10+dfsg-6.7?arch=amd64&amp;distro=debian-11&amp;syft-id=8886a424381473ef" type="library">
+    <component bom-ref="pkg:deb/debian/libxml2@2.9.10+dfsg-6.7?arch=amd64&amp;distro=debian-11&amp;package-id=8886a424381473ef" type="library">
       <publisher>Debian XML/SGML Group &lt;debian-xml-sgml-pkgs@lists.alioth.debian.org&gt;</publisher>
       <name>libxml2</name>
       <version>2.9.10+dfsg-6.7</version>
@@ -3655,7 +3655,7 @@
         <property name="syft:metadata:installedSize">1875</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxpm4@1:3.5.12-1?arch=amd64&amp;upstream=libxpm&amp;distro=debian-11&amp;syft-id=5964523c7b948d4d" type="library">
+    <component bom-ref="pkg:deb/debian/libxpm4@1:3.5.12-1?arch=amd64&amp;upstream=libxpm&amp;distro=debian-11&amp;package-id=5964523c7b948d4d" type="library">
       <publisher>Debian X Strike Force &lt;debian-x@lists.debian.org&gt;</publisher>
       <name>libxpm4</name>
       <version>1:3.5.12-1</version>
@@ -3675,7 +3675,7 @@
         <property name="syft:metadata:source">libxpm</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxslt1.1@1.1.34-4?arch=amd64&amp;upstream=libxslt&amp;distro=debian-11&amp;syft-id=1c32642e04ce09a6" type="library">
+    <component bom-ref="pkg:deb/debian/libxslt1.1@1.1.34-4?arch=amd64&amp;upstream=libxslt&amp;distro=debian-11&amp;package-id=1c32642e04ce09a6" type="library">
       <publisher>Debian XML/SGML Group &lt;debian-xml-sgml-pkgs@lists.alioth.debian.org&gt;</publisher>
       <name>libxslt1.1</name>
       <version>1.1.34-4</version>
@@ -3695,7 +3695,7 @@
         <property name="syft:metadata:source">libxslt</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxxhash0@0.8.0-2?arch=amd64&amp;upstream=xxhash&amp;distro=debian-11&amp;syft-id=5dbfd774c60b62b7" type="library">
+    <component bom-ref="pkg:deb/debian/libxxhash0@0.8.0-2?arch=amd64&amp;upstream=xxhash&amp;distro=debian-11&amp;package-id=5dbfd774c60b62b7" type="library">
       <publisher>Norbert Preining &lt;norbert@preining.info&gt;</publisher>
       <name>libxxhash0</name>
       <version>0.8.0-2</version>
@@ -3723,7 +3723,7 @@
         <property name="syft:metadata:source">xxhash</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libzstd1@1.4.8+dfsg-2.1?arch=amd64&amp;upstream=libzstd&amp;distro=debian-11&amp;syft-id=ebcdac604e89e227" type="library">
+    <component bom-ref="pkg:deb/debian/libzstd1@1.4.8+dfsg-2.1?arch=amd64&amp;upstream=libzstd&amp;distro=debian-11&amp;package-id=ebcdac604e89e227" type="library">
       <publisher>Debian Med Packaging Team &lt;debian-med-packaging@lists.alioth.debian.org&gt;</publisher>
       <name>libzstd1</name>
       <version>1.4.8+dfsg-2.1</version>
@@ -3754,7 +3754,7 @@
         <property name="syft:metadata:source">libzstd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/login@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;syft-id=b6673a35736c938f" type="library">
+    <component bom-ref="pkg:deb/debian/login@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;package-id=b6673a35736c938f" type="library">
       <publisher>Shadow package maintainers &lt;pkg-shadow-devel@lists.alioth.debian.org&gt;</publisher>
       <name>login</name>
       <version>1:4.8.1-1</version>
@@ -3781,7 +3781,7 @@
         <property name="syft:metadata:source">shadow</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/logsave@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;syft-id=785d3365eb8d1fd1" type="library">
+    <component bom-ref="pkg:deb/debian/logsave@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=785d3365eb8d1fd1" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>logsave</name>
       <version>1.46.2-2</version>
@@ -3809,7 +3809,7 @@
         <property name="syft:metadata:source">e2fsprogs</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/lsb-base@11.1.0?arch=all&amp;upstream=lsb&amp;distro=debian-11&amp;syft-id=df87d50c1cf551b9" type="library">
+    <component bom-ref="pkg:deb/debian/lsb-base@11.1.0?arch=all&amp;upstream=lsb&amp;distro=debian-11&amp;package-id=df87d50c1cf551b9" type="library">
       <publisher>Debian sysvinit maintainers &lt;debian-init-diversity@chiark.greenend.org.uk&gt;</publisher>
       <name>lsb-base</name>
       <version>11.1.0</version>
@@ -3842,7 +3842,7 @@
         <property name="syft:metadata:source">lsb</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/mawk@1.3.4.20200120-2?arch=amd64&amp;distro=debian-11&amp;syft-id=86913dec0f0c000d" type="library">
+    <component bom-ref="pkg:deb/debian/mawk@1.3.4.20200120-2?arch=amd64&amp;distro=debian-11&amp;package-id=86913dec0f0c000d" type="library">
       <publisher>Boyuan Yang &lt;byang@debian.org&gt;</publisher>
       <name>mawk</name>
       <version>1.3.4.20200120-2</version>
@@ -3866,7 +3866,7 @@
         <property name="syft:metadata:installedSize">242</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/mount@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;syft-id=16d02d85542621d3" type="library">
+    <component bom-ref="pkg:deb/debian/mount@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=16d02d85542621d3" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>mount</name>
       <version>2.36.1-8+deb11u1</version>
@@ -3930,7 +3930,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/ncurses-base@6.2+20201114-2?arch=all&amp;upstream=ncurses&amp;distro=debian-11&amp;syft-id=20d92f7e7d8b38f3" type="library">
+    <component bom-ref="pkg:deb/debian/ncurses-base@6.2+20201114-2?arch=all&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=20d92f7e7d8b38f3" type="library">
       <publisher>Craig Small &lt;csmall@debian.org&gt;</publisher>
       <name>ncurses-base</name>
       <version>6.2+20201114-2</version>
@@ -3965,7 +3965,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/ncurses-bin@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;syft-id=a9b59b7b725d0bbb" type="library">
+    <component bom-ref="pkg:deb/debian/ncurses-bin@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=a9b59b7b725d0bbb" type="library">
       <publisher>Craig Small &lt;csmall@debian.org&gt;</publisher>
       <name>ncurses-bin</name>
       <version>6.2+20201114-2</version>
@@ -3998,7 +3998,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/nginx@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;syft-id=2033a39665fae11f" type="library">
+    <component bom-ref="pkg:deb/debian/nginx@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;package-id=2033a39665fae11f" type="library">
       <publisher>NGINX Packaging &lt;nginx-packaging@f5.com&gt;</publisher>
       <name>nginx</name>
       <version>1.21.6-1~bullseye</version>
@@ -4019,7 +4019,7 @@
         <property name="syft:metadata:installedSize">3058</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/nginx-module-geoip@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;syft-id=df4404edb87de6d6" type="library">
+    <component bom-ref="pkg:deb/debian/nginx-module-geoip@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;package-id=df4404edb87de6d6" type="library">
       <publisher>NGINX Packaging &lt;nginx-packaging@f5.com&gt;</publisher>
       <name>nginx-module-geoip</name>
       <version>1.21.6-1~bullseye</version>
@@ -4047,7 +4047,7 @@
         <property name="syft:metadata:installedSize">160</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/nginx-module-image-filter@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;syft-id=fe8e5dc315822030" type="library">
+    <component bom-ref="pkg:deb/debian/nginx-module-image-filter@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;package-id=fe8e5dc315822030" type="library">
       <publisher>NGINX Packaging &lt;nginx-packaging@f5.com&gt;</publisher>
       <name>nginx-module-image-filter</name>
       <version>1.21.6-1~bullseye</version>
@@ -4079,7 +4079,7 @@
         <property name="syft:metadata:installedSize">134</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/nginx-module-njs@1.21.6+0.7.2-1~bullseye?arch=amd64&amp;distro=debian-11&amp;syft-id=1e4858b992b7a6ec" type="library">
+    <component bom-ref="pkg:deb/debian/nginx-module-njs@1.21.6+0.7.2-1~bullseye?arch=amd64&amp;distro=debian-11&amp;package-id=1e4858b992b7a6ec" type="library">
       <publisher>NGINX Packaging &lt;nginx-packaging@f5.com&gt;</publisher>
       <name>nginx-module-njs</name>
       <version>1.21.6+0.7.2-1~bullseye</version>
@@ -4107,7 +4107,7 @@
         <property name="syft:metadata:installedSize">4275</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/nginx-module-xslt@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;syft-id=3be8b861a4c18bdc" type="library">
+    <component bom-ref="pkg:deb/debian/nginx-module-xslt@1.21.6-1~bullseye?arch=amd64&amp;distro=debian-11&amp;package-id=3be8b861a4c18bdc" type="library">
       <publisher>NGINX Packaging &lt;nginx-packaging@f5.com&gt;</publisher>
       <name>nginx-module-xslt</name>
       <version>1.21.6-1~bullseye</version>
@@ -4135,7 +4135,7 @@
         <property name="syft:metadata:installedSize">126</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/openssl@1.1.1k-1+deb11u1?arch=amd64&amp;distro=debian-11&amp;syft-id=40a6ba3a82280af4" type="library">
+    <component bom-ref="pkg:deb/debian/openssl@1.1.1k-1+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=40a6ba3a82280af4" type="library">
       <publisher>Debian OpenSSL Team &lt;pkg-openssl-devel@lists.alioth.debian.org&gt;</publisher>
       <name>openssl</name>
       <version>1.1.1k-1+deb11u1</version>
@@ -4156,7 +4156,7 @@
         <property name="syft:metadata:installedSize">1465</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/passwd@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;syft-id=c0f87faa100a3ce7" type="library">
+    <component bom-ref="pkg:deb/debian/passwd@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;package-id=c0f87faa100a3ce7" type="library">
       <publisher>Shadow package maintainers &lt;pkg-shadow-devel@lists.alioth.debian.org&gt;</publisher>
       <name>passwd</name>
       <version>1:4.8.1-1</version>
@@ -4183,7 +4183,7 @@
         <property name="syft:metadata:source">shadow</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/perl-base@5.32.1-4+deb11u2?arch=amd64&amp;upstream=perl&amp;distro=debian-11&amp;syft-id=abcb5b1412cd9c08" type="library">
+    <component bom-ref="pkg:deb/debian/perl-base@5.32.1-4+deb11u2?arch=amd64&amp;upstream=perl&amp;distro=debian-11&amp;package-id=abcb5b1412cd9c08" type="library">
       <publisher>Niko Tyni &lt;ntyni@debian.org&gt;</publisher>
       <name>perl-base</name>
       <version>5.32.1-4+deb11u2</version>
@@ -4234,7 +4234,7 @@
         <property name="syft:metadata:source">perl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/readline-common@8.1-1?arch=all&amp;upstream=readline&amp;distro=debian-11&amp;syft-id=1ac22947adacf3be" type="library">
+    <component bom-ref="pkg:deb/debian/readline-common@8.1-1?arch=all&amp;upstream=readline&amp;distro=debian-11&amp;package-id=1ac22947adacf3be" type="library">
       <publisher>Matthias Klose &lt;doko@debian.org&gt;</publisher>
       <name>readline-common</name>
       <version>8.1-1</version>
@@ -4264,7 +4264,7 @@
         <property name="syft:metadata:source">readline</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/sed@4.7-1?arch=amd64&amp;distro=debian-11&amp;syft-id=60af338a72e539c1" type="library">
+    <component bom-ref="pkg:deb/debian/sed@4.7-1?arch=amd64&amp;distro=debian-11&amp;package-id=60af338a72e539c1" type="library">
       <publisher>Clint Adams &lt;clint@debian.org&gt;</publisher>
       <name>sed</name>
       <version>4.7-1</version>
@@ -4288,7 +4288,7 @@
         <property name="syft:metadata:installedSize">883</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/sensible-utils@0.0.14?arch=all&amp;distro=debian-11&amp;syft-id=ef4c689f97f3d29f" type="library">
+    <component bom-ref="pkg:deb/debian/sensible-utils@0.0.14?arch=all&amp;distro=debian-11&amp;package-id=ef4c689f97f3d29f" type="library">
       <publisher>Anibal Monsalve Salazar &lt;anibal@debian.org&gt;</publisher>
       <name>sensible-utils</name>
       <version>0.0.14</version>
@@ -4320,7 +4320,7 @@
         <property name="syft:metadata:installedSize">44</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/sysvinit-utils@2.96-7?arch=amd64&amp;upstream=sysvinit&amp;distro=debian-11&amp;syft-id=66ec852782a314c3" type="library">
+    <component bom-ref="pkg:deb/debian/sysvinit-utils@2.96-7?arch=amd64&amp;upstream=sysvinit&amp;distro=debian-11&amp;package-id=66ec852782a314c3" type="library">
       <publisher>Debian sysvinit maintainers &lt;debian-init-diversity@chiark.greenend.org.uk&gt;</publisher>
       <name>sysvinit-utils</name>
       <version>2.96-7</version>
@@ -4353,7 +4353,7 @@
         <property name="syft:metadata:source">sysvinit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/tar@1.34+dfsg-1?arch=amd64&amp;distro=debian-11&amp;syft-id=2c804797b124e34" type="library">
+    <component bom-ref="pkg:deb/debian/tar@1.34+dfsg-1?arch=amd64&amp;distro=debian-11&amp;package-id=2c804797b124e34" type="library">
       <publisher>Janos Lenart &lt;ocsi@debian.org&gt;</publisher>
       <name>tar</name>
       <version>1.34+dfsg-1</version>
@@ -4380,7 +4380,7 @@
         <property name="syft:metadata:installedSize">3152</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/tzdata@2021a-1+deb11u2?arch=all&amp;distro=debian-11&amp;syft-id=5d3f385446ce3ab" type="library">
+    <component bom-ref="pkg:deb/debian/tzdata@2021a-1+deb11u2?arch=all&amp;distro=debian-11&amp;package-id=5d3f385446ce3ab" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>tzdata</name>
       <version>2021a-1+deb11u2</version>
@@ -4399,7 +4399,7 @@
         <property name="syft:metadata:installedSize">3409</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/ucf@3.0043?arch=all&amp;distro=debian-11&amp;syft-id=ae51a29db35a57ed" type="library">
+    <component bom-ref="pkg:deb/debian/ucf@3.0043?arch=all&amp;distro=debian-11&amp;package-id=ae51a29db35a57ed" type="library">
       <publisher>Manoj Srivastava &lt;srivasta@debian.org&gt;</publisher>
       <name>ucf</name>
       <version>3.0043</version>
@@ -4425,7 +4425,7 @@
         <property name="syft:metadata:installedSize">232</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/util-linux@2.36.1-8+deb11u1?arch=amd64&amp;distro=debian-11&amp;syft-id=ba5bb3d6ca7609c5" type="library">
+    <component bom-ref="pkg:deb/debian/util-linux@2.36.1-8+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=ba5bb3d6ca7609c5" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>util-linux</name>
       <version>2.36.1-8+deb11u1</version>
@@ -4495,7 +4495,7 @@
         <property name="syft:metadata:installedSize">4615</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/zlib1g@1:1.2.11.dfsg-2?arch=amd64&amp;upstream=zlib&amp;distro=debian-11&amp;syft-id=43ee4bb372c17176" type="library">
+    <component bom-ref="pkg:deb/debian/zlib1g@1:1.2.11.dfsg-2?arch=amd64&amp;upstream=zlib&amp;distro=debian-11&amp;package-id=43ee4bb372c17176" type="library">
       <publisher>Mark Brown &lt;broonie@debian.org&gt;</publisher>
       <name>zlib1g</name>
       <version>1:1.2.11.dfsg-2</version>
