@@ -79316,14 +79316,15 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.44.1",
+  "version": "0.45.0",
   "configuration": {
    "configPath": "",
+   "verbosity": 0,
+   "quiet": false,
    "output": [
     "json"
    ],
    "file": "",
-   "quiet": false,
    "check-for-app-update": true,
    "anchore": {
     "host": "",
@@ -79338,7 +79339,7 @@
    },
    "log": {
     "structured": false,
-    "level": "error",
+    "level": "info",
     "file-location": ""
    },
    "package": {
