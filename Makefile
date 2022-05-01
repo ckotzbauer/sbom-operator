@@ -19,4 +19,4 @@ test-registries:
 	go test github.com/ckotzbauer/sbom-operator/internal/registry
 
 test:
-	go test github.com/ckotzbauer/sbom-operator/internal/syft
+	go test $(shell go list ./... | grep -v sbom-operator/internal/registry)
