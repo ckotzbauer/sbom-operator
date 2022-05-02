@@ -74,7 +74,7 @@ func testRegistry(t *testing.T, name, image string, legacy bool) {
 
 	if err == nil {
 		stat, _ := os.Stat(file)
-		assert.Equal(t, 2823168, stat.Size())
+		assert.Equal(t, int64(2823168), stat.Size())
 	}
 
 	os.Remove(file)
