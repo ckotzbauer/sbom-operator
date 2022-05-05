@@ -67,7 +67,12 @@ func (c *CronService) runBackgroundService() {
 	}
 
 	k8s := kubernetes.NewClient()
-	namespaces := k8s.ListNamespaces(viper.GetString(internal.ConfigKeyNamespaceLabelSelector))
+	namespaceSelector := viper.GetString(internal.ConfigKeyNamespaceLabelSelector)
+	namespaces, err := k8s.ListNamespaces(namespaceSelector)
+	if err != nil {
+		logrus.WithError(err).Errorf("failed to list namespaces with selector: %s, abort background-service", namespaceSelector)
+		return
+	}
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
 	containerImages, allImages := k8s.LoadImageInfos(namespaces, viper.GetString(internal.ConfigKeyPodLabelSelector))
 
