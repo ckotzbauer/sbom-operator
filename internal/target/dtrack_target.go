@@ -65,7 +65,11 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 		return nil
 	}
 
-	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
+	client, err := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
+	if err != nil {
+		logrus.WithError(err).Errorf("failed to init dtrack client")
+		return err
+	}
 
 	logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
 

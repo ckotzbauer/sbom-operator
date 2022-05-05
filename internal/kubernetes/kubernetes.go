@@ -66,26 +66,24 @@ func prepareLabelSelector(selector string) meta.ListOptions {
 	return listOptions
 }
 
-func (client *KubeClient) ListNamespaces(labelSelector string) []corev1.Namespace {
+func (client *KubeClient) ListNamespaces(labelSelector string) ([]corev1.Namespace, error) {
 	list, err := client.Client.CoreV1().Namespaces().List(context.Background(), prepareLabelSelector(labelSelector))
 
 	if err != nil {
-		logrus.WithError(err).Error("ListNamespaces errored!")
-		return []corev1.Namespace{}
+		return []corev1.Namespace{}, fmt.Errorf("failed to list namespaces")
 	}
 
-	return list.Items
+	return list.Items, nil
 }
 
-func (client *KubeClient) listPods(namespace, labelSelector string) []corev1.Pod {
+func (client *KubeClient) listPods(namespace, labelSelector string) ([]corev1.Pod, error) {
 	list, err := client.Client.CoreV1().Pods(namespace).List(context.Background(), prepareLabelSelector(labelSelector))
 
 	if err != nil {
-		logrus.WithError(err).Error("ListPods errored!")
-		return []corev1.Pod{}
+		return []corev1.Pod{}, fmt.Errorf("failed to list pods: %w", err)
 	}
 
-	return list.Items
+	return list.Items, nil
 }
 
 func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []ContainerImage) {
@@ -93,7 +91,11 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 	allImages := []ContainerImage{}
 
 	for _, ns := range namespaces {
-		pods := client.listPods(ns.Name, podLabelSelector)
+		pods, err := client.listPods(ns.Name, podLabelSelector)
+		if err != nil {
+			logrus.WithError(err).Errorf("failed to list pods for namespace: %s", ns.Name)
+			continue
+		}
 
 		for _, pod := range pods {
 			annotations := pod.Annotations
