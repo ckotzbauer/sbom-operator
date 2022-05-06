@@ -19,11 +19,12 @@ import (
 )
 
 type ContainerImage struct {
-	Image      string
-	ImageID    string
-	Auth       []byte
-	LegacyAuth bool
-	Pods       []corev1.Pod
+	Image       string
+	ImageID     string
+	Auth        []byte
+	LegacyAuth  bool
+	Pods        []corev1.Pod
+	PullSecrets []KubeCreds
 }
 
 type KubeClient struct {
@@ -36,6 +37,11 @@ var (
 	jobSecretName      = "sbom-operator-job-config"
 	JobName            = "sbom-operator-job"
 )
+
+type KubeCreds struct {
+	creds  []byte
+	legacy bool
+}
 
 func NewClient(ignoreAnnotations bool) *KubeClient {
 	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
@@ -85,9 +91,23 @@ func (client *KubeClient) listPods(namespace, labelSelector string) ([]corev1.Po
 	return list.Items, nil
 }
 
+func LoadNextPullSecret(image ContainerImage) ContainerImage {
+	if len(image.PullSecrets) > 1 {
+		image.Auth = image.PullSecrets[0].creds
+		image.LegacyAuth = image.PullSecrets[0].legacy
+		image.PullSecrets = image.PullSecrets[1:]
+	} else {
+		image.Auth = image.PullSecrets[0].creds
+		image.LegacyAuth = image.PullSecrets[0].legacy
+		image.PullSecrets = nil
+	}
+	return image
+}
+
 func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []ContainerImage) {
 	images := map[string]ContainerImage{}
 	allImages := []ContainerImage{}
+	allImageCreds := []KubeCreds{}
 
 	for _, ns := range namespaces {
 		pods, err := client.listPods(ns.Name, podLabelSelector)
@@ -103,12 +123,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 			statuses = append(statuses, pod.Status.InitContainerStatuses...)
 			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
 
-			pullSecrets, legacy, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
-
-			if err != nil {
-				logrus.WithError(err).Errorf("PullSecrets could not be retrieved for pod %s/%s", ns.Name, pod.Name)
-				continue
-			}
+			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
 
 			for _, c := range statuses {
 				if c.ImageID != "" {
@@ -119,11 +134,12 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 						img, ok := images[trimmedImageID]
 						if !ok {
 							img = ContainerImage{
-								Image:      c.Image,
-								ImageID:    trimmedImageID,
-								Auth:       pullSecrets,
-								LegacyAuth: legacy,
-								Pods:       []corev1.Pod{},
+								Image:       c.Image,
+								ImageID:     trimmedImageID,
+								Auth:        nil,
+								LegacyAuth:  false,
+								Pods:        []corev1.Pod{},
+								PullSecrets: allImageCreds,
 							}
 						}
 
@@ -133,11 +149,12 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 					} else {
 						logrus.Debugf("Skip image %s", trimmedImageID)
 						allImages = append(allImages, ContainerImage{
-							Image:      c.Image,
-							ImageID:    trimmedImageID,
-							Auth:       pullSecrets,
-							LegacyAuth: legacy,
-							Pods:       []corev1.Pod{},
+							Image:       c.Image,
+							ImageID:     trimmedImageID,
+							Auth:        nil,
+							LegacyAuth:  false,
+							Pods:        []corev1.Pod{},
+							PullSecrets: allImageCreds,
 						})
 					}
 				}
@@ -196,12 +213,14 @@ func (client *KubeClient) hasAnnotation(annotations map[string]string, status co
 	return false
 }
 
-func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) ([]byte, bool, error) {
-	// TODO: Support all secrets which are referenced as imagePullSecrets instead of only the first one.
+func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) []KubeCreds {
+	allImageCreds := []KubeCreds{}
+
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			return nil, false, err
+			logrus.WithError(err).Errorf("Error in loadSecrets: '%s'!", err)
+			// return nil, false, err
 		}
 
 		var creds []byte
@@ -213,15 +232,18 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 			creds = secret.Data[corev1.DockerConfigKey]
 			legacy = true
 		} else {
-			return nil, false, fmt.Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
+			logrus.WithError(err).Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
 		}
 
 		if len(creds) > 0 {
-			return creds, legacy, nil
+			allImageCreds = append(allImageCreds, KubeCreds{creds: creds, legacy: legacy})
 		}
 	}
+	if len(allImageCreds) > 0 {
+		return allImageCreds
+	}
 
-	return nil, false, nil
+	return nil
 }
 
 func (client *KubeClient) CreateJobSecret(namespace, suffix string, data []byte) error {
