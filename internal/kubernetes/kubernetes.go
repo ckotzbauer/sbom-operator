@@ -21,6 +21,7 @@ import (
 type ContainerImage struct {
 	Image       string
 	ImageID     string
+	SecretName  string
 	Auth        []byte
 	LegacyAuth  bool
 	Pods        []corev1.Pod
@@ -39,6 +40,7 @@ var (
 )
 
 type KubeCreds struct {
+	name   string
 	creds  []byte
 	legacy bool
 }
@@ -93,10 +95,12 @@ func (client *KubeClient) listPods(namespace, labelSelector string) ([]corev1.Po
 
 func LoadNextPullSecret(image ContainerImage) ContainerImage {
 	if len(image.PullSecrets) > 1 {
+		image.SecretName = image.PullSecrets[0].name
 		image.Auth = image.PullSecrets[0].creds
 		image.LegacyAuth = image.PullSecrets[0].legacy
 		image.PullSecrets = image.PullSecrets[1:]
 	} else {
+		image.SecretName = image.PullSecrets[0].name
 		image.Auth = image.PullSecrets[0].creds
 		image.LegacyAuth = image.PullSecrets[0].legacy
 		image.PullSecrets = nil
@@ -136,6 +140,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 							img = ContainerImage{
 								Image:       c.Image,
 								ImageID:     trimmedImageID,
+								SecretName:  "",
 								Auth:        nil,
 								LegacyAuth:  false,
 								Pods:        []corev1.Pod{},
@@ -151,6 +156,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 						allImages = append(allImages, ContainerImage{
 							Image:       c.Image,
 							ImageID:     trimmedImageID,
+							SecretName:  "",
 							Auth:        nil,
 							LegacyAuth:  false,
 							Pods:        []corev1.Pod{},
@@ -225,6 +231,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 
 		var creds []byte
 		legacy := false
+		name := secret.Name
 
 		if secret.Type == corev1.SecretTypeDockerConfigJson {
 			creds = secret.Data[corev1.DockerConfigJsonKey]
@@ -236,7 +243,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 		}
 
 		if len(creds) > 0 {
-			allImageCreds = append(allImageCreds, KubeCreds{creds: creds, legacy: legacy})
+			allImageCreds = append(allImageCreds, KubeCreds{name: name, creds: creds, legacy: legacy})
 		}
 	}
 	if len(allImageCreds) > 0 {

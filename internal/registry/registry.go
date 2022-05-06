@@ -27,7 +27,7 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 
 	if len(image.Auth) > 0 {
 		cfg, err := ResolveAuthConfig(image)
-		logrus.Debugf("image: %q using auth: username: %s", image.ImageID, cfg.Username)
+		logrus.Debugf("image: %q using secret: '%s', username: %s", image.ImageID, image.SecretName, cfg.Username)
 		empty := types.AuthConfig{}
 
 		if err != nil {
