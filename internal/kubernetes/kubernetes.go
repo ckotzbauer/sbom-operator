@@ -230,7 +230,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			logrus.WithError(err).Errorf("Error in loadSecrets: namespace: %s, secret '%s'!", err)
+			logrus.WithError(err).Errorf("Error in loadSecrets: namespace: %s, secret '%s'! Error: %s", namespace, s.Name, err)
 			continue
 		}
 
