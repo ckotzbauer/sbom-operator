@@ -128,7 +128,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
 
 			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
-			globalRedhatCred := client.loadSecrets("eenv-security", []corev1.LocalObjectReference{{Name: "/api/v1/secrets/docker-redhat"}})
+			globalRedhatCred := client.loadSecrets("eenv-security", []corev1.LocalObjectReference{{Name: "docker-redhat"}})
 			allImageCreds = append(allImageCreds, globalRedhatCred...)
 
 			for _, c := range statuses {
