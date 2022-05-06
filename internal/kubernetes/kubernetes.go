@@ -94,15 +94,15 @@ func (client *KubeClient) listPods(namespace, labelSelector string) ([]corev1.Po
 }
 
 func LoadNextPullSecret(image ContainerImage) ContainerImage {
-	if len(image.PullSecrets) > 1 {
+	if len(image.PullSecrets) > 0 {
 		image.SecretName = image.PullSecrets[0].name
 		image.Auth = image.PullSecrets[0].creds
 		image.LegacyAuth = image.PullSecrets[0].legacy
+	}
+
+	if len(image.PullSecrets) > 1 {
 		image.PullSecrets = image.PullSecrets[1:]
 	} else {
-		image.SecretName = image.PullSecrets[0].name
-		image.Auth = image.PullSecrets[0].creds
-		image.LegacyAuth = image.PullSecrets[0].legacy
 		image.PullSecrets = nil
 	}
 	return image
@@ -128,7 +128,10 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
 
 			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
-			globalRedhatCred := client.loadSecrets("eenv-security", []corev1.LocalObjectReference{{Name: "docker-redhat"}})
+			ownNamespace := os.Getenv("POD_NAMESPACE")
+			logrus.Debugf("ownNamespace: %s", ownNamespace)
+
+			globalRedhatCred := client.loadSecrets(ownNamespace, []corev1.LocalObjectReference{{Name: "docker-redhat"}})
 			allImageCreds = append(allImageCreds, globalRedhatCred...)
 
 			for _, c := range statuses {
@@ -227,8 +230,8 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			logrus.WithError(err).Errorf("Error in loadSecrets: '%s'!", err)
-			// return nil, false, err
+			logrus.WithError(err).Errorf("Error in loadSecrets: namespace: %s, secret '%s'!", err)
+			continue
 		}
 
 		var creds []byte
