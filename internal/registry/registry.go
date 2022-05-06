@@ -12,6 +12,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
+	"github.com/sirupsen/logrus"
 
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 
@@ -41,6 +42,7 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 					RegistryToken: cfg.RegistryToken,
 				})),
 			}
+			logrus.Debugf("image: %q using auth: username: %s", image.ImageID, cfg.Username)
 		}
 	}
 

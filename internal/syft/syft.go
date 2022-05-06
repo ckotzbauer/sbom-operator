@@ -48,7 +48,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	imagePath := "/tmp/" + strings.ReplaceAll(fullRef.Tag(), ":", "_") + ".tar.gz"
 	for img.PullSecrets != nil {
 		img = kubernetes.LoadNextPullSecret(img)
-		logrus.Debugf("Pull Secret %s loaded for image: %s ", img.Auth, img.ImageID)
+		logrus.Debugf("image: %s LoadNextPullSecret", img.ImageID)
 
 		err = registry.SaveImage(imagePath, img)
 
