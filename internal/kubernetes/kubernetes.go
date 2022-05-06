@@ -34,9 +34,10 @@ type KubeClient struct {
 }
 
 var (
-	annotationTemplate = "ckotzbauer.sbom-operator.io/%s"
-	jobSecretName      = "sbom-operator-job-config"
-	JobName            = "sbom-operator-job"
+	annotationTemplate    = "ckotzbauer.sbom-operator.io/%s"
+	jobSecretName         = "sbom-operator-job-config"
+	JobName               = "sbom-operator-job"
+	sbomOperatorNamespace = ""
 )
 
 type KubeCreds struct {
@@ -57,6 +58,11 @@ func NewClient(ignoreAnnotations bool) *KubeClient {
 	client, err := kubernetes.NewForConfig(config)
 	if err != nil {
 		logrus.WithError(err).Fatal("Could not create Kubernetes client from config!")
+	}
+
+	sbomOperatorNamespace, _, err = kubeConfig.Namespace()
+	if err != nil {
+		logrus.WithError(err).Fatal("namespace could not be read!")
 	}
 
 	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations}
@@ -128,10 +134,10 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
 
 			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
-			ownNamespace := os.Getenv("POD_NAMESPACE")
-			logrus.Debugf("ownNamespace: %s", ownNamespace)
 
-			globalRedhatCred := client.loadSecrets(ownNamespace, []corev1.LocalObjectReference{{Name: "docker-redhat"}})
+			logrus.Debugf("ownNamespace: %s", sbomOperatorNamespace)
+
+			globalRedhatCred := client.loadSecrets(sbomOperatorNamespace, []corev1.LocalObjectReference{{Name: "docker-redhat"}})
 			allImageCreds = append(allImageCreds, globalRedhatCred...)
 
 			for _, c := range statuses {
