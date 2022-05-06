@@ -21,11 +21,13 @@ import (
 
 func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
+	logrus.Debugf("image: %q SaveImage", image.ImageID)
 
 	o := crane.GetOptions()
 
 	if len(image.Auth) > 0 {
 		cfg, err := ResolveAuthConfig(image)
+		logrus.Debugf("image: %q using auth: username: %s", image.ImageID, cfg.Username)
 		empty := types.AuthConfig{}
 
 		if err != nil {
@@ -42,7 +44,6 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 					RegistryToken: cfg.RegistryToken,
 				})),
 			}
-			logrus.Debugf("image: %q using auth: username: %s", image.ImageID, cfg.Username)
 		}
 	}
 
