@@ -135,10 +135,11 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 
 			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
 
-			logrus.Debugf("ownNamespace: %s", sbomOperatorNamespace)
-
-			globalRedhatCred := client.loadSecrets(sbomOperatorNamespace, []corev1.LocalObjectReference{{Name: "docker-redhat"}})
-			allImageCreds = append(allImageCreds, globalRedhatCred...)
+			customGlobalPullSecret := viper.GetString(internal.ConfigKeyCustomGlobalPullSecret)
+			if customGlobalPullSecret != "" {
+				globalRedhatCred := client.loadSecrets(sbomOperatorNamespace, []corev1.LocalObjectReference{{Name: customGlobalPullSecret}})
+				allImageCreds = append(allImageCreds, globalRedhatCred...)
+			}
 
 			for _, c := range statuses {
 				if c.ImageID != "" {
