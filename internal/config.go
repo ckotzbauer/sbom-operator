@@ -21,4 +21,5 @@ var (
 	ConfigKeyJobImage               = "job-image"
 	ConfigKeyJobImagePullSecret     = "job-image-pull-secret"
 	ConfigKeyJobTimeout             = "job-timeout"
+	ConfigKeyCustomGlobalPullSecret = "custom-global-pull-secret"
 )
