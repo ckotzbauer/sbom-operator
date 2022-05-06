@@ -12,7 +12,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
-	types "k8s.io/apimachinery/pkg/types"
+	"k8s.io/apimachinery/pkg/types"
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 
@@ -70,7 +70,7 @@ func (client *KubeClient) ListNamespaces(labelSelector string) ([]corev1.Namespa
 	list, err := client.Client.CoreV1().Namespaces().List(context.Background(), prepareLabelSelector(labelSelector))
 
 	if err != nil {
-		return []corev1.Namespace{}, fmt.Errorf("failed to list namespaces")
+		return []corev1.Namespace{}, fmt.Errorf("failed to list namespaces: %w", err)
 	}
 
 	return list.Items, nil
