@@ -153,6 +153,8 @@ github.com/anchore/stereoscope v0.0.0-20220406160859-c03a18a6b270 h1:NmxPDR6vo3x
 github.com/anchore/stereoscope v0.0.0-20220406160859-c03a18a6b270/go.mod h1:yoCLUZY0k/pYLNIy0L80p2Ko0PKVNXm8rHtgxp4OiSc=
 github.com/anchore/syft v0.45.0 h1:PrCPNuuOAN8/9EjTkXEXZv5c2A7j9mCzuREnom+BHUA=
 github.com/anchore/syft v0.45.0/go.mod h1:R4Cmsnrh02RGxitrQrLcOjGMV1nIXZUypZqAKKLAE7c=
+github.com/anchore/syft v0.45.1 h1:94x+ROBCZbtduYf+J+yu+MMG4YREfFpTW+MnCSlpQ3c=
+github.com/anchore/syft v0.45.1/go.mod h1:/vnLTaFDHPGhizPbIgAyeTPjCY9Mzz255w84vVGGkEE=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.2/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
@@ -1425,6 +1427,8 @@ golang.org/x/crypto v0.0.0-20210921155107-089bfa567519/go.mod h1:GvvjBRRGRdwPK5y
 golang.org/x/crypto v0.0.0-20211108221036-ceb1ce70b4fa/go.mod h1:GvvjBRRGRdwPK5ydBHafDWAxML/pGHZbMvKqRZ5+Abc=
 golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4 h1:kUhD7nTDoI3fVd9G4ORWrbV5NY0liEs/Jg2pv5f+bBA=
 golang.org/x/crypto v0.0.0-20220411220226-7b82a4e95df4/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
+golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f h1:OeJjE6G4dgCY4PIXvIRQbE8+RX+uXZyGhUy/ksMGJoc=
+golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f/go.mod h1:IxCIyHEi3zRg3s0A5j5BB6A9Jmi73HwBIUl50j+osU4=
 golang.org/x/exp v0.0.0-20190121172915-509febef88a4/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/exp v0.0.0-20190306152737-a1d7652674e8/go.mod h1:CJ0aWSM057203Lf6IL+f9T1iT9GByDxfZKAQTCR3kQA=
 golang.org/x/exp v0.0.0-20190510132918-efd6b22b2522/go.mod h1:ZjyILWgesfNpC6sMxTJOJm9Kp84zZh5NQWvqDGG3Qr8=
