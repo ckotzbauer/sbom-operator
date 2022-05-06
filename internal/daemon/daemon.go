@@ -66,7 +66,7 @@ func (c *CronService) runBackgroundService() {
 		}
 	}
 
-	k8s := kubernetes.NewClient()
+	k8s := kubernetes.NewClient(viper.GetBool(internal.ConfigKeyIgnoreAnnotations))
 	namespaceSelector := viper.GetString(internal.ConfigKeyNamespaceLabelSelector)
 	namespaces, err := k8s.ListNamespaces(namespaceSelector)
 	if err != nil {
@@ -117,13 +117,20 @@ func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient
 }
 
 func executeJobImage(k8s *kubernetes.KubeClient, containerImages map[string]kubernetes.ContainerImage) {
-	j, err := job.StartJob(k8s, containerImages)
+	jobClient := job.New(
+		k8s,
+		viper.GetString(internal.ConfigKeyJobImage),
+		viper.GetString(internal.ConfigKeyJobImagePullSecret),
+		viper.GetString(internal.ConfigKeyKubernetesClusterId),
+		viper.GetInt64(internal.ConfigKeyJobTimeout))
+
+	j, err := jobClient.StartJob(containerImages)
 	if err != nil {
 		// Already handled from job-module
 		return
 	}
 
-	if job.WaitForJob(k8s, j) {
+	if jobClient.WaitForJob(j) {
 		for _, i := range containerImages {
 			for _, pod := range i.Pods {
 				k8s.UpdatePodAnnotation(pod)
@@ -139,11 +146,22 @@ func initTargets(targetKeys []string) []target.Target {
 		var err error
 
 		if ta == "git" {
-			t := target.NewGitTarget()
+			workingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
+			workPath := viper.GetString(internal.ConfigKeyGitPath)
+			repository := viper.GetString(internal.ConfigKeyGitRepository)
+			branch := viper.GetString(internal.ConfigKeyGitBranch)
+			format := viper.GetString(internal.ConfigKeyFormat)
+			token := viper.GetString(internal.ConfigKeyGitAccessToken)
+			name := viper.GetString(internal.ConfigKeyGitAuthorName)
+			email := viper.GetString(internal.ConfigKeyGitAuthorEmail)
+			t := target.NewGitTarget(workingTree, workPath, repository, branch, token, name, email, format)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "dtrack" {
-			t := target.NewDependencyTrackTarget()
+			baseUrl := viper.GetString(internal.ConfigKeyDependencyTrackBaseUrl)
+			apiKey := viper.GetString(internal.ConfigKeyDependencyTrackApiKey)
+			k8sClusterId := viper.GetString(internal.ConfigKeyKubernetesClusterId)
+			t := target.NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else {

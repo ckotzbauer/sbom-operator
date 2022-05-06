@@ -7,7 +7,6 @@ import (
 	"strings"
 
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -38,7 +37,7 @@ var (
 	JobName            = "sbom-operator-job"
 )
 
-func NewClient() *KubeClient {
+func NewClient(ignoreAnnotations bool) *KubeClient {
 	loadingRules := clientcmd.NewDefaultClientConfigLoadingRules()
 
 	kubeConfig := clientcmd.NewNonInteractiveDeferredLoadingClientConfig(loadingRules, &clientcmd.ConfigOverrides{})
@@ -52,7 +51,7 @@ func NewClient() *KubeClient {
 		logrus.WithError(err).Fatal("Could not create Kubernetes client from config!")
 	}
 
-	return &KubeClient{Client: client, ignoreAnnotations: viper.GetBool(internal.ConfigKeyIgnoreAnnotations)}
+	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations}
 }
 
 func prepareLabelSelector(selector string) meta.ListOptions {

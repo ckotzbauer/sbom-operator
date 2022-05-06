@@ -9,7 +9,6 @@ import (
 	parser "github.com/novln/docker-parser"
 	dtrack "github.com/nscuro/dtrack-client"
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
@@ -26,10 +25,7 @@ const (
 	sbomOperator      = "sbom-operator"
 )
 
-func NewDependencyTrackTarget() *DependencyTrackTarget {
-	baseUrl := viper.GetString(internal.ConfigKeyDependencyTrackBaseUrl)
-	apiKey := viper.GetString(internal.ConfigKeyDependencyTrackApiKey)
-	k8sClusterId := viper.GetString(internal.ConfigKeyKubernetesClusterId)
+func NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId string) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:      baseUrl,
 		apiKey:       apiKey,

@@ -12,7 +12,6 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target/git"
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 )
 
 type GitTarget struct {
@@ -24,22 +23,13 @@ type GitTarget struct {
 	sbomFormat  string
 }
 
-func NewGitTarget() *GitTarget {
-	workingTree := viper.GetString(internal.ConfigKeyGitWorkingTree)
-	workPath := viper.GetString(internal.ConfigKeyGitPath)
-	repository := viper.GetString(internal.ConfigKeyGitRepository)
-	branch := viper.GetString(internal.ConfigKeyGitBranch)
-	format := viper.GetString(internal.ConfigKeyFormat)
-
-	gitAccount := git.New(
-		viper.GetString(internal.ConfigKeyGitAccessToken),
-		viper.GetString(internal.ConfigKeyGitAuthorName),
-		viper.GetString(internal.ConfigKeyGitAuthorEmail))
+func NewGitTarget(workingTree, path, repo, branch, token, name, email, format string) *GitTarget {
+	gitAccount := git.New(token, name, email)
 
 	return &GitTarget{
 		workingTree: workingTree,
-		workPath:    workPath,
-		repository:  repository,
+		workPath:    path,
+		repository:  repo,
 		branch:      branch,
 		sbomFormat:  format,
 		gitAccount:  gitAccount,
@@ -75,9 +65,7 @@ func (g *GitTarget) ValidateConfig() error {
 }
 
 func (g *GitTarget) Initialize() {
-	g.gitAccount.PrepareRepository(
-		g.repository, g.workingTree,
-		viper.GetString(internal.ConfigKeyGitBranch))
+	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
 func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
