@@ -52,7 +52,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		err = registry.SaveImage(imagePath, img)
 
 		if err != nil {
-			logrus.Debugf("image: %s Image-Pull failed with the current auth", img.ImageID)
+			logrus.Debugf("image: %s Image-Pull failed with PullSecret: %s", img.ImageID, img.SecretName)
 		} else {
 			break
 		}
@@ -61,6 +61,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 		logrus.WithError(err).Error("Image-Pull failed")
 		return "", err
 	}
+	logrus.Debugf("Image %s successfully pulled with PullSecret: %s", img.ImageID, img.SecretName)
 
 	input, err := source.ParseInput(filepath.Join("docker-archive:", imagePath), "", false)
 	if err != nil {

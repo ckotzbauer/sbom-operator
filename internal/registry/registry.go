@@ -12,7 +12,6 @@ import (
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
-	"github.com/sirupsen/logrus"
 
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 
@@ -21,13 +20,10 @@ import (
 
 func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
-	logrus.Debugf("image: %q SaveImage", image.ImageID)
-
 	o := crane.GetOptions()
 
 	if len(image.Auth) > 0 {
 		cfg, err := ResolveAuthConfig(image)
-		logrus.Debugf("image: %q using secret: '%s', username: %s", image.ImageID, image.SecretName, cfg.Username)
 		empty := types.AuthConfig{}
 
 		if err != nil {
