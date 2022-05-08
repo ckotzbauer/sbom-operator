@@ -129,19 +129,15 @@ func (g *GitAccount) CommitAll(path, message string) error {
 	return g.commitAndPush(w, r, message)
 }
 
-func (g *GitAccount) Remove(workTree, path string) {
+func (g *GitAccount) Remove(workTree, path string) error {
 	r, w := g.openExistingRepo(workTree)
 
 	if r == nil && w == nil {
-		return
+		return nil
 	}
 
 	_, err := w.Remove(path)
-
-	if err != nil {
-		logrus.WithError(err).Error("Remove failed")
-		return
-	}
+	return err
 }
 
 func (g *GitAccount) CommitAndPush(path, message string) error {
