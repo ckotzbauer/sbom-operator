@@ -29,7 +29,7 @@ jobs:
       - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
-          version: "v1.3.1"
+          version: "v1.8.3"
           install-only: true
 
       - name: Build binary
@@ -37,6 +37,10 @@ jobs:
 
       - name: Unit tests
         run: make test
+
+      - uses: codecov/codecov-action@v3
+        with:
+          files: cover.out
 
       - name: Build image
         uses: docker/build-push-action@v3
