@@ -70,7 +70,7 @@ func testRegistry(t *testing.T, name, image string, legacy bool) {
 	assert.NoError(t, err)
 
 	file := "/tmp/1.0.0.tar.gz"
-	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded), LegacyAuth: legacy})
+	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, PullSecrets: []kubernetes.KubeCreds{{SecretName: name, SecretCredsData: []byte(decoded), IsLegacySecret: legacy}}})
 
 	if err == nil {
 		stat, _ := os.Stat(file)

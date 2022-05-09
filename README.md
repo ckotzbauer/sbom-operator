@@ -86,7 +86,7 @@ All parameters are cli-flags.
 | `dtrack-base-url` | `true` when `dtrack` target is used | `""` | Dependency-Track base URL, e.g. 'https://dtrack.example.com' |
 | `dtrack-api-key` | `true` when `dtrack` target is used | `""` | Dependency-Track API key |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
-| `custom-global-pull-secret` | `false` | `""` | Kubernetes Secret Name to additionally load when pulling images (must be in the same namespace as the sbom-operator) |
+| `fallback-image-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
 | `job-image` | `false` | `""` | Job-Image to process images with instead of Syft |
 | `job-image-pull-secret` | `false` | `""` | Pre-existing pull-secret-name for private job-images |
 | `job-timeout` | `false` | `3600` | Job-Timeout in seconds (`activeDeadlineSeconds`) |

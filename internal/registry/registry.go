@@ -12,6 +12,7 @@ import (
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
+	"github.com/sirupsen/logrus"
 
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 
@@ -22,61 +23,70 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
 	o := crane.GetOptions()
 
-	if len(image.Auth) > 0 {
-		cfg, err := ResolveAuthConfig(image)
-		empty := types.AuthConfig{}
+	for pullSecretIndex, pullSecret := range image.PullSecrets {
 
-		if err != nil {
-			return err
-		}
+		if len(pullSecret.SecretCredsData) > 0 {
+			cfg, err := ResolveAuthConfigWithPullSecretIndex(image, pullSecretIndex)
+			empty := types.AuthConfig{}
 
-		if cfg != empty {
-			o.Remote = []remote.Option{
-				remote.WithAuth(authn.FromConfig(authn.AuthConfig{
-					Username:      cfg.Username,
-					Password:      cfg.Password,
-					Auth:          cfg.Auth,
-					IdentityToken: cfg.IdentityToken,
-					RegistryToken: cfg.RegistryToken,
-				})),
+			if err != nil {
+				logrus.Debugf("image: %s Image-Pull failed with PullSecret: %s", image.ImageID, pullSecret.SecretName)
+				continue
 			}
+
+			if cfg != empty {
+				o.Remote = []remote.Option{
+					remote.WithAuth(authn.FromConfig(authn.AuthConfig{
+						Username:      cfg.Username,
+						Password:      cfg.Password,
+						Auth:          cfg.Auth,
+						IdentityToken: cfg.IdentityToken,
+						RegistryToken: cfg.RegistryToken,
+					})),
+				}
+			}
+
+			ref, err := name.ParseReference(image.ImageID, o.Name...)
+
+			if err != nil {
+				return fmt.Errorf("parsing reference %q: %w", image.ImageID, err)
+			}
+
+			rmt, err := remote.Get(ref, o.Remote...)
+			if err != nil {
+				return err
+			}
+
+			img, err := rmt.Image()
+			if err != nil {
+				return err
+			}
+
+			imageMap[image.ImageID] = img
+
+			if err := crane.MultiSave(imageMap, imagePath); err != nil {
+				return fmt.Errorf("saving tarball %s: %w", imagePath, err)
+			}
+
+			logrus.Debugf("Image %s successfully pulled with PullSecret: %s", image.ImageID, pullSecret.SecretName)
 		}
-	}
 
-	ref, err := name.ParseReference(image.ImageID, o.Name...)
-
-	if err != nil {
-		return fmt.Errorf("parsing reference %q: %w", image.ImageID, err)
-	}
-
-	rmt, err := remote.Get(ref, o.Remote...)
-	if err != nil {
-		return err
-	}
-
-	img, err := rmt.Image()
-	if err != nil {
-		return err
-	}
-
-	imageMap[image.ImageID] = img
-
-	if err := crane.MultiSave(imageMap, imagePath); err != nil {
-		return fmt.Errorf("saving tarball %s: %w", imagePath, err)
+		logrus.Debugf("image: %s load next pull secret", image.ImageID)
 	}
 
 	return nil
 }
 
-func ResolveAuthConfig(image kubernetes.ContainerImage) (types.AuthConfig, error) {
+func ResolveAuthConfigWithPullSecretIndex(image kubernetes.ContainerImage, pullSecretIndex int) (types.AuthConfig, error) {
 	var cf *configfile.ConfigFile
 	var err error
+	pullSecret := image.PullSecrets[pullSecretIndex]
 
-	if image.LegacyAuth {
+	if pullSecret.IsLegacySecret {
 		cf = configfile.New("")
-		err = LegacyLoadFromReader(bytes.NewReader(image.Auth), cf)
+		err = LegacyLoadFromReader(bytes.NewReader(pullSecret.SecretCredsData), cf)
 	} else {
-		cf, err = config.LoadFromReader(bytes.NewReader(image.Auth))
+		cf, err = config.LoadFromReader(bytes.NewReader(pullSecret.SecretCredsData))
 	}
 
 	if err != nil {
@@ -105,4 +115,9 @@ func ResolveAuthConfig(image kubernetes.ContainerImage) (types.AuthConfig, error
 	}
 
 	return cfg, nil
+}
+
+func ResolveAuthConfig(image kubernetes.ContainerImage) (types.AuthConfig, error) {
+	// to not break JobImages this function needs to redirect to the actual resolve-function
+	return ResolveAuthConfigWithPullSecretIndex(image, 0)
 }
