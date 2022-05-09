@@ -60,7 +60,7 @@ func NewClient(ignoreAnnotations bool) *KubeClient {
 
 	sbomOperatorNamespace := os.Getenv("POD_NAMESPACE")
 	if sbomOperatorNamespace == "" {
-		logrus.WithError(err).Fatal("Fatal: Mandatory Environment Variable 'POD_NAMESPACE' is not set!")
+		logrus.Infof("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
 	}
 
 	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, SbomOperatorNamespace: sbomOperatorNamespace}
@@ -120,8 +120,12 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 
 			fallbackPullSecretName := viper.GetString(internal.ConfigKeyCustomGlobalPullSecret)
 			if fallbackPullSecretName != "" {
-				fallbackPullSecret := client.loadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: fallbackPullSecretName}})
-				allImageCreds = append(allImageCreds, fallbackPullSecret...)
+				if client.SbomOperatorNamespace != "" {
+					logrus.Debugf("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
+				} else {
+					fallbackPullSecret := client.loadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: fallbackPullSecretName}})
+					allImageCreds = append(allImageCreds, fallbackPullSecret...)
+				}
 			}
 
 			for _, c := range statuses {
