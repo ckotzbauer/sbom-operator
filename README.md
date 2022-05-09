@@ -114,6 +114,8 @@ envVars:
       secretKeyRef:
         name: "sbom-operator"
         key: "accessToken"
+  - name: POD_NAMESPACE
+    value: "default"
 
 ```
 
@@ -202,6 +204,8 @@ jobImageMode: true
 envVars:
   - name: SBOM_JOB_CAS_API_KEY
     value: "<KEY>"
+  - name: POD_NAMESPACE
+    value: "<NAMESPACE-NAME>"
 ```
 
 All operator-environment variables prefixed with `SBOM_JOB_` are passed to the Kubernetes job.
