@@ -24,5 +24,5 @@ var (
 	ConfigKeyOciRegistry            = "oci-registry"
 	ConfigKeyOciUser                = "oci-user"
 	ConfigKeyOciToken               = "oci-token"
-	ConfigKeyCustomGlobalPullSecret = "custom-global-pull-secret"
+	ConfigKeyFallbackPullSecret     = "fallback-pull-secret"
 )

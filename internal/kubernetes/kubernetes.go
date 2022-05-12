@@ -59,9 +59,6 @@ func NewClient(ignoreAnnotations bool) *KubeClient {
 	}
 
 	sbomOperatorNamespace := os.Getenv("POD_NAMESPACE")
-	if sbomOperatorNamespace == "" {
-		logrus.Infof("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
-	}
 
 	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, SbomOperatorNamespace: sbomOperatorNamespace}
 }
@@ -100,7 +97,6 @@ func (client *KubeClient) listPods(namespace, labelSelector string) ([]corev1.Po
 func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) (map[string]ContainerImage, []ContainerImage) {
 	images := map[string]ContainerImage{}
 	allImages := []ContainerImage{}
-	allImageCreds := []KubeCreds{}
 
 	for _, ns := range namespaces {
 		pods, err := client.listPods(ns.Name, podLabelSelector)
@@ -110,6 +106,8 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 		}
 
 		for _, pod := range pods {
+			allImageCreds := []KubeCreds{}
+
 			annotations := pod.Annotations
 			statuses := []corev1.ContainerStatus{}
 			statuses = append(statuses, pod.Status.ContainerStatuses...)
@@ -118,7 +116,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 
 			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
 
-			fallbackPullSecretName := viper.GetString(internal.ConfigKeyCustomGlobalPullSecret)
+			fallbackPullSecretName := viper.GetString(internal.ConfigKeyFallbackPullSecret)
 			if fallbackPullSecretName != "" {
 				if client.SbomOperatorNamespace != "" {
 					logrus.Debugf("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
@@ -218,7 +216,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			logrus.WithError(err).Errorf("Error in loadSecrets: namespace: %s, secret '%s'! Error: %s", namespace, s.Name, err)
+			logrus.WithError(err).Errorf("Error in loadSecrets: namespace: %s, secret '%s'!", namespace, s.Name)
 			continue
 		}
 
@@ -239,11 +237,8 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 			allImageCreds = append(allImageCreds, KubeCreds{SecretName: name, SecretCredsData: creds, IsLegacySecret: legacy})
 		}
 	}
-	if len(allImageCreds) > 0 {
-		return allImageCreds
-	}
 
-	return nil
+	return allImageCreds
 }
 
 func (client *KubeClient) CreateJobSecret(namespace, suffix string, data []byte) error {
