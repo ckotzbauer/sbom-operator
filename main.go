@@ -62,7 +62,7 @@ func init() {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyKubernetesClusterId, "default", "Kubernetes Cluster ID")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImage, "", "Custom Job-Image")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImagePullSecret, "", "Custom Job-Image-Pull-Secret")
-	rootCmd.PersistentFlags().String(internal.ConfigKeyCustomGlobalPullSecret, "", "Custom Global-Pull-Secret")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyFallbackPullSecret, "", "Custom Global-Pull-Secret")
 	rootCmd.PersistentFlags().Int64(internal.ConfigKeyJobTimeout, 60*60, "Job-Timeout")
 }
 
