@@ -124,6 +124,27 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 	assert.Equal(t, output.SpdxVersion, fixture.SpdxVersion)
 }
 
+// test for analysing an image completely without pullSecret
+func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
+	format := "cyclonedx"
+	s := syft.New(format).WithVersion("v9.9.9")
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
+	assert.NoError(t, err)
+
+	var output syftCyclonedxOutput
+	err = xml.Unmarshal([]byte(sbom), &output)
+	assert.NoError(t, err)
+
+	data, err := os.ReadFile("./fixtures/" + name + "." + format)
+	assert.NoError(t, err)
+
+	var fixture syftCyclonedxOutput
+	err = xml.Unmarshal(data, &fixture)
+	assert.NoError(t, err)
+
+	assert.Equal(t, marshalCyclonedx(t, output.Components), marshalCyclonedx(t, fixture.Components))
+}
+
 func TestSyft(t *testing.T) {
 	tests := []testData{
 		{
@@ -179,6 +200,7 @@ func TestSyft(t *testing.T) {
 				testJsonSbom(t, v.image, v.digest)
 			} else if v.format == "cyclonedx" {
 				testCyclonedxSbom(t, v.image, v.digest)
+				testCyclonedxSbomWithoutPullSecrets(t, v.image, v.digest)
 			} else if v.format == "spdxjson" {
 				testSpdxSbom(t, v.image, v.digest)
 			}
