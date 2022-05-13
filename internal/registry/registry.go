@@ -69,6 +69,7 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 			}
 
 			logrus.Debugf("Image %s successfully pulled with PullSecret: %s", image.ImageID, pullSecret.SecretName)
+			break
 		}
 
 		logrus.Debugf("image: %s load next pull secret", image.ImageID)
