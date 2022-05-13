@@ -1,5 +1,5 @@
-FROM codenotary/vcn:0.9.13 as vcn
-FROM docker:20.10.14-dind
+FROM codenotary/vcn:0.9.16 as vcn
+FROM docker:20.10.15-dind
 
 COPY --from=vcn /bin/vcn /bin/vcn
 COPY entrypoint.sh /

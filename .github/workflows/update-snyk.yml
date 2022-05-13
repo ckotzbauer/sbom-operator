@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-snyk:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan-snyk.yml@0.13.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan-snyk.yml@0.14.1
     with:
       install-go: true
       go-version: '1.18.1'

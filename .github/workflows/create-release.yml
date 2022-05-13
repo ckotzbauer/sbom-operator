@@ -9,7 +9,7 @@ on:
 
 jobs:
   release:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@0.13.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@0.14.1
     with:
       go-version: 1.18.1
       version: ${{ github.event.inputs.version }}

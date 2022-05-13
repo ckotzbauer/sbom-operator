@@ -70,7 +70,7 @@ func (g *GitTarget) Initialize() {
 
 func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
 	imageID := image.ImageID
-	filePath := g.imageIDToFilePath(imageID)
+	filePath := g.ImageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
 	err := os.MkdirAll(dir, 0777)
@@ -105,13 +105,13 @@ func (g *GitTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 func (g *GitTarget) mapToFiles(allImages []kubernetes.ContainerImage) []string {
 	paths := []string{}
 	for _, img := range allImages {
-		paths = append(paths, g.imageIDToFilePath(img.ImageID))
+		paths = append(paths, g.ImageIDToFilePath(img.ImageID))
 	}
 
 	return paths
 }
 
-func (g *GitTarget) imageIDToFilePath(id string) string {
+func (g *GitTarget) ImageIDToFilePath(id string) string {
 	fileName := syft.GetFileName(g.sbomFormat)
 	filePath := strings.ReplaceAll(id, "@", "/")
 	return strings.ReplaceAll(path.Join(g.workingTree, g.workPath, filePath, fileName), ":", "_")
@@ -145,7 +145,7 @@ func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs, allProcesse
 			if !found {
 				rel, _ := filepath.Rel(g.workingTree, p)
 				dir := filepath.Dir(rel)
-				g.gitAccount.Remove(g.workingTree, dir)
+				err = g.gitAccount.Remove(g.workingTree, dir)
 				if err != nil {
 					logrus.WithError(err).Errorf("File could not be deleted %s", p)
 				} else {

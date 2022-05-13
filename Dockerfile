@@ -12,6 +12,6 @@ ARG TARGETOS
 ARG TARGETARCH
 
 COPY --from=alpine /etc/ssl/certs/ca-certificates.crt /etc/ssl/certs/
-COPY dist/sbom-operator_${TARGETOS}_${TARGETARCH}/sbom-operator /usr/local/bin/sbom-operator
+COPY dist/sbom-operator_${TARGETOS}_${TARGETARCH}_v1/sbom-operator /usr/local/bin/sbom-operator
 
 ENTRYPOINT ["/usr/local/bin/sbom-operator"]

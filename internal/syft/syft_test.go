@@ -12,6 +12,11 @@ import (
 	"github.com/stretchr/testify/assert"
 )
 
+type simpleTestData struct {
+	input    string
+	expected string
+}
+
 type testData struct {
 	image  string
 	digest string
@@ -177,6 +182,50 @@ func TestSyft(t *testing.T) {
 			} else if v.format == "spdxjson" {
 				testSpdxSbom(t, v.image, v.digest)
 			}
+		})
+	}
+}
+
+func TestGetFileName(t *testing.T) {
+	tests := []simpleTestData{
+		{
+			input:    "",
+			expected: "sbom.json",
+		},
+		{
+			input:    "json",
+			expected: "sbom.json",
+		},
+		{
+			input:    "text",
+			expected: "sbom.txt",
+		},
+		{
+			input:    "cyclonedx",
+			expected: "sbom.xml",
+		},
+		{
+			input:    "cyclonedxjson",
+			expected: "sbom.json",
+		},
+		{
+			input:    "spdx",
+			expected: "sbom.spdx",
+		},
+		{
+			input:    "spdxjson",
+			expected: "sbom.json",
+		},
+		{
+			input:    "table",
+			expected: "sbom.txt",
+		},
+	}
+
+	for _, v := range tests {
+		t.Run(v.input, func(t *testing.T) {
+			out := syft.GetFileName(v.input)
+			assert.Equal(t, v.expected, out)
 		})
 	}
 }

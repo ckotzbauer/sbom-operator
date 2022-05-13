@@ -12,7 +12,7 @@ import (
 	"github.com/pkg/errors"
 )
 
-// This is ported from https://github.com/docker/cli/blob/v20.10.12/cli/config/config.go
+// This is ported from https://github.com/docker/cli/blob/v20.10.15/cli/config/configfile/file.go
 // The only changes to the original source are the fact, that the "auth" field is not decoded
 // when "username" or "password" are not blank to avoid overwrites.
 

@@ -16,7 +16,7 @@ vet:
 	go vet ./...
 
 test-registries:
-	go test github.com/ckotzbauer/sbom-operator/internal/registry
+	go test github.com/ckotzbauer/sbom-operator/internal/registry -coverprofile cover-registries.out
 
 test:
-	go test $(shell go list ./... | grep -v sbom-operator/internal/registry)
+	go test $(shell go list ./... | grep -v sbom-operator/internal/registry) -coverprofile cover.out

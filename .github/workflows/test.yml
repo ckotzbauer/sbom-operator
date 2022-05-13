@@ -17,29 +17,130 @@ jobs:
 
       - name: Set up QEMU
         id: qemu
-        uses: docker/setup-qemu-action@v1
+        uses: docker/setup-qemu-action@v2
 
       - name: Set up Docker Buildx
         id: buildx
-        uses: docker/setup-buildx-action@v1
+        uses: docker/setup-buildx-action@v2
 
       - name: Checkout
         uses: actions/checkout@v3
 
+      - name: Setup AWS CLI
+        uses: unfor19/install-aws-cli-action@v1
+
+      - uses: azure/setup-kubectl@v2.1
+        with:
+          version: 'v1.24.0'
+
       - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
-          version: "v1.3.1"
+          version: "v1.8.3"
           install-only: true
 
       - name: Build binary
         run: make build
 
+#      - name: Prepare ACR secrets
+#        shell: bash
+#        run: |
+#          mkdir auth
+#
+#          kubectl create secret docker-registry acr-secret \
+#            --docker-username="${{ secrets.TEST_ACR_USERNAME }}" \
+#            --docker-password="${{ secrets.TEST_ACR_PASSWORD }}" \
+#            --docker-server=sbomgitoperator.azurecr.io \
+#            --docker-email="${{ secrets.TEST_EMAIL }}" \
+#            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/acr.yaml
+
+      - name: Prepare ECR secrets
+        shell: bash
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.TEST_AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.TEST_AWS_SECRET_ACCESS_KEY }}
+          AWS_REGION: eu-central-1
+        run: |
+         mkdir auth
+
+          kubectl create secret docker-registry ecr-secret \
+            --docker-username=AWS \
+            --docker-password="$(aws ecr get-login-password)" \
+            --docker-server=055403865123.dkr.ecr.eu-central-1.amazonaws.com \
+            --docker-email="${{ secrets.TEST_EMAIL }}" \
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ecr.yaml
+
+      - name: Prepare GAR secrets
+        shell: bash
+        env:
+          TEST_GAR_PASSWORD: ${{ secrets.TEST_GAR_PASSWORD }}
+        run: |
+          kubectl create secret docker-registry gar-secret \
+            --docker-username=_json_key \
+            --docker-password="$TEST_GAR_PASSWORD" \
+            --docker-server=europe-west3-docker.pkg.dev \
+            --docker-email="${{ secrets.TEST_EMAIL }}" \
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gar.yaml
+
+      - name: Prepare GCR secrets
+        shell: bash
+        env:
+          TEST_GCR_PASSWORD: ${{ secrets.TEST_GCR_PASSWORD }}
+        run: |
+          kubectl create secret docker-registry gcr-secret \
+            --docker-username=_json_key \
+            --docker-password="$TEST_GCR_PASSWORD" \
+            --docker-server=gcr.io \
+            --docker-email="${{ secrets.TEST_EMAIL }}" \
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/gcr.yaml
+
+      - name: Prepare GHCR secrets
+        shell: bash
+        run: |
+          kubectl create secret docker-registry ghcr-secret \
+            --docker-username="${{ secrets.TEST_GHCR_USERNAME }}" \
+            --docker-password="${{ secrets.TEST_GHCR_PASSWORD }}" \
+            --docker-server=ghcr.io \
+            --docker-email="${{ secrets.TEST_EMAIL }}" \
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/ghcr.yaml
+
+      - name: Prepare Hub secrets
+        shell: bash
+        run: |
+          kubectl create secret docker-registry hub-secret \
+            --docker-username="${{ secrets.TEST_HUB_USERNAME }}" \
+            --docker-password="${{ secrets.TEST_HUB_PASSWORD }}" \
+            --docker-server=https://index.docker.io/v1/ \
+            --docker-email="${{ secrets.TEST_EMAIL }}" \
+            -o json --dry-run=client | jq -r '.data.".dockerconfigjson"' > auth/hub.yaml
+
+      - name: Prepare legacy GHCR secrets
+        shell: bash
+        env:
+          TEST_GCR_PASSWORD: ${{ secrets.TEST_GCR_PASSWORD }}
+        run: |
+          cat << EOF > .dockercfg
+          {
+              "ghcr.io": { "username": "${{ secrets.TEST_GHCR_USERNAME }}", "password": "${{ secrets.TEST_GHCR_PASSWORD }}" }
+          }
+          EOF
+
+          kubectl create secret generic ghcr-secret \
+            --from-file=.dockercfg \
+            --type=kubernetes.io/dockercfg \
+            -o json --dry-run=client | jq -r '.data.".dockercfg"' > auth/legacy-ghcr.yaml
+
       - name: Unit tests
-        run: make test
+        run: |
+          make test
+          make test-registries
+
+      - uses: codecov/codecov-action@v3
+        with:
+          files: cover.out,cover-registries.out
 
       - name: Build image
-        uses: docker/build-push-action@v2
+        uses: docker/build-push-action@v3
         with:
           context: .
           push: false
@@ -49,7 +150,7 @@ jobs:
             ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
-        uses: ckotzbauer/actions-toolkit/grype@0.13.0
+        uses: ckotzbauer/actions-toolkit/grype@0.14.1
         with:
           scan-target: ghcr.io/ckotzbauer/sbom-operator
           fail-on: "medium"

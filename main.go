@@ -74,8 +74,8 @@ func initConfig() {
 func printVersion() {
 	logrus.Info(fmt.Sprintf("Version: %s", Version))
 	logrus.Info(fmt.Sprintf("Commit: %s", Commit))
-	logrus.Info(fmt.Sprintf("Buit at: %s", Date))
-	logrus.Info(fmt.Sprintf("Buit by: %s", BuiltBy))
+	logrus.Info(fmt.Sprintf("Built at: %s", Date))
+	logrus.Info(fmt.Sprintf("Built by: %s", BuiltBy))
 	logrus.Info(fmt.Sprintf("Go Version: %s", runtime.Version()))
 }
 
