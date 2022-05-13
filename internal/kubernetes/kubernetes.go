@@ -118,7 +118,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 
 			fallbackPullSecretName := viper.GetString(internal.ConfigKeyFallbackPullSecret)
 			if fallbackPullSecretName != "" {
-				if client.SbomOperatorNamespace != "" {
+				if client.SbomOperatorNamespace == "" {
 					logrus.Debugf("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
 				} else {
 					fallbackPullSecret := client.loadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: fallbackPullSecretName}})
