@@ -20,22 +20,29 @@ import (
 	parser "github.com/novln/docker-parser"
 )
 
+var (
+	ErrorNoValidPullSecret = errors.New("No valid or valid-but-unauthorized PullSecret found from ContainerImage")
+)
+
 func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
 	o := crane.GetOptions()
+	var err error
+	var cfg types.AuthConfig
+	empty := types.AuthConfig{}
+	pullSecrets := image.PullSecrets
 
-	if len(image.PullSecrets) == 0 {
-		return nil
+	if len(pullSecrets) == 0 {
+		pullSecrets = []kubernetes.KubeCreds{{SecretName: "noAuth"}}
 	}
 
-	for _, pullSecret := range image.PullSecrets {
+	for _, pullSecret := range pullSecrets {
 
-		if len(pullSecret.SecretCredsData) > 0 {
-			cfg, err := ResolveAuthConfigWithPullSecret(image, pullSecret)
-			empty := types.AuthConfig{}
+		if pullSecret.SecretName != "noAuth" && len(pullSecret.SecretCredsData) > 0 {
+			cfg, err = ResolveAuthConfigWithPullSecret(image, pullSecret)
 
 			if err != nil {
-				logrus.Debugf("image: %s Image-Pull failed with PullSecret: %s", image.ImageID, pullSecret.SecretName)
+				logrus.Debugf("image: %s, Read Authentication Configuration from secret: %s failed. Error: %s", image.ImageID, pullSecret.SecretName, err)
 				continue
 			}
 
@@ -50,37 +57,42 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 					})),
 				}
 			}
-
-			ref, err := name.ParseReference(image.ImageID, o.Name...)
-
-			if err != nil {
-				return fmt.Errorf("parsing reference %q: %w", image.ImageID, err)
-			}
-
-			rmt, err := remote.Get(ref, o.Remote...)
-			if err != nil {
-				return err
-			}
-
-			img, err := rmt.Image()
-			if err != nil {
-				return err
-			}
-
-			imageMap[image.ImageID] = img
-
-			if err := crane.MultiSave(imageMap, imagePath); err != nil {
-				return fmt.Errorf("saving tarball %s: %w", imagePath, err)
-			}
-
-			logrus.Debugf("Image %s successfully pulled with PullSecret: %s", image.ImageID, pullSecret.SecretName)
-			break
 		}
 
-		logrus.Debugf("image: %s load next pull secret", image.ImageID)
+		ref, err := name.ParseReference(image.ImageID, o.Name...)
+
+		if err != nil {
+			// should be immediately returned because it seems that no other pullSecret will solve this problem
+			return fmt.Errorf("parsing reference %q: %w", image.ImageID, err)
+		}
+
+		rmt, err := remote.Get(ref, o.Remote...)
+		if err != nil {
+			// should not be returned, because, this might be an Authentication Error
+			logrus.Debugf("image: %s, Image-Pull Error: %s", image.ImageID, err)
+			continue
+		}
+
+		img, err := rmt.Image()
+		if err != nil {
+			// should be immediately returned because no other pullSecret will solve this problem
+			return err
+		}
+
+		imageMap[image.ImageID] = img
+
+		if err := crane.MultiSave(imageMap, imagePath); err != nil {
+			// should be immediately returned because no other pullSecret will solve this problem
+			return fmt.Errorf("saving tarball %s: %w", imagePath, err)
+		}
+
+		logrus.Debugf("Image %s successfully pulled with PullSecret: %s", image.ImageID, pullSecret.SecretName)
+		// pull was sucessfull - no error occurred
+		return nil
 	}
 
-	return nil
+	// no valid pull request found for this image - returning an error
+	return ErrorNoValidPullSecret
 }
 
 func ResolveAuthConfigWithPullSecret(image kubernetes.ContainerImage, pullSecret kubernetes.KubeCreds) (types.AuthConfig, error) {
@@ -123,13 +135,11 @@ func ResolveAuthConfigWithPullSecret(image kubernetes.ContainerImage, pullSecret
 }
 
 func ResolveAuthConfig(image kubernetes.ContainerImage) (types.AuthConfig, error) {
-	var err error
 	// to not break JobImages this function needs to redirect to the actual resolve-function, using the first pullSecret from the list if exists
 	if len(image.PullSecrets) > 0 {
 		return ResolveAuthConfigWithPullSecret(image, image.PullSecrets[0])
 	} else {
-		err = errors.New("No PullSecret found for image")
-		return types.AuthConfig{}, err
+		return types.AuthConfig{}, nil
 	}
 
 }
