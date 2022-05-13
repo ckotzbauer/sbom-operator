@@ -2,6 +2,7 @@ package registry
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 
 	"github.com/docker/cli/cli/config"
@@ -23,10 +24,14 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	imageMap := map[string]v1.Image{}
 	o := crane.GetOptions()
 
-	for pullSecretIndex, pullSecret := range image.PullSecrets {
+	if len(image.PullSecrets) == 0 {
+		return nil
+	}
+
+	for _, pullSecret := range image.PullSecrets {
 
 		if len(pullSecret.SecretCredsData) > 0 {
-			cfg, err := ResolveAuthConfigWithPullSecretIndex(image, pullSecretIndex)
+			cfg, err := ResolveAuthConfigWithPullSecret(image, pullSecret)
 			empty := types.AuthConfig{}
 
 			if err != nil {
@@ -78,10 +83,9 @@ func SaveImage(imagePath string, image kubernetes.ContainerImage) error {
 	return nil
 }
 
-func ResolveAuthConfigWithPullSecretIndex(image kubernetes.ContainerImage, pullSecretIndex int) (types.AuthConfig, error) {
+func ResolveAuthConfigWithPullSecret(image kubernetes.ContainerImage, pullSecret kubernetes.KubeCreds) (types.AuthConfig, error) {
 	var cf *configfile.ConfigFile
 	var err error
-	pullSecret := image.PullSecrets[pullSecretIndex]
 
 	if pullSecret.IsLegacySecret {
 		cf = configfile.New("")
@@ -119,6 +123,13 @@ func ResolveAuthConfigWithPullSecretIndex(image kubernetes.ContainerImage, pullS
 }
 
 func ResolveAuthConfig(image kubernetes.ContainerImage) (types.AuthConfig, error) {
-	// to not break JobImages this function needs to redirect to the actual resolve-function
-	return ResolveAuthConfigWithPullSecretIndex(image, 0)
+	var err error
+	// to not break JobImages this function needs to redirect to the actual resolve-function, using the first pullSecret from the list if exists
+	if len(image.PullSecrets) > 0 {
+		return ResolveAuthConfigWithPullSecret(image, image.PullSecrets[0])
+	} else {
+		err = errors.New("No PullSecret found for image")
+		return types.AuthConfig{}, err
+	}
+
 }
