@@ -1,3 +1,61 @@
+## Version 0.11.0 (2022-05-14)
+
+### Cleanup and refactoring
+
+* [[`c9e3825f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c9e3825f)] - **cleanup**: decouple packages from config-handling
+
+### Build and testing
+
+* [[`0750c686`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0750c686)] - **build**: update to go@1.18.2
+* [[`9e2765e0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9e2765e0)] - **build**: downgrade goreleaser
+* [[`d0766034`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d0766034)] - **build**: combine test-workflows
+* [[`1097894d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1097894d)] - **build**: fix binary-path
+* [[`ceee1941`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ceee1941)] - **build**: remove test-args
+* [[`77f060de`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/77f060de)] - **build**: update snyk-action
+* [[`522483e7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/522483e7)] - **test**: update syft-fixtures
+* [[`39d60e49`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/39d60e49)] - **test**: add configfile test
+* [[`88f36a72`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/88f36a72)] - **test**: add more syft-tests
+* [[`c6202709`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c6202709)] - **test**: add codecov coverage
+* [[`240360bd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/240360bd)] - **test**: added git-target tests
+* [[`49e30be0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/49e30be0)] - **test**: fix type
+* [[`2ee94dfb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2ee94dfb)] - **test**: refactor unit-tests
+
+### Documentation
+
+* [[`7709adcb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7709adcb)] - **doc**: add version [skip ci]
+
+### Dependency updates
+
+* [[`a792350e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a792350e)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.46.0
+* [[`517fbea1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/517fbea1)] - **deps**: update module github.com&#x2F;docker&#x2F;cli to v20.10.16
+* [[`13c8fe2c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/13c8fe2c)] - **deps**: update dependency docker to v20.10.16
+* [[`0346001d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0346001d)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.14.1
+* [[`c01abc04`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c01abc04)] - **deps**: update docker&#x2F;setup-qemu-action action to v2
+* [[`d233191e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d233191e)] - **deps**: update docker&#x2F;build-push-action action to v3
+* [[`a2b260c7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a2b260c7)] - **deps**: update docker&#x2F;setup-buildx-action action to v2
+* [[`b9f806c9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b9f806c9)] - **deps**: update module github.com&#x2F;docker&#x2F;cli to v20.10.15
+* [[`7038d4a1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7038d4a1)] - **deps**: update dependency docker to v20.10.15
+* [[`4138705b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4138705b)] - **deps**: update kubernetes versions to v0.24.0
+* [[`05eccba8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/05eccba8)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.14.0
+* [[`4b5e4d5c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4b5e4d5c)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.45.1
+* [[`7d54aa79`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7d54aa79)] - **deps**: update dependency codenotary&#x2F;vcn to v0.9.16
+* [[`2532f525`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2532f525)] - **deps**: updated syft
+* [[`f334f912`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f334f912)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.45.0
+* [[`f960688c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f960688c)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.13.0
+* [[`65a1fbd6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/65a1fbd6)] - **deps**: update module github.com&#x2F;onsi&#x2F;ginkgo&#x2F;v2 to v2.1.4
+* [[`50605ad9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/50605ad9)] - **deps**: update sigstore&#x2F;cosign-installer digest to 536b37e
+
+### Common changes
+
+* [[`5ed32b82`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5ed32b82)] - **chore**: go mod tidy
+* [[`e6193061`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e6193061)] - **chore**: [typo] fix typo in startup messages
+* [[`809abe22`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/809abe22)] - **chore**: go mod tidy
+* [[`c9e0ee78`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c9e0ee78)] - **chore**: Added causing error
+* [[`c68c429e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c68c429e)] - **chore**: Don&#39;t continue if list namespaces failes
+* [[`bbb9afdc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bbb9afdc)] - **chore**: release 0.10.0
+* [[`30b81d96`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/30b81d96)] - **chore**: remove some example-values [skip ci]
+
+
 ## Version 0.10.0 (2022-04-27)
 
 ### Common changes
