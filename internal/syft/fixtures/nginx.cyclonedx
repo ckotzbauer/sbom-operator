@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:ff7d48e2-0b78-4b65-8dda-b9f2b79f18f5" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:35633695-67bd-4d7f-8fab-9e0d6e808c04" version="1">
   <metadata>
-    <timestamp>2022-04-30T09:58:49+02:00</timestamp>
+    <timestamp>2022-05-14T09:20:22+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.45.0</version>
+        <version>0.46.0</version>
       </tool>
     </tools>
     <component bom-ref="bed2b68c44140e08" type="container">
@@ -572,6 +572,9 @@
         </license>
         <license>
           <id>GPL-2.0+</id>
+        </license>
+        <license>
+          <id>Bitstream-Vera</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:fonts-dejavu-core:fonts-dejavu-core:2.37-2:*:*:*:*:*:*:*</cpe>
