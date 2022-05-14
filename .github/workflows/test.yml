@@ -36,7 +36,7 @@ jobs:
       - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
-          version: "v1.8.3"
+          version: "v1.7.0"
           install-only: true
 
       - name: Build binary
@@ -150,7 +150,7 @@ jobs:
             ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
-        uses: ckotzbauer/actions-toolkit/grype@0.14.1
+        uses: ckotzbauer/actions-toolkit/grype@0.14.2
         with:
           scan-target: ghcr.io/ckotzbauer/sbom-operator
           fail-on: "medium"
