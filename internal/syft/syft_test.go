@@ -60,7 +60,7 @@ func marshalCyclonedx(t *testing.T, x interface{}) string {
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{{SecretName: "syft-test-creds", SecretCredsData: []byte{}}}})
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
 
 	assert.NoError(t, err)
 
@@ -84,7 +84,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{{SecretName: "syft-test-creds", SecretCredsData: []byte{}}}})
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput
@@ -104,7 +104,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{{SecretName: "syft-test-creds", SecretCredsData: []byte{}}}})
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftSpdxOutput

@@ -62,21 +62,19 @@ func TestRegistry(t *testing.T) {
 			imageSize: 2823168,
 		},
 	}
-	unauthenticatedPositiveTests := []testData{
-		{
-			registry:  "docker-io",
-			image:     "hello-world:latest",
-			legacy:    false,
-			imageSize: 7168,
-		},
+
+	unauthenticatedPositiveTest := testData{
+		registry:  "docker-io",
+		image:     "hello-world:latest",
+		legacy:    false,
+		imageSize: 7168,
 	}
-	unauthenticatedNegativeTests := []testData{
-		{
-			registry:  "ghcr",
-			image:     "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
-			legacy:    false,
-			imageSize: 2823168,
-		},
+
+	unauthenticatedNegativeTest := testData{
+		registry:  "ghcr",
+		image:     "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
+		legacy:    false,
+		imageSize: 2823168,
 	}
 
 	for _, v := range tests {
@@ -84,16 +82,18 @@ func TestRegistry(t *testing.T) {
 			testRegistry(t, v.registry, v.image, v.legacy, v.imageSize)
 		})
 	}
-	for _, v := range unauthenticatedPositiveTests {
-		t.Run(v.registry, func(t *testing.T) {
-			testRegistryWithoutPullSecretsPositive(t, v.image, v.imageSize)
-		})
-	}
-	for _, v := range unauthenticatedNegativeTests {
-		t.Run(v.registry, func(t *testing.T) {
-			testRegistryWithoutPullSecretsNegative(t, v.image)
-		})
-	}
+
+	t.Run("unauthenticated positive", func(t *testing.T) {
+		testRegistryWithoutPullSecretsPositive(t, unauthenticatedPositiveTest.image, unauthenticatedPositiveTest.imageSize)
+	})
+
+	t.Run("unauthenticated negative", func(t *testing.T) {
+		testRegistryWithoutPullSecretsNegative(t, unauthenticatedNegativeTest.image)
+	})
+
+	t.Run("wrong secret negative", func(t *testing.T) {
+		testRegistryWithWrongPullSecretNegative(t, unauthenticatedNegativeTest.image)
+	})
 }
 
 func testRegistry(t *testing.T, name, image string, legacy bool, imageSize int64) {
@@ -104,7 +104,10 @@ func testRegistry(t *testing.T, name, image string, legacy bool, imageSize int64
 	assert.NoError(t, err)
 
 	file := "/tmp/1.0.0.tar.gz"
-	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, PullSecrets: []kubernetes.KubeCreds{{SecretName: name, SecretCredsData: []byte(decoded), IsLegacySecret: legacy}}})
+	err = registry.SaveImage(file, kubernetes.ContainerImage{
+		ImageID:     image,
+		PullSecrets: []kubernetes.KubeCreds{{SecretName: name, SecretCredsData: []byte(decoded), IsLegacySecret: legacy}},
+	})
 
 	if err == nil {
 		stat, _ := os.Stat(file)
@@ -117,7 +120,6 @@ func testRegistry(t *testing.T, name, image string, legacy bool, imageSize int64
 
 // this test should check if an image is pullable without pullSecrets (e.g. dockerhub - where it is really possible)
 func testRegistryWithoutPullSecretsPositive(t *testing.T, image string, imageSize int64) {
-
 	file := "/tmp/1.0.0.tar.gz"
 	err := registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, PullSecrets: []kubernetes.KubeCreds{}})
 
@@ -133,12 +135,24 @@ func testRegistryWithoutPullSecretsPositive(t *testing.T, image string, imageSiz
 // this test should check if an image is not pullable without pullSecrets (e.g. internal registry - where it is forbidden)
 // an error must be returned
 func testRegistryWithoutPullSecretsNegative(t *testing.T, image string) {
-
 	file := "/tmp/1.0.0.tar.gz"
 	err := registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, PullSecrets: []kubernetes.KubeCreds{}})
+	assert.Error(t, err)
+	os.Remove(file)
+}
 
-	assert.Error(t, registry.ErrorNoValidPullSecret)
+// this test should check if an image is not pullable with wrong pullSecrets
+// an error must be returned
+func testRegistryWithWrongPullSecretNegative(t *testing.T, image string) {
+	file := "/tmp/1.0.0.tar.gz"
+	err := registry.SaveImage(file, kubernetes.ContainerImage{
+		ImageID:     image,
+		PullSecrets: []kubernetes.KubeCreds{{SecretName: "test", SecretCredsData: []byte{}, IsLegacySecret: false}},
+	})
+
+	if assert.Error(t, err) {
+		assert.Equal(t, registry.ErrorNoValidPullSecret, err)
+	}
 
 	os.Remove(file)
-	assert.NoError(t, err)
 }

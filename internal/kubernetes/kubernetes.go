@@ -59,7 +59,6 @@ func NewClient(ignoreAnnotations bool) *KubeClient {
 	}
 
 	sbomOperatorNamespace := os.Getenv("POD_NAMESPACE")
-
 	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, SbomOperatorNamespace: sbomOperatorNamespace}
 }
 
@@ -216,7 +215,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			logrus.WithError(err).Errorf("Error in loadSecrets: namespace: %s, secret '%s'!", namespace, s.Name)
+			logrus.WithError(err).Errorf("Could not load secret: %s/%s", namespace, s.Name)
 			continue
 		}
 
