@@ -96199,7 +96199,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.45.0",
+  "version": "0.46.0",
   "configuration": {
    "configPath": "",
    "verbosity": 0,
@@ -96222,7 +96222,7 @@
    },
    "log": {
     "structured": false,
-    "level": "info",
+    "level": "warning",
     "file-location": ""
    },
    "package": {
@@ -96273,13 +96273,25 @@
    },
    "exclude": [],
    "attest": {
-    "key": "cosign.key"
+    "key": "",
+    "cert": "",
+    "noUpload": false,
+    "force": false,
+    "recursive": false,
+    "replace": false,
+    "fulcioUrl": "https://fulcio.sigstore.dev",
+    "fulcio_identity_token": "",
+    "insecure_skip_verify": false,
+    "rekorUrl": "https://rekor.sigstore.dev",
+    "oidcIssuer": "https://oauth2.sigstore.dev/auth",
+    "oidcClientId": "sigstore",
+    "OIDCRedirectURL": ""
    },
    "platform": ""
   }
  },
  "schema": {
-  "version": "3.2.2",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.2.2.json"
+  "version": "3.2.3",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.2.3.json"
  }
 }
