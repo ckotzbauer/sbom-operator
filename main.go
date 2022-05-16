@@ -63,6 +63,9 @@ func init() {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImage, "", "Custom Job-Image")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImagePullSecret, "", "Custom Job-Image-Pull-Secret")
 	rootCmd.PersistentFlags().Int64(internal.ConfigKeyJobTimeout, 60*60, "Job-Timeout")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyOciRegistry, "", "OCI-Registry")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyOciUser, "", "OCI-User")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
 }
 
 func initConfig() {

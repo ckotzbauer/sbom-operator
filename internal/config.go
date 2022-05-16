@@ -21,4 +21,7 @@ var (
 	ConfigKeyJobImage               = "job-image"
 	ConfigKeyJobImagePullSecret     = "job-image-pull-secret"
 	ConfigKeyJobTimeout             = "job-timeout"
+	ConfigKeyOciRegistry            = "oci-registry"
+	ConfigKeyOciUser                = "oci-user"
+	ConfigKeyOciToken               = "oci-token"
 )

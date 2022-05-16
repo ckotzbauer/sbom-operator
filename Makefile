@@ -1,3 +1,6 @@
+REGISTRY_USER=""
+REGISTRY_TOKEN=""
+
 all: build
 
 build: fmt vet
@@ -15,8 +18,9 @@ fmt:
 vet:
 	go vet ./...
 
-test-registries:
-	go test github.com/ckotzbauer/sbom-operator/internal/registry -coverprofile cover-registries.out
-
 test:
-	go test $(shell go list ./... | grep -v sbom-operator/internal/registry) -coverprofile cover.out
+	go test $(shell go list ./... | grep -v sbom-operator/internal/registry | grep -v sbom-operator/internal/target) -coverprofile cover.out
+
+test-integration:
+	bash internal/target/oci/fixtures/oci-test.sh $(REGISTRY_USER) $(REGISTRY_TOKEN)
+	go test github.com/ckotzbauer/sbom-operator/internal/registry -coverprofile cover-integration.out
