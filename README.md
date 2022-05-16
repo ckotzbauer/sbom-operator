@@ -167,6 +167,15 @@ dev-cluster
                     │   sbom.json
 ```
 
+#### OCI-Registry
+
+In this mode the operator will generate a SBOM and store it into an OCI-Registry. The SBOM then can be processed by cosign, Kyverno
+or any other tool. E.g.:
+```bash
+COSIGN_REPOSITORY=<yourregistry> cosign download sbom <your full image digest>
+```
+
+
 ## Job-Images
 
 If you don't want to use Syft to analyze your images, you can give the Job-Image feature a try. The operator creates a Kubernetes-Job
