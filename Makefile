@@ -23,4 +23,4 @@ test:
 
 test-integration:
 	bash internal/target/oci/fixtures/oci-test.sh $(REGISTRY_USER) $(REGISTRY_TOKEN)
-	go test github.com/ckotzbauer/sbom-operator/internal/registry -coverprofile cover-integration.out
+	go test github.com/ckotzbauer/sbom-operator/internal/registry -coverprofile cover-registry.out
