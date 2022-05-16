@@ -73,7 +73,7 @@ All parameters are cli-flags.
 | `cron` | `false` | `@hourly` | Backround-Service interval (CRON). All options from [github.com/robfig/cron](https://github.com/robfig/cron) are allowed |
 | `ignore-annotations` | `false` | `false` | Force analyzing of all images, including those from annotated pods. |
 | `format` | `false` | `json` | SBOM-Format. |
-| `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack` |
+| `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack`, `oci` |
 | `git-workingtree` | `false` | `/work` | Directory to place the git-repo. |
 | `git-repository` | `true` when `git` target is used. | `""` | Git-Repository-URL (HTTPS). |
 | `git-branch` | `false` | `main` | Git-Branch to checkout. |
@@ -89,6 +89,9 @@ All parameters are cli-flags.
 | `job-image` | `false` | `""` | Job-Image to process images with instead of Syft |
 | `job-image-pull-secret` | `false` | `""` | Pre-existing pull-secret-name for private job-images |
 | `job-timeout` | `false` | `3600` | Job-Timeout in seconds (`activeDeadlineSeconds`) |
+| `oci-registry` | `true` when `oci` target is used | `""` | OCI-Registry |
+| `oci-user` | `true` when `oci` target is used | `""` | OCI-User |
+| `oci-token` | `true` when `oci` target is used | `""` | OCI-Token |
 
 The flags can be configured as args or as environment-variables prefixed with `SBOM_` to inject sensitive configs as secret values.
 
