@@ -120,7 +120,7 @@ jobs:
 
       - name: Unit tests
         run: |
-          make test-integration -e REGISTRY_USER=ckotzbauer -e REGISTRY_TOKEN=${{ secrets.REPO_ACCESS }}
+          make test-integration -e REGISTRY_USER=ckotzbauer -e REGISTRY_TOKEN=${{ secrets.GHCR_PASSWORD }}
 
       - uses: codecov/codecov-action@v3
         with:
