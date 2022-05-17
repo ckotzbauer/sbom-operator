@@ -3,6 +3,7 @@ set -eu
 
 DATE="$(date +%Y%m%d%H%M%S)"
 
+docker login -u ckotzbauer -p "${2}" ghcr.io
 docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
 docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
 DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
