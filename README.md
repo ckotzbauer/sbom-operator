@@ -230,3 +230,4 @@ Please refer to the [Contribution guildelines](https://github.com/ckotzbauer/.gi
 ## Code of conduct
 
 Please refer to the [Conduct guildelines](https://github.com/ckotzbauer/.github/blob/main/CODE_OF_CONDUCT.md).
+
