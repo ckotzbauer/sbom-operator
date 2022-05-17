@@ -24,6 +24,12 @@ jobs:
         with:
           version: 'v1.24.0'
 
+      - name: Setup Cosign
+        uses: sigstore/cosign-installer@536b37ec5d5b543420bdfd9b744c5965bd4d8730
+
+      - name: Setup Syft
+        uses: ckotzbauer/actions-toolkit/setup-syft@0.14.2
+
       - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v2
         with:
