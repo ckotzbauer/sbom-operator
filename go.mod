@@ -145,4 +145,4 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.0
+replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
