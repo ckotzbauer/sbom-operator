@@ -1,3 +1,45 @@
+## Version 0.12.0 (2022-05-29)
+
+### Features and improvements
+
+* [[`7b08d4c2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7b08d4c2)] - **feat**: add oci-target
+
+### Build and testing
+
+* [[`510fe7e5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/510fe7e5)] - **build**: add syft and cosign
+* [[`996854b0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/996854b0)] - **build**: fix password
+* [[`0ff08f18`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0ff08f18)] - **build**: fix branch
+* [[`eda259d1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eda259d1)] - **test**: add docker-login
+* [[`4a530812`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4a530812)] - **test**: add vscode debug-profile
+* [[`1597b4e0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1597b4e0)] - **test**: split coverage profiles
+
+### Documentation
+
+* [[`5601c365`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5601c365)] - **doc**: add oci-docs [skip ci]
+
+### Security
+
+* [[`6f8361f8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6f8361f8)] - **security**: enforce yaml.v3
+
+### Dependency updates
+
+* [[`1286ab35`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1286ab35)] - **deps**: update module github.com&#x2F;spf13&#x2F;viper to v1.12.0
+* [[`8a4a4903`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8a4a4903)] - **deps**: update dependency alpine to v3.16
+* [[`5a4212ce`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5a4212ce)] - **deps**: update module gopkg.in&#x2F;yaml.v3 to v3.0.1
+* [[`b34c4ef1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b34c4ef1)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.46.3
+* [[`3c6e690b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3c6e690b)] - **deps**: update kubernetes versions to v0.24.1
+* [[`98438361`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/98438361)] - **deps**: update sigstore&#x2F;cosign-installer digest to 3d3d32a
+* [[`7cbbc382`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7cbbc382)] - **deps**: fix syft-update
+* [[`19047624`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/19047624)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.46.1
+* [[`788abb15`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/788abb15)] - **deps**: update goreleaser&#x2F;goreleaser-action action to v3
+* [[`aad51e7a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aad51e7a)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.9.0
+
+### Common changes
+
+* [[`ad7dc282`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ad7dc282)] - **chore**: Multiple pull-secrets and optional fallback-secret (#98)
+* [[`1694a80f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1694a80f)] - **chore**: force build
+
+
 ## Version 0.11.0 (2022-05-14)
 
 ### Cleanup and refactoring
