@@ -60,7 +60,8 @@ func marshalCyclonedx(t *testing.T, x interface{}) string {
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
+
 	assert.NoError(t, err)
 
 	var output syftJsonOutput
@@ -83,7 +84,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput
@@ -103,7 +104,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, Auth: []byte{}})
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftSpdxOutput
@@ -121,6 +122,27 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 	assert.JSONEq(t, marshalJson(t, output.Relationships), marshalJson(t, fixture.Relationships))
 	assert.JSONEq(t, marshalJson(t, output.Files), marshalJson(t, fixture.Files))
 	assert.Equal(t, output.SpdxVersion, fixture.SpdxVersion)
+}
+
+// test for analysing an image completely without pullSecret
+func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
+	format := "cyclonedx"
+	s := syft.New(format).WithVersion("v9.9.9")
+	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []kubernetes.KubeCreds{}})
+	assert.NoError(t, err)
+
+	var output syftCyclonedxOutput
+	err = xml.Unmarshal([]byte(sbom), &output)
+	assert.NoError(t, err)
+
+	data, err := os.ReadFile("./fixtures/" + name + "." + format)
+	assert.NoError(t, err)
+
+	var fixture syftCyclonedxOutput
+	err = xml.Unmarshal(data, &fixture)
+	assert.NoError(t, err)
+
+	assert.Equal(t, marshalCyclonedx(t, output.Components), marshalCyclonedx(t, fixture.Components))
 }
 
 func TestSyft(t *testing.T) {
@@ -178,6 +200,7 @@ func TestSyft(t *testing.T) {
 				testJsonSbom(t, v.image, v.digest)
 			} else if v.format == "cyclonedx" {
 				testCyclonedxSbom(t, v.image, v.digest)
+				testCyclonedxSbomWithoutPullSecrets(t, v.image, v.digest)
 			} else if v.format == "spdxjson" {
 				testSpdxSbom(t, v.image, v.digest)
 			}

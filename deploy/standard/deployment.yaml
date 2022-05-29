@@ -23,6 +23,10 @@ spec:
               secretKeyRef:
                 name: "sbom-operator"
                 key: "accessToken"
+          - name: POD_NAMESPACE
+            valueFrom:
+              fieldRef:
+                fieldPath: metadata.namespace
         args:
           # example values
           - --cron="0 6 * * * *"

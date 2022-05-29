@@ -11,58 +11,92 @@ import (
 )
 
 type testData struct {
-	registry string
-	image    string
-	legacy   bool
+	registry  string
+	image     string
+	legacy    bool
+	imageSize int64
 }
 
 func TestRegistry(t *testing.T) {
 	tests := []testData{
 		{
-			registry: "gcr",
-			image:    "gcr.io/sbom-git-operator/integration-test-image:1.0.0",
-			legacy:   false,
+			registry:  "gcr",
+			image:     "gcr.io/sbom-git-operator/integration-test-image:1.0.0",
+			legacy:    false,
+			imageSize: 2823168,
 		},
 		{
-			registry: "gar",
-			image:    "europe-west3-docker.pkg.dev/sbom-git-operator/sbom-git-operator/integration-test-image:1.0.0",
-			legacy:   false,
+			registry:  "gar",
+			image:     "europe-west3-docker.pkg.dev/sbom-git-operator/sbom-git-operator/integration-test-image:1.0.0",
+			legacy:    false,
+			imageSize: 2823168,
 		},
 		{
-			registry: "ecr",
-			image:    "055403865123.dkr.ecr.eu-central-1.amazonaws.com/sbom-git-operator/integration-test-image:1.0.0",
-			legacy:   false,
+			registry:  "ecr",
+			image:     "055403865123.dkr.ecr.eu-central-1.amazonaws.com/sbom-git-operator/integration-test-image:1.0.0",
+			legacy:    false,
+			imageSize: 2823168,
 		},
 		/*{
 			registry: "acr",
 			image:  "sbomgitoperator.azurecr.io/integration-test-image:1.0.0",
 			legacy: false,
+			imageSize: 2823168,
 		},*/
 		{
-			registry: "hub",
-			image:    "docker.io/ckotzbauer/integration-test-image:1.0.0",
-			legacy:   false,
+			registry:  "hub",
+			image:     "docker.io/ckotzbauer/integration-test-image:1.0.0",
+			legacy:    false,
+			imageSize: 2823168,
 		},
 		{
-			registry: "ghcr",
-			image:    "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
-			legacy:   false,
+			registry:  "ghcr",
+			image:     "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
+			legacy:    false,
+			imageSize: 2823168,
 		},
 		{
-			registry: "legacy-ghcr",
-			image:    "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
-			legacy:   true,
+			registry:  "legacy-ghcr",
+			image:     "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
+			legacy:    true,
+			imageSize: 2823168,
 		},
+	}
+
+	unauthenticatedPositiveTest := testData{
+		registry:  "docker-io",
+		image:     "hello-world:latest",
+		legacy:    false,
+		imageSize: 7168,
+	}
+
+	unauthenticatedNegativeTest := testData{
+		registry:  "ghcr",
+		image:     "ghcr.io/ckotzbauer-kubernetes-bot/sbom-git-operator-integration-test:1.0.0",
+		legacy:    false,
+		imageSize: 2823168,
 	}
 
 	for _, v := range tests {
 		t.Run(v.registry, func(t *testing.T) {
-			testRegistry(t, v.registry, v.image, v.legacy)
+			testRegistry(t, v.registry, v.image, v.legacy, v.imageSize)
 		})
 	}
+
+	t.Run("unauthenticated positive", func(t *testing.T) {
+		testRegistryWithoutPullSecretsPositive(t, unauthenticatedPositiveTest.image, unauthenticatedPositiveTest.imageSize)
+	})
+
+	t.Run("unauthenticated negative", func(t *testing.T) {
+		testRegistryWithoutPullSecretsNegative(t, unauthenticatedNegativeTest.image)
+	})
+
+	t.Run("wrong secret negative", func(t *testing.T) {
+		testRegistryWithWrongPullSecretNegative(t, unauthenticatedNegativeTest.image)
+	})
 }
 
-func testRegistry(t *testing.T, name, image string, legacy bool) {
+func testRegistry(t *testing.T, name, image string, legacy bool, imageSize int64) {
 	b, err := os.ReadFile("../../auth/" + name + ".yaml")
 	assert.NoError(t, err)
 
@@ -70,13 +104,55 @@ func testRegistry(t *testing.T, name, image string, legacy bool) {
 	assert.NoError(t, err)
 
 	file := "/tmp/1.0.0.tar.gz"
-	err = registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, Auth: []byte(decoded), LegacyAuth: legacy})
+	err = registry.SaveImage(file, kubernetes.ContainerImage{
+		ImageID:     image,
+		PullSecrets: []kubernetes.KubeCreds{{SecretName: name, SecretCredsData: []byte(decoded), IsLegacySecret: legacy}},
+	})
 
 	if err == nil {
 		stat, _ := os.Stat(file)
-		assert.Equal(t, int64(2823168), stat.Size())
+		assert.Equal(t, imageSize, stat.Size())
 	}
 
 	os.Remove(file)
 	assert.NoError(t, err)
+}
+
+// this test should check if an image is pullable without pullSecrets (e.g. dockerhub - where it is really possible)
+func testRegistryWithoutPullSecretsPositive(t *testing.T, image string, imageSize int64) {
+	file := "/tmp/1.0.0.tar.gz"
+	err := registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, PullSecrets: []kubernetes.KubeCreds{}})
+
+	if err == nil {
+		stat, _ := os.Stat(file)
+		assert.Equal(t, imageSize, stat.Size())
+	}
+
+	os.Remove(file)
+	assert.NoError(t, err)
+}
+
+// this test should check if an image is not pullable without pullSecrets (e.g. internal registry - where it is forbidden)
+// an error must be returned
+func testRegistryWithoutPullSecretsNegative(t *testing.T, image string) {
+	file := "/tmp/1.0.0.tar.gz"
+	err := registry.SaveImage(file, kubernetes.ContainerImage{ImageID: image, PullSecrets: []kubernetes.KubeCreds{}})
+	assert.Error(t, err)
+	os.Remove(file)
+}
+
+// this test should check if an image is not pullable with wrong pullSecrets
+// an error must be returned
+func testRegistryWithWrongPullSecretNegative(t *testing.T, image string) {
+	file := "/tmp/1.0.0.tar.gz"
+	err := registry.SaveImage(file, kubernetes.ContainerImage{
+		ImageID:     image,
+		PullSecrets: []kubernetes.KubeCreds{{SecretName: "test", SecretCredsData: []byte{}, IsLegacySecret: false}},
+	})
+
+	if assert.Error(t, err) {
+		assert.Equal(t, registry.ErrorNoValidPullSecret, err)
+	}
+
+	os.Remove(file)
 }

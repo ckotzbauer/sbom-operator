@@ -7,6 +7,7 @@ import (
 	"strings"
 
 	"github.com/sirupsen/logrus"
+	"github.com/spf13/viper"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -18,17 +19,23 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 )
 
+type KubeCreds struct {
+	SecretName      string
+	SecretCredsData []byte
+	IsLegacySecret  bool
+}
+
 type ContainerImage struct {
-	Image      string
-	ImageID    string
-	Auth       []byte
-	LegacyAuth bool
-	Pods       []corev1.Pod
+	Image       string
+	ImageID     string
+	Pods        []corev1.Pod
+	PullSecrets []KubeCreds
 }
 
 type KubeClient struct {
-	Client            *kubernetes.Clientset
-	ignoreAnnotations bool
+	Client                *kubernetes.Clientset
+	ignoreAnnotations     bool
+	SbomOperatorNamespace string
 }
 
 var (
@@ -51,7 +58,8 @@ func NewClient(ignoreAnnotations bool) *KubeClient {
 		logrus.WithError(err).Fatal("Could not create Kubernetes client from config!")
 	}
 
-	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations}
+	sbomOperatorNamespace := os.Getenv("POD_NAMESPACE")
+	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, SbomOperatorNamespace: sbomOperatorNamespace}
 }
 
 func prepareLabelSelector(selector string) meta.ListOptions {
@@ -97,17 +105,24 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 		}
 
 		for _, pod := range pods {
+			allImageCreds := []KubeCreds{}
+
 			annotations := pod.Annotations
 			statuses := []corev1.ContainerStatus{}
 			statuses = append(statuses, pod.Status.ContainerStatuses...)
 			statuses = append(statuses, pod.Status.InitContainerStatuses...)
 			statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
 
-			pullSecrets, legacy, err := client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
+			allImageCreds = client.loadSecrets(pod.Namespace, pod.Spec.ImagePullSecrets)
 
-			if err != nil {
-				logrus.WithError(err).Errorf("PullSecrets could not be retrieved for pod %s/%s", ns.Name, pod.Name)
-				continue
+			fallbackPullSecretName := viper.GetString(internal.ConfigKeyFallbackPullSecret)
+			if fallbackPullSecretName != "" {
+				if client.SbomOperatorNamespace == "" {
+					logrus.Debugf("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
+				} else {
+					fallbackPullSecret := client.loadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: fallbackPullSecretName}})
+					allImageCreds = append(allImageCreds, fallbackPullSecret...)
+				}
 			}
 
 			for _, c := range statuses {
@@ -119,11 +134,10 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 						img, ok := images[trimmedImageID]
 						if !ok {
 							img = ContainerImage{
-								Image:      c.Image,
-								ImageID:    trimmedImageID,
-								Auth:       pullSecrets,
-								LegacyAuth: legacy,
-								Pods:       []corev1.Pod{},
+								Image:       c.Image,
+								ImageID:     trimmedImageID,
+								Pods:        []corev1.Pod{},
+								PullSecrets: allImageCreds,
 							}
 						}
 
@@ -133,11 +147,10 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 					} else {
 						logrus.Debugf("Skip image %s", trimmedImageID)
 						allImages = append(allImages, ContainerImage{
-							Image:      c.Image,
-							ImageID:    trimmedImageID,
-							Auth:       pullSecrets,
-							LegacyAuth: legacy,
-							Pods:       []corev1.Pod{},
+							Image:       c.Image,
+							ImageID:     trimmedImageID,
+							Pods:        []corev1.Pod{},
+							PullSecrets: allImageCreds,
 						})
 					}
 				}
@@ -196,16 +209,19 @@ func (client *KubeClient) hasAnnotation(annotations map[string]string, status co
 	return false
 }
 
-func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) ([]byte, bool, error) {
-	// TODO: Support all secrets which are referenced as imagePullSecrets instead of only the first one.
+func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) []KubeCreds {
+	allImageCreds := []KubeCreds{}
+
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
 		if err != nil {
-			return nil, false, err
+			logrus.WithError(err).Errorf("Could not load secret: %s/%s", namespace, s.Name)
+			continue
 		}
 
 		var creds []byte
 		legacy := false
+		name := secret.Name
 
 		if secret.Type == corev1.SecretTypeDockerConfigJson {
 			creds = secret.Data[corev1.DockerConfigJsonKey]
@@ -213,15 +229,15 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 			creds = secret.Data[corev1.DockerConfigKey]
 			legacy = true
 		} else {
-			return nil, false, fmt.Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
+			logrus.WithError(err).Errorf("invalid secret-type %s for pullSecret %s/%s", secret.Type, secret.Namespace, secret.Name)
 		}
 
 		if len(creds) > 0 {
-			return creds, legacy, nil
+			allImageCreds = append(allImageCreds, KubeCreds{SecretName: name, SecretCredsData: creds, IsLegacySecret: legacy})
 		}
 	}
 
-	return nil, false, nil
+	return allImageCreds
 }
 
 func (client *KubeClient) CreateJobSecret(namespace, suffix string, data []byte) error {
