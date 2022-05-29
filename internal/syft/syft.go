@@ -49,6 +49,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	err = registry.SaveImage(imagePath, img)
 
 	if err != nil {
+		logrus.WithError(err).Error("Image-Pull failed")
 		return "", err
 	}
 
