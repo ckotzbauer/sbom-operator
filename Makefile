@@ -19,7 +19,7 @@ vet:
 	go vet ./...
 
 test:
-	go test $(shell go list ./... | grep -v sbom-operator/internal/registry | grep -v sbom-operator/internal/target) -coverprofile cover.out
+	go test $(shell go list ./... | grep -v sbom-operator/internal/registry | grep -v sbom-operator/internal/target/oci) -coverprofile cover.out
 
 test-integration:
 	bash internal/target/oci/fixtures/oci-test.sh $(REGISTRY_USER) $(REGISTRY_TOKEN)
