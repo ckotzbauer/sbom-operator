@@ -1,4 +1,4 @@
-package target
+package git
 
 import (
 	"fmt"
@@ -10,7 +10,6 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
-	"github.com/ckotzbauer/sbom-operator/internal/target/git"
 	"github.com/sirupsen/logrus"
 )
 
@@ -19,12 +18,12 @@ type GitTarget struct {
 	workPath    string
 	repository  string
 	branch      string
-	gitAccount  git.GitAccount
+	gitAccount  GitAccount
 	sbomFormat  string
 }
 
 func NewGitTarget(workingTree, path, repo, branch, token, name, email, format string) *GitTarget {
-	gitAccount := git.New(token, name, email)
+	gitAccount := New(token, name, email)
 
 	return &GitTarget{
 		workingTree: workingTree,

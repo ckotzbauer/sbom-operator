@@ -8,6 +8,9 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
+	"github.com/ckotzbauer/sbom-operator/internal/target/dtrack"
+	"github.com/ckotzbauer/sbom-operator/internal/target/git"
+	"github.com/ckotzbauer/sbom-operator/internal/target/oci"
 	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
@@ -154,14 +157,22 @@ func initTargets(targetKeys []string) []target.Target {
 			token := viper.GetString(internal.ConfigKeyGitAccessToken)
 			name := viper.GetString(internal.ConfigKeyGitAuthorName)
 			email := viper.GetString(internal.ConfigKeyGitAuthorEmail)
-			t := target.NewGitTarget(workingTree, workPath, repository, branch, token, name, email, format)
+			t := git.NewGitTarget(workingTree, workPath, repository, branch, token, name, email, format)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "dtrack" {
 			baseUrl := viper.GetString(internal.ConfigKeyDependencyTrackBaseUrl)
 			apiKey := viper.GetString(internal.ConfigKeyDependencyTrackApiKey)
 			k8sClusterId := viper.GetString(internal.ConfigKeyKubernetesClusterId)
-			t := target.NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId)
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId)
+			err = t.ValidateConfig()
+			targets = append(targets, t)
+		} else if ta == "oci" {
+			registry := viper.GetString(internal.ConfigKeyOciRegistry)
+			username := viper.GetString(internal.ConfigKeyOciUser)
+			token := viper.GetString(internal.ConfigKeyOciToken)
+			format := viper.GetString(internal.ConfigKeyFormat)
+			t := oci.NewOciTarget(registry, username, token, format)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else {
