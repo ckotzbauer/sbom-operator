@@ -54,7 +54,7 @@ jobs:
             ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
-        uses: ckotzbauer/actions-toolkit/grype@0.14.2
+        uses: ckotzbauer/actions-toolkit/grype@0.15.0
         with:
           scan-target: ghcr.io/ckotzbauer/sbom-operator
           fail-on: "medium"
