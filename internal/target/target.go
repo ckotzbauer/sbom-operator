@@ -1,12 +1,12 @@
 package target
 
 import (
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 )
 
 type Target interface {
 	Initialize()
 	ValidateConfig() error
-	ProcessSbom(image kubernetes.ContainerImage, sbom string) error
-	Cleanup(allImages []kubernetes.ContainerImage)
+	ProcessSbom(image libk8s.KubeImage, sbom string) error
+	Cleanup(allImages []libk8s.KubeImage)
 }

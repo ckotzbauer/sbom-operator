@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/anchore/syft v0.47.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220616062755-33820a752d05
+	github.com/ckotzbauer/libk8soci v0.0.0-20220616071828-a85971a56e7e
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.5.0
 	github.com/robfig/cron v1.2.0
@@ -14,7 +14,6 @@ require (
 	github.com/stretchr/testify v1.7.2
 	k8s.io/api v0.24.1
 	k8s.io/apimachinery v0.24.1
-	k8s.io/client-go v0.24.1
 )
 
 require (
@@ -111,6 +110,7 @@ require (
 	google.golang.org/grpc v1.46.2 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
+	k8s.io/client-go v0.24.1 // indirect
 	lukechampine.com/uint128 v1.1.1 // indirect
 	modernc.org/cc/v3 v3.35.22 // indirect
 	modernc.org/ccgo/v3 v3.15.1 // indirect

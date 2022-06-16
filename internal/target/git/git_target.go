@@ -7,8 +7,8 @@ import (
 	"path/filepath"
 	"strings"
 
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/sirupsen/logrus"
 )
@@ -67,8 +67,8 @@ func (g *GitTarget) Initialize() {
 	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
-func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
-	imageID := image.ImageID
+func (g *GitTarget) ProcessSbom(image libk8s.KubeImage, sbom string) error {
+	imageID := image.Image.ImageID
 	filePath := g.ImageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
@@ -86,7 +86,7 @@ func (g *GitTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) er
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) Cleanup(allImages []kubernetes.ContainerImage) {
+func (g *GitTarget) Cleanup(allImages []libk8s.KubeImage) {
 	logrus.Debug("Start to remove old SBOMs")
 	ignoreDirs := []string{".git"}
 
@@ -101,10 +101,10 @@ func (g *GitTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 	}
 }
 
-func (g *GitTarget) mapToFiles(allImages []kubernetes.ContainerImage) []string {
+func (g *GitTarget) mapToFiles(allImages []libk8s.KubeImage) []string {
 	paths := []string{}
 	for _, img := range allImages {
-		paths = append(paths, g.ImageIDToFilePath(img.ImageID))
+		paths = append(paths, g.ImageIDToFilePath(img.Image.ImageID))
 	}
 
 	return paths

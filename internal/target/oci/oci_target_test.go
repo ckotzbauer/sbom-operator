@@ -5,7 +5,8 @@ import (
 	"os"
 	"testing"
 
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
+	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -15,7 +16,7 @@ func TestOci(t *testing.T) {
 	sbom, err := os.ReadFile("./fixtures/sbom.json")
 	assert.NoError(t, err)
 
-	img := kubernetes.ContainerImage{ImageID: os.Getenv("TEST_DIGEST")}
+	img := libk8s.KubeImage{Image: liboci.RegistryImage{ImageID: os.Getenv("TEST_DIGEST")}}
 
 	err = oci.ProcessSbom(img, string(sbom))
 	assert.NoError(t, err)

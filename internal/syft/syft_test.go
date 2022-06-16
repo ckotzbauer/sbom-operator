@@ -8,7 +8,6 @@ import (
 	"testing"
 
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/stretchr/testify/assert"
 )
@@ -61,7 +60,7 @@ func marshalCyclonedx(t *testing.T, x interface{}) string {
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
+	sbom, err := s.ExecuteSyft(oci.RegistryImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
 
 	assert.NoError(t, err)
 
@@ -85,7 +84,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
+	sbom, err := s.ExecuteSyft(oci.RegistryImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput
@@ -105,7 +104,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
+	sbom, err := s.ExecuteSyft(oci.RegistryImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftSpdxOutput
@@ -129,7 +128,7 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format).WithVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(kubernetes.ContainerImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
+	sbom, err := s.ExecuteSyft(oci.RegistryImage{ImageID: imageID, PullSecrets: []oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput

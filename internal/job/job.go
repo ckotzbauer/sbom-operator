@@ -11,6 +11,7 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/sirupsen/logrus"
@@ -48,12 +49,12 @@ func New(k8s *kubernetes.KubeClient, image, imagePullSecret, clusterId string, t
 	}
 }
 
-func (j JobClient) StartJob(images map[string]kubernetes.ContainerImage) (*batchv1.Job, error) {
+func (j JobClient) StartJob(images []libk8s.KubeImage) (*batchv1.Job, error) {
 	configs := make([]imageConfig, 0)
 	podNamespace := os.Getenv("POD_NAMESPACE")
 
 	for _, image := range images {
-		cfg, err := oci.ResolveAuthConfig(oci.RegistryImage{ImageID: image.ImageID, PullSecrets: image.PullSecrets})
+		cfg, err := oci.ResolveAuthConfig(oci.RegistryImage{ImageID: image.Image.ImageID, PullSecrets: image.Image.PullSecrets})
 		if err != nil {
 			logrus.WithError(err).Error("Error occurred during auth-resolve")
 			return nil, err
@@ -63,7 +64,7 @@ func (j JobClient) StartJob(images map[string]kubernetes.ContainerImage) (*batch
 			Host:     cfg.ServerAddress,
 			User:     cfg.Username,
 			Password: cfg.Password,
-			Image:    image.ImageID,
+			Image:    image.Image.ImageID,
 			Pods:     j.convertPods(image.Pods),
 		})
 	}
@@ -93,7 +94,7 @@ func (j JobClient) StartJob(images map[string]kubernetes.ContainerImage) (*batch
 
 func (j JobClient) WaitForJob(job *batchv1.Job) bool {
 	for {
-		job, err := j.k8s.Client.BatchV1().Jobs(job.Namespace).Get(context.Background(), job.Name, meta.GetOptions{})
+		job, err := j.k8s.Client.Client.BatchV1().Jobs(job.Namespace).Get(context.Background(), job.Name, meta.GetOptions{})
 		if err != nil {
 			logrus.WithError(err).Warnf("Error while waiting for job %s.", job.Name)
 			return false

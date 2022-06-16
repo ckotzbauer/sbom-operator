@@ -3,6 +3,7 @@ package daemon
 import (
 	"time"
 
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/job"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
@@ -71,7 +72,7 @@ func (c *CronService) runBackgroundService() {
 
 	k8s := kubernetes.NewClient(viper.GetBool(internal.ConfigKeyIgnoreAnnotations))
 	namespaceSelector := viper.GetString(internal.ConfigKeyNamespaceLabelSelector)
-	namespaces, err := k8s.ListNamespaces(namespaceSelector)
+	namespaces, err := k8s.Client.ListNamespaces(namespaceSelector)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to list namespaces with selector: %s, abort background-service", namespaceSelector)
 		return
@@ -90,11 +91,11 @@ func (c *CronService) runBackgroundService() {
 }
 
 func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient,
-	containerImages map[string]kubernetes.ContainerImage, allImages []kubernetes.ContainerImage) {
+	containerImages []libk8s.KubeImage, allImages map[string]libk8s.KubeImage) {
 	sy := syft.New(format)
 
 	for _, image := range containerImages {
-		sbom, err := sy.ExecuteSyft(image)
+		sbom, err := sy.ExecuteSyft(image.Image)
 		if err != nil {
 			// Error is already handled from syft module.
 			continue
@@ -114,12 +115,12 @@ func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient
 		}
 	}
 
-	for _, t := range c.targets {
+	/*for _, t := range c.targets {
 		t.Cleanup(allImages)
-	}
+	}*/
 }
 
-func executeJobImage(k8s *kubernetes.KubeClient, containerImages map[string]kubernetes.ContainerImage) {
+func executeJobImage(k8s *kubernetes.KubeClient, containerImages []libk8s.KubeImage) {
 	jobClient := job.New(
 		k8s,
 		viper.GetString(internal.ConfigKeyJobImage),

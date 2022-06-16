@@ -13,7 +13,6 @@ import (
 
 	"github.com/anchore/syft/syft/source"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/sirupsen/logrus"
 
 	parser "github.com/novln/docker-parser"
@@ -36,7 +35,7 @@ func (s Syft) WithVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
+func (s *Syft) ExecuteSyft(img oci.RegistryImage) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	fullRef, err := parser.Parse(img.ImageID)

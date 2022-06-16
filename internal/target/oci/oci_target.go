@@ -3,8 +3,8 @@ package oci
 import (
 	"fmt"
 
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
@@ -50,10 +50,10 @@ func (g *OciTarget) ValidateConfig() error {
 func (g *OciTarget) Initialize() {
 }
 
-func (g *OciTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
-	ref, err := name.ParseReference(image.ImageID)
+func (g *OciTarget) ProcessSbom(image libk8s.KubeImage, sbom string) error {
+	ref, err := name.ParseReference(image.Image.ImageID)
 	if err != nil {
-		logrus.WithError(err).Errorf("failed to parse reference %s", image.ImageID)
+		logrus.WithError(err).Errorf("failed to parse reference %s", image.Image.ImageID)
 		return err
 	}
 
@@ -90,5 +90,5 @@ func (g *OciTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) er
 	return err
 }
 
-func (g *OciTarget) Cleanup(allImages []kubernetes.ContainerImage) {
+func (g *OciTarget) Cleanup(allImages []libk8s.KubeImage) {
 }

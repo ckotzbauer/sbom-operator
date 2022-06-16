@@ -10,8 +10,8 @@ import (
 	dtrack "github.com/nscuro/dtrack-client"
 	"github.com/sirupsen/logrus"
 
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal"
-	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 )
 
 type DependencyTrackTarget struct {
@@ -46,10 +46,10 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() {
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbom string) error {
-	imageRef, err := parser.Parse(image.Image)
+func (g *DependencyTrackTarget) ProcessSbom(image libk8s.KubeImage, sbom string) error {
+	imageRef, err := parser.Parse(image.Image.Image)
 	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
+		logrus.WithError(err).Errorf("Could not parse image %s", image.Image.Image)
 		return nil
 	}
 
@@ -57,7 +57,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 	version := imageRef.Tag()
 
 	if sbom == "" {
-		logrus.Infof("Empty SBOM - skip image (image=%s)", image.ImageID)
+		logrus.Infof("Empty SBOM - skip image (image=%s)", image.Image.ImageID)
 		return nil
 	}
 
@@ -103,7 +103,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image kubernetes.ContainerImage, sbo
 	return nil
 }
 
-func (g *DependencyTrackTarget) Cleanup(allImages []kubernetes.ContainerImage) {
+func (g *DependencyTrackTarget) Cleanup(allImages []libk8s.KubeImage) {
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
 
 	var (
@@ -113,9 +113,9 @@ func (g *DependencyTrackTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 
 	allImageRefs := make([]parser.Reference, len(allImages))
 	for _, image := range allImages {
-		ref, err := parser.Parse(image.Image)
+		ref, err := parser.Parse(image.Image.Image)
 		if err != nil {
-			logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
+			logrus.WithError(err).Errorf("Could not parse image %s", image.Image.Image)
 			continue
 		}
 		allImageRefs = append(allImageRefs, *ref)
@@ -136,7 +136,7 @@ func (g *DependencyTrackTarget) Cleanup(allImages []kubernetes.ContainerImage) {
 
 			// Image used in current cluster
 			for _, image := range allImages {
-				if image.Image == currentImageName {
+				if image.Image.Image == currentImageName {
 					continue projectLoop
 				}
 			}
