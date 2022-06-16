@@ -11,8 +11,8 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 
+	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
-	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	"github.com/sirupsen/logrus"
 )
 
@@ -53,7 +53,7 @@ func (j JobClient) StartJob(images map[string]kubernetes.ContainerImage) (*batch
 	podNamespace := os.Getenv("POD_NAMESPACE")
 
 	for _, image := range images {
-		cfg, err := registry.ResolveAuthConfig(image)
+		cfg, err := oci.ResolveAuthConfig(oci.RegistryImage{ImageID: image.ImageID, PullSecrets: image.PullSecrets})
 		if err != nil {
 			logrus.WithError(err).Error("Error occurred during auth-resolve")
 			return nil, err

@@ -12,8 +12,8 @@ import (
 	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
+	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
-	"github.com/ckotzbauer/sbom-operator/internal/registry"
 	"github.com/sirupsen/logrus"
 
 	parser "github.com/novln/docker-parser"
@@ -46,7 +46,7 @@ func (s *Syft) ExecuteSyft(img kubernetes.ContainerImage) (string, error) {
 	}
 
 	imagePath := "/tmp/" + strings.ReplaceAll(fullRef.Tag(), ":", "_") + ".tar.gz"
-	err = registry.SaveImage(imagePath, img)
+	err = oci.SaveImage(imagePath, oci.RegistryImage{ImageID: img.ImageID, PullSecrets: img.PullSecrets})
 
 	if err != nil {
 		logrus.WithError(err).Error("Image-Pull failed")

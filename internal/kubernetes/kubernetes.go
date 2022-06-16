@@ -16,20 +16,15 @@ import (
 	"k8s.io/client-go/kubernetes"
 	"k8s.io/client-go/tools/clientcmd"
 
+	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
 )
-
-type KubeCreds struct {
-	SecretName      string
-	SecretCredsData []byte
-	IsLegacySecret  bool
-}
 
 type ContainerImage struct {
 	Image       string
 	ImageID     string
 	Pods        []corev1.Pod
-	PullSecrets []KubeCreds
+	PullSecrets []oci.KubeCreds
 }
 
 type KubeClient struct {
@@ -105,7 +100,7 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 		}
 
 		for _, pod := range pods {
-			allImageCreds := []KubeCreds{}
+			allImageCreds := []oci.KubeCreds{}
 
 			annotations := pod.Annotations
 			statuses := []corev1.ContainerStatus{}
@@ -209,8 +204,8 @@ func (client *KubeClient) hasAnnotation(annotations map[string]string, status co
 	return false
 }
 
-func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) []KubeCreds {
-	allImageCreds := []KubeCreds{}
+func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalObjectReference) []oci.KubeCreds {
+	allImageCreds := []oci.KubeCreds{}
 
 	for _, s := range secrets {
 		secret, err := client.Client.CoreV1().Secrets(namespace).Get(context.Background(), s.Name, meta.GetOptions{})
@@ -233,7 +228,7 @@ func (client *KubeClient) loadSecrets(namespace string, secrets []corev1.LocalOb
 		}
 
 		if len(creds) > 0 {
-			allImageCreds = append(allImageCreds, KubeCreds{SecretName: name, SecretCredsData: creds, IsLegacySecret: legacy})
+			allImageCreds = append(allImageCreds, oci.KubeCreds{SecretName: name, SecretCredsData: creds, IsLegacySecret: legacy})
 		}
 	}
 
