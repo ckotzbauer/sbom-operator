@@ -36,8 +36,23 @@ jobs:
         run: make build
 
       - name: Unit tests
+        env:
+          REGISTRY_USER: ckotzbauer
+          REGISTRY_TOKEN: ${{ secrets.GHCR_PASSWORD }}
         run: |
           make test
+
+          DATE="$(date +%Y%m%d%H%M%S)"
+
+          docker login -u "$REGISTRY_USER" -p "$REGISTRY_TOKEN" ghcr.io
+          docker build --build-arg date=${DATE} --context internal/target/oci/fixtures -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
+          docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
+          DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
+
+          syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
+          TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
+
+          COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
 
       - uses: codecov/codecov-action@v3
         with:
