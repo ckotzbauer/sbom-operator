@@ -54,15 +54,12 @@ jobs:
             docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
             DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
             syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
-            TEST_LIST="$(go list ./...)"
-          else
-            TEST_LIST="$(go list ./... | grep -v internat/target/oci)"
-          fi
 
-          TEST_DIGEST="${DIGEST}" go test "$TEST_LIST" -coverprofile cover.out
+            TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
 
-          if [ "$IS_FORK" != 'true' ]; then
             COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
+          else
+            go test $(go list ./... | grep -v internat/target/oci) -coverprofile cover.out
           fi
 
       - uses: codecov/codecov-action@v3
