@@ -27,7 +27,7 @@ jobs:
         uses: sigstore/cosign-installer@7e0881f8fe90b25e305bbf0309761e9314607e25
 
       - name: Setup Syft
-        uses: ckotzbauer/actions-toolkit/setup-syft@0.15.0
+        uses: ckotzbauer/actions-toolkit/setup-syft@0.16.0
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -35,7 +35,7 @@ jobs:
       - name: Install GoReleaser
         uses: goreleaser/goreleaser-action@v3
         with:
-          version: "v1.7.0"
+          version: "v1.9.2"
           install-only: true
 
       - name: Build binary
@@ -77,7 +77,7 @@ jobs:
             ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
-        uses: ckotzbauer/actions-toolkit/grype@0.15.0
+        uses: ckotzbauer/actions-toolkit/grype@0.16.0
         with:
           scan-target: ghcr.io/ckotzbauer/sbom-operator
           fail-on: "medium"
