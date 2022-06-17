@@ -45,20 +45,25 @@ jobs:
         env:
           REGISTRY_USER: ckotzbauer
           REGISTRY_TOKEN: ${{ secrets.GHCR_PASSWORD }}
+          IS_FORK: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
         run: |
-          make test
+          if [ "$IS_FORK" != 'true' ]; then
+            DATE="$(date +%Y%m%d%H%M%S)"
+            docker login -u "$REGISTRY_USER" -p "$REGISTRY_TOKEN" ghcr.io
+            docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
+            docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
+            DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
+            syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
+            TEST_LIST="$(go list ./...)"
+          else
+            TEST_LIST="$(go list ./... | grep -v internat/target/oci)"
+          fi
 
-          DATE="$(date +%Y%m%d%H%M%S)"
+          TEST_DIGEST="${DIGEST}" go test "$TEST_LIST" -coverprofile cover.out
 
-          docker login -u "$REGISTRY_USER" -p "$REGISTRY_TOKEN" ghcr.io
-          docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
-          docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
-          DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
-
-          syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
-          TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
-
-          COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
+          if [ "$IS_FORK" != 'true' ]; then
+            COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
+          fi
 
       - uses: codecov/codecov-action@v3
         with:
