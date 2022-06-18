@@ -47,7 +47,7 @@ jobs:
           REGISTRY_TOKEN: ${{ secrets.GHCR_PASSWORD }}
           IS_FORK: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
         run: |
-          if [ "$IS_FORK" != 'true' ]; then
+          if [ "$IS_FORK" != true ]; then
             DATE="$(date +%Y%m%d%H%M%S)"
             docker login -u "$REGISTRY_USER" -p "$REGISTRY_TOKEN" ghcr.io
             docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
@@ -59,7 +59,7 @@ jobs:
 
             COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
           else
-            go test $(go list ./... | grep -v internat/target/oci) -coverprofile cover.out
+            go test $(go list ./... | grep -v internal/target/oci) -coverprofile cover.out
           fi
 
       - uses: codecov/codecov-action@v3
