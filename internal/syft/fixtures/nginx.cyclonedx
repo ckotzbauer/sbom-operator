@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:fac1fac5-05c7-4203-8780-4b9764c1686f" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:30c10e0a-10db-494e-b4f4-3a5a7f9e5183" version="1">
   <metadata>
-    <timestamp>2022-05-22T08:50:09+02:00</timestamp>
+    <timestamp>2022-06-18T08:37:32+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.46.1</version>
+        <version>0.48.1</version>
       </tool>
     </tools>
     <component bom-ref="bed2b68c44140e08" type="container">
@@ -4543,6 +4543,7 @@
       <properties>
         <property name="syft:distro:id">debian</property>
         <property name="syft:distro:prettyName">Debian GNU/Linux 11 (bullseye)</property>
+        <property name="syft:distro:versionCodename">bullseye</property>
         <property name="syft:distro:versionID">11</property>
       </properties>
     </component>

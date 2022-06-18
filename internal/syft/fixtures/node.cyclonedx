@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:a52653ce-ee2a-4f13-8aea-684bcdad9d02" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:e3f9084e-6e2a-4bb8-956c-3366654557c3" version="1">
   <metadata>
-    <timestamp>2022-05-22T08:50:50+02:00</timestamp>
+    <timestamp>2022-06-18T08:38:12+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.46.1</version>
+        <version>0.48.1</version>
       </tool>
     </tools>
     <component bom-ref="36cc3d123ca150cc" type="container">
@@ -9783,6 +9783,7 @@
       <properties>
         <property name="syft:distro:id">debian</property>
         <property name="syft:distro:prettyName">Debian GNU/Linux 10 (buster)</property>
+        <property name="syft:distro:versionCodename">buster</property>
         <property name="syft:distro:versionID">10</property>
       </properties>
     </component>
