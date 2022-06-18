@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/anchore/syft v0.47.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220616071828-a85971a56e7e
+	github.com/ckotzbauer/libk8soci v0.0.0-20220617111310-769e57e01900
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.5.0
 	github.com/robfig/cron v1.2.0
