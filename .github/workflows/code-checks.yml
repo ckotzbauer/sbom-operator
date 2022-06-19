@@ -19,7 +19,9 @@ jobs:
         uses: actions/checkout@v3
 
       - name: Gosec Security Scanner
-        run: make lintsec
+        run: |
+          make bootstrap-tools
+          make lintsec
 
   golint:
     runs-on: ubuntu-latest
