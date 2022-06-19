@@ -1,5 +1,6 @@
-REGISTRY_USER=""
-REGISTRY_TOKEN=""
+TEMPDIR = ./.tmp
+LINTCMD = $(TEMPDIR)/golangci-lint run
+GOSECCMD = $(TEMPDIR)/gosec ./...
 
 all: build
 
@@ -21,24 +22,16 @@ vet:
 test:
 	go test $(shell go list ./... | grep -v sbom-operator/internal/target/oci) -coverprofile cover.out
 
-lintsec: gosec
-	$(GOSEC) ./...
+lint:
+	$(LINTCMD)
 
-# find or download gosec
-# download gosec if necessary
-gosec:
-ifeq (, $(shell which gosec))
-	@{ \
-	set -e ;\
-	GOSEC_TMP_DIR=$$(mktemp -d) ;\
-	cd $$GOSEC_TMP_DIR ;\
-	go mod init tmp ;\
-	go install github.com/securego/gosec/v2/cmd/gosec@v2.12.0 ;\
-	rm -rf $$GOSEC_TMP_DIR ;\
-	}
-GOSEC=$(GOBIN)/gosec
-else
-GOSEC=$(shell which gosec)
-endif
+lintsec:
+	$(GOSECCMD)
 
-curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s v1.46.2
+$(TEMPDIR):
+	mkdir -p $(TEMPDIR)
+
+.PHONY: bootstrap-tools
+bootstrap-tools: $(TEMPDIR)
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(TEMPDIR)/ v1.46.2
+	curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(TEMPDIR)/ v2.12.0
