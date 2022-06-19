@@ -94,8 +94,7 @@ func (c *CronService) runBackgroundService() {
 	running = false
 }
 
-func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient,
-	containerImages []libk8s.KubeImage, allImages map[string]libk8s.KubeImage) {
+func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient, containerImages []libk8s.KubeImage, allImages []libk8s.KubeImage) {
 	sy := syft.New(format)
 
 	for _, image := range containerImages {
@@ -119,9 +118,9 @@ func (c *CronService) executeSyftScans(format string, k8s *kubernetes.KubeClient
 		}
 	}
 
-	/*for _, t := range c.targets {
+	for _, t := range c.targets {
 		t.Cleanup(allImages)
-	}*/
+	}
 }
 
 func executeJobImage(k8s *kubernetes.KubeClient, containerImages []libk8s.KubeImage) {

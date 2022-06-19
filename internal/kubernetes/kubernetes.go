@@ -38,7 +38,7 @@ func NewClient(ignoreAnnotations bool) *KubeClient {
 	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, SbomOperatorNamespace: sbomOperatorNamespace}
 }
 
-func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.KubeImage, map[string]libk8s.KubeImage) {
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.KubeImage, []libk8s.KubeImage) {
 	fallbackPullSecretName := viper.GetString(internal.ConfigKeyFallbackPullSecret)
 	var fallbackPullSecret []oci.KubeCreds
 

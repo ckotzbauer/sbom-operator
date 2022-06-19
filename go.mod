@@ -4,7 +4,7 @@ go 1.18
 
 require (
 	github.com/anchore/syft v0.48.1
-	github.com/ckotzbauer/libk8soci v0.0.0-20220618141744-5d23eb2eeea7
+	github.com/ckotzbauer/libk8soci v0.0.0-20220619090832-e2ab03f1c147
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.6.0
 	github.com/robfig/cron v1.2.0
@@ -103,6 +103,7 @@ require (
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.0.0-20220427172511-eb4f295cb31f // indirect
+	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220106191415-9b9b3d81d5e3 // indirect
 	golang.org/x/sync v0.0.0-20220513210516-0976fa681c29 // indirect
 	golang.org/x/tools v0.1.10 // indirect
