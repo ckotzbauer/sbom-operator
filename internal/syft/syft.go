@@ -96,7 +96,11 @@ func (s *Syft) ExecuteSyft(img oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	os.Remove(imagePath)
+	err = os.Remove(imagePath)
+	if err != nil {
+		logrus.WithError(err).Warnf("Image %s could not be deleted", imagePath)
+	}
+
 	return string(b), nil
 }
 

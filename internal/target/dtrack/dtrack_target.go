@@ -111,16 +111,6 @@ func (g *DependencyTrackTarget) Cleanup(allImages []libk8s.KubeImage) {
 		pageSize   = 50
 	)
 
-	allImageRefs := make([]parser.Reference, len(allImages))
-	for _, image := range allImages {
-		ref, err := parser.Parse(image.Image.Image)
-		if err != nil {
-			logrus.WithError(err).Errorf("Could not parse image %s", image.Image.Image)
-			continue
-		}
-		allImageRefs = append(allImageRefs, *ref)
-	}
-
 	for {
 		projectsPage, err := client.Project.GetAll(context.Background(), dtrack.PageOptions{
 			PageNumber: pageNumber,
@@ -150,7 +140,10 @@ func (g *DependencyTrackTarget) Cleanup(allImages []libk8s.KubeImage) {
 					if clusterId == g.k8sClusterId {
 						logrus.Infof("Removing %v=%v tag from project %v", kubernetesCluster, g.k8sClusterId, currentImageName)
 						project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
-						client.Project.Update(context.Background(), project)
+						_, err := client.Project.Update(context.Background(), project)
+						if err != nil {
+							logrus.WithError(err).Warnf("Project %s could not be updated", project.UUID.String())
+						}
 					} else {
 						otherClusterIds = append(otherClusterIds, clusterId)
 					}
@@ -163,7 +156,10 @@ func (g *DependencyTrackTarget) Cleanup(allImages []libk8s.KubeImage) {
 			// if not in other cluster delete the project
 			if sbomOperatorPropFound && len(otherClusterIds) == 0 {
 				logrus.Infof("Image not running in any cluster - removing %v", currentImageName)
-				client.Project.Delete(context.Background(), project.UUID)
+				err := client.Project.Delete(context.Background(), project.UUID)
+				if err != nil {
+					logrus.WithError(err).Warnf("Project %s could not be deleted", project.UUID.String())
+				}
 			}
 		}
 

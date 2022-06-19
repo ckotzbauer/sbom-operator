@@ -24,9 +24,9 @@ var (
 	daemonCron string
 
 	rootCmd = &cobra.Command{
-		Use:              "sbom-operator",
-		Short:            "An operator for cataloguing all k8s-cluster-images to multiple targets.",
-		PersistentPreRun: internal.BindFlags,
+		Use:               "sbom-operator",
+		Short:             "An operator for cataloguing all k8s-cluster-images to multiple targets.",
+		PersistentPreRunE: internal.BindFlags,
 		Run: func(cmd *cobra.Command, args []string) {
 			internal.SetUpLogs(os.Stdout, verbosity)
 			printVersion()
@@ -88,5 +88,8 @@ func health(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
-	rootCmd.Execute()
+	err := rootCmd.Execute()
+	if err != nil {
+		panic(err)
+	}
 }

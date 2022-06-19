@@ -40,7 +40,11 @@ func Start(cronTime string) {
 	cs.printNextExecution()
 
 	c := cron.New()
-	c.AddFunc(cr, func() { cs.runBackgroundService() })
+	err := c.AddFunc(cr, func() { cs.runBackgroundService() })
+	if err != nil {
+		logrus.WithError(err).Fatal("Could not configure cron")
+	}
+
 	c.Start()
 }
 
