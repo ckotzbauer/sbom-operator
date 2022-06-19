@@ -95,7 +95,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image libk8s.KubeImage, sbom string)
 		project.Tags = append(project.Tags, dtrack.Tag{Name: sbomOperator})
 	}
 
-	_, err = client.Project.Update(context.Background(), *project)
+	_, err = client.Project.Update(context.Background(), project)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not update project tags")
 	}
@@ -131,7 +131,7 @@ func (g *DependencyTrackTarget) Cleanup(allImages []libk8s.KubeImage) {
 		}
 
 	projectLoop:
-		for _, project := range projectsPage.Projects {
+		for _, project := range projectsPage.Items {
 			currentImageName := fmt.Sprintf("%v:%v", project.Name, project.Version)
 
 			// Image used in current cluster
