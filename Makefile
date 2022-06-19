@@ -1,5 +1,5 @@
 TEMPDIR = ./.tmp
-LINTCMD = $(TEMPDIR)/golangci-lint run
+LINTCMD = $(TEMPDIR)/golangci-lint run --timeout 5m
 GOSECCMD = $(TEMPDIR)/gosec ./...
 
 all: build
