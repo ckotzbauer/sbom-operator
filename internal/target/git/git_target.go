@@ -97,7 +97,10 @@ func (g *GitTarget) Cleanup(allImages []libk8s.KubeImage) {
 	if err != nil {
 		logrus.WithError(err).Error("Could not cleanup old SBOMs")
 	} else {
-		g.gitAccount.CommitAndPush(g.workingTree, "Deleted old SBOMs")
+		err := g.gitAccount.CommitAndPush(g.workingTree, "Deleted old SBOMs")
+		if err != nil {
+			logrus.WithError(err).Error("Could not commit SBOM removal to git")
+		}
 	}
 }
 

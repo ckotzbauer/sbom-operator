@@ -42,9 +42,3 @@ func TestUnescape(t *testing.T) {
 		})
 	}
 }
-
-func TestRandStringBytes(t *testing.T) {
-	out := RandStringBytes(67)
-	assert.NotEmpty(t, out)
-	assert.Equal(t, 67, len(out))
-}

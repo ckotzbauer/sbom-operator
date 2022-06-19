@@ -26,8 +26,9 @@ type KubeClient struct {
 
 var (
 	annotationTemplate = "ckotzbauer.sbom-operator.io/%s"
-	jobSecretName      = "sbom-operator-job-config"
-	JobName            = "sbom-operator-job"
+	/* #nosec */
+	jobSecretName = "sbom-operator-job-config"
+	JobName       = "sbom-operator-job"
 )
 
 func NewClient(ignoreAnnotations bool) *KubeClient {
