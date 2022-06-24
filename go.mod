@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.18
 
 require (
-	github.com/anchore/syft v0.48.1
+	github.com/anchore/syft v0.49.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20220619090832-e2ab03f1c147
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.6.0
@@ -18,6 +18,9 @@ require (
 
 require (
 	github.com/CycloneDX/cyclonedx-go v0.5.2 // indirect
+	github.com/Masterminds/goutils v1.1.1 // indirect
+	github.com/Masterminds/semver/v3 v3.1.1 // indirect
+	github.com/Masterminds/sprig/v3 v3.2.2 // indirect
 	github.com/Microsoft/go-winio v0.5.2 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20210428141323-04723f9f07d7 // indirect
 	github.com/PuerkitoBio/purell v1.1.1 // indirect
@@ -56,6 +59,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/hcl v1.0.0 // indirect
+	github.com/huandu/xstrings v1.3.2 // indirect
 	github.com/inconshreveable/mousetrap v1.0.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/jinzhu/copier v0.3.2 // indirect
@@ -70,9 +74,11 @@ require (
 	github.com/mattn/go-isatty v0.0.14 // indirect
 	github.com/mattn/go-runewidth v0.0.13 // indirect
 	github.com/mholt/archiver/v3 v3.5.1 // indirect
+	github.com/mitchellh/copystructure v1.2.0 // indirect
 	github.com/mitchellh/go-homedir v1.1.0 // indirect
 	github.com/mitchellh/hashstructure/v2 v2.0.2 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
+	github.com/mitchellh/reflectwalk v1.0.2 // indirect
 	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/nwaples/rardecode v1.1.0 // indirect
@@ -89,6 +95,7 @@ require (
 	github.com/rivo/uniseg v0.2.0 // indirect
 	github.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
+	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/spdx/tools-golang v0.2.0 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
