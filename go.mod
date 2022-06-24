@@ -11,7 +11,7 @@ require (
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.4.0
 	github.com/spf13/viper v1.12.0
-	github.com/stretchr/testify v1.7.2
+	github.com/stretchr/testify v1.7.5
 	k8s.io/api v0.24.2
 	k8s.io/apimachinery v0.24.2
 )
