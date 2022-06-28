@@ -1,3 +1,57 @@
+## Version 0.13.0 (2022-06-28)
+
+### Bug fixes
+
+* [[`c5ace22b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c5ace22b)] - **fix**: update libk8soci
+
+### Cleanup and refactoring
+
+* [[`3764b742`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3764b742)] - **cleanup**: moved some k8s logics to libk8soci
+* [[`e87fbf11`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e87fbf11)] - **cleanup**: moved registry package to libk8soci
+* [[`1be48395`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1be48395)] - **cleanup**: fix test path
+* [[`6bbc756c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6bbc756c)] - **cleanup**: move targets to own packages
+
+### Build and testing
+
+* [[`fecc9ced`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fecc9ced)] - **build**: add linting (#124)
+* [[`b30b9170`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b30b9170)] - **build**: fix fork condition
+* [[`951230b5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/951230b5)] - **build**: update to golang 1.18.3
+* [[`811824a7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/811824a7)] - **build**: tolerate suffixes
+* [[`8240e512`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8240e512)] - **build**: update toolkit to 0.16.0
+* [[`d6d2dbe0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d6d2dbe0)] - **build**: added dependencies
+* [[`88471bde`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/88471bde)] - **build**: fix command
+* [[`78bf604b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/78bf604b)] - **test**: fix conditional execution
+* [[`a592ef59`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a592ef59)] - **test**: only execute on non-forks
+* [[`64b22fe2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/64b22fe2)] - **test**: merge tests
+* [[`0b0e45a4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0b0e45a4)] - **test**: fix test path
+
+### Security
+
+* [[`d22c9d2f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d22c9d2f)] - **security**: updated containerd to 1.6.6
+
+### Dependency updates
+
+* [[`b21910d4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b21910d4)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.17.0
+* [[`88dc0e7f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/88dc0e7f)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.10.0
+* [[`bab83b3b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bab83b3b)] - **deps**: update module github.com&#x2F;spf13&#x2F;cobra to v1.5.0
+* [[`44272a8d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/44272a8d)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.49.0
+* [[`23cc1405`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/23cc1405)] - **deps**: update module github.com&#x2F;stretchr&#x2F;testify to v1.7.5
+* [[`49c569a6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/49c569a6)] - **deps**: update sigstore&#x2F;cosign-installer digest to 441a29e
+* [[`6d614e99`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6d614e99)] - **deps**: update module github.com&#x2F;nscuro&#x2F;dtrack-client to v0.6.0 (#123)
+* [[`17bd6ce8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/17bd6ce8)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 5d23eb2
+* [[`5f26087a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5f26087a)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.48.1 (#121)
+* [[`eafde448`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eafde448)] - **deps**: update dependency codenotary&#x2F;vcn to v0.9.20 (#119)
+* [[`fe955100`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fe955100)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 769e57e
+* [[`b3eb7a61`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b3eb7a61)] - **deps**: update kubernetes versions to v0.24.2 (#120)
+* [[`0ddf2619`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0ddf2619)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.47.0 (#117)
+* [[`5b53a5a7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5b53a5a7)] - **deps**: update module github.com&#x2F;stretchr&#x2F;testify to v1.7.2 (#115)
+* [[`b47a870e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b47a870e)] - **deps**: update sigstore&#x2F;cosign-installer digest to 7e0881f (#112)
+* [[`2683c671`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2683c671)] - **deps**: update dependency docker to v20.10.17 (#113)
+* [[`c45fb8ed`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c45fb8ed)] - **deps**: update module github.com&#x2F;docker&#x2F;cli to v20.10.17 (#114)
+* [[`55178600`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/55178600)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.15.0 (#116)
+* [[`3433998a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3433998a)] - **deps**: update dependency codenotary&#x2F;vcn to v0.9.19
+
+
 ## Version 0.12.0 (2022-05-29)
 
 ### Features and improvements
