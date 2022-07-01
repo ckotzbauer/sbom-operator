@@ -4,14 +4,14 @@ go 1.18
 
 require (
 	github.com/anchore/syft v0.49.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220619090832-e2ab03f1c147
+	github.com/ckotzbauer/libk8soci v0.0.0-20220701045827-83b65b42c42b
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.6.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.8.1
 	github.com/spf13/cobra v1.5.0
 	github.com/spf13/viper v1.12.0
-	github.com/stretchr/testify v1.7.5
+	github.com/stretchr/testify v1.8.0
 	k8s.io/api v0.24.2
 	k8s.io/apimachinery v0.24.2
 )
@@ -119,7 +119,7 @@ require (
 	google.golang.org/grpc v1.46.2 // indirect
 	gopkg.in/ini.v1 v1.66.4 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
-	k8s.io/client-go v0.24.1 // indirect
+	k8s.io/client-go v0.24.2 // indirect
 	lukechampine.com/uint128 v1.1.1 // indirect
 	modernc.org/cc/v3 v3.35.22 // indirect
 	modernc.org/ccgo/v3 v3.15.1 // indirect
