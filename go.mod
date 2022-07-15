@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.18
 
 require (
-	github.com/anchore/syft v0.50.0
+	github.com/anchore/syft v0.51.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20220701045827-83b65b42c42b
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.6.0
@@ -29,7 +29,7 @@ require (
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 // indirect
-	github.com/anchore/stereoscope v0.0.0-20220628191509-5bd627c0f9ce // indirect
+	github.com/anchore/stereoscope v0.0.0-20220708133445-777471f38c5b // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.0.2 // indirect
 	github.com/containerd/containerd v1.6.6 // indirect
