@@ -1,3 +1,35 @@
+## Version 0.14.0 (2022-07-24)
+
+### Bug fixes
+
+* [[`2a423903`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2a423903)] - **fix**: don&#39;t hang forever
+
+### Cleanup and refactoring
+
+* [[`b0175b96`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b0175b96)] - **cleanup**: integrated libstandard
+
+### Build and testing
+
+* [[`1e0fd179`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1e0fd179)] - **build**: update actions-toolkit
+
+### Documentation
+
+* [[`805460e7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/805460e7)] - **doc**: update version-table
+* [[`04bcf02e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/04bcf02e)] - **doc**: update version-matrix [skip ci]
+
+### Dependency updates
+
+* [[`fd9f1c50`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fd9f1c50)] - **deps**: update to go 1.18.4
+* [[`294aa413`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/294aa413)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.11.0
+* [[`8eb828ec`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8eb828ec)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.52.0
+* [[`84e8614f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/84e8614f)] - **deps**: update alpine digest to 7580ece
+* [[`aceb331b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aceb331b)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.51.0
+* [[`e0623c7d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e0623c7d)] - **deps**: update kubernetes versions to v0.24.3
+* [[`eac0c2a5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eac0c2a5)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.50.0
+* [[`c665f870`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c665f870)] - **deps**: update sigstore&#x2F;cosign-installer digest to 48866aa
+* [[`af5df9c8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/af5df9c8)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 83b65b4
+
+
 ## Version 0.13.0 (2022-06-28)
 
 ### Bug fixes
