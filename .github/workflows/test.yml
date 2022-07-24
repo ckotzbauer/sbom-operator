@@ -27,7 +27,7 @@ jobs:
         uses: sigstore/cosign-installer@48866aa521d8bf870604709cd43ec2f602d03ff2
 
       - name: Setup Syft
-        uses: ckotzbauer/actions-toolkit/setup-syft@0.17.0
+        uses: ckotzbauer/actions-toolkit/setup-syft@0.18.0
 
       - name: Checkout
         uses: actions/checkout@v3
@@ -77,7 +77,7 @@ jobs:
             ghcr.io/ckotzbauer/sbom-operator:latest
 
       - name: Container scan
-        uses: ckotzbauer/actions-toolkit/grype@0.17.0
+        uses: ckotzbauer/actions-toolkit/grype@0.18.0
         with:
           scan-target: ghcr.io/ckotzbauer/sbom-operator
           fail-on: "medium"
