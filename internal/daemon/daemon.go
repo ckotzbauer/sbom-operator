@@ -79,6 +79,7 @@ func (c *CronService) runBackgroundService() {
 	namespaces, err := k8s.Client.ListNamespaces(namespaceSelector)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to list namespaces with selector: %s, abort background-service", namespaceSelector)
+		running = false
 		return
 	}
 	logrus.Debugf("Discovered %v namespaces", len(namespaces))
