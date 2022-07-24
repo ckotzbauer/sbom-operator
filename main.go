@@ -3,14 +3,13 @@ package main
 import (
 	"fmt"
 	"net/http"
-	"os"
 	"runtime"
 
+	"github.com/ckotzbauer/libstandard"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/daemon"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
-	"github.com/spf13/viper"
 )
 
 var (
@@ -19,32 +18,30 @@ var (
 	Commit  = "main"
 	Date    = ""
 	BuiltBy = ""
+)
 
-	verbosity  string
-	daemonCron string
-
-	rootCmd = &cobra.Command{
-		Use:               "sbom-operator",
-		Short:             "An operator for cataloguing all k8s-cluster-images to multiple targets.",
-		PersistentPreRunE: internal.BindFlags,
+func newRootCmd() *cobra.Command {
+	rootCmd := &cobra.Command{
+		Use:   "sbom-operator",
+		Short: "An operator for cataloguing all k8s-cluster-images to multiple targets.",
+		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
+			internal.OperatorConfig = &internal.Config{}
+			return libstandard.DefaultInitializer(internal.OperatorConfig, cmd, "sbom-operator")
+		},
 		Run: func(cmd *cobra.Command, args []string) {
-			internal.SetUpLogs(os.Stdout, verbosity)
 			printVersion()
 
-			daemon.Start(viper.GetString(internal.ConfigKeyCron))
+			daemon.Start(internal.OperatorConfig.Cron)
 
 			logrus.Info("Webserver is running at port 8080")
 			http.HandleFunc("/health", health)
 			logrus.WithError(http.ListenAndServe(":8080", nil)).Fatal("Starting webserver failed!")
 		},
 	}
-)
 
-func init() {
-	cobra.OnInitialize(initConfig)
-
-	rootCmd.PersistentFlags().StringVarP(&verbosity, internal.ConfigKeyVerbosity, "v", logrus.InfoLevel.String(), "Log-level (debug, info, warn, error, fatal, panic)")
-	rootCmd.PersistentFlags().StringVarP(&daemonCron, internal.ConfigKeyCron, "c", "@hourly", "Backround-Service interval (CRON)")
+	libstandard.AddConfigFlag(rootCmd)
+	libstandard.AddVerbosityFlag(rootCmd)
+	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "@hourly", "Backround-Service interval (CRON)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormat, "json", "SBOM-Format.")
 	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeyTargets, []string{"git"}, "Targets for created SBOMs (git, dtrack).")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyIgnoreAnnotations, false, "Force analyzing of all images, including those from annotated pods.")
@@ -67,11 +64,7 @@ func init() {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciRegistry, "", "OCI-Registry")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciUser, "", "OCI-User")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
-}
-
-func initConfig() {
-	viper.SetEnvPrefix("SBOM")
-	viper.AutomaticEnv()
+	return rootCmd
 }
 
 func printVersion() {
@@ -88,6 +81,7 @@ func health(w http.ResponseWriter, req *http.Request) {
 }
 
 func main() {
+	rootCmd := newRootCmd()
 	err := rootCmd.Execute()
 	if err != nil {
 		panic(err)

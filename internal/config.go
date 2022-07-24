@@ -1,7 +1,33 @@
 package internal
 
+type Config struct {
+	Cron                   string   `yaml:"cron" env:"SBOM_CRON" flag:"cron"`
+	Format                 string   `yaml:"format" env:"SBOM_FORMAT" flag:"format"`
+	Targets                []string `yaml:"targets" env:"SBOM_TARGETS" flag:"targets"`
+	IgnoreAnnotations      bool     `yaml:"ignoreAnnotations" env:"SBOM_IGNORE_ANNOTATIONS" flag:"ignore-annotations"`
+	GitWorkingTree         string   `yaml:"gitWorkingTree" env:"SBOM_GIT_WORKINGTREE" flag:"git-workingtree"`
+	GitRepository          string   `yaml:"gitRepository" env:"SBOM_GIT_REPOSITORY" flag:"git-repository"`
+	GitBranch              string   `yaml:"gitBranch" env:"SBOM_GIT_BRANCH" flag:"git-branch"`
+	GitPath                string   `yaml:"gitPath" env:"SBOM_GIT_PATH" flag:"git-path"`
+	GitAccessToken         string   `yaml:"gitAccessToken" env:"SBOM_GIT_ACCESS_TOKEN" flag:"git-access-token"`
+	GitAuthorName          string   `yaml:"gitAuthorName" env:"SBOM_GIT_AUTHOR_NAME" flag:"git-author-name"`
+	GitAuthorEmail         string   `yaml:"gitAuthorEmail" env:"SBOM_GIT_AUTHOR_EMAIL" flag:"git-author-email"`
+	PodLabelSelector       string   `yaml:"podLabelSelector" env:"SBOM_POD_LABEL_SELECTOR" flag:"pod-label-selector"`
+	NamespaceLabelSelector string   `yaml:"namespaceLabelSelector" env:"SBOM_NAMESPACE_LABEL_SELECTOR" flag:"namespace-label-selector"`
+	DtrackBaseUrl          string   `yaml:"dtrackBaseUrl" env:"SBOM_DTRACK_BASE_URL" flag:"dtrack-base-url"`
+	DtrackApiKey           string   `yaml:"dtrackApiKey" env:"SBOM_DTRACK_API_KEY" flag:"dtrack-api-key"`
+	KubernetesClusterId    string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
+	JobImage               string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
+	JobImagePullSecret     string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
+	JobTimeout             int64    `yaml:"jobTimeout" env:"SBOM_JOB_TIMEOUT" flag:"job-timeout"`
+	OciRegistry            string   `yaml:"ociRegistry" env:"SBOM_OCI_REGISTRY" flag:"oci-registry"`
+	OciUser                string   `yaml:"ociUser" env:"SBOM_OCI_USER" flag:"oci-user"`
+	OciToken               string   `yaml:"ociToken" env:"SBOM_OCI_TOKEN" flag:"oci-token"`
+	FallbackPullSecret     string   `yaml:"fallbackPullSecret" env:"SBOM_FALLBACK_PULL_SECRET" flag:"fallback-pull-secret"`
+	Verbosity              string   `env:"SBOM_VERBOSITY" flag:"verbosity"`
+}
+
 var (
-	ConfigKeyVerbosity              = "verbosity"
 	ConfigKeyCron                   = "cron"
 	ConfigKeyFormat                 = "format"
 	ConfigKeyTargets                = "targets"
@@ -27,4 +53,6 @@ var (
 	ConfigKeyOciUser            = "oci-user"
 	ConfigKeyOciToken           = "oci-token"
 	ConfigKeyFallbackPullSecret = "fallback-pull-secret"
+
+	OperatorConfig *Config
 )

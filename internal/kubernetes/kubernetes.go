@@ -6,7 +6,6 @@ import (
 	"os"
 
 	"github.com/sirupsen/logrus"
-	"github.com/spf13/viper"
 	batchv1 "k8s.io/api/batch/v1"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
@@ -15,12 +14,12 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
-	"github.com/ckotzbauer/sbom-operator/internal"
 )
 
 type KubeClient struct {
 	Client                *libk8s.KubeClient
 	ignoreAnnotations     bool
+	fallbackPullSecret    string
 	SbomOperatorNamespace string
 }
 
@@ -31,22 +30,21 @@ var (
 	JobName       = "sbom-operator-job"
 )
 
-func NewClient(ignoreAnnotations bool) *KubeClient {
+func NewClient(ignoreAnnotations bool, fallbackPullSecret string) *KubeClient {
 	client := libk8s.NewClient()
 
 	sbomOperatorNamespace := os.Getenv("POD_NAMESPACE")
-	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, SbomOperatorNamespace: sbomOperatorNamespace}
+	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, fallbackPullSecret: fallbackPullSecret, SbomOperatorNamespace: sbomOperatorNamespace}
 }
 
 func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.KubeImage, []libk8s.KubeImage) {
-	fallbackPullSecretName := viper.GetString(internal.ConfigKeyFallbackPullSecret)
 	var fallbackPullSecret []oci.KubeCreds
 
-	if fallbackPullSecretName != "" {
+	if client.fallbackPullSecret != "" {
 		if client.SbomOperatorNamespace == "" {
 			logrus.Debugf("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
 		} else {
-			fallbackPullSecret = client.Client.LoadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: fallbackPullSecretName}})
+			fallbackPullSecret = client.Client.LoadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: client.fallbackPullSecret}})
 		}
 	}
 
