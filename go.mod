@@ -1,6 +1,6 @@
 module github.com/ckotzbauer/sbom-operator
 
-go 1.18
+go 1.19
 
 require (
 	github.com/anchore/syft v0.53.0
