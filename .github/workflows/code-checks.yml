@@ -37,5 +37,5 @@ jobs:
       - name: Golint
         uses: golangci/golangci-lint-action@v3
         with:
-          version: v1.46.2
+          version: v1.48.0
           args: --timeout 5m
