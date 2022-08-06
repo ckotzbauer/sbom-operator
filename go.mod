@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/syft v0.53.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220701045827-83b65b42c42b
+	github.com/ckotzbauer/libk8soci v0.0.0-20220801045234-0c88accfdf59
 	github.com/ckotzbauer/libstandard v0.0.0-20220724093059-4e2e27d1237f
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.6.0
@@ -104,7 +104,7 @@ require (
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
-	golang.org/x/exp v0.0.0-20220613132600-b0d781184e0d // indirect
+	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
 	golang.org/x/tools v0.1.11 // indirect
@@ -112,7 +112,7 @@ require (
 	google.golang.org/genproto v0.0.0-20220624142145-8cd45d7dbd1f // indirect
 	google.golang.org/grpc v1.48.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
-	k8s.io/client-go v0.24.2 // indirect
+	k8s.io/client-go v0.24.3 // indirect
 	lukechampine.com/uint128 v1.1.1 // indirect
 	modernc.org/cc/v3 v3.36.0 // indirect
 	modernc.org/ccgo/v3 v3.16.6 // indirect
