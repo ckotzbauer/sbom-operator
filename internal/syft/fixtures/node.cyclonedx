@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:e3f9084e-6e2a-4bb8-956c-3366654557c3" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:f31e5241-35e5-4eb6-9d97-5d6edfb3c64c" version="1">
   <metadata>
-    <timestamp>2022-06-18T08:38:12+02:00</timestamp>
+    <timestamp>2022-08-06T09:58:05+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.48.1</version>
+        <version>0.53.4</version>
       </tool>
     </tools>
     <component bom-ref="36cc3d123ca150cc" type="container">
@@ -583,7 +583,7 @@
       <version>3.118</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:adduser:adduser:3.118:*:*:*:*:*:*:*</cpe>
@@ -969,7 +969,7 @@
       <version>1.8.2.3</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:apt:apt:1.8.2.3:*:*:*:*:*:*:*</cpe>
@@ -1193,7 +1193,7 @@
       <version>3.5.46</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:base-passwd:base-passwd:3.5.46:*:*:*:*:*:*:*</cpe>
@@ -1222,7 +1222,7 @@
       <version>5.0-4</version>
       <licenses>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:bash:bash:5.0-4:*:*:*:*:*:*:*</cpe>
@@ -1355,34 +1355,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -2028,7 +2028,7 @@
       <version>8.30-3</version>
       <licenses>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:coreutils:coreutils:8.30-3:*:*:*:*:*:*:*</cpe>
@@ -2351,10 +2351,10 @@
           <id>BSD-2-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:dpkg:dpkg:1.19.7:*:*:*:*:*:*:*</cpe>
@@ -2380,10 +2380,10 @@
       <version>1.44.5-1+deb10u3</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:e2fsprogs:e2fsprogs:1.44.5-1\+deb10u3:*:*:*:*:*:*:*</cpe>
@@ -2578,34 +2578,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -2636,7 +2636,7 @@
           <id>GFDL-1.3</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:findutils:findutils:4.6.0\+git\+20190209-2:*:*:*:*:*:*:*</cpe>
@@ -2817,10 +2817,10 @@
           <id>GFDL-1.2</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gcc-8-base:gcc-8-base:8.3.0-6:*:*:*:*:*:*:*</cpe>
@@ -2886,22 +2886,22 @@
           <id>CC0-1.0</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gpgv:gpgv:2.2.12-1\+deb10u1:*:*:*:*:*:*:*</cpe>
@@ -2957,10 +2957,10 @@
       <version>3.3-1</version>
       <licenses>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:grep:grep:3.3-1:*:*:*:*:*:*:*</cpe>
@@ -3138,7 +3138,7 @@
       <version>3.21</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:hostname:hostname:3.21:*:*:*:*:*:*:*</cpe>
@@ -3581,10 +3581,10 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:init-system-helpers:init-system-helpers:1.56\+nmu1:*:*:*:*:*:*:*</cpe>
@@ -4182,16 +4182,16 @@
       <version>2.2.53-4</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libacl1:libacl1:2.2.53-4:*:*:*:*:*:*:*</cpe>
@@ -4216,7 +4216,7 @@
       <version>1.8.2.3</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libapt-pkg5.0:libapt-pkg5.0:1.8.2.3:*:*:*:*:*:*:*</cpe>
@@ -4246,16 +4246,16 @@
       <version>1:2.4.48-4</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libattr1:libattr1:1\:2.4.48-4:*:*:*:*:*:*:*</cpe>
@@ -4282,13 +4282,13 @@
       <version>1:2.8.4-3</version>
       <licenses>
         <license>
-          <id>GPL-1.0</id>
+          <id>GPL-1.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libaudit-common:libaudit-common:1\:2.8.4-3:*:*:*:*:*:*:*</cpe>
@@ -4320,13 +4320,13 @@
       <version>1:2.8.4-3</version>
       <licenses>
         <license>
-          <id>GPL-1.0</id>
+          <id>GPL-1.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libaudit1:libaudit1:1\:2.8.4-3:*:*:*:*:*:*:*</cpe>
@@ -4360,34 +4360,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -4415,7 +4415,7 @@
       <version>1.0.6-9.2~deb10u1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libbz2-1.0:libbz2-1.0:1.0.6-9.2\~deb10u1:*:*:*:*:*:*:*</cpe>
@@ -4445,10 +4445,10 @@
       <version>2.28-10</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libc-bin:libc-bin:2.28-10:*:*:*:*:*:*:*</cpe>
@@ -4480,10 +4480,10 @@
       <version>2.28-10</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libc6:libc6:2.28-10:*:*:*:*:*:*:*</cpe>
@@ -4510,13 +4510,13 @@
       <version>0.7.9-2</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libcap-ng0:libcap-ng0:0.7.9-2:*:*:*:*:*:*:*</cpe>
@@ -4611,10 +4611,10 @@
       <version>1.44.5-1+deb10u3</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libext2fs2:libext2fs2:1.44.5-1\+deb10u3:*:*:*:*:*:*:*</cpe>
@@ -4648,34 +4648,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -4726,10 +4726,10 @@
           <id>GFDL-1.2</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgcc1:libgcc1:1\:8.3.0-6:*:*:*:*:*:*:*</cpe>
@@ -4755,7 +4755,7 @@
       <version>1.8.4-5+deb10u1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgcrypt20:libgcrypt20:1.8.4-5\+deb10u1:*:*:*:*:*:*:*</cpe>
@@ -4779,13 +4779,13 @@
       <version>2:6.1.2+dfsg-4</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgmp10:libgmp10:2\:6.1.2\+dfsg-4:*:*:*:*:*:*:*</cpe>
@@ -4816,10 +4816,10 @@
           <id>GFDL-1.3</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgnutls30:libgnutls30:3.6.7-4\+deb10u7:*:*:*:*:*:*:*</cpe>
@@ -4847,13 +4847,13 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
@@ -4886,16 +4886,16 @@
       <version>3.4.1-1+deb10u1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
@@ -4923,22 +4923,22 @@
       <version>2.0.5-1+deb10u1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libidn2-0:libidn2-0:2.0.5-1\+deb10u1:*:*:*:*:*:*:*</cpe>
@@ -4971,10 +4971,10 @@
           <id>BSD-2-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:liblz4-1:liblz4-1:1.8.3-1\+deb10u1:*:*:*:*:*:*:*</cpe>
@@ -5004,19 +5004,19 @@
       <version>5.2.4-1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
@@ -5053,34 +5053,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -5128,16 +5128,16 @@
       <version>3.4.1-1+deb10u1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
@@ -5625,7 +5625,7 @@
       <version>2.3.3-4</version>
       <licenses>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libseccomp2:libseccomp2:2.3.3-4:*:*:*:*:*:*:*</cpe>
@@ -5650,10 +5650,10 @@
       <version>2.8-1+b1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libselinux1:libselinux1:2.8-1\+b1:*:*:*:*:*:*:*</cpe>
@@ -5755,34 +5755,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -5833,10 +5833,10 @@
           <id>GFDL-1.2</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libstdc\+\+6:libstdc\+\+6:8.3.0-6:*:*:*:*:*:*:*</cpe>
@@ -5864,13 +5864,13 @@
           <id>CC0-1.0</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
@@ -5901,10 +5901,10 @@
           <id>GFDL-1.3</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libtasn1-6:libtasn1-6:4.13-3:*:*:*:*:*:*:*</cpe>
@@ -5956,13 +5956,13 @@
           <id>CC0-1.0</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
@@ -5993,22 +5993,22 @@
           <id>GFDL-1.2</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -6045,34 +6045,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -6103,10 +6103,10 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
           <id>Zlib</id>
@@ -6134,7 +6134,7 @@
       <version>1:4.5-1.1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:login:login:1\:4.5-1.1:*:*:*:*:*:*:*</cpe>
@@ -6196,7 +6196,7 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:lsb-base:lsb-base:10.2019051400:*:*:*:*:*:*:*</cpe>
@@ -6262,7 +6262,7 @@
       <version>1.3.3-17+b3</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:mawk:mawk:1.3.3-17\+b3:*:*:*:*:*:*:*</cpe>
@@ -6621,34 +6621,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>
@@ -7597,7 +7597,7 @@
       <version>1:4.5-1.1</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:passwd:passwd:1\:4.5-1.1:*:*:*:*:*:*:*</cpe>
@@ -7666,19 +7666,19 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <id>GPL-1.0</id>
+          <id>GPL-1.0-only</id>
         </license>
         <license>
-          <id>GPL-1.0+</id>
+          <id>GPL-1.0-or-later</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>Zlib</id>
@@ -8268,7 +8268,7 @@
       <version>4.7-1</version>
       <licenses>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:sed:sed:4.7-1:*:*:*:*:*:*:*</cpe>
@@ -9006,10 +9006,10 @@
       <version>2.93-8</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:sysvinit-utils:sysvinit-utils:2.93-8:*:*:*:*:*:*:*</cpe>
@@ -9039,10 +9039,10 @@
       <version>1.30+dfsg-6</version>
       <licenses>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:tar:tar:1.30\+dfsg-6:*:*:*:*:*:*:*</cpe>
@@ -9358,34 +9358,34 @@
           <id>BSD-4-Clause</id>
         </license>
         <license>
-          <id>GPL-2.0</id>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0+</id>
+          <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>GPL-3.0</id>
+          <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>GPL-3.0+</id>
+          <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.0</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.0+</id>
+          <id>LGPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1</id>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <id>LGPL-2.1+</id>
         </license>
         <license>
-          <id>LGPL-3.0</id>
+          <id>LGPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-3.0+</id>
+          <id>LGPL-3.0-or-later</id>
         </license>
         <license>
           <id>MIT</id>

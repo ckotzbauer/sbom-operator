@@ -96200,7 +96200,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.48.1",
+  "version": "0.53.4",
   "configuration": {
    "configPath": "",
    "verbosity": 0,
@@ -96208,6 +96208,7 @@
    "output": [
     "json"
    ],
+   "output-template-path": "",
    "file": "",
    "check-for-app-update": true,
    "anchore": {
@@ -96226,6 +96227,7 @@
     "level": "warning",
     "file-location": ""
    },
+   "catalogers": null,
    "package": {
     "cataloger": {
      "enabled": true,
@@ -96292,7 +96294,7 @@
   }
  },
  "schema": {
-  "version": "3.3.0",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.3.0.json"
+  "version": "3.3.1",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-3.3.1.json"
  }
 }

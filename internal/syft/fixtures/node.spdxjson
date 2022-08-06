@@ -3,15 +3,15 @@
  "name": "node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-06-18T06:38:26.654575636Z",
+  "created": "2022-08-06T07:58:19.001097425Z",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.48.1"
+   "Tool: syft-0.53.4"
   ],
   "licenseListVersion": "3.17"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec-c6972e96-0a71-4225-8d61-08fc9d9fe179",
+ "documentNamespace": "https://anchore.com/syft/image/node@sha256-f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec-73b63caa-6eee-4fb7-9376-905ad3366eb1",
  "packages": [
   {
    "SPDXID": "SPDXRef-357eb6b8320e6221",
@@ -967,7 +967,7 @@
   {
    "SPDXID": "SPDXRef-a124711c55c5b5ec",
    "name": "adduser",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -982,7 +982,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Debian Adduser Developers <adduser@packages.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/adduser/copyright, /var/lib/dpkg/info/adduser.conffiles, /var/lib/dpkg/info/adduser.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.118"
@@ -1538,7 +1538,7 @@
   {
    "SPDXID": "SPDXRef-97bca63533fb8559",
    "name": "apt",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -1553,7 +1553,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: APT Development Team <deity@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/apt/copyright, /var/lib/dpkg/info/apt.conffiles, /var/lib/dpkg/info/apt.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.8.2.3"
@@ -1921,7 +1921,7 @@
   {
    "SPDXID": "SPDXRef-9d81bbe092b4cdc2",
    "name": "base-passwd",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -1961,7 +1961,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Colin Watson <cjwatson@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/base-passwd/copyright, /var/lib/dpkg/info/base-passwd.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.5.46"
@@ -1969,7 +1969,7 @@
   {
    "SPDXID": "SPDXRef-994b8c72b58b71d1",
    "name": "bash",
-   "licenseConcluded": "GPL-3.0",
+   "licenseConcluded": "GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -1984,7 +1984,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-3.0",
+   "licenseDeclared": "GPL-3.0-only",
    "originator": "Person: Matthias Klose <doko@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/bash/copyright, /var/lib/dpkg/info/bash.conffiles, /var/lib/dpkg/info/bash.md5sums, /var/lib/dpkg/status",
    "versionInfo": "5.0-4"
@@ -2166,7 +2166,7 @@
   {
    "SPDXID": "SPDXRef-96887322ab525fca",
    "name": "bsdutils",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -2181,7 +2181,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/bsdutils/copyright, /var/lib/dpkg/info/bsdutils.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:2.33.1-0.1"
@@ -3170,7 +3170,7 @@
   {
    "SPDXID": "SPDXRef-98ff0b5949036700",
    "name": "coreutils",
-   "licenseConcluded": "GPL-3.0",
+   "licenseConcluded": "GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -3185,7 +3185,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-3.0",
+   "licenseDeclared": "GPL-3.0-only",
    "originator": "Person: Michael Stone <mstone@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/coreutils/copyright, /var/lib/dpkg/info/coreutils.md5sums, /var/lib/dpkg/status",
    "versionInfo": "8.30-3"
@@ -3548,7 +3548,7 @@
   {
    "SPDXID": "SPDXRef-1c461a8c455fd76e",
    "name": "dpkg",
-   "licenseConcluded": "BSD-2-Clause AND GPL-2.0 AND GPL-2.0+",
+   "licenseConcluded": "BSD-2-Clause AND GPL-2.0-only AND GPL-2.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -3563,7 +3563,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND GPL-2.0 AND GPL-2.0+",
+   "licenseDeclared": "BSD-2-Clause AND GPL-2.0-only AND GPL-2.0-or-later",
    "originator": "Person: Dpkg Developers <debian-dpkg@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/dpkg/copyright, /var/lib/dpkg/info/dpkg.conffiles, /var/lib/dpkg/info/dpkg.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.19.7"
@@ -3571,7 +3571,7 @@
   {
    "SPDXID": "SPDXRef-4704db820516f48e",
    "name": "e2fsprogs",
-   "licenseConcluded": "GPL-2.0 AND LGPL-2.0",
+   "licenseConcluded": "GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -3586,7 +3586,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND LGPL-2.0",
+   "licenseDeclared": "GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: Theodore Y. Ts'o <tytso@mit.edu>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/e2fsprogs/copyright, /var/lib/dpkg/info/e2fsprogs.conffiles, /var/lib/dpkg/info/e2fsprogs.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.44.5-1+deb10u3"
@@ -3856,7 +3856,7 @@
   {
    "SPDXID": "SPDXRef-c3a96c48937a6ae9",
    "name": "fdisk",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -3871,7 +3871,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/fdisk/copyright, /var/lib/dpkg/info/fdisk.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -3879,7 +3879,7 @@
   {
    "SPDXID": "SPDXRef-a71bb79f1862826c",
    "name": "findutils",
-   "licenseConcluded": "GFDL-1.3 AND GPL-3.0",
+   "licenseConcluded": "GFDL-1.3 AND GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -3894,7 +3894,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GFDL-1.3 AND GPL-3.0",
+   "licenseDeclared": "GFDL-1.3 AND GPL-3.0-only",
    "originator": "Person: Andreas Metzler <ametzler@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/findutils/copyright, /var/lib/dpkg/info/findutils.md5sums, /var/lib/dpkg/status",
    "versionInfo": "4.6.0+git+20190209-2"
@@ -4106,7 +4106,7 @@
   {
    "SPDXID": "SPDXRef-d266c8b50d7e7a38",
    "name": "gcc-8-base",
-   "licenseConcluded": "GFDL-1.2 AND GPL-2.0 AND GPL-3.0",
+   "licenseConcluded": "GFDL-1.2 AND GPL-2.0-only AND GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -4166,7 +4166,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GFDL-1.2 AND GPL-2.0 AND GPL-3.0",
+   "licenseDeclared": "GFDL-1.2 AND GPL-2.0-only AND GPL-3.0-only",
    "originator": "Person: Debian GCC Maintainers <debian-gcc@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/gcc-8-base/copyright, /var/lib/dpkg/info/gcc-8-base:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "8.3.0-6"
@@ -4202,7 +4202,7 @@
   {
    "SPDXID": "SPDXRef-4bc65f4454089474",
    "name": "gpgv",
-   "licenseConcluded": "BSD-3-Clause AND CC0-1.0 AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+",
+   "licenseConcluded": "BSD-3-Clause AND CC0-1.0 AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -4217,7 +4217,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-3-Clause AND CC0-1.0 AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+",
+   "licenseDeclared": "BSD-3-Clause AND CC0-1.0 AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later",
    "originator": "Person: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/gpgv/copyright, /var/lib/dpkg/info/gpgv.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.2.12-1+deb10u1"
@@ -4282,7 +4282,7 @@
   {
    "SPDXID": "SPDXRef-ece9216cfc777e77",
    "name": "grep",
-   "licenseConcluded": "GPL-3.0 AND GPL-3.0+",
+   "licenseConcluded": "GPL-3.0-only AND GPL-3.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -4297,7 +4297,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-3.0 AND GPL-3.0+",
+   "licenseDeclared": "GPL-3.0-only AND GPL-3.0-or-later",
    "originator": "Person: Anibal Monsalve Salazar <anibal@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/grep/copyright, /var/lib/dpkg/info/grep.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.3-1"
@@ -4553,7 +4553,7 @@
   {
    "SPDXID": "SPDXRef-9dee7fa238220314",
    "name": "hostname",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -4568,7 +4568,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Michael Meskes <meskes@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/hostname/copyright, /var/lib/dpkg/info/hostname.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.21"
@@ -5292,7 +5292,7 @@
   {
    "SPDXID": "SPDXRef-493fd16dd84c7e3b",
    "name": "init-system-helpers",
-   "licenseConcluded": "BSD-3-Clause AND GPL-2.0 AND GPL-2.0+",
+   "licenseConcluded": "BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -5352,7 +5352,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-3-Clause AND GPL-2.0 AND GPL-2.0+",
+   "licenseDeclared": "BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later",
    "originator": "Person: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/init-system-helpers/copyright, /var/lib/dpkg/info/init-system-helpers.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.56+nmu1"
@@ -6483,7 +6483,7 @@
   {
    "SPDXID": "SPDXRef-700f5968e1c4f52",
    "name": "libacl1",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0+ AND LGPL-2.1",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6498,7 +6498,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0+ AND LGPL-2.1",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-only",
    "originator": "Person: Guillem Jover <guillem@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libacl1/copyright, /var/lib/dpkg/info/libacl1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.2.53-4"
@@ -6506,7 +6506,7 @@
   {
    "SPDXID": "SPDXRef-e4cf02f6603adead",
    "name": "libapt-pkg5.0",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6546,7 +6546,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: APT Development Team <deity@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libapt-pkg5.0/copyright, /var/lib/dpkg/info/libapt-pkg5.0:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.8.2.3"
@@ -6554,7 +6554,7 @@
   {
    "SPDXID": "SPDXRef-eb1dcf48b626ca9",
    "name": "libattr1",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0+ AND LGPL-2.1",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6569,7 +6569,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0+ AND LGPL-2.1",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.0-or-later AND LGPL-2.1-only",
    "originator": "Person: Guillem Jover <guillem@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libattr1/copyright, /var/lib/dpkg/info/libattr1:amd64.conffiles, /var/lib/dpkg/info/libattr1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:2.4.48-4"
@@ -6577,7 +6577,7 @@
   {
    "SPDXID": "SPDXRef-28bbf923885fe291",
    "name": "libaudit-common",
-   "licenseConcluded": "GPL-1.0 AND GPL-2.0 AND LGPL-2.1",
+   "licenseConcluded": "GPL-1.0-only AND GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6617,7 +6617,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-1.0 AND GPL-2.0 AND LGPL-2.1",
+   "licenseDeclared": "GPL-1.0-only AND GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: Laurent Bigonville <bigon@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libaudit-common/copyright, /var/lib/dpkg/info/libaudit-common.conffiles, /var/lib/dpkg/info/libaudit-common.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:2.8.4-3"
@@ -6625,7 +6625,7 @@
   {
    "SPDXID": "SPDXRef-523c4ccb32a1d5b1",
    "name": "libaudit1",
-   "licenseConcluded": "GPL-1.0 AND GPL-2.0 AND LGPL-2.1",
+   "licenseConcluded": "GPL-1.0-only AND GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6640,7 +6640,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-1.0 AND GPL-2.0 AND LGPL-2.1",
+   "licenseDeclared": "GPL-1.0-only AND GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: Laurent Bigonville <bigon@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libaudit1/copyright, /var/lib/dpkg/info/libaudit1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:2.8.4-3"
@@ -6648,7 +6648,7 @@
   {
    "SPDXID": "SPDXRef-51163de3c38d44a3",
    "name": "libblkid1",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6663,7 +6663,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libblkid1/copyright, /var/lib/dpkg/info/libblkid1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -6671,7 +6671,7 @@
   {
    "SPDXID": "SPDXRef-f0c1511508d4955d",
    "name": "libbz2-1.0",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6711,7 +6711,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Anibal Monsalve Salazar <anibal@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libbz2-1.0/copyright, /var/lib/dpkg/info/libbz2-1.0:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.0.6-9.2~deb10u1"
@@ -6719,7 +6719,7 @@
   {
    "SPDXID": "SPDXRef-36e1ace58f15fcec",
    "name": "libc-bin",
-   "licenseConcluded": "GPL-2.0 AND LGPL-2.1",
+   "licenseConcluded": "GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6759,7 +6759,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND LGPL-2.1",
+   "licenseDeclared": "GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: GNU Libc Maintainers <debian-glibc@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libc-bin/copyright, /var/lib/dpkg/info/libc-bin.conffiles, /var/lib/dpkg/info/libc-bin.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.28-10"
@@ -6767,7 +6767,7 @@
   {
    "SPDXID": "SPDXRef-bc65824adf463d8d",
    "name": "libc6",
-   "licenseConcluded": "GPL-2.0 AND LGPL-2.1",
+   "licenseConcluded": "GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6782,7 +6782,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND LGPL-2.1",
+   "licenseDeclared": "GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: GNU Libc Maintainers <debian-glibc@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libc6/copyright, /var/lib/dpkg/info/libc6:amd64.conffiles, /var/lib/dpkg/info/libc6:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.28-10"
@@ -6790,7 +6790,7 @@
   {
    "SPDXID": "SPDXRef-3d614a8efbe7dbb0",
    "name": "libcap-ng0",
-   "licenseConcluded": "GPL-2.0 AND GPL-3.0 AND LGPL-2.1",
+   "licenseConcluded": "GPL-2.0-only AND GPL-3.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6830,7 +6830,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-3.0 AND LGPL-2.1",
+   "licenseDeclared": "GPL-2.0-only AND GPL-3.0-only AND LGPL-2.1-only",
    "originator": "Person: Pierre Chifflier <pollux@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libcap-ng0/copyright, /var/lib/dpkg/info/libcap-ng0:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "0.7.9-2"
@@ -6932,7 +6932,7 @@
   {
    "SPDXID": "SPDXRef-ad942cbdd9743814",
    "name": "libext2fs2",
-   "licenseConcluded": "GPL-2.0 AND LGPL-2.0",
+   "licenseConcluded": "GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6947,7 +6947,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND LGPL-2.0",
+   "licenseDeclared": "GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: Theodore Y. Ts'o <tytso@mit.edu>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libext2fs2/copyright, /var/lib/dpkg/info/libext2fs2:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.44.5-1+deb10u3"
@@ -6955,7 +6955,7 @@
   {
    "SPDXID": "SPDXRef-5d96215843d1b329",
    "name": "libfdisk1",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -6970,7 +6970,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libfdisk1/copyright, /var/lib/dpkg/info/libfdisk1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -7001,7 +7001,7 @@
   {
    "SPDXID": "SPDXRef-6bc3cec624ca5c72",
    "name": "libgcc1",
-   "licenseConcluded": "GFDL-1.2 AND GPL-2.0 AND GPL-3.0",
+   "licenseConcluded": "GFDL-1.2 AND GPL-2.0-only AND GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7016,7 +7016,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GFDL-1.2 AND GPL-2.0 AND GPL-3.0",
+   "licenseDeclared": "GFDL-1.2 AND GPL-2.0-only AND GPL-3.0-only",
    "originator": "Person: Debian GCC Maintainers <debian-gcc@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/gcc-8-base/copyright, /var/lib/dpkg/info/libgcc1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:8.3.0-6"
@@ -7024,7 +7024,7 @@
   {
    "SPDXID": "SPDXRef-860f7e926ef38e25",
    "name": "libgcrypt20",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7039,7 +7039,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libgcrypt20/copyright, /var/lib/dpkg/info/libgcrypt20:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.8.4-5+deb10u1"
@@ -7047,7 +7047,7 @@
   {
    "SPDXID": "SPDXRef-15451fd84450843",
    "name": "libgmp10",
-   "licenseConcluded": "GPL-2.0 AND GPL-3.0 AND LGPL-3.0",
+   "licenseConcluded": "GPL-2.0-only AND GPL-3.0-only AND LGPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7062,7 +7062,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-3.0 AND LGPL-3.0",
+   "licenseDeclared": "GPL-2.0-only AND GPL-3.0-only AND LGPL-3.0-only",
    "originator": "Person: Debian Science Team <debian-science-maintainers@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libgmp10/copyright, /var/lib/dpkg/info/libgmp10:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2:6.1.2+dfsg-4"
@@ -7070,7 +7070,7 @@
   {
    "SPDXID": "SPDXRef-498aa462a4351db6",
    "name": "libgnutls30",
-   "licenseConcluded": "Apache-2.0 AND GFDL-1.3 AND GPL-3.0 AND LGPL-3.0",
+   "licenseConcluded": "Apache-2.0 AND GFDL-1.3 AND GPL-3.0-only AND LGPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7085,7 +7085,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "Apache-2.0 AND GFDL-1.3 AND GPL-3.0 AND LGPL-3.0",
+   "licenseDeclared": "Apache-2.0 AND GFDL-1.3 AND GPL-3.0-only AND LGPL-3.0-only",
    "originator": "Person: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libgnutls30/copyright, /var/lib/dpkg/info/libgnutls30:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.6.7-4+deb10u7"
@@ -7093,7 +7093,7 @@
   {
    "SPDXID": "SPDXRef-420f201febddd070",
    "name": "libgpg-error0",
-   "licenseConcluded": "BSD-3-Clause AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseConcluded": "BSD-3-Clause AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.1+",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7133,7 +7133,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-3-Clause AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseDeclared": "BSD-3-Clause AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.1+",
    "originator": "Person: Debian GnuPG Maintainers <pkg-gnupg-maint@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libgpg-error0/copyright, /var/lib/dpkg/info/libgpg-error0:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.35-1"
@@ -7141,7 +7141,7 @@
   {
    "SPDXID": "SPDXRef-eddd882bcffd9931",
    "name": "libhogweed4",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1+",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1+",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7156,7 +7156,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1+",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1+",
    "originator": "Person: Magnus Holmgren <holmgren@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libnettle6/copyright, /var/lib/dpkg/info/libhogweed4:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.4.1-1+deb10u1"
@@ -7164,7 +7164,7 @@
   {
    "SPDXID": "SPDXRef-feb2232382aba94",
    "name": "libidn2-0",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-3.0 AND LGPL-3.0+",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-3.0-only AND LGPL-3.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7204,7 +7204,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-3.0 AND LGPL-3.0+",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-3.0-only AND LGPL-3.0-or-later",
    "originator": "Person: Debian Libidn team <help-libidn@gnu.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libidn2-0/copyright, /var/lib/dpkg/info/libidn2-0:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.0.5-1+deb10u1"
@@ -7212,7 +7212,7 @@
   {
    "SPDXID": "SPDXRef-8b90a435596afa1a",
    "name": "liblz4-1",
-   "licenseConcluded": "BSD-2-Clause AND GPL-2.0 AND GPL-2.0+",
+   "licenseConcluded": "BSD-2-Clause AND GPL-2.0-only AND GPL-2.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7252,7 +7252,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND GPL-2.0 AND GPL-2.0+",
+   "licenseDeclared": "BSD-2-Clause AND GPL-2.0-only AND GPL-2.0-or-later",
    "originator": "Person: Nobuhiro Iwamatsu <iwamatsu@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/liblz4-1/copyright, /var/lib/dpkg/info/liblz4-1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.8.3-1+deb10u1"
@@ -7260,7 +7260,7 @@
   {
    "SPDXID": "SPDXRef-21d758174f0bbc95",
    "name": "liblzma5",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND LGPL-2.0 AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.1-only AND LGPL-2.1-only AND LGPL-2.1+",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7275,7 +7275,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND LGPL-2.0 AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND LGPL-2.1-only AND LGPL-2.1-only AND LGPL-2.1+",
    "originator": "Person: Jonathan Nieder <jrnieder@gmail.com>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/liblzma5/copyright, /var/lib/dpkg/info/liblzma5:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "5.2.4-1"
@@ -7283,7 +7283,7 @@
   {
    "SPDXID": "SPDXRef-5cd5be829d28ff16",
    "name": "libmount1",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7298,7 +7298,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libmount1/copyright, /var/lib/dpkg/info/libmount1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -7329,7 +7329,7 @@
   {
    "SPDXID": "SPDXRef-b7199037b6763011",
    "name": "libnettle6",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1+",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1+",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7344,7 +7344,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1+",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1+",
    "originator": "Person: Magnus Holmgren <holmgren@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libnettle6/copyright, /var/lib/dpkg/info/libnettle6:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "3.4.1-1+deb10u1"
@@ -7924,7 +7924,7 @@
   {
    "SPDXID": "SPDXRef-f40c5ee0f80d1b04",
    "name": "libseccomp2",
-   "licenseConcluded": "LGPL-2.1",
+   "licenseConcluded": "LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7939,7 +7939,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "LGPL-2.1",
+   "licenseDeclared": "LGPL-2.1-only",
    "originator": "Person: Kees Cook <kees@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libseccomp2/copyright, /var/lib/dpkg/info/libseccomp2:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.3.3-4"
@@ -7947,7 +7947,7 @@
   {
    "SPDXID": "SPDXRef-1412fa324c8d10da",
    "name": "libselinux1",
-   "licenseConcluded": "GPL-2.0 AND LGPL-2.1",
+   "licenseConcluded": "GPL-2.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -7962,7 +7962,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND LGPL-2.1",
+   "licenseDeclared": "GPL-2.0-only AND LGPL-2.1-only",
    "originator": "Person: Debian SELinux maintainers <selinux-devel@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libselinux1/copyright, /var/lib/dpkg/info/libselinux1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.8-1+b1"
@@ -8064,7 +8064,7 @@
   {
    "SPDXID": "SPDXRef-2aef04af4e0ef18b",
    "name": "libsmartcols1",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8079,7 +8079,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libsmartcols1/copyright, /var/lib/dpkg/info/libsmartcols1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -8110,7 +8110,7 @@
   {
    "SPDXID": "SPDXRef-8ed17e81157576c4",
    "name": "libstdc++6",
-   "licenseConcluded": "GFDL-1.2 AND GPL-2.0 AND GPL-3.0",
+   "licenseConcluded": "GFDL-1.2 AND GPL-2.0-only AND GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8125,7 +8125,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GFDL-1.2 AND GPL-2.0 AND GPL-3.0",
+   "licenseDeclared": "GFDL-1.2 AND GPL-2.0-only AND GPL-3.0-only",
    "originator": "Person: Debian GCC Maintainers <debian-gcc@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/gcc-8-base/copyright, /var/lib/dpkg/info/libstdc++6:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "8.3.0-6"
@@ -8133,7 +8133,7 @@
   {
    "SPDXID": "SPDXRef-9037f0abe53169d0",
    "name": "libsystemd0",
-   "licenseConcluded": "CC0-1.0 AND GPL-2.0 AND GPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseConcluded": "CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8148,7 +8148,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "CC0-1.0 AND GPL-2.0 AND GPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseDeclared": "CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+",
    "originator": "Person: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libsystemd0/copyright, /var/lib/dpkg/info/libsystemd0:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "241-7~deb10u8"
@@ -8156,7 +8156,7 @@
   {
    "SPDXID": "SPDXRef-3999927a34e7971e",
    "name": "libtasn1-6",
-   "licenseConcluded": "GFDL-1.3 AND GPL-3.0 AND LGPL-2.1",
+   "licenseConcluded": "GFDL-1.3 AND GPL-3.0-only AND LGPL-2.1-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8196,7 +8196,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GFDL-1.3 AND GPL-3.0 AND LGPL-2.1",
+   "licenseDeclared": "GFDL-1.3 AND GPL-3.0-only AND LGPL-2.1-only",
    "originator": "Person: Debian GnuTLS Maintainers <pkg-gnutls-maint@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libtasn1-6/copyright, /var/lib/dpkg/info/libtasn1-6:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "4.13-3"
@@ -8227,7 +8227,7 @@
   {
    "SPDXID": "SPDXRef-b7d17454982bbaa5",
    "name": "libudev1",
-   "licenseConcluded": "CC0-1.0 AND GPL-2.0 AND GPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseConcluded": "CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8242,7 +8242,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "CC0-1.0 AND GPL-2.0 AND GPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+",
+   "licenseDeclared": "CC0-1.0 AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+",
    "originator": "Person: Debian systemd Maintainers <pkg-systemd-maintainers@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libudev1/copyright, /var/lib/dpkg/info/libudev1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "241-7~deb10u8"
@@ -8250,7 +8250,7 @@
   {
    "SPDXID": "SPDXRef-4b79ebc54e5e4ff6",
    "name": "libunistring2",
-   "licenseConcluded": "GFDL-1.2 AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "GFDL-1.2 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8265,7 +8265,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GFDL-1.2 AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "GFDL-1.2 AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: Jörg Frings-Fürst <debian@jff.email>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libunistring2/copyright, /var/lib/dpkg/info/libunistring2:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "0.9.10-1"
@@ -8273,7 +8273,7 @@
   {
    "SPDXID": "SPDXRef-8fd005ce93f2a31d",
    "name": "libuuid1",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8288,7 +8288,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libuuid1/copyright, /var/lib/dpkg/info/libuuid1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -8296,7 +8296,7 @@
   {
    "SPDXID": "SPDXRef-9d494da0c20d0394",
    "name": "libzstd1",
-   "licenseConcluded": "BSD-3-Clause AND GPL-2.0 AND GPL-2.0+ AND Zlib",
+   "licenseConcluded": "BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND Zlib",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8311,7 +8311,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-3-Clause AND GPL-2.0 AND GPL-2.0+ AND Zlib",
+   "licenseDeclared": "BSD-3-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND Zlib",
    "originator": "Person: Debian Med Packaging Team <debian-med-packaging@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/libzstd1/copyright, /var/lib/dpkg/info/libzstd1:amd64.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.3.8+dfsg-3+deb10u2"
@@ -8319,7 +8319,7 @@
   {
    "SPDXID": "SPDXRef-2ebc8a77e04ca1d3",
    "name": "login",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8334,7 +8334,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Shadow package maintainers <pkg-shadow-devel@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/login/copyright, /var/lib/dpkg/info/login.conffiles, /var/lib/dpkg/info/login.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:4.5-1.1"
@@ -8400,7 +8400,7 @@
   {
    "SPDXID": "SPDXRef-b1fc6118b8b0176d",
    "name": "lsb-base",
-   "licenseConcluded": "BSD-3-Clause AND GPL-2.0",
+   "licenseConcluded": "BSD-3-Clause AND GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8440,7 +8440,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-3-Clause AND GPL-2.0",
+   "licenseDeclared": "BSD-3-Clause AND GPL-2.0-only",
    "originator": "Person: Debian LSB Team <debian-lsb@lists.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/lsb-base/copyright, /var/lib/dpkg/info/lsb-base.md5sums, /var/lib/dpkg/status",
    "versionInfo": "10.2019051400"
@@ -8526,7 +8526,7 @@
   {
    "SPDXID": "SPDXRef-5722063f50dd70ea",
    "name": "mawk",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -8541,7 +8541,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Steve Langasek <vorlon@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/mawk/copyright, /var/lib/dpkg/info/mawk.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.3.3-17+b3"
@@ -9105,7 +9105,7 @@
   {
    "SPDXID": "SPDXRef-9d197c74f994ebda",
    "name": "mount",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -9120,7 +9120,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/mount/copyright, /var/lib/dpkg/info/mount.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
@@ -10766,7 +10766,7 @@
   {
    "SPDXID": "SPDXRef-f87993e2514d8117",
    "name": "passwd",
-   "licenseConcluded": "GPL-2.0",
+   "licenseConcluded": "GPL-2.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -10781,7 +10781,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0",
+   "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Shadow package maintainers <pkg-shadow-devel@lists.alioth.debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/passwd/copyright, /var/lib/dpkg/info/passwd.conffiles, /var/lib/dpkg/info/passwd.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1:4.5-1.1"
@@ -10867,7 +10867,7 @@
   {
    "SPDXID": "SPDXRef-695dfe3a6632a521",
    "name": "perl-base",
-   "licenseConcluded": "Artistic-2.0 AND BSD-3-Clause AND GPL-1.0 AND GPL-1.0+ AND GPL-2.0 AND GPL-2.0+ AND LGPL-2.1 AND Zlib",
+   "licenseConcluded": "Artistic-2.0 AND BSD-3-Clause AND GPL-1.0-only AND GPL-1.0-or-later AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND Zlib",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -10907,7 +10907,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "Artistic-2.0 AND BSD-3-Clause AND GPL-1.0 AND GPL-1.0+ AND GPL-2.0 AND GPL-2.0+ AND LGPL-2.1 AND Zlib",
+   "licenseDeclared": "Artistic-2.0 AND BSD-3-Clause AND GPL-1.0-only AND GPL-1.0-or-later AND GPL-2.0-only AND GPL-2.0-or-later AND LGPL-2.1-only AND Zlib",
    "originator": "Person: Niko Tyni <ntyni@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/perl/copyright, /var/lib/dpkg/info/perl-base.md5sums, /var/lib/dpkg/status",
    "versionInfo": "5.28.1-6+deb10u1"
@@ -11944,7 +11944,7 @@
   {
    "SPDXID": "SPDXRef-60af338a72e539c1",
    "name": "sed",
-   "licenseConcluded": "GPL-3.0",
+   "licenseConcluded": "GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -11959,7 +11959,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-3.0",
+   "licenseDeclared": "GPL-3.0-only",
    "originator": "Person: Clint Adams <clint@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/sed/copyright, /var/lib/dpkg/info/sed.md5sums, /var/lib/dpkg/status",
    "versionInfo": "4.7-1"
@@ -13217,7 +13217,7 @@
   {
    "SPDXID": "SPDXRef-3b7e9568a786ced2",
    "name": "sysvinit-utils",
-   "licenseConcluded": "GPL-2.0 AND GPL-2.0+",
+   "licenseConcluded": "GPL-2.0-only AND GPL-2.0-or-later",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -13257,7 +13257,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-2.0+",
+   "licenseDeclared": "GPL-2.0-only AND GPL-2.0-or-later",
    "originator": "Person: Debian sysvinit maintainers <debian-init-diversity@chiark.greenend.org.uk>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/sysvinit-utils/copyright, /var/lib/dpkg/info/sysvinit-utils.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.93-8"
@@ -13265,7 +13265,7 @@
   {
    "SPDXID": "SPDXRef-1b2a52f0f39a3090",
    "name": "tar",
-   "licenseConcluded": "GPL-2.0 AND GPL-3.0",
+   "licenseConcluded": "GPL-2.0-only AND GPL-3.0-only",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -13280,7 +13280,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "GPL-2.0 AND GPL-3.0",
+   "licenseDeclared": "GPL-2.0-only AND GPL-3.0-only",
    "originator": "Person: Bdale Garbee <bdale@gag.com>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/tar/copyright, /var/lib/dpkg/info/tar.md5sums, /var/lib/dpkg/status",
    "versionInfo": "1.30+dfsg-6"
@@ -13759,7 +13759,7 @@
   {
    "SPDXID": "SPDXRef-f9f9ee6a3a4ab49f",
    "name": "util-linux",
-   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseConcluded": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "downloadLocation": "NOASSERTION",
    "externalRefs": [
     {
@@ -13799,7 +13799,7 @@
     }
    ],
    "filesAnalyzed": false,
-   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0 AND GPL-2.0+ AND GPL-3.0 AND GPL-3.0+ AND LGPL-2.0 AND LGPL-2.0+ AND LGPL-2.1 AND LGPL-2.1+ AND LGPL-3.0 AND LGPL-3.0+ AND MIT",
+   "licenseDeclared": "BSD-2-Clause AND BSD-3-Clause AND BSD-4-Clause AND GPL-2.0-only AND GPL-2.0-or-later AND GPL-3.0-only AND GPL-3.0-or-later AND LGPL-2.1-only AND LGPL-2.0-or-later AND LGPL-2.1-only AND LGPL-2.1+ AND LGPL-3.0-only AND LGPL-3.0-or-later AND MIT",
    "originator": "Person: LaMont Jones <lamont@debian.org>",
    "sourceInfo": "acquired package info from DPKG DB: /usr/share/doc/util-linux/copyright, /var/lib/dpkg/info/util-linux.conffiles, /var/lib/dpkg/info/util-linux.md5sums, /var/lib/dpkg/status",
    "versionInfo": "2.33.1-0.1"
