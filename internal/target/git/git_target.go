@@ -7,7 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
-	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
+	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/sirupsen/logrus"
@@ -67,8 +67,8 @@ func (g *GitTarget) Initialize() {
 	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
-func (g *GitTarget) ProcessSbom(image libk8s.KubeImage, sbom string) error {
-	imageID := image.Image.ImageID
+func (g *GitTarget) ProcessSbom(image libk8s.RegistryImage, sbom string) error {
+	imageID := image.ImageID
 	filePath := g.ImageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
@@ -86,41 +86,13 @@ func (g *GitTarget) ProcessSbom(image libk8s.KubeImage, sbom string) error {
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) Cleanup(allImages []libk8s.KubeImage) {
-	logrus.Debug("Start to remove old SBOMs")
+func (g *GitTarget) LoadImages() []libk8s.RegistryImage {
 	ignoreDirs := []string{".git"}
-
 	fileName := syft.GetFileName(g.sbomFormat)
-	allProcessedFiles := g.mapToFiles(allImages)
+	basePath := filepath.Join(g.workingTree, g.workPath)
+	images := make([]libk8s.RegistryImage, 0)
 
-	err := filepath.Walk(filepath.Join(g.workingTree, g.workPath), g.deleteObsoleteFiles(fileName, ignoreDirs, allProcessedFiles))
-	if err != nil {
-		logrus.WithError(err).Error("Could not cleanup old SBOMs")
-	} else {
-		err := g.gitAccount.CommitAndPush(g.workingTree, "Deleted old SBOMs")
-		if err != nil {
-			logrus.WithError(err).Error("Could not commit SBOM removal to git")
-		}
-	}
-}
-
-func (g *GitTarget) mapToFiles(allImages []libk8s.KubeImage) []string {
-	paths := []string{}
-	for _, img := range allImages {
-		paths = append(paths, g.ImageIDToFilePath(img.Image.ImageID))
-	}
-
-	return paths
-}
-
-func (g *GitTarget) ImageIDToFilePath(id string) string {
-	fileName := syft.GetFileName(g.sbomFormat)
-	filePath := strings.ReplaceAll(id, "@", "/")
-	return strings.ReplaceAll(path.Join(g.workingTree, g.workPath, filePath, fileName), ":", "_")
-}
-
-func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs, allProcessedFiles []string) filepath.WalkFunc {
-	return func(p string, info os.FileInfo, err error) error {
+	err := filepath.Walk(basePath, func(p string, info os.FileInfo, err error) error {
 		if err != nil {
 			logrus.WithError(err).Errorf("An error occurred while processing %s", p)
 			return nil
@@ -135,27 +107,55 @@ func (g *GitTarget) deleteObsoleteFiles(fileName string, ignoreDirs, allProcesse
 			}
 		}
 
-		if info.Name() == fileName {
-			found := false
-			for _, f := range allProcessedFiles {
-				if f == p {
-					found = true
-					break
-				}
-			}
-
-			if !found {
-				rel, _ := filepath.Rel(g.workingTree, p)
-				dir := filepath.Dir(rel)
-				err = g.gitAccount.Remove(g.workingTree, dir)
-				if err != nil {
-					logrus.WithError(err).Errorf("File could not be deleted %s", p)
-				} else {
-					logrus.Debugf("Deleted old SBOM: %s", p)
-				}
-			}
+		if filepath.Base(p) == fileName {
+			sbomPath, _ := filepath.Rel(basePath, p)
+			s := filepath.Dir(sbomPath)
+			images = append(images, libk8s.RegistryImage{ImageID: strings.Replace(s, "/sha256_", "@sha256:", 1)})
 		}
 
 		return nil
+	})
+
+	if err != nil {
+		logrus.WithError(err).Error("Could not list all SBOMs")
+		return []libk8s.RegistryImage{}
 	}
+
+	return images
+}
+
+func (g *GitTarget) Remove(images []libk8s.RegistryImage) {
+	logrus.Debug("Start to remove old SBOMs")
+	sbomFiles := g.mapToFiles(images)
+
+	for _, f := range sbomFiles {
+		rel, _ := filepath.Rel(g.workingTree, f)
+		dir := filepath.Dir(rel)
+		err := g.gitAccount.Remove(g.workingTree, dir)
+		if err != nil {
+			logrus.WithError(err).Errorf("File could not be deleted %s", f)
+		} else {
+			logrus.Debugf("Deleted old SBOM: %s", f)
+		}
+	}
+
+	err := g.gitAccount.CommitAndPush(g.workingTree, "Deleted old SBOMs")
+	if err != nil {
+		logrus.WithError(err).Error("Could not commit SBOM removal to git")
+	}
+}
+
+func (g *GitTarget) mapToFiles(allImages []libk8s.RegistryImage) []string {
+	paths := []string{}
+	for _, img := range allImages {
+		paths = append(paths, g.ImageIDToFilePath(img.ImageID))
+	}
+
+	return paths
+}
+
+func (g *GitTarget) ImageIDToFilePath(id string) string {
+	fileName := syft.GetFileName(g.sbomFormat)
+	filePath := strings.ReplaceAll(id, "@", "/")
+	return strings.ReplaceAll(path.Join(g.workingTree, g.workPath, filePath, fileName), ":", "_")
 }

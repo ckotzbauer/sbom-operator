@@ -232,8 +232,8 @@ github.com/cilium/ebpf v0.0.0-20200702112145-1c8d4c9ef775/go.mod h1:7cR51M8ViRLI
 github.com/cilium/ebpf v0.2.0/go.mod h1:To2CFviqOWL/M0gIMsvSMlqe7em/l1ALkX1PyjrX2Qs=
 github.com/cilium/ebpf v0.4.0/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
 github.com/cilium/ebpf v0.6.2/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
-github.com/ckotzbauer/libk8soci v0.0.0-20220801045234-0c88accfdf59 h1:xQP71LgWiWEemWGejG3qcWuELsnpIbZqhGCsWkUqB2I=
-github.com/ckotzbauer/libk8soci v0.0.0-20220801045234-0c88accfdf59/go.mod h1:TvU933QZzcyaCRyYl8cEK7RbKY/nPlSscc7mq9jueOU=
+github.com/ckotzbauer/libk8soci v0.0.0-20220814080927-09fb03282594 h1:MLe4ncdxG7kGwkSD38oLmCvr4EvneUQqTVZqKd3jQtI=
+github.com/ckotzbauer/libk8soci v0.0.0-20220814080927-09fb03282594/go.mod h1:IBQEVvyUDhkBa15BRG/Bx0iojbJA+4fqj8IpppI1Ylw=
 github.com/ckotzbauer/libstandard v0.0.0-20220801044619-e3c9900286ea h1:gofNE9np8uUttsOnPSOhKrMMj0nLn4+59ZwOP+Yu7Qo=
 github.com/ckotzbauer/libstandard v0.0.0-20220801044619-e3c9900286ea/go.mod h1:u4cKHuLhOIvu/X02luI4k32oH//Hlz9PxjEA7kj0Evs=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
@@ -418,8 +418,6 @@ github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25Kn
 github.com/elazarl/goproxy v0.0.0-20180725130230-947c36da3153/go.mod h1:/Zj4wYkgs4iZTTu3o/KG3Itv/qCCa8VVMlb3i9OVuzc=
 github.com/emicklei/go-restful v0.0.0-20170410110728-ff4f55a20633/go.mod h1:otzb+WCGbkyDHkqmQmT5YD2WR4BBwUdeQoFo8l/7tVs=
 github.com/emicklei/go-restful v2.9.5+incompatible/go.mod h1:otzb+WCGbkyDHkqmQmT5YD2WR4BBwUdeQoFo8l/7tVs=
-github.com/emicklei/go-restful/v3 v3.8.0 h1:eCZ8ulSerjdAiaNpF7GxXIE7ZCMo1moN1qX+S609eVw=
-github.com/emicklei/go-restful/v3 v3.8.0/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
 github.com/emicklei/go-restful/v3 v3.9.0 h1:XwGDlfxEnQZzuopoqxwSEllNcCOM9DhhFyhFIIGKwxE=
 github.com/emicklei/go-restful/v3 v3.9.0/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
 github.com/emirpasic/gods v1.12.0 h1:QAUIPSaCu4G+POclxeqb3F+WPpdKqFGlw36+yOzGlrg=

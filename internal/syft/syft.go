@@ -23,8 +23,8 @@ type Syft struct {
 	resolveVersion func() string
 }
 
-func New(sbomFormat string) Syft {
-	return Syft{
+func New(sbomFormat string) *Syft {
+	return &Syft{
 		sbomFormat:     sbomFormat,
 		resolveVersion: getSyftVersion,
 	}
