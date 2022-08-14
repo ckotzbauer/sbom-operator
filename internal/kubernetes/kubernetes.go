@@ -38,11 +38,11 @@ func NewClient(ignoreAnnotations bool, fallbackPullSecret string) *KubeClient {
 	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, fallbackPullSecret: fallbackPullSecret, SbomOperatorNamespace: sbomOperatorNamespace}
 }
 
-func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cache.ResourceEventHandlerFuncs) cache.SharedIndexInformer {
+func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cache.ResourceEventHandlerFuncs) (cache.SharedIndexInformer, error) {
 	fallbackPullSecret := client.loadFallbackPullSecret()
 	informer := client.Client.CreatePodInformer(podLabelSelector)
 	informer.AddEventHandler(handler)
-	informer.SetTransform(func(x interface{}) (interface{}, error) {
+	err := informer.SetTransform(func(x interface{}) (interface{}, error) {
 		pod := x.(corev1.Pod)
 		containers := client.Client.ExtractContainerInfos(pod)
 		if fallbackPullSecret != nil {
@@ -54,7 +54,7 @@ func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cach
 		return libk8s.PodInfo{Containers: containers, PodName: pod.Name, PodNamespace: pod.Namespace, Annotations: pod.Annotations}, nil
 	})
 
-	return informer
+	return informer, err
 }
 
 func (client *KubeClient) loadFallbackPullSecret() []oci.KubeCreds {

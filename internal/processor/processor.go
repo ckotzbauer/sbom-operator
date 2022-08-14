@@ -44,7 +44,7 @@ func (p *Processor) ListenForPods() {
 
 	c := make(chan struct{})
 	var informer cache.SharedIndexInformer
-	informer = p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
+	informer, err := p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
 			podInfo := obj.(libk8s.PodInfo)
 			// TODO: Check if scan is needed
@@ -64,6 +64,11 @@ func (p *Processor) ListenForPods() {
 			p.cleanupImagesIfNeeded(podInfo.Containers, informer.GetStore().List())
 		},
 	})
+
+	if err != nil {
+		logrus.WithError(err).Fatalf("Can't listen for pod-changes.")
+	}
+
 	listenOnSignals(c)
 	informer.Run(c)
 }
