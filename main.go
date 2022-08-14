@@ -51,7 +51,7 @@ func newRootCmd() *cobra.Command {
 
 	libstandard.AddConfigFlag(rootCmd)
 	libstandard.AddVerbosityFlag(rootCmd)
-	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "@hourly", "Backround-Service interval (CRON)")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "", "Backround-Service interval (CRON)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormat, "json", "SBOM-Format.")
 	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeyTargets, []string{"git"}, "Targets for created SBOMs (git, dtrack).")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyIgnoreAnnotations, false, "Force analyzing of all images, including those from annotated pods.")

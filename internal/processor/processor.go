@@ -42,17 +42,18 @@ func (p *Processor) ListenForPods() {
 		}
 	}
 
-	c := make(chan struct{})
 	var informer cache.SharedIndexInformer
 	informer, err := p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
 			podInfo := obj.(libk8s.PodInfo)
 			// TODO: Check if scan is needed
+			logrus.Debugf("Pod %s/%s was created.", podInfo.PodNamespace, podInfo.PodName)
 			p.ScanPod(podInfo)
 		},
 		UpdateFunc: func(old, new interface{}) {
 			oldPod := old.(libk8s.PodInfo)
 			newPod := new.(libk8s.PodInfo)
+			logrus.Debugf("Pod %s/%s was updated.", newPod.PodNamespace, newPod.PodName)
 
 			var removedContainers []libk8s.ContainerInfo
 			newPod.Containers, removedContainers = getChangedContainers(oldPod, newPod)
@@ -61,16 +62,17 @@ func (p *Processor) ListenForPods() {
 		},
 		DeleteFunc: func(obj interface{}) {
 			podInfo := obj.(libk8s.PodInfo)
+			logrus.Debugf("Pod %s/%s was removed.", podInfo.PodNamespace, podInfo.PodName)
 			p.cleanupImagesIfNeeded(podInfo.Containers, informer.GetStore().List())
 		},
 	})
 
 	if err != nil {
 		logrus.WithError(err).Fatalf("Can't listen for pod-changes.")
+		return
 	}
 
-	listenOnSignals(c)
-	informer.Run(c)
+	runInformerAsync(informer)
 }
 
 func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []liboci.RegistryImage) {
@@ -166,6 +168,7 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []liboci.R
 		for _, t := range targetImages {
 			if !containsImage(allImages, t.ImageID) {
 				removableImages = append(removableImages, t)
+				logrus.Debugf("Image %s marked for removal", t.ImageID)
 			}
 		}
 
@@ -244,6 +247,7 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []libk8s.ContainerIn
 
 		if !found {
 			images = append(images, c.Image)
+			logrus.Debugf("Image %s marked for removal", c.Image.ImageID)
 		}
 	}
 
@@ -252,7 +256,8 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []libk8s.ContainerIn
 	}
 }
 
-func listenOnSignals(informerChan chan struct{}) {
+func runInformerAsync(informer cache.SharedIndexInformer) {
+	c := make(chan struct{})
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
@@ -260,8 +265,13 @@ func listenOnSignals(informerChan chan struct{}) {
 			sig := <-sigs
 			switch sig {
 			case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
-				informerChan <- struct{}{}
+				logrus.Infof("Received signal %s", sig)
+				c <- struct{}{}
 			}
 		}
+	}()
+
+	go func() {
+		informer.Run(c)
 	}()
 }
