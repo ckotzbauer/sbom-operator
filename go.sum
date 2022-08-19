@@ -147,8 +147,12 @@ github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 h1:kDrYkTS
 github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7/go.mod h1:Blo6OgJNiYF41ufcgHKkbCKF2MDOMlrqhXv/ij6ocR4=
 github.com/anchore/stereoscope v0.0.0-20220803153229-c55b13fee7e4 h1:OMc0B7MxfjfqagdgboPFVJzsDJbFk7J7NXhgTTnhvuo=
 github.com/anchore/stereoscope v0.0.0-20220803153229-c55b13fee7e4/go.mod h1:90tB0wMdDe2V8fB52tPf1xjg/ieLoWayRu8YJNd9c7w=
+github.com/anchore/stereoscope v0.0.0-20220808115346-84004345484e h1:W13WKIHqgENdcIg49GsG2GJx2BnIg5rpI/gE2Bp/IRQ=
+github.com/anchore/stereoscope v0.0.0-20220808115346-84004345484e/go.mod h1:90tB0wMdDe2V8fB52tPf1xjg/ieLoWayRu8YJNd9c7w=
 github.com/anchore/syft v0.53.4 h1:tRiKa8ZL2FpDzzrcBHms4E6lgsmOkVbITrlcM35aKc0=
 github.com/anchore/syft v0.53.4/go.mod h1:Ms14EskPVOazbPO1j38sxR8kki0uL13xzV5fcuoQDBY=
+github.com/anchore/syft v0.54.0 h1:PNG6KHsO/KIGEivZgWTgAVgwISK/TfrRzocCEwK8WCQ=
+github.com/anchore/syft v0.54.0/go.mod h1:T+cDACkaFFl+ARWxLUS2Iri5agi4017wBRQUq5ZAAmE=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.2/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
@@ -1905,6 +1909,8 @@ google.golang.org/protobuf v1.26.0/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQ
 google.golang.org/protobuf v1.27.1/go.mod h1:9q0QmTI4eRPtz6boOQmLYwt+qCgq0jsYwAQnmE0givc=
 google.golang.org/protobuf v1.28.0 h1:w43yiav+6bVFTBQFZX0r7ipe9JQ1QsbMgHwbBziscLw=
 google.golang.org/protobuf v1.28.0/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
+google.golang.org/protobuf v1.28.1 h1:d0NfwRgPtno5B1Wa6L2DAG+KivqkdutMf1UhdNx175w=
+google.golang.org/protobuf v1.28.1/go.mod h1:HV8QOd/L58Z+nl8r43ehVNZIU/HEI6OcFqwMG9pJV4I=
 gopkg.in/airbrake/gobrake.v2 v2.0.9/go.mod h1:/h5ZAUhDkGaJfjzjKLSjv6zCL6O0LLBxU4K+aSYdM/U=
 gopkg.in/alecthomas/kingpin.v2 v2.2.6/go.mod h1:FMv+mEhP44yOT+4EoQTLFTRgOQ1FBLkstjWtayDeSgw=
 gopkg.in/check.v1 v0.0.0-20161208181325-20d25e280405/go.mod h1:Co6ibVJAznAaIkqp8huTwlJQCZ016jof/cbN4VW5Yz0=
