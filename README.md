@@ -281,8 +281,6 @@ COSIGN_REPOSITORY=ghcr.io/ckotzbauer/sbom-operator-metadata cosign download sbom
 ```
 
 
-[Contributing](https://github.com/ckotzbauer/sbom-operator/blob/master/CONTRIBUTING.md)
---------
 [License](https://github.com/ckotzbauer/sbom-operator/blob/master/LICENSE)
 --------
 [Changelog](https://github.com/ckotzbauer/sbom-operator/blob/master/CHANGELOG.md)
