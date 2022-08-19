@@ -77,7 +77,7 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `verbosity` | `false` | `info` | Log-level (debug, info, warn, error, fatal, panic) |
 | `cron` | `false` | `""` | Backround-Service interval (CRON). See [Trigger](#analysis-trigger) for details. |
 | `ignore-annotations` | `false` | `false` | Force analyzing of all images, including those from annotated pods. |
-| `format` | `false` | `json` | SBOM-Format. |
+| `format` | `false` | `json` | SBOM-Format. (One of `json`, `syftjson`, `cyclonedxjson`, `spdxjson`, `github`, `githubjson`, `cyclonedx`, `cyclone`, `cyclonedxxml`, `spdx`, `spdxtv`, `spdxtagvalue`, `text`, `table`) |
 | `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack`, `oci`. Ignored with a `job-image` |
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
@@ -219,6 +219,7 @@ The operator needs the Registry-URL, a user and a token as password to authentic
 | `job-image` | `false` | `""` | Job-Image to process images with instead of Syft |
 | `job-image-pull-secret` | `false` | `""` | Pre-existing pull-secret-name for private job-images |
 | `job-timeout` | `false` | `3600` | Job-Timeout in seconds (`activeDeadlineSeconds`) |
+| `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
 
 If you don't want to use Syft to analyze your images, you can give the Job-Image feature a try. The operator creates a Kubernetes-Job
 which does the analysis with any possible tool inside. There's no target-handling done by the operator, the tool from the job has to process
@@ -253,8 +254,31 @@ All operator-environment variables prefixed with `SBOM_JOB_` are passed to the K
 The docker-image is based on `scratch` to reduce the attack-surface and keep the image small. Furthermore the image and release-artifacts are signed 
 with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files. The release-process satisfies SLSA Level 2. All of those "metadata files" are 
 also stored in a dedicated repository `ghcr.io/ckotzbauer/sbom-operator-metadata`.
-Both, SLSA and the signatures are still experimental for this project.
 When discovering security issues please refer to the [Security process](https://github.com/ckotzbauer/.github/blob/main/SECURITY.md).
+
+### Signature verification
+
+```bash
+COSIGN_EXPERIMENTAL=1 COSIGN_REPOSITORY=ghcr.io/ckotzbauer/sbom-operator-metadata cosign verify ghcr.io/ckotzbauer/sbom-operator:<tag-to-verify> --certificate-github-workflow-name create-release --certificate-github-workflow-repository ckotzbauer/sbom-operator
+```
+
+### Attestation verification
+
+```bash
+COSIGN_EXPERIMENTAL=1 COSIGN_REPOSITORY=ghcr.io/ckotzbauer/sbom-operator-metadata cosign verify-attestation ghcr.io/ckotzbauer/sbom-operator:<tag-to-verify> --certificate-github-workflow-name create-release --certificate-github-workflow-repository ckotzbauer/sbom-operator
+```
+
+### Download attestation
+
+```bash
+COSIGN_REPOSITORY=ghcr.io/ckotzbauer/sbom-operator-metadata cosign download attestation ghcr.io/ckotzbauer/sbom-operator:<tag-to-verify> | jq -r '.payload' | base64 -d
+```
+
+### Download SBOM
+
+```bash
+COSIGN_REPOSITORY=ghcr.io/ckotzbauer/sbom-operator-metadata cosign download sbom ghcr.io/ckotzbauer/sbom-operator:<tag-to-verify> | jq -r '.payload' | base64 -d
+```
 
 
 [Contributing](https://github.com/ckotzbauer/sbom-operator/blob/master/CONTRIBUTING.md)
