@@ -17,12 +17,15 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/target/oci"
 	"github.com/sirupsen/logrus"
 	"k8s.io/client-go/tools/cache"
+
+	corev1 "k8s.io/api/core/v1"
 )
 
 type Processor struct {
-	K8s     *kubernetes.KubeClient
-	sy      *syft.Syft
-	Targets []target.Target
+	K8s      *kubernetes.KubeClient
+	sy       *syft.Syft
+	Targets  []target.Target
+	imageMap map[string]bool
 }
 
 func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
@@ -32,7 +35,7 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 		targets = initTargets()
 	}
 
-	return &Processor{K8s: k8s, sy: sy, Targets: targets}
+	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool)}
 }
 
 func (p *Processor) ListenForPods() {
@@ -45,25 +48,28 @@ func (p *Processor) ListenForPods() {
 	var informer cache.SharedIndexInformer
 	informer, err := p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
 		AddFunc: func(obj interface{}) {
-			podInfo := obj.(libk8s.PodInfo)
-			// TODO: Check if scan is needed
-			logrus.Debugf("Pod %s/%s was created.", podInfo.PodNamespace, podInfo.PodName)
-			p.ScanPod(podInfo)
+			pod := obj.(*corev1.Pod)
+			info := p.K8s.Client.ExtractPodInfos(*pod)
+			logrus.Debugf("Pod %s/%s was created.", info.PodNamespace, info.PodName)
+			p.scanPod(info)
 		},
 		UpdateFunc: func(old, new interface{}) {
-			oldPod := old.(libk8s.PodInfo)
-			newPod := new.(libk8s.PodInfo)
-			logrus.Debugf("Pod %s/%s was updated.", newPod.PodNamespace, newPod.PodName)
+			oldPod := old.(*corev1.Pod)
+			newPod := new.(*corev1.Pod)
+			oldInfo := p.K8s.Client.ExtractPodInfos(*oldPod)
+			newInfo := p.K8s.Client.ExtractPodInfos(*newPod)
+			logrus.Debugf("Pod %s/%s was updated.", newInfo.PodNamespace, newInfo.PodName)
 
 			var removedContainers []libk8s.ContainerInfo
-			newPod.Containers, removedContainers = getChangedContainers(oldPod, newPod)
-			p.ScanPod(newPod)
+			newInfo.Containers, removedContainers = getChangedContainers(oldInfo, newInfo)
+			p.scanPod(newInfo)
 			p.cleanupImagesIfNeeded(removedContainers, informer.GetStore().List())
 		},
 		DeleteFunc: func(obj interface{}) {
-			podInfo := obj.(libk8s.PodInfo)
-			logrus.Debugf("Pod %s/%s was removed.", podInfo.PodNamespace, podInfo.PodName)
-			p.cleanupImagesIfNeeded(podInfo.Containers, informer.GetStore().List())
+			pod := obj.(*corev1.Pod)
+			info := p.K8s.Client.ExtractPodInfos(*pod)
+			logrus.Debugf("Pod %s/%s was removed.", info.PodNamespace, info.PodName)
+			p.cleanupImagesIfNeeded(info.Containers, informer.GetStore().List())
 		},
 	})
 
@@ -83,10 +89,18 @@ func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []liboci.Reg
 	}
 }
 
-func (p *Processor) ScanPod(pod libk8s.PodInfo) {
+func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	errOccurred := false
+	p.K8s.InjectPullSecrets(pod)
 
 	for _, container := range pod.Containers {
+		alreadyScanned := p.imageMap[container.Image.ImageID]
+		if p.K8s.HasAnnotation(pod.Annotations, container) || alreadyScanned {
+			logrus.Debugf("Skip image %s", container.Image.ImageID)
+			continue
+		}
+
+		p.imageMap[container.Image.ImageID] = true
 		sbom, err := p.sy.ExecuteSyft(container.Image)
 		if err != nil {
 			// Error is already handled from syft module.
@@ -99,7 +113,7 @@ func (p *Processor) ScanPod(pod libk8s.PodInfo) {
 		}
 	}
 
-	if !errOccurred {
+	if !errOccurred && len(pod.Containers) > 0 {
 		p.K8s.UpdatePodAnnotation(pod)
 	}
 }
@@ -159,7 +173,7 @@ func HasJobImage() bool {
 
 func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []liboci.RegistryImage) {
 	for _, pod := range pods {
-		p.ScanPod(pod)
+		p.scanPod(pod)
 	}
 
 	for _, t := range p.Targets {
@@ -168,11 +182,14 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []liboci.R
 		for _, t := range targetImages {
 			if !containsImage(allImages, t.ImageID) {
 				removableImages = append(removableImages, t)
+				delete(p.imageMap, t.ImageID)
 				logrus.Debugf("Image %s marked for removal", t.ImageID)
 			}
 		}
 
-		t.Remove(removableImages)
+		if len(removableImages) > 0 {
+			t.Remove(removableImages)
+		}
 	}
 }
 
@@ -184,14 +201,31 @@ func (p *Processor) executeJobImage(pods []libk8s.PodInfo) {
 		internal.OperatorConfig.KubernetesClusterId,
 		internal.OperatorConfig.JobTimeout)
 
-	j, err := jobClient.StartJob(pods)
+	filteredPods := make([]libk8s.PodInfo, 0)
+	for _, pod := range pods {
+		filteredContainers := make([]libk8s.ContainerInfo, 0)
+		for _, container := range pod.Containers {
+			if p.K8s.HasAnnotation(pod.Annotations, container) {
+				logrus.Debugf("Skip image %s", container.Image.ImageID)
+				continue
+			}
+
+			filteredContainers = append(filteredContainers, container)
+		}
+
+		if len(filteredContainers) > 0 {
+			filteredPods = append(filteredPods, pod)
+		}
+	}
+
+	j, err := jobClient.StartJob(filteredPods)
 	if err != nil {
 		// Already handled from job-module
 		return
 	}
 
 	if jobClient.WaitForJob(j) {
-		for _, pod := range pods {
+		for _, pod := range filteredPods {
 			p.K8s.UpdatePodAnnotation(pod)
 		}
 	}
@@ -240,38 +274,47 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []libk8s.ContainerIn
 
 	for _, c := range removedContainers {
 		found := false
-		for _, p := range allPods {
-			pod := p.(libk8s.PodInfo)
-			found = found || containsContainerImage(pod.Containers, c.Image.ImageID)
+		for _, po := range allPods {
+			pod := po.(*corev1.Pod)
+			info := p.K8s.Client.ExtractPodInfos(*pod)
+			found = found || containsContainerImage(info.Containers, c.Image.ImageID)
 		}
 
 		if !found {
 			images = append(images, c.Image)
+			delete(p.imageMap, c.Image.ImageID)
 			logrus.Debugf("Image %s marked for removal", c.Image.ImageID)
 		}
 	}
 
-	for _, t := range p.Targets {
-		t.Remove(images)
+	if len(images) > 0 {
+		for _, t := range p.Targets {
+			t.Remove(images)
+		}
 	}
 }
 
 func runInformerAsync(informer cache.SharedIndexInformer) {
-	c := make(chan struct{})
+	stop := make(chan struct{})
 	sigs := make(chan os.Signal, 1)
-	signal.Notify(sigs, syscall.SIGQUIT, syscall.SIGINT, syscall.SIGTERM)
+	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
 	go func() {
-		for {
+		run := true
+		for run {
 			sig := <-sigs
 			switch sig {
-			case syscall.SIGQUIT, syscall.SIGTERM, syscall.SIGINT:
+			case syscall.SIGTERM, syscall.SIGINT:
 				logrus.Infof("Received signal %s", sig)
-				c <- struct{}{}
+				close(stop)
+				run = false
 			}
 		}
 	}()
 
 	go func() {
-		informer.Run(c)
+		logrus.Info("Start pod-informer")
+		informer.Run(stop)
+		logrus.Info("Pod-informer has stopped")
+		os.Exit(0)
 	}()
 }
