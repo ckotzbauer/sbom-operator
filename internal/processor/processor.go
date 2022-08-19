@@ -78,7 +78,7 @@ func (p *Processor) ListenForPods() {
 		return
 	}
 
-	runInformerAsync(informer)
+	p.runInformerAsync(informer)
 }
 
 func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []liboci.RegistryImage) {
@@ -294,7 +294,7 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []libk8s.ContainerIn
 	}
 }
 
-func runInformerAsync(informer cache.SharedIndexInformer) {
+func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 	stop := make(chan struct{})
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
@@ -316,5 +316,39 @@ func runInformerAsync(informer cache.SharedIndexInformer) {
 		informer.Run(stop)
 		logrus.Info("Pod-informer has stopped")
 		os.Exit(0)
+	}()
+
+	go func() {
+		if !HasJobImage() {
+			logrus.Info("Wait for cache to be synced")
+			if !cache.WaitForCacheSync(stop, informer.HasSynced) {
+				logrus.Fatal("Timed out waiting for the cache to sync")
+			}
+
+			logrus.Info("Finished cache sync")
+			pods := informer.GetStore().List()
+			missingPods := make([]libk8s.PodInfo, 0)
+			allImages := make([]liboci.RegistryImage, 0)
+
+			for _, t := range p.Targets {
+				targetImages := t.LoadImages()
+				for _, po := range pods {
+					pod := po.(*corev1.Pod)
+					info := p.K8s.Client.ExtractPodInfos(*pod)
+					for _, c := range info.Containers {
+						allImages = append(allImages, c.Image)
+						if !containsImage(targetImages, c.Image.ImageID) && !p.K8s.HasAnnotation(info.Annotations, c) {
+							missingPods = append(missingPods, info)
+							logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
+							break
+						}
+					}
+				}
+			}
+
+			if len(missingPods) > 0 {
+				p.executeSyftScans(missingPods, allImages)
+			}
+		}
 	}()
 }
