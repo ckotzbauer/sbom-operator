@@ -39,12 +39,6 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 }
 
 func (p *Processor) ListenForPods() {
-	if !HasJobImage() {
-		for _, t := range p.Targets {
-			t.Initialize()
-		}
-	}
-
 	var informer cache.SharedIndexInformer
 	informer, err := p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
 		UpdateFunc: func(old, new interface{}) {
@@ -306,6 +300,12 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 	}()
 
 	go func() {
+		if !HasJobImage() {
+			for _, t := range p.Targets {
+				t.Initialize()
+			}
+		}
+
 		logrus.Info("Start pod-informer")
 		informer.Run(stop)
 		logrus.Info("Pod-informer has stopped")
