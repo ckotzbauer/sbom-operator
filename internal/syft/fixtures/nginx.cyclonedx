@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:b6692256-d7f3-4d80-88a1-26fc0af69388" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:08f354d7-59c9-414d-bc36-22cdc3c083cc" version="1">
   <metadata>
-    <timestamp>2022-08-06T09:57:23+02:00</timestamp>
+    <timestamp>2022-08-20T11:58:26+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.53.4</version>
+        <version>0.54.0</version>
       </tool>
     </tools>
     <component bom-ref="bed2b68c44140e08" type="container">
@@ -177,7 +177,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -488,7 +488,7 @@
           <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:e2fsprogs:e2fsprogs:1.46.2-2:*:*:*:*:*:*:*</cpe>
@@ -1071,7 +1071,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -1476,7 +1476,7 @@
           <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libext2fs2:libext2fs2:1.46.2-2:*:*:*:*:*:*:*</cpe>
@@ -1886,7 +1886,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -2098,7 +2098,7 @@
           <id>GPL-2.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -2255,7 +2255,7 @@
           <id>GPL-3.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.1-only</id>
@@ -2344,7 +2344,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -2396,7 +2396,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -3030,7 +3030,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -3462,7 +3462,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -3793,7 +3793,7 @@
           <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:logsave:logsave:1.46.2-2:*:*:*:*:*:*:*</cpe>
@@ -3896,7 +3896,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>
@@ -4455,7 +4455,7 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <id>LGPL-2.0-only</id>
         </license>
         <license>
           <id>LGPL-2.0-or-later</id>

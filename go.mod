@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.19
 
 require (
-	github.com/anchore/syft v0.53.4
+	github.com/anchore/syft v0.54.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20220801045234-0c88accfdf59
 	github.com/ckotzbauer/libstandard v0.0.0-20220801044619-e3c9900286ea
 	github.com/novln/docker-parser v1.0.0
@@ -27,7 +27,7 @@ require (
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 // indirect
-	github.com/anchore/stereoscope v0.0.0-20220803153229-c55b13fee7e4 // indirect
+	github.com/anchore/stereoscope v0.0.0-20220808115346-84004345484e // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.0.2 // indirect
 	github.com/containerd/containerd v1.6.6 // indirect
@@ -150,7 +150,7 @@ require (
 	golang.org/x/text v0.3.7 // indirect
 	golang.org/x/time v0.0.0-20220411224347-583f2d630306 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
-	google.golang.org/protobuf v1.28.0 // indirect
+	google.golang.org/protobuf v1.28.1 // indirect
 	gopkg.in/inf.v0 v0.9.1 // indirect
 	gopkg.in/yaml.v2 v2.4.0 // indirect
 	gopkg.in/yaml.v3 v3.0.1 // indirect
