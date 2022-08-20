@@ -28,6 +28,8 @@ func (g *GitAccount) alreadyCloned(path string) (*git.Repository, error) {
 
 	if err == git.ErrRepositoryNotExists {
 		return nil, nil
+	} else if err != nil {
+		return nil, err
 	}
 
 	return r, nil
