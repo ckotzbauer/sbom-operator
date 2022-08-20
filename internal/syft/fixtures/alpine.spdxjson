@@ -3,15 +3,15 @@
  "name": "alpine@sha256-21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-08-06T07:56:59.307815806Z",
+  "created": "2022-08-20T09:57:49.785358019Z",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.53.4"
+   "Tool: syft-0.54.0"
   ],
-  "licenseListVersion": "3.17"
+  "licenseListVersion": "3.18"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300-f15b8f81-d8f8-4d6d-9b41-3de73fe0634c",
+ "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300-86e95a7d-c0f0-4a0d-8961-20ef8b2dce86",
  "packages": [
   {
    "SPDXID": "SPDXRef-9f527213f4d2a873",
@@ -57,6 +57,32 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-2eaa15c5fc625ebe",
+    "SPDXRef-a53373020dfa8bb4",
+    "SPDXRef-2c0eaf2a7d7dbad",
+    "SPDXRef-f3ee626693308800",
+    "SPDXRef-38605c90f707fb90",
+    "SPDXRef-60fa740c32339374",
+    "SPDXRef-420fa6f3289d6ee6",
+    "SPDXRef-ae2cba512a3f4065",
+    "SPDXRef-24d0f8d913cd9906",
+    "SPDXRef-d41a5f82a774a6a1",
+    "SPDXRef-dc65dbf355556024",
+    "SPDXRef-b3a5f05adcd1cf82",
+    "SPDXRef-b499705c36475f74",
+    "SPDXRef-2e3613b244458b5a",
+    "SPDXRef-64b20ab568341372",
+    "SPDXRef-84fd54b3f2a2e825",
+    "SPDXRef-32701f6d1e056c29",
+    "SPDXRef-5e12c5188eeb9cb3",
+    "SPDXRef-9ab25fdcabefa4ac",
+    "SPDXRef-18d9a7fcef583aeb",
+    "SPDXRef-93b858998f2c7034",
+    "SPDXRef-fb021b79aa9cd553",
+    "SPDXRef-82fda88ae28dd50",
+    "SPDXRef-13d6d27618d264f7"
+   ],
    "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -106,6 +132,49 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-8ec9dcf9b3d1d7ce",
+    "SPDXRef-39dcc03ca17480ca",
+    "SPDXRef-4d646d694b6380fc",
+    "SPDXRef-395f72182f48f77c",
+    "SPDXRef-496698ff67ca49fc",
+    "SPDXRef-66756a275982c586",
+    "SPDXRef-187efc434122356a",
+    "SPDXRef-add734ec170033bd",
+    "SPDXRef-59d943ecba7b9db1",
+    "SPDXRef-27d8de5355fdb7ba",
+    "SPDXRef-ff0560ee36b984a7",
+    "SPDXRef-66756a275982c586",
+    "SPDXRef-2c8a8c151837aa6e",
+    "SPDXRef-79cc1d44454e11b9",
+    "SPDXRef-abfd85d1b45289dc",
+    "SPDXRef-56080e31fd12fe67",
+    "SPDXRef-7803dc5a1a496765",
+    "SPDXRef-ccc2b3e76affde68",
+    "SPDXRef-3562d93285c5a3c5",
+    "SPDXRef-57149f915867bf12",
+    "SPDXRef-2363acec0a71a382",
+    "SPDXRef-2dac0f0b0463195c",
+    "SPDXRef-187efc434122356a",
+    "SPDXRef-f059a81847acaad9",
+    "SPDXRef-27d8de5355fdb7ba",
+    "SPDXRef-3562d93285c5a3c5",
+    "SPDXRef-27d8de5355fdb7ba",
+    "SPDXRef-2dac0f0b0463195c",
+    "SPDXRef-abfd85d1b45289dc",
+    "SPDXRef-2c8a8c151837aa6e",
+    "SPDXRef-57149f915867bf12",
+    "SPDXRef-56080e31fd12fe67",
+    "SPDXRef-f059a81847acaad9",
+    "SPDXRef-79cc1d44454e11b9",
+    "SPDXRef-2363acec0a71a382",
+    "SPDXRef-add734ec170033bd",
+    "SPDXRef-59d943ecba7b9db1",
+    "SPDXRef-ccc2b3e76affde68",
+    "SPDXRef-add734ec170033bd",
+    "SPDXRef-ff0560ee36b984a7",
+    "SPDXRef-7803dc5a1a496765"
+   ],
    "licenseDeclared": "MIT",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -155,6 +224,10 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-5f14b5421fba85af",
+    "SPDXRef-d72447617fa2b70c"
+   ],
    "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -179,6 +252,15 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-988a54d89f5c4c09",
+    "SPDXRef-988a54d89f5c4c09",
+    "SPDXRef-cd1c702a19149d7d",
+    "SPDXRef-be5355441673f6dc",
+    "SPDXRef-e7d6b30bf31f933a",
+    "SPDXRef-e6d162458c0b30b0",
+    "SPDXRef-d5ee1ce0839cb21a"
+   ],
    "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -248,6 +330,10 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-b7cfa7f53a05225f",
+    "SPDXRef-b7cfa7f53a05225f"
+   ],
    "licenseDeclared": "MPL-2.0 AND MIT",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -321,6 +407,17 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-b7cfa7f53a05225f",
+    "SPDXRef-d1029b42eed49dbe",
+    "SPDXRef-5f7354d1f6e1cdce",
+    "SPDXRef-1a7b85af7f458360",
+    "SPDXRef-a00e69b6cf4b0ef0",
+    "SPDXRef-4862e08252039e5",
+    "SPDXRef-f57c06db35618298",
+    "SPDXRef-ba1b2107c3063563",
+    "SPDXRef-a00e69b6cf4b0ef0"
+   ],
    "licenseDeclared": "OpenSSL",
    "originator": "Person: Timo Teras <timo.teras@iki.fi>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -345,6 +442,10 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-81250f1630c1a804",
+    "SPDXRef-81250f1630c1a804"
+   ],
    "licenseDeclared": "ISC",
    "originator": "Person: Ariadne Conill <ariadne@dereferenced.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -369,6 +470,10 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-a64a40d78e73f3bd",
+    "SPDXRef-a64a40d78e73f3bd"
+   ],
    "licenseDeclared": "OpenSSL",
    "originator": "Person: Timo Teras <timo.teras@iki.fi>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -393,6 +498,10 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-e322847d6485c76d",
+    "SPDXRef-e322847d6485c76d"
+   ],
    "licenseDeclared": "MIT",
    "originator": "Person: Timo Teräs <timo.teras@iki.fi>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -442,6 +551,13 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-d59e19c68624688f",
+    "SPDXRef-757b30be1d3baa0b",
+    "SPDXRef-780fcf6f56cca2e0",
+    "SPDXRef-ab2d028a906db5df",
+    "SPDXRef-8e69e89855b5ae0f"
+   ],
    "licenseDeclared": "MIT",
    "originator": "Person: Timo Teräs <timo.teras@iki.fi>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -466,6 +582,9 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-7516f5d905deb6db"
+   ],
    "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -515,6 +634,9 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-711694a1725d661e"
+   ],
    "licenseDeclared": "GPL-2.0-only",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
@@ -539,6 +661,10 @@
     }
    ],
    "filesAnalyzed": false,
+   "hasFiles": [
+    "SPDXRef-bfd3d0235da50adb",
+    "SPDXRef-bfd3d0235da50adb"
+   ],
    "licenseDeclared": "Zlib",
    "originator": "Person: Natanael Copa <ncopa@alpinelinux.org>",
    "sourceInfo": "acquired package info from APK DB: /lib/apk/db/installed",
