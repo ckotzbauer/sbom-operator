@@ -7,8 +7,8 @@ import (
 	"regexp"
 	"time"
 
+	"golang.org/x/exp/maps"
 	batchv1 "k8s.io/api/batch/v1"
-	corev1 "k8s.io/api/core/v1"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
@@ -49,27 +49,35 @@ func New(k8s *kubernetes.KubeClient, image, imagePullSecret, clusterId string, t
 	}
 }
 
-func (j JobClient) StartJob(images []libk8s.KubeImage) (*batchv1.Job, error) {
-	configs := make([]imageConfig, 0)
+func (j JobClient) StartJob(pods []libk8s.PodInfo) (*batchv1.Job, error) {
 	podNamespace := os.Getenv("POD_NAMESPACE")
+	images := make(map[string]imageConfig, 0)
 
-	for _, image := range images {
-		cfg, err := oci.ResolveAuthConfig(oci.RegistryImage{ImageID: image.Image.ImageID, PullSecrets: image.Image.PullSecrets})
-		if err != nil {
-			logrus.WithError(err).Error("Error occurred during auth-resolve")
-			return nil, err
+	for _, pod := range pods {
+		for _, container := range pod.Containers {
+			cfg, err := oci.ResolveAuthConfig(*container.Image)
+			if err != nil {
+				logrus.WithError(err).Error("Error occurred during auth-resolve")
+				return nil, err
+			}
+
+			img, ok := images[container.Image.ImageID]
+			if !ok {
+				img = imageConfig{
+					Host:     cfg.ServerAddress,
+					User:     cfg.Username,
+					Password: cfg.Password,
+					Image:    container.Image.ImageID,
+					Pods:     []imagePod{},
+				}
+			}
+
+			img.Pods = append(img.Pods, j.convertPod(pod))
+			images[container.Image.ImageID] = img
 		}
-
-		configs = append(configs, imageConfig{
-			Host:     cfg.ServerAddress,
-			User:     cfg.Username,
-			Password: cfg.Password,
-			Image:    image.Image.ImageID,
-			Pods:     j.convertPods(image.Pods),
-		})
 	}
 
-	bytes, err := json.Marshal(configs)
+	bytes, err := json.Marshal(maps.Values(images))
 	if err != nil {
 		logrus.WithError(err).Error("Error occurred during config-marshal")
 		return nil, err
@@ -138,16 +146,10 @@ func getJobEnvs() map[string]string {
 	return m
 }
 
-func (j JobClient) convertPods(pods []corev1.Pod) []imagePod {
-	ips := make([]imagePod, 0)
-
-	for _, p := range pods {
-		ips = append(ips, imagePod{
-			Pod:       p.Name,
-			Namespace: p.Namespace,
-			Cluster:   j.clusterId,
-		})
+func (j JobClient) convertPod(pod libk8s.PodInfo) imagePod {
+	return imagePod{
+		Pod:       pod.PodName,
+		Namespace: pod.PodNamespace,
+		Cluster:   j.clusterId,
 	}
-
-	return ips
 }

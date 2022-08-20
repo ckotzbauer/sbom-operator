@@ -4,16 +4,19 @@ go 1.19
 
 require (
 	github.com/anchore/syft v0.54.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220801045234-0c88accfdf59
+	github.com/ckotzbauer/libk8soci v0.0.0-20220820074711-9ebdb60394e6
 	github.com/ckotzbauer/libstandard v0.0.0-20220801044619-e3c9900286ea
+	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.6.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cobra v1.5.0
 	github.com/stretchr/testify v1.8.0
+	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e
 	k8s.io/api v0.24.4
 	k8s.io/apimachinery v0.24.4
+	k8s.io/client-go v0.24.4
 )
 
 require (
@@ -52,7 +55,6 @@ require (
 	github.com/go-restruct/restruct v1.2.0-alpha // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/gnostic v0.5.7-v3refs // indirect
-	github.com/google/uuid v1.3.0 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/huandu/xstrings v1.3.2 // indirect
@@ -107,7 +109,6 @@ require (
 	github.com/xanzy/ssh-agent v0.3.0 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.0.0-20220622213112-05595931fe9d // indirect
-	golang.org/x/exp v0.0.0-20220722155223-a9213eeb770e // indirect
 	golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4 // indirect
 	golang.org/x/sync v0.0.0-20220601150217-0de741cfad7f // indirect
 	golang.org/x/tools v0.1.11 // indirect
@@ -115,7 +116,6 @@ require (
 	google.golang.org/genproto v0.0.0-20220624142145-8cd45d7dbd1f // indirect
 	google.golang.org/grpc v1.48.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
-	k8s.io/client-go v0.24.3 // indirect
 	lukechampine.com/uint128 v1.1.1 // indirect
 	modernc.org/cc/v3 v3.36.0 // indirect
 	modernc.org/ccgo/v3 v3.16.6 // indirect

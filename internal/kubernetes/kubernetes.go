@@ -11,16 +11,16 @@ import (
 	"k8s.io/apimachinery/pkg/api/errors"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/client-go/tools/cache"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 )
 
 type KubeClient struct {
-	Client                *libk8s.KubeClient
-	ignoreAnnotations     bool
-	fallbackPullSecret    string
-	SbomOperatorNamespace string
+	Client             *libk8s.KubeClient
+	ignoreAnnotations  bool
+	fallbackPullSecret []*oci.KubeCreds
 }
 
 var (
@@ -30,81 +30,85 @@ var (
 	JobName       = "sbom-operator-job"
 )
 
-func NewClient(ignoreAnnotations bool, fallbackPullSecret string) *KubeClient {
+func NewClient(ignoreAnnotations bool, fallbackPullSecretName string) *KubeClient {
 	client := libk8s.NewClient()
 
 	sbomOperatorNamespace := os.Getenv("POD_NAMESPACE")
-	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, fallbackPullSecret: fallbackPullSecret, SbomOperatorNamespace: sbomOperatorNamespace}
+	fallbackPullSecret := loadFallbackPullSecret(client, sbomOperatorNamespace, fallbackPullSecretName)
+	return &KubeClient{Client: client, ignoreAnnotations: ignoreAnnotations, fallbackPullSecret: fallbackPullSecret}
 }
 
-func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.KubeImage, []libk8s.KubeImage) {
-	var fallbackPullSecret []oci.KubeCreds
+func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cache.ResourceEventHandlerFuncs) (cache.SharedIndexInformer, error) {
+	informer := client.Client.CreatePodInformer(podLabelSelector)
+	informer.AddEventHandler(handler)
+	err := informer.SetTransform(func(x interface{}) (interface{}, error) {
+		pod := x.(*corev1.Pod).DeepCopy()
+		logrus.Tracef("Transform %s/%s", pod.Namespace, pod.Name)
 
-	if client.fallbackPullSecret != "" {
-		if client.SbomOperatorNamespace == "" {
+		return &corev1.Pod{
+				ObjectMeta: meta.ObjectMeta{
+					Name:        pod.Name,
+					Namespace:   pod.Namespace,
+					Annotations: pod.Annotations,
+				},
+				Status: corev1.PodStatus{
+					InitContainerStatuses:      pod.Status.InitContainerStatuses,
+					EphemeralContainerStatuses: pod.Status.EphemeralContainerStatuses,
+					ContainerStatuses:          pod.Status.ContainerStatuses,
+				},
+				Spec: corev1.PodSpec{
+					ImagePullSecrets: pod.Spec.ImagePullSecrets,
+				},
+			},
+			nil
+	})
+
+	return informer, err
+}
+
+func loadFallbackPullSecret(client *libk8s.KubeClient, namespace, name string) []*oci.KubeCreds {
+	var fallbackPullSecret []*oci.KubeCreds
+
+	if name != "" {
+		if namespace == "" {
 			logrus.Debugf("please specify the environment variable 'POD_NAMESPACE' in order to use the fallbackPullSecret")
 		} else {
-			fallbackPullSecret = client.Client.LoadSecrets(client.SbomOperatorNamespace, []corev1.LocalObjectReference{{Name: client.fallbackPullSecret}})
+			fallbackPullSecret = client.LoadSecrets(namespace, []corev1.LocalObjectReference{{Name: name}})
 		}
 	}
 
-	allImages := client.Client.LoadImageInfos(namespaces, podLabelSelector)
-	imagesToProcess := make([]libk8s.KubeImage, 0)
-
-	for _, img := range allImages {
-		if fallbackPullSecret != nil {
-			img.Image.PullSecrets = append(img.Image.PullSecrets, fallbackPullSecret...)
-		}
-
-		annotationFound := false
-		for _, pod := range img.Pods {
-			containers := getContainerStatuses(pod, img.Image.ImageID)
-			for _, c := range containers {
-				x := client.hasAnnotation(pod.Annotations, c)
-				if x {
-					annotationFound = true
-					break
-				}
-			}
-
-			if annotationFound {
-				break
-			}
-		}
-
-		if !annotationFound {
-			imagesToProcess = append(imagesToProcess, img)
-		} else {
-			logrus.Debugf("Skip image %s", img.Image.ImageID)
-		}
-	}
-
-	return imagesToProcess, allImages
+	return fallbackPullSecret
 }
 
-func getContainerStatuses(pod corev1.Pod, imageID string) []corev1.ContainerStatus {
-	found := make([]corev1.ContainerStatus, 0)
+func (client *KubeClient) InjectPullSecrets(pod libk8s.PodInfo) {
+	for _, container := range pod.Containers {
+		container.Image.PullSecrets = client.Client.LoadSecrets(pod.PodNamespace, pod.PullSecretNames)
 
-	statuses := []corev1.ContainerStatus{}
-	statuses = append(statuses, pod.Status.ContainerStatuses...)
-	statuses = append(statuses, pod.Status.InitContainerStatuses...)
-	statuses = append(statuses, pod.Status.EphemeralContainerStatuses...)
+		if client.fallbackPullSecret != nil {
+			container.Image.PullSecrets = append(container.Image.PullSecrets, client.fallbackPullSecret...)
+		}
+	}
+}
 
-	for _, s := range statuses {
-		if s.ImageID == imageID {
-			found = append(found, s)
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.PodInfo, []*oci.RegistryImage) {
+	podInfos := client.Client.LoadPodInfos(namespaces, podLabelSelector)
+	allImages := make([]*oci.RegistryImage, 0)
+
+	for _, pod := range podInfos {
+		for _, container := range pod.Containers {
+			allImages = append(allImages, container.Image)
 		}
 	}
 
-	return found
+	return podInfos, allImages
 }
 
-func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
-	newPod, err := client.Client.Client.CoreV1().Pods(pod.Namespace).Get(context.Background(), pod.Name, meta.GetOptions{})
+func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
+	newPod, err := client.Client.Client.CoreV1().Pods(pod.PodNamespace).Get(context.Background(), pod.PodName, meta.GetOptions{})
 
 	if err != nil {
 		if !errors.IsNotFound(err) {
-			logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.Namespace, pod.Name)
+			logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.PodNamespace, pod.PodName)
 		}
 
 		return
@@ -115,15 +119,15 @@ func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
 		ann = make(map[string]string)
 	}
 
-	for _, c := range pod.Status.ContainerStatuses {
+	for _, c := range newPod.Status.ContainerStatuses {
 		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
 	}
 
-	for _, c := range pod.Status.InitContainerStatuses {
+	for _, c := range newPod.Status.InitContainerStatuses {
 		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
 	}
 
-	for _, c := range pod.Status.EphemeralContainerStatuses {
+	for _, c := range newPod.Status.EphemeralContainerStatuses {
 		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
 	}
 
@@ -131,17 +135,17 @@ func (client *KubeClient) UpdatePodAnnotation(pod corev1.Pod) {
 
 	_, err = client.Client.Client.CoreV1().Pods(newPod.Namespace).Update(context.Background(), newPod, meta.UpdateOptions{})
 	if err != nil {
-		logrus.WithError(err).Errorf("Pod %s/%s could not be updated!", pod.Namespace, pod.Name)
+		logrus.WithError(err).Warnf("Pod %s/%s could not be updated!", newPod.Namespace, newPod.Name)
 	}
 }
 
-func (client *KubeClient) hasAnnotation(annotations map[string]string, status corev1.ContainerStatus) bool {
+func (client *KubeClient) HasAnnotation(annotations map[string]string, container *libk8s.ContainerInfo) bool {
 	if annotations == nil || client.ignoreAnnotations {
 		return false
 	}
 
-	if val, ok := annotations[fmt.Sprintf(annotationTemplate, status.Name)]; ok {
-		return val == status.ImageID
+	if val, ok := annotations[fmt.Sprintf(annotationTemplate, container.Name)]; ok {
+		return val == container.Image.ImageID
 	}
 
 	return false

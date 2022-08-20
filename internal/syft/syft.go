@@ -23,8 +23,8 @@ type Syft struct {
 	resolveVersion func() string
 }
 
-func New(sbomFormat string) Syft {
-	return Syft{
+func New(sbomFormat string) *Syft {
+	return &Syft{
 		sbomFormat:     sbomFormat,
 		resolveVersion: getSyftVersion,
 	}
@@ -35,7 +35,7 @@ func (s Syft) WithVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img oci.RegistryImage) (string, error) {
+func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	fullRef, err := parser.Parse(img.ImageID)
@@ -106,18 +106,14 @@ func (s *Syft) ExecuteSyft(img oci.RegistryImage) (string, error) {
 
 func GetFileName(sbomFormat string) string {
 	switch sbomFormat {
-	case "json":
+	case "json", "syftjson", "cyclonedxjson", "spdxjson", "github", "githubjson":
 		return "sbom.json"
+	case "cyclonedx", "cyclone", "cyclonedxxml":
+		return "sbom.xml"
+	case "spdx", "spdxtv", "spdxtagvalue":
+		return "sbom.spdx"
 	case "text":
 		return "sbom.txt"
-	case "cyclonedx":
-		return "sbom.xml"
-	case "cyclonedxjson":
-		return "sbom.json"
-	case "spdx":
-		return "sbom.spdx"
-	case "spdxjson":
-		return "sbom.json"
 	case "table":
 		return "sbom.txt"
 	default:

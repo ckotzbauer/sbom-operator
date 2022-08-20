@@ -8,6 +8,9 @@ import (
 	"github.com/ckotzbauer/libstandard"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/daemon"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal/processor"
+	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 )
@@ -31,7 +34,14 @@ func newRootCmd() *cobra.Command {
 		Run: func(cmd *cobra.Command, args []string) {
 			printVersion()
 
-			daemon.Start(internal.OperatorConfig.Cron)
+			if internal.OperatorConfig.Cron != "" {
+				daemon.Start(internal.OperatorConfig.Cron)
+			} else {
+				k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
+				sy := syft.New(internal.OperatorConfig.Format)
+				p := processor.New(k8s, sy)
+				p.ListenForPods()
+			}
 
 			logrus.Info("Webserver is running at port 8080")
 			http.HandleFunc("/health", health)
@@ -41,7 +51,7 @@ func newRootCmd() *cobra.Command {
 
 	libstandard.AddConfigFlag(rootCmd)
 	libstandard.AddVerbosityFlag(rootCmd)
-	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "@hourly", "Backround-Service interval (CRON)")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "", "Backround-Service interval (CRON)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormat, "json", "SBOM-Format.")
 	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeyTargets, []string{"git"}, "Targets for created SBOMs (git, dtrack).")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyIgnoreAnnotations, false, "Force analyzing of all images, including those from annotated pods.")
