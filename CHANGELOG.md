@@ -1,3 +1,40 @@
+## Version 0.15.0 (2022-08-20)
+
+### Features and improvements
+
+* [[`8d4d7293`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8d4d7293)] - **feat**: Add Pod-Informer (#151)
+* [[`d214f871`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d214f871)] - **feat**: use go 1.19
+
+### Build and testing
+
+* [[`490e9c83`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/490e9c83)] - **build**: update golangci-lint
+* [[`6bba0740`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6bba0740)] - **build**: update golangci-lint
+
+### Documentation
+
+* [[`4324c429`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4324c429)] - **doc**: updated docs for new release
+
+### Security
+
+* [[`7503e23b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7503e23b)] - **security**: update to go-restful@3.8.0
+* [[`0c7478c8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0c7478c8)] - **security**: update go-restful
+
+### Dependency updates
+
+* [[`e6cef8a3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e6cef8a3)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.54.0 (#155)
+* [[`8214b089`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8214b089)] - **deps**: update kubernetes versions to v0.24.4
+* [[`ad381acb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ad381acb)] - **deps**: update sigstore&#x2F;cosign-installer digest to 716fc02
+* [[`84a9e5c7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/84a9e5c7)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.19.0
+* [[`c5d9856e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c5d9856e)] - **deps**: update alpine:3.16 docker digest to bc41182
+* [[`b2cec7ef`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b2cec7ef)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.9.0 (#148)
+* [[`79a8d53f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/79a8d53f)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.53.4 (#147)
+* [[`6435dc47`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6435dc47)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to e3c9900
+* [[`d5cfd847`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d5cfd847)] - **deps**: update sigstore&#x2F;cosign-installer digest to 5a02ebd
+* [[`40477c68`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/40477c68)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 0c88acc
+* [[`4f10535b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4f10535b)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.53.0
+* [[`e023dd75`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e023dd75)] - **deps**: update sigstore&#x2F;cosign-installer digest to 09a077b
+
+
 ## Version 0.14.0 (2022-07-24)
 
 ### Bug fixes
