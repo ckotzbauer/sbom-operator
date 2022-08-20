@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/syft v0.54.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220819091110-243f6ba84807
+	github.com/ckotzbauer/libk8soci v0.0.0-20220820074711-9ebdb60394e6
 	github.com/ckotzbauer/libstandard v0.0.0-20220801044619-e3c9900286ea
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0

@@ -49,7 +49,7 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() {
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(image libk8s.RegistryImage, sbom string) error {
+func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string) error {
 	projectName, version := getRepoWithVersion(image)
 
 	if sbom == "" {
@@ -102,7 +102,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image libk8s.RegistryImage, sbom str
 	return nil
 }
 
-func (g *DependencyTrackTarget) LoadImages() []libk8s.RegistryImage {
+func (g *DependencyTrackTarget) LoadImages() []*libk8s.RegistryImage {
 	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
 
 	if g.imageProjectMap == nil {
@@ -114,7 +114,7 @@ func (g *DependencyTrackTarget) LoadImages() []libk8s.RegistryImage {
 		pageSize   = 50
 	)
 
-	images := make([]libk8s.RegistryImage, 0)
+	images := make([]*libk8s.RegistryImage, 0)
 	for {
 		projectsPage, err := client.Project.GetAll(context.Background(), dtrack.PageOptions{
 			PageNumber: pageNumber,
@@ -147,7 +147,7 @@ func (g *DependencyTrackTarget) LoadImages() []libk8s.RegistryImage {
 			}
 
 			if imageRelatesToCluster && sbomOperatorPropFound && len(imageId) > 0 {
-				images = append(images, libk8s.RegistryImage{ImageID: imageId})
+				images = append(images, &libk8s.RegistryImage{ImageID: imageId})
 				g.imageProjectMap[imageId] = project.UUID
 			}
 		}
@@ -162,7 +162,7 @@ func (g *DependencyTrackTarget) LoadImages() []libk8s.RegistryImage {
 	return images
 }
 
-func (g *DependencyTrackTarget) Remove(images []libk8s.RegistryImage) {
+func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
 	if g.imageProjectMap == nil {
 		// prepropulate imageProjectMap
 		g.LoadImages()
@@ -236,7 +236,7 @@ func removeTag(tags []dtrack.Tag, tagString string) []dtrack.Tag {
 	return newTags
 }
 
-func getRepoWithVersion(image libk8s.RegistryImage) (string, string) {
+func getRepoWithVersion(image *libk8s.RegistryImage) (string, string) {
 	imageRef, err := parser.Parse(image.ImageID)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", image.ImageID)

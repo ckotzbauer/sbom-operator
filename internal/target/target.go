@@ -7,7 +7,7 @@ import (
 type Target interface {
 	Initialize()
 	ValidateConfig() error
-	ProcessSbom(image libk8s.RegistryImage, sbom string) error
-	LoadImages() []libk8s.RegistryImage
-	Remove(images []libk8s.RegistryImage)
+	ProcessSbom(image *libk8s.RegistryImage, sbom string) error
+	LoadImages() []*libk8s.RegistryImage
+	Remove(images []*libk8s.RegistryImage)
 }

@@ -67,7 +67,7 @@ func (g *GitTarget) Initialize() {
 	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
-func (g *GitTarget) ProcessSbom(image libk8s.RegistryImage, sbom string) error {
+func (g *GitTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string) error {
 	imageID := image.ImageID
 	filePath := g.ImageIDToFilePath(imageID)
 
@@ -86,11 +86,11 @@ func (g *GitTarget) ProcessSbom(image libk8s.RegistryImage, sbom string) error {
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) LoadImages() []libk8s.RegistryImage {
+func (g *GitTarget) LoadImages() []*libk8s.RegistryImage {
 	ignoreDirs := []string{".git"}
 	fileName := syft.GetFileName(g.sbomFormat)
 	basePath := filepath.Join(g.workingTree, g.workPath)
-	images := make([]libk8s.RegistryImage, 0)
+	images := make([]*libk8s.RegistryImage, 0)
 
 	err := filepath.Walk(basePath, func(p string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -110,7 +110,7 @@ func (g *GitTarget) LoadImages() []libk8s.RegistryImage {
 		if filepath.Base(p) == fileName {
 			sbomPath, _ := filepath.Rel(basePath, p)
 			s := filepath.Dir(sbomPath)
-			images = append(images, libk8s.RegistryImage{ImageID: strings.Replace(s, "/sha256_", "@sha256:", 1)})
+			images = append(images, &libk8s.RegistryImage{ImageID: strings.Replace(s, "/sha256_", "@sha256:", 1)})
 		}
 
 		return nil
@@ -118,13 +118,13 @@ func (g *GitTarget) LoadImages() []libk8s.RegistryImage {
 
 	if err != nil {
 		logrus.WithError(err).Error("Could not list all SBOMs")
-		return []libk8s.RegistryImage{}
+		return []*libk8s.RegistryImage{}
 	}
 
 	return images
 }
 
-func (g *GitTarget) Remove(images []libk8s.RegistryImage) {
+func (g *GitTarget) Remove(images []*libk8s.RegistryImage) {
 	logrus.Debug("Start to remove old SBOMs")
 	sbomFiles := g.mapToFiles(images)
 
@@ -145,7 +145,7 @@ func (g *GitTarget) Remove(images []libk8s.RegistryImage) {
 	}
 }
 
-func (g *GitTarget) mapToFiles(allImages []libk8s.RegistryImage) []string {
+func (g *GitTarget) mapToFiles(allImages []*libk8s.RegistryImage) []string {
 	paths := []string{}
 	for _, img := range allImages {
 		paths = append(paths, g.ImageIDToFilePath(img.ImageID))

@@ -55,7 +55,7 @@ func (j JobClient) StartJob(pods []libk8s.PodInfo) (*batchv1.Job, error) {
 
 	for _, pod := range pods {
 		for _, container := range pod.Containers {
-			cfg, err := oci.ResolveAuthConfig(container.Image)
+			cfg, err := oci.ResolveAuthConfig(*container.Image)
 			if err != nil {
 				logrus.WithError(err).Error("Error occurred during auth-resolve")
 				return nil, err

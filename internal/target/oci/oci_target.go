@@ -50,7 +50,7 @@ func (g *OciTarget) ValidateConfig() error {
 func (g *OciTarget) Initialize() {
 }
 
-func (g *OciTarget) ProcessSbom(image libk8s.RegistryImage, sbom string) error {
+func (g *OciTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string) error {
 	ref, err := name.ParseReference(image.ImageID)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to parse reference %s", image.ImageID)
@@ -90,9 +90,9 @@ func (g *OciTarget) ProcessSbom(image libk8s.RegistryImage, sbom string) error {
 	return err
 }
 
-func (g *OciTarget) LoadImages() []libk8s.RegistryImage {
-	return []libk8s.RegistryImage{}
+func (g *OciTarget) LoadImages() []*libk8s.RegistryImage {
+	return []*libk8s.RegistryImage{}
 }
 
-func (g *OciTarget) Remove(allImages []libk8s.RegistryImage) {
+func (g *OciTarget) Remove(allImages []*libk8s.RegistryImage) {
 }

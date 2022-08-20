@@ -20,7 +20,7 @@ import (
 type KubeClient struct {
 	Client             *libk8s.KubeClient
 	ignoreAnnotations  bool
-	fallbackPullSecret []oci.KubeCreds
+	fallbackPullSecret []*oci.KubeCreds
 }
 
 var (
@@ -66,8 +66,8 @@ func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cach
 	return informer, err
 }
 
-func loadFallbackPullSecret(client *libk8s.KubeClient, namespace, name string) []oci.KubeCreds {
-	var fallbackPullSecret []oci.KubeCreds
+func loadFallbackPullSecret(client *libk8s.KubeClient, namespace, name string) []*oci.KubeCreds {
+	var fallbackPullSecret []*oci.KubeCreds
 
 	if name != "" {
 		if namespace == "" {
@@ -90,9 +90,9 @@ func (client *KubeClient) InjectPullSecrets(pod libk8s.PodInfo) {
 	}
 }
 
-func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.PodInfo, []oci.RegistryImage) {
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.PodInfo, []*oci.RegistryImage) {
 	podInfos := client.Client.LoadPodInfos(namespaces, podLabelSelector)
-	allImages := make([]oci.RegistryImage, 0)
+	allImages := make([]*oci.RegistryImage, 0)
 
 	for _, pod := range podInfos {
 		for _, container := range pod.Containers {
@@ -139,7 +139,7 @@ func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
 	}
 }
 
-func (client *KubeClient) HasAnnotation(annotations map[string]string, container libk8s.ContainerInfo) bool {
+func (client *KubeClient) HasAnnotation(annotations map[string]string, container *libk8s.ContainerInfo) bool {
 	if annotations == nil || client.ignoreAnnotations {
 		return false
 	}

@@ -60,7 +60,7 @@ func (p *Processor) ListenForPods() {
 			newInfo := p.K8s.Client.ExtractPodInfos(*newPod)
 			logrus.Debugf("Pod %s/%s was updated.", newInfo.PodNamespace, newInfo.PodName)
 
-			var removedContainers []libk8s.ContainerInfo
+			var removedContainers []*libk8s.ContainerInfo
 			newInfo.Containers, removedContainers = getChangedContainers(oldInfo, newInfo)
 			p.scanPod(newInfo)
 			p.cleanupImagesIfNeeded(removedContainers, informer.GetStore().List())
@@ -81,7 +81,7 @@ func (p *Processor) ListenForPods() {
 	p.runInformerAsync(informer)
 }
 
-func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []liboci.RegistryImage) {
+func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.RegistryImage) {
 	if !HasJobImage() {
 		p.executeSyftScans(pods, allImages)
 	} else {
@@ -171,14 +171,14 @@ func HasJobImage() bool {
 	return internal.OperatorConfig.JobImage != ""
 }
 
-func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []liboci.RegistryImage) {
+func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.RegistryImage) {
 	for _, pod := range pods {
 		p.scanPod(pod)
 	}
 
 	for _, t := range p.Targets {
 		targetImages := t.LoadImages()
-		removableImages := make([]liboci.RegistryImage, 0)
+		removableImages := make([]*liboci.RegistryImage, 0)
 		for _, t := range targetImages {
 			if !containsImage(allImages, t.ImageID) {
 				removableImages = append(removableImages, t)
@@ -203,7 +203,7 @@ func (p *Processor) executeJobImage(pods []libk8s.PodInfo) {
 
 	filteredPods := make([]libk8s.PodInfo, 0)
 	for _, pod := range pods {
-		filteredContainers := make([]libk8s.ContainerInfo, 0)
+		filteredContainers := make([]*libk8s.ContainerInfo, 0)
 		for _, container := range pod.Containers {
 			if p.K8s.HasAnnotation(pod.Annotations, container) {
 				logrus.Debugf("Skip image %s", container.Image.ImageID)
@@ -231,9 +231,9 @@ func (p *Processor) executeJobImage(pods []libk8s.PodInfo) {
 	}
 }
 
-func getChangedContainers(oldPod, newPod libk8s.PodInfo) ([]libk8s.ContainerInfo, []libk8s.ContainerInfo) {
-	addedContainers := make([]libk8s.ContainerInfo, 0)
-	removedContainers := make([]libk8s.ContainerInfo, 0)
+func getChangedContainers(oldPod, newPod libk8s.PodInfo) ([]*libk8s.ContainerInfo, []*libk8s.ContainerInfo) {
+	addedContainers := make([]*libk8s.ContainerInfo, 0)
+	removedContainers := make([]*libk8s.ContainerInfo, 0)
 	for _, c := range newPod.Containers {
 		if !containsContainerImage(oldPod.Containers, c.Image.ImageID) {
 			addedContainers = append(addedContainers, c)
@@ -249,7 +249,7 @@ func getChangedContainers(oldPod, newPod libk8s.PodInfo) ([]libk8s.ContainerInfo
 	return addedContainers, removedContainers
 }
 
-func containsImage(images []liboci.RegistryImage, image string) bool {
+func containsImage(images []*liboci.RegistryImage, image string) bool {
 	for _, i := range images {
 		if i.ImageID == image {
 			return true
@@ -259,7 +259,7 @@ func containsImage(images []liboci.RegistryImage, image string) bool {
 	return false
 }
 
-func containsContainerImage(containers []libk8s.ContainerInfo, image string) bool {
+func containsContainerImage(containers []*libk8s.ContainerInfo, image string) bool {
 	for _, c := range containers {
 		if c.Image.ImageID == image {
 			return true
@@ -269,8 +269,8 @@ func containsContainerImage(containers []libk8s.ContainerInfo, image string) boo
 	return false
 }
 
-func (p *Processor) cleanupImagesIfNeeded(removedContainers []libk8s.ContainerInfo, allPods []interface{}) {
-	images := make([]liboci.RegistryImage, 0)
+func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerInfo, allPods []interface{}) {
+	images := make([]*liboci.RegistryImage, 0)
 
 	for _, c := range removedContainers {
 		found := false
@@ -328,7 +328,7 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			logrus.Info("Finished cache sync")
 			pods := informer.GetStore().List()
 			missingPods := make([]libk8s.PodInfo, 0)
-			allImages := make([]liboci.RegistryImage, 0)
+			allImages := make([]*liboci.RegistryImage, 0)
 
 			for _, t := range p.Targets {
 				targetImages := t.LoadImages()
