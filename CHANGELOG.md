@@ -1,5 +1,11 @@
 ## Version 0.15.0 (2022-08-20)
 
+### BREAKING CHANGES
+
+Due to the possibility of real-time processing with cache-informers, the default value of the `cron` flag was changed to an empty string.
+Without explicitly defining the flag, cron scheduling is now disabled by default.
+Due to the major refactoring of the code base, this update must be done carefully.
+
 ### Features and improvements
 
 * [[`8d4d7293`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8d4d7293)] - **feat**: Add Pod-Informer (#151)
