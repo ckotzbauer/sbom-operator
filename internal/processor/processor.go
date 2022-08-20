@@ -47,18 +47,12 @@ func (p *Processor) ListenForPods() {
 
 	var informer cache.SharedIndexInformer
 	informer, err := p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
-		AddFunc: func(obj interface{}) {
-			pod := obj.(*corev1.Pod)
-			info := p.K8s.Client.ExtractPodInfos(*pod)
-			logrus.Debugf("Pod %s/%s was created.", info.PodNamespace, info.PodName)
-			p.scanPod(info)
-		},
 		UpdateFunc: func(old, new interface{}) {
 			oldPod := old.(*corev1.Pod)
 			newPod := new.(*corev1.Pod)
 			oldInfo := p.K8s.Client.ExtractPodInfos(*oldPod)
 			newInfo := p.K8s.Client.ExtractPodInfos(*newPod)
-			logrus.Debugf("Pod %s/%s was updated.", newInfo.PodNamespace, newInfo.PodName)
+			logrus.Tracef("Pod %s/%s was updated.", newInfo.PodNamespace, newInfo.PodName)
 
 			var removedContainers []*libk8s.ContainerInfo
 			newInfo.Containers, removedContainers = getChangedContainers(oldInfo, newInfo)
@@ -68,7 +62,7 @@ func (p *Processor) ListenForPods() {
 		DeleteFunc: func(obj interface{}) {
 			pod := obj.(*corev1.Pod)
 			info := p.K8s.Client.ExtractPodInfos(*pod)
-			logrus.Debugf("Pod %s/%s was removed.", info.PodNamespace, info.PodName)
+			logrus.Tracef("Pod %s/%s was removed.", info.PodNamespace, info.PodName)
 			p.cleanupImagesIfNeeded(info.Containers, informer.GetStore().List())
 		},
 	})
