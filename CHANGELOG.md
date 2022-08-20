@@ -1,3 +1,15 @@
+## Version 0.15.1 (2022-08-20)
+
+### Bug fixes
+
+* [[`a0346aa3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a0346aa3)] - **fix**: handle git-errors correctly
+* [[`addc0ada`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/addc0ada)] - **fix**: initialize targets async
+
+### Documentation
+
+* [[`36817ad7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/36817ad7)] - **doc**: updated changelog [skip ci]
+
+
 ## Version 0.15.0 (2022-08-20)
 
 ### BREAKING CHANGES
