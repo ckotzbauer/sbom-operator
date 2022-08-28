@@ -28,6 +28,7 @@ rules:
   verbs:
   - get
   - update
+  - watch
 - apiGroups:
   - ""
   resources:
