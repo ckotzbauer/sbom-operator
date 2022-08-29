@@ -23,9 +23,9 @@ type DependencyTrackTarget struct {
 }
 
 const (
-	kubernetesCluster = "kubernetes-cluster"
-	sbomOperator      = "sbom-operator"
-	rawImageId        = "raw-image-id"
+	kubernetesCluster  = "kubernetes-cluster"
+	sbomOperator       = "sbom-operator"
+	rawImageId         = "raw-image-id"
 	podNamespaceTagKey = "namespace"
 )
 
@@ -94,7 +94,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom st
 	if !containsTag(project.Tags, rawImageId) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: fmt.Sprintf("%s=%s", rawImageId, image.ImageID)})
 	}
-    podNamespaceTag := podNamespaceTagKey + "="+podNamespace
+	podNamespaceTag := podNamespaceTagKey + "=" + podNamespace
 	if !containsTag(project.Tags, podNamespaceTag) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
 	}
