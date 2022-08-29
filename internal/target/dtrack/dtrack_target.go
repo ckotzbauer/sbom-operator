@@ -23,9 +23,10 @@ type DependencyTrackTarget struct {
 }
 
 const (
-	kubernetesCluster = "kubernetes-cluster"
-	sbomOperator      = "sbom-operator"
-	rawImageId        = "raw-image-id"
+	kubernetesCluster  = "kubernetes-cluster"
+	sbomOperator       = "sbom-operator"
+	rawImageId         = "raw-image-id"
+	podNamespaceTagKey = "namespace"
 )
 
 func NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId string) *DependencyTrackTarget {
@@ -49,7 +50,7 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() {
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string) error {
+func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string, podNamespace string) error {
 	projectName, version := getRepoWithVersion(image)
 
 	if sbom == "" {
@@ -93,7 +94,10 @@ func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom st
 	if !containsTag(project.Tags, rawImageId) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: fmt.Sprintf("%s=%s", rawImageId, image.ImageID)})
 	}
-
+	podNamespaceTag := podNamespaceTagKey + "=" + podNamespace
+	if !containsTag(project.Tags, podNamespaceTag) {
+		project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
+	}
 	_, err = client.Project.Update(context.Background(), project)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not update project tags")

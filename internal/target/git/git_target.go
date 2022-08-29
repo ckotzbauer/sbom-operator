@@ -67,7 +67,7 @@ func (g *GitTarget) Initialize() {
 	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
-func (g *GitTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string) error {
+func (g *GitTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string, podNamespace string) error {
 	imageID := image.ImageID
 	filePath := g.ImageIDToFilePath(imageID)
 
