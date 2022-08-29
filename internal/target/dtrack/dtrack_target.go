@@ -13,6 +13,7 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/target"
 )
 
 type DependencyTrackTarget struct {
@@ -50,11 +51,11 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() {
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string, podNamespace string) error {
-	projectName, version := getRepoWithVersion(image)
+func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
+	projectName, version := getRepoWithVersion(ctx.Image)
 
-	if sbom == "" {
-		logrus.Infof("Empty SBOM - skip image (image=%s)", image.ImageID)
+	if ctx.Sbom == "" {
+		logrus.Infof("Empty SBOM - skip image (image=%s)", ctx.Image.ImageID)
 		return nil
 	}
 
@@ -66,7 +67,7 @@ func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom st
 
 	logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
 
-	sbomBase64 := base64.StdEncoding.EncodeToString([]byte(sbom))
+	sbomBase64 := base64.StdEncoding.EncodeToString([]byte(ctx.Sbom))
 	uploadToken, err := client.BOM.Upload(
 		context.Background(),
 		dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, AutoCreate: true, BOM: sbomBase64},
@@ -92,9 +93,9 @@ func (g *DependencyTrackTarget) ProcessSbom(image *libk8s.RegistryImage, sbom st
 		project.Tags = append(project.Tags, dtrack.Tag{Name: sbomOperator})
 	}
 	if !containsTag(project.Tags, rawImageId) {
-		project.Tags = append(project.Tags, dtrack.Tag{Name: fmt.Sprintf("%s=%s", rawImageId, image.ImageID)})
+		project.Tags = append(project.Tags, dtrack.Tag{Name: fmt.Sprintf("%s=%s", rawImageId, ctx.Image.ImageID)})
 	}
-	podNamespaceTag := podNamespaceTagKey + "=" + podNamespace
+	podNamespaceTag := podNamespaceTagKey + "=" + ctx.Pod.PodNamespace
 	if !containsTag(project.Tags, podNamespaceTag) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
 	}

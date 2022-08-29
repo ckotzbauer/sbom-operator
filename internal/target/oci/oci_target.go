@@ -5,6 +5,7 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
 	"github.com/google/go-containerregistry/pkg/v1/remote"
@@ -50,14 +51,14 @@ func (g *OciTarget) ValidateConfig() error {
 func (g *OciTarget) Initialize() {
 }
 
-func (g *OciTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string, podNamespace string) error {
-	ref, err := name.ParseReference(image.ImageID)
+func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
+	ref, err := name.ParseReference(ctx.Image.ImageID)
 	if err != nil {
-		logrus.WithError(err).Errorf("failed to parse reference %s", image.ImageID)
+		logrus.WithError(err).Errorf("failed to parse reference %s", ctx.Image.ImageID)
 		return err
 	}
 
-	b := []byte(sbom)
+	b := []byte(ctx.Sbom)
 	opts := []remote.Option{
 		remote.WithAuth(authn.FromConfig(authn.AuthConfig{
 			Username:      g.userName,

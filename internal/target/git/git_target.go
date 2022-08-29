@@ -10,6 +10,7 @@ import (
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/sirupsen/logrus"
 )
 
@@ -67,8 +68,8 @@ func (g *GitTarget) Initialize() {
 	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
-func (g *GitTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string, podNamespace string) error {
-	imageID := image.ImageID
+func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
+	imageID := ctx.Image.ImageID
 	filePath := g.ImageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
@@ -78,7 +79,7 @@ func (g *GitTarget) ProcessSbom(image *libk8s.RegistryImage, sbom string, podNam
 		return err
 	}
 
-	err = os.WriteFile(filePath, []byte(sbom), 0640)
+	err = os.WriteFile(filePath, []byte(ctx.Sbom), 0640)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
 	}

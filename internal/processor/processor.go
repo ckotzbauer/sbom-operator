@@ -96,7 +96,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		}
 
 		for _, t := range p.Targets {
-			err = t.ProcessSbom(container.Image, sbom, pod.PodNamespace)
+			err = t.ProcessSbom(target.NewContext(sbom, container.Image, container, &pod))
 			errOccurred = errOccurred || err != nil
 		}
 	}
