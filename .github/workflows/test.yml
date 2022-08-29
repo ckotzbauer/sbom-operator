@@ -45,7 +45,7 @@ jobs:
         env:
           REGISTRY_USER: ckotzbauer
           REGISTRY_TOKEN: ${{ secrets.GHCR_PASSWORD }}
-          IS_FORK: ${{ github.event.pull_request.head.repo.full_name == github.repository }}
+          IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
         run: |
           if [ "$IS_FORK" != true ]; then
             DATE="$(date +%Y%m%d%H%M%S)"
