@@ -8,7 +8,7 @@
 ## Overview
 
 This operator maintains a central place to track all packages and software used in all those images in a Kubernetes cluster. For this a Software Bill of 
-Materials (SBOM) is generated from each image with Syft. They are all stored in one or more targets. Currently Git, Dependency Track and OCI-Registry are supported. 
+Materials (SBOM) is generated from each image with Syft. They are all stored in one or more targets. Currently Git, Dependency Track, OCI-Registry and ConfigMaps are supported. 
 With this it is possible to do further analysis, [vulnerability scans](https://github.com/ckotzbauer/vulnerability-operator) and much more in a single place. 
 To prevent scans of images that have already been analyzed pods are annotated with the imageID of the already processed image.
 
@@ -79,7 +79,7 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `cron` | `false` | `""` | Backround-Service interval (CRON). See [Trigger](#analysis-trigger) for details. |
 | `ignore-annotations` | `false` | `false` | Force analyzing of all images, including those from annotated pods. |
 | `format` | `false` | `json` | SBOM-Format. (One of `json`, `syftjson`, `cyclonedxjson`, `spdxjson`, `github`, `githubjson`, `cyclonedx`, `cyclone`, `cyclonedxxml`, `spdx`, `spdxtv`, `spdxtagvalue`, `text`, `table`) |
-| `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack`, `oci`. Ignored with a `job-image` |
+| `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack`, `oci`, `configmap`. Ignored with a `job-image` |
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 | `fallback-image-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
@@ -209,6 +209,14 @@ COSIGN_REPOSITORY=<yourregistry> cosign download sbom <your full image digest>
 ```
 
 The operator needs the Registry-URL, a user and a token as password to authenticate to the registry. Write-permissions are needed.
+
+
+### ConfigMap
+
+This target stores the SBOM as Kubernetes-ConfigMap. They are placed in the same namespace as the corresponding pod and the name
+consists of the pod- and container-name. The configmap is labeled with `ckotzbauer.sbom-operator.io=true` and 
+annotated with `ckotzbauer.sbom-operator.io/image-id=<full-image-repo-with-digest>`.
+The content is stored as broli-compressed binary-data with the configmap-key `sbom`.
 
 
 ## Job-Images
