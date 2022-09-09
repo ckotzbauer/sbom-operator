@@ -227,6 +227,8 @@ github.com/cilium/ebpf v0.4.0/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJ
 github.com/cilium/ebpf v0.6.2/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
 github.com/ckotzbauer/libk8soci v0.0.0-20220820074711-9ebdb60394e6 h1:ZqQ3DO7vBTpfWZNZAVpqsbVT1q07IoEUbNaxbWPQTcU=
 github.com/ckotzbauer/libk8soci v0.0.0-20220820074711-9ebdb60394e6/go.mod h1:IBQEVvyUDhkBa15BRG/Bx0iojbJA+4fqj8IpppI1Ylw=
+github.com/ckotzbauer/libk8soci v0.0.0-20220903073536-1b257a42db3e h1:ESs3uPw3lCtPJRawMEbETVAP0sPLktR7BGwmZwL9SxM=
+github.com/ckotzbauer/libk8soci v0.0.0-20220903073536-1b257a42db3e/go.mod h1:Ha7CyFvpgSMkrzkGkLtGGiqT1+GAv2TscHubjBunf9o=
 github.com/ckotzbauer/libstandard v0.0.0-20220903141541-869498553a91 h1:gEWEtrlzJt36HtXNVVhkC7B0ivOHD3gGmuYutXh5vIw=
 github.com/ckotzbauer/libstandard v0.0.0-20220903141541-869498553a91/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
