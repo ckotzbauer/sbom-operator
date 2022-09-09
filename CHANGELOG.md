@@ -1,3 +1,35 @@
+## Version 0.16.0 (2022-09-09)
+
+### Features and improvements
+
+* [[`17139c89`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/17139c89)] - **feat**: add configmap target (#163)
+* [[`11ba433b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/11ba433b)] - **feat**: add pod namespace as tag in dtrack project (#157)
+
+### Bug fixes
+
+* [[`02656337`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/02656337)] - **fix**: add watch-permission for pods
+* [[`85b5a74a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/85b5a74a)] - **fix**: Grant &#x60;watch&#x60; permissionson on &#x60;Pods&#x60; to ServiceAccount (#162)
+
+### Cleanup and refactoring
+
+* [[`a1d33324`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a1d33324)] - **cleanup**: add target-context
+
+### Build and testing
+
+* [[`56e8ab4c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/56e8ab4c)] - **build**: fix condition
+
+### Documentation
+
+* [[`b97e6e48`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b97e6e48)] - **doc**: update version-docs
+
+### Dependency updates
+
+* [[`5dddd500`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5dddd500)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 334a238
+* [[`519652df`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/519652df)] - **deps**: update kubernetes versions to v0.25.0
+* [[`90064cc8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/90064cc8)] - **deps**: update sigstore&#x2F;cosign-installer digest to 14d4334
+* [[`14865951`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/14865951)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to bd9bcdd
+
+
 ## Version 0.15.1 (2022-08-20)
 
 ### Bug fixes
