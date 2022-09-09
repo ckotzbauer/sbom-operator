@@ -24,7 +24,7 @@ type KubeClient struct {
 }
 
 var (
-	annotationTemplate = "ckotzbauer.sbom-operator.io/%s"
+	AnnotationTemplate = "ckotzbauer.sbom-operator.io/%s"
 	/* #nosec */
 	jobSecretName = "sbom-operator-job-config"
 	JobName       = "sbom-operator-job"
@@ -120,15 +120,15 @@ func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
 	}
 
 	for _, c := range newPod.Status.ContainerStatuses {
-		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
+		ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = c.ImageID
 	}
 
 	for _, c := range newPod.Status.InitContainerStatuses {
-		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
+		ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = c.ImageID
 	}
 
 	for _, c := range newPod.Status.EphemeralContainerStatuses {
-		ann[fmt.Sprintf(annotationTemplate, c.Name)] = c.ImageID
+		ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = c.ImageID
 	}
 
 	newPod.Annotations = ann
@@ -144,7 +144,7 @@ func (client *KubeClient) HasAnnotation(annotations map[string]string, container
 		return false
 	}
 
-	if val, ok := annotations[fmt.Sprintf(annotationTemplate, container.Name)]; ok {
+	if val, ok := annotations[fmt.Sprintf(AnnotationTemplate, container.Name)]; ok {
 		return val == container.Image.ImageID
 	}
 
@@ -260,4 +260,32 @@ func mapToEnvVars(m map[string]string) []corev1.EnvVar {
 	}
 
 	return vars
+}
+
+func (client *KubeClient) CreateConfigMap(namespace, name, imageId string, data []byte) error {
+	cm := corev1.ConfigMap{
+		ObjectMeta: meta.ObjectMeta{
+			Name:      name,
+			Namespace: namespace,
+			Labels: map[string]string{
+				"ckotzbauer.sbom-operator.io": "true",
+			},
+			Annotations: map[string]string{
+				fmt.Sprintf(AnnotationTemplate, "image-id"): imageId,
+			},
+		},
+		BinaryData: map[string][]byte{"sbom": data},
+	}
+
+	_, err := client.Client.Client.CoreV1().ConfigMaps(namespace).Create(context.Background(), &cm, meta.CreateOptions{})
+	return err
+}
+
+func (client *KubeClient) ListConfigMaps() ([]corev1.ConfigMap, error) {
+	list, err := client.Client.Client.CoreV1().ConfigMaps("").List(context.Background(), meta.ListOptions{LabelSelector: "ckotzbauer.sbom-operator.io=true"})
+	return list.Items, err
+}
+
+func (client *KubeClient) DeleteConfigMap(cm corev1.ConfigMap) error {
+	return client.Client.Client.CoreV1().ConfigMaps(cm.Namespace).Delete(context.Background(), cm.Name, meta.DeleteOptions{})
 }

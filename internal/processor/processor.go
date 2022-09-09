@@ -12,6 +12,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
+	"github.com/ckotzbauer/sbom-operator/internal/target/configmap"
 	"github.com/ckotzbauer/sbom-operator/internal/target/dtrack"
 	"github.com/ckotzbauer/sbom-operator/internal/target/git"
 	"github.com/ckotzbauer/sbom-operator/internal/target/oci"
@@ -32,7 +33,7 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 	targets := make([]target.Target, 0)
 	if !HasJobImage() {
 		logrus.Debugf("Targets set to: %v", internal.OperatorConfig.Targets)
-		targets = initTargets()
+		targets = initTargets(k8s)
 	}
 
 	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool)}
@@ -106,7 +107,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	}
 }
 
-func initTargets() []target.Target {
+func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 	targets := make([]target.Target, 0)
 
 	for _, ta := range internal.OperatorConfig.Targets {
@@ -137,6 +138,10 @@ func initTargets() []target.Target {
 			token := internal.OperatorConfig.OciToken
 			format := internal.OperatorConfig.Format
 			t := oci.NewOciTarget(registry, username, token, format)
+			err = t.ValidateConfig()
+			targets = append(targets, t)
+		} else if ta == "configmap" {
+			t := configmap.NewConfigMapTarget(k8s)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else {
