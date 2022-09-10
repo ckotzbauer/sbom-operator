@@ -158,6 +158,7 @@ The `autoCreate` option of DT is used. You have to set the `--format` flag to `c
 | `git-password` | `false` | `""` | Git-Password |
 | `github-app-id` | `false` | `""` | GitHub App-ID. |
 | `github-app-installation-id` | `false` | `""` | GitHub App-Installation-ID. |
+| `git-fallback-clone` | `false` | `false` | Use git binary for clones. |
 
 The operator will save all files with a specific folder structure as described below. When a `git-path` is configured, all folders above this path are not touched
 from the application. Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 
