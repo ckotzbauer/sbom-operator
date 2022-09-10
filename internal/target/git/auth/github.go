@@ -12,7 +12,6 @@ import (
 	"strings"
 	"time"
 
-	"github.com/go-git/go-git/v5/plumbing/transport"
 	githttp "github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/golang-jwt/jwt"
 )
@@ -37,7 +36,7 @@ func (g *GitHubAuthenticator) IsAvailable() bool {
 	return g.AppID != "" && g.AppInstallationID != "" && g.PrivateKey != ""
 }
 
-func (g *GitHubAuthenticator) ResolveAuth() (transport.AuthMethod, error) {
+func (g *GitHubAuthenticator) ResolveAuth() (*githttp.BasicAuth, error) {
 	if g.currentToken == nil || g.currentToken.ExpiresAt.Before(time.Now().Add(1*time.Minute)) {
 		token, err := getGitHubToken(g.PrivateKey, g.AppID, g.AppInstallationID)
 		if err != nil {

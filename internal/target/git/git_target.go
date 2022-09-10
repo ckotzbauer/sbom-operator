@@ -23,8 +23,8 @@ type GitTarget struct {
 	sbomFormat  string
 }
 
-func NewGitTarget(workingTree, path, repo, branch, token, name, email, githubAppID, githubAppInstallationID, githubAppPrivateKey, format string) *GitTarget {
-	gitAccount := New(token, name, email, githubAppID, githubAppInstallationID, githubAppPrivateKey)
+func NewGitTarget(workingTree, path, repo, branch, name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, format string, fallbackClone bool) *GitTarget {
+	gitAccount := New(name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, fallbackClone)
 
 	return &GitTarget{
 		workingTree: workingTree,
