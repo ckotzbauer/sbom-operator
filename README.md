@@ -151,9 +151,11 @@ The `autoCreate` option of DT is used. You have to set the `--format` flag to `c
 | `git-repository` | `true` when `git` target is used. | `""` | Git-Repository-URL (HTTPS). |
 | `git-branch` | `false` | `main` | Git-Branch to checkout. |
 | `git-path` | `false` | `""` | Folder-Path inside the Git-Repository. |
-| `git-access-token` | `true` when `git` target is used. | `""` | Git-Personal-Access-Token with write-permissions. |
 | `git-author-name` | `true` when `git` target is used. | `""` | Author name to use for Git-Commits. |
 | `git-author-email` | `true` when `git` target is used. | `""` | Author email to use for Git-Commits. |
+| `git-access-token` | `false` | `""` | Git-Personal-Access-Token with write-permissions. |
+| `github-app-id` | `false` | `""` | GitHub App-ID. |
+| `github-app-installation-id` | `false` | `""` | GitHub App-Installation-ID. |
 
 The operator will save all files with a specific folder structure as described below. When a `git-path` is configured, all folders above this path are not touched
 from the application. Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 

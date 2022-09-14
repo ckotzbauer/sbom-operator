@@ -23,8 +23,8 @@ type GitTarget struct {
 	sbomFormat  string
 }
 
-func NewGitTarget(workingTree, path, repo, branch, token, name, email, format string) *GitTarget {
-	gitAccount := New(token, name, email)
+func NewGitTarget(workingTree, path, repo, branch, token, name, email, githubAppID, githubAppInstallationID, githubAppPrivateKey, format string) *GitTarget {
+	gitAccount := New(token, name, email, githubAppID, githubAppInstallationID, githubAppPrivateKey)
 
 	return &GitTarget{
 		workingTree: workingTree,
@@ -47,10 +47,6 @@ func (g *GitTarget) ValidateConfig() error {
 
 	if g.branch == "" {
 		return fmt.Errorf("%s is empty", internal.ConfigKeyGitBranch)
-	}
-
-	if g.gitAccount.Token == "" {
-		return fmt.Errorf("%s is empty", internal.ConfigKeyGitAccessToken)
 	}
 
 	if g.gitAccount.Name == "" {

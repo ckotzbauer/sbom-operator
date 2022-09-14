@@ -5,21 +5,31 @@ import (
 	"os"
 	"time"
 
+	"github.com/ckotzbauer/sbom-operator/internal/target/git/auth"
 	git "github.com/go-git/go-git/v5"
 	"github.com/go-git/go-git/v5/plumbing"
 	"github.com/go-git/go-git/v5/plumbing/object"
 	"github.com/go-git/go-git/v5/plumbing/transport"
-	"github.com/go-git/go-git/v5/plumbing/transport/http"
 	"github.com/sirupsen/logrus"
 )
 
+var authenticators []auth.GitAuthenticator
+
 type GitAccount struct {
-	Token string
-	Name  string
-	Email string
+	Token                   string
+	GitHubAppID             string
+	GitHubAppInstallationID string
+	GitHubAppPrivateKey     string
+	Name                    string
+	Email                   string
 }
 
-func New(token, name, email string) GitAccount {
+func New(token, name, email, githubAppID, githubAppInstallationID, githubAppPrivateKey string) GitAccount {
+	authenticators = []auth.GitAuthenticator{
+		&auth.TokenGitAuthenticator{Token: token},
+		&auth.GitHubAuthenticator{AppID: githubAppID, AppInstallationID: githubAppInstallationID, PrivateKey: githubAppPrivateKey},
+	}
+
 	return GitAccount{Token: token, Name: name, Email: email}
 }
 
@@ -41,15 +51,19 @@ func (g *GitAccount) PrepareRepository(repo, path, branch string) {
 
 	if r == nil && err == nil {
 		cloned = true
-		r, err = git.PlainClone(path, false, &git.CloneOptions{
-			URL:      repo,
-			Progress: os.Stdout,
-			Auth:     g.tokenAuth(),
-		})
-	}
+		auth, err := g.resolveAuth()
+		if err != nil {
+			logrus.WithError(err).Error("Auth failed")
+			return
+		}
 
-	if err != nil {
-		logrus.WithError(err).Error("Open or clone failed")
+		r, err = git.PlainClone(path, false, &git.CloneOptions{URL: repo, Progress: os.Stdout, Auth: auth})
+		if err != nil {
+			logrus.WithError(err).Error("Clone failed")
+			return
+		}
+	} else if err != nil {
+		logrus.WithError(err).Error("Open failed")
 		return
 	}
 
@@ -70,11 +84,13 @@ func (g *GitAccount) PrepareRepository(repo, path, branch string) {
 	}
 
 	if !cloned {
-		err = w.Pull(&git.PullOptions{
-			Auth:          g.tokenAuth(),
-			ReferenceName: plumbing.NewBranchReferenceName(branch),
-		})
+		auth, err := g.resolveAuth()
+		if err != nil {
+			logrus.WithError(err).Error("Auth failed")
+			return
+		}
 
+		err = w.Pull(&git.PullOptions{ReferenceName: plumbing.NewBranchReferenceName(branch), Auth: auth})
 		if err != nil && !errors.Is(err, git.NoErrAlreadyUpToDate) {
 			logrus.WithError(err).Error("Pull failed")
 			return
@@ -180,10 +196,13 @@ func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message s
 		return err
 	}
 
-	err = r.Push(&git.PushOptions{
-		Auth: g.tokenAuth(),
-	})
+	auth, err := g.resolveAuth()
+	if err != nil {
+		logrus.WithError(err).Error("Auth failed")
+		return err
+	}
 
+	err = r.Push(&git.PushOptions{Auth: auth})
 	if err != nil {
 		logrus.WithError(err).Error("Push failed")
 		return err
@@ -193,9 +212,17 @@ func (g *GitAccount) commitAndPush(w *git.Worktree, r *git.Repository, message s
 	return nil
 }
 
-func (g *GitAccount) tokenAuth() transport.AuthMethod {
-	return &http.BasicAuth{
-		Username: "<token>", // this can be anything except an empty string
-		Password: g.Token,
+func (g *GitAccount) resolveAuth() (transport.AuthMethod, error) {
+	for _, authenticator := range authenticators {
+		if authenticator.IsAvailable() {
+			resolved, err := authenticator.ResolveAuth()
+			if err != nil {
+				return nil, err
+			}
+
+			return resolved, nil
+		}
 	}
+
+	return nil, nil
 }
