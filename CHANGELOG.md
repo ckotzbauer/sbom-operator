@@ -1,3 +1,30 @@
+## Version 0.17.0 (2022-09-17)
+
+### Features and improvements
+
+* [[`a2dfe037`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a2dfe037)] - **feat**: add git-fallback-mode to workaround multi_ack issue (#171)
+* [[`eb12f659`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eb12f659)] - **feat**: reworked git-auth; added github-app support close #141
+
+### Cleanup and refactoring
+
+* [[`68b989f1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/68b989f1)] - **cleanup**: file removals
+
+### Documentation
+
+* [[`0f4635d8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0f4635d8)] - **doc**: updated version-table
+
+### Dependency updates
+
+* [[`99542d3c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/99542d3c)] - **deps**: update kubernetes versions to v0.25.1
+* [[`a0589380`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a0589380)] - **deps**: update docker docker tag to v20.10.18
+* [[`230e8349`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/230e8349)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to b168a2c
+* [[`4b9256fd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4b9256fd)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.20.0
+* [[`5eca1779`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5eca1779)] - **deps**: update codenotary&#x2F;cas docker tag to v1.0.3
+* [[`ee3d2108`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ee3d2108)] - **deps**: update sigstore&#x2F;cosign-installer digest to f3c664d
+* [[`040d0df1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/040d0df1)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 5c715a9
+* [[`f7ad99ee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f7ad99ee)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 1b257a4
+
+
 ## Version 0.16.0 (2022-09-09)
 
 ### Features and improvements
