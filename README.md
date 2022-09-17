@@ -154,12 +154,21 @@ The `autoCreate` option of DT is used. You have to set the `--format` flag to `c
 | `git-author-name` | `true` when `git` target is used. | `""` | Author name to use for Git-Commits. |
 | `git-author-email` | `true` when `git` target is used. | `""` | Author email to use for Git-Commits. |
 | `git-access-token` | `false` | `""` | Git-Personal-Access-Token with write-permissions. |
+| `git-username` | `false` | `""` | Git-Username |
+| `git-password` | `false` | `""` | Git-Password |
 | `github-app-id` | `false` | `""` | GitHub App-ID. |
 | `github-app-installation-id` | `false` | `""` | GitHub App-Installation-ID. |
+| `git-fallback-clone` | `false` | `false` | Use git binary for clones. |
 
 The operator will save all files with a specific folder structure as described below. When a `git-path` is configured, all folders above this path are not touched
 from the application. Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 
-The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json`. The file-extension may differ when another output-format is configured. A token-based authentication to the git-repository is used (PAT).
+The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json` (see example below).
+The file-extension may differ when another output-format is configured. 
+You can use a token-based authentication (e.g. a PAT for GitHub) with `--git-access-token`, BasicAuth with username and password (`--git-username`, `--git-password`) or
+Github App Authentication (`--github-app-id`, `--github-app-installation-id`, env: `SBOM_GITHUB_APP_PRIVATE_KEY`) The private-key has to be Base64 encoded. 
+To clone repositories with a git-binary instead of the pure golang implementation, add the `--git-fallback-clone` flag. This is needed for Git-Providers which
+need `multi_ack` e.g. Azure DevOps or AWS CodeCommit. 
+See [this issue](https://github.com/go-git/go-git/issues/64) for more details.
 
 ```
 dev-cluster

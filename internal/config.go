@@ -10,8 +10,11 @@ type Config struct {
 	GitBranch               string   `yaml:"gitBranch" env:"SBOM_GIT_BRANCH" flag:"git-branch"`
 	GitPath                 string   `yaml:"gitPath" env:"SBOM_GIT_PATH" flag:"git-path"`
 	GitAccessToken          string   `yaml:"gitAccessToken" env:"SBOM_GIT_ACCESS_TOKEN" flag:"git-access-token"`
+	GitUserName             string   `yaml:"gitUserName" env:"SBOM_GIT_USERNAME" flag:"git-username"`
+	GitPassword             string   `yaml:"gitPassword" env:"SBOM_GIT_PASSWORD" flag:"git-password"`
 	GitAuthorName           string   `yaml:"gitAuthorName" env:"SBOM_GIT_AUTHOR_NAME" flag:"git-author-name"`
 	GitAuthorEmail          string   `yaml:"gitAuthorEmail" env:"SBOM_GIT_AUTHOR_EMAIL" flag:"git-author-email"`
+	GitFallbackClone        bool     `yaml:"gitFallbackClone" env:"SBOM_GIT_FALLBACK_CLONE" flag:"git-fallback-clone"`
 	GitHubAppId             string   `yaml:"githubAppId" env:"SBOM_GITHUB_APP_ID" flag:"github-app-id"`
 	GitHubAppInstallationId string   `yaml:"githubAppInstallationId" env:"SBOM_GITHUB_APP_INSTALLATION_ID" flag:"github-app-installation-id"`
 	GitHubPrivateKey        string   `yaml:"githubAppPrivateKey" env:"SBOM_GITHUB_APP_PRIVATE_KEY"`
@@ -40,8 +43,11 @@ var (
 	ConfigKeyGitBranch               = "git-branch"
 	ConfigKeyGitPath                 = "git-path"
 	ConfigKeyGitAccessToken          = "git-access-token"
+	ConfigKeyGitUserName             = "git-username"
+	ConfigKeyGitPassword             = "git-password"
 	ConfigKeyGitAuthorName           = "git-author-name"
 	ConfigKeyGitAuthorEmail          = "git-author-email"
+	ConfigKeyGitFallbackClone        = "git-fallback-clone"
 	ConfigKeyGitHubAppId             = "github-app-id"
 	ConfigKeyGitHubAppInstallationId = "github-app-installation-id"
 	ConfigKeyPodLabelSelector        = "pod-label-selector"
