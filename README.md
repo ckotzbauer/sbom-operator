@@ -162,9 +162,12 @@ The `autoCreate` option of DT is used. You have to set the `--format` flag to `c
 
 The operator will save all files with a specific folder structure as described below. When a `git-path` is configured, all folders above this path are not touched
 from the application. Assuming that `git-path` is set to `dev-cluster/sboms`. When no `git-path` is given, the structure below is directly in the repository-root. 
-The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json`. The file-extension may differ when another output-format is configured. 
-You can use a token-based authentication (e.g. a PAT for GitHub) or BasicAuth with username and password. To clone repositories with a git-binary instead of the
-pure golang implementation, add the `--git-fallback-clone` flag. This is needed for Git-Providers which need `multi_ack` e.g. Azure DevOps or AWS CodeCommit. 
+The structure is basically `<git-path>/<registry-server>/<image-path>/<image-digest>/sbom.json` (see example below).
+The file-extension may differ when another output-format is configured. 
+You can use a token-based authentication (e.g. a PAT for GitHub) with `--git-access-token`, BasicAuth with username and password (`--git-username`, `--git-password`) or
+Github App Authentication (`--github-app-id`, `--github-app-installation-id`, env: `SBOM_GITHUB_APP_PRIVATE_KEY`) The private-key has to be Base64 encoded. 
+To clone repositories with a git-binary instead of the pure golang implementation, add the `--git-fallback-clone` flag. This is needed for Git-Providers which
+need `multi_ack` e.g. Azure DevOps or AWS CodeCommit. 
 See [this issue](https://github.com/go-git/go-git/issues/64) for more details.
 
 ```

@@ -35,7 +35,7 @@ func New(name, email, token, userName, password, githubAppID, githubAppInstallat
 		&auth.GitHubAuthenticator{AppID: githubAppID, AppInstallationID: githubAppInstallationID, PrivateKey: githubAppPrivateKey},
 	}
 
-	return GitAccount{Token: token, Name: name, Email: email}
+	return GitAccount{Token: token, Name: name, Email: email, FallbackClone: fallbackClone}
 }
 
 func (g *GitAccount) alreadyCloned(path string) (*git.Repository, error) {
@@ -135,6 +135,14 @@ func (g *GitAccount) openExistingRepo(path string) (*git.Repository, *git.Worktr
 }
 
 func (g *GitAccount) fallbackClone(path, repo, branch string, auth *http.BasicAuth) error {
+	if _, err := os.Stat(path); os.IsNotExist(err) {
+		err := os.Mkdir(path, 0644)
+		if err != nil {
+			logrus.WithError(err).Error("directory creation failed.")
+			return err
+		}
+	}
+
 	cmd := exec.Command("git", "clone", "-b", branch, repo, path)
 	cmd.Env = append(cmd.Env, os.Environ()...)
 	cmd.Env = append(cmd.Env, "GIT_ASKPASS=git-ask-pass.sh")
@@ -158,7 +166,7 @@ func (g *GitAccount) fallbackClone(path, repo, branch string, auth *http.BasicAu
 		}
 	}
 
-	logrus.Debugf("Cloned repository with fallback-mode.")
+	logrus.Debug("Cloned repository with fallback-mode.")
 	return nil
 }
 
