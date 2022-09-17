@@ -18,7 +18,8 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| main            | v0.25.0                             | 1.24.x, 1.25.x, 1.26.x            |
+| main            | v0.25.1                             | 1.24.x, 1.25.x, 1.26.x            |
+| 0.17.0          | v0.25.1                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.16.0          | v0.25.0                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.15.0          | v0.24.4                             | 1.23.x, 1.24.x, 1.25.x            |
 | 0.14.0          | v0.24.3                             | 1.23.x, 1.24.x, 1.25.x            |
@@ -272,9 +273,9 @@ All operator-environment variables prefixed with `SBOM_JOB_` are passed to the K
 
 ## Security
 
-The docker-image is based on `scratch` to reduce the attack-surface and keep the image small. Furthermore the image and release-artifacts are signed 
-with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files. The release-process satisfies SLSA Level 2. All of those "metadata files" are 
-also stored in a dedicated repository `ghcr.io/ckotzbauer/sbom-operator-metadata`.
+The docker-image is based on a [distroless git-image](https://github.com/ckotzbauer/distroless-git-slim) to reduce the attack-surface and keep the image small.
+Furthermore the image and release-artifacts are signed with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files.
+The release-process satisfies SLSA Level 2. All of those "metadata files" are  also stored in a dedicated repository `ghcr.io/ckotzbauer/sbom-operator-metadata`.
 When discovering security issues please refer to the [Security process](https://github.com/ckotzbauer/.github/blob/main/SECURITY.md).
 
 ### Signature verification
