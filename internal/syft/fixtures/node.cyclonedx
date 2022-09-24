@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:dfd7636a-63ee-4743-8493-c41b2f12db22" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:733e57d2-f9a1-47ef-9355-16f39668c67a" version="1">
   <metadata>
-    <timestamp>2022-08-20T11:59:21+02:00</timestamp>
+    <timestamp>2022-09-24T09:18:22+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.54.0</version>
+        <version>0.56.0-SNAPSHOT-7c86e7ba</version>
       </tool>
     </tools>
     <component bom-ref="36cc3d123ca150cc" type="container">
@@ -15,7 +15,7 @@
     </component>
   </metadata>
   <components>
-    <component bom-ref="pkg:npm/%40gar/promisify@1.1.2?package-id=357eb6b8320e6221" type="library">
+    <component bom-ref="pkg:npm/%40gar/promisify@1.1.2?package-id=7c552f014b38a9bf" type="library">
       <author>Gar &lt;gar+npm@danger.computer&gt;</author>
       <name>@gar/promisify</name>
       <version>1.1.2</version>
@@ -41,7 +41,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@gar/promisify/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40isaacs/string-locale-compare@1.1.0?package-id=c8d3718d1d8e72be" type="library">
+    <component bom-ref="pkg:npm/%40isaacs/string-locale-compare@1.1.0?package-id=beebcda10f37f09e" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@isaacs/string-locale-compare</name>
       <version>1.1.0</version>
@@ -77,7 +77,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@isaacs/string-locale-compare/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/arborist@4.0.3?package-id=8092564541a8aeb1" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/arborist@4.0.3?package-id=e7aa113fb18ae1ed" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>@npmcli/arborist</name>
       <version>4.0.3</version>
@@ -103,7 +103,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/arborist/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/ci-detect@1.4.0?package-id=828402c9f0bb96a7" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/ci-detect@1.4.0?package-id=e8363c8f109cc6cb" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/ci-detect</name>
       <version>1.4.0</version>
@@ -135,7 +135,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/ci-detect/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/config@2.3.0?package-id=f09dadd3c458fa0c" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/config@2.3.0?package-id=6478ffc254590ff0" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/config</name>
       <version>2.3.0</version>
@@ -161,7 +161,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/config/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/disparity-colors@1.0.1?package-id=191eeca0650ab2e0" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/disparity-colors@1.0.1?package-id=75d13fae9c899222" type="library">
       <author>npm Inc. &lt;support@npmjs.com&gt;</author>
       <name>@npmcli/disparity-colors</name>
       <version>1.0.1</version>
@@ -193,7 +193,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/disparity-colors/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/fs@1.0.0?package-id=81aa1c0923a72916" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/fs@1.0.0?package-id=4c9be5dfc9bb99b4" type="library">
       <author>GitHub Inc.</author>
       <name>@npmcli/fs</name>
       <version>1.0.0</version>
@@ -214,7 +214,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/fs/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/git@2.1.0?package-id=61b4e3d06f6ede21" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/git@2.1.0?package-id=b26e415389dc1364" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/git</name>
       <version>2.1.0</version>
@@ -240,7 +240,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/git/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/installed-package-contents@1.0.7?package-id=49cdc30c507dbc7c" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/installed-package-contents@1.0.7?package-id=685c53613afae4e7" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/installed-package-contents</name>
       <version>1.0.7</version>
@@ -276,7 +276,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/installed-package-contents/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/map-workspaces@2.0.0?package-id=cb57aa8558f5bb12" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/map-workspaces@2.0.0?package-id=4276a0dc5c125b77" type="library">
       <author>GitHub Inc.</author>
       <name>@npmcli/map-workspaces</name>
       <version>2.0.0</version>
@@ -308,7 +308,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/map-workspaces/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/metavuln-calculator@2.0.0?package-id=331a84ddf60e438e" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/metavuln-calculator@2.0.0?package-id=4caa1af3ae002158" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/metavuln-calculator</name>
       <version>2.0.0</version>
@@ -340,7 +340,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/metavuln-calculator/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/move-file@1.1.2?package-id=2a08ea49fc14c419" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/move-file@1.1.2?package-id=3b253f06a150709e" type="library">
       <name>@npmcli/move-file</name>
       <version>1.1.2</version>
       <licenses>
@@ -371,7 +371,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/move-file/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/name-from-folder@1.0.1?package-id=ed158d82e136d6e4" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/name-from-folder@1.0.1?package-id=49346485f39bf8d" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/name-from-folder</name>
       <version>1.0.1</version>
@@ -407,7 +407,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/name-from-folder/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/node-gyp@1.0.2?package-id=9a9b60078bfc298a" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/node-gyp@1.0.2?package-id=2c5a79fc7caf4993" type="library">
       <author>Brian Jenkins &lt;bonkydog@bonkydog.com&gt;</author>
       <name>@npmcli/node-gyp</name>
       <version>1.0.2</version>
@@ -434,7 +434,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/node-gyp/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/package-json@1.0.1?package-id=8c93fdb16179df08" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/package-json@1.0.1?package-id=d184694f3231a9c2" type="library">
       <author>GitHub Inc.</author>
       <name>@npmcli/package-json</name>
       <version>1.0.1</version>
@@ -461,7 +461,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/package-json/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/promise-spawn@1.3.2?package-id=717dc6897970f8f6" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/promise-spawn@1.3.2?package-id=c23ac947b304c5b9" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/promise-spawn</name>
       <version>1.3.2</version>
@@ -493,7 +493,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/promise-spawn/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40npmcli/run-script@2.0.0?package-id=6b856c62030d0f2b" type="library">
+    <component bom-ref="pkg:npm/%40npmcli/run-script@2.0.0?package-id=45d00e642283c9c7" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>@npmcli/run-script</name>
       <version>2.0.0</version>
@@ -525,7 +525,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@npmcli/run-script/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/%40tootallnate/once@1.1.2?package-id=68ecdd16860ca180" type="library">
+    <component bom-ref="pkg:npm/%40tootallnate/once@1.1.2?package-id=a499a167592887aa" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://n8.io/)</author>
       <name>@tootallnate/once</name>
       <version>1.1.2</version>
@@ -551,7 +551,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/@tootallnate/once/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/abbrev@1.1.1?package-id=f8ea82d60a0d4a02" type="library">
+    <component bom-ref="pkg:npm/abbrev@1.1.1?package-id=572eb6fde6d3d979" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt;</author>
       <name>abbrev</name>
       <version>1.1.1</version>
@@ -603,7 +603,7 @@
         <property name="syft:metadata:installedSize">849</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/agent-base@6.0.2?package-id=b3f77d22bcb1daac" type="library">
+    <component bom-ref="pkg:npm/agent-base@6.0.2?package-id=83aeac6e0631fadd" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://n8.io/)</author>
       <name>agent-base</name>
       <version>6.0.2</version>
@@ -635,7 +635,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/agent-base/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/agentkeepalive@4.1.4?package-id=cc3dbda295b0fb24" type="library">
+    <component bom-ref="pkg:npm/agentkeepalive@4.1.4?package-id=8f24b6b5fcf1d532" type="library">
       <author>fengmk2 &lt;fengmk2@gmail.com&gt; (https://fengmk2.com)</author>
       <name>agentkeepalive</name>
       <version>4.1.4</version>
@@ -661,7 +661,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/agentkeepalive/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/aggregate-error@3.1.0?package-id=e3a3d8bb27678505" type="library">
+    <component bom-ref="pkg:npm/aggregate-error@3.1.0?package-id=d1876bb0f5030347" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>aggregate-error</name>
       <version>3.1.0</version>
@@ -693,7 +693,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/aggregate-error/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansi-regex@2.1.1?package-id=9555406cc778f301" type="library">
+    <component bom-ref="pkg:npm/ansi-regex@2.1.1?package-id=8684907d2f73d14c" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>ansi-regex</name>
       <version>2.1.1</version>
@@ -725,7 +725,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ansi-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansi-regex@3.0.0?package-id=f0d54f04ccc612b6" type="library">
+    <component bom-ref="pkg:npm/ansi-regex@3.0.0?package-id=538b0e2c6d4a3cff" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>ansi-regex</name>
       <version>3.0.0</version>
@@ -757,7 +757,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/string-width/node_modules/ansi-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansi-regex@5.0.0?package-id=d513eece3f30bf80" type="library">
+    <component bom-ref="pkg:npm/ansi-regex@5.0.0?package-id=dd00114c29648914" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>ansi-regex</name>
       <version>5.0.0</version>
@@ -789,7 +789,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-table3/node_modules/ansi-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansi-regex@5.0.1?package-id=473f9786456e18ef" type="library">
+    <component bom-ref="pkg:npm/ansi-regex@5.0.1?package-id=28229291fe2dac00" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>ansi-regex</name>
       <version>5.0.1</version>
@@ -821,7 +821,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-columns/node_modules/ansi-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansi-styles@4.3.0?package-id=53df02226385b37c" type="library">
+    <component bom-ref="pkg:npm/ansi-styles@4.3.0?package-id=df448f29a6b625b6" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>ansi-styles</name>
       <version>4.3.0</version>
@@ -853,7 +853,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ansi-styles/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansicolors@0.3.2?package-id=49ce4f292a7d54d7" type="library">
+    <component bom-ref="pkg:npm/ansicolors@0.3.2?package-id=603392e44f5130a6" type="library">
       <author>Thorsten Lorenz &lt;thlorenz@gmx.de&gt; (thlorenz.com)</author>
       <name>ansicolors</name>
       <version>0.3.2</version>
@@ -879,7 +879,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ansicolors/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ansistyles@0.1.3?package-id=6f8e5d1a22c35dd1" type="library">
+    <component bom-ref="pkg:npm/ansistyles@0.1.3?package-id=bc05ae8d047d5971" type="library">
       <author>Thorsten Lorenz &lt;thlorenz@gmx.de&gt; (thlorenz.com)</author>
       <name>ansistyles</name>
       <version>0.1.3</version>
@@ -905,7 +905,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ansistyles/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/aproba@1.2.0?package-id=2760c46a9e2bfd8d" type="library">
+    <component bom-ref="pkg:npm/aproba@1.2.0?package-id=13fa7b70883c24a2" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt;</author>
       <name>aproba</name>
       <version>1.2.0</version>
@@ -934,7 +934,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/node-gyp/node_modules/aproba/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/aproba@2.0.0?package-id=cc0a05aedfce0486" type="library">
+    <component bom-ref="pkg:npm/aproba@2.0.0?package-id=f3cf5a060d2ef858" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt;</author>
       <name>aproba</name>
       <version>2.0.0</version>
@@ -989,7 +989,7 @@
         <property name="syft:metadata:installedSize">4064</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/archy@1.0.0?package-id=d46d2cb62f3c3478" type="library">
+    <component bom-ref="pkg:npm/archy@1.0.0?package-id=1d414e2a397e0f45" type="library">
       <author>James Halliday &lt;mail@substack.net&gt; (http://substack.net)</author>
       <name>archy</name>
       <version>1.0.0</version>
@@ -1015,7 +1015,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/archy/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/are-we-there-yet@1.1.6?package-id=9ca4f147eef9c805" type="library">
+    <component bom-ref="pkg:npm/are-we-there-yet@1.1.6?package-id=47d7605149acda43" type="library">
       <author>GitHub Inc.</author>
       <name>are-we-there-yet</name>
       <version>1.1.6</version>
@@ -1058,7 +1058,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/are-we-there-yet/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/are-we-there-yet@2.0.0?package-id=36060c78ccc6ddf8" type="library">
+    <component bom-ref="pkg:npm/are-we-there-yet@2.0.0?package-id=a4ca675a38df2308" type="library">
       <author>GitHub Inc.</author>
       <name>are-we-there-yet</name>
       <version>2.0.0</version>
@@ -1101,7 +1101,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npmlog/node_modules/are-we-there-yet/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/asap@2.0.6?package-id=d32faa010586f7c6" type="library">
+    <component bom-ref="pkg:npm/asap@2.0.6?package-id=c0ff1db2974bcc3b" type="library">
       <name>asap</name>
       <version>2.0.6</version>
       <licenses>
@@ -1126,7 +1126,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/asap/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/balanced-match@1.0.2?package-id=98bdf1368904ea4e" type="library">
+    <component bom-ref="pkg:npm/balanced-match@1.0.2?package-id=a4849b1bec2b1fd2" type="library">
       <author>Julian Gruber &lt;mail@juliangruber.com&gt; (http://juliangruber.com)</author>
       <name>balanced-match</name>
       <version>1.0.2</version>
@@ -1242,7 +1242,7 @@
         <property name="syft:metadata:installedSize">6439</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/bin-links@2.3.0?package-id=929a0582692fcb7d" type="library">
+    <component bom-ref="pkg:npm/bin-links@2.3.0?package-id=525a30a019d69f18" type="library">
       <name>bin-links</name>
       <version>2.3.0</version>
       <licenses>
@@ -1273,7 +1273,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/bin-links/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/binary-extensions@2.2.0?package-id=720cffda61f75e49" type="library">
+    <component bom-ref="pkg:npm/binary-extensions@2.2.0?package-id=2d0265da64a9587a" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>binary-extensions</name>
       <version>2.2.0</version>
@@ -1305,7 +1305,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/binary-extensions/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/brace-expansion@1.1.11?package-id=b23463d9c75dddc1" type="library">
+    <component bom-ref="pkg:npm/brace-expansion@1.1.11?package-id=f119a763ba0a720d" type="library">
       <author>Julian Gruber &lt;mail@juliangruber.com&gt; (http://juliangruber.com)</author>
       <name>brace-expansion</name>
       <version>1.1.11</version>
@@ -1405,7 +1405,7 @@
         <property name="syft:metadata:sourceVersion">2.33.1-0.1</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/builtins@1.0.3?package-id=8cbc46b343bdd344" type="library">
+    <component bom-ref="pkg:npm/builtins@1.0.3?package-id=c87d25f4db9e8965" type="library">
       <name>builtins</name>
       <version>1.0.3</version>
       <licenses>
@@ -1430,7 +1430,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/builtins/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/cacache@15.3.0?package-id=48b06bb1cfb20db1" type="library">
+    <component bom-ref="pkg:npm/cacache@15.3.0?package-id=56ac51ee1c959679" type="library">
       <name>cacache</name>
       <version>15.3.0</version>
       <licenses>
@@ -1455,7 +1455,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cacache/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/chalk@4.1.2?package-id=b46bd906c8a649d9" type="library">
+    <component bom-ref="pkg:npm/chalk@4.1.2?package-id=e81105e9384558d6" type="library">
       <name>chalk</name>
       <version>4.1.2</version>
       <licenses>
@@ -1480,7 +1480,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/chalk/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/chownr@2.0.0?package-id=7d9ae4c3df433510" type="library">
+    <component bom-ref="pkg:npm/chownr@2.0.0?package-id=4c4ea5c0aa8f1a2" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>chownr</name>
       <version>2.0.0</version>
@@ -1506,7 +1506,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/chownr/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/cidr-regex@3.1.1?package-id=2b888e6860b2a519" type="library">
+    <component bom-ref="pkg:npm/cidr-regex@3.1.1?package-id=3eac757ccb6b76bf" type="library">
       <author>silverwind &lt;me@silverwind.io&gt;</author>
       <name>cidr-regex</name>
       <version>3.1.1</version>
@@ -1538,7 +1538,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cidr-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/clean-stack@2.2.0?package-id=9eeafb7b08d1eeca" type="library">
+    <component bom-ref="pkg:npm/clean-stack@2.2.0?package-id=52dc7a6abbf31aff" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>clean-stack</name>
       <version>2.2.0</version>
@@ -1570,7 +1570,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/clean-stack/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/cli-columns@4.0.0?package-id=2337dab16fed45c" type="library">
+    <component bom-ref="pkg:npm/cli-columns@4.0.0?package-id=c44dcb7ebc42cadd" type="library">
       <author>Shannon Moeller &lt;me@shannonmoeller&gt; (http://shannonmoeller.com)</author>
       <name>cli-columns</name>
       <version>4.0.0</version>
@@ -1605,7 +1605,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-columns/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/cli-table3@0.6.0?package-id=c77c2a8390f364f6" type="library">
+    <component bom-ref="pkg:npm/cli-table3@0.6.0?package-id=4a2552ab738501bc" type="library">
       <author>James Talmage</author>
       <name>cli-table3</name>
       <version>0.6.0</version>
@@ -1640,7 +1640,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-table3/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/clone@1.0.4?package-id=be4ea8f10c83da7d" type="library">
+    <component bom-ref="pkg:npm/clone@1.0.4?package-id=d21a84d8db15b3fb" type="library">
       <author>Paul Vorbach &lt;paul@vorba.ch&gt; (http://paul.vorba.ch/)</author>
       <name>clone</name>
       <version>1.0.4</version>
@@ -1666,7 +1666,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/clone/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/cmd-shim@4.1.0?package-id=f300e3fdfe2d42ed" type="library">
+    <component bom-ref="pkg:npm/cmd-shim@4.1.0?package-id=19e3a79dc0915bc2" type="library">
       <name>cmd-shim</name>
       <version>4.1.0</version>
       <licenses>
@@ -1697,7 +1697,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cmd-shim/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/code-point-at@1.1.0?package-id=1115cb50246aacfc" type="library">
+    <component bom-ref="pkg:npm/code-point-at@1.1.0?package-id=96068e98b7a8fd00" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>code-point-at</name>
       <version>1.1.0</version>
@@ -1733,7 +1733,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/code-point-at/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/color-convert@2.0.1?package-id=73a700789ebc12a1" type="library">
+    <component bom-ref="pkg:npm/color-convert@2.0.1?package-id=98384739ab17ac50" type="library">
       <author>Heather Arthur &lt;fayearthur@gmail.com&gt;</author>
       <name>color-convert</name>
       <version>2.0.1</version>
@@ -1765,7 +1765,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/color-convert/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/color-name@1.1.4?package-id=f88cabfd11db8255" type="library">
+    <component bom-ref="pkg:npm/color-name@1.1.4?package-id=9d1cf426504404d6" type="library">
       <author>DY &lt;dfcreative@gmail.com&gt;</author>
       <name>color-name</name>
       <version>1.1.4</version>
@@ -1800,7 +1800,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/color-name/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/color-support@1.1.3?package-id=669b7b070bb43095" type="library">
+    <component bom-ref="pkg:npm/color-support@1.1.3?package-id=6aee984bb26443e7" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>color-support</name>
       <version>1.1.3</version>
@@ -1832,7 +1832,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/color-support/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/colors@1.4.0?package-id=1013c6b5eabdbda1" type="library">
+    <component bom-ref="pkg:npm/colors@1.4.0?package-id=b77cee6f07d72052" type="library">
       <author>Marak Squires</author>
       <name>colors</name>
       <version>1.4.0</version>
@@ -1861,7 +1861,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/colors/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/columnify@1.5.4?package-id=26ce4a973a9399fb" type="library">
+    <component bom-ref="pkg:npm/columnify@1.5.4?package-id=e429e72e482cc415" type="library">
       <author>Tim Oxley</author>
       <name>columnify</name>
       <version>1.5.4</version>
@@ -1890,7 +1890,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/columnify/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/common-ancestor-path@1.0.1?package-id=f6d27a58cd1660d8" type="library">
+    <component bom-ref="pkg:npm/common-ancestor-path@1.0.1?package-id=ed067c0974f6a39b" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>common-ancestor-path</name>
       <version>1.0.1</version>
@@ -1926,7 +1926,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/common-ancestor-path/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/concat-map@0.0.1?package-id=87d0b8b9f08088fa" type="library">
+    <component bom-ref="pkg:npm/concat-map@0.0.1?package-id=c02883d7da2b655a" type="library">
       <author>James Halliday &lt;mail@substack.net&gt; (http://substack.net)</author>
       <name>concat-map</name>
       <version>0.0.1</version>
@@ -1958,7 +1958,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/concat-map/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/console-control-strings@1.1.0?package-id=2ba05db54f46dd18" type="library">
+    <component bom-ref="pkg:npm/console-control-strings@1.1.0?package-id=830d7c5125430507" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org/)</author>
       <name>console-control-strings</name>
       <version>1.1.0</version>
@@ -1994,7 +1994,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/console-control-strings/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/corepack@0.10.0?package-id=ae05343e4aca5203" type="library">
+    <component bom-ref="pkg:npm/corepack@0.10.0?package-id=39e95e15883e7b92" type="library">
       <name>corepack</name>
       <version>0.10.0</version>
       <licenses>
@@ -2140,7 +2140,7 @@
         <property name="syft:metadata:installedSize">226</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/debug@4.3.2?package-id=dc74fb5da8d617f4" type="library">
+    <component bom-ref="pkg:npm/debug@4.3.2?package-id=55f3c1217c0cd98a" type="library">
       <author>TJ Holowaychuk &lt;tj@vision-media.ca&gt;</author>
       <name>debug</name>
       <version>4.3.2</version>
@@ -2166,7 +2166,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/debug/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/debuglog@1.0.1?package-id=e755539509dce101" type="library">
+    <component bom-ref="pkg:npm/debuglog@1.0.1?package-id=abc228c3ae588d51" type="library">
       <author>Sam Roberts &lt;sam@strongloop.com&gt;</author>
       <name>debuglog</name>
       <version>1.0.1</version>
@@ -2192,7 +2192,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/debuglog/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/defaults@1.0.3?package-id=95f44e0794e43ce9" type="library">
+    <component bom-ref="pkg:npm/defaults@1.0.3?package-id=e3719380225d6f4b" type="library">
       <author>Elijah Insua &lt;tmpvar@gmail.com&gt;</author>
       <name>defaults</name>
       <version>1.0.3</version>
@@ -2218,7 +2218,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/defaults/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/delegates@1.0.0?package-id=e563395d310790cd" type="library">
+    <component bom-ref="pkg:npm/delegates@1.0.0?package-id=95826b76ddd2a9a3" type="library">
       <name>delegates</name>
       <version>1.0.0</version>
       <licenses>
@@ -2243,7 +2243,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/delegates/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/depd@1.1.2?package-id=6f0484a79f5ef167" type="library">
+    <component bom-ref="pkg:npm/depd@1.1.2?package-id=f72bd20a222742ab" type="library">
       <author>Douglas Christopher Wilson &lt;doug@somethingdoug.com&gt;</author>
       <name>depd</name>
       <version>1.1.2</version>
@@ -2269,7 +2269,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/depd/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/dezalgo@1.0.3?package-id=a1fa0c6e89f2c268" type="library">
+    <component bom-ref="pkg:npm/dezalgo@1.0.3?package-id=f50b1fe54fb72cc4" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>dezalgo</name>
       <version>1.0.3</version>
@@ -2298,7 +2298,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/dezalgo/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/diff@5.0.0?package-id=8a6c36ab19aaf63a" type="library">
+    <component bom-ref="pkg:npm/diff@5.0.0?package-id=86b67c58cb3d5dfc" type="library">
       <name>diff</name>
       <version>5.0.0</version>
       <licenses>
@@ -2403,7 +2403,7 @@
         <property name="syft:metadata:installedSize">1416</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/emoji-regex@8.0.0?package-id=ccd60f626bc1f738" type="library">
+    <component bom-ref="pkg:npm/emoji-regex@8.0.0?package-id=570e99c9e995de81" type="library">
       <author>Mathias Bynens (https://mathiasbynens.be/)</author>
       <name>emoji-regex</name>
       <version>8.0.0</version>
@@ -2438,7 +2438,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/emoji-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/encoding@0.1.13?package-id=c5723d6fcce0e3fc" type="library">
+    <component bom-ref="pkg:npm/encoding@0.1.13?package-id=da9f43f3a702a7f2" type="library">
       <author>Andris Reinman</author>
       <name>encoding</name>
       <version>0.1.13</version>
@@ -2464,7 +2464,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/encoding/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/env-paths@2.2.1?package-id=521f0d3822bc3297" type="library">
+    <component bom-ref="pkg:npm/env-paths@2.2.1?package-id=12e59920cc118b3f" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>env-paths</name>
       <version>2.2.1</version>
@@ -2496,7 +2496,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/env-paths/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/err-code@2.0.3?package-id=58e4674ef6e9f922" type="library">
+    <component bom-ref="pkg:npm/err-code@2.0.3?package-id=4fbe8c1da6a5248f" type="library">
       <author>IndigoUnited &lt;hello@indigounited.com&gt; (http://indigounited.com)</author>
       <name>err-code</name>
       <version>2.0.3</version>
@@ -2528,7 +2528,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/err-code/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/fastest-levenshtein@1.0.12?package-id=4fb3403cb6bc2435" type="library">
+    <component bom-ref="pkg:npm/fastest-levenshtein@1.0.12?package-id=2063aef265c95e2f" type="library">
       <author>Kasper U. Weihe</author>
       <name>fastest-levenshtein</name>
       <version>1.0.12</version>
@@ -2654,7 +2654,7 @@
         <property name="syft:metadata:installedSize">1938</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/fs-minipass@2.1.0?package-id=5788cc38d1b17a35" type="library">
+    <component bom-ref="pkg:npm/fs-minipass@2.1.0?package-id=d80dbbed0e421e9a" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>fs-minipass</name>
       <version>2.1.0</version>
@@ -2689,7 +2689,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/fs-minipass/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/fs.realpath@1.0.0?package-id=27ab21c09aa8a9f2" type="library">
+    <component bom-ref="pkg:npm/fs.realpath@1.0.0?package-id=eacb78f50950d123" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>fs.realpath</name>
       <version>1.0.0</version>
@@ -2715,7 +2715,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/fs.realpath/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/function-bind@1.1.1?package-id=3d0cece54a47fa3f" type="library">
+    <component bom-ref="pkg:npm/function-bind@1.1.1?package-id=20fc0bb9b42e3d3c" type="library">
       <author>Raynos &lt;raynos2@gmail.com&gt;</author>
       <name>function-bind</name>
       <version>1.1.1</version>
@@ -2750,7 +2750,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/function-bind/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/gauge@2.7.4?package-id=9182634693f9b040" type="library">
+    <component bom-ref="pkg:npm/gauge@2.7.4?package-id=efa0e1b761f3a2b" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt;</author>
       <name>gauge</name>
       <version>2.7.4</version>
@@ -2779,7 +2779,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/node-gyp/node_modules/gauge/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/gauge@3.0.1?package-id=b8b59f57f977a515" type="library">
+    <component bom-ref="pkg:npm/gauge@3.0.1?package-id=57e21e56d7e8d882" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt;</author>
       <name>gauge</name>
       <version>3.0.1</version>
@@ -2848,7 +2848,7 @@
         <property name="syft:metadata:source">gcc-8</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/glob@7.2.0?package-id=395dbb6a5b4aaec3" type="library">
+    <component bom-ref="pkg:npm/glob@7.2.0?package-id=3f4e43ab882f0d14" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>glob</name>
       <version>7.2.0</version>
@@ -2920,7 +2920,7 @@
         <property name="syft:metadata:source">gnupg2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/graceful-fs@4.2.8?package-id=de88f5e6c9f0f02b" type="library">
+    <component bom-ref="pkg:npm/graceful-fs@4.2.8?package-id=2e93b511dd46680" type="library">
       <name>graceful-fs</name>
       <version>4.2.8</version>
       <licenses>
@@ -2997,7 +2997,7 @@
         <property name="syft:metadata:installedSize">243</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/has@1.0.3?package-id=bd8a5a9cd266a81e" type="library">
+    <component bom-ref="pkg:npm/has@1.0.3?package-id=529f6547e90df93f" type="library">
       <author>Thiago de Arruda &lt;tpadilha84@gmail.com&gt;</author>
       <name>has</name>
       <version>1.0.3</version>
@@ -3026,7 +3026,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/has/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/has-flag@4.0.0?package-id=8860fd9131ba370d" type="library">
+    <component bom-ref="pkg:npm/has-flag@4.0.0?package-id=56faedfaf8d3d5c9" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>has-flag</name>
       <version>4.0.0</version>
@@ -3058,7 +3058,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/has-flag/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/has-unicode@2.0.1?package-id=edfd4f735a9fbe0f" type="library">
+    <component bom-ref="pkg:npm/has-unicode@2.0.1?package-id=8dbdaa983890cb8b" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt;</author>
       <name>has-unicode</name>
       <version>2.0.1</version>
@@ -3093,7 +3093,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/has-unicode/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/hosted-git-info@4.0.2?package-id=978afaf49646dba1" type="library">
+    <component bom-ref="pkg:npm/hosted-git-info@4.0.2?package-id=df50ac2e83b9afe" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org)</author>
       <name>hosted-git-info</name>
       <version>4.0.2</version>
@@ -3156,7 +3156,7 @@
         <property name="syft:metadata:installedSize">54</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/http-cache-semantics@4.1.0?package-id=900c210b103b058c" type="library">
+    <component bom-ref="pkg:npm/http-cache-semantics@4.1.0?package-id=1cd0895bcd12ad80" type="library">
       <author>Kornel Lesiński &lt;kornel@geekhood.net&gt; (https://kornel.ski/)</author>
       <name>http-cache-semantics</name>
       <version>4.1.0</version>
@@ -3192,7 +3192,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/http-cache-semantics/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/http-proxy-agent@4.0.1?package-id=7204ae8c35a322ad" type="library">
+    <component bom-ref="pkg:npm/http-proxy-agent@4.0.1?package-id=19d357fdde4f750c" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://n8.io/)</author>
       <name>http-proxy-agent</name>
       <version>4.0.1</version>
@@ -3228,7 +3228,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/http-proxy-agent/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/https-proxy-agent@5.0.0?package-id=1a4a8a21889a348c" type="library">
+    <component bom-ref="pkg:npm/https-proxy-agent@5.0.0?package-id=92a40aa540beb741" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://n8.io/)</author>
       <name>https-proxy-agent</name>
       <version>5.0.0</version>
@@ -3264,7 +3264,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/https-proxy-agent/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/humanize-ms@1.2.1?package-id=8ac0a3c87a86d825" type="library">
+    <component bom-ref="pkg:npm/humanize-ms@1.2.1?package-id=313fdae9ecfb1ddb" type="library">
       <author>dead-horse &lt;dead_horse@qq.com&gt; (http://deadhorse.me)</author>
       <name>humanize-ms</name>
       <version>1.2.1</version>
@@ -3296,7 +3296,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/humanize-ms/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/iconv-lite@0.6.3?package-id=68c59b079e0a41f2" type="library">
+    <component bom-ref="pkg:npm/iconv-lite@0.6.3?package-id=b29ed147c8ffab66" type="library">
       <author>Alexander Shtuchkin &lt;ashtuchkin@gmail.com&gt;</author>
       <name>iconv-lite</name>
       <version>0.6.3</version>
@@ -3331,7 +3331,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/iconv-lite/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ignore-walk@4.0.1?package-id=d98ba68f10d72a7d" type="library">
+    <component bom-ref="pkg:npm/ignore-walk@4.0.1?package-id=c56022b3ae9301a5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>ignore-walk</name>
       <version>4.0.1</version>
@@ -3363,7 +3363,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ignore-walk/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/imurmurhash@0.1.4?package-id=39345bfd2940907c" type="library">
+    <component bom-ref="pkg:npm/imurmurhash@0.1.4?package-id=727808884c20309a" type="library">
       <author>Jens Taylor &lt;jensyt@gmail.com&gt; (https://github.com/homebrewing)</author>
       <name>imurmurhash</name>
       <version>0.1.4</version>
@@ -3392,7 +3392,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/imurmurhash/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/indent-string@4.0.0?package-id=2aebc505fa99968b" type="library">
+    <component bom-ref="pkg:npm/indent-string@4.0.0?package-id=69af07593b6648c8" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>indent-string</name>
       <version>4.0.0</version>
@@ -3424,7 +3424,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/indent-string/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/infer-owner@1.0.4?package-id=8d8a260f1a9fc8ee" type="library">
+    <component bom-ref="pkg:npm/infer-owner@1.0.4?package-id=a5038d0416371e43" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>infer-owner</name>
       <version>1.0.4</version>
@@ -3456,7 +3456,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/infer-owner/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/inflight@1.0.6?package-id=3578ec1d56838182" type="library">
+    <component bom-ref="pkg:npm/inflight@1.0.6?package-id=d50b3427a8ef3291" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>inflight</name>
       <version>1.0.6</version>
@@ -3485,7 +3485,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/inflight/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/inherits@2.0.4?package-id=204a5d39770db4ba" type="library">
+    <component bom-ref="pkg:npm/inherits@2.0.4?package-id=2e954d80be612e82" type="library">
       <name>inherits</name>
       <version>2.0.4</version>
       <licenses>
@@ -3510,7 +3510,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/inherits/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ini@2.0.0?package-id=631596b8774f5b34" type="library">
+    <component bom-ref="pkg:npm/ini@2.0.0?package-id=1042dbca0211ae86" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>ini</name>
       <version>2.0.0</version>
@@ -3536,7 +3536,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ini/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/init-package-json@2.0.5?package-id=e1cf946d4a9cc876" type="library">
+    <component bom-ref="pkg:npm/init-package-json@2.0.5?package-id=a19e06927c4d4fdf" type="library">
       <author>GitHub Inc.</author>
       <name>init-package-json</name>
       <version>2.0.5</version>
@@ -3611,7 +3611,7 @@
         <property name="syft:metadata:installedSize">133</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ip@1.1.5?package-id=b2fbe7b0b38b9943" type="library">
+    <component bom-ref="pkg:npm/ip@1.1.5?package-id=ede08acbbea8b77e" type="library">
       <author>Fedor Indutny &lt;fedor@indutny.com&gt;</author>
       <name>ip</name>
       <version>1.1.5</version>
@@ -3640,7 +3640,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ip/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ip-regex@4.3.0?package-id=5c5e9c4d548bdc86" type="library">
+    <component bom-ref="pkg:npm/ip-regex@4.3.0?package-id=e9c77d2e6a526738" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>ip-regex</name>
       <version>4.3.0</version>
@@ -3672,7 +3672,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ip-regex/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-cidr@4.0.2?package-id=ccfcfe378254fe43" type="library">
+    <component bom-ref="pkg:npm/is-cidr@4.0.2?package-id=28bb14bf4eaf4d39" type="library">
       <author>silverwind &lt;me@silverwind.io&gt;</author>
       <name>is-cidr</name>
       <version>4.0.2</version>
@@ -3704,7 +3704,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/is-cidr/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-core-module@2.7.0?package-id=9ca67a5e867268bc" type="library">
+    <component bom-ref="pkg:npm/is-core-module@2.7.0?package-id=7a8315140a6ab228" type="library">
       <author>Jordan Harband &lt;ljharb@gmail.com&gt;</author>
       <name>is-core-module</name>
       <version>2.7.0</version>
@@ -3743,7 +3743,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/is-core-module/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-fullwidth-code-point@1.0.0?package-id=657da48d0a4ea0b0" type="library">
+    <component bom-ref="pkg:npm/is-fullwidth-code-point@1.0.0?package-id=3252f1acb5b36f1f" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>is-fullwidth-code-point</name>
       <version>1.0.0</version>
@@ -3783,7 +3783,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/node-gyp/node_modules/is-fullwidth-code-point/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-fullwidth-code-point@2.0.0?package-id=c091b2de2f7a12e2" type="library">
+    <component bom-ref="pkg:npm/is-fullwidth-code-point@2.0.0?package-id=d541956296ddcce3" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>is-fullwidth-code-point</name>
       <version>2.0.0</version>
@@ -3823,7 +3823,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/is-fullwidth-code-point/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-fullwidth-code-point@3.0.0?package-id=3457992b262bb383" type="library">
+    <component bom-ref="pkg:npm/is-fullwidth-code-point@3.0.0?package-id=eec7c4a1d1e1964f" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>is-fullwidth-code-point</name>
       <version>3.0.0</version>
@@ -3863,7 +3863,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-columns/node_modules/is-fullwidth-code-point/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-fullwidth-code-point@3.0.0?package-id=803a22ff80ce9c9a" type="library">
+    <component bom-ref="pkg:npm/is-fullwidth-code-point@3.0.0?package-id=1d0a72f49ac528ae" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>is-fullwidth-code-point</name>
       <version>3.0.0</version>
@@ -3903,7 +3903,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-table3/node_modules/is-fullwidth-code-point/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-lambda@1.0.1?package-id=2f17c8221dadcd0c" type="library">
+    <component bom-ref="pkg:npm/is-lambda@1.0.1?package-id=6849a72e2f880e0f" type="library">
       <author>Thomas Watson Steen &lt;w@tson.dk&gt; (https://twitter.com/wa7son)</author>
       <name>is-lambda</name>
       <version>1.0.1</version>
@@ -3938,7 +3938,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/is-lambda/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/is-typedarray@1.0.0?package-id=19dd5f6008a198de" type="library">
+    <component bom-ref="pkg:npm/is-typedarray@1.0.0?package-id=b00270198a826f19" type="library">
       <author>Hugh Kennedy &lt;hughskennedy@gmail.com&gt; (http://hughsk.io/)</author>
       <name>is-typedarray</name>
       <version>1.0.0</version>
@@ -3973,7 +3973,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/is-typedarray/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/isexe@2.0.0?package-id=7a34a9635d74a20e" type="library">
+    <component bom-ref="pkg:npm/isexe@2.0.0?package-id=9fa861f63952a510" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>isexe</name>
       <version>2.0.0</version>
@@ -4002,7 +4002,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/isexe/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/json-parse-even-better-errors@2.3.1?package-id=d89af0cf4b27818c" type="library">
+    <component bom-ref="pkg:npm/json-parse-even-better-errors@2.3.1?package-id=ced79be5b9d2db99" type="library">
       <author>Kat Marchán &lt;kzm@zkat.tech&gt;</author>
       <name>json-parse-even-better-errors</name>
       <version>2.3.1</version>
@@ -4046,7 +4046,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/json-parse-even-better-errors/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/json-stringify-nice@1.1.4?package-id=117faa43eab29e06" type="library">
+    <component bom-ref="pkg:npm/json-stringify-nice@1.1.4?package-id=31f147c61907eab9" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>json-stringify-nice</name>
       <version>1.1.4</version>
@@ -4082,7 +4082,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/json-stringify-nice/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/jsonparse@1.3.1?package-id=d742a59f2b8909e6" type="library">
+    <component bom-ref="pkg:npm/jsonparse@1.3.1?package-id=1e0ed3ba09498fc2" type="library">
       <author>Tim Caswell &lt;tim@creationix.com&gt;</author>
       <name>jsonparse</name>
       <version>1.3.1</version>
@@ -4108,7 +4108,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/jsonparse/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/just-diff@3.1.1?package-id=b75ab97ea18b1b1f" type="library">
+    <component bom-ref="pkg:npm/just-diff@3.1.1?package-id=fdf50b0f685761fb" type="library">
       <author>Angus Croll</author>
       <name>just-diff</name>
       <version>3.1.1</version>
@@ -4140,7 +4140,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/just-diff/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/just-diff-apply@3.0.0?package-id=cfed5f238a8f8d30" type="library">
+    <component bom-ref="pkg:npm/just-diff-apply@3.0.0?package-id=55950a4ee1015dbe" type="library">
       <author>Angus Croll</author>
       <name>just-diff-apply</name>
       <version>3.0.0</version>
@@ -5159,7 +5159,7 @@
         <property name="syft:metadata:source">nettle</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmaccess@4.0.3?package-id=2601c4df31013f10" type="library">
+    <component bom-ref="pkg:npm/libnpmaccess@4.0.3?package-id=c9904ce412daed3d" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>libnpmaccess</name>
       <version>4.0.3</version>
@@ -5188,7 +5188,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmaccess/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmdiff@2.0.4?package-id=87b729b3a44cd292" type="library">
+    <component bom-ref="pkg:npm/libnpmdiff@2.0.4?package-id=1118be351327a815" type="library">
       <author>GitHub Inc.</author>
       <name>libnpmdiff</name>
       <version>2.0.4</version>
@@ -5214,7 +5214,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmdiff/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmexec@3.0.1?package-id=c772277bfa689bb" type="library">
+    <component bom-ref="pkg:npm/libnpmexec@3.0.1?package-id=934e87e20ad25e0d" type="library">
       <author>GitHub Inc.</author>
       <name>libnpmexec</name>
       <version>3.0.1</version>
@@ -5240,7 +5240,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmexec/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmfund@2.0.1?package-id=732174efdb994188" type="library">
+    <component bom-ref="pkg:npm/libnpmfund@2.0.1?package-id=2f483bf3d6df92bb" type="library">
       <author>npm Inc. &lt;support@npmjs.com&gt;</author>
       <name>libnpmfund</name>
       <version>2.0.1</version>
@@ -5266,7 +5266,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmfund/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmhook@6.0.3?package-id=dbf4eb17dce3bcd0" type="library">
+    <component bom-ref="pkg:npm/libnpmhook@6.0.3?package-id=dedd7f6e7c7b2168" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>libnpmhook</name>
       <version>6.0.3</version>
@@ -5292,7 +5292,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmhook/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmorg@2.0.3?package-id=cf32fbd6032727d3" type="library">
+    <component bom-ref="pkg:npm/libnpmorg@2.0.3?package-id=3bb6dd427638d93b" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>libnpmorg</name>
       <version>2.0.3</version>
@@ -5321,7 +5321,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmorg/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmpack@3.0.0?package-id=7781ee26912a4ede" type="library">
+    <component bom-ref="pkg:npm/libnpmpack@3.0.0?package-id=85930e716f069679" type="library">
       <author>npm Inc. &lt;support@npmjs.com&gt;</author>
       <name>libnpmpack</name>
       <version>3.0.0</version>
@@ -5350,7 +5350,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmpack/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmpublish@4.0.2?package-id=7c94ab904f9cb949" type="library">
+    <component bom-ref="pkg:npm/libnpmpublish@4.0.2?package-id=f0b3689bc58a1856" type="library">
       <author>npm Inc. &lt;support@npmjs.com&gt;</author>
       <name>libnpmpublish</name>
       <version>4.0.2</version>
@@ -5379,7 +5379,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmpublish/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmsearch@3.1.2?package-id=f295e648366103ff" type="library">
+    <component bom-ref="pkg:npm/libnpmsearch@3.1.2?package-id=68db5468ed1162e2" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>libnpmsearch</name>
       <version>3.1.2</version>
@@ -5408,7 +5408,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmsearch/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmteam@2.0.4?package-id=b80c3fb300e023b8" type="library">
+    <component bom-ref="pkg:npm/libnpmteam@2.0.4?package-id=e80f7613f3d4d4b8" type="library">
       <author>Kat Marchán &lt;kzm@zkat.tech&gt;</author>
       <name>libnpmteam</name>
       <version>2.0.4</version>
@@ -5437,7 +5437,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/libnpmteam/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/libnpmversion@2.0.1?package-id=1809e4834a43685d" type="library">
+    <component bom-ref="pkg:npm/libnpmversion@2.0.1?package-id=70543d65a923e345" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>libnpmversion</name>
       <version>2.0.1</version>
@@ -6155,7 +6155,7 @@
         <property name="syft:metadata:source">shadow</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/lru-cache@6.0.0?package-id=bc0aed15b8dd295e" type="library">
+    <component bom-ref="pkg:npm/lru-cache@6.0.0?package-id=8e6824d94db733e" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt;</author>
       <name>lru-cache</name>
       <version>6.0.0</version>
@@ -6220,7 +6220,7 @@
         <property name="syft:metadata:source">lsb</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/make-fetch-happen@9.1.0?package-id=a40ec5de8eb10ea0" type="library">
+    <component bom-ref="pkg:npm/make-fetch-happen@9.1.0?package-id=5e60c45df154c2bb" type="library">
       <author>Kat Marchán &lt;kzm@zkat.tech&gt;</author>
       <name>make-fetch-happen</name>
       <version>9.1.0</version>
@@ -6282,7 +6282,7 @@
         <property name="syft:metadata:sourceVersion">1.3.3-17</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minimatch@3.0.4?package-id=fb0fd64bc4c7f6e2" type="library">
+    <component bom-ref="pkg:npm/minimatch@3.0.4?package-id=859564b495f6e079" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me)</author>
       <name>minimatch</name>
       <version>3.0.4</version>
@@ -6308,7 +6308,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minimatch/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass@3.1.5?package-id=176e647db3c54d4e" type="library">
+    <component bom-ref="pkg:npm/minipass@3.1.5?package-id=9de905bc640394a5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>minipass</name>
       <version>3.1.5</version>
@@ -6334,7 +6334,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass-collect@1.0.2?package-id=2103db877fd0a647" type="library">
+    <component bom-ref="pkg:npm/minipass-collect@1.0.2?package-id=ad90016cd15c19e1" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>minipass-collect</name>
       <version>1.0.2</version>
@@ -6361,7 +6361,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass-collect/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass-fetch@1.4.1?package-id=340bc04e0b3f647a" type="library">
+    <component bom-ref="pkg:npm/minipass-fetch@1.4.1?package-id=809690d50f5eeeb" type="library">
       <name>minipass-fetch</name>
       <version>1.4.1</version>
       <licenses>
@@ -6392,7 +6392,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass-fetch/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass-flush@1.0.5?package-id=e6f31bbf1a9ca89" type="library">
+    <component bom-ref="pkg:npm/minipass-flush@1.0.5?package-id=ed75388c907a8d81" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>minipass-flush</name>
       <version>1.0.5</version>
@@ -6424,7 +6424,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass-flush/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass-json-stream@1.0.1?package-id=3252d8e6c283901d" type="library">
+    <component bom-ref="pkg:npm/minipass-json-stream@1.0.1?package-id=299e2ff09f1b230e" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>minipass-json-stream</name>
       <version>1.0.1</version>
@@ -6460,7 +6460,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass-json-stream/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass-pipeline@1.2.4?package-id=4170f21438269716" type="library">
+    <component bom-ref="pkg:npm/minipass-pipeline@1.2.4?package-id=677f459bea8063db" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>minipass-pipeline</name>
       <version>1.2.4</version>
@@ -6487,7 +6487,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass-pipeline/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minipass-sized@1.0.3?package-id=81651dbec5ef99b1" type="library">
+    <component bom-ref="pkg:npm/minipass-sized@1.0.3?package-id=4375138b830e88e7" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>minipass-sized</name>
       <version>1.0.3</version>
@@ -6519,7 +6519,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minipass-sized/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/minizlib@2.1.2?package-id=7672e109e90f4ba8" type="library">
+    <component bom-ref="pkg:npm/minizlib@2.1.2?package-id=41e0efbc487a03c5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>minizlib</name>
       <version>2.1.2</version>
@@ -6545,7 +6545,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/minizlib/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/mkdirp@1.0.4?package-id=1afbd4089be0ac67" type="library">
+    <component bom-ref="pkg:npm/mkdirp@1.0.4?package-id=89ac7ef72d73e3b5" type="library">
       <name>mkdirp</name>
       <version>1.0.4</version>
       <licenses>
@@ -6570,7 +6570,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/mkdirp/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/mkdirp-infer-owner@2.0.0?package-id=5967b9378c896660" type="library">
+    <component bom-ref="pkg:npm/mkdirp-infer-owner@2.0.0?package-id=536c26a5e29656f7" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>mkdirp-infer-owner</name>
       <version>2.0.0</version>
@@ -6670,7 +6670,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ms@2.1.2?package-id=1110a9fb20d40e8f" type="library">
+    <component bom-ref="pkg:npm/ms@2.1.2?package-id=bec8b7a038d42b4b" type="library">
       <name>ms</name>
       <version>2.1.2</version>
       <licenses>
@@ -6695,7 +6695,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/debug/node_modules/ms/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ms@2.1.3?package-id=2c1d580b00a411d7" type="library">
+    <component bom-ref="pkg:npm/ms@2.1.3?package-id=89a03cce261661de" type="library">
       <name>ms</name>
       <version>2.1.3</version>
       <licenses>
@@ -6720,7 +6720,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ms/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/mute-stream@0.0.8?package-id=6c758d35ac834999" type="library">
+    <component bom-ref="pkg:npm/mute-stream@0.0.8?package-id=347b5ecfbf81c176" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>mute-stream</name>
       <version>0.0.8</version>
@@ -6804,7 +6804,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/negotiator@0.6.2?package-id=8b576e13a18f0ef1" type="library">
+    <component bom-ref="pkg:npm/negotiator@0.6.2?package-id=b003606cc0537e1" type="library">
       <name>negotiator</name>
       <version>0.6.2</version>
       <licenses>
@@ -6829,7 +6829,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/negotiator/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/node-gyp@8.3.0?package-id=219504795b41e7f4" type="library">
+    <component bom-ref="pkg:npm/node-gyp@8.3.0?package-id=2dd13626dfcf4b00" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://tootallnate.net)</author>
       <name>node-gyp</name>
       <version>8.3.0</version>
@@ -6861,7 +6861,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/node-gyp/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/nopt@5.0.0?package-id=d9e99284b5ffda21" type="library">
+    <component bom-ref="pkg:npm/nopt@5.0.0?package-id=b8e864306e4673bc" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>nopt</name>
       <version>5.0.0</version>
@@ -6887,7 +6887,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/nopt/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/normalize-package-data@3.0.3?package-id=184ac479eda238d7" type="library">
+    <component bom-ref="pkg:npm/normalize-package-data@3.0.3?package-id=e856aa3e2f0d7f7c" type="library">
       <author>Meryn Stol &lt;merynstol@gmail.com&gt;</author>
       <name>normalize-package-data</name>
       <version>3.0.3</version>
@@ -6923,7 +6923,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/normalize-package-data/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm@8.1.2?package-id=ce7bb92bf87696d4" type="library">
+    <component bom-ref="pkg:npm/npm@8.1.2?package-id=5de2b9a68fd551f5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me)</author>
       <name>npm</name>
       <version>8.1.2</version>
@@ -6952,7 +6952,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-audit-report@2.1.5?package-id=51427535cbcd4c0f" type="library">
+    <component bom-ref="pkg:npm/npm-audit-report@2.1.5?package-id=229bdcec981ff964" type="library">
       <author>Adam Baldwin</author>
       <name>npm-audit-report</name>
       <version>2.1.5</version>
@@ -6991,7 +6991,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-audit-report/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-bundled@1.1.2?package-id=3cce447f7d665c9f" type="library">
+    <component bom-ref="pkg:npm/npm-bundled@1.1.2?package-id=bc599f819e958acb" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>npm-bundled</name>
       <version>1.1.2</version>
@@ -7023,7 +7023,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-bundled/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-init@0.0.0?package-id=e9d6f80867bac462" type="library">
+    <component bom-ref="pkg:npm/npm-init@0.0.0?package-id=69e3dc6ac41a3757" type="library">
       <name>npm-init</name>
       <version>0.0.0</version>
       <cpe>cpe:2.3:a:npm-init:npm-init:0.0.0:*:*:*:*:*:*:*</cpe>
@@ -7044,7 +7044,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/promzard/example/npm-init/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-install-checks@4.0.0?package-id=c3045831187475ff" type="library">
+    <component bom-ref="pkg:npm/npm-install-checks@4.0.0?package-id=d2fa2d407ff1cade" type="library">
       <name>npm-install-checks</name>
       <version>4.0.0</version>
       <licenses>
@@ -7079,7 +7079,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-install-checks/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-normalize-package-bin@1.0.1?package-id=ecabe884c85275b7" type="library">
+    <component bom-ref="pkg:npm/npm-normalize-package-bin@1.0.1?package-id=5bb7352a44c9ff17" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>npm-normalize-package-bin</name>
       <version>1.0.1</version>
@@ -7119,7 +7119,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-normalize-package-bin/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-package-arg@8.1.5?package-id=83a7b0a7b63710a8" type="library">
+    <component bom-ref="pkg:npm/npm-package-arg@8.1.5?package-id=49638d11d3386e57" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>npm-package-arg</name>
       <version>8.1.5</version>
@@ -7158,7 +7158,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-package-arg/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-packlist@3.0.0?package-id=c0a59090b6cd7ae4" type="library">
+    <component bom-ref="pkg:npm/npm-packlist@3.0.0?package-id=941e7f6cf4676078" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>npm-packlist</name>
       <version>3.0.0</version>
@@ -7190,7 +7190,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-packlist/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-pick-manifest@6.1.1?package-id=ba8f32396a24dd38" type="library">
+    <component bom-ref="pkg:npm/npm-pick-manifest@6.1.1?package-id=e66f3e4615d912c" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>npm-pick-manifest</name>
       <version>6.1.1</version>
@@ -7226,7 +7226,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-pick-manifest/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-profile@5.0.4?package-id=e4b61e90bf73b557" type="library">
+    <component bom-ref="pkg:npm/npm-profile@5.0.4?package-id=d6a76ec6e6d0e0a8" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org/)</author>
       <name>npm-profile</name>
       <version>5.0.4</version>
@@ -7258,7 +7258,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-profile/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-registry-fetch@11.0.0?package-id=da31c6e5509f625e" type="library">
+    <component bom-ref="pkg:npm/npm-registry-fetch@11.0.0?package-id=63f9d7b14bafc86d" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>npm-registry-fetch</name>
       <version>11.0.0</version>
@@ -7294,7 +7294,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-registry-fetch/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npm-user-validate@1.0.1?package-id=5a7f36d509987c97" type="library">
+    <component bom-ref="pkg:npm/npm-user-validate@1.0.1?package-id=62a66fe41db6afb" type="library">
       <author>Robert Kowalski &lt;rok@kowalski.gd&gt;</author>
       <name>npm-user-validate</name>
       <version>1.0.1</version>
@@ -7330,7 +7330,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npm-user-validate/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npmlog@4.1.2?package-id=785e69b0d5da37dd" type="library">
+    <component bom-ref="pkg:npm/npmlog@4.1.2?package-id=f8597640de0670cd" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>npmlog</name>
       <version>4.1.2</version>
@@ -7356,7 +7356,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/node-gyp/node_modules/npmlog/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/npmlog@5.0.1?package-id=4e6ba7b4029c1022" type="library">
+    <component bom-ref="pkg:npm/npmlog@5.0.1?package-id=1a99ae10fe619c5d" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>npmlog</name>
       <version>5.0.1</version>
@@ -7382,7 +7382,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/npmlog/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/number-is-nan@1.0.1?package-id=1acbad21b2dcf073" type="library">
+    <component bom-ref="pkg:npm/number-is-nan@1.0.1?package-id=3d19a594157bb600" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>number-is-nan</name>
       <version>1.0.1</version>
@@ -7418,7 +7418,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/number-is-nan/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/object-assign@4.1.1?package-id=7efbc02978ba7697" type="library">
+    <component bom-ref="pkg:npm/object-assign@4.1.1?package-id=5781e3d670822b0d" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>object-assign</name>
       <version>4.1.1</version>
@@ -7450,7 +7450,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/object-assign/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/once@1.4.0?package-id=49e04afb8e3ea0f" type="library">
+    <component bom-ref="pkg:npm/once@1.4.0?package-id=1a779b220d82bf97" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>once</name>
       <version>1.4.0</version>
@@ -7476,7 +7476,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/once/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/opener@1.5.2?package-id=180718e0fc2afdaa" type="library">
+    <component bom-ref="pkg:npm/opener@1.5.2?package-id=3632615cf775f06e" type="library">
       <author>Domenic Denicola &lt;d@domenic.me&gt; (https://domenic.me/)</author>
       <name>opener</name>
       <version>1.5.2</version>
@@ -7497,7 +7497,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/opener/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/p-map@4.0.0?package-id=2bbd2674fc1f5440" type="library">
+    <component bom-ref="pkg:npm/p-map@4.0.0?package-id=26b9a76a9c389931" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (https://sindresorhus.com)</author>
       <name>p-map</name>
       <version>4.0.0</version>
@@ -7529,7 +7529,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/p-map/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/pacote@12.0.2?package-id=34ac09434916e389" type="library">
+    <component bom-ref="pkg:npm/pacote@12.0.2?package-id=aeae4a170625796f" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>pacote</name>
       <version>12.0.2</version>
@@ -7555,7 +7555,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/pacote/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/parse-conflict-json@1.1.1?package-id=b79636805a4c73c1" type="library">
+    <component bom-ref="pkg:npm/parse-conflict-json@1.1.1?package-id=4b28ac576602a09" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>parse-conflict-json</name>
       <version>1.1.1</version>
@@ -7618,7 +7618,7 @@
         <property name="syft:metadata:source">shadow</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/path-is-absolute@1.0.1?package-id=37d27551731a6694" type="library">
+    <component bom-ref="pkg:npm/path-is-absolute@1.0.1?package-id=2c160bf05eec9a2c" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>path-is-absolute</name>
       <version>1.0.1</version>
@@ -7705,7 +7705,7 @@
         <property name="syft:metadata:source">perl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/proc-log@1.0.0?package-id=ebea2ed0923e224" type="library">
+    <component bom-ref="pkg:npm/proc-log@1.0.0?package-id=a2edab7d50d7eba5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>proc-log</name>
       <version>1.0.0</version>
@@ -7737,7 +7737,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/proc-log/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/promise-all-reject-late@1.0.1?package-id=eeb0c0210f56dbd3" type="library">
+    <component bom-ref="pkg:npm/promise-all-reject-late@1.0.1?package-id=e6157bfa1d0295d5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>promise-all-reject-late</name>
       <version>1.0.1</version>
@@ -7772,7 +7772,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/promise-all-reject-late/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/promise-call-limit@1.0.1?package-id=f066bc32ab0b79b4" type="library">
+    <component bom-ref="pkg:npm/promise-call-limit@1.0.1?package-id=b1442860907cd6f8" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>promise-call-limit</name>
       <version>1.0.1</version>
@@ -7808,7 +7808,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/promise-call-limit/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/promise-inflight@1.0.1?package-id=4475da3bbaad8b8f" type="library">
+    <component bom-ref="pkg:npm/promise-inflight@1.0.1?package-id=1a1b34c0b1942ac" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org/)</author>
       <name>promise-inflight</name>
       <version>1.0.1</version>
@@ -7843,7 +7843,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/promise-inflight/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/promise-retry@2.0.1?package-id=333bb3d64601176" type="library">
+    <component bom-ref="pkg:npm/promise-retry@2.0.1?package-id=8536730979d871fc" type="library">
       <author>IndigoUnited &lt;hello@indigounited.com&gt; (http://indigounited.com)</author>
       <name>promise-retry</name>
       <version>2.0.1</version>
@@ -7875,7 +7875,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/promise-retry/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/promzard@0.3.0?package-id=1ea9be289ba01179" type="library">
+    <component bom-ref="pkg:npm/promzard@0.3.0?package-id=e341e5b5d43fee3c" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>promzard</name>
       <version>0.3.0</version>
@@ -7901,7 +7901,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/promzard/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/qrcode-terminal@0.12.0?package-id=36081ff9fe51b2be" type="library">
+    <component bom-ref="pkg:npm/qrcode-terminal@0.12.0?package-id=7b1f7ba594449979" type="library">
       <name>qrcode-terminal</name>
       <version>0.12.0</version>
       <cpe>cpe:2.3:a:qrcode-terminal:qrcode-terminal:0.12.0:*:*:*:*:*:*:*</cpe>
@@ -7930,7 +7930,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/qrcode-terminal/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/read@1.0.7?package-id=5e004acd27c82ce" type="library">
+    <component bom-ref="pkg:npm/read@1.0.7?package-id=95bbf0d2aaf232a9" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>read</name>
       <version>1.0.7</version>
@@ -7956,7 +7956,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/read/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/read-cmd-shim@2.0.0?package-id=da7d932eaabfa25e" type="library">
+    <component bom-ref="pkg:npm/read-cmd-shim@2.0.0?package-id=57ae705c5d0c5e48" type="library">
       <name>read-cmd-shim</name>
       <version>2.0.0</version>
       <licenses>
@@ -7994,7 +7994,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/read-cmd-shim/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/read-package-json@4.1.1?package-id=332c26cc1a675d0a" type="library">
+    <component bom-ref="pkg:npm/read-package-json@4.1.1?package-id=4771fb687f2cdc31" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>read-package-json</name>
       <version>4.1.1</version>
@@ -8030,7 +8030,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/read-package-json/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/read-package-json-fast@2.0.3?package-id=f0891db00f13e184" type="library">
+    <component bom-ref="pkg:npm/read-package-json-fast@2.0.3?package-id=64aab06a6aa569e5" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>read-package-json-fast</name>
       <version>2.0.3</version>
@@ -8070,7 +8070,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/read-package-json-fast/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/readable-stream@3.6.0?package-id=d24bbf410aee44a1" type="library">
+    <component bom-ref="pkg:npm/readable-stream@3.6.0?package-id=d14f5152dcf5f98b" type="library">
       <name>readable-stream</name>
       <version>3.6.0</version>
       <licenses>
@@ -8101,7 +8101,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/readable-stream/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/readdir-scoped-modules@1.1.0?package-id=593d991ee0e10883" type="library">
+    <component bom-ref="pkg:npm/readdir-scoped-modules@1.1.0?package-id=be0df61c49bf4fad" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>readdir-scoped-modules</name>
       <version>1.1.0</version>
@@ -8140,7 +8140,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/readdir-scoped-modules/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/retry@0.12.0?package-id=5f93ae2e3e07e41c" type="library">
+    <component bom-ref="pkg:npm/retry@0.12.0?package-id=828bb37e300a6c11" type="library">
       <author>Tim Koschützki &lt;tim@debuggable.com&gt; (http://debuggable.com/)</author>
       <name>retry</name>
       <version>0.12.0</version>
@@ -8169,7 +8169,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/retry/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/rimraf@3.0.2?package-id=9df5478ed3d1e81a" type="library">
+    <component bom-ref="pkg:npm/rimraf@3.0.2?package-id=6bb557406b34985" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>rimraf</name>
       <version>3.0.2</version>
@@ -8195,7 +8195,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/rimraf/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/safe-buffer@5.2.1?package-id=ecc2e0533e62cf20" type="library">
+    <component bom-ref="pkg:npm/safe-buffer@5.2.1?package-id=31caa18801a725c7" type="library">
       <author>Feross Aboukhadijeh &lt;feross@feross.org&gt; (https://feross.org)</author>
       <name>safe-buffer</name>
       <version>5.2.1</version>
@@ -8230,7 +8230,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/safe-buffer/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/safer-buffer@2.1.2?package-id=aa85aef26aa1cf7f" type="library">
+    <component bom-ref="pkg:npm/safer-buffer@2.1.2?package-id=e8dd0ac2aeb6bc6d" type="library">
       <author>Nikita Skovoroda &lt;chalkerx@gmail.com&gt; (https://github.com/ChALkeR)</author>
       <name>safer-buffer</name>
       <version>2.1.2</version>
@@ -8286,7 +8286,7 @@
         <property name="syft:metadata:installedSize">883</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/semver@7.3.5?package-id=3a08a4edfe30bd79" type="library">
+    <component bom-ref="pkg:npm/semver@7.3.5?package-id=1c86bd9f425804fd" type="library">
       <name>semver</name>
       <version>7.3.5</version>
       <licenses>
@@ -8311,7 +8311,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/semver/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/set-blocking@2.0.0?package-id=b8641c301c747908" type="library">
+    <component bom-ref="pkg:npm/set-blocking@2.0.0?package-id=17a1a5bec7bc0d4f" type="library">
       <author>Ben Coe &lt;ben@npmjs.com&gt;</author>
       <name>set-blocking</name>
       <version>2.0.0</version>
@@ -8346,7 +8346,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/set-blocking/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/signal-exit@3.0.3?package-id=598b7afa11e6bc6" type="library">
+    <component bom-ref="pkg:npm/signal-exit@3.0.3?package-id=77397a78e90b22e1" type="library">
       <author>Ben Coe &lt;ben@npmjs.com&gt;</author>
       <name>signal-exit</name>
       <version>3.0.3</version>
@@ -8381,7 +8381,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/signal-exit/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/smart-buffer@4.2.0?package-id=97df2245218286b9" type="library">
+    <component bom-ref="pkg:npm/smart-buffer@4.2.0?package-id=ddde0a9d567cac0d" type="library">
       <author>Josh Glazebrook</author>
       <name>smart-buffer</name>
       <version>4.2.0</version>
@@ -8416,7 +8416,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/smart-buffer/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/socks@2.6.1?package-id=29481ae2f6263331" type="library">
+    <component bom-ref="pkg:npm/socks@2.6.1?package-id=366715cc3dd31441" type="library">
       <author>Josh Glazebrook</author>
       <name>socks</name>
       <version>2.6.1</version>
@@ -8445,7 +8445,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/socks/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/socks-proxy-agent@6.1.0?package-id=ef756258d2f414d9" type="library">
+    <component bom-ref="pkg:npm/socks-proxy-agent@6.1.0?package-id=9cc7cd6792551fdb" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://n8.io/)</author>
       <name>socks-proxy-agent</name>
       <version>6.1.0</version>
@@ -8481,7 +8481,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/socks-proxy-agent/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/spdx-correct@3.1.1?package-id=7d2a47614fe66532" type="library">
+    <component bom-ref="pkg:npm/spdx-correct@3.1.1?package-id=9fdd0b7ccfc0dc60" type="library">
       <author>Kyle E. Mitchell &lt;kyle@kemitchell.com&gt; (https://kemitchell.com)</author>
       <name>spdx-correct</name>
       <version>3.1.1</version>
@@ -8513,7 +8513,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/spdx-correct/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/spdx-exceptions@2.3.0?package-id=6b5b209ef522d10e" type="library">
+    <component bom-ref="pkg:npm/spdx-exceptions@2.3.0?package-id=e3ba0b962516bc8e" type="library">
       <author>The Linux Foundation</author>
       <name>spdx-exceptions</name>
       <version>2.3.0</version>
@@ -8545,7 +8545,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/spdx-exceptions/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/spdx-expression-parse@3.0.1?package-id=a9fbfbc0049221e3" type="library">
+    <component bom-ref="pkg:npm/spdx-expression-parse@3.0.1?package-id=50235b4caff976c7" type="library">
       <author>Kyle E. Mitchell &lt;kyle@kemitchell.com&gt; (https://kemitchell.com)</author>
       <name>spdx-expression-parse</name>
       <version>3.0.1</version>
@@ -8581,7 +8581,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/spdx-expression-parse/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/spdx-license-ids@3.0.10?package-id=ef292eab91fe2d4a" type="library">
+    <component bom-ref="pkg:npm/spdx-license-ids@3.0.10?package-id=8c2a123983286b4e" type="library">
       <author>Shinnosuke Watanabe (https://github.com/shinnn)</author>
       <name>spdx-license-ids</name>
       <version>3.0.10</version>
@@ -8617,7 +8617,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/spdx-license-ids/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/ssri@8.0.1?package-id=993bdeec0a2d7fb1" type="library">
+    <component bom-ref="pkg:npm/ssri@8.0.1?package-id=7b962acda54b8cdc" type="library">
       <author>Kat Marchán &lt;kzm@sykosomatic.org&gt;</author>
       <name>ssri</name>
       <version>8.0.1</version>
@@ -8643,7 +8643,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/ssri/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/string-width@1.0.2?package-id=7298870c15d824f" type="library">
+    <component bom-ref="pkg:npm/string-width@1.0.2?package-id=2e79d5afb4184ed3" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>string-width</name>
       <version>1.0.2</version>
@@ -8675,7 +8675,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/node-gyp/node_modules/string-width/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/string-width@2.1.1?package-id=bfedd7435445477f" type="library">
+    <component bom-ref="pkg:npm/string-width@2.1.1?package-id=f2de8cb15761b1be" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>string-width</name>
       <version>2.1.1</version>
@@ -8707,7 +8707,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/string-width/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/string-width@4.2.2?package-id=6e99007e84171f5a" type="library">
+    <component bom-ref="pkg:npm/string-width@4.2.2?package-id=a31a58d4b147384a" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>string-width</name>
       <version>4.2.2</version>
@@ -8739,7 +8739,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-table3/node_modules/string-width/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/string-width@4.2.3?package-id=5590d2f156fd20f8" type="library">
+    <component bom-ref="pkg:npm/string-width@4.2.3?package-id=c36d1ac63e1ab7b4" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>string-width</name>
       <version>4.2.3</version>
@@ -8771,7 +8771,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-columns/node_modules/string-width/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/string_decoder@1.3.0?package-id=ea792d755567951f" type="library">
+    <component bom-ref="pkg:npm/string_decoder@1.3.0?package-id=d096ca8225da1532" type="library">
       <name>string_decoder</name>
       <version>1.3.0</version>
       <licenses>
@@ -8805,7 +8805,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/string_decoder/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/stringify-package@1.0.1?package-id=eb8c4512a5620de8" type="library">
+    <component bom-ref="pkg:npm/stringify-package@1.0.1?package-id=7e2ca150d4ea8880" type="library">
       <author>Kat Marchán &lt;kzm@zkat.tech&gt;</author>
       <name>stringify-package</name>
       <version>1.0.1</version>
@@ -8840,7 +8840,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/stringify-package/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/strip-ansi@3.0.1?package-id=9d66bc4c65b0aa5c" type="library">
+    <component bom-ref="pkg:npm/strip-ansi@3.0.1?package-id=a862b6030ddf4d32" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>strip-ansi</name>
       <version>3.0.1</version>
@@ -8872,7 +8872,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/strip-ansi/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/strip-ansi@4.0.0?package-id=3166b4f104422784" type="library">
+    <component bom-ref="pkg:npm/strip-ansi@4.0.0?package-id=13cef8f11e7a6b2d" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>strip-ansi</name>
       <version>4.0.0</version>
@@ -8904,7 +8904,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/string-width/node_modules/strip-ansi/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/strip-ansi@6.0.0?package-id=5a3428a3a768b283" type="library">
+    <component bom-ref="pkg:npm/strip-ansi@6.0.0?package-id=5b6a863cb7c108f4" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>strip-ansi</name>
       <version>6.0.0</version>
@@ -8936,7 +8936,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-table3/node_modules/strip-ansi/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/strip-ansi@6.0.1?package-id=16039a5b72932f71" type="library">
+    <component bom-ref="pkg:npm/strip-ansi@6.0.1?package-id=deea729d4e3b42ed" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>strip-ansi</name>
       <version>6.0.1</version>
@@ -8968,7 +8968,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/cli-columns/node_modules/strip-ansi/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/supports-color@7.2.0?package-id=c51d99e428ff753e" type="library">
+    <component bom-ref="pkg:npm/supports-color@7.2.0?package-id=bc9af7d897201e31" type="library">
       <author>Sindre Sorhus &lt;sindresorhus@gmail.com&gt; (sindresorhus.com)</author>
       <name>supports-color</name>
       <version>7.2.0</version>
@@ -9060,7 +9060,7 @@
         <property name="syft:metadata:installedSize">2884</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/tar@6.1.11?package-id=f30ed41a70dcc5fb" type="library">
+    <component bom-ref="pkg:npm/tar@6.1.11?package-id=2926d14bcef00e44" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>tar</name>
       <version>6.1.11</version>
@@ -9086,7 +9086,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/tar/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/text-table@0.2.0?package-id=d291ac0838028376" type="library">
+    <component bom-ref="pkg:npm/text-table@0.2.0?package-id=3672c01bead006d3" type="library">
       <author>James Halliday &lt;mail@substack.net&gt; (http://substack.net)</author>
       <name>text-table</name>
       <version>0.2.0</version>
@@ -9121,7 +9121,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/text-table/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/tiny-relative-date@1.3.0?package-id=ab5d9beebefdbea7" type="library">
+    <component bom-ref="pkg:npm/tiny-relative-date@1.3.0?package-id=e389d2e4034afb27" type="library">
       <author>Joseph Wynn &lt;joseph@wildlyinaccurate.com&gt; (https://wildlyinaccurate.com/)</author>
       <name>tiny-relative-date</name>
       <version>1.3.0</version>
@@ -9157,7 +9157,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/tiny-relative-date/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/treeverse@1.0.4?package-id=2826075226c2adcf" type="library">
+    <component bom-ref="pkg:npm/treeverse@1.0.4?package-id=d914dc615c0d3316" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>treeverse</name>
       <version>1.0.4</version>
@@ -9183,7 +9183,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/treeverse/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/typedarray-to-buffer@3.1.5?package-id=370e1e66318b599c" type="library">
+    <component bom-ref="pkg:npm/typedarray-to-buffer@3.1.5?package-id=5a3d21f7ee8966e1" type="library">
       <author>Feross Aboukhadijeh &lt;feross@feross.org&gt; (http://feross.org/)</author>
       <name>typedarray-to-buffer</name>
       <version>3.1.5</version>
@@ -9241,7 +9241,7 @@
         <property name="syft:metadata:installedSize">3039</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/unique-filename@1.1.1?package-id=b5d02842ba74ae84" type="library">
+    <component bom-ref="pkg:npm/unique-filename@1.1.1?package-id=5a12166602a0880a" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org/)</author>
       <name>unique-filename</name>
       <version>1.1.1</version>
@@ -9276,7 +9276,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/unique-filename/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/unique-slug@2.0.2?package-id=e817f0c7dc3bf695" type="library">
+    <component bom-ref="pkg:npm/unique-slug@2.0.2?package-id=5b4b794e7c49fb30" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org)</author>
       <name>unique-slug</name>
       <version>2.0.2</version>
@@ -9308,7 +9308,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/unique-slug/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/util-deprecate@1.0.2?package-id=b8b1c14a6dcae849" type="library">
+    <component bom-ref="pkg:npm/util-deprecate@1.0.2?package-id=741442418ce81ba5" type="library">
       <author>Nathan Rajlich &lt;nathan@tootallnate.net&gt; (http://n8.io/)</author>
       <name>util-deprecate</name>
       <version>1.0.2</version>
@@ -9413,7 +9413,7 @@
         <property name="syft:metadata:installedSize">4327</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/validate-npm-package-license@3.0.4?package-id=6b61b76332ab5d1b" type="library">
+    <component bom-ref="pkg:npm/validate-npm-package-license@3.0.4?package-id=4fbbaa3b99c701a1" type="library">
       <author>Kyle E. Mitchell &lt;kyle@kemitchell.com&gt; (https://kemitchell.com)</author>
       <name>validate-npm-package-license</name>
       <version>3.0.4</version>
@@ -9453,7 +9453,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/validate-npm-package-license/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/validate-npm-package-name@3.0.0?package-id=4a635ce913d0ebaf" type="library">
+    <component bom-ref="pkg:npm/validate-npm-package-name@3.0.0?package-id=ffea0d578f749faa" type="library">
       <author>zeke</author>
       <name>validate-npm-package-name</name>
       <version>3.0.0</version>
@@ -9496,7 +9496,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/validate-npm-package-name/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/walk-up-path@1.0.0?package-id=d6cedf169246b2dc" type="library">
+    <component bom-ref="pkg:npm/walk-up-path@1.0.0?package-id=41fcfe64ef2c8d85" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (https://izs.me)</author>
       <name>walk-up-path</name>
       <version>1.0.0</version>
@@ -9532,7 +9532,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/walk-up-path/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/wcwidth@1.0.1?package-id=573dfac4fedad5a4" type="library">
+    <component bom-ref="pkg:npm/wcwidth@1.0.1?package-id=36ed86b8a435448c" type="library">
       <author>Tim Oxley</author>
       <name>wcwidth</name>
       <version>1.0.1</version>
@@ -9561,7 +9561,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/wcwidth/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/which@2.0.2?package-id=4aa60e11986f27ea" type="library">
+    <component bom-ref="pkg:npm/which@2.0.2?package-id=34b4c1198b166cdb" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me)</author>
       <name>which</name>
       <version>2.0.2</version>
@@ -9587,7 +9587,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/which/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/wide-align@1.1.3?package-id=253adfdbacb95057" type="library">
+    <component bom-ref="pkg:npm/wide-align@1.1.3?package-id=1ac4c31169b4a16d" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org/)</author>
       <name>wide-align</name>
       <version>1.1.3</version>
@@ -9619,7 +9619,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/wide-align/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/wrappy@1.0.2?package-id=7a967fadabf771c" type="library">
+    <component bom-ref="pkg:npm/wrappy@1.0.2?package-id=3effff915061d194" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>wrappy</name>
       <version>1.0.2</version>
@@ -9648,7 +9648,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/wrappy/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/write-file-atomic@3.0.3?package-id=841bb393e1708e9b" type="library">
+    <component bom-ref="pkg:npm/write-file-atomic@3.0.3?package-id=fb15fffc143eb9c9" type="library">
       <author>Rebecca Turner &lt;me@re-becca.org&gt; (http://re-becca.org)</author>
       <name>write-file-atomic</name>
       <version>3.0.3</version>
@@ -9687,7 +9687,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/write-file-atomic/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/yallist@4.0.0?package-id=87b43048ccbebbca" type="library">
+    <component bom-ref="pkg:npm/yallist@4.0.0?package-id=9c979cf433eff671" type="library">
       <author>Isaac Z. Schlueter &lt;i@izs.me&gt; (http://blog.izs.me/)</author>
       <name>yallist</name>
       <version>4.0.0</version>
@@ -9713,7 +9713,7 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/yallist/package.json</property>
       </properties>
     </component>
-    <component bom-ref="pkg:npm/yarn@1.22.15?package-id=fdd0f0722a8d11e7" type="library">
+    <component bom-ref="pkg:npm/yarn@1.22.15?package-id=9786725867a00358" type="library">
       <name>yarn</name>
       <version>1.22.15</version>
       <licenses>
