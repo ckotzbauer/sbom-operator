@@ -1,3 +1,29 @@
+## Version 0.18.0 (2022-09-24)
+
+### Features and improvements
+
+* [[`ec17ccbe`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ec17ccbe)] - **feat**: update Codenotary VCN to 1.0.1
+
+### Cleanup and refactoring
+
+* [[`68a2a661`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/68a2a661)] - **cleanup**: use git-implementation from libk8soci
+* [[`849134b3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/849134b3)] - **cleanup**: go-mod-tidy
+
+### Documentation
+
+* [[`1d2d361f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1d2d361f)] - **doc**: updated version-table
+* [[`8e65d89b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8e65d89b)] - **doc**: update VCN docs
+* [[`e1d242cc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e1d242cc)] - **doc**: add git-init note
+
+### Dependency updates
+
+* [[`d868e046`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d868e046)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.57.0 (#170)
+* [[`c8d5f103`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c8d5f103)] - **deps**: update kubernetes versions to v0.25.2
+* [[`fa3ad710`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fa3ad710)] - **deps**: update sigstore&#x2F;cosign-installer digest to ced07f2
+* [[`e24bb779`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e24bb779)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 439092d
+* [[`fb238932`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fb238932)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to cfc4b76
+
+
 ## Version 0.17.0 (2022-09-17)
 
 ### Features and improvements
