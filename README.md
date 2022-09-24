@@ -171,6 +171,9 @@ To clone repositories with a git-binary instead of the pure golang implementatio
 need `multi_ack` e.g. Azure DevOps or AWS CodeCommit. 
 See [this issue](https://github.com/go-git/go-git/issues/64) for more details.
 
+**Note**: It is required, that the specified branch of the repo is fully initialized. There's no logic which creates a non-existent branch. Just commit a `README.md`
+or something similar, to make things work.
+
 ```
 dev-cluster
 │
