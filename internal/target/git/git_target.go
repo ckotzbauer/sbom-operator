@@ -7,6 +7,7 @@ import (
 	"path/filepath"
 	"strings"
 
+	"github.com/ckotzbauer/libk8soci/pkg/git"
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
@@ -19,12 +20,12 @@ type GitTarget struct {
 	workPath    string
 	repository  string
 	branch      string
-	gitAccount  GitAccount
+	gitAccount  git.GitAccount
 	sbomFormat  string
 }
 
 func NewGitTarget(workingTree, path, repo, branch, name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, format string, fallbackClone bool) *GitTarget {
-	gitAccount := New(name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, fallbackClone)
+	gitAccount := git.New(name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, fallbackClone)
 
 	return &GitTarget{
 		workingTree: workingTree,
