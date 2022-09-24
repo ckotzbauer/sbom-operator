@@ -57,9 +57,6 @@ for the analyze-result, as the Codenotary Cloud is doing this for us.
 - The Pod-Name, Pod-Namespace and the cluster-name are stored as notarization-attributes.
 - Environment variables from on the operator prefixed with `SBOM_JOB_` are passed to the job without the prefix.
 - Use the `SBOM_JOB_VCN_EXTRA_ARGS` env to pass custom flags to the `vcn notarize` command.
-- The job-container needs to be privileged, as VCN needs the Docker-Daemon to read the images from.
-- VCN currently does not support distroless images and images where no package-manager is installed.
-- There's a bug in VCN, that some images could not be notarized (error-messages like `stream copy error: reading from a closed fifo` are appearing)
 - All bugs or behaviours from VCN which could not be handled by the operator or the `entrypoint.sh` are out-of-scope of this repo.
 
 ## Verifying an notarized image (manually)
