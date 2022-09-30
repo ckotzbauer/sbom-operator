@@ -134,8 +134,8 @@ func (g *DependencyTrackTarget) LoadImages() []*libk8s.RegistryImage {
 		for _, project := range projectsPage.Items {
 			sbomOperatorPropFound := false
 			imageRelatesToCluster := false
+			imageId = ""
 			for _, tag := range project.Tags {
-				imageId = ""
 				if strings.Index(tag.Name, kubernetesCluster) == 0 {
 					clusterId := string(tag.Name[len(kubernetesCluster)+1:])
 					if clusterId == g.k8sClusterId {
