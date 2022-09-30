@@ -104,6 +104,8 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		logrus.WithError(err).Errorf("Could not update project tags")
 	}
 
+	g.LoadImages()
+
 	return nil
 }
 
