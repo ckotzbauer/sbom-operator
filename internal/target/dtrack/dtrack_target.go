@@ -104,6 +104,12 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		logrus.WithError(err).Errorf("Could not update project tags")
 	}
 
+	if g.imageProjectMap == nil {
+		// prepropulate imageProjectMap
+		g.LoadImages()
+	}
+
+	g.imageProjectMap[ctx.Image.ImageID] = project.UUID
 	return nil
 }
 
@@ -177,7 +183,7 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
 
 	for _, img := range images {
 		uuid := g.imageProjectMap[img.ImageID]
-		if uuid.String() == "" {
+		if uuid.String() == "00000000-0000-0000-0000-000000000000" {
 			logrus.Warnf("No project found for imageID: %s", img.ImageID)
 			continue
 		}
@@ -199,6 +205,7 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
 					logrus.Infof("Removing %v=%v tag from project %v", kubernetesCluster, g.k8sClusterId, currentImageName)
 					project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
 					_, err := client.Project.Update(context.Background(), project)
+					delete(g.imageProjectMap, img.ImageID)
 					if err != nil {
 						logrus.WithError(err).Warnf("Project %s could not be updated", project.UUID.String())
 					}
@@ -215,6 +222,7 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
 		if sbomOperatorPropFound && len(otherClusterIds) == 0 {
 			logrus.Infof("Image not running in any cluster - removing %v", currentImageName)
 			err := client.Project.Delete(context.Background(), project.UUID)
+			delete(g.imageProjectMap, img.ImageID)
 			if err != nil {
 				logrus.WithError(err).Warnf("Project %s could not be deleted", project.UUID.String())
 			}
