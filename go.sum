@@ -222,8 +222,8 @@ github.com/cilium/ebpf v0.0.0-20200702112145-1c8d4c9ef775/go.mod h1:7cR51M8ViRLI
 github.com/cilium/ebpf v0.2.0/go.mod h1:To2CFviqOWL/M0gIMsvSMlqe7em/l1ALkX1PyjrX2Qs=
 github.com/cilium/ebpf v0.4.0/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
 github.com/cilium/ebpf v0.6.2/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
-github.com/ckotzbauer/libk8soci v0.0.0-20221001132859-e9868464794e h1:T9dpazJ7+pWmfYZ3IZSyoez9GVCjQLbkbgWW5kn9hQU=
-github.com/ckotzbauer/libk8soci v0.0.0-20221001132859-e9868464794e/go.mod h1:Q+zTrgNoLV5rraQH2S3Ab791e1Cht7CyjaYwe4+krTg=
+github.com/ckotzbauer/libk8soci v0.0.0-20221001150641-31090231afa3 h1:w4wAS1HN9ceLK+qryEpW2UqkCmOae5SpJO60LTbpmz0=
+github.com/ckotzbauer/libk8soci v0.0.0-20221001150641-31090231afa3/go.mod h1:Q+zTrgNoLV5rraQH2S3Ab791e1Cht7CyjaYwe4+krTg=
 github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9 h1:PYC9Efifz1gmoku/lbHZrzOFka76VTYY0jERsiEl6aw=
 github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
