@@ -1,3 +1,29 @@
+## Version 0.19.0 (2022-10-01)
+
+### Features and improvements
+
+* [[`796b1aaf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/796b1aaf)] - **feat**: add pod-labels to dtrack close #172
+
+### Bug fixes
+
+* [[`862539af`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/862539af)] - **fix**: properly maintain imageMap for dtrack
+* [[`70abfcc6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/70abfcc6)] - **fix**: Properly build dtrack imageProjectMap (#184)
+
+### Documentation
+
+* [[`a7399c95`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a7399c95)] - **doc**: update docs
+
+### Dependency updates
+
+* [[`d1f4ab7a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d1f4ab7a)] - **deps**: update libk8soci
+* [[`8c2915c7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8c2915c7)] - **deps**: update to golang 1.19.1
+* [[`db053212`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/db053212)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 9d8a11f (#189)
+* [[`ecdb0e41`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ecdb0e41)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to ae09c4e (#190)
+* [[`29651c98`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/29651c98)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.58.0
+* [[`0ed1aba5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0ed1aba5)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to ec3f013
+* [[`4df77d04`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4df77d04)] - **deps**: update actions&#x2F;checkout digest to e6d535c
+
+
 ## Version 0.18.0 (2022-09-24)
 
 ### Features and improvements
