@@ -63,7 +63,7 @@ func (p *Processor) ListenForPods() {
 	})
 
 	if err != nil {
-		logrus.WithError(err).Fatalf("Can't listen for pod-changes.")
+		logrus.WithError(err).Fatal("Can't listen for pod-changes.")
 		return
 	}
 
@@ -316,7 +316,7 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			for _, t := range p.Targets {
 				err := t.Initialize()
 				if err != nil {
-					logrus.Fatalf("Target could not be initialized: %w", err)
+					logrus.WithError(err).Fatal("Target could not be initialized,")
 				}
 			}
 		}
