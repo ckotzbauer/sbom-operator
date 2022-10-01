@@ -230,6 +230,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20220917113119-cfc4b7682664 h1:iRgtgS+Z+8
 github.com/ckotzbauer/libk8soci v0.0.0-20220917113119-cfc4b7682664/go.mod h1:3y9g/UyTis8fYNG4Enu7a2OcHAfoZQ9XC3KgGfjY00o=
 github.com/ckotzbauer/libstandard v0.0.0-20220903141541-869498553a91 h1:gEWEtrlzJt36HtXNVVhkC7B0ivOHD3gGmuYutXh5vIw=
 github.com/ckotzbauer/libstandard v0.0.0-20220903141541-869498553a91/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
+github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9 h1:PYC9Efifz1gmoku/lbHZrzOFka76VTYY0jERsiEl6aw=
+github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cloudflare/circl v1.1.0 h1:bZgT/A+cikZnKIwn7xL2OBj012Bmvho/o6RpRvv3GKY=
 github.com/cloudflare/circl v1.1.0/go.mod h1:prBCrKB9DV4poKZY1l9zBXg2QJY7mvgRvtMxxK7fi4I=
