@@ -24,7 +24,8 @@ func (g *ConfigMapTarget) ValidateConfig() error {
 	return nil
 }
 
-func (g *ConfigMapTarget) Initialize() {
+func (g *ConfigMapTarget) Initialize() error {
+	return nil
 }
 
 func (g *ConfigMapTarget) ProcessSbom(ctx *target.TargetContext) error {

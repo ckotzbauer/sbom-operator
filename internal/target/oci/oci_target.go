@@ -48,7 +48,8 @@ func (g *OciTarget) ValidateConfig() error {
 	return nil
 }
 
-func (g *OciTarget) Initialize() {
+func (g *OciTarget) Initialize() error {
+	return nil
 }
 
 func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {

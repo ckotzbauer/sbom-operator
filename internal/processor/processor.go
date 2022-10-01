@@ -314,7 +314,10 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 	go func() {
 		if !HasJobImage() {
 			for _, t := range p.Targets {
-				t.Initialize()
+				err := t.Initialize()
+				if err != nil {
+					logrus.Fatalf("Target could not be initialized: %w", err)
+				}
 			}
 		}
 

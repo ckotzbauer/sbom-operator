@@ -51,7 +51,8 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 	return nil
 }
 
-func (g *DependencyTrackTarget) Initialize() {
+func (g *DependencyTrackTarget) Initialize() error {
+	return nil
 }
 
 func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {

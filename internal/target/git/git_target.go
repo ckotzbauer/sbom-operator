@@ -61,8 +61,8 @@ func (g *GitTarget) ValidateConfig() error {
 	return nil
 }
 
-func (g *GitTarget) Initialize() {
-	g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
+func (g *GitTarget) Initialize() error {
+	return g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
 func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {

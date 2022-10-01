@@ -13,7 +13,7 @@ type TargetContext struct {
 }
 
 type Target interface {
-	Initialize()
+	Initialize() error
 	ValidateConfig() error
 	ProcessSbom(ctx *TargetContext) error
 	LoadImages() []*oci.RegistryImage

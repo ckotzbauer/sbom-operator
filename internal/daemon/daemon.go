@@ -59,7 +59,11 @@ func (c *CronService) runBackgroundService() {
 
 	if !processor.HasJobImage() {
 		for _, t := range c.processor.Targets {
-			t.Initialize()
+			err := t.Initialize()
+			if err != nil {
+				logrus.Fatalf("Target could not be initialized: %w", err)
+			}
+
 			t.LoadImages()
 		}
 	}
