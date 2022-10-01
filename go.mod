@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/syft v0.58.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20220917113119-cfc4b7682664
+	github.com/ckotzbauer/libk8soci v0.0.0-20221001085912-9d8a11f350af
 	github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
@@ -37,7 +37,7 @@ require (
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/containerd/containerd v1.6.6 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.12.0 // indirect
-	github.com/docker/cli v20.10.17+incompatible // indirect
+	github.com/docker/cli v20.10.18+incompatible // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
 	github.com/docker/docker v20.10.17+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.6.4 // indirect
