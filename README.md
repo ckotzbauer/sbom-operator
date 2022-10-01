@@ -19,6 +19,7 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 | sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
 | main            | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
+| 0.19.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.18.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.17.0          | v0.25.1                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.16.0          | v0.25.0                             | 1.24.x, 1.25.x, 1.26.x            |
@@ -136,6 +137,7 @@ not present in the cluster anymore are removed from the configured targets (exce
 |-----------|----------|---------|-------------|
 | `dtrack-base-url` | `true` when `dtrack` target is used | `""` | Dependency-Track base URL, e.g. 'https://dtrack.example.com' |
 | `dtrack-api-key` | `true` when `dtrack` target is used | `""` | Dependency-Track API key |
+| `dtrack-label-tag-matcher` | `false` | `""` | Dependency-Track Pod-Label-Tag matcher regex |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
 
 Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version.
