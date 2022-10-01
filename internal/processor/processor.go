@@ -134,8 +134,9 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 		} else if ta == "dtrack" {
 			baseUrl := internal.OperatorConfig.DtrackBaseUrl
 			apiKey := internal.OperatorConfig.DtrackApiKey
+			podLabelTagMatcher := internal.OperatorConfig.DtrackLabelTagMatcher
 			k8sClusterId := internal.OperatorConfig.KubernetesClusterId
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId)
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, k8sClusterId)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {

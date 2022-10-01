@@ -4,6 +4,7 @@ import (
 	"context"
 	"encoding/base64"
 	"fmt"
+	"regexp"
 	"strings"
 
 	"github.com/google/uuid"
@@ -17,10 +18,11 @@ import (
 )
 
 type DependencyTrackTarget struct {
-	baseUrl         string
-	apiKey          string
-	k8sClusterId    string
-	imageProjectMap map[string]uuid.UUID
+	baseUrl            string
+	apiKey             string
+	podLabelTagMatcher string
+	k8sClusterId       string
+	imageProjectMap    map[string]uuid.UUID
 }
 
 const (
@@ -30,11 +32,12 @@ const (
 	podNamespaceTagKey = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, k8sClusterId string) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, k8sClusterId string) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
-		baseUrl:      baseUrl,
-		apiKey:       apiKey,
-		k8sClusterId: k8sClusterId,
+		baseUrl:            baseUrl,
+		apiKey:             apiKey,
+		k8sClusterId:       k8sClusterId,
+		podLabelTagMatcher: podLabelTagMatcher,
 	}
 }
 
@@ -99,6 +102,23 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	if !containsTag(project.Tags, podNamespaceTag) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
 	}
+
+	var reg *regexp.Regexp
+	if g.podLabelTagMatcher != "" {
+		reg, err = regexp.Compile(g.podLabelTagMatcher)
+		if err != nil {
+			logrus.Errorf("Could not parse regex: %v", err)
+			return err
+		}
+	}
+
+	for podLabelKey, podLabelValue := range ctx.Pod.Labels {
+		podLabel := fmt.Sprintf("%s=%s", podLabelKey, podLabelValue)
+		if !containsTag(project.Tags, podLabel) && (reg == nil || reg.MatchString(podLabelKey)) {
+			project.Tags = append(project.Tags, dtrack.Tag{Name: podLabel})
+		}
+	}
+
 	_, err = client.Project.Update(context.Background(), project)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not update project tags")

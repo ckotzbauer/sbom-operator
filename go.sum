@@ -139,12 +139,8 @@ github.com/anchore/go-testutils v0.0.0-20200925183923-d5f45b0d3c04 h1:VzprUTpc0v
 github.com/anchore/go-testutils v0.0.0-20200925183923-d5f45b0d3c04/go.mod h1:6dK64g27Qi1qGQZ67gFmBFvEHScy0/C8qhQhNe5B5pQ=
 github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 h1:kDrYkTSM9uIxaX/P9s0F4nKYNM+hnSgLJdLpqvsaQ/g=
 github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7/go.mod h1:Blo6OgJNiYF41ufcgHKkbCKF2MDOMlrqhXv/ij6ocR4=
-github.com/anchore/stereoscope v0.0.0-20220829182958-659c89aa659f h1:ekyERd7HC9ylQL6CutrFkP6u6aHfy1wz6LugRzDP6Qs=
-github.com/anchore/stereoscope v0.0.0-20220829182958-659c89aa659f/go.mod h1:QjCxOPxjv7RqJm0pMIvB7P3rKHn7/uMBU7mnmM7ijTU=
 github.com/anchore/stereoscope v0.0.0-20220921141924-56552770e555 h1:5HwWsccgInNYmj7Q+fhszYya47mX0xtW5Gtolmmar3Y=
 github.com/anchore/stereoscope v0.0.0-20220921141924-56552770e555/go.mod h1:QjCxOPxjv7RqJm0pMIvB7P3rKHn7/uMBU7mnmM7ijTU=
-github.com/anchore/syft v0.57.0 h1:03jPoO3aW52vKb/ySjof6Fzczay7PVhq5niQ0X7nyCs=
-github.com/anchore/syft v0.57.0/go.mod h1:h9TSd7uOBDqEzDybjEE9/dYQ0H9OYfgXerp6WKDgAn0=
 github.com/anchore/syft v0.58.0 h1:hh5k6Bkda6Q4AbT/5106FmDKB3ksc83AuELYw2hPo3k=
 github.com/anchore/syft v0.58.0/go.mod h1:EtZQE3/Twdd5HEKyIsm++v/Z3Kcw1uw5Yr2rulT8LTY=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
@@ -226,12 +222,8 @@ github.com/cilium/ebpf v0.0.0-20200702112145-1c8d4c9ef775/go.mod h1:7cR51M8ViRLI
 github.com/cilium/ebpf v0.2.0/go.mod h1:To2CFviqOWL/M0gIMsvSMlqe7em/l1ALkX1PyjrX2Qs=
 github.com/cilium/ebpf v0.4.0/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
 github.com/cilium/ebpf v0.6.2/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
-github.com/ckotzbauer/libk8soci v0.0.0-20220917113119-cfc4b7682664 h1:iRgtgS+Z+8WY8P1dZCuak5rWZ4oy1nHReKEjj12WMGc=
-github.com/ckotzbauer/libk8soci v0.0.0-20220917113119-cfc4b7682664/go.mod h1:3y9g/UyTis8fYNG4Enu7a2OcHAfoZQ9XC3KgGfjY00o=
-github.com/ckotzbauer/libk8soci v0.0.0-20221001085912-9d8a11f350af h1:lSDPP1AK0prEOLD2C0npAAtePKdGeaj7Fv2iGrHByFU=
-github.com/ckotzbauer/libk8soci v0.0.0-20221001085912-9d8a11f350af/go.mod h1:Q+zTrgNoLV5rraQH2S3Ab791e1Cht7CyjaYwe4+krTg=
-github.com/ckotzbauer/libstandard v0.0.0-20220903141541-869498553a91 h1:gEWEtrlzJt36HtXNVVhkC7B0ivOHD3gGmuYutXh5vIw=
-github.com/ckotzbauer/libstandard v0.0.0-20220903141541-869498553a91/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
+github.com/ckotzbauer/libk8soci v0.0.0-20221001132859-e9868464794e h1:T9dpazJ7+pWmfYZ3IZSyoez9GVCjQLbkbgWW5kn9hQU=
+github.com/ckotzbauer/libk8soci v0.0.0-20221001132859-e9868464794e/go.mod h1:Q+zTrgNoLV5rraQH2S3Ab791e1Cht7CyjaYwe4+krTg=
 github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9 h1:PYC9Efifz1gmoku/lbHZrzOFka76VTYY0jERsiEl6aw=
 github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
@@ -381,8 +373,6 @@ github.com/dgryski/go-sip13 v0.0.0-20181026042036-e10d5fee7954/go.mod h1:vAd38F8
 github.com/dnaeon/go-vcr v1.0.1/go.mod h1:aBB1+wY4s93YsC3HHjMBMrwTj2R9FHDzUr9KyGc8n1E=
 github.com/docker/cli v20.10.10+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v20.10.12+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
-github.com/docker/cli v20.10.17+incompatible h1:eO2KS7ZFeov5UJeaDmIs1NFEDRf32PaqRpvoEkKBy5M=
-github.com/docker/cli v20.10.17+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v20.10.18+incompatible h1:f/GQLsVpo10VvToRay2IraVA1wHz9KktZyjev3SIVDU=
 github.com/docker/cli v20.10.18+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v0.0.0-20190905152932-14b96e55d84c/go.mod h1:0+TTO4EOBfRPhZXAeF1Vu+W3hHZ8eLp8PgKVZlcvtFY=
@@ -1348,8 +1338,6 @@ golang.org/x/exp v0.0.0-20200119233911-0405dc783f0a/go.mod h1:2RIsYlXP63K8oxa1u0
 golang.org/x/exp v0.0.0-20200207192155-f17229e696bd/go.mod h1:J/WKrq2StrnmMY6+EHIKF9dgMWnmCNThgcyBT1FY9mM=
 golang.org/x/exp v0.0.0-20200224162631-6cc2880d07d6/go.mod h1:3jZMyOhIsHpP37uCMkUooju7aAi5cS1Q23tOzKc+0MU=
 golang.org/x/exp v0.0.0-20200331195152-e8c3332aa8e5/go.mod h1:4M0jN8W1tt0AVLNr8HDosyJCDCDuyL9N9+3m7wDWgKw=
-golang.org/x/exp v0.0.0-20220921164117-439092de6870 h1:j8b6j9gzSigH28O5SjSpQSSh9lFd6f5D/q0aHjNTulc=
-golang.org/x/exp v0.0.0-20220921164117-439092de6870/go.mod h1:cyybsKvd6eL0RnXn6p/Grxp8F5bW7iYuBgsNCOHpMYE=
 golang.org/x/exp v0.0.0-20220930202632-ec3f01382ef9 h1:RjggHMcaTVp0LOVZcW0bo8alwHrOaCrGUDgfWUHhnN4=
 golang.org/x/exp v0.0.0-20220930202632-ec3f01382ef9/go.mod h1:cyybsKvd6eL0RnXn6p/Grxp8F5bW7iYuBgsNCOHpMYE=
 golang.org/x/image v0.0.0-20190227222117-0694c2d4d067/go.mod h1:kZ7UVZpmo3dzQBMxlp+ypCbDeSB+sBbTgSJuh5dn5js=
@@ -1439,8 +1427,6 @@ golang.org/x/net v0.0.0-20210505024714-0287a6fb4125/go.mod h1:9nx3DQGgdP8bBQD5qx
 golang.org/x/net v0.0.0-20210510120150-4163338589ed/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.0.0-20210805182204-aaa1db679c0d/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
 golang.org/x/net v0.0.0-20211111160137-58aab5ef257a/go.mod h1:9nx3DQGgdP8bBQD5qxJ1jj9UTztislL4KSBs9R2vV5Y=
-golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b h1:ZmngSVLe/wycRns9MKikG9OWIEjGcGAkacif7oYQaUY=
-golang.org/x/net v0.0.0-20220826154423-83b083e8dc8b/go.mod h1:YDH+HFinaLZZlnHAfSS6ZXJJ9M9t4Dl22yv3iI2vPwk=
 golang.org/x/net v0.0.0-20220909164309-bea034e7d591 h1:D0B/7al0LLrVC8aWF4+oxpv/m8bc7ViFfVS8/gXGdqI=
 golang.org/x/net v0.0.0-20220909164309-bea034e7d591/go.mod h1:YDH+HFinaLZZlnHAfSS6ZXJJ9M9t4Dl22yv3iI2vPwk=
 golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=

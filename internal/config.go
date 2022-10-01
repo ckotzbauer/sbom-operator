@@ -22,6 +22,7 @@ type Config struct {
 	NamespaceLabelSelector  string   `yaml:"namespaceLabelSelector" env:"SBOM_NAMESPACE_LABEL_SELECTOR" flag:"namespace-label-selector"`
 	DtrackBaseUrl           string   `yaml:"dtrackBaseUrl" env:"SBOM_DTRACK_BASE_URL" flag:"dtrack-base-url"`
 	DtrackApiKey            string   `yaml:"dtrackApiKey" env:"SBOM_DTRACK_API_KEY" flag:"dtrack-api-key"`
+	DtrackLabelTagMatcher   string   `yaml:"dtrackLabelTagMatcher" env:"SBOM_DTRACK_LABEL_TAG_MATCHER" flag:"dtrack-label-tag-matcher"`
 	KubernetesClusterId     string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
 	JobImage                string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
 	JobImagePullSecret      string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
@@ -54,9 +55,10 @@ var (
 	ConfigKeyNamespaceLabelSelector  = "namespace-label-selector"
 	ConfigKeyDependencyTrackBaseUrl  = "dtrack-base-url"
 	/* #nosec */
-	ConfigKeyDependencyTrackApiKey = "dtrack-api-key"
-	ConfigKeyKubernetesClusterId   = "kubernetes-cluster-id"
-	ConfigKeyJobImage              = "job-image"
+	ConfigKeyDependencyTrackApiKey          = "dtrack-api-key"
+	ConfigKeyDependencyTrackLabelTagMatcher = "dtrack-label-tag-matcher"
+	ConfigKeyKubernetesClusterId            = "kubernetes-cluster-id"
+	ConfigKeyJobImage                       = "job-image"
 	/* #nosec */
 	ConfigKeyJobImagePullSecret = "job-image-pull-secret"
 	ConfigKeyJobTimeout         = "job-timeout"

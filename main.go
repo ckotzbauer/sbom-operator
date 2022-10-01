@@ -71,6 +71,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyNamespaceLabelSelector, "", "Kubernetes Label-Selector for namespaces.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackBaseUrl, "", "Dependency-Track base URL, e.g. 'https://dtrack.example.com'")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackApiKey, "", "Dependency-Track API key")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackLabelTagMatcher, "", "Dependency-Track Pod-Label-Tag matcher regex")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyKubernetesClusterId, "default", "Kubernetes Cluster ID")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImage, "", "Custom Job-Image")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImagePullSecret, "", "Custom Job-Image-Pull-Secret")
