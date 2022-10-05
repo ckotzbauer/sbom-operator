@@ -50,6 +50,7 @@ func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cach
 					Name:        pod.Name,
 					Namespace:   pod.Namespace,
 					Annotations: pod.Annotations,
+					Labels:      pod.Labels,
 				},
 				Status: corev1.PodStatus{
 					InitContainerStatuses:      pod.Status.InitContainerStatuses,
