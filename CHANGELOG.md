@@ -1,3 +1,26 @@
+## Version 0.20.0 (2022-10-08)
+
+### Bug fixes
+
+* [[`a5452b97`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a5452b97)] - **fix**: map pod labels (#194)
+* [[`44146ade`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/44146ade)] - **fix**: fix fatal statements
+* [[`2601fea3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2601fea3)] - **fix**: fail on target-init error
+
+### Security
+
+* [[`d5737bd4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d5737bd4)] - **security**: update github.com&#x2F;sylabs&#x2F;sif&#x2F;v2
+
+### Dependency updates
+
+* [[`f8e5d78f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f8e5d78f)] - **deps**: update to go@1.19.2
+* [[`d0ad1c04`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d0ad1c04)] - **deps**: update codenotary&#x2F;vcn docker tag to v1.0.2
+* [[`cca44dd2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cca44dd2)] - **deps**: update sigstore&#x2F;cosign-installer digest to 7cc35d7
+* [[`664e36f7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/664e36f7)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 316c755
+* [[`b8ebd888`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b8ebd888)] - **deps**: update actions&#x2F;checkout digest to 8230315
+* [[`5e28b829`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5e28b829)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 540bb73
+* [[`ce4eea51`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ce4eea51)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.21.3 (#191)
+
+
 ## Version 0.19.0 (2022-10-01)
 
 ### Features and improvements
