@@ -166,4 +166,6 @@ require (
 
 replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 
+replace github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.8.1
+
 replace github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.9.0
