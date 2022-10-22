@@ -80,7 +80,7 @@ jobs:
       - name: Generate Provenance
         uses: ckotzbauer/actions-toolkit/slsa-provenance@0.23.0
         with:
-          action-sha: "0.16.0"
+          action-sha: "0.22.0"
           images: ${{ inputs.docker-tags }}
           artifact-path: job-images/${{ inputs.job-image }}
           sign: true
