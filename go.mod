@@ -11,7 +11,7 @@ require (
 	github.com/nscuro/dtrack-client v0.6.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/spf13/cobra v1.6.0
+	github.com/spf13/cobra v1.6.1
 	github.com/stretchr/testify v1.8.1
 	golang.org/x/exp v0.0.0-20221023144134-a1e5550cf13e
 	k8s.io/api v0.25.3
@@ -26,7 +26,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.2 // indirect
 	github.com/Microsoft/go-winio v0.6.0 // indirect
-	github.com/ProtonMail/go-crypto v0.0.0-20220930113650-c6815a8c17ad // indirect
+	github.com/ProtonMail/go-crypto v0.0.0-20221026131551-cf6655e29de4 // indirect
 	github.com/acobaugh/osrelease v0.1.0 // indirect
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
@@ -166,6 +166,6 @@ require (
 
 replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 
-replace github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.8.2
+replace github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.8.3
 
 replace github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.9.0
