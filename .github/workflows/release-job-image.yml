@@ -49,7 +49,7 @@ jobs:
           token: ${{ secrets.pat }}
 
       - name: Setup Cosign
-        uses: sigstore/cosign-installer@9becc617647dfa20ae7b1151972e9b3a2c338a2b
+        uses: sigstore/cosign-installer@7bca8b41164994a7dc93749d266e2f1db492f8a2
 
       - name: Setup Syft
         uses: ckotzbauer/actions-toolkit/setup-syft@0.23.0
