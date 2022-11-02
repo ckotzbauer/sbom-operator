@@ -2145,6 +2145,76 @@
    "type": "contains"
   },
   {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "248c08501c32172a",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "37cc4e0e99ac682a",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "3e639ec3b115fd80",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "3e95687e5e10a2a2",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "439b5d54c3f70792",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "57d24348d51e644",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "71edb0ba2e199bbe",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "857eb7db81c6539b",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "93d7c40162bd8db1",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "b248d062a4ba57e9",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "bbc2330f9d4da9d7",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "c16c09c7850854ac",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "f2b818a68dbc3f5c",
+   "type": "contains"
+  },
+  {
+   "parent": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
+   "child": "f50d80ee2e58ff26",
+   "type": "contains"
+  },
+  {
    "parent": "93d7c40162bd8db1",
    "child": "13d6d27618d264f7",
    "type": "contains"
@@ -2277,76 +2347,6 @@
   {
    "parent": "c16c09c7850854ac",
    "child": "b7cfa7f53a05225f",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "248c08501c32172a",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "37cc4e0e99ac682a",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "3e639ec3b115fd80",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "3e95687e5e10a2a2",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "439b5d54c3f70792",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "57d24348d51e644",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "71edb0ba2e199bbe",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "857eb7db81c6539b",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "93d7c40162bd8db1",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "b248d062a4ba57e9",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "bbc2330f9d4da9d7",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "c16c09c7850854ac",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "f2b818a68dbc3f5c",
-   "type": "contains"
-  },
-  {
-   "parent": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
-   "child": "f50d80ee2e58ff26",
    "type": "contains"
   },
   {
@@ -2899,14 +2899,16 @@
   }
  ],
  "source": {
-  "id": "e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
+  "id": "8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
   "type": "image",
   "target": {
-   "userInput": "alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
+   "userInput": "/tmp/sha256_21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300.tar.gz",
    "imageID": "sha256:c059bfaa849c4d8e4aecaeb3a10c2d9b3d85f5165c66ad3a4d937758128c4d18",
-   "manifestDigest": "sha256:e7d88de73db3d3fd9b2d63aa7f447a10fd0220b7cbf39803c803f2af9ba256b3",
+   "manifestDigest": "sha256:8fc9d30e06a8f3735dad88d4fa5faba0ac004d73bcd2026cfad4e2515ebddb11",
    "mediaType": "application/vnd.docker.distribution.manifest.v2+json",
-   "tags": [],
+   "tags": [
+    "index.docker.io/library/alpine:i-was-a-digest"
+   ],
    "imageSize": 5580949,
    "layers": [
     {
@@ -2915,11 +2917,9 @@
      "size": 5580949
     }
    ],
-   "manifest": "ewogICAic2NoZW1hVmVyc2lvbiI6IDIsCiAgICJtZWRpYVR5cGUiOiAiYXBwbGljYXRpb24vdm5kLmRvY2tlci5kaXN0cmlidXRpb24ubWFuaWZlc3QudjIranNvbiIsCiAgICJjb25maWciOiB7CiAgICAgICJtZWRpYVR5cGUiOiAiYXBwbGljYXRpb24vdm5kLmRvY2tlci5jb250YWluZXIuaW1hZ2UudjEranNvbiIsCiAgICAgICJzaXplIjogMTQ3MSwKICAgICAgImRpZ2VzdCI6ICJzaGEyNTY6YzA1OWJmYWE4NDljNGQ4ZTRhZWNhZWIzYTEwYzJkOWIzZDg1ZjUxNjVjNjZhZDNhNGQ5Mzc3NTgxMjhjNGQxOCIKICAgfSwKICAgImxheWVycyI6IFsKICAgICAgewogICAgICAgICAibWVkaWFUeXBlIjogImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuaW1hZ2Uucm9vdGZzLmRpZmYudGFyLmd6aXAiLAogICAgICAgICAic2l6ZSI6IDI4MTg0MTMsCiAgICAgICAgICJkaWdlc3QiOiAic2hhMjU2OjU5YmYxYzM1MDlmMzM1MTU2MjI2MTlhZjIxZWQ1NWJiZTI2ZDI0OTEzY2VkYmNhMTA2NDY4YTVmYjM3YTUwYzMiCiAgICAgIH0KICAgXQp9",
+   "manifest": "eyJzY2hlbWFWZXJzaW9uIjoyLCJtZWRpYVR5cGUiOiJhcHBsaWNhdGlvbi92bmQuZG9ja2VyLmRpc3RyaWJ1dGlvbi5tYW5pZmVzdC52Mitqc29uIiwiY29uZmlnIjp7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuY29udGFpbmVyLmltYWdlLnYxK2pzb24iLCJzaXplIjoxNDcxLCJkaWdlc3QiOiJzaGEyNTY6YzA1OWJmYWE4NDljNGQ4ZTRhZWNhZWIzYTEwYzJkOWIzZDg1ZjUxNjVjNjZhZDNhNGQ5Mzc3NTgxMjhjNGQxOCJ9LCJsYXllcnMiOlt7Im1lZGlhVHlwZSI6ImFwcGxpY2F0aW9uL3ZuZC5kb2NrZXIuaW1hZ2Uucm9vdGZzLmRpZmYudGFyLmd6aXAiLCJzaXplIjoyODE4NDEzLCJkaWdlc3QiOiJzaGEyNTY6OGQzYWMzNDg5OTk2NDIzZjUzZDYwODdjODExODAwMDYyNjNiNzlmMjA2ZDNmZGVjOWU2NmYwZTI3Y2ViODc1OSJ9XX0=",
    "config": "eyJhcmNoaXRlY3R1cmUiOiJhbWQ2NCIsImNvbmZpZyI6eyJIb3N0bmFtZSI6IiIsIkRvbWFpbm5hbWUiOiIiLCJVc2VyIjoiIiwiQXR0YWNoU3RkaW4iOmZhbHNlLCJBdHRhY2hTdGRvdXQiOmZhbHNlLCJBdHRhY2hTdGRlcnIiOmZhbHNlLCJUdHkiOmZhbHNlLCJPcGVuU3RkaW4iOmZhbHNlLCJTdGRpbk9uY2UiOmZhbHNlLCJFbnYiOlsiUEFUSD0vdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91c3IvYmluOi9zYmluOi9iaW4iXSwiQ21kIjpbIi9iaW4vc2giXSwiSW1hZ2UiOiJzaGEyNTY6Yjc0NzUzNGFlMjlkMDhjMGM4NGNjNDMyNmNhZjA0ZTg3M2M2ZDAyYmI2N2NkOWM3NjQ0YmUyYjRmYThkMmYzMSIsIlZvbHVtZXMiOm51bGwsIldvcmtpbmdEaXIiOiIiLCJFbnRyeXBvaW50IjpudWxsLCJPbkJ1aWxkIjpudWxsLCJMYWJlbHMiOm51bGx9LCJjb250YWluZXIiOiI0MjkyZThlZDJlZjJiNmRjNGJiYWY4ZTFjZGEwY2I1Zjk1Yjk2YWRjNGFhMmRhM2QxNTE4MWI1NGQwN2EwYjM0IiwiY29udGFpbmVyX2NvbmZpZyI6eyJIb3N0bmFtZSI6IjQyOTJlOGVkMmVmMiIsIkRvbWFpbm5hbWUiOiIiLCJVc2VyIjoiIiwiQXR0YWNoU3RkaW4iOmZhbHNlLCJBdHRhY2hTdGRvdXQiOmZhbHNlLCJBdHRhY2hTdGRlcnIiOmZhbHNlLCJUdHkiOmZhbHNlLCJPcGVuU3RkaW4iOmZhbHNlLCJTdGRpbk9uY2UiOmZhbHNlLCJFbnYiOlsiUEFUSD0vdXNyL2xvY2FsL3NiaW46L3Vzci9sb2NhbC9iaW46L3Vzci9zYmluOi91c3IvYmluOi9zYmluOi9iaW4iXSwiQ21kIjpbIi9iaW4vc2giLCItYyIsIiMobm9wKSAiLCJDTUQgW1wiL2Jpbi9zaFwiXSJdLCJJbWFnZSI6InNoYTI1NjpiNzQ3NTM0YWUyOWQwOGMwYzg0Y2M0MzI2Y2FmMDRlODczYzZkMDJiYjY3Y2Q5Yzc2NDRiZTJiNGZhOGQyZjMxIiwiVm9sdW1lcyI6bnVsbCwiV29ya2luZ0RpciI6IiIsIkVudHJ5cG9pbnQiOm51bGwsIk9uQnVpbGQiOm51bGwsIkxhYmVscyI6e319LCJjcmVhdGVkIjoiMjAyMS0xMS0yNFQyMDoxOTo0MC40ODMzNjc1NDZaIiwiZG9ja2VyX3ZlcnNpb24iOiIyMC4xMC43IiwiaGlzdG9yeSI6W3siY3JlYXRlZCI6IjIwMjEtMTEtMjRUMjA6MTk6NDAuMTk5NzAwOTQ2WiIsImNyZWF0ZWRfYnkiOiIvYmluL3NoIC1jICMobm9wKSBBREQgZmlsZTo5MjMzZjZmMjIzN2Q3OTY1OWE5NTIxZjdlMzkwZGYyMTdjZWM0OWYxYThhYTNhMTIxNDdiYmNhMTk1NmFjZGI5IGluIC8gIn0seyJjcmVhdGVkIjoiMjAyMS0xMS0yNFQyMDoxOTo0MC40ODMzNjc1NDZaIiwiY3JlYXRlZF9ieSI6Ii9iaW4vc2ggLWMgIyhub3ApICBDTUQgW1wiL2Jpbi9zaFwiXSIsImVtcHR5X2xheWVyIjp0cnVlfV0sIm9zIjoibGludXgiLCJyb290ZnMiOnsidHlwZSI6ImxheWVycyIsImRpZmZfaWRzIjpbInNoYTI1Njo4ZDNhYzM0ODk5OTY0MjNmNTNkNjA4N2M4MTE4MDAwNjI2M2I3OWYyMDZkM2ZkZWM5ZTY2ZjBlMjdjZWI4NzU5Il19fQ==",
-   "repoDigests": [
-    "index.docker.io/library/alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300"
-   ],
+   "repoDigests": [],
    "architecture": "",
    "os": ""
   }
@@ -2934,91 +2934,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.60.2",
-  "configuration": {
-   "configPath": "",
-   "verbosity": 0,
-   "quiet": false,
-   "output": [
-    "json"
-   ],
-   "output-template-path": "",
-   "file": "",
-   "check-for-app-update": true,
-   "dev": {
-    "profile-cpu": false,
-    "profile-mem": false
-   },
-   "log": {
-    "structured": false,
-    "level": "warn",
-    "file-location": ""
-   },
-   "catalogers": null,
-   "package": {
-    "cataloger": {
-     "enabled": true,
-     "scope": "Squashed"
-    },
-    "search-unindexed-archives": false,
-    "search-indexed-archives": true
-   },
-   "file-metadata": {
-    "cataloger": {
-     "enabled": false,
-     "scope": "Squashed"
-    },
-    "digests": [
-     "sha256"
-    ]
-   },
-   "file-classification": {
-    "cataloger": {
-     "enabled": false,
-     "scope": "Squashed"
-    }
-   },
-   "file-contents": {
-    "cataloger": {
-     "enabled": false,
-     "scope": "Squashed"
-    },
-    "skip-files-above-size": 1048576,
-    "globs": []
-   },
-   "secrets": {
-    "cataloger": {
-     "enabled": false,
-     "scope": "AllLayers"
-    },
-    "additional-patterns": {},
-    "exclude-pattern-names": [],
-    "reveal-values": false,
-    "skip-files-above-size": 1048576
-   },
-   "registry": {
-    "insecure-skip-tls-verify": false,
-    "insecure-use-http": false,
-    "auth": []
-   },
-   "exclude": [],
-   "attest": {
-    "key": "",
-    "cert": "",
-    "noUpload": false,
-    "force": false,
-    "recursive": false,
-    "replace": false,
-    "fulcioUrl": "https://fulcio.sigstore.dev",
-    "fulcio_identity_token": "",
-    "insecure_skip_verify": false,
-    "rekorUrl": "https://rekor.sigstore.dev",
-    "oidcIssuer": "https://oauth2.sigstore.dev/auth",
-    "oidcClientId": "sigstore",
-    "OIDCRedirectURL": ""
-   },
-   "platform": ""
-  }
+  "version": "v9.9.9"
  },
  "schema": {
   "version": "4.1.0",
