@@ -3,7 +3,7 @@
  "name": "nginx@sha256-2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767",
  "spdxVersion": "SPDX-2.2",
  "creationInfo": {
-  "created": "2022-09-24T07:17:48.649891473Z",
+  "created": "2022-11-02T17:00:06.619804733Z",
   "creators": [
    "Organization: Anchore, Inc",
    "Tool: syft-0.56.0-SNAPSHOT-7c86e7ba"
@@ -11,7 +11,7 @@
   "licenseListVersion": "3.18"
  },
  "dataLicense": "CC0-1.0",
- "documentNamespace": "https://anchore.com/syft/image/nginx@sha256-2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767-df8d335f-31cd-4c1b-9c29-9ac5c6619d51",
+ "documentNamespace": "https://anchore.com/syft/image/nginx@sha256-2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767-6b046049-fdb4-4dfe-ac5d-b059091dd3dd",
  "packages": [
   {
    "SPDXID": "SPDXRef-a124711c55c5b5ec",
