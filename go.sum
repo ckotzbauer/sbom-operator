@@ -230,6 +230,8 @@ github.com/cilium/ebpf v0.4.0/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJ
 github.com/cilium/ebpf v0.6.2/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJXRs=
 github.com/ckotzbauer/libk8soci v0.0.0-20221001150641-31090231afa3 h1:w4wAS1HN9ceLK+qryEpW2UqkCmOae5SpJO60LTbpmz0=
 github.com/ckotzbauer/libk8soci v0.0.0-20221001150641-31090231afa3/go.mod h1:Q+zTrgNoLV5rraQH2S3Ab791e1Cht7CyjaYwe4+krTg=
+github.com/ckotzbauer/libk8soci v0.0.0-20221101074507-09b45d7565d7 h1:HR5+5VmFyEVpVVHPEhyOhVW+Zlc4hPMMCYvm82AdU+M=
+github.com/ckotzbauer/libk8soci v0.0.0-20221101074507-09b45d7565d7/go.mod h1:0uopbd6IolLBBbUzO0pQpR1A3tDLEm3l0yRLjafSqGI=
 github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9 h1:PYC9Efifz1gmoku/lbHZrzOFka76VTYY0jERsiEl6aw=
 github.com/ckotzbauer/libstandard v0.0.0-20221001073118-ae09c4e8cbb9/go.mod h1:Yjkw6+S1bb/tB9DssKfmNOrJVApjZ/00QYLm2p28wzQ=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
@@ -385,6 +387,8 @@ github.com/docker/cli v20.10.18+incompatible h1:f/GQLsVpo10VvToRay2IraVA1wHz9Kkt
 github.com/docker/cli v20.10.18+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v20.10.20+incompatible h1:lWQbHSHUFs7KraSN2jOJK7zbMS2jNCHI4mt4xUFUVQ4=
 github.com/docker/cli v20.10.20+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v20.10.21+incompatible h1:qVkgyYUnOLQ98LtXBrwd/duVqPT2X4SHndOuGsfwyhU=
+github.com/docker/cli v20.10.21+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v0.0.0-20190905152932-14b96e55d84c/go.mod h1:0+TTO4EOBfRPhZXAeF1Vu+W3hHZ8eLp8PgKVZlcvtFY=
 github.com/docker/distribution v2.7.1-0.20190205005809-0d3efadf0154+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/distribution v2.7.1+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
