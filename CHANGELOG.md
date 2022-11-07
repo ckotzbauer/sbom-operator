@@ -1,3 +1,38 @@
+## Version 0.21.0 (2022-11-07)
+
+### Build and testing
+
+* [[`6c66d0f1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6c66d0f1)] - **build**: use new slsa-provenance
+
+### Dependency updates
+
+* [[`eb986d6a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eb986d6a)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to f965990 (#225)
+* [[`8e33d7cb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8e33d7cb)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 3b97f5c
+* [[`01fce52e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/01fce52e)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.24.0
+* [[`b640b472`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b640b472)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to c99f073
+* [[`4203ce00`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4203ce00)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 09b45d7
+* [[`403a2fcc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/403a2fcc)] - **deps**: update to go@1.19.3
+* [[`ebd1232d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ebd1232d)] - **deps**: update module github.com&#x2F;spf13&#x2F;cobra to v1.6.1 (#218)
+* [[`8cda7697`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8cda7697)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.8.3 (#220)
+* [[`7173d503`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7173d503)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 83b7d23 (#215)
+* [[`94e4dddc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/94e4dddc)] - **deps**: update sigstore&#x2F;cosign-installer digest to 7bca8b4 (#216)
+* [[`3c4202b8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3c4202b8)] - **deps**: update docker docker tag to v20.10.21 (#217)
+* [[`3c4c5d6c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3c4c5d6c)] - **deps**: update module github.com&#x2F;stretchr&#x2F;testify to v1.8.1 (#219)
+* [[`624ae08f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/624ae08f)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to a1e5550 (#214)
+* [[`20283401`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/20283401)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.23.0 (#213)
+* [[`becc5f9e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/becc5f9e)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.8.2 (#210)
+* [[`06038df5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/06038df5)] - **deps**: update actions&#x2F;checkout digest to 1f9a0c2 (#206)
+* [[`7ebd8147`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7ebd8147)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 2094472 (#207)
+* [[`8ccb629c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8ccb629c)] - **deps**: update sigstore&#x2F;cosign-installer digest to 9becc61 (#208)
+* [[`8a94f997`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8a94f997)] - **deps**: update docker docker tag to v20.10.20 (#209)
+* [[`f4cc5286`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f4cc5286)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.12.0 (#212)
+* [[`a78be4d5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a78be4d5)] - **deps**: update kubernetes versions to v0.25.3
+* [[`a216ba71`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a216ba71)] - **deps**: update module github.com&#x2F;spf13&#x2F;cobra to v1.6.0
+* [[`bd5e47c8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bd5e47c8)] - **deps**: update docker docker tag to v20.10.19
+* [[`047e06ce`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/047e06ce)] - **deps**: update sigstore&#x2F;cosign-installer digest to c6d50c2
+* [[`11116919`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/11116919)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 4de253d
+
+
 ## Version 0.20.0 (2022-10-08)
 
 ### Bug fixes
