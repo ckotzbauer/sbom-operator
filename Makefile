@@ -7,6 +7,9 @@ all: build
 build: fmt vet
 	goreleaser build --rm-dist --single-target --snapshot
 
+build-all: fmt vet
+	goreleaser build --rm-dist --snapshot
+
 # Run against the configured Kubernetes cluster in ~/.kube/config
 run: fmt vet
 	go run ./main.go

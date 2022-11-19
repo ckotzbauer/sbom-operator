@@ -17,6 +17,12 @@ type simpleTestData struct {
 	expected string
 }
 
+type mapTestData struct {
+	input    string
+	expected string
+	dataMap  map[string]string
+}
+
 type testData struct {
 	image  string
 	digest string
@@ -59,7 +65,7 @@ func marshalCyclonedx(t *testing.T, x interface{}) string {
 
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
-	s := syft.New(format).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 
 	assert.NoError(t, err)
@@ -83,7 +89,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
-	s := syft.New(format).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -103,7 +109,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
-	s := syft.New(format).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -127,7 +133,7 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 // test for analysing an image completely without pullSecret
 func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
-	s := syft.New(format).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -248,6 +254,50 @@ func TestGetFileName(t *testing.T) {
 		t.Run(v.input, func(t *testing.T) {
 			out := syft.GetFileName(v.input)
 			assert.Equal(t, v.expected, out)
+		})
+	}
+}
+
+func TestApplyProxyRegistry(t *testing.T) {
+	tests := []mapTestData{
+		{
+			input:    "alpine:3.17",
+			expected: "alpine:3.17",
+			dataMap:  make(map[string]string),
+		},
+		{
+			input:    "docker.io/alpine:3.17",
+			expected: "ghcr.io/alpine:3.17",
+			dataMap:  map[string]string{"docker.io": "ghcr.io"},
+		},
+		{
+			input:    "alpine:3.17",
+			expected: "ghcr.io/alpine:3.17",
+			dataMap:  map[string]string{"docker.io": "ghcr.io"},
+		},
+		{
+			input:    "alpine:3.17",
+			expected: "alpine:3.17",
+			dataMap:  map[string]string{"ghcr.io": "docker.io"},
+		},
+		{
+			input:    "alpine:3.17",
+			expected: "my.registry.com:5000/alpine:3.17",
+			dataMap:  map[string]string{"docker.io": "my.registry.com:5000"},
+		},
+		{
+			input:    "my.registry.com:5000/alpine:3.17",
+			expected: "ghcr.io/alpine:3.17",
+			dataMap:  map[string]string{"my.registry.com:5000": "ghcr.io"},
+		},
+	}
+
+	for _, v := range tests {
+		t.Run(v.input, func(t *testing.T) {
+			s := syft.New("json", v.dataMap)
+			img := &oci.RegistryImage{ImageID: v.input, Image: v.input}
+			s.ApplyProxyRegistry(img)
+			assert.Equal(t, v.expected, img.ImageID)
 		})
 	}
 }
