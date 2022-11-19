@@ -1,3 +1,43 @@
+## Version 0.22.0 (2022-11-19)
+
+### Features and improvements
+
+* [[`1127ac46`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1127ac46)] - **feat**: use syft image-pull mechanism
+
+### Bug fixes
+
+* [[`9632e3bd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9632e3bd)] - **fix**: cleanup go.sum
+
+### Cleanup and refactoring
+
+* [[`fe30c3af`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fe30c3af)] - **cleanup**: remove files
+
+### Build and testing
+
+* [[`ab95912d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ab95912d)] - **test**: update fixtures
+
+### Documentation
+
+* [[`646c8349`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/646c8349)] - **doc**: updated docs
+
+### Dependency updates
+
+* [[`a7594000`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a7594000)] - **deps**: updated syft to 0.62.0
+* [[`9b92743f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9b92743f)] - **deps**: update syft
+* [[`c5a57827`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c5a57827)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.59.0
+* [[`f5dd2379`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f5dd2379)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 823db52
+* [[`2f5c4aa8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2f5c4aa8)] - **deps**: update alpine docker tag to v3.17
+* [[`34e1eb8d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/34e1eb8d)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 8509921
+* [[`9347c322`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9347c322)] - **deps**: update actions&#x2F;checkout digest to bf08527
+* [[`00a27d9a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/00a27d9a)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 129d8d6 (#227)
+* [[`34683d14`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/34683d14)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.10.0
+* [[`2d825be1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2d825be1)] - **deps**: update codenotary&#x2F;vcn docker tag to v1.0.3
+* [[`89e8bd8e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/89e8bd8e)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.12.1
+* [[`2e1cf608`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2e1cf608)] - **deps**: update kubernetes versions to v0.25.4 (#229)
+* [[`811f414d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/811f414d)] - **deps**: update actions&#x2F;checkout digest to 5c3ccc2 (#226)
+* [[`c897eb6a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c897eb6a)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.25.0
+
+
 ## Version 0.21.0 (2022-11-07)
 
 ### Build and testing
