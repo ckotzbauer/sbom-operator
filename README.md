@@ -18,7 +18,10 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| main            | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
+| main            | v0.25.4                             | 1.24.x, 1.25.x, 1.26.x            |
+| 0.22.0          | v0.25.4                             | 1.24.x, 1.25.x, 1.26.x            |
+| 0.21.0          | v0.25.3                             | 1.24.x, 1.25.x, 1.26.x            |
+| 0.20.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.19.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.18.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.17.0          | v0.25.1                             | 1.24.x, 1.25.x, 1.26.x            |
@@ -43,15 +46,7 @@ However, the operator will work with more versions of Kubernetes in general.
 
 ## Container Registry Support
 
-The operator relies on the [go-containeregistry](https://github.com/google/go-containerregistry) library to download images. It should work with most registries. 
-These are officially tested (with authentication):
-- ACR (Azure Container Registry) (currently not unit-tested)
-- ECR (Amazon Elastic Container Registry)
-- GAR (Google Artifact Registry)
-- GCR (Google Container Registry)
-- GHCR (GitHub Container Registry)
-- DockerHub
-
+The operator relies on the syft-internal mechanism to download images from OCI-compliant registries.
 
 ## Installation
 
