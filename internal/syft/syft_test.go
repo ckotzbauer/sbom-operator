@@ -296,7 +296,8 @@ func TestApplyProxyRegistry(t *testing.T) {
 		t.Run(v.input, func(t *testing.T) {
 			s := syft.New("json", v.dataMap)
 			img := &oci.RegistryImage{ImageID: v.input, Image: v.input}
-			s.ApplyProxyRegistry(img)
+			err := s.ApplyProxyRegistry(img)
+			assert.NoError(t, err)
 			assert.Equal(t, v.expected, img.ImageID)
 		})
 	}
