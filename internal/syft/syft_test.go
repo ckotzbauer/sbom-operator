@@ -149,12 +149,12 @@ func TestSyft(t *testing.T) {
 	tests := []testData{
 		{
 			image:  "alpine",
-			digest: "alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
+			digest: "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
 			format: "json",
 		},
 		{
-			image:  "nginx",
-			digest: "nginx@sha256:2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767",
+			image:  "mysql",
+			digest: "mysql@sha256:96439dd0d8d085cd90c8001be2c9dde07b8a68b472bd20efcbe3df78cff66492",
 			format: "json",
 		},
 		{
@@ -164,12 +164,12 @@ func TestSyft(t *testing.T) {
 		},
 		{
 			image:  "alpine",
-			digest: "alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
+			digest: "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
 			format: "cyclonedx",
 		},
 		{
-			image:  "nginx",
-			digest: "nginx@sha256:2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767",
+			image:  "mysql",
+			digest: "mysql@sha256:96439dd0d8d085cd90c8001be2c9dde07b8a68b472bd20efcbe3df78cff66492",
 			format: "cyclonedx",
 		},
 		{
@@ -177,21 +177,21 @@ func TestSyft(t *testing.T) {
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
 			format: "cyclonedx",
 		},
-		{
+		/*{
 			image:  "alpine",
-			digest: "alpine@sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
+			digest: "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
 			format: "spdxjson",
 		},
-		{
-			image:  "nginx",
-			digest: "nginx@sha256:2834dc507516af02784808c5f48b7cbe38b8ed5d0f4837f16e78d00deb7e7767",
+		/*{
+			image:  "mysql",
+			digest: "mysql@sha256:96439dd0d8d085cd90c8001be2c9dde07b8a68b472bd20efcbe3df78cff66492",
 			format: "spdxjson",
 		},
 		{
 			image:  "node",
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
 			format: "spdxjson",
-		},
+		},*/
 	}
 
 	for _, v := range tests {

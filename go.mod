@@ -3,7 +3,8 @@ module github.com/ckotzbauer/sbom-operator
 go 1.19
 
 require (
-	github.com/anchore/syft v0.60.2
+	github.com/anchore/stereoscope v0.0.0-20221006201143-d24c9d626b33
+	github.com/anchore/syft v0.62.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20221119111012-823db52bbd92
 	github.com/ckotzbauer/libstandard v0.0.0-20221101073032-3b97f5c3f6aa
 	github.com/google/uuid v1.3.0
@@ -32,7 +33,6 @@ require (
 	github.com/anchore/go-logger v0.0.0-20220728155337-03b66a5207d8 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 // indirect
-	github.com/anchore/stereoscope v0.0.0-20221006201143-d24c9d626b33 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.0.2 // indirect
 	github.com/cloudflare/circl v1.1.0 // indirect
@@ -97,7 +97,7 @@ require (
 	github.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect
 	github.com/sergi/go-diff v1.2.0 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/spdx/tools-golang v0.2.0 // indirect
+	github.com/spdx/tools-golang v0.3.1-0.20221108182156-8a01147e6342 // indirect
 	github.com/spf13/afero v1.8.2 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/sylabs/sif/v2 v2.8.1 // indirect
