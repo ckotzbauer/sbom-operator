@@ -82,6 +82,7 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 | `fallback-image-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
+| `registry-proxy` | `false` | `[]` | Proxy-Registry-Hosts to use. Flag can be used multiple times. Value-Mapping e.g. `docker.io=ghcr.io` |
 
 
 ### Example Helm-Config

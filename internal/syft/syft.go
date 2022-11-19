@@ -13,17 +13,22 @@ import (
 	"github.com/anchore/syft/syft/source"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/sirupsen/logrus"
+
+	parser "github.com/novln/docker-parser"
+	"github.com/novln/docker-parser/docker"
 )
 
 type Syft struct {
-	sbomFormat     string
-	resolveVersion func() string
+	sbomFormat       string
+	resolveVersion   func() string
+	proxyRegistryMap map[string]string
 }
 
-func New(sbomFormat string) *Syft {
+func New(sbomFormat string, proxyRegistryMap map[string]string) *Syft {
 	return &Syft{
-		sbomFormat:     sbomFormat,
-		resolveVersion: getSyftVersion,
+		sbomFormat:       sbomFormat,
+		resolveVersion:   getSyftVersion,
+		proxyRegistryMap: proxyRegistryMap,
 	}
 }
 
@@ -34,6 +39,10 @@ func (s Syft) WithVersion(version string) Syft {
 
 func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
+	err := s.ApplyProxyRegistry(img)
+	if err != nil {
+		return "", err
+	}
 
 	input, err := source.ParseInput(fmt.Sprintf("registry:%s", img.ImageID), "", false)
 	if err != nil {
@@ -41,7 +50,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	opts := &image.RegistryOptions{Credentials: convertSecrets(*img)}
+	opts := &image.RegistryOptions{Credentials: s.convertSecrets(*img)}
 	src, cleanup, err := source.New(*input, opts, nil)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
@@ -115,13 +124,20 @@ func getSyftVersion() string {
 	return ""
 }
 
-func convertSecrets(img oci.RegistryImage) []image.RegistryCredentials {
+func (s *Syft) convertSecrets(img oci.RegistryImage) []image.RegistryCredentials {
 	credentials := make([]image.RegistryCredentials, 0)
 	for _, secret := range img.PullSecrets {
 		cfg, err := oci.ResolveAuthConfigWithPullSecret(img, *secret)
 		if err != nil {
 			logrus.WithError(err).Warnf("image: %s, Read authentication configuration from secret: %s failed", img.ImageID, secret.SecretName)
 			continue
+		}
+
+		for registryToReplace, proxyRegistry := range s.proxyRegistryMap {
+			if cfg.ServerAddress == registryToReplace ||
+				(strings.Contains(cfg.ServerAddress, docker.DefaultHostname) && strings.Contains(registryToReplace, docker.DefaultHostname)) {
+				cfg.ServerAddress = proxyRegistry
+			}
 		}
 
 		credentials = append(credentials, image.RegistryCredentials{
@@ -133,4 +149,31 @@ func convertSecrets(img oci.RegistryImage) []image.RegistryCredentials {
 	}
 
 	return credentials
+}
+
+func (s *Syft) ApplyProxyRegistry(img *oci.RegistryImage) error {
+	imageRef, err := parser.Parse(img.ImageID)
+	if err != nil {
+		logrus.WithError(err).Errorf("Could not parse image %s", img.ImageID)
+		return err
+	}
+
+	for registryToReplace, proxyRegistry := range s.proxyRegistryMap {
+		if imageRef.Registry() == registryToReplace {
+			shortName := strings.TrimPrefix(imageRef.ShortName(), docker.DefaultRepoPrefix)
+			fullName := fmt.Sprintf("%s/%s", imageRef.Registry(), shortName)
+			if strings.HasPrefix(imageRef.Tag(), "sha256") {
+				fullName = fmt.Sprintf("%s@%s", fullName, imageRef.Tag())
+			} else {
+				fullName = fmt.Sprintf("%s:%s", fullName, imageRef.Tag())
+			}
+
+			img.ImageID = strings.ReplaceAll(fullName, registryToReplace, proxyRegistry)
+			img.Image = strings.ReplaceAll(img.Image, registryToReplace, proxyRegistry)
+			logrus.Debugf("Applied Registry-Proxy %s", img.ImageID)
+			break
+		}
+	}
+
+	return nil
 }
