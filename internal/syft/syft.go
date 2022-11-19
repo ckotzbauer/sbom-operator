@@ -2,11 +2,10 @@ package syft
 
 import (
 	"fmt"
-	"os"
-	"path/filepath"
 	"runtime/debug"
 	"strings"
 
+	"github.com/anchore/stereoscope/pkg/image"
 	"github.com/anchore/syft/syft"
 	"github.com/anchore/syft/syft/pkg/cataloger"
 	"github.com/anchore/syft/syft/sbom"
@@ -14,8 +13,6 @@ import (
 	"github.com/anchore/syft/syft/source"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/sirupsen/logrus"
-
-	parser "github.com/novln/docker-parser"
 )
 
 type Syft struct {
@@ -38,29 +35,16 @@ func (s Syft) WithVersion(version string) Syft {
 func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
-	fullRef, err := parser.Parse(img.ImageID)
+	input, err := source.ParseInput(fmt.Sprintf("registry:%s", img.ImageID), "", false)
 	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse imageID %s", img.ImageID)
+		logrus.WithError(fmt.Errorf("failed to parse input registry:%s: %w", img.ImageID, err)).Error("Input-Parsing failed")
 		return "", err
 	}
 
-	imagePath := "/tmp/" + strings.ReplaceAll(fullRef.Tag(), ":", "_") + ".tar.gz"
-	err = oci.SaveImage(imagePath, oci.RegistryImage{ImageID: img.ImageID, PullSecrets: img.PullSecrets})
-
+	opts := &image.RegistryOptions{Credentials: convertSecrets(*img)}
+	src, cleanup, err := source.New(*input, opts, nil)
 	if err != nil {
-		logrus.WithError(err).Error("Image-Pull failed")
-		return "", err
-	}
-
-	input, err := source.ParseInput(filepath.Join("docker-archive:", imagePath), "", false)
-	if err != nil {
-		logrus.WithError(fmt.Errorf("failed to parse input %s: %w", imagePath, err)).Error("Input-Parsing failed")
-		return "", err
-	}
-
-	src, cleanup, err := source.New(*input, nil, nil)
-	if err != nil {
-		logrus.WithError(fmt.Errorf("failed to construct source from input %s: %w", imagePath, err)).Error("Source-Creation failed")
+		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
 		return "", err
 	}
 
@@ -96,11 +80,6 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	err = os.Remove(imagePath)
-	if err != nil {
-		logrus.WithError(err).Warnf("Image %s could not be deleted", imagePath)
-	}
-
 	return string(b), nil
 }
 
@@ -134,4 +113,24 @@ func getSyftVersion() string {
 	}
 
 	return ""
+}
+
+func convertSecrets(img oci.RegistryImage) []image.RegistryCredentials {
+	credentials := make([]image.RegistryCredentials, 0)
+	for _, secret := range img.PullSecrets {
+		cfg, err := oci.ResolveAuthConfigWithPullSecret(img, *secret)
+		if err != nil {
+			logrus.WithError(err).Warnf("image: %s, Read authentication configuration from secret: %s failed", img.ImageID, secret.SecretName)
+			continue
+		}
+
+		credentials = append(credentials, image.RegistryCredentials{
+			Username:  cfg.Username,
+			Password:  cfg.Password,
+			Token:     cfg.RegistryToken,
+			Authority: cfg.ServerAddress,
+		})
+	}
+
+	return credentials
 }
