@@ -138,8 +138,8 @@ github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 h1:kDrYkTS
 github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7/go.mod h1:Blo6OgJNiYF41ufcgHKkbCKF2MDOMlrqhXv/ij6ocR4=
 github.com/anchore/stereoscope v0.0.0-20221006201143-d24c9d626b33 h1:Y+9aMJMTEMH+kJJFEaxqrF6X1t9CkjpWjOzaCo1q5vM=
 github.com/anchore/stereoscope v0.0.0-20221006201143-d24c9d626b33/go.mod h1:WOWtswyDxLkBnizq9LihYa9uw88r1FhBvJo7g//Ljcc=
-github.com/anchore/syft v0.62.0 h1:eKi0lfcQJVEte6rQSk2ZEU4CYwGWXkOaGtzu9apsfZM=
-github.com/anchore/syft v0.62.0/go.mod h1:aDR91I0K5EHp8oiE3DibOnOajF/A0N2tti46RNTiSrc=
+github.com/anchore/syft v0.62.1 h1:3pIZb+Bm5wBJaKbcy48uW6WrSPdXmtCxScnA9ra2HPQ=
+github.com/anchore/syft v0.62.1/go.mod h1:aDR91I0K5EHp8oiE3DibOnOajF/A0N2tti46RNTiSrc=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.4 h1:V7DdXeJtZscaqfNuAdSRuRFzuiKlHSC/Zh3zl9qY3JY=
@@ -213,8 +213,6 @@ github.com/cilium/ebpf v0.6.2/go.mod h1:4tRaxcgiL706VnOzHOdBlY8IEAIdxINsQBcU4xJJ
 github.com/cilium/ebpf v0.7.0/go.mod h1:/oI2+1shJiTGAMgl6/RgJr36Eo1jzrRcAWbcXO2usCA=
 github.com/ckotzbauer/libk8soci v0.0.0-20221119111012-823db52bbd92 h1:WiVFBrokfX1q6AsvtN9t6gGIHLaw1Dn66J1VymaPYpk=
 github.com/ckotzbauer/libk8soci v0.0.0-20221119111012-823db52bbd92/go.mod h1:0uopbd6IolLBBbUzO0pQpR1A3tDLEm3l0yRLjafSqGI=
-github.com/ckotzbauer/libstandard v0.0.0-20221101073032-3b97f5c3f6aa h1:pIIkcaOcz1BNWN8jwMQrc5SRlJSMJlfWSCENKrZnHIk=
-github.com/ckotzbauer/libstandard v0.0.0-20221101073032-3b97f5c3f6aa/go.mod h1:9W+F8tlDH+PqLUQmV+NA2awzzawEoaVfNg3nqwsluQI=
 github.com/ckotzbauer/libstandard v0.0.0-20221119162050-e04d84d8ddd7 h1:9etf47RrPLFdb7DgV8BP9d+cJ2BsDMC8uZL9M+Ztx9U=
 github.com/ckotzbauer/libstandard v0.0.0-20221119162050-e04d84d8ddd7/go.mod h1:9W+F8tlDH+PqLUQmV+NA2awzzawEoaVfNg3nqwsluQI=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
@@ -418,8 +416,6 @@ github.com/dustin/go-humanize v1.0.0/go.mod h1:HtrtbFcZ19U5GC7JDqmcUSB87Iq5E25Kn
 github.com/elazarl/goproxy v0.0.0-20180725130230-947c36da3153/go.mod h1:/Zj4wYkgs4iZTTu3o/KG3Itv/qCCa8VVMlb3i9OVuzc=
 github.com/emicklei/go-restful v0.0.0-20170410110728-ff4f55a20633/go.mod h1:otzb+WCGbkyDHkqmQmT5YD2WR4BBwUdeQoFo8l/7tVs=
 github.com/emicklei/go-restful v2.9.5+incompatible/go.mod h1:otzb+WCGbkyDHkqmQmT5YD2WR4BBwUdeQoFo8l/7tVs=
-github.com/emicklei/go-restful/v3 v3.10.0 h1:X4gma4HM7hFm6WMeAsTfqA0GOfdNoCzBIkHGoRLGXuM=
-github.com/emicklei/go-restful/v3 v3.10.0/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
 github.com/emicklei/go-restful/v3 v3.10.1 h1:rc42Y5YTp7Am7CS630D7JmhRjq4UlEUuEKfrDac4bSQ=
 github.com/emicklei/go-restful/v3 v3.10.1/go.mod h1:6n3XBCmQQb25CM2LCACGz8ukIrRry+4bhvbpWn3mrbc=
 github.com/emirpasic/gods v1.12.0 h1:QAUIPSaCu4G+POclxeqb3F+WPpdKqFGlw36+yOzGlrg=

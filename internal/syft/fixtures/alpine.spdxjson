@@ -3,14 +3,14 @@
  "dataLicense": "CC0-1.0",
  "SPDXID": "SPDXRef-DOCUMENT",
  "name": "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
- "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61-53390b5e-a888-481f-93e0-7ba89b689197",
+ "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61-8b4ae823-46e6-4466-9c95-a562563f44d3",
  "creationInfo": {
   "licenseListVersion": "3.18",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.62.0"
+   "Tool: syft-0.62.1"
   ],
-  "created": "2022-11-19T10:48:53Z",
+  "created": "2022-11-21T15:47:36Z",
   "comment": ""
  },
  "packages": [
@@ -1343,23 +1343,78 @@
  ],
  "relationships": [
   {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-297728d38e6c3b1e",
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-2af827ce4eb04c44",
    "relationshipType": "CONTAINS"
   },
   {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-6ee813d1f1b96196",
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-2fb145001610fece",
    "relationshipType": "CONTAINS"
   },
   {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-86286181da6fdaf1",
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-Package-apk-ssl-client-3e67765eb67607e0",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-5600d1c6edad3f99",
    "relationshipType": "CONTAINS"
   },
   {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-94c1e38e73ebdcfa",
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-5d597ac17bab796d",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-8737e8bacc56825b",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-8915f671c2566a43",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-8a6819249a7e7dc1",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-a5bf1607543b5b59",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-b64485e55e0c989f",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-be9f89b7fe9dfe59",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-ccd614acff73002",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relatedSpdxElement": "SPDXRef-fa8cba6e97a51f3f",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1369,7 +1424,7 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-82e81eb835f5928a",
+   "relatedSpdxElement": "SPDXRef-297728d38e6c3b1e",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1379,7 +1434,7 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-f570f9d78db7024c",
+   "relatedSpdxElement": "SPDXRef-420bcb99f42f9b4e",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1394,12 +1449,37 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
+   "relatedSpdxElement": "SPDXRef-6ee813d1f1b96196",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
+   "relatedSpdxElement": "SPDXRef-82e81eb835f5928a",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
+   "relatedSpdxElement": "SPDXRef-86286181da6fdaf1",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
+   "relatedSpdxElement": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
+   "relatedSpdxElement": "SPDXRef-94c1e38e73ebdcfa",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
    "relatedSpdxElement": "SPDXRef-f4005cf7c106187b",
    "relationshipType": "CONTAINS"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-f93a6627074e5146",
+   "relatedSpdxElement": "SPDXRef-f570f9d78db7024c",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1409,107 +1489,7 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-420bcb99f42f9b4e",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-221fe91bb61ea3b7",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-fdb291b1d0d63808",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-a21cea1ea334e33",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-4e3b122247ba4ffb",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-e62ee70c9a64f2d6",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-63a52656586953e0",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-e3e2f3630e2006e6",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-binsh-6dd813189bb733c8",
-   "relatedSpdxElement": "SPDXRef-a21cea1ea334e33",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-c31a39c4fccebddc",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-8a949d754445a148",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-36878a3c636cdc1c",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-94bea11cff9f19c",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-f20d3b4d133262e7",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-ab06f2cdb343e5ef",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-66d89f7c176eb3f0",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-a6604088a2ee324b",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-da92fc1d4e9d944b",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relatedSpdxElement": "SPDXRef-cce2bc161789055e",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-c60cba03839369ce",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-867f08ec2c8a6f71",
+   "relatedSpdxElement": "SPDXRef-f93a6627074e5146",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1519,7 +1499,17 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-9002ef3c8cc647b3",
+   "relatedSpdxElement": "SPDXRef-1b2d2e4d9cafb7a0",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-2304fbb06e0b918",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-33ae754a8456140a",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1529,7 +1519,7 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-5c52b5071103b8a7",
+   "relatedSpdxElement": "SPDXRef-3e6faedd4c78c48c",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1539,12 +1529,37 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-5c52b5071103b8a7",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-74ad339a5039a9ee",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-7fba3ded81003204",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
    "relatedSpdxElement": "SPDXRef-82960f74611c4c79",
    "relationshipType": "CONTAINS"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-3e6faedd4c78c48c",
+   "relatedSpdxElement": "SPDXRef-867f08ec2c8a6f71",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-8f43d3ae34ebf166",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
+   "relatedSpdxElement": "SPDXRef-9002ef3c8cc647b3",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1559,17 +1574,17 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-1b2d2e4d9cafb7a0",
+   "relatedSpdxElement": "SPDXRef-9da547fc150a5d17",
    "relationshipType": "CONTAINS"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-7fba3ded81003204",
+   "relatedSpdxElement": "SPDXRef-a997fb045b34b877",
    "relationshipType": "CONTAINS"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-ea87b9084cefdae6",
+   "relatedSpdxElement": "SPDXRef-c60cba03839369ce",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1584,102 +1599,7 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-a997fb045b34b877",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-33ae754a8456140a",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-74ad339a5039a9ee",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-8f43d3ae34ebf166",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-9da547fc150a5d17",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-keys-2b5e23d349b556cf",
-   "relatedSpdxElement": "SPDXRef-2304fbb06e0b918",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-ca-certificates-bundle-893d472df8998cbd",
-   "relatedSpdxElement": "SPDXRef-b3e5c4ebfc3fb889",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-2af827ce4eb04c44",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-a5bf1607543b5b59",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-ccd614acff73002",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-5d597ac17bab796d",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-2fb145001610fece",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-8915f671c2566a43",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-be9f89b7fe9dfe59",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-fa8cba6e97a51f3f",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-b64485e55e0c989f",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-5600d1c6edad3f99",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-8a6819249a7e7dc1",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-8737e8bacc56825b",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
-   "relatedSpdxElement": "SPDXRef-3849cef6b5fb9ae5",
+   "relatedSpdxElement": "SPDXRef-ea87b9084cefdae6",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1688,9 +1608,184 @@
    "relationshipType": "CONTAINS"
   },
   {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-binsh-6dd813189bb733c8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-binsh-6dd813189bb733c8",
+   "relatedSpdxElement": "SPDXRef-a21cea1ea334e33",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-4e3b122247ba4ffb",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-63a52656586953e0",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-Package-apk-busybox-binsh-6dd813189bb733c8",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-a21cea1ea334e33",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-e3e2f3630e2006e6",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-e62ee70c9a64f2d6",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-fdb291b1d0d63808",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
+   "relatedSpdxElement": "SPDXRef-3849cef6b5fb9ae5",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-ssl-client-3e67765eb67607e0",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-ca-certificates-bundle-893d472df8998cbd",
+   "relatedSpdxElement": "SPDXRef-b3e5c4ebfc3fb889",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-ca-certificates-bundle-893d472df8998cbd",
+   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-36878a3c636cdc1c",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-66d89f7c176eb3f0",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-8a949d754445a148",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-94bea11cff9f19c",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-a6604088a2ee324b",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-ab06f2cdb343e5ef",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-c31a39c4fccebddc",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-cce2bc161789055e",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-da92fc1d4e9d944b",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
+   "relatedSpdxElement": "SPDXRef-f20d3b4d133262e7",
+   "relationshipType": "CONTAINS"
+  },
+  {
    "spdxElementId": "SPDXRef-Package-apk-zlib-94014313cfcd2b71",
    "relatedSpdxElement": "SPDXRef-33c427473a67bcab",
    "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-zlib-94014313cfcd2b71",
+   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-221fe91bb61ea3b7",
+   "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-ssl-client-3e67765eb67607e0",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-zlib-94014313cfcd2b71",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-scanelf-e903138d19e85b80",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
+   "relatedSpdxElement": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
+   "relationshipType": "DEPENDENCY_OF"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
@@ -1708,13 +1803,28 @@
    "relationshipType": "CONTAINS"
   },
   {
+   "spdxElementId": "SPDXRef-Package-apk-scanelf-e903138d19e85b80",
+   "relatedSpdxElement": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
+   "relatedSpdxElement": "SPDXRef-2fd74bf1d1727fee",
+   "relationshipType": "CONTAINS"
+  },
+  {
    "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
    "relatedSpdxElement": "SPDXRef-3f46a173249bb671",
    "relationshipType": "CONTAINS"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
-   "relatedSpdxElement": "SPDXRef-ecbdb7fee3bb5035",
+   "relatedSpdxElement": "SPDXRef-Package-apk-libc-utils-8126b232e2d3c608",
+   "relationshipType": "DEPENDENCY_OF"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
+   "relatedSpdxElement": "SPDXRef-a07d64adfc747525",
    "relationshipType": "CONTAINS"
   },
   {
@@ -1724,118 +1834,8 @@
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
-   "relatedSpdxElement": "SPDXRef-2fd74bf1d1727fee",
+   "relatedSpdxElement": "SPDXRef-ecbdb7fee3bb5035",
    "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
-   "relatedSpdxElement": "SPDXRef-a07d64adfc747525",
-   "relationshipType": "CONTAINS"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
-   "relatedSpdxElement": "SPDXRef-Package-apk-busybox-binsh-6dd813189bb733c8",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-alpine-baselayout-data-291d1267b40d636f",
-   "relatedSpdxElement": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-busybox-binsh-6dd813189bb733c8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-alpine-baselayout-92b19c7750fb559d",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-ssl-client-3e67765eb67607e0",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-Package-apk-ssl-client-3e67765eb67607e0",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-ssl-client-3e67765eb67607e0",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-zlib-94014313cfcd2b71",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-ca-certificates-bundle-893d472df8998cbd",
-   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libcrypto3-20fd21bab4a9be13",
-   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-libssl3-7ae494d499484cc8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-zlib-94014313cfcd2b71",
-   "relatedSpdxElement": "SPDXRef-Package-apk-apk-tools-e5f757b0df1f62bc",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-scanelf-e903138d19e85b80",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-scanelf-e903138d19e85b80",
-   "relatedSpdxElement": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-d9700f02cf26e8b8",
-   "relatedSpdxElement": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
-   "relationshipType": "DEPENDENCY_OF"
-  },
-  {
-   "spdxElementId": "SPDXRef-Package-apk-musl-utils-f71ecf5267e6c37b",
-   "relatedSpdxElement": "SPDXRef-Package-apk-libc-utils-8126b232e2d3c608",
-   "relationshipType": "DEPENDENCY_OF"
   }
  ]
 }
