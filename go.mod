@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/anchore/stereoscope v0.0.0-20221130153459-3b80d983223f
 	github.com/anchore/syft v0.62.1
-	github.com/ckotzbauer/libk8soci v0.0.0-20221119111012-823db52bbd92
+	github.com/ckotzbauer/libk8soci v0.0.0-20221201063831-8818bf9cd479
 	github.com/ckotzbauer/libstandard v0.0.0-20221201063231-f92ba673952d
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
