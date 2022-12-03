@@ -9,7 +9,7 @@ require (
 	github.com/ckotzbauer/libstandard v0.0.0-20221119162050-e04d84d8ddd7
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
-	github.com/nscuro/dtrack-client v0.6.0
+	github.com/nscuro/dtrack-client v0.7.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.0
 	github.com/spf13/cobra v1.6.1
