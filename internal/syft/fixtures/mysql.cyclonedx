@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:0c37d1b9-5883-4555-9f61-b574de3063a0" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:669f13fa-9256-491d-bdbb-9732df286324" version="1">
   <metadata>
-    <timestamp>2022-11-21T16:49:02+01:00</timestamp>
+    <timestamp>2022-12-03T12:00:51+01:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.62.1</version>
+        <version>0.62.3</version>
       </tool>
     </tools>
     <component bom-ref="ff873208b8358031" type="container">
@@ -2704,6 +2704,18 @@
         <property name="syft:location:2:path">/usr/lib/mysqlsh/lib/python3.9/site-packages/pycparser-2.21.dist-info/direct_url.json</property>
         <property name="syft:location:3:layerID">sha256:8848f79a3581bf86a7e56316dabb50874edc82861eded7258656f43d55aecb00</property>
         <property name="syft:location:3:path">/usr/lib/mysqlsh/lib/python3.9/site-packages/pycparser-2.21.dist-info/top_level.txt</property>
+      </properties>
+    </component>
+    <component bom-ref="ec4390d0c580e6b" type="library">
+      <name>python</name>
+      <version>3.9.13</version>
+      <cpe>cpe:2.3:a:python:python:3.9.13:*:*:*:*:*:*:*</cpe>
+      <properties>
+        <property name="syft:package:language">binary</property>
+        <property name="syft:package:metadataType">BinaryMetadata</property>
+        <property name="syft:package:type">binary</property>
+        <property name="syft:location:0:layerID">sha256:8848f79a3581bf86a7e56316dabb50874edc82861eded7258656f43d55aecb00</property>
+        <property name="syft:location:0:path">/usr/lib64/libpython3.9.so.1.0</property>
       </properties>
     </component>
     <component bom-ref="pkg:pypi/python-dateutil@2.8.2?package-id=a3914181c2fbe0c5" type="library">
