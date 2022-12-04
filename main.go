@@ -81,6 +81,8 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciRegistry, "", "OCI-Registry")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciUser, "", "OCI-User")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
+
+	rootCmd.PersistentFlags().MarkDeprecated(internal.ConfigKeyGitFallbackClone, "'multi_ack' is supported by default. The flag doesn't have any effect and will be removed in 0.25.0")
 	return rootCmd
 }
 

@@ -14,7 +14,6 @@ type Config struct {
 	GitPassword             string   `yaml:"gitPassword" env:"SBOM_GIT_PASSWORD" flag:"git-password"`
 	GitAuthorName           string   `yaml:"gitAuthorName" env:"SBOM_GIT_AUTHOR_NAME" flag:"git-author-name"`
 	GitAuthorEmail          string   `yaml:"gitAuthorEmail" env:"SBOM_GIT_AUTHOR_EMAIL" flag:"git-author-email"`
-	GitFallbackClone        bool     `yaml:"gitFallbackClone" env:"SBOM_GIT_FALLBACK_CLONE" flag:"git-fallback-clone"`
 	GitHubAppId             string   `yaml:"githubAppId" env:"SBOM_GITHUB_APP_ID" flag:"github-app-id"`
 	GitHubAppInstallationId string   `yaml:"githubAppInstallationId" env:"SBOM_GITHUB_APP_INSTALLATION_ID" flag:"github-app-installation-id"`
 	GitHubPrivateKey        string   `yaml:"githubAppPrivateKey" env:"SBOM_GITHUB_APP_PRIVATE_KEY"`

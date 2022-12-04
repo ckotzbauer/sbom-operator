@@ -124,11 +124,10 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			password := internal.OperatorConfig.GitPassword
 			name := internal.OperatorConfig.GitAuthorName
 			email := internal.OperatorConfig.GitAuthorEmail
-			fallbackClone := internal.OperatorConfig.GitFallbackClone
 			githubAppId := internal.OperatorConfig.GitHubAppId
 			githubAppInstallationId := internal.OperatorConfig.GitHubAppInstallationId
 			githubAppPrivateKey := internal.OperatorConfig.GitHubPrivateKey
-			t := git.NewGitTarget(workingTree, workPath, repository, branch, name, email, token, userName, password, githubAppId, githubAppInstallationId, githubAppPrivateKey, format, fallbackClone)
+			t := git.NewGitTarget(workingTree, workPath, repository, branch, name, email, token, userName, password, githubAppId, githubAppInstallationId, githubAppPrivateKey, format)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "dtrack" {
