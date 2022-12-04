@@ -1079,31 +1079,6 @@
    }
   },
   {
-   "id": "d49bb0510b7c7ca7",
-   "name": "busybox",
-   "version": "1.35.0",
-   "type": "binary",
-   "foundBy": "",
-   "locations": [
-    {
-     "path": "/bin/busybox",
-     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
-    }
-   ],
-   "licenses": [],
-   "language": "binary",
-   "cpes": [
-    "cpe:2.3:a:busybox:busybox:1.35.0:*:*:*:*:*:*:*"
-   ],
-   "purl": "",
-   "metadataType": "BinaryMetadata",
-   "metadata": {
-    "classifier": "busybox-binary",
-    "realPath": "/bin/busybox",
-    "virtualPath": "/bin/busybox"
-   }
-  },
-  {
    "id": "757a346b43f898cc",
    "name": "busybox",
    "version": "1.35.0-r27",
@@ -2428,16 +2403,6 @@
   },
   {
    "parent": "757a346b43f898cc",
-   "child": "d49bb0510b7c7ca7",
-   "type": "ownership-by-file-overlap",
-   "metadata": {
-    "files": [
-     "/bin/busybox"
-    ]
-   }
-  },
-  {
-   "parent": "757a346b43f898cc",
    "child": "e3e2f3630e2006e6",
    "type": "contains"
   },
@@ -2589,11 +2554,6 @@
   {
    "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
    "child": "94014313cfcd2b71",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "d49bb0510b7c7ca7",
    "type": "contains"
   },
   {
@@ -3294,7 +3254,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.62.3",
+  "version": "0.62.1",
   "configuration": {
    "configPath": "",
    "verbosity": 0,
