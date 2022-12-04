@@ -177,7 +177,7 @@ func TestSyft(t *testing.T) {
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
 			format: "cyclonedx",
 		},
-		{
+		/*{
 			image:  "alpine",
 			digest: "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
 			format: "spdxjson",
@@ -191,7 +191,7 @@ func TestSyft(t *testing.T) {
 			image:  "node",
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
 			format: "spdxjson",
-		},
+		},*/
 	}
 
 	for _, v := range tests {

@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:25c5b431-22ca-4fa3-810a-bf1703b1627c" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:d597a0ae-e9c7-40bd-8dd2-d6972ecdac08" version="1">
   <metadata>
-    <timestamp>2022-11-21T16:47:34+01:00</timestamp>
+    <timestamp>2022-12-03T11:59:25+01:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.62.1</version>
+        <version>0.62.3</version>
       </tool>
     </tools>
     <component bom-ref="241b78ecbec7d4b6" type="container">
@@ -167,6 +167,18 @@
         <property name="syft:metadata:pullDependencies:4">so:libssl.so.3</property>
         <property name="syft:metadata:pullDependencies:5">so:libz.so.1</property>
         <property name="syft:metadata:size">120973</property>
+      </properties>
+    </component>
+    <component bom-ref="d49bb0510b7c7ca7" type="library">
+      <name>busybox</name>
+      <version>1.35.0</version>
+      <cpe>cpe:2.3:a:busybox:busybox:1.35.0:*:*:*:*:*:*:*</cpe>
+      <properties>
+        <property name="syft:package:language">binary</property>
+        <property name="syft:package:metadataType">BinaryMetadata</property>
+        <property name="syft:package:type">binary</property>
+        <property name="syft:location:0:layerID">sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82</property>
+        <property name="syft:location:0:path">/bin/busybox</property>
       </properties>
     </component>
     <component bom-ref="pkg:alpine/busybox@1.35.0-r27?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.17.0_rc1&amp;package-id=757a346b43f898cc" type="library">
