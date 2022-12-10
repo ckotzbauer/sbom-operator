@@ -593,6 +593,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20221204131059-13ed4e35ba04 h1:o5URBl5xeY
 github.com/ckotzbauer/libk8soci v0.0.0-20221204131059-13ed4e35ba04/go.mod h1:oBoqEs985cklIGkLoACIG2bVGuYnS1eiG4jp/8UbXV4=
 github.com/ckotzbauer/libk8soci v0.0.0-20221208070827-883addd2e374 h1:Q6G/kAO12lUBCzb/XKuF+eGmn0uq5B4d0Y9HItP+LU8=
 github.com/ckotzbauer/libk8soci v0.0.0-20221208070827-883addd2e374/go.mod h1:HjI1tBuhA+fQKwb4BcCrm59sYgk7/BOdq3g1kVS1KXk=
+github.com/ckotzbauer/libk8soci v0.0.0-20221210081318-b9bdf7978b15 h1:kIHiuxwaw46DDGSZ3CU2hNe+eTd3N5x1lD0AicDuOPg=
+github.com/ckotzbauer/libk8soci v0.0.0-20221210081318-b9bdf7978b15/go.mod h1:vW4f7xJ95onuG52B3OyUZ2P6vArmEcEBP4NpD07FZdU=
 github.com/ckotzbauer/libstandard v0.0.0-20221201063231-f92ba673952d h1:Ni+bSgRD2ZcaXOaNpqtzfW9/1OlGE0RBPWv5BKp8Ot4=
 github.com/ckotzbauer/libstandard v0.0.0-20221201063231-f92ba673952d/go.mod h1:9W+F8tlDH+PqLUQmV+NA2awzzawEoaVfNg3nqwsluQI=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
