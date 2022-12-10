@@ -1,3 +1,52 @@
+## Version 0.23.0 (2022-12-10)
+
+### Features and improvements
+
+* [[`437dfce6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/437dfce6)] - **feat**: add initial registry-proxy implementation
+
+### Bug fixes
+
+* [[`9ab17429`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9ab17429)] - **fix**: kubernetes update
+* [[`68148a32`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/68148a32)] - **fix**: clarify usge
+* [[`54932bad`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/54932bad)] - **fix**: update to syft@0.62.1 to fix spdx ordering
+
+### Cleanup and refactoring
+
+* [[`c107f84e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c107f84e)] - **cleanup**: deprecate git-fallback-clone
+
+### Build and testing
+
+* [[`1b160795`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1b160795)] - **test**: check error
+* [[`4c74f0d3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4c74f0d3)] - **test**: deactivate spdxjson tests
+
+### Documentation
+
+* [[`070735d4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/070735d4)] - **doc**: removed link
+* [[`f928128d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f928128d)] - **doc**: added version
+
+### Dependency updates
+
+* [[`725ba445`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/725ba445)] - **deps**: update to go@1.19.4
+* [[`40c47636`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/40c47636)] - **deps**: update kubernetes versions to v0.26.0
+* [[`6dd7f358`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6dd7f358)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 883addd
+* [[`73d8c099`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/73d8c099)] - **deps**: update sigstore&#x2F;cosign-installer digest to b6757d8
+* [[`ea75ea98`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ea75ea98)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 732eee0
+* [[`3a4109cb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3a4109cb)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to c5ff155
+* [[`4ed3af56`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4ed3af56)] - **deps**: update module github.com&#x2F;pjbgf&#x2F;sha1cd to v0.2.3
+* [[`fb7b3b20`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fb7b3b20)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 6dcec33
+* [[`2d7d94e9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2d7d94e9)] - **deps**: rollback to syft@0.62.1
+* [[`47092aad`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/47092aad)] - **deps**: updated libk8soci with git multi_ack support
+* [[`a57737b7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a57737b7)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.62.3
+* [[`93dec8df`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/93dec8df)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 8818bf9
+* [[`a4f1e9aa`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a4f1e9aa)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to 3b80d98
+* [[`12fbd852`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/12fbd852)] - **deps**: update module github.com&#x2F;nscuro&#x2F;dtrack-client to v0.7.0
+* [[`16d6fc87`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/16d6fc87)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to f92ba67
+* [[`49816283`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/49816283)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.9.0
+* [[`fc4f7597`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fc4f7597)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 6ab00d0
+* [[`81245dd9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/81245dd9)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to e04d84d
+* [[`0d2bced8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0d2bced8)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.10.1
+
+
 ## Version 0.22.0 (2022-11-19)
 
 ### Features and improvements
