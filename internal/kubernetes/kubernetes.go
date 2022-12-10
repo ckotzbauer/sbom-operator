@@ -40,8 +40,12 @@ func NewClient(ignoreAnnotations bool, fallbackPullSecretName string) *KubeClien
 
 func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cache.ResourceEventHandlerFuncs) (cache.SharedIndexInformer, error) {
 	informer := client.Client.CreatePodInformer(podLabelSelector)
-	informer.AddEventHandler(handler)
-	err := informer.SetTransform(func(x interface{}) (interface{}, error) {
+	_, err := informer.AddEventHandler(handler)
+	if err != nil {
+		return nil, err
+	}
+
+	err = informer.SetTransform(func(x interface{}) (interface{}, error) {
 		pod := x.(*corev1.Pod).DeepCopy()
 		logrus.Tracef("Transform %s/%s", pod.Namespace, pod.Name)
 

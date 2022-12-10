@@ -18,8 +18,8 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| main            | v0.25.4                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.23.0          | v0.25.4                             | 1.24.x, 1.25.x, 1.26.x            |
+| main            | v0.26.0                             | 1.25.x, 1.26.x, 1.27.x            |
+| 0.23.0          | v0.26.0                             | 1.25.x, 1.26.x, 1.27.x            |
 | 0.22.0          | v0.25.4                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.21.0          | v0.25.3                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.20.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
