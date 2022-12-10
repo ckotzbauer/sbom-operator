@@ -167,7 +167,6 @@ The structure is basically `<git-path>/<registry-server>/<image-path>/<image-dig
 The file-extension may differ when another output-format is configured. 
 You can use a token-based authentication (e.g. a PAT for GitHub) with `--git-access-token`, BasicAuth with username and password (`--git-username`, `--git-password`) or
 Github App Authentication (`--github-app-id`, `--github-app-installation-id`, env: `SBOM_GITHUB_APP_PRIVATE_KEY`) The private-key has to be Base64 encoded. 
-See [this issue](https://github.com/go-git/go-git/issues/64) for more details.
 
 **Note**: It is required, that the specified branch of the repo is fully initialized. There's no logic which creates a non-existent branch. Just commit a `README.md`
 or something similar, to make things work.
