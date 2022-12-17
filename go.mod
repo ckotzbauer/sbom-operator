@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/anchore/stereoscope v0.0.0-20221208011002-c5ff155d72f1
 	github.com/anchore/syft v0.62.1
-	github.com/ckotzbauer/libk8soci v0.0.0-20221211134342-7873cfef2ecf
+	github.com/ckotzbauer/libk8soci v0.0.0-20221216164241-860d8e82111e
 	github.com/ckotzbauer/libstandard v0.0.0-20221211123229-8434bdf8eece
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
@@ -38,7 +38,7 @@ require (
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/containerd/containerd v1.6.12 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.12.1 // indirect
-	github.com/docker/cli v20.10.21+incompatible // indirect
+	github.com/docker/cli v20.10.22+incompatible // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
 	github.com/docker/docker v20.10.20+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect

@@ -599,6 +599,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20221211103223-73d18aa0aead h1:2C3zmwQh8E
 github.com/ckotzbauer/libk8soci v0.0.0-20221211103223-73d18aa0aead/go.mod h1:vW4f7xJ95onuG52B3OyUZ2P6vArmEcEBP4NpD07FZdU=
 github.com/ckotzbauer/libk8soci v0.0.0-20221211134342-7873cfef2ecf h1:5uI+rspUKZddMvI4SVO+cjfQ1Ig1N8tsRqy9ZLIOuRg=
 github.com/ckotzbauer/libk8soci v0.0.0-20221211134342-7873cfef2ecf/go.mod h1:HsabW2atrIMkdauZLqBpggLRkdODN3NrggNAcrc3bbo=
+github.com/ckotzbauer/libk8soci v0.0.0-20221216164241-860d8e82111e h1:gHdtP9pOrkrhn98baDTnScVPF/cqXl863eEfW4qeIbI=
+github.com/ckotzbauer/libk8soci v0.0.0-20221216164241-860d8e82111e/go.mod h1:iCyFGATOCWbtM7ompmb6194mK8Ye2u2pcpxOrande9A=
 github.com/ckotzbauer/libstandard v0.0.0-20221201063231-f92ba673952d h1:Ni+bSgRD2ZcaXOaNpqtzfW9/1OlGE0RBPWv5BKp8Ot4=
 github.com/ckotzbauer/libstandard v0.0.0-20221201063231-f92ba673952d/go.mod h1:9W+F8tlDH+PqLUQmV+NA2awzzawEoaVfNg3nqwsluQI=
 github.com/ckotzbauer/libstandard v0.0.0-20221210175000-b84c49f68bb0 h1:w1zgAMFe/OrBK0C9HsFTM7xXZFgDBqgU8YzlLd4XfdM=
@@ -782,6 +784,8 @@ github.com/docker/cli v20.10.12+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hH
 github.com/docker/cli v20.10.20+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v20.10.21+incompatible h1:qVkgyYUnOLQ98LtXBrwd/duVqPT2X4SHndOuGsfwyhU=
 github.com/docker/cli v20.10.21+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v20.10.22+incompatible h1:0E7UqWPcn4SlvLImMHyh6xwyNRUGdPxhstpHeh0bFL0=
+github.com/docker/cli v20.10.22+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v0.0.0-20190905152932-14b96e55d84c/go.mod h1:0+TTO4EOBfRPhZXAeF1Vu+W3hHZ8eLp8PgKVZlcvtFY=
 github.com/docker/distribution v2.7.1-0.20190205005809-0d3efadf0154+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/distribution v2.7.1+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
