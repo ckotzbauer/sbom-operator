@@ -43,7 +43,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
-        uses: actions/checkout@bf085276cecdb0cc76fbbe0687a5a0e786646936
+        uses: actions/checkout@3ba5ee6fac7e0e30e2ea884e236f282d3a775891
         with:
           fetch-depth: 0
           token: ${{ secrets.pat }}
