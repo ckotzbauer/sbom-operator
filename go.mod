@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/stereoscope v0.0.0-20221208011002-c5ff155d72f1
-	github.com/anchore/syft v0.62.1
+	github.com/anchore/syft v0.63.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20221216164241-860d8e82111e
 	github.com/ckotzbauer/libstandard v0.0.0-20221211123229-8434bdf8eece
 	github.com/google/uuid v1.3.0
@@ -21,7 +21,7 @@ require (
 )
 
 require (
-	github.com/CycloneDX/cyclonedx-go v0.5.2 // indirect
+	github.com/CycloneDX/cyclonedx-go v0.7.0 // indirect
 	github.com/DataDog/zstd v1.5.2 // indirect
 	github.com/Masterminds/goutils v1.1.1 // indirect
 	github.com/Masterminds/semver/v3 v3.1.1 // indirect
