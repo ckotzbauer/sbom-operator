@@ -1,5 +1,5 @@
 FROM codenotary/cas:1.0.3 as cas
-FROM docker:20.10.21-dind
+FROM docker:20.10.22-dind
 
 COPY --from=cas /bin/cas /bin/cas
 COPY entrypoint.sh /
