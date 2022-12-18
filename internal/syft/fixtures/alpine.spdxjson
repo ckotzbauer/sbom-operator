@@ -3,14 +3,14 @@
  "dataLicense": "CC0-1.0",
  "SPDXID": "SPDXRef-DOCUMENT",
  "name": "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
- "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61-9961634b-0f2a-4967-842d-cdc010da5d7c",
+ "documentNamespace": "https://anchore.com/syft/image/alpine@sha256-36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61-3874c109-19d1-4dee-9498-f1543a27a343",
  "creationInfo": {
-  "licenseListVersion": "3.18",
+  "licenseListVersion": "3.19",
   "creators": [
    "Organization: Anchore, Inc",
-   "Tool: syft-0.62.1"
+   "Tool: syft-0.63.0"
   ],
-  "created": "2022-12-04T15:01:51Z",
+  "created": "2022-12-18T09:29:40Z",
   "comment": ""
  },
  "packages": [
@@ -258,6 +258,24 @@
      "referenceCategory": "PACKAGE-MANAGER",
      "referenceType": "purl",
      "referenceLocator": "pkg:alpine/apk-tools@2.12.10-r1?arch=x86_64&upstream=apk-tools&distro=alpine-3.17.0_rc1",
+     "comment": ""
+    }
+   ]
+  },
+  {
+   "name": "busybox",
+   "SPDXID": "SPDXRef-Package-binary-busybox-d49bb0510b7c7ca7",
+   "versionInfo": "1.35.0",
+   "downloadLocation": "NOASSERTION",
+   "sourceInfo": "acquired package info from the following paths: /bin/busybox",
+   "licenseConcluded": "NONE",
+   "licenseDeclared": "NONE",
+   "copyrightText": "NOASSERTION",
+   "externalRefs": [
+    {
+     "referenceCategory": "SECURITY",
+     "referenceType": "cpe23Type",
+     "referenceLocator": "cpe:2.3:a:busybox:busybox:1.35.0:*:*:*:*:*:*:*",
      "comment": ""
     }
    ]
@@ -1636,6 +1654,12 @@
    "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
    "relatedSpdxElement": "SPDXRef-a21cea1ea334e33",
    "relationshipType": "CONTAINS"
+  },
+  {
+   "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",
+   "relatedSpdxElement": "SPDXRef-Package-binary-busybox-d49bb0510b7c7ca7",
+   "relationshipType": "OTHER",
+   "comment": "ownership-by-file-overlap: indicates that the parent package claims ownership of a child package since the parent metadata indicates overlap with a location that a cataloger found the child package by"
   },
   {
    "spdxElementId": "SPDXRef-Package-apk-busybox-757a346b43f898cc",

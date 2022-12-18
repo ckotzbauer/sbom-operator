@@ -159,8 +159,8 @@ func TestSyft(t *testing.T) {
 			format: "json",
 		},
 		{
-			image:  "mysql",
-			digest: "mysql@sha256:96439dd0d8d085cd90c8001be2c9dde07b8a68b472bd20efcbe3df78cff66492",
+			image:  "redis",
+			digest: "redis@sha256:fdaa0102e0c66802845aa5c961cb89a091a188056811802383660cd9e10889da",
 			format: "json",
 		},
 		{
@@ -174,8 +174,8 @@ func TestSyft(t *testing.T) {
 			format: "cyclonedx",
 		},
 		{
-			image:  "mysql",
-			digest: "mysql@sha256:96439dd0d8d085cd90c8001be2c9dde07b8a68b472bd20efcbe3df78cff66492",
+			image:  "redis",
+			digest: "redis@sha256:fdaa0102e0c66802845aa5c961cb89a091a188056811802383660cd9e10889da",
 			format: "cyclonedx",
 		},
 		{
@@ -189,8 +189,8 @@ func TestSyft(t *testing.T) {
 			format: "spdxjson",
 		},
 		{
-			image:  "mysql",
-			digest: "mysql@sha256:96439dd0d8d085cd90c8001be2c9dde07b8a68b472bd20efcbe3df78cff66492",
+			image:  "redis",
+			digest: "redis@sha256:fdaa0102e0c66802845aa5c961cb89a091a188056811802383660cd9e10889da",
 			format: "spdxjson",
 		},
 		{

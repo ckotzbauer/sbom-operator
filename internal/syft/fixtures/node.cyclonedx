@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:478e4781-0667-44df-85eb-855c9be009e9" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:f0671830-9e37-40a5-b1ef-70820eca3146" version="1">
   <metadata>
-    <timestamp>2022-12-04T16:04:18+01:00</timestamp>
+    <timestamp>2022-12-18T10:32:22+01:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.62.1</version>
+        <version>0.63.0</version>
       </tool>
     </tools>
     <component bom-ref="36cc3d123ca150cc" type="container">
@@ -6829,12 +6829,13 @@
         <property name="syft:location:0:path">/usr/local/lib/node_modules/npm/node_modules/negotiator/package.json</property>
       </properties>
     </component>
-    <component bom-ref="2f43fea7157cf4ce" type="library">
+    <component bom-ref="pkg:generic/node@16.13.2?package-id=e66b7829ad2d00a0" type="library">
       <name>node</name>
       <version>16.13.2</version>
       <cpe>cpe:2.3:a:nodejs:node.js:16.13.2:*:*:*:*:*:*:*</cpe>
+      <purl>pkg:generic/node@16.13.2</purl>
       <properties>
-        <property name="syft:package:foundBy">node-binary-cataloger</property>
+        <property name="syft:package:foundBy">binary-cataloger</property>
         <property name="syft:package:language">javascript</property>
         <property name="syft:package:metadataType">BinaryMetadata</property>
         <property name="syft:package:type">binary</property>
