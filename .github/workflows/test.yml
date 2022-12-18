@@ -6,79 +6,37 @@ on:
     branches:
       - "**"
 
+env:
+  REGISTRY_USER: ckotzbauer
+  REGISTRY_TOKEN: ${{ secrets.GHCR_PASSWORD }}
+  IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
+
 jobs:
   build-image:
-    runs-on: ubuntu-latest
-    steps:
-      - name: Install Go
-        uses: actions/setup-go@v3
-        with:
-          go-version: '1.19.4'
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-build-test.yml@0.29.0
+    with:
+      install-go: true
+      go-version: "1.19.4"
+      install-goreleaser: true
+      install-cosign: true
+      build-commands: make build
+      test-commands: |
+        if [ "$IS_FORK" != true ]; then
+          DATE="$(date +%Y%m%d%H%M%S)"
+          docker login -u "$REGISTRY_USER" -p "$REGISTRY_TOKEN" ghcr.io
+          docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
+          docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
+          DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
+          syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
 
-      - name: Set up QEMU
-        id: qemu
-        uses: docker/setup-qemu-action@v2
+          TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
 
-      - name: Set up Docker Buildx
-        id: buildx
-        uses: docker/setup-buildx-action@v2
-
-      - name: Setup Cosign
-        uses: sigstore/cosign-installer@b6757d8360bb6b9803c38b68e8cb7442baaf7eb5
-
-      - name: Setup Syft
-        uses: ckotzbauer/actions-toolkit/setup-syft@0.27.0
-
-      - name: Checkout
-        uses: actions/checkout@v3
-
-      - name: Install GoReleaser
-        uses: goreleaser/goreleaser-action@v4
-        with:
-          version: "v1.9.2"
-          install-only: true
-
-      - name: Build binary
-        run: make build
-
-      - name: Unit tests
-        env:
-          REGISTRY_USER: ckotzbauer
-          REGISTRY_TOKEN: ${{ secrets.GHCR_PASSWORD }}
-          IS_FORK: ${{ github.event.pull_request.head.repo.full_name != github.repository }}
-        run: |
-          if [ "$IS_FORK" != true ]; then
-            DATE="$(date +%Y%m%d%H%M%S)"
-            docker login -u "$REGISTRY_USER" -p "$REGISTRY_TOKEN" ghcr.io
-            docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
-            docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
-            DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
-            syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
-
-            TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
-
-            COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
-          else
-            go test $(go list ./... | grep -v internal/target/oci) -coverprofile cover.out
-          fi
-
-      - uses: codecov/codecov-action@v3
-        with:
-          files: cover.out
-
-      - name: Build image
-        uses: docker/build-push-action@v3
-        with:
-          context: .
-          push: false
-          load: true
-          platforms: linux/amd64
-          tags: |
-            ghcr.io/ckotzbauer/sbom-operator:latest
-
-      - name: Container scan
-        uses: ckotzbauer/actions-toolkit/grype@0.27.0
-        with:
-          scan-target: ghcr.io/ckotzbauer/sbom-operator
-          fail-on: "medium"
-          config-file: ".github/grype.yaml"
+          COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
+        else
+          go test $(go list ./... | grep -v internal/target/oci) -coverprofile cover.out
+        fi
+      report-coverage: true
+      coverage-file: cover.out
+      build-image: true
+      docker-tag: ghcr.io/ckotzbauer/sbom-operator:latest
+      scan-image: true
