@@ -28467,11 +28467,11 @@
    }
   },
   {
-   "id": "2f43fea7157cf4ce",
+   "id": "e66b7829ad2d00a0",
    "name": "node",
    "version": "16.13.2",
    "type": "binary",
-   "foundBy": "node-binary-cataloger",
+   "foundBy": "binary-cataloger",
    "locations": [
     {
      "path": "/usr/local/bin/node",
@@ -28485,10 +28485,10 @@
     "cpe:2.3:a:node:node:16.13.2:*:*:*:*:*:*:*",
     "cpe:2.3:a:*:node:16.13.2:*:*:*:*:*:*:*"
    ],
-   "purl": "",
+   "purl": "pkg:generic/node@16.13.2",
    "metadataType": "BinaryMetadata",
    "metadata": {
-    "classifier": "node.js",
+    "classifier": "nodejs-binary",
     "realPath": "/usr/local/bin/node",
     "virtualPath": "/usr/local/bin/node"
    }
@@ -50108,11 +50108,6 @@
   },
   {
    "parent": "590fb448ee7c2acc777f02e7d4e8639d042d8628bc82c574f4e2c7503725ab9c",
-   "child": "2f43fea7157cf4ce",
-   "type": "contains"
-  },
-  {
-   "parent": "590fb448ee7c2acc777f02e7d4e8639d042d8628bc82c574f4e2c7503725ab9c",
    "child": "2ffa33661d633a7",
    "type": "contains"
   },
@@ -51259,6 +51254,11 @@
   {
    "parent": "590fb448ee7c2acc777f02e7d4e8639d042d8628bc82c574f4e2c7503725ab9c",
    "child": "e65468843881ebcf",
+   "type": "contains"
+  },
+  {
+   "parent": "590fb448ee7c2acc777f02e7d4e8639d042d8628bc82c574f4e2c7503725ab9c",
+   "child": "e66b7829ad2d00a0",
    "type": "contains"
   },
   {
@@ -81091,7 +81091,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.62.1",
+  "version": "0.63.0",
   "configuration": {
    "configPath": "",
    "verbosity": 0,
