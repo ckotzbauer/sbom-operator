@@ -25,7 +25,7 @@ type GitTarget struct {
 }
 
 func NewGitTarget(workingTree, path, repo, branch, name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, format string) *GitTarget {
-	gitAccount := git.New(name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey, false)
+	gitAccount := git.New(name, email, token, userName, password, githubAppID, githubAppInstallationID, githubAppPrivateKey)
 
 	return &GitTarget{
 		workingTree: workingTree,

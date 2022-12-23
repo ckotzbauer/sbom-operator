@@ -50,7 +50,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img)}
+	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img, s.proxyRegistryMap)}
 	src, cleanup, err := source.New(*input, opts, nil)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
