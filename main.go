@@ -66,7 +66,6 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitAuthorEmail, "", "Author email to use for Git-Commits.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitHubAppId, "", "GitHub App ID (for authentication).")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitHubAppInstallationId, "", "GitHub App Installation ID (for authentication).")
-	rootCmd.PersistentFlags().Bool(internal.ConfigKeyGitFallbackClone, false, "Use git binary for clones.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyPodLabelSelector, "", "Kubernetes Label-Selector for pods.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyNamespaceLabelSelector, "", "Kubernetes Label-Selector for namespaces.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackBaseUrl, "", "Dependency-Track base URL, e.g. 'https://dtrack.example.com'")
@@ -81,11 +80,6 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciRegistry, "", "OCI-Registry")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciUser, "", "OCI-User")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
-
-	err := rootCmd.PersistentFlags().MarkDeprecated(internal.ConfigKeyGitFallbackClone, "'multi_ack' is supported by default. The flag doesn't have any effect and will be removed in 0.24.0")
-	if err != nil {
-		panic(err)
-	}
 
 	return rootCmd
 }

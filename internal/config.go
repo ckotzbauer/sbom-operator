@@ -48,7 +48,6 @@ var (
 	ConfigKeyGitPassword             = "git-password"
 	ConfigKeyGitAuthorName           = "git-author-name"
 	ConfigKeyGitAuthorEmail          = "git-author-email"
-	ConfigKeyGitFallbackClone        = "git-fallback-clone"
 	ConfigKeyGitHubAppId             = "github-app-id"
 	ConfigKeyGitHubAppInstallationId = "github-app-installation-id"
 	ConfigKeyPodLabelSelector        = "pod-label-selector"
