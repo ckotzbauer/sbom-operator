@@ -50,7 +50,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	opts := &image.RegistryOptions{Credentials: s.convertSecrets(*img)}
+	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img)}
 	src, cleanup, err := source.New(*input, opts, nil)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
@@ -122,33 +122,6 @@ func getSyftVersion() string {
 	}
 
 	return ""
-}
-
-func (s *Syft) convertSecrets(img oci.RegistryImage) []image.RegistryCredentials {
-	credentials := make([]image.RegistryCredentials, 0)
-	for _, secret := range img.PullSecrets {
-		cfg, err := oci.ResolveAuthConfigWithPullSecret(img, *secret)
-		if err != nil {
-			logrus.WithError(err).Warnf("image: %s, Read authentication configuration from secret: %s failed", img.ImageID, secret.SecretName)
-			continue
-		}
-
-		for registryToReplace, proxyRegistry := range s.proxyRegistryMap {
-			if cfg.ServerAddress == registryToReplace ||
-				(strings.Contains(cfg.ServerAddress, docker.DefaultHostname) && strings.Contains(registryToReplace, docker.DefaultHostname)) {
-				cfg.ServerAddress = proxyRegistry
-			}
-		}
-
-		credentials = append(credentials, image.RegistryCredentials{
-			Username:  cfg.Username,
-			Password:  cfg.Password,
-			Token:     cfg.RegistryToken,
-			Authority: cfg.ServerAddress,
-		})
-	}
-
-	return credentials
 }
 
 func (s *Syft) ApplyProxyRegistry(img *oci.RegistryImage) error {
