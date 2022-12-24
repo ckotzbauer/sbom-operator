@@ -47,6 +47,8 @@ jobs:
         REGISTRY_TOKEN=$(_read "REGISTRY_TOKEN")
         IS_FORK=${{ github.event.pull_request.head.repo.full_name != github.repository }}
         echo $IS_FORK
+        echo ${{ github.event.pull_request.head.repo.full_name }}
+        echo ${{ github.repository }}
 
         if [ "$IS_FORK" != true ]; then
           DATE="$(date +%Y%m%d%H%M%S)"
