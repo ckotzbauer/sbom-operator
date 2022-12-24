@@ -7,30 +7,9 @@ on:
       - "**"
 
 jobs:
-  prepare-secrets:
-    runs-on: ubuntu-latest
-    outputs:
-      encrypted-test-secrets: ${{ steps.prepare.outputs.encrypted_test_secrets }}
-    steps:
-      - name: Prepare
-        id: prepare
-        run: |
-          _append() {
-              values=$(echo "$values" | jq --arg key "$1" --arg value "$2" '.[$key] = $value')
-          }
-
-          values='{}'
-          _append REGISTRY_TOKEN "${{ secrets.GHCR_PASSWORD }}"
-
-          encrypted_test_secrets=$(gpg --symmetric --batch --passphrase "${{ github.sha }}" --output - <(echo "$values") | base64 -w0)
-          echo "encrypted_test_secrets=$encrypted_test_secrets" >> $GITHUB_OUTPUT
-
-
   test:
     uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-build-test.yml@0.30.2
     needs: prepare-secrets
-    secrets:
-      encrypted-test-secrets: ${{ needs.prepare-secrets.outputs.encrypted-test-secrets }}
     with:
       install-go: true
       go-version: "1.19.4"
@@ -39,31 +18,14 @@ jobs:
       install-syft: true
       build-commands: make build
       test-commands: |
-        _read() {
-            echo "$decrypted_value" | jq -r --arg value "$1" '.[$value]'
-        }
+        DATE="$(date +%Y%m%d%H%M%S)"
+        docker build --build-arg date=${DATE} -t ttl.sh/sbom-operator-oci-test-${DATE}:1h internal/target/oci/fixtures
+        docker push ttl.sh/sbom-operator-oci-test-${DATE}:1h
+        DIGEST=$(docker inspect ttl.sh/sbom-operator-oci-test-${DATE}:1h --format='{{index .RepoDigests 0}}')
+        syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
 
-        decrypted_value=$(gpg --decrypt --quiet --batch --passphrase "${{ github.sha }}" --output - <(echo "$ENCRYPTED_TEST_SECRETS" | base64 --decode))
-        REGISTRY_TOKEN=$(_read "REGISTRY_TOKEN")
-        IS_FORK=${{ github.event.pull_request.head.repo.full_name != github.repository }}
-        echo $IS_FORK
-        echo ${{ github.event.pull_request.head.repo.full_name }}
-        echo ${{ github.repository }}
-
-        if [ "$IS_FORK" != true ]; then
-          DATE="$(date +%Y%m%d%H%M%S)"
-          docker login -u ckotzbauer -p "$REGISTRY_TOKEN" ghcr.io
-          docker build --build-arg date=${DATE} -t ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} internal/target/oci/fixtures
-          docker push ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE}
-          DIGEST=$(docker inspect ghcr.io/ckotzbauer/sbom-operator/oci-test:${DATE} --format='{{index .RepoDigests 0}}')
-          syft registry:${DIGEST} -o json > internal/target/oci/fixtures/sbom.json
-
-          TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
-
-          COSIGN_REPOSITORY="ghcr.io/ckotzbauer/sbom-operator/oci-test" cosign download sbom ${DIGEST}
-        else
-          go test $(go list ./... | grep -v internal/target/oci) -coverprofile cover.out
-        fi
+        TEST_DIGEST="${DIGEST}" go test $(go list ./...) -coverprofile cover.out
+        COSIGN_REPOSITORY="ttl.sh/sbom-operator-oci-test-${DATE}" cosign download sbom ${DIGEST}
       report-coverage: true
       coverage-file: cover.out
       build-image: true
