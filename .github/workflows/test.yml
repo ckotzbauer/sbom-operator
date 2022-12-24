@@ -21,7 +21,6 @@ jobs:
 
           values='{}'
           _append REGISTRY_TOKEN "${{ secrets.GHCR_PASSWORD }}"
-          _append IS_FORK ${{ github.event.pull_request.head.repo.full_name != github.repository }}
 
           encrypted_test_secrets=$(gpg --symmetric --batch --passphrase "${{ github.sha }}" --output - <(echo "$values") | base64 -w0)
           echo "encrypted_test_secrets=$encrypted_test_secrets" >> $GITHUB_OUTPUT
@@ -46,7 +45,8 @@ jobs:
 
         decrypted_value=$(gpg --decrypt --quiet --batch --passphrase "${{ github.sha }}" --output - <(echo "$ENCRYPTED_TEST_SECRETS" | base64 --decode))
         REGISTRY_TOKEN=$(_read "REGISTRY_TOKEN")
-        IS_FORK=$(_read "IS_FORK")
+        IS_FORK=${{ github.event.pull_request.head.repo.full_name != github.repository }}
+        echo $IS_FORK
 
         if [ "$IS_FORK" != true ]; then
           DATE="$(date +%Y%m%d%H%M%S)"
