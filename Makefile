@@ -23,7 +23,7 @@ vet:
 	go vet ./...
 
 test:
-	go test $(shell go list ./... | grep -v sbom-operator/internal/target/oci) -coverprofile cover.out
+	bash hack/run-tests.sh
 
 lint:
 	$(LINTCMD)
