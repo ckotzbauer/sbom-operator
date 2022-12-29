@@ -167,10 +167,9 @@ require (
 	sigs.k8s.io/yaml v1.3.0 // indirect
 )
 
-replace gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
-
-replace github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.9.0
-
-replace github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.10.1
-
-replace github.com/pjbgf/sha1cd => github.com/pjbgf/sha1cd v0.2.3
+replace (
+	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.10.1
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.9.0
+	golang.org/x/net => golang.org/x/net v0.4.0
+	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
+)
