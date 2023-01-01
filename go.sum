@@ -590,6 +590,8 @@ github.com/circonus-labs/circonus-gometrics v2.3.1+incompatible/go.mod h1:nmEj6D
 github.com/circonus-labs/circonusllhist v0.1.3/go.mod h1:kMXHVDlOchFAehlya5ePtbp5jckzBHf4XRpQvBOLI+I=
 github.com/ckotzbauer/libk8soci v0.0.0-20221223155540-dbb0c68c1680 h1:SL58mGTnJbkTHZQ9XpzGJxTqRvxUMJ3YmmIyLm+mXz4=
 github.com/ckotzbauer/libk8soci v0.0.0-20221223155540-dbb0c68c1680/go.mod h1:CDB4JaydrC/0HiiFA1t8uwyTy0rdXxpB+LZqZf8+i1w=
+github.com/ckotzbauer/libk8soci v0.0.0-20230101090926-4a4637d2237c h1:33rvmQh50ueEBlA20qEZpACEp8oE3FrdB9hTW0MZoZA=
+github.com/ckotzbauer/libk8soci v0.0.0-20230101090926-4a4637d2237c/go.mod h1:CDB4JaydrC/0HiiFA1t8uwyTy0rdXxpB+LZqZf8+i1w=
 github.com/ckotzbauer/libstandard v0.0.0-20221220070224-df4733d88fba h1:8W12G7DQ65d2ZAWfXa2RiKC5sm5TKSnt3oDwfpG659w=
 github.com/ckotzbauer/libstandard v0.0.0-20221220070224-df4733d88fba/go.mod h1:9W+F8tlDH+PqLUQmV+NA2awzzawEoaVfNg3nqwsluQI=
 github.com/ckotzbauer/libstandard v0.0.0-20230101030448-7bb3724952dc h1:eQ9iZ0Va3UZ/xzfKdA2gqgtcOMzNVLzziB+COaxQrkE=
