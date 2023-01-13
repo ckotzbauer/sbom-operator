@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/stereoscope v0.0.0-20221208011002-c5ff155d72f1
-	github.com/anchore/syft v0.65.0
+	github.com/anchore/syft v0.66.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20230101090926-4a4637d2237c
 	github.com/ckotzbauer/libstandard v0.0.0-20230101030448-7bb3724952dc
 	github.com/google/uuid v1.3.0
@@ -32,7 +32,7 @@ require (
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/anchore/go-logger v0.0.0-20220728155337-03b66a5207d8 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
-	github.com/anchore/packageurl-go v0.1.1-0.20220428202044-a072fa3cb6d7 // indirect
+	github.com/anchore/packageurl-go v0.1.1-0.20230104203445-02e0a6721501 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.0.2 // indirect
 	github.com/cloudflare/circl v1.1.0 // indirect
