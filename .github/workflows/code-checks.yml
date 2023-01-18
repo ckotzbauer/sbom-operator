@@ -11,7 +11,7 @@ jobs:
     uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-lint.yml@0.30.3
     with:
       install-go: true
-      go-version: "1.19.4"
+      go-version: "1.19.5"
       lint-commands: |
         make bootstrap-tools
         make lintsec
@@ -20,7 +20,7 @@ jobs:
     uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-lint.yml@0.30.3
     with:
       install-go: true
-      go-version: "1.19.4"
+      go-version: "1.19.5"
       lint-commands: |
         make bootstrap-tools
         make lint

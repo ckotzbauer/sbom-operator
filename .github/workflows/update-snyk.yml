@@ -10,7 +10,7 @@ jobs:
     uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan-snyk.yml@0.30.3
     with:
       install-go: true
-      go-version: '1.19.4'
+      go-version: '1.19.5'
       scan-commands: snyk monitor
     secrets:
       token: ${{ secrets.SNYK_TOKEN }}
