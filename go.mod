@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/anchore/stereoscope v0.0.0-20221208011002-c5ff155d72f1
 	github.com/anchore/syft v0.68.1
-	github.com/ckotzbauer/libk8soci v0.0.0-20230101090926-4a4637d2237c
+	github.com/ckotzbauer/libk8soci v0.0.0-20230201064449-665152e30569
 	github.com/ckotzbauer/libstandard v0.0.0-20230101030448-7bb3724952dc
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
@@ -38,7 +38,7 @@ require (
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/containerd/containerd v1.6.12 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.12.1 // indirect
-	github.com/docker/cli v20.10.22+incompatible // indirect
+	github.com/docker/cli v20.10.23+incompatible // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
 	github.com/docker/docker v20.10.23+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
@@ -51,7 +51,7 @@ require (
 	github.com/facebookincubator/nvdtools v0.1.5 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.0 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
-	github.com/go-git/go-billy/v5 v5.3.1 // indirect
+	github.com/go-git/go-billy/v5 v5.4.0 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.20.0 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
@@ -135,7 +135,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-git/go-git/v5 v5.5.1 // indirect
+	github.com/go-git/go-git/v5 v5.5.2 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
