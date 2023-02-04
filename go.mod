@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/stereoscope v0.0.0-20221208011002-c5ff155d72f1
-	github.com/anchore/syft v0.68.1
+	github.com/anchore/syft v0.70.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230201064449-665152e30569
 	github.com/ckotzbauer/libstandard v0.0.0-20230201033308-451a1baa8541
 	github.com/google/uuid v1.3.0
@@ -32,6 +32,7 @@ require (
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/anchore/go-logger v0.0.0-20220728155337-03b66a5207d8 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
+	github.com/anchore/go-struct-converter v0.0.0-20221118182256-c68fdcfa2092 // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20230104203445-02e0a6721501 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.6.0 // indirect
@@ -40,7 +41,7 @@ require (
 	github.com/containerd/stargz-snapshotter/estargz v0.12.1 // indirect
 	github.com/docker/cli v20.10.23+incompatible // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
-	github.com/docker/docker v20.10.23+incompatible // indirect
+	github.com/docker/docker v23.0.0+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
@@ -99,7 +100,7 @@ require (
 	github.com/sergi/go-diff v1.3.1 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/skeema/knownhosts v1.1.0 // indirect
-	github.com/spdx/tools-golang v0.4.0 // indirect
+	github.com/spdx/tools-golang v0.5.0-rc1 // indirect
 	github.com/spf13/afero v1.9.3 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/sylabs/sif/v2 v2.8.1 // indirect
