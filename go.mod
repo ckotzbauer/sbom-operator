@@ -3,8 +3,8 @@ module github.com/ckotzbauer/sbom-operator
 go 1.19
 
 require (
-	github.com/anchore/stereoscope v0.0.0-20230203152723-c49244e4d66f
-	github.com/anchore/syft v0.70.0
+	github.com/anchore/stereoscope v0.0.0-20230208154630-5a306f07f2e7
+	github.com/anchore/syft v0.71.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230201064449-665152e30569
 	github.com/ckotzbauer/libstandard v0.0.0-20230201033308-451a1baa8541
 	github.com/google/uuid v1.3.0
@@ -35,6 +35,7 @@ require (
 	github.com/anchore/go-struct-converter v0.0.0-20221118182256-c68fdcfa2092 // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20230104203445-02e0a6721501 // indirect
 	github.com/andybalholm/brotli v1.0.4 // indirect
+	github.com/becheran/wildmatch-go v1.0.0 // indirect
 	github.com/bmatcuk/doublestar/v4 v4.6.0 // indirect
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/containerd/containerd v1.6.12 // indirect
@@ -115,7 +116,7 @@ require (
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.5.0 // indirect
-	golang.org/x/mod v0.7.0 // indirect
+	golang.org/x/mod v0.8.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/tools v0.2.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
@@ -149,11 +150,11 @@ require (
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
-	golang.org/x/net v0.5.0 // indirect
+	golang.org/x/net v0.6.0 // indirect
 	golang.org/x/oauth2 v0.2.0 // indirect
-	golang.org/x/sys v0.4.0 // indirect
-	golang.org/x/term v0.4.0 // indirect
-	golang.org/x/text v0.6.0 // indirect
+	golang.org/x/sys v0.5.0 // indirect
+	golang.org/x/term v0.5.0 // indirect
+	golang.org/x/text v0.7.0 // indirect
 	golang.org/x/time v0.2.0 // indirect
 	google.golang.org/appengine v1.6.7 // indirect
 	google.golang.org/protobuf v1.28.1 // indirect
