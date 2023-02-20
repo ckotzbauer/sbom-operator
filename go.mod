@@ -27,7 +27,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.0 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/Microsoft/go-winio v0.6.0 // indirect
-	github.com/ProtonMail/go-crypto v0.0.0-20230201104953-d1d05f4e2bfb // indirect
+	github.com/ProtonMail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8 // indirect
 	github.com/acobaugh/osrelease v0.1.0 // indirect
 	github.com/acomagu/bufpipe v1.0.3 // indirect
 	github.com/anchore/go-logger v0.0.0-20220728155337-03b66a5207d8 // indirect
@@ -171,7 +171,7 @@ require (
 
 replace (
 	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.10.1
-	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.9.1
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.9.2
 	golang.org/x/net => golang.org/x/net v0.7.0
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 )
