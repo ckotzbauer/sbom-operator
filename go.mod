@@ -4,7 +4,7 @@ go 1.19
 
 require (
 	github.com/anchore/stereoscope v0.0.0-20230222185948-fab1c9638abc
-	github.com/anchore/syft v0.72.0
+	github.com/anchore/syft v0.73.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230201064449-665152e30569
 	github.com/ckotzbauer/libstandard v0.0.0-20230201033308-451a1baa8541
 	github.com/google/uuid v1.3.0
