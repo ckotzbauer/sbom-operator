@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.19
 
 require (
-	github.com/anchore/stereoscope v0.0.0-20230222185948-fab1c9638abc
+	github.com/anchore/stereoscope v0.0.0-20230301191755-abfb374a1122
 	github.com/anchore/syft v0.73.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230201064449-665152e30569
 	github.com/ckotzbauer/libstandard v0.0.0-20230201033308-451a1baa8541
@@ -112,7 +112,7 @@ require (
 	github.com/vbatts/tar-split v0.11.2 // indirect
 	github.com/vifraa/gopom v0.2.1 // indirect
 	github.com/wagoodman/go-partybus v0.0.0-20210627031916-db1f5573bbc5 // indirect
-	github.com/wagoodman/go-progress v0.0.0-20200731105512-1020f39e6240 // indirect
+	github.com/wagoodman/go-progress v0.0.0-20230301185719-21920a456ad5 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.6.0 // indirect
