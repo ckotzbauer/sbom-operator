@@ -5,7 +5,7 @@ go 1.19
 require (
 	github.com/anchore/stereoscope v0.0.0-20230301191755-abfb374a1122
 	github.com/anchore/syft v0.74.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20230201064449-665152e30569
+	github.com/ckotzbauer/libk8soci v0.0.0-20230302180816-5a495f2c324b
 	github.com/ckotzbauer/libstandard v0.0.0-20230301104845-4fc13982308c
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
@@ -91,7 +91,7 @@ require (
 	github.com/opencontainers/image-spec v1.1.0-rc2 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pierrec/lz4/v4 v4.1.15 // indirect
-	github.com/pjbgf/sha1cd v0.2.3 // indirect
+	github.com/pjbgf/sha1cd v0.3.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/remyoudompheng/bigfft v0.0.0-20200410134404-eec4a21b6bb0 // indirect
@@ -137,7 +137,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-git/go-git/v5 v5.5.2 // indirect
+	github.com/go-git/go-git/v5 v5.6.0 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
