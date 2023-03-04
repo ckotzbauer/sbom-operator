@@ -13,7 +13,7 @@ on:
 
 jobs:
   label-issues:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-label-issues.yml@0.32.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-label-issues.yml@0.33.1
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
