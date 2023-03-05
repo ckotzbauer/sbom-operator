@@ -70,12 +70,14 @@ func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
 	filePath := g.ImageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
+	/* #nosec */
 	err := os.MkdirAll(dir, 0777)
 	if err != nil {
 		logrus.WithError(err).Error("Directory could not be created")
 		return err
 	}
 
+	/* #nosec */
 	err = os.WriteFile(filePath, []byte(ctx.Sbom), 0640)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")

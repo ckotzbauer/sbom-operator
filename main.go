@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime"
+	"time"
 
 	"github.com/ckotzbauer/libstandard"
 	"github.com/ckotzbauer/sbom-operator/internal"
@@ -45,7 +46,13 @@ func newRootCmd() *cobra.Command {
 
 			logrus.Info("Webserver is running at port 8080")
 			http.HandleFunc("/health", health)
-			logrus.WithError(http.ListenAndServe(":8080", nil)).Fatal("Starting webserver failed!")
+
+			server := &http.Server{
+				Addr:              ":8080",
+				ReadHeaderTimeout: 3 * time.Second,
+			}
+
+			logrus.WithError(server.ListenAndServe()).Fatal("Starting webserver failed!")
 		},
 	}
 
