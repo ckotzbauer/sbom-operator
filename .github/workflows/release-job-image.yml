@@ -52,10 +52,10 @@ jobs:
         uses: sigstore/cosign-installer@c3667d99424e7e6047999fb6246c0da843953c65
 
       - name: Setup Syft
-        uses: ckotzbauer/actions-toolkit/setup-syft@0.33.1
+        uses: ckotzbauer/actions-toolkit/setup-syft@0.33.3
 
       - name: Build and push image
-        uses: ckotzbauer/actions-toolkit/docker@0.33.1
+        uses: ckotzbauer/actions-toolkit/docker@0.33.3
         with:
           ghcr-password: ${{ secrets.ghcr-password }}
           dockerhub-user: ${{ secrets.dockerhub-user }}
@@ -69,7 +69,7 @@ jobs:
           tags: ${{ inputs.docker-tags }}
 
       - name: Generate SBOM
-        uses: ckotzbauer/actions-toolkit/sbom@0.33.1
+        uses: ckotzbauer/actions-toolkit/sbom@0.33.3
         with:
           images: ${{ inputs.docker-tags }}
           sign: true
@@ -78,7 +78,7 @@ jobs:
           cosign-repository: ${{ inputs.cosign-repository }}
 
       - name: Generate Provenance
-        uses: ckotzbauer/actions-toolkit/slsa-provenance@0.33.1
+        uses: ckotzbauer/actions-toolkit/slsa-provenance@0.33.3
         with:
           action-sha: "0.22.0"
           images: ${{ inputs.docker-tags }}
