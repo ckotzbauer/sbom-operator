@@ -40,6 +40,7 @@ signs:
     certificate: '${artifact}.pem'
     args:
       - sign-blob
+      - '-y'
       - '--output-certificate=${certificate}'
       - '--output-signature=${signature}'
       - '${artifact}'
