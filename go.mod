@@ -1,6 +1,6 @@
 module github.com/ckotzbauer/sbom-operator
 
-go 1.19
+go 1.20
 
 require (
 	github.com/anchore/stereoscope v0.0.0-20230301191755-abfb374a1122
@@ -83,7 +83,6 @@ require (
 	github.com/mitchellh/hashstructure/v2 v2.0.2 // indirect
 	github.com/mitchellh/mapstructure v1.5.0 // indirect
 	github.com/mitchellh/reflectwalk v1.0.2 // indirect
-	github.com/moby/term v0.0.0-20210619224110-3f7ff695adc6 // indirect
 	github.com/munnerz/goautoneg v0.0.0-20191010083416-a7dc8b61c822 // indirect
 	github.com/nwaples/rardecode v1.1.0 // indirect
 	github.com/olekukonko/tablewriter v0.0.5 // indirect
