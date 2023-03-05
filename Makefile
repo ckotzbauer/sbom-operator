@@ -5,10 +5,10 @@ GOSECCMD = $(TEMPDIR)/gosec ./...
 all: build
 
 build: fmt vet
-	goreleaser build --rm-dist --single-target --snapshot
+	goreleaser build --clean --single-target --snapshot
 
 build-all: fmt vet
-	goreleaser build --rm-dist --snapshot
+	goreleaser build --clean --snapshot
 
 # Run against the configured Kubernetes cluster in ~/.kube/config
 run: fmt vet
@@ -36,5 +36,5 @@ $(TEMPDIR):
 
 .PHONY: bootstrap-tools
 bootstrap-tools: $(TEMPDIR)
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(TEMPDIR)/ v1.48.0
-	curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(TEMPDIR)/ v2.12.0
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -b $(TEMPDIR)/ v1.51.2
+	curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -b $(TEMPDIR)/ v2.15.0
