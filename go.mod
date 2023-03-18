@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.20
 
 require (
-	github.com/anchore/stereoscope v0.0.0-20230301191755-abfb374a1122
+	github.com/anchore/stereoscope v0.0.0-20230317134707-7928713c391e
 	github.com/anchore/syft v0.74.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20230302180816-5a495f2c324b
 	github.com/ckotzbauer/libstandard v0.0.0-20230301104845-4fc13982308c
