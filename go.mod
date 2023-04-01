@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/anchore/stereoscope v0.0.0-20230323161519-d7551b7f46f5
 	github.com/anchore/syft v0.75.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20230401075321-e237187cac15
+	github.com/ckotzbauer/libk8soci v0.0.0-20230401075657-cb79f1d0c5b9
 	github.com/ckotzbauer/libstandard v0.0.0-20230331235255-b1d9d972d7e3
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
@@ -29,7 +29,7 @@ require (
 	github.com/Microsoft/go-winio v0.6.0 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230217124315-7d5c6f04bbb8 // indirect
 	github.com/acobaugh/osrelease v0.1.0 // indirect
-	github.com/acomagu/bufpipe v1.0.3 // indirect
+	github.com/acomagu/bufpipe v1.0.4 // indirect
 	github.com/anchore/go-logger v0.0.0-20220728155337-03b66a5207d8 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
 	github.com/anchore/go-struct-converter v0.0.0-20221118182256-c68fdcfa2092 // indirect
@@ -53,7 +53,7 @@ require (
 	github.com/facebookincubator/nvdtools v0.1.5 // indirect
 	github.com/gabriel-vasile/mimetype v1.4.0 // indirect
 	github.com/go-git/gcfg v1.5.0 // indirect
-	github.com/go-git/go-billy/v5 v5.4.0 // indirect
+	github.com/go-git/go-billy/v5 v5.4.1 // indirect
 	github.com/go-openapi/jsonpointer v0.19.5 // indirect
 	github.com/go-openapi/jsonreference v0.20.0 // indirect
 	github.com/go-openapi/swag v0.22.3 // indirect
@@ -136,7 +136,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.1 // indirect
-	github.com/go-git/go-git/v5 v5.6.0 // indirect
+	github.com/go-git/go-git/v5 v5.6.1 // indirect
 	github.com/go-logr/logr v1.2.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
