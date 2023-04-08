@@ -12,7 +12,7 @@ require (
 	github.com/nscuro/dtrack-client v0.7.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.0
-	github.com/spf13/cobra v1.6.1
+	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.2
 	golang.org/x/exp v0.0.0-20230321023759-10a507213a29
 	k8s.io/api v0.26.3
