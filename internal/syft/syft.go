@@ -42,7 +42,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	input, err := source.ParseInput(fmt.Sprintf("registry:%s", img.ImageID), "", false)
+	input, err := source.ParseInput(fmt.Sprintf("registry:%s", img.ImageID), "")
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to parse input registry:%s: %w", img.ImageID, err)).Error("Input-Parsing failed")
 		return "", err

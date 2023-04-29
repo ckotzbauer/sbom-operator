@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/anchore/stereoscope v0.0.0-20230412183729-8602f1afc574
-	github.com/anchore/syft v0.75.0
+	github.com/anchore/syft v0.79.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230401075657-cb79f1d0c5b9
 	github.com/ckotzbauer/libstandard v0.0.0-20230331235255-b1d9d972d7e3
 	github.com/google/uuid v1.3.0
@@ -40,9 +40,10 @@ require (
 	github.com/cloudflare/circl v1.1.0 // indirect
 	github.com/containerd/containerd v1.7.0 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.14.3 // indirect
+	github.com/deitch/magic v0.0.0-20230404182410-1ff89d7342da // indirect
 	github.com/docker/cli v23.0.1+incompatible // indirect
 	github.com/docker/distribution v2.8.1+incompatible // indirect
-	github.com/docker/docker v23.0.3+incompatible // indirect
+	github.com/docker/docker v23.0.4+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-units v0.5.0 // indirect
@@ -60,6 +61,7 @@ require (
 	github.com/go-restruct/restruct v1.2.0-alpha // indirect
 	github.com/golang/snappy v0.0.4 // indirect
 	github.com/google/gnostic v0.5.7-v3refs // indirect
+	github.com/google/licensecheck v0.3.1 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
@@ -100,14 +102,14 @@ require (
 	github.com/sergi/go-diff v1.3.1 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/skeema/knownhosts v1.1.0 // indirect
-	github.com/spdx/tools-golang v0.5.0-rc1 // indirect
+	github.com/spdx/tools-golang v0.5.0 // indirect
 	github.com/spf13/afero v1.9.5 // indirect
 	github.com/spf13/cast v1.5.0 // indirect
 	github.com/sylabs/sif/v2 v2.8.1 // indirect
 	github.com/sylabs/squashfs v0.6.1 // indirect
 	github.com/therootcompany/xz v1.0.1 // indirect
 	github.com/ulikunitz/xz v0.5.10 // indirect
-	github.com/vbatts/go-mtree v0.5.2 // indirect
+	github.com/vbatts/go-mtree v0.5.3 // indirect
 	github.com/vbatts/tar-split v0.11.2 // indirect
 	github.com/vifraa/gopom v0.2.1 // indirect
 	github.com/wagoodman/go-partybus v0.0.0-20210627031916-db1f5573bbc5 // indirect

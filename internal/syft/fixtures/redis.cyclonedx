@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:324e7c2e-831a-45f5-ba8f-a483039897bf" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:125bac55-dc4c-4ee0-b5b9-7111a25ee00b" version="1">
   <metadata>
-    <timestamp>2022-12-18T10:50:47+01:00</timestamp>
+    <timestamp>2023-04-29T09:40:54+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.63.0</version>
+        <version>0.79.0</version>
       </tool>
     </tools>
     <component bom-ref="8464dd735b32ece2" type="container">
@@ -49,6 +49,9 @@
         <license>
           <id>GPL-2.0-only</id>
         </license>
+        <license>
+          <name>GPLv2+</name>
+        </license>
       </licenses>
       <cpe>cpe:2.3:a:apt:apt:2.2.4:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/apt@2.2.4?arch=amd64&amp;distro=debian-11</purl>
@@ -71,6 +74,11 @@
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>base-files</name>
       <version>11.1+deb11u5</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:base-files:base-files:11.1\+deb11u5:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/base-files@11.1+deb11u5?arch=amd64&amp;distro=debian-11</purl>
       <properties>
@@ -100,6 +108,9 @@
       <licenses>
         <license>
           <id>GPL-2.0-only</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:base-passwd:base-passwd:3.5.51:*:*:*:*:*:*:*</cpe>
@@ -175,6 +186,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -194,6 +208,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:bsdutils:bsdutils:1\:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -251,6 +268,9 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
+          <name>Expat</name>
+        </license>
+        <license>
           <id>FSFUL</id>
         </license>
         <license>
@@ -261,6 +281,9 @@
         </license>
         <license>
           <id>GPL-2.0-or-later</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:dash:dash:0.5.11\+git20200708\+dd9ef66-5:*:*:*:*:*:*:*</cpe>
@@ -308,6 +331,11 @@
       <publisher>Debian Release Team &lt;packages@release.debian.org&gt;</publisher>
       <name>debian-archive-keyring</name>
       <version>2021.1.1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:debian-archive-keyring:debian-archive-keyring:2021.1.1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all&amp;distro=debian-11</purl>
       <properties>
@@ -362,6 +390,14 @@
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>diffutils</name>
       <version>1:3.7-5</version>
+      <licenses>
+        <license>
+          <name>GFDL</name>
+        </license>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:diffutils:diffutils:1\:3.7-5:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/diffutils@1:3.7-5?arch=amd64&amp;distro=debian-11</purl>
       <properties>
@@ -390,6 +426,12 @@
         </license>
         <license>
           <id>GPL-2.0-or-later</id>
+        </license>
+        <license>
+          <name>public-domain-md5</name>
+        </license>
+        <license>
+          <name>public-domain-s-s-d</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:dpkg:dpkg:1.20.12:*:*:*:*:*:*:*</cpe>
@@ -471,13 +513,22 @@
       <version>10.2.1-6</version>
       <licenses>
         <license>
+          <name>Artistic</name>
+        </license>
+        <license>
           <id>GFDL-1.2-only</id>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gcc-10-base:gcc-10-base:10.2.1-6:*:*:*:*:*:*:*</cpe>
@@ -511,13 +562,22 @@
       <version>9.3.0-22</version>
       <licenses>
         <license>
+          <name>Artistic</name>
+        </license>
+        <license>
           <id>GFDL-1.2-only</id>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
@@ -613,6 +673,9 @@
           <id>CC0-1.0</id>
         </license>
         <license>
+          <name>Expat</name>
+        </license>
+        <license>
           <id>GPL-3.0-only</id>
         </license>
         <license>
@@ -629,6 +692,15 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>RFC-Reference</name>
+        </license>
+        <license>
+          <name>TinySCHEME</name>
+        </license>
+        <license>
+          <name>permissive</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gpgv:gpgv:2.2.27-2\+deb11u2:*:*:*:*:*:*:*</cpe>
@@ -679,6 +751,15 @@
       <name>gzip</name>
       <version>1.10-4+deb11u1</version>
       <licenses>
+        <license>
+          <name>FSF-manpages</name>
+        </license>
+        <license>
+          <name>GFDL-1.3+-no-invariant</name>
+        </license>
+        <license>
+          <name>GFDL-3</name>
+        </license>
         <license>
           <id>GPL-3.0-only</id>
         </license>
@@ -805,6 +886,9 @@
       <licenses>
         <license>
           <id>GPL-2.0-only</id>
+        </license>
+        <license>
+          <name>GPLv2+</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libapt-pkg6.0:libapt-pkg6.0:2.2.4:*:*:*:*:*:*:*</cpe>
@@ -960,6 +1044,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -979,6 +1066,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libblkid1:libblkid1:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -1002,6 +1092,9 @@
       <name>libbz2-1.0</name>
       <version>1.0.8-4</version>
       <licenses>
+        <license>
+          <name>BSD-variant</name>
+        </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
@@ -1246,6 +1339,11 @@
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libffi7</name>
       <version>3.3-6</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libffi7:libffi7:3.3-6:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libffi7@3.3-6?arch=amd64&amp;upstream=libffi&amp;distro=debian-11</purl>
       <properties>
@@ -1268,13 +1366,22 @@
       <version>10.2.1-6</version>
       <licenses>
         <license>
+          <name>Artistic</name>
+        </license>
+        <license>
           <id>GFDL-1.2-only</id>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgcc-s1:libgcc-s1:10.2.1-6:*:*:*:*:*:*:*</cpe>
@@ -1306,6 +1413,9 @@
         <license>
           <id>GPL-2.0-only</id>
         </license>
+        <license>
+          <name>LGPL</name>
+        </license>
       </licenses>
       <cpe>cpe:2.3:a:libgcrypt20:libgcrypt20:1.8.7-6:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64&amp;distro=debian-11</purl>
@@ -1327,6 +1437,9 @@
       <name>libgmp10</name>
       <version>2:6.2.1+dfsg-1+deb11u1</version>
       <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
@@ -1365,13 +1478,37 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
+          <name>CC0</name>
+        </license>
+        <license>
+          <name>Expat</name>
+        </license>
+        <license>
           <id>GFDL-1.3-only</id>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <id>GPL-3.0-only</id>
         </license>
         <license>
+          <name>GPLv3+</name>
+        </license>
+        <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-3.0-only</id>
+        </license>
+        <license>
+          <name>LGPLv2.1+</name>
+        </license>
+        <license>
+          <name>LGPLv3+_or_GPLv2+</name>
+        </license>
+        <license>
+          <name>The</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgnutls30:libgnutls30:3.7.1-5\+deb11u2:*:*:*:*:*:*:*</cpe>
@@ -1409,6 +1546,9 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>g10-permissive</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgpg-error0:libgpg-error0:1.38-2:*:*:*:*:*:*:*</cpe>
@@ -1472,6 +1612,15 @@
       <version>3.7.3-1</version>
       <licenses>
         <license>
+          <name>Expat</name>
+        </license>
+        <license>
+          <name>GAP</name>
+        </license>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
@@ -1481,6 +1630,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -1488,6 +1640,9 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libhogweed6:libhogweed6:3.7.3-1:*:*:*:*:*:*:*</cpe>
@@ -1528,6 +1683,9 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>Unicode</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libidn2-0:libidn2-0:2.3.0-5:*:*:*:*:*:*:*</cpe>
@@ -1707,6 +1865,9 @@
       <version>5.2.5-2.1~deb11u1</version>
       <licenses>
         <license>
+          <name>Autoconf</name>
+        </license>
+        <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
@@ -1723,6 +1884,27 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>PD</name>
+        </license>
+        <license>
+          <name>PD-debian</name>
+        </license>
+        <license>
+          <name>config-h</name>
+        </license>
+        <license>
+          <name>noderivs</name>
+        </license>
+        <license>
+          <name>permissive-fsf</name>
+        </license>
+        <license>
+          <name>permissive-nowarranty</name>
+        </license>
+        <license>
+          <name>probably-PD</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:liblzma5:liblzma5:5.2.5-2.1\~deb11u1:*:*:*:*:*:*:*</cpe>
@@ -1768,6 +1950,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -1787,6 +1972,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libmount1:libmount1:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -1811,6 +1999,15 @@
       <version>3.7.3-1</version>
       <licenses>
         <license>
+          <name>Expat</name>
+        </license>
+        <license>
+          <name>GAP</name>
+        </license>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
@@ -1820,6 +2017,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -1827,6 +2027,9 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libnettle8:libnettle8:3.7.3-1:*:*:*:*:*:*:*</cpe>
@@ -1857,7 +2060,16 @@
           <id>GPL-2.0-only</id>
         </license>
         <license>
+          <name>GPL-2+-autoconf-exception</name>
+        </license>
+        <license>
+          <name>GPL-2+-libtool-exception</name>
+        </license>
+        <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>GPL-3+-autoconf-exception</name>
         </license>
         <license>
           <id>LGPL-2.1-only</id>
@@ -1867,6 +2079,21 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>permissive-autoconf-m4</name>
+        </license>
+        <license>
+          <name>permissive-autoconf-m4-no-warranty</name>
+        </license>
+        <license>
+          <name>permissive-configure</name>
+        </license>
+        <license>
+          <name>permissive-fsf</name>
+        </license>
+        <license>
+          <name>permissive-makefile-in</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libnsl2:libnsl2:1.3.0-2:*:*:*:*:*:*:*</cpe>
@@ -1896,6 +2123,15 @@
         <license>
           <id>ISC</id>
         </license>
+        <license>
+          <name>ISC+IBM</name>
+        </license>
+        <license>
+          <name>permissive-like-automake-output</name>
+        </license>
+        <license>
+          <name>same-as-rest-of-p11kit</name>
+        </license>
       </licenses>
       <cpe>cpe:2.3:a:libp11-kit0:libp11-kit0:0.23.22-1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64&amp;upstream=p11-kit&amp;distro=debian-11</purl>
@@ -1922,6 +2158,11 @@
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-modules</name>
       <version>1.4.0-9+deb11u1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libpam-modules:libpam-modules:1.4.0-9\+deb11u1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11</purl>
       <properties>
@@ -1949,6 +2190,11 @@
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-modules-bin</name>
       <version>1.4.0-9+deb11u1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libpam-modules-bin:libpam-modules-bin:1.4.0-9\+deb11u1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11</purl>
       <properties>
@@ -1978,6 +2224,11 @@
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-runtime</name>
       <version>1.4.0-9+deb11u1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libpam-runtime:libpam-runtime:1.4.0-9\+deb11u1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all&amp;upstream=pam&amp;distro=debian-11</purl>
       <properties>
@@ -2005,6 +2256,11 @@
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam0g</name>
       <version>1.4.0-9+deb11u1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libpam0g:libpam0g:1.4.0-9\+deb11u1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11</purl>
       <properties>
@@ -2127,6 +2383,14 @@
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsemanage-common</name>
       <version>3.1-1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
+          <name>LGPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libsemanage-common:libsemanage-common:3.1-1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libsemanage-common@3.1-1?arch=all&amp;upstream=libsemanage&amp;distro=debian-11</purl>
       <properties>
@@ -2154,6 +2418,14 @@
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsemanage1</name>
       <version>3.1-1+b2</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
+          <name>LGPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libsemanage1:libsemanage1:3.1-1\+b2:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64&amp;upstream=libsemanage%403.1-1&amp;distro=debian-11</purl>
       <properties>
@@ -2175,6 +2447,14 @@
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsepol1</name>
       <version>3.1-1</version>
+      <licenses>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
+          <name>LGPL</name>
+        </license>
+      </licenses>
       <cpe>cpe:2.3:a:libsepol1:libsepol1:3.1-1:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libsepol1@3.1-1?arch=amd64&amp;upstream=libsepol&amp;distro=debian-11</purl>
       <properties>
@@ -2218,6 +2498,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -2237,6 +2520,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libsmartcols1:libsmartcols1:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -2301,13 +2587,22 @@
       <version>10.2.1-6</version>
       <licenses>
         <license>
+          <name>Artistic</name>
+        </license>
+        <license>
           <id>GFDL-1.2-only</id>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libstdc\+\+6:libstdc\+\+6:10.2.1-6:*:*:*:*:*:*:*</cpe>
@@ -2335,6 +2630,9 @@
           <id>CC0-1.0</id>
         </license>
         <license>
+          <name>Expat</name>
+        </license>
+        <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
@@ -2345,6 +2643,9 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libsystemd0:libsystemd0:247.3-7\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -2373,6 +2674,9 @@
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <id>LGPL-2.1-only</id>
@@ -2405,6 +2709,9 @@
       <licenses>
         <license>
           <id>BSD-3-Clause</id>
+        </license>
+        <license>
+          <name>MIT/X11</name>
         </license>
         <license>
           <id>X11</id>
@@ -2504,6 +2811,9 @@
           <id>CC0-1.0</id>
         </license>
         <license>
+          <name>Expat</name>
+        </license>
+        <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
@@ -2514,6 +2824,9 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libudev1:libudev1:247.3-7\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -2538,7 +2851,13 @@
       <version>0.9.10-4</version>
       <licenses>
         <license>
+          <name>FreeSoftware</name>
+        </license>
+        <license>
           <id>GFDL-1.2-only</id>
+        </license>
+        <license>
+          <name>GFDL-1.2+</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
@@ -2605,6 +2924,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -2624,6 +2946,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libuuid1:libuuid1:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -2677,6 +3002,9 @@
       <licenses>
         <license>
           <id>BSD-3-Clause</id>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
@@ -2840,6 +3168,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -2859,6 +3190,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:mount:mount:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -2884,6 +3218,9 @@
       <licenses>
         <license>
           <id>BSD-3-Clause</id>
+        </license>
+        <license>
+          <name>MIT/X11</name>
         </license>
         <license>
           <id>X11</id>
@@ -2919,6 +3256,9 @@
       <licenses>
         <license>
           <id>BSD-3-Clause</id>
+        </license>
+        <license>
+          <name>MIT/X11</name>
         </license>
         <license>
           <id>X11</id>
@@ -2978,10 +3318,34 @@
       <version>5.32.1-4+deb11u2</version>
       <licenses>
         <license>
+          <name>Artistic</name>
+        </license>
+        <license>
           <id>Artistic-2.0</id>
         </license>
         <license>
+          <name>Artistic-dist</name>
+        </license>
+        <license>
           <id>BSD-3-Clause</id>
+        </license>
+        <license>
+          <name>BSD-3-clause-GENERIC</name>
+        </license>
+        <license>
+          <name>BSD-3-clause-with-weird-numbering</name>
+        </license>
+        <license>
+          <name>BSD-4-clause-POWERDOG</name>
+        </license>
+        <license>
+          <name>BZIP</name>
+        </license>
+        <license>
+          <name>DONT-CHANGE-THE-GPL</name>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
         <license>
           <id>GPL-1.0-only</id>
@@ -2996,7 +3360,34 @@
           <id>GPL-2.0-or-later</id>
         </license>
         <license>
+          <name>GPL-3+-WITH-BISON-EXCEPTION</name>
+        </license>
+        <license>
+          <name>HSIEH-BSD</name>
+        </license>
+        <license>
+          <name>HSIEH-DERIVATIVE</name>
+        </license>
+        <license>
           <id>LGPL-2.1-only</id>
+        </license>
+        <license>
+          <name>REGCOMP</name>
+        </license>
+        <license>
+          <name>REGCOMP,</name>
+        </license>
+        <license>
+          <name>RRA-KEEP-THIS-NOTICE</name>
+        </license>
+        <license>
+          <name>SDBM-PUBLIC-DOMAIN</name>
+        </license>
+        <license>
+          <name>TEXT-TABS</name>
+        </license>
+        <license>
+          <name>Unicode</name>
         </license>
         <license>
           <id>Zlib</id>
@@ -3021,6 +3412,20 @@
         <property name="syft:location:2:path">/var/lib/dpkg/status</property>
         <property name="syft:metadata:installedSize">7664</property>
         <property name="syft:metadata:source">perl</property>
+      </properties>
+    </component>
+    <component bom-ref="pkg:generic/redis@7.0.7?package-id=f1600f3635f8b175" type="application">
+      <name>redis</name>
+      <version>7.0.7</version>
+      <cpe>cpe:2.3:a:redislabs:redis:7.0.7:*:*:*:*:*:*:*</cpe>
+      <purl>pkg:generic/redis@7.0.7</purl>
+      <properties>
+        <property name="syft:package:foundBy">binary-cataloger</property>
+        <property name="syft:package:metadataType">BinaryMetadata</property>
+        <property name="syft:package:type">binary</property>
+        <property name="syft:cpe23">cpe:2.3:a:redis:redis:7.0.7:*:*:*:*:*:*:*</property>
+        <property name="syft:location:0:layerID">sha256:ff287be0ffa172431321a4e54b2c71b2ab2a67634405ca0e1fa0b5c7bb7acdef</property>
+        <property name="syft:location:0:path">/usr/local/bin/redis-server</property>
       </properties>
     </component>
     <component bom-ref="pkg:deb/debian/sed@4.7-1?arch=amd64&amp;distro=debian-11&amp;package-id=cd24b1a69c7b788a" type="library">
@@ -3153,6 +3558,9 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -3172,6 +3580,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>public-domain</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:util-linux:util-linux:2.36.1-8\+deb11u1:*:*:*:*:*:*:*</cpe>
