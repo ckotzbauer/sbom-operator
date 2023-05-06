@@ -76,7 +76,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	result.Artifacts.PackageCatalog = packageCatalog
+	result.Artifacts.Packages = packageCatalog
 	result.Artifacts.LinuxDistribution = theDistro
 	result.Relationships = relationships
 
