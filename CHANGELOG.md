@@ -1,3 +1,28 @@
+## Version 0.26.1 (2023-05-13)
+
+### Bug fixes
+
+* [[`ee896258`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ee896258)] - **fix**: update syft
+
+### Security
+
+* [[`816a9ec6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/816a9ec6)] - **security**: update github.com&#x2F;docker&#x2F;distribution
+
+### Dependency updates
+
+* [[`a8815eeb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a8815eeb)] - **deps**: update module github.com&#x2F;cloudflare&#x2F;circl to v1.3.3 [security]
+* [[`e5f2c5b2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e5f2c5b2)] - **deps**: update sigstore&#x2F;cosign-installer digest to 84448ba
+* [[`aca57c53`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aca57c53)] - **deps**: update docker docker tag to v23.0.6
+* [[`0c91696b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0c91696b)] - **deps**: update alpine docker tag to v3.18
+* [[`545e2529`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/545e2529)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.10.0
+* [[`b0a87eff`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b0a87eff)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to dd950f8
+* [[`a13f11eb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a13f11eb)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.80.0
+* [[`97aaa801`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/97aaa801)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.15.1
+* [[`b73f8159`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b73f8159)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 8487cf7
+* [[`e4bf35e5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e4bf35e5)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.11.3
+* [[`49fb6fdc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/49fb6fdc)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 9b1b0c4
+
+
 ## Version 0.26.0 (2023-04-29)
 
 ### Features and improvements
