@@ -1,4 +1,4 @@
-FROM codenotary/vcn:v1.0.4 as vcn
+FROM codenotary/vcn:v1.0.5 as vcn
 FROM alpine:3.18
 
 COPY --from=vcn /bin/vcn /bin/vcn
