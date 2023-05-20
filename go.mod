@@ -13,7 +13,7 @@ require (
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.2
 	github.com/spf13/cobra v1.7.0
-	github.com/stretchr/testify v1.8.2
+	github.com/stretchr/testify v1.8.3
 	golang.org/x/exp v0.0.0-20230519143937-03e91628a987
 	k8s.io/api v0.27.2
 	k8s.io/apimachinery v0.27.2
