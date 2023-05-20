@@ -613,6 +613,8 @@ github.com/stretchr/testify v1.8.2/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o
 github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69rRypqCw=
 github.com/sylabs/sif/v2 v2.11.3 h1:EQxi5zl6i5DsbVal9HHpk/zuSx7aNLeZBy8vmvFz838=
 github.com/sylabs/sif/v2 v2.11.3/go.mod h1:0ryivqvvsncJOJjU5QQIEc77a5zKK46F+urBXMdA07w=
+github.com/sylabs/sif/v2 v2.11.4 h1:4dRvsRFVkyS7e8oD8AEL0HrJocnet05+EFW+DhVb/Ic=
+github.com/sylabs/sif/v2 v2.11.4/go.mod h1:83kqbKZFRFfFLe1ui5BH+rAxF2obICM/i3zto4ivM7s=
 github.com/sylabs/squashfs v0.6.1 h1:4hgvHnD9JGlYWwT0bPYNt9zaz23mAV3Js+VEgQoRGYQ=
 github.com/sylabs/squashfs v0.6.1/go.mod h1:ZwpbPCj0ocIvMy2br6KZmix6Gzh6fsGQcCnydMF+Kx8=
 github.com/therootcompany/xz v1.0.1 h1:CmOtsn1CbtmyYiusbfmhmkpAAETj0wBIH6kCYaX+xzw=
