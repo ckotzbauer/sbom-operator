@@ -6,14 +6,14 @@ require (
 	github.com/anchore/stereoscope v0.0.0-20230522170632-e14bc4437b2e
 	github.com/anchore/syft v0.82.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230513143633-d9352f8438c2
-	github.com/ckotzbauer/libstandard v0.0.0-20230513143705-a8c0d8222679
+	github.com/ckotzbauer/libstandard v0.0.0-20230601032622-211d40c9d69c
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/nscuro/dtrack-client v0.7.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.2
 	github.com/spf13/cobra v1.7.0
-	github.com/stretchr/testify v1.8.3
+	github.com/stretchr/testify v1.8.4
 	golang.org/x/exp v0.0.0-20230522175609-2e198f4a06a1
 	k8s.io/api v0.27.2
 	k8s.io/apimachinery v0.27.2
