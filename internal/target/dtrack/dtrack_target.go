@@ -18,9 +18,14 @@ import (
 )
 
 type DependencyTrackTarget struct {
+	clientOptions []dtrack.ClientOption
+
 	baseUrl            string
 	apiKey             string
 	podLabelTagMatcher string
+	caCertFile         string
+	clientCertFile     string
+	clientKeyFile      string
 	k8sClusterId       string
 	imageProjectMap    map[string]uuid.UUID
 }
@@ -32,12 +37,15 @@ const (
 	podNamespaceTagKey = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, k8sClusterId string) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:            baseUrl,
 		apiKey:             apiKey,
-		k8sClusterId:       k8sClusterId,
 		podLabelTagMatcher: podLabelTagMatcher,
+		caCertFile:         caCertFile,
+		clientCertFile:     clientCertFile,
+		clientKeyFile:      clientKeyFile,
+		k8sClusterId:       k8sClusterId,
 	}
 }
 
@@ -48,10 +56,36 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 	if g.apiKey == "" {
 		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackApiKey)
 	}
+	if g.caCertFile != "" {
+		if g.clientCertFile == "" {
+			return fmt.Errorf(
+				"%s provided but %s is empty",
+				internal.ConfigKeyDependencyTrackCaCertFile,
+				internal.ConfigKeyDependencyTrackClientCertFile,
+			)
+		}
+
+		if g.clientKeyFile == "" {
+			return fmt.Errorf(
+				"%s provided but %s is empty",
+				internal.ConfigKeyDependencyTrackCaCertFile,
+				internal.ConfigKeyDependencyTrackClientKeyFile,
+			)
+		}
+	}
+
 	return nil
 }
 
 func (g *DependencyTrackTarget) Initialize() error {
+	g.clientOptions = []dtrack.ClientOption{}
+
+	g.clientOptions = append(g.clientOptions, dtrack.WithAPIKey(g.apiKey))
+
+	if len(g.caCertFile) > 0 {
+		g.clientOptions = append(g.clientOptions, dtrack.WithMTLS(g.caCertFile, g.clientCertFile, g.clientKeyFile))
+	}
+
 	return nil
 }
 
@@ -63,7 +97,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		return nil
 	}
 
-	client, err := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
+	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return err
@@ -135,7 +169,10 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 }
 
 func (g *DependencyTrackTarget) LoadImages() []*libk8s.RegistryImage {
-	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
+	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	if err != nil {
+		logrus.WithError(err).Errorf("failed to init dtrack client")
+	}
 
 	if g.imageProjectMap == nil {
 		g.imageProjectMap = make(map[string]uuid.UUID)
@@ -200,7 +237,10 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
 		g.LoadImages()
 	}
 
-	client, _ := dtrack.NewClient(g.baseUrl, dtrack.WithAPIKey(g.apiKey))
+	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	if err != nil {
+		logrus.WithError(err).Errorf("failed to init dtrack client")
+	}
 
 	for _, img := range images {
 		uuid := g.imageProjectMap[img.ImageID]
