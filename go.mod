@@ -3,13 +3,13 @@ module github.com/ckotzbauer/sbom-operator
 go 1.20
 
 require (
+	github.com/DependencyTrack/client-go v0.10.0
 	github.com/anchore/stereoscope v0.0.0-20230609190519-5b5049bf4d3a
 	github.com/anchore/syft v0.83.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20230603074221-127a0e6288dd
 	github.com/ckotzbauer/libstandard v0.0.0-20230601032622-211d40c9d69c
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
-	github.com/nscuro/dtrack-client v0.7.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.7.0
