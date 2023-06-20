@@ -22,6 +22,9 @@ type Config struct {
 	DtrackBaseUrl           string   `yaml:"dtrackBaseUrl" env:"SBOM_DTRACK_BASE_URL" flag:"dtrack-base-url"`
 	DtrackApiKey            string   `yaml:"dtrackApiKey" env:"SBOM_DTRACK_API_KEY" flag:"dtrack-api-key"`
 	DtrackLabelTagMatcher   string   `yaml:"dtrackLabelTagMatcher" env:"SBOM_DTRACK_LABEL_TAG_MATCHER" flag:"dtrack-label-tag-matcher"`
+	DtrackCaCertFile        string   `yaml:"dtrackCaCertFile" env:"SBOM_DTRACK_CA_CERT_FILE" flag:"dtrack-ca-cert-file"`
+	DtrackClientCertFile    string   `yaml:"dtrackClientCertFile" env:"SBOM_DTRACK_CLIENT_CERT_FILE" flag:"dtrack-client-cert-file"`
+	DtrackClientKeyFile     string   `yaml:"dtrackClientKeyFile" env:"SBOM_DTRACK_CLIENT_KEY_FILE" flag:"dtrack-client-key-file"`
 	KubernetesClusterId     string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
 	JobImage                string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
 	JobImagePullSecret      string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
@@ -56,6 +59,9 @@ var (
 	/* #nosec */
 	ConfigKeyDependencyTrackApiKey          = "dtrack-api-key"
 	ConfigKeyDependencyTrackLabelTagMatcher = "dtrack-label-tag-matcher"
+	ConfigKeyDependencyTrackCaCertFile      = "dtrack-ca-cert-file"
+	ConfigKeyDependencyTrackClientCertFile  = "dtrack-client-cert-file"
+	ConfigKeyDependencyTrackClientKeyFile   = "dtrack-client-key-file"
 	ConfigKeyKubernetesClusterId            = "kubernetes-cluster-id"
 	ConfigKeyJobImage                       = "job-image"
 	/* #nosec */

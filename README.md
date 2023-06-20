@@ -137,6 +137,9 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-base-url` | `true` when `dtrack` target is used | `""` | Dependency-Track base URL, e.g. 'https://dtrack.example.com' |
 | `dtrack-api-key` | `true` when `dtrack` target is used | `""` | Dependency-Track API key |
 | `dtrack-label-tag-matcher` | `false` | `""` | Dependency-Track Pod-Label-Tag matcher regex |
+| `dtrack-ca-cert-file` | `false` | `""` | CA-Certificate filepath when using mTLS to connect to dtrack |
+| `dtrack-client-cert-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Certificate filepath when using mTLS to connect to dtrack |
+| `dtrack-client-key-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Key filepath when using mTLS to connect to dtrack |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
 
 Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version.
