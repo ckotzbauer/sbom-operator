@@ -100,6 +100,8 @@ github.com/anchore/stereoscope v0.0.0-20230622163731-8c7173ebcf69 h1:ph9Tdh5v0WD
 github.com/anchore/stereoscope v0.0.0-20230622163731-8c7173ebcf69/go.mod h1:0LsgHgXO4QFnk2hsYwtqd3fR18PIZXlFLIl2qb9tu3g=
 github.com/anchore/syft v0.83.1 h1:HWHuCHTfvcvlQaIJwHefNtDekjCbMpWLOLKmkxdoJcw=
 github.com/anchore/syft v0.83.1/go.mod h1:7KRcwblqUS1pau/ZjSblPOJHM8bFGeQmsbuGutGMATE=
+github.com/anchore/syft v0.84.0 h1:mU0xTGVFjuJDIr9pGjZfjcRmCdpSKsQxghZmWihdPDc=
+github.com/anchore/syft v0.84.0/go.mod h1:QM2WJFbV/mvBnb7nR1yYLm0mIw0MVhjzgd/QaxYMA/g=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.5 h1:8uQZIdzKmjc/iuPu7O2ioW48L81FgatrcpfFmiq/cCs=
@@ -714,6 +716,8 @@ golang.org/x/mod v0.6.0-dev.0.20220419223038-86c51ed26bb4/go.mod h1:jJ57K6gSWd91
 golang.org/x/mod v0.8.0/go.mod h1:iBbtSCu2XBx23ZKBPSOrRkjjQPZFPuis4dIYUhu/chs=
 golang.org/x/mod v0.10.0 h1:lFO9qtOdlre5W1jxS3r/4szv2/6iXxScdzjoBMXNhYk=
 golang.org/x/mod v0.10.0/go.mod h1:iBbtSCu2XBx23ZKBPSOrRkjjQPZFPuis4dIYUhu/chs=
+golang.org/x/mod v0.11.0 h1:bUO06HqtnRcc/7l71XBe4WcqTZ+3AH1J59zWDDwLKgU=
+golang.org/x/mod v0.11.0/go.mod h1:iBbtSCu2XBx23ZKBPSOrRkjjQPZFPuis4dIYUhu/chs=
 golang.org/x/net v0.11.0 h1:Gi2tvZIJyBtO9SDr1q9h5hEQCp/4L2RQ+ar0qjx2oNU=
 golang.org/x/net v0.11.0/go.mod h1:2L/ixqYpgIVXmeoSA/4Lu7BzTG4KIyPIryS4IsOd1oQ=
 golang.org/x/oauth2 v0.0.0-20180821212333-d2e6202438be/go.mod h1:N/0e6XlmueqKjAGxoOufVs8QHGRruUQn6yWY3a++T0U=
