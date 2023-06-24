@@ -5,7 +5,7 @@ go 1.20
 require (
 	github.com/DependencyTrack/client-go v0.10.0
 	github.com/anchore/stereoscope v0.0.0-20230622163731-8c7173ebcf69
-	github.com/anchore/syft v0.83.1
+	github.com/anchore/syft v0.84.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230603074221-127a0e6288dd
 	github.com/ckotzbauer/libstandard v0.0.0-20230601032622-211d40c9d69c
 	github.com/google/uuid v1.3.0
@@ -119,7 +119,7 @@ require (
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	golang.org/x/crypto v0.10.0 // indirect
-	golang.org/x/mod v0.10.0 // indirect
+	golang.org/x/mod v0.11.0 // indirect
 	golang.org/x/sync v0.1.0 // indirect
 	golang.org/x/tools v0.8.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
