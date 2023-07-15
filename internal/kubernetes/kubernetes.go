@@ -26,8 +26,9 @@ type KubeClient struct {
 var (
 	AnnotationTemplate = "ckotzbauer.sbom-operator.io/%s"
 	/* #nosec */
-	jobSecretName = "sbom-operator-job-config"
-	JobName       = "sbom-operator-job"
+	jobSecretName       = "sbom-operator-job-config"
+	JobName             = "sbom-operator-job"
+	updatePodMaxRetries = 3
 )
 
 func NewClient(ignoreAnnotations bool, fallbackPullSecretName string) *KubeClient {
@@ -109,14 +110,24 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 }
 
 func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
-	newPod, err := client.Client.Client.CoreV1().Pods(pod.PodNamespace).Get(context.Background(), pod.PodName, meta.GetOptions{})
-
-	if err != nil {
-		if !errors.IsNotFound(err) {
-			logrus.WithError(err).Errorf("Pod %s/%s could not be fetched!", pod.PodNamespace, pod.PodName)
+	for i := 0; i < updatePodMaxRetries; i++ {
+		err := client.updatePodAnnotation(pod)
+		if err == nil {
+			break
 		}
 
-		return
+		logrus.WithError(err).Warnf("Failed to update annotation for pod %s/%s!", pod.PodNamespace, pod.PodName)
+	}
+}
+
+func (client *KubeClient) updatePodAnnotation(pod libk8s.PodInfo) error {
+	newPod, err := client.Client.Client.CoreV1().Pods(pod.PodNamespace).Get(context.Background(), pod.PodName, meta.GetOptions{})
+	if err != nil {
+		if !errors.IsNotFound(err) {
+			return fmt.Errorf("pod could not be fetched: %w", err)
+		}
+
+		return nil
 	}
 
 	ann := newPod.Annotations
@@ -140,8 +151,10 @@ func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
 
 	_, err = client.Client.Client.CoreV1().Pods(newPod.Namespace).Update(context.Background(), newPod, meta.UpdateOptions{})
 	if err != nil {
-		logrus.WithError(err).Warnf("Pod %s/%s could not be updated!", newPod.Namespace, newPod.Name)
+		return fmt.Errorf("pod could not be updated: %w", err)
 	}
+
+	return nil
 }
 
 func (client *KubeClient) HasAnnotation(annotations map[string]string, container *libk8s.ContainerInfo) bool {
