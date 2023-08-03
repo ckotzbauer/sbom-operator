@@ -1,7 +1,7 @@
 {
  "artifacts": [
   {
-   "id": "92b19c7750fb559d",
+   "id": "538dff49e6576a74",
    "name": "alpine-baselayout",
    "version": "3.4.0-r0",
    "type": "apk",
@@ -16,7 +16,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -34,7 +48,6 @@
     "originPackage": "alpine-baselayout",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "3.4.0-r0",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://git.alpinelinux.org/cgit/aports/tree/main/alpine-baselayout",
     "description": "Alpine base dir structure and init scripts",
@@ -374,7 +387,7 @@
    }
   },
   {
-   "id": "291d1267b40d636f",
+   "id": "2b13c37ad68dba47",
    "name": "alpine-baselayout-data",
    "version": "3.4.0-r0",
    "type": "apk",
@@ -389,7 +402,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -411,7 +438,6 @@
     "originPackage": "alpine-baselayout",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "3.4.0-r0",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://git.alpinelinux.org/cgit/aports/tree/main/alpine-baselayout",
     "description": "Alpine base dir structure and init scripts",
@@ -540,7 +566,7 @@
    }
   },
   {
-   "id": "2b5e23d349b556cf",
+   "id": "52cdfe05331430a5",
    "name": "alpine-keys",
    "version": "2.4-r1",
    "type": "apk",
@@ -555,7 +581,21 @@
     }
    ],
    "licenses": [
-    "MIT"
+    {
+     "value": "MIT",
+     "spdxExpression": "MIT",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -573,7 +613,6 @@
     "originPackage": "alpine-keys",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "2.4-r1",
-    "license": "MIT",
     "architecture": "x86_64",
     "url": "https://alpinelinux.org",
     "description": "Public keys for Alpine Linux packages",
@@ -980,7 +1019,7 @@
    }
   },
   {
-   "id": "e5f757b0df1f62bc",
+   "id": "1d0d53b03364a499",
    "name": "apk-tools",
    "version": "2.12.10-r1",
    "type": "apk",
@@ -995,7 +1034,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1013,7 +1066,6 @@
     "originPackage": "apk-tools",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "2.12.10-r1",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://gitlab.alpinelinux.org/alpine/apk-tools",
     "description": "Alpine Package Keeper - package manager for alpine",
@@ -1129,7 +1181,7 @@
    }
   },
   {
-   "id": "757a346b43f898cc",
+   "id": "db8f2e0215e78df1",
    "name": "busybox",
    "version": "1.35.0-r27",
    "type": "apk",
@@ -1144,7 +1196,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1157,7 +1223,6 @@
     "originPackage": "busybox",
     "maintainer": "Sören Tempel <soeren+alpine@soeren-tempel.net>",
     "version": "1.35.0-r27",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://busybox.net/",
     "description": "Size optimized toolbox of many common UNIX utilities",
@@ -1293,7 +1358,7 @@
    }
   },
   {
-   "id": "6dd813189bb733c8",
+   "id": "afd7fb2b76317ef2",
    "name": "busybox-binsh",
    "version": "1.35.0-r27",
    "type": "apk",
@@ -1308,7 +1373,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1326,7 +1405,6 @@
     "originPackage": "busybox",
     "maintainer": "Sören Tempel <soeren+alpine@soeren-tempel.net>",
     "version": "1.35.0-r27",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://busybox.net/",
     "description": "busybox ash /bin/sh",
@@ -1359,7 +1437,7 @@
    }
   },
   {
-   "id": "893d472df8998cbd",
+   "id": "4f3ed727b35c3fba",
    "name": "ca-certificates-bundle",
    "version": "20220614-r2",
    "type": "apk",
@@ -1374,9 +1452,21 @@
     }
    ],
    "licenses": [
-    "MPL-2.0",
-    "AND",
-    "MIT"
+    {
+     "value": "MPL-2.0 AND MIT",
+     "spdxExpression": "MPL-2.0 AND MIT",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1400,7 +1490,6 @@
     "originPackage": "ca-certificates",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "20220614-r2",
-    "license": "MPL-2.0 AND MIT",
     "architecture": "x86_64",
     "url": "https://www.mozilla.org/en-US/about/governance/policies/security-group/certs/",
     "description": "Pre generated bundle of Mozilla certificates",
@@ -1466,7 +1555,7 @@
    }
   },
   {
-   "id": "8126b232e2d3c608",
+   "id": "3da1da8b4149460f",
    "name": "libc-utils",
    "version": "0.7.2-r3",
    "type": "apk",
@@ -1481,9 +1570,21 @@
     }
    ],
    "licenses": [
-    "BSD-2-Clause",
-    "AND",
-    "BSD-3-Clause"
+    {
+     "value": "BSD-2-Clause AND BSD-3-Clause",
+     "spdxExpression": "BSD-2-Clause AND BSD-3-Clause",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1501,7 +1602,6 @@
     "originPackage": "libc-dev",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "0.7.2-r3",
-    "license": "BSD-2-Clause AND BSD-3-Clause",
     "architecture": "x86_64",
     "url": "https://alpinelinux.org",
     "description": "Meta package to pull in correct libc",
@@ -1517,7 +1617,7 @@
    }
   },
   {
-   "id": "20fd21bab4a9be13",
+   "id": "a70eec9a6565b463",
    "name": "libcrypto3",
    "version": "3.0.7-r0",
    "type": "apk",
@@ -1532,7 +1632,21 @@
     }
    ],
    "licenses": [
-    "Apache-2.0"
+    {
+     "value": "Apache-2.0",
+     "spdxExpression": "Apache-2.0",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1548,7 +1662,6 @@
     "originPackage": "openssl",
     "maintainer": "Ariadne Conill <ariadne@dereferenced.org>",
     "version": "3.0.7-r0",
-    "license": "Apache-2.0",
     "architecture": "x86_64",
     "url": "https://www.openssl.org/",
     "description": "Crypto library from openssl",
@@ -1725,7 +1838,7 @@
    }
   },
   {
-   "id": "7ae494d499484cc8",
+   "id": "ad13da443052d69b",
    "name": "libssl3",
    "version": "3.0.7-r0",
    "type": "apk",
@@ -1740,7 +1853,21 @@
     }
    ],
    "licenses": [
-    "Apache-2.0"
+    {
+     "value": "Apache-2.0",
+     "spdxExpression": "Apache-2.0",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1756,7 +1883,6 @@
     "originPackage": "openssl",
     "maintainer": "Ariadne Conill <ariadne@dereferenced.org>",
     "version": "3.0.7-r0",
-    "license": "Apache-2.0",
     "architecture": "x86_64",
     "url": "https://www.openssl.org/",
     "description": "SSL shared libraries",
@@ -1805,7 +1931,7 @@
    }
   },
   {
-   "id": "d9700f02cf26e8b8",
+   "id": "a82a419b6960f70b",
    "name": "musl",
    "version": "1.2.3-r4",
    "type": "apk",
@@ -1820,7 +1946,21 @@
     }
    ],
    "licenses": [
-    "MIT"
+    {
+     "value": "MIT",
+     "spdxExpression": "MIT",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1835,7 +1975,6 @@
     "originPackage": "musl",
     "maintainer": "Timo Teräs <timo.teras@iki.fi>",
     "version": "1.2.3-r4",
-    "license": "MIT",
     "architecture": "x86_64",
     "url": "https://musl.libc.org/",
     "description": "the musl c library (libc) implementation",
@@ -1875,7 +2014,7 @@
    }
   },
   {
-   "id": "f71ecf5267e6c37b",
+   "id": "96aaf79fc685e220",
    "name": "musl-utils",
    "version": "1.2.3-r4",
    "type": "apk",
@@ -1890,11 +2029,21 @@
     }
    ],
    "licenses": [
-    "MIT",
-    "AND",
-    "BSD-2-Clause",
-    "AND",
-    "GPL-2.0-or-later"
+    {
+     "value": "MIT AND BSD-2-Clause AND GPL-2.0-or-later",
+     "spdxExpression": "MIT AND BSD-2-Clause AND GPL-2.0-or-later",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -1914,7 +2063,6 @@
     "originPackage": "musl",
     "maintainer": "Timo Teräs <timo.teras@iki.fi>",
     "version": "1.2.3-r4",
-    "license": "MIT AND BSD-2-Clause AND GPL-2.0-or-later",
     "architecture": "x86_64",
     "url": "https://musl.libc.org/",
     "description": "the musl c library (libc) implementation",
@@ -1997,7 +2145,7 @@
    }
   },
   {
-   "id": "e903138d19e85b80",
+   "id": "014ce49f90e359d5",
    "name": "scanelf",
    "version": "1.3.5-r1",
    "type": "apk",
@@ -2012,7 +2160,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -2025,7 +2187,6 @@
     "originPackage": "pax-utils",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "1.3.5-r1",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://wiki.gentoo.org/wiki/Hardened/PaX_Utilities",
     "description": "Scan ELF binaries for stuff",
@@ -2060,7 +2221,7 @@
    }
   },
   {
-   "id": "3e67765eb67607e0",
+   "id": "c772ac8d3166a947",
    "name": "ssl_client",
    "version": "1.35.0-r27",
    "type": "apk",
@@ -2075,7 +2236,21 @@
     }
    ],
    "licenses": [
-    "GPL-2.0-only"
+    {
+     "value": "GPL-2.0-only",
+     "spdxExpression": "GPL-2.0-only",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -2093,7 +2268,6 @@
     "originPackage": "busybox",
     "maintainer": "Sören Tempel <soeren+alpine@soeren-tempel.net>",
     "version": "1.35.0-r27",
-    "license": "GPL-2.0-only",
     "architecture": "x86_64",
     "url": "https://busybox.net/",
     "description": "EXternal ssl_client for busybox wget",
@@ -2130,7 +2304,7 @@
    }
   },
   {
-   "id": "94014313cfcd2b71",
+   "id": "b8ee1f66780f175f",
    "name": "zlib",
    "version": "1.2.13-r0",
    "type": "apk",
@@ -2145,7 +2319,21 @@
     }
    ],
    "licenses": [
-    "Zlib"
+    {
+     "value": "Zlib",
+     "spdxExpression": "Zlib",
+     "type": "declared",
+     "urls": [],
+     "locations": [
+      {
+       "path": "/lib/apk/db/installed",
+       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
+       "annotations": {
+        "evidence": "primary"
+       }
+      }
+     ]
+    }
    ],
    "language": "",
    "cpes": [
@@ -2158,7 +2346,6 @@
     "originPackage": "zlib",
     "maintainer": "Natanael Copa <ncopa@alpinelinux.org>",
     "version": "1.2.13-r0",
-    "license": "Zlib",
     "architecture": "x86_64",
     "url": "https://zlib.net/",
     "description": "A compression/decompression Library",
@@ -2202,332 +2389,647 @@
  ],
  "artifactRelationships": [
   {
-   "parent": "20fd21bab4a9be13",
-   "child": "2af827ce4eb04c44",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "2fb145001610fece",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "3e67765eb67607e0",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "5600d1c6edad3f99",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "5d597ac17bab796d",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "7ae494d499484cc8",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
+   "parent": "014ce49f90e359d5",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "20fd21bab4a9be13",
-   "child": "8737e8bacc56825b",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "8915f671c2566a43",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "8a6819249a7e7dc1",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "a5bf1607543b5b59",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "b64485e55e0c989f",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "be9f89b7fe9dfe59",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "ccd614acff73002",
-   "type": "contains"
-  },
-  {
-   "parent": "20fd21bab4a9be13",
-   "child": "e5f757b0df1f62bc",
+   "parent": "014ce49f90e359d5",
+   "child": "96aaf79fc685e220",
    "type": "dependency-of"
   },
   {
-   "parent": "20fd21bab4a9be13",
-   "child": "fa8cba6e97a51f3f",
+   "parent": "014ce49f90e359d5",
+   "child": "9d90ebcafcd55681",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "1d0d53b03364a499",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "1d0d53b03364a499",
+   "child": "b62941e48f78a551",
+   "type": "contains"
+  },
+  {
+   "parent": "1d0d53b03364a499",
+   "child": "c17c353c764ceca6",
+   "type": "contains"
+  },
+  {
+   "parent": "2b13c37ad68dba47",
    "child": "1b3dea58788a55c9",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "297728d38e6c3b1e",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "30e74f29ee03c324",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "420bcb99f42f9b4e",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "43760edd5f076d95",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "4cfcb9beb5ec158e",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
+   "child": "538dff49e6576a74",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "2b13c37ad68dba47",
    "child": "6ee813d1f1b96196",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "82e81eb835f5928a",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "86286181da6fdaf1",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
-   "child": "92b19c7750fb559d",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "94c1e38e73ebdcfa",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "f4005cf7c106187b",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "f570f9d78db7024c",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "f821e8e904e3074e",
    "type": "contains"
   },
   {
-   "parent": "291d1267b40d636f",
+   "parent": "2b13c37ad68dba47",
    "child": "f93a6627074e5146",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "3da1da8b4149460f",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "4f3ed727b35c3fba",
+   "child": "1d0d53b03364a499",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "4f3ed727b35c3fba",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "4f3ed727b35c3fba",
+   "child": "b3e5c4ebfc3fb889",
+   "type": "contains"
+  },
+  {
+   "parent": "52cdfe05331430a5",
+   "child": "02304fbb06e0b918",
+   "type": "contains"
+  },
+  {
+   "parent": "52cdfe05331430a5",
+   "child": "09291d424386d91c",
+   "type": "contains"
+  },
+  {
+   "parent": "52cdfe05331430a5",
+   "child": "0cee099824762ede",
+   "type": "contains"
+  },
+  {
+   "parent": "52cdfe05331430a5",
    "child": "100dbb1df2ee43bb",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "1b2d2e4d9cafb7a0",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
-   "child": "2304fbb06e0b918",
-   "type": "contains"
-  },
-  {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "33ae754a8456140a",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "3942e7f08442fb9f",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "3e6faedd4c78c48c",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "4c2790666ef81ec8",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "5c52b5071103b8a7",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "74ad339a5039a9ee",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "7fba3ded81003204",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "82960f74611c4c79",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "867f08ec2c8a6f71",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "8f43d3ae34ebf166",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "9002ef3c8cc647b3",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
-   "child": "9291d424386d91c",
-   "type": "contains"
-  },
-  {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "93a4e70ff064f35c",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "9da547fc150a5d17",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "a997fb045b34b877",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "c60cba03839369ce",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
-   "child": "cee099824762ede",
-   "type": "contains"
-  },
-  {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "d6adeff2a04b45cc",
    "type": "contains"
   },
   {
-   "parent": "2b5e23d349b556cf",
+   "parent": "52cdfe05331430a5",
    "child": "ea87b9084cefdae6",
    "type": "contains"
   },
   {
-   "parent": "3e67765eb67607e0",
+   "parent": "538dff49e6576a74",
+   "child": "094bea11cff9f19c",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "36878a3c636cdc1c",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "66d89f7c176eb3f0",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "3e67765eb67607e0",
+   "parent": "538dff49e6576a74",
+   "child": "8a949d754445a148",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "a6604088a2ee324b",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "ab06f2cdb343e5ef",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "c31a39c4fccebddc",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "cce2bc161789055e",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "da92fc1d4e9d944b",
+   "type": "contains"
+  },
+  {
+   "parent": "538dff49e6576a74",
+   "child": "f20d3b4d133262e7",
+   "type": "contains"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "0e0d5a5e09228031",
+   "type": "contains"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "2fd74bf1d1727fee",
+   "type": "contains"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "3da1da8b4149460f",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "3f46a173249bb671",
+   "type": "contains"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "a07d64adfc747525",
+   "type": "contains"
+  },
+  {
+   "parent": "96aaf79fc685e220",
+   "child": "ecbdb7fee3bb5035",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "014ce49f90e359d5",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "1d0d53b03364a499",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "2b13c37ad68dba47",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "3da1da8b4149460f",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "4f3ed727b35c3fba",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "52cdfe05331430a5",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "538dff49e6576a74",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "96aaf79fc685e220",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "a70eec9a6565b463",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "a82a419b6960f70b",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "ad13da443052d69b",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "afd7fb2b76317ef2",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "b8ee1f66780f175f",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "c39d25e7a774b551",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "c772ac8d3166a947",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "db8f2e0215e78df1",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "0ccd614acff73002",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "1d0d53b03364a499",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "2af827ce4eb04c44",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "2fb145001610fece",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "5600d1c6edad3f99",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "5d597ac17bab796d",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "8737e8bacc56825b",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "8915f671c2566a43",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "8a6819249a7e7dc1",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "a5bf1607543b5b59",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "ad13da443052d69b",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "b64485e55e0c989f",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "be9f89b7fe9dfe59",
+   "type": "contains"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "c772ac8d3166a947",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a70eec9a6565b463",
+   "child": "fa8cba6e97a51f3f",
+   "type": "contains"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "014ce49f90e359d5",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "1d0d53b03364a499",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "1d0d53b03364a499",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "221fe91bb61ea3b7",
+   "type": "contains"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "96aaf79fc685e220",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "a70eec9a6565b463",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "ad13da443052d69b",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "b8ee1f66780f175f",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "c772ac8d3166a947",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a82a419b6960f70b",
+   "child": "db8f2e0215e78df1",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "ad13da443052d69b",
+   "child": "1d0d53b03364a499",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "ad13da443052d69b",
+   "child": "3849cef6b5fb9ae5",
+   "type": "contains"
+  },
+  {
+   "parent": "ad13da443052d69b",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "ad13da443052d69b",
+   "child": "c772ac8d3166a947",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "afd7fb2b76317ef2",
+   "child": "0a21cea1ea334e33",
+   "type": "contains"
+  },
+  {
+   "parent": "afd7fb2b76317ef2",
+   "child": "538dff49e6576a74",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "afd7fb2b76317ef2",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "b8ee1f66780f175f",
+   "child": "1d0d53b03364a499",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "b8ee1f66780f175f",
+   "child": "33c427473a67bcab",
+   "type": "contains"
+  },
+  {
+   "parent": "b8ee1f66780f175f",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "c39d25e7a774b551",
+   "child": "0a21cea1ea334e33",
+   "type": "evident-by"
+  },
+  {
+   "parent": "c772ac8d3166a947",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "c772ac8d3166a947",
    "child": "93acda700c901314",
    "type": "contains"
   },
   {
-   "parent": "6dd813189bb733c8",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "6dd813189bb733c8",
-   "child": "92b19c7750fb559d",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "6dd813189bb733c8",
-   "child": "a21cea1ea334e33",
+   "parent": "db8f2e0215e78df1",
+   "child": "0a21cea1ea334e33",
    "type": "contains"
   },
   {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "4e3b122247ba4ffb",
    "type": "contains"
   },
   {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "63a52656586953e0",
    "type": "contains"
   },
   {
-   "parent": "757a346b43f898cc",
-   "child": "6dd813189bb733c8",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "757a346b43f898cc",
-   "child": "a21cea1ea334e33",
-   "type": "contains"
+   "parent": "db8f2e0215e78df1",
+   "child": "afd7fb2b76317ef2",
+   "type": "dependency-of"
   },
   {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "c39d25e7a774b551",
    "type": "ownership-by-file-overlap",
    "metadata": {
@@ -2537,339 +3039,24 @@
    }
   },
   {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "e3e2f3630e2006e6",
    "type": "contains"
   },
   {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "e62ee70c9a64f2d6",
    "type": "contains"
   },
   {
-   "parent": "757a346b43f898cc",
+   "parent": "db8f2e0215e78df1",
    "child": "fdb291b1d0d63808",
-   "type": "contains"
-  },
-  {
-   "parent": "7ae494d499484cc8",
-   "child": "3849cef6b5fb9ae5",
-   "type": "contains"
-  },
-  {
-   "parent": "7ae494d499484cc8",
-   "child": "3e67765eb67607e0",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "7ae494d499484cc8",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "7ae494d499484cc8",
-   "child": "e5f757b0df1f62bc",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "8126b232e2d3c608",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "893d472df8998cbd",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "893d472df8998cbd",
-   "child": "b3e5c4ebfc3fb889",
-   "type": "contains"
-  },
-  {
-   "parent": "893d472df8998cbd",
-   "child": "e5f757b0df1f62bc",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "36878a3c636cdc1c",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "66d89f7c176eb3f0",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "8a949d754445a148",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "94bea11cff9f19c",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "a6604088a2ee324b",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "ab06f2cdb343e5ef",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "c31a39c4fccebddc",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "cce2bc161789055e",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "da92fc1d4e9d944b",
-   "type": "contains"
-  },
-  {
-   "parent": "92b19c7750fb559d",
-   "child": "f20d3b4d133262e7",
-   "type": "contains"
-  },
-  {
-   "parent": "94014313cfcd2b71",
-   "child": "33c427473a67bcab",
-   "type": "contains"
-  },
-  {
-   "parent": "94014313cfcd2b71",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "94014313cfcd2b71",
-   "child": "e5f757b0df1f62bc",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "20fd21bab4a9be13",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "291d1267b40d636f",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "2b5e23d349b556cf",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "3e67765eb67607e0",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "6dd813189bb733c8",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "757a346b43f898cc",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "7ae494d499484cc8",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "8126b232e2d3c608",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "893d472df8998cbd",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "92b19c7750fb559d",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "94014313cfcd2b71",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "c39d25e7a774b551",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "d9700f02cf26e8b8",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "e5f757b0df1f62bc",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "e903138d19e85b80",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "f71ecf5267e6c37b",
-   "type": "contains"
-  },
-  {
-   "parent": "c39d25e7a774b551",
-   "child": "a21cea1ea334e33",
-   "type": "evident-by"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "20fd21bab4a9be13",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "221fe91bb61ea3b7",
-   "type": "contains"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "3e67765eb67607e0",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "757a346b43f898cc",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "7ae494d499484cc8",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "94014313cfcd2b71",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "e5f757b0df1f62bc",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "e5f757b0df1f62bc",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "e903138d19e85b80",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "d9700f02cf26e8b8",
-   "child": "f71ecf5267e6c37b",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "e5f757b0df1f62bc",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "e5f757b0df1f62bc",
-   "child": "b62941e48f78a551",
-   "type": "contains"
-  },
-  {
-   "parent": "e5f757b0df1f62bc",
-   "child": "c17c353c764ceca6",
-   "type": "contains"
-  },
-  {
-   "parent": "e903138d19e85b80",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "e903138d19e85b80",
-   "child": "9d90ebcafcd55681",
-   "type": "contains"
-  },
-  {
-   "parent": "e903138d19e85b80",
-   "child": "f71ecf5267e6c37b",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "2fd74bf1d1727fee",
-   "type": "contains"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "3f46a173249bb671",
-   "type": "contains"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "8126b232e2d3c608",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "a07d64adfc747525",
-   "type": "contains"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "e0d5a5e09228031",
-   "type": "contains"
-  },
-  {
-   "parent": "f71ecf5267e6c37b",
-   "child": "ecbdb7fee3bb5035",
    "type": "contains"
   }
  ],
  "files": [
   {
-   "id": "a21cea1ea334e33",
+   "id": "0a21cea1ea334e33",
    "location": {
     "path": "/bin/busybox",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -2897,7 +3084,7 @@
    }
   },
   {
-   "id": "cee099824762ede",
+   "id": "0cee099824762ede",
    "location": {
     "path": "/etc/apk/keys/alpine-devel@lists.alpinelinux.org-6165ee59.rsa.pub",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -3030,7 +3217,7 @@
    }
   },
   {
-   "id": "94bea11cff9f19c",
+   "id": "094bea11cff9f19c",
    "location": {
     "path": "/etc/profile.d/README",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -3212,7 +3399,7 @@
    }
   },
   {
-   "id": "e0d5a5e09228031",
+   "id": "0e0d5a5e09228031",
    "location": {
     "path": "/usr/bin/getconf",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -3282,7 +3469,7 @@
    }
   },
   {
-   "id": "ccd614acff73002",
+   "id": "0ccd614acff73002",
    "location": {
     "path": "/usr/lib/ossl-modules/legacy.so",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -3380,7 +3567,7 @@
    }
   },
   {
-   "id": "2304fbb06e0b918",
+   "id": "02304fbb06e0b918",
    "location": {
     "path": "/usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616ac3bc.rsa.pub",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -3394,7 +3581,7 @@
    }
   },
   {
-   "id": "9291d424386d91c",
+   "id": "09291d424386d91c",
    "location": {
     "path": "/usr/share/apk/keys/alpine-devel@lists.alpinelinux.org-616ae350.rsa.pub",
     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82"
@@ -3417,8 +3604,10 @@
  ],
  "source": {
   "id": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+  "name": "alpine",
+  "version": "sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
   "type": "image",
-  "target": {
+  "metadata": {
    "userInput": "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
    "imageID": "sha256:31003d392b8075e5dbc93a0bfd29cf4965c1d456a7eeeb6ef815af1bea375e0d",
    "manifestDigest": "sha256:9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
@@ -3451,7 +3640,7 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.79.0",
+  "version": "0.86.1",
   "configuration": {
    "configPath": "",
    "verbosity": 0,
@@ -3489,6 +3678,9 @@
    },
    "linux-kernel": {
     "catalog-modules": true
+   },
+   "python": {
+    "guess-unpinned-requirements": false
    },
    "attest": {},
    "file-metadata": {
@@ -3532,12 +3724,22 @@
    "exclude": [],
    "platform": "",
    "name": "",
+   "source": {
+    "name": "",
+    "version": "",
+    "file": {
+     "digests": [
+      "sha256"
+     ]
+    }
+   },
    "parallelism": 1,
-   "default-image-pull-source": ""
+   "default-image-pull-source": "",
+   "base-path": ""
   }
  },
  "schema": {
-  "version": "7.1.4",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-7.1.4.json"
+  "version": "10.0.0",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-10.0.0.json"
  }
 }

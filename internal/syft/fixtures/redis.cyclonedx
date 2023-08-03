@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:125bac55-dc4c-4ee0-b5b9-7111a25ee00b" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:43727ef0-e0aa-4eb8-80d5-b7b24cfbd188" version="1">
   <metadata>
-    <timestamp>2023-04-29T09:40:54+02:00</timestamp>
+    <timestamp>2023-08-03T15:14:49+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.79.0</version>
+        <version>0.86.1</version>
       </tool>
     </tools>
     <component bom-ref="8464dd735b32ece2" type="container">
-      <name>redis@sha256:fdaa0102e0c66802845aa5c961cb89a091a188056811802383660cd9e10889da</name>
-      <version>sha256:44ab680808b4ce24bdbb45e004b5f53c97b25938434883cb4091b183e43050a8</version>
+      <name>redis</name>
+      <version>sha256:fdaa0102e0c66802845aa5c961cb89a091a188056811802383660cd9e10889da</version>
     </component>
   </metadata>
   <components>
-    <component bom-ref="pkg:deb/debian/adduser@3.118?arch=all&amp;distro=debian-11&amp;package-id=3e9282034226b93f" type="library">
+    <component bom-ref="pkg:deb/debian/adduser@3.118?arch=all&amp;distro=debian-11&amp;package-id=fa3d4bdfaf909c6b" type="library">
       <publisher>Debian Adduser Developers &lt;adduser@packages.debian.org&gt;</publisher>
       <name>adduser</name>
       <version>3.118</version>
@@ -41,7 +41,7 @@
         <property name="syft:metadata:installedSize">849</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/apt@2.2.4?arch=amd64&amp;distro=debian-11&amp;package-id=1cce537379623b25" type="library">
+    <component bom-ref="pkg:deb/debian/apt@2.2.4?arch=amd64&amp;distro=debian-11&amp;package-id=35d8a2a477e2fc2f" type="library">
       <publisher>APT Development Team &lt;deity@lists.debian.org&gt;</publisher>
       <name>apt</name>
       <version>2.2.4</version>
@@ -70,7 +70,7 @@
         <property name="syft:metadata:installedSize">4337</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/base-files@11.1+deb11u5?arch=amd64&amp;distro=debian-11&amp;package-id=8a4d0a5e2afa8cb4" type="library">
+    <component bom-ref="pkg:deb/debian/base-files@11.1+deb11u5?arch=amd64&amp;distro=debian-11&amp;package-id=5f81f40e54f9eaa3" type="library">
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>base-files</name>
       <version>11.1+deb11u5</version>
@@ -101,7 +101,7 @@
         <property name="syft:metadata:installedSize">340</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/base-passwd@3.5.51?arch=amd64&amp;distro=debian-11&amp;package-id=7ae3e2ba2e10f31" type="library">
+    <component bom-ref="pkg:deb/debian/base-passwd@3.5.51?arch=amd64&amp;distro=debian-11&amp;package-id=dadb9954548661a6" type="library">
       <publisher>Colin Watson &lt;cjwatson@debian.org&gt;</publisher>
       <name>base-passwd</name>
       <version>3.5.51</version>
@@ -133,7 +133,7 @@
         <property name="syft:metadata:installedSize">243</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/bash@5.1-2+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=94b35b4f7d874a43" type="library">
+    <component bom-ref="pkg:deb/debian/bash@5.1-2+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=e32e410796716c30" type="library">
       <publisher>Matthias Klose &lt;doko@debian.org&gt;</publisher>
       <name>bash</name>
       <version>5.1-2+deb11u1</version>
@@ -159,7 +159,7 @@
         <property name="syft:metadata:installedSize">6469</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/bsdutils@1:2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux%402.36.1-8+deb11u1&amp;distro=debian-11&amp;package-id=677e6ace24dce684" type="library">
+    <component bom-ref="pkg:deb/debian/bsdutils@1:2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux%402.36.1-8+deb11u1&amp;distro=debian-11&amp;package-id=4d5fea29af890d85" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>bsdutils</name>
       <version>1:2.36.1-8+deb11u1</version>
@@ -186,9 +186,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -208,6 +205,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -230,7 +230,7 @@
         <property name="syft:metadata:sourceVersion">2.36.1-8+deb11u1</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/coreutils@8.32-4+b1?arch=amd64&amp;upstream=coreutils%408.32-4&amp;distro=debian-11&amp;package-id=65bac153c492b66e" type="library">
+    <component bom-ref="pkg:deb/debian/coreutils@8.32-4+b1?arch=amd64&amp;upstream=coreutils%408.32-4&amp;distro=debian-11&amp;package-id=daeac3deb7976b32" type="library">
       <publisher>Michael Stone &lt;mstone@debian.org&gt;</publisher>
       <name>coreutils</name>
       <version>8.32-4+b1</version>
@@ -256,19 +256,13 @@
         <property name="syft:metadata:sourceVersion">8.32-4</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/dash@0.5.11+git20200708+dd9ef66-5?arch=amd64&amp;distro=debian-11&amp;package-id=19db7775ce4c27be" type="library">
+    <component bom-ref="pkg:deb/debian/dash@0.5.11+git20200708+dd9ef66-5?arch=amd64&amp;distro=debian-11&amp;package-id=8fbbfa5d1ef18185" type="library">
       <publisher>Andrej Shadura &lt;andrewsh@debian.org&gt;</publisher>
       <name>dash</name>
       <version>0.5.11+git20200708+dd9ef66-5</version>
       <licenses>
         <license>
           <id>BSD-3-Clause</id>
-        </license>
-        <license>
-          <id>BSD-3-Clause</id>
-        </license>
-        <license>
-          <name>Expat</name>
         </license>
         <license>
           <id>FSFUL</id>
@@ -281,6 +275,9 @@
         </license>
         <license>
           <id>GPL-2.0-or-later</id>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -301,7 +298,7 @@
         <property name="syft:metadata:installedSize">221</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/debconf@1.5.77?arch=all&amp;distro=debian-11&amp;package-id=99525df5637687bd" type="library">
+    <component bom-ref="pkg:deb/debian/debconf@1.5.77?arch=all&amp;distro=debian-11&amp;package-id=499becf1f8450136" type="library">
       <publisher>Debconf Developers &lt;debconf-devel@lists.alioth.debian.org&gt;</publisher>
       <name>debconf</name>
       <version>1.5.77</version>
@@ -327,7 +324,7 @@
         <property name="syft:metadata:installedSize">517</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all&amp;distro=debian-11&amp;package-id=f7fcb44a58e72708" type="library">
+    <component bom-ref="pkg:deb/debian/debian-archive-keyring@2021.1.1?arch=all&amp;distro=debian-11&amp;package-id=ae1f10af1a7b69b2" type="library">
       <publisher>Debian Release Team &lt;packages@release.debian.org&gt;</publisher>
       <name>debian-archive-keyring</name>
       <version>2021.1.1</version>
@@ -362,7 +359,7 @@
         <property name="syft:metadata:installedSize">234</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/debianutils@4.11.2?arch=amd64&amp;distro=debian-11&amp;package-id=4cd4f150dae8c295" type="library">
+    <component bom-ref="pkg:deb/debian/debianutils@4.11.2?arch=amd64&amp;distro=debian-11&amp;package-id=97230e52d627b890" type="library">
       <publisher>Clint Adams &lt;clint@debian.org&gt;</publisher>
       <name>debianutils</name>
       <version>4.11.2</version>
@@ -386,7 +383,7 @@
         <property name="syft:metadata:installedSize">230</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/diffutils@1:3.7-5?arch=amd64&amp;distro=debian-11&amp;package-id=9133f9a320bf77e1" type="library">
+    <component bom-ref="pkg:deb/debian/diffutils@1:3.7-5?arch=amd64&amp;distro=debian-11&amp;package-id=f6cf059ab218a6c7" type="library">
       <publisher>Santiago Vila &lt;sanvila@debian.org&gt;</publisher>
       <name>diffutils</name>
       <version>1:3.7-5</version>
@@ -413,7 +410,7 @@
         <property name="syft:metadata:installedSize">1598</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/dpkg@1.20.12?arch=amd64&amp;distro=debian-11&amp;package-id=3dbbad249b74a866" type="library">
+    <component bom-ref="pkg:deb/debian/dpkg@1.20.12?arch=amd64&amp;distro=debian-11&amp;package-id=64660788c7842368" type="library">
       <publisher>Dpkg Developers &lt;debian-dpkg@lists.debian.org&gt;</publisher>
       <name>dpkg</name>
       <version>1.20.12</version>
@@ -451,7 +448,7 @@
         <property name="syft:metadata:installedSize">6980</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64&amp;distro=debian-11&amp;package-id=7c4baa682137e759" type="library">
+    <component bom-ref="pkg:deb/debian/e2fsprogs@1.46.2-2?arch=amd64&amp;distro=debian-11&amp;package-id=221d43b05a961959" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>e2fsprogs</name>
       <version>1.46.2-2</version>
@@ -480,7 +477,7 @@
         <property name="syft:metadata:installedSize">1511</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/findutils@4.8.0-1?arch=amd64&amp;distro=debian-11&amp;package-id=b503e3d45616f33c" type="library">
+    <component bom-ref="pkg:deb/debian/findutils@4.8.0-1?arch=amd64&amp;distro=debian-11&amp;package-id=59f9ee4984bb1663" type="library">
       <publisher>Andreas Metzler &lt;ametzler@debian.org&gt;</publisher>
       <name>findutils</name>
       <version>4.8.0-1</version>
@@ -507,25 +504,25 @@
         <property name="syft:metadata:installedSize">1959</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gcc-10-base@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=742204f033ae5a1e" type="library">
+    <component bom-ref="pkg:deb/debian/gcc-10-base@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=41f61caa2a5d2eeb" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>gcc-10-base</name>
       <version>10.2.1-6</version>
       <licenses>
         <license>
-          <name>Artistic</name>
-        </license>
-        <license>
           <id>GFDL-1.2-only</id>
-        </license>
-        <license>
-          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>Artistic</name>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <name>LGPL</name>
@@ -556,19 +553,13 @@
         <property name="syft:metadata:source">gcc-10</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gcc-9-base@9.3.0-22?arch=amd64&amp;upstream=gcc-9&amp;distro=debian-11&amp;package-id=57c0768e353bbfc8" type="library">
+    <component bom-ref="pkg:deb/debian/gcc-9-base@9.3.0-22?arch=amd64&amp;upstream=gcc-9&amp;distro=debian-11&amp;package-id=a25a8593467edfe5" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>gcc-9-base</name>
       <version>9.3.0-22</version>
       <licenses>
         <license>
-          <name>Artistic</name>
-        </license>
-        <license>
           <id>GFDL-1.2-only</id>
-        </license>
-        <license>
-          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
@@ -577,10 +568,16 @@
           <id>GPL-3.0-only</id>
         </license>
         <license>
-          <name>LGPL</name>
+          <id>LGPL-2.1-or-later</id>
         </license>
         <license>
-          <id>LGPL-2.1-or-later</id>
+          <name>Artistic</name>
+        </license>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gcc-9-base:gcc-9-base:9.3.0-22:*:*:*:*:*:*:*</cpe>
@@ -661,7 +658,7 @@
         <property name="syft:metadata:mainModule">github.com/tianon/gosu</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gpgv@2.2.27-2+deb11u2?arch=amd64&amp;upstream=gnupg2&amp;distro=debian-11&amp;package-id=b6346590c45ba7ab" type="library">
+    <component bom-ref="pkg:deb/debian/gpgv@2.2.27-2+deb11u2?arch=amd64&amp;upstream=gnupg2&amp;distro=debian-11&amp;package-id=9d0df76821246a9c" type="library">
       <publisher>Debian GnuPG Maintainers &lt;pkg-gnupg-maint@lists.alioth.debian.org&gt;</publisher>
       <name>gpgv</name>
       <version>2.2.27-2+deb11u2</version>
@@ -671,9 +668,6 @@
         </license>
         <license>
           <id>CC0-1.0</id>
-        </license>
-        <license>
-          <name>Expat</name>
         </license>
         <license>
           <id>GPL-3.0-only</id>
@@ -692,6 +686,9 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
         <license>
           <name>RFC-Reference</name>
@@ -719,7 +716,7 @@
         <property name="syft:metadata:source">gnupg2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/grep@3.6-1?arch=amd64&amp;distro=debian-11&amp;package-id=9ed140c6f7959d" type="library">
+    <component bom-ref="pkg:deb/debian/grep@3.6-1?arch=amd64&amp;distro=debian-11&amp;package-id=eb8f2b59d0233e72" type="library">
       <publisher>Anibal Monsalve Salazar &lt;anibal@debian.org&gt;</publisher>
       <name>grep</name>
       <version>3.6-1</version>
@@ -746,11 +743,17 @@
         <property name="syft:metadata:installedSize">1091</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/gzip@1.10-4+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=ade955af6710751d" type="library">
+    <component bom-ref="pkg:deb/debian/gzip@1.10-4+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=cdfdefaaa0180f56" type="library">
       <publisher>Milan Kupcevic &lt;milan@debian.org&gt;</publisher>
       <name>gzip</name>
       <version>1.10-4+deb11u1</version>
       <licenses>
+        <license>
+          <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <id>GPL-3.0-or-later</id>
+        </license>
         <license>
           <name>FSF-manpages</name>
         </license>
@@ -759,12 +762,6 @@
         </license>
         <license>
           <name>GFDL-3</name>
-        </license>
-        <license>
-          <id>GPL-3.0-only</id>
-        </license>
-        <license>
-          <id>GPL-3.0-or-later</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:gzip:gzip:1.10-4\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -782,7 +779,7 @@
         <property name="syft:metadata:installedSize">242</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/hostname@3.23?arch=amd64&amp;distro=debian-11&amp;package-id=fec906d1ab1d9712" type="library">
+    <component bom-ref="pkg:deb/debian/hostname@3.23?arch=amd64&amp;distro=debian-11&amp;package-id=88c02b4510b4a43a" type="library">
       <publisher>Michael Meskes &lt;meskes@debian.org&gt;</publisher>
       <name>hostname</name>
       <version>3.23</version>
@@ -806,7 +803,7 @@
         <property name="syft:metadata:installedSize">50</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/init-system-helpers@1.60?arch=all&amp;distro=debian-11&amp;package-id=9853db6c4e48777f" type="library">
+    <component bom-ref="pkg:deb/debian/init-system-helpers@1.60?arch=all&amp;distro=debian-11&amp;package-id=d003880cf06f980e" type="library">
       <publisher>Debian systemd Maintainers &lt;pkg-systemd-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>init-system-helpers</name>
       <version>1.60</version>
@@ -845,7 +842,7 @@
         <property name="syft:metadata:installedSize">131</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libacl1@2.2.53-10?arch=amd64&amp;upstream=acl&amp;distro=debian-11&amp;package-id=e26fd10cf6ff246" type="library">
+    <component bom-ref="pkg:deb/debian/libacl1@2.2.53-10?arch=amd64&amp;upstream=acl&amp;distro=debian-11&amp;package-id=d504003f83bf71f7" type="library">
       <publisher>Guillem Jover &lt;guillem@debian.org&gt;</publisher>
       <name>libacl1</name>
       <version>2.2.53-10</version>
@@ -879,7 +876,7 @@
         <property name="syft:metadata:source">acl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libapt-pkg6.0@2.2.4?arch=amd64&amp;upstream=apt&amp;distro=debian-11&amp;package-id=da442f0998cccf2b" type="library">
+    <component bom-ref="pkg:deb/debian/libapt-pkg6.0@2.2.4?arch=amd64&amp;upstream=apt&amp;distro=debian-11&amp;package-id=c605daac13c1d326" type="library">
       <publisher>APT Development Team &lt;deity@lists.debian.org&gt;</publisher>
       <name>libapt-pkg6.0</name>
       <version>2.2.4</version>
@@ -912,7 +909,7 @@
         <property name="syft:metadata:source">apt</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libattr1@1:2.4.48-6?arch=amd64&amp;upstream=attr&amp;distro=debian-11&amp;package-id=254a97dd16e20391" type="library">
+    <component bom-ref="pkg:deb/debian/libattr1@1:2.4.48-6?arch=amd64&amp;upstream=attr&amp;distro=debian-11&amp;package-id=82b9d53e3fe6ce31" type="library">
       <publisher>Guillem Jover &lt;guillem@debian.org&gt;</publisher>
       <name>libattr1</name>
       <version>1:2.4.48-6</version>
@@ -948,7 +945,7 @@
         <property name="syft:metadata:source">attr</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libaudit-common@1:3.0-2?arch=all&amp;upstream=audit&amp;distro=debian-11&amp;package-id=e666dc18886f28ff" type="library">
+    <component bom-ref="pkg:deb/debian/libaudit-common@1:3.0-2?arch=all&amp;upstream=audit&amp;distro=debian-11&amp;package-id=eb61ea42a078bb1f" type="library">
       <publisher>Laurent Bigonville &lt;bigon@debian.org&gt;</publisher>
       <name>libaudit-common</name>
       <version>1:3.0-2</version>
@@ -986,7 +983,7 @@
         <property name="syft:metadata:source">audit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libaudit1@1:3.0-2?arch=amd64&amp;upstream=audit&amp;distro=debian-11&amp;package-id=ae77fe6c43b7188d" type="library">
+    <component bom-ref="pkg:deb/debian/libaudit1@1:3.0-2?arch=amd64&amp;upstream=audit&amp;distro=debian-11&amp;package-id=b005ed7d4173130b" type="library">
       <publisher>Laurent Bigonville &lt;bigon@debian.org&gt;</publisher>
       <name>libaudit1</name>
       <version>1:3.0-2</version>
@@ -1017,7 +1014,7 @@
         <property name="syft:metadata:source">audit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libblkid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=f235c9c5cb7b4190" type="library">
+    <component bom-ref="pkg:deb/debian/libblkid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=bbd4a983a897a699" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libblkid1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -1044,9 +1041,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -1068,6 +1062,9 @@
           <id>MIT</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <name>public-domain</name>
         </license>
       </licenses>
@@ -1087,16 +1084,16 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libbz2-1.0@1.0.8-4?arch=amd64&amp;upstream=bzip2&amp;distro=debian-11&amp;package-id=120fe415369d1784" type="library">
+    <component bom-ref="pkg:deb/debian/libbz2-1.0@1.0.8-4?arch=amd64&amp;upstream=bzip2&amp;distro=debian-11&amp;package-id=627f07de0e482942" type="library">
       <publisher>Anibal Monsalve Salazar &lt;anibal@debian.org&gt;</publisher>
       <name>libbz2-1.0</name>
       <version>1.0.8-4</version>
       <licenses>
         <license>
-          <name>BSD-variant</name>
+          <id>GPL-2.0-only</id>
         </license>
         <license>
-          <id>GPL-2.0-only</id>
+          <name>BSD-variant</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libbz2-1.0:libbz2-1.0:1.0.8-4:*:*:*:*:*:*:*</cpe>
@@ -1120,7 +1117,7 @@
         <property name="syft:metadata:source">bzip2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libc-bin@2.31-13+deb11u5?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;package-id=228ff11572a24b74" type="library">
+    <component bom-ref="pkg:deb/debian/libc-bin@2.31-13+deb11u5?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;package-id=1fc178ad12430fc5" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>libc-bin</name>
       <version>2.31-13+deb11u5</version>
@@ -1155,7 +1152,7 @@
         <property name="syft:metadata:source">glibc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libc6@2.31-13+deb11u5?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;package-id=abe2c3f30be707e3" type="library">
+    <component bom-ref="pkg:deb/debian/libc6@2.31-13+deb11u5?arch=amd64&amp;upstream=glibc&amp;distro=debian-11&amp;package-id=ea43a1ea37aece8e" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>libc6</name>
       <version>2.31-13+deb11u5</version>
@@ -1185,7 +1182,7 @@
         <property name="syft:metadata:source">glibc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libcap-ng0@0.7.9-2.2+b1?arch=amd64&amp;upstream=libcap-ng%400.7.9-2.2&amp;distro=debian-11&amp;package-id=77d3f745010c245" type="library">
+    <component bom-ref="pkg:deb/debian/libcap-ng0@0.7.9-2.2+b1?arch=amd64&amp;upstream=libcap-ng%400.7.9-2.2&amp;distro=debian-11&amp;package-id=c227716485bb9f1a" type="library">
       <publisher>Pierre Chifflier &lt;pollux@debian.org&gt;</publisher>
       <name>libcap-ng0</name>
       <version>0.7.9-2.2+b1</version>
@@ -1307,7 +1304,7 @@
         <property name="syft:metadata:source">cdebconf</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libext2fs2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=78620e65fcd780c3" type="library">
+    <component bom-ref="pkg:deb/debian/libext2fs2@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=dcb5d90676dd3971" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>libext2fs2</name>
       <version>1.46.2-2</version>
@@ -1335,7 +1332,7 @@
         <property name="syft:metadata:source">e2fsprogs</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libffi7@3.3-6?arch=amd64&amp;upstream=libffi&amp;distro=debian-11&amp;package-id=b76aa1c712147c28" type="library">
+    <component bom-ref="pkg:deb/debian/libffi7@3.3-6?arch=amd64&amp;upstream=libffi&amp;distro=debian-11&amp;package-id=b975ce34d8fef8a1" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libffi7</name>
       <version>3.3-6</version>
@@ -1360,25 +1357,25 @@
         <property name="syft:metadata:source">libffi</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgcc-s1@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=ddb4ba0153b59955" type="library">
+    <component bom-ref="pkg:deb/debian/libgcc-s1@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=ddf8c98466b69567" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libgcc-s1</name>
       <version>10.2.1-6</version>
       <licenses>
         <license>
-          <name>Artistic</name>
-        </license>
-        <license>
           <id>GFDL-1.2-only</id>
-        </license>
-        <license>
-          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>Artistic</name>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <name>LGPL</name>
@@ -1405,7 +1402,7 @@
         <property name="syft:metadata:source">gcc-10</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64&amp;distro=debian-11&amp;package-id=7bc9b7389c934ca8" type="library">
+    <component bom-ref="pkg:deb/debian/libgcrypt20@1.8.7-6?arch=amd64&amp;distro=debian-11&amp;package-id=c69c4517911c8dfd" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libgcrypt20</name>
       <version>1.8.7-6</version>
@@ -1432,14 +1429,11 @@
         <property name="syft:metadata:installedSize">1355</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgmp10@2:6.2.1+dfsg-1+deb11u1?arch=amd64&amp;upstream=gmp&amp;distro=debian-11&amp;package-id=b8566db47d8d4ddc" type="library">
+    <component bom-ref="pkg:deb/debian/libgmp10@2:6.2.1+dfsg-1+deb11u1?arch=amd64&amp;upstream=gmp&amp;distro=debian-11&amp;package-id=3b84e3bdf6560208" type="library">
       <publisher>Debian Science Team &lt;debian-science-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libgmp10</name>
       <version>2:6.2.1+dfsg-1+deb11u1</version>
       <licenses>
-        <license>
-          <name>GPL</name>
-        </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
@@ -1448,6 +1442,9 @@
         </license>
         <license>
           <id>LGPL-3.0-only</id>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libgmp10:libgmp10:2\:6.2.1\+dfsg-1\+deb11u1:*:*:*:*:*:*:*</cpe>
@@ -1466,7 +1463,7 @@
         <property name="syft:metadata:source">gmp</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgnutls30@3.7.1-5+deb11u2?arch=amd64&amp;upstream=gnutls28&amp;distro=debian-11&amp;package-id=9ba32f357c27d6bd" type="library">
+    <component bom-ref="pkg:deb/debian/libgnutls30@3.7.1-5+deb11u2?arch=amd64&amp;upstream=gnutls28&amp;distro=debian-11&amp;package-id=8b35e1304d8604ef" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libgnutls30</name>
       <version>3.7.1-5+deb11u2</version>
@@ -1478,28 +1475,28 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
+          <id>GFDL-1.3-only</id>
+        </license>
+        <license>
+          <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <id>LGPL-3.0-only</id>
+        </license>
+        <license>
           <name>CC0</name>
         </license>
         <license>
           <name>Expat</name>
         </license>
         <license>
-          <id>GFDL-1.3-only</id>
-        </license>
-        <license>
           <name>GPL</name>
-        </license>
-        <license>
-          <id>GPL-3.0-only</id>
         </license>
         <license>
           <name>GPLv3+</name>
         </license>
         <license>
           <name>LGPL</name>
-        </license>
-        <license>
-          <id>LGPL-3.0-only</id>
         </license>
         <license>
           <name>LGPLv2.1+</name>
@@ -1527,7 +1524,7 @@
         <property name="syft:metadata:source">gnutls28</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgpg-error0@1.38-2?arch=amd64&amp;upstream=libgpg-error&amp;distro=debian-11&amp;package-id=2391ec82a95e1b79" type="library">
+    <component bom-ref="pkg:deb/debian/libgpg-error0@1.38-2?arch=amd64&amp;upstream=libgpg-error&amp;distro=debian-11&amp;package-id=953b74bbb216ae56" type="library">
       <publisher>Debian GnuPG Maintainers &lt;pkg-gnupg-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libgpg-error0</name>
       <version>1.38-2</version>
@@ -1572,7 +1569,7 @@
         <property name="syft:metadata:source">libgpg-error</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libgssapi-krb5-2@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=3f685865c7e045c1" type="library">
+    <component bom-ref="pkg:deb/debian/libgssapi-krb5-2@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=b78525f3ebdfdfd8" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libgssapi-krb5-2</name>
       <version>1.18.3-6+deb11u3</version>
@@ -1606,20 +1603,11 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libhogweed6@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;package-id=5e22b39e8cb919f6" type="library">
+    <component bom-ref="pkg:deb/debian/libhogweed6@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;package-id=839b241b37d898a6" type="library">
       <publisher>Magnus Holmgren &lt;holmgren@debian.org&gt;</publisher>
       <name>libhogweed6</name>
       <version>3.7.3-1</version>
       <licenses>
-        <license>
-          <name>Expat</name>
-        </license>
-        <license>
-          <name>GAP</name>
-        </license>
-        <license>
-          <name>GPL</name>
-        </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
@@ -1630,9 +1618,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -1640,6 +1625,18 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>Expat</name>
+        </license>
+        <license>
+          <name>GAP</name>
+        </license>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -1661,7 +1658,7 @@
         <property name="syft:metadata:source">nettle</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libidn2-0@2.3.0-5?arch=amd64&amp;upstream=libidn2&amp;distro=debian-11&amp;package-id=8eb1c8304ad48ef2" type="library">
+    <component bom-ref="pkg:deb/debian/libidn2-0@2.3.0-5?arch=amd64&amp;upstream=libidn2&amp;distro=debian-11&amp;package-id=881588ec0d13c41e" type="library">
       <publisher>Debian Libidn team &lt;help-libidn@gnu.org&gt;</publisher>
       <name>libidn2-0</name>
       <version>2.3.0-5</version>
@@ -1709,7 +1706,7 @@
         <property name="syft:metadata:source">libidn2</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libk5crypto3@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=ae9e3b8691722eba" type="library">
+    <component bom-ref="pkg:deb/debian/libk5crypto3@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=eee18a8d6a6e2c05" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libk5crypto3</name>
       <version>1.18.3-6+deb11u3</version>
@@ -1734,7 +1731,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libkeyutils1@1.6.1-2?arch=amd64&amp;upstream=keyutils&amp;distro=debian-11&amp;package-id=308487f5f23bf878" type="library">
+    <component bom-ref="pkg:deb/debian/libkeyutils1@1.6.1-2?arch=amd64&amp;upstream=keyutils&amp;distro=debian-11&amp;package-id=3a4f53ea703b425c" type="library">
       <publisher>Christian Kastner &lt;ckk@debian.org&gt;</publisher>
       <name>libkeyutils1</name>
       <version>1.6.1-2</version>
@@ -1768,7 +1765,7 @@
         <property name="syft:metadata:source">keyutils</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libkrb5-3@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=8bdffe6652e8e7ef" type="library">
+    <component bom-ref="pkg:deb/debian/libkrb5-3@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=d8d66570c5b54080" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libkrb5-3</name>
       <version>1.18.3-6+deb11u3</version>
@@ -1798,7 +1795,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libkrb5support0@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=471e6243bbbcf8b2" type="library">
+    <component bom-ref="pkg:deb/debian/libkrb5support0@1.18.3-6+deb11u3?arch=amd64&amp;upstream=krb5&amp;distro=debian-11&amp;package-id=b7f88754be28592f" type="library">
       <publisher>Sam Hartman &lt;hartmans@debian.org&gt;</publisher>
       <name>libkrb5support0</name>
       <version>1.18.3-6+deb11u3</version>
@@ -1823,7 +1820,7 @@
         <property name="syft:metadata:source">krb5</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/liblz4-1@1.9.3-2?arch=amd64&amp;upstream=lz4&amp;distro=debian-11&amp;package-id=b59e208fb7f8bae4" type="library">
+    <component bom-ref="pkg:deb/debian/liblz4-1@1.9.3-2?arch=amd64&amp;upstream=lz4&amp;distro=debian-11&amp;package-id=8de94fcbbd0a8341" type="library">
       <publisher>Nobuhiro Iwamatsu &lt;iwamatsu@debian.org&gt;</publisher>
       <name>liblz4-1</name>
       <version>1.9.3-2</version>
@@ -1859,14 +1856,11 @@
         <property name="syft:metadata:source">lz4</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/liblzma5@5.2.5-2.1~deb11u1?arch=amd64&amp;upstream=xz-utils&amp;distro=debian-11&amp;package-id=b95662a389d30c72" type="library">
+    <component bom-ref="pkg:deb/debian/liblzma5@5.2.5-2.1~deb11u1?arch=amd64&amp;upstream=xz-utils&amp;distro=debian-11&amp;package-id=a86aa058c33cc81c" type="library">
       <publisher>Jonathan Nieder &lt;jrnieder@gmail.com&gt;</publisher>
       <name>liblzma5</name>
       <version>5.2.5-2.1~deb11u1</version>
       <licenses>
-        <license>
-          <name>Autoconf</name>
-        </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
@@ -1884,6 +1878,9 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>Autoconf</name>
         </license>
         <license>
           <name>PD</name>
@@ -1923,7 +1920,7 @@
         <property name="syft:metadata:source">xz-utils</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libmount1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=afd0c3536366dc2c" type="library">
+    <component bom-ref="pkg:deb/debian/libmount1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=85192996a27b8c7f" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libmount1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -1950,9 +1947,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -1974,6 +1968,9 @@
           <id>MIT</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <name>public-domain</name>
         </license>
       </licenses>
@@ -1993,20 +1990,11 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libnettle8@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;package-id=ceff94b390c9bf61" type="library">
+    <component bom-ref="pkg:deb/debian/libnettle8@3.7.3-1?arch=amd64&amp;upstream=nettle&amp;distro=debian-11&amp;package-id=055a77b1be66e8dd" type="library">
       <publisher>Magnus Holmgren &lt;holmgren@debian.org&gt;</publisher>
       <name>libnettle8</name>
       <version>3.7.3-1</version>
       <licenses>
-        <license>
-          <name>Expat</name>
-        </license>
-        <license>
-          <name>GAP</name>
-        </license>
-        <license>
-          <name>GPL</name>
-        </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
@@ -2017,9 +2005,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -2027,6 +2012,18 @@
         </license>
         <license>
           <id>LGPL-3.0-or-later</id>
+        </license>
+        <license>
+          <name>Expat</name>
+        </license>
+        <license>
+          <name>GAP</name>
+        </license>
+        <license>
+          <name>GPL</name>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -2048,7 +2045,7 @@
         <property name="syft:metadata:source">nettle</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libnsl2@1.3.0-2?arch=amd64&amp;upstream=libnsl&amp;distro=debian-11&amp;package-id=fc8ac2f1807436d9" type="library">
+    <component bom-ref="pkg:deb/debian/libnsl2@1.3.0-2?arch=amd64&amp;upstream=libnsl&amp;distro=debian-11&amp;package-id=f41707c6dfa1cebe" type="library">
       <publisher>GNU Libc Maintainers &lt;debian-glibc@lists.debian.org&gt;</publisher>
       <name>libnsl2</name>
       <version>1.3.0-2</version>
@@ -2060,16 +2057,7 @@
           <id>GPL-2.0-only</id>
         </license>
         <license>
-          <name>GPL-2+-autoconf-exception</name>
-        </license>
-        <license>
-          <name>GPL-2+-libtool-exception</name>
-        </license>
-        <license>
           <id>GPL-3.0-only</id>
-        </license>
-        <license>
-          <name>GPL-3+-autoconf-exception</name>
         </license>
         <license>
           <id>LGPL-2.1-only</id>
@@ -2079,6 +2067,15 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>GPL-2+-autoconf-exception</name>
+        </license>
+        <license>
+          <name>GPL-2+-libtool-exception</name>
+        </license>
+        <license>
+          <name>GPL-3+-autoconf-exception</name>
         </license>
         <license>
           <name>permissive-autoconf-m4</name>
@@ -2112,7 +2109,7 @@
         <property name="syft:metadata:source">libnsl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64&amp;upstream=p11-kit&amp;distro=debian-11&amp;package-id=a2ce6d1eb48ab956" type="library">
+    <component bom-ref="pkg:deb/debian/libp11-kit0@0.23.22-1?arch=amd64&amp;upstream=p11-kit&amp;distro=debian-11&amp;package-id=4b1cfa4a4d596258" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libp11-kit0</name>
       <version>0.23.22-1</version>
@@ -2154,7 +2151,7 @@
         <property name="syft:metadata:source">p11-kit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=903eac5974d73705" type="library">
+    <component bom-ref="pkg:deb/debian/libpam-modules@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=91f013e0a1b01bbc" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-modules</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2186,7 +2183,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=2dc3f20bb97e020d" type="library">
+    <component bom-ref="pkg:deb/debian/libpam-modules-bin@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=3e8abf04506e8e68" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-modules-bin</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2220,7 +2217,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all&amp;upstream=pam&amp;distro=debian-11&amp;package-id=1238d07342abe7a3" type="library">
+    <component bom-ref="pkg:deb/debian/libpam-runtime@1.4.0-9+deb11u1?arch=all&amp;upstream=pam&amp;distro=debian-11&amp;package-id=dbb41db32be26c54" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam-runtime</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2252,7 +2249,7 @@
         <property name="syft:metadata:source">pam</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=70917c5424d601fa" type="library">
+    <component bom-ref="pkg:deb/debian/libpam0g@1.4.0-9+deb11u1?arch=amd64&amp;upstream=pam&amp;distro=debian-11&amp;package-id=d4eefeac5014df7f" type="library">
       <publisher>Steve Langasek &lt;vorlon@debian.org&gt;</publisher>
       <name>libpam0g</name>
       <version>1.4.0-9+deb11u1</version>
@@ -2326,7 +2323,7 @@
         <property name="syft:metadata:source">pcre3</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libseccomp2@2.5.1-1+deb11u1?arch=amd64&amp;upstream=libseccomp&amp;distro=debian-11&amp;package-id=bb0878d1437830b4" type="library">
+    <component bom-ref="pkg:deb/debian/libseccomp2@2.5.1-1+deb11u1?arch=amd64&amp;upstream=libseccomp&amp;distro=debian-11&amp;package-id=7c34abab8a4114da" type="library">
       <publisher>Kees Cook &lt;kees@debian.org&gt;</publisher>
       <name>libseccomp2</name>
       <version>2.5.1-1+deb11u1</version>
@@ -2351,7 +2348,7 @@
         <property name="syft:metadata:source">libseccomp</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libselinux1@3.1-3?arch=amd64&amp;upstream=libselinux&amp;distro=debian-11&amp;package-id=bb9d0a1adefb7931" type="library">
+    <component bom-ref="pkg:deb/debian/libselinux1@3.1-3?arch=amd64&amp;upstream=libselinux&amp;distro=debian-11&amp;package-id=b644ce69c271b425" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libselinux1</name>
       <version>3.1-3</version>
@@ -2379,7 +2376,7 @@
         <property name="syft:metadata:source">libselinux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsemanage-common@3.1-1?arch=all&amp;upstream=libsemanage&amp;distro=debian-11&amp;package-id=f41fe741bd23f493" type="library">
+    <component bom-ref="pkg:deb/debian/libsemanage-common@3.1-1?arch=all&amp;upstream=libsemanage&amp;distro=debian-11&amp;package-id=97ce42b1b0c70a6e" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsemanage-common</name>
       <version>3.1-1</version>
@@ -2414,7 +2411,7 @@
         <property name="syft:metadata:source">libsemanage</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64&amp;upstream=libsemanage%403.1-1&amp;distro=debian-11&amp;package-id=fa4813c20a8027a6" type="library">
+    <component bom-ref="pkg:deb/debian/libsemanage1@3.1-1+b2?arch=amd64&amp;upstream=libsemanage%403.1-1&amp;distro=debian-11&amp;package-id=b0ebc0e0a2f76c36" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsemanage1</name>
       <version>3.1-1+b2</version>
@@ -2443,7 +2440,7 @@
         <property name="syft:metadata:sourceVersion">3.1-1</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsepol1@3.1-1?arch=amd64&amp;upstream=libsepol&amp;distro=debian-11&amp;package-id=cfa6f496d2fd049" type="library">
+    <component bom-ref="pkg:deb/debian/libsepol1@3.1-1?arch=amd64&amp;upstream=libsepol&amp;distro=debian-11&amp;package-id=455dae0a07323046" type="library">
       <publisher>Debian SELinux maintainers &lt;selinux-devel@lists.alioth.debian.org&gt;</publisher>
       <name>libsepol1</name>
       <version>3.1-1</version>
@@ -2471,7 +2468,7 @@
         <property name="syft:metadata:source">libsepol</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsmartcols1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=cf3b22adc552a311" type="library">
+    <component bom-ref="pkg:deb/debian/libsmartcols1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=c38aaebe13ed88d7" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libsmartcols1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -2498,9 +2495,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -2520,6 +2514,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -2581,25 +2578,25 @@
         <property name="syft:metadata:source">openssl</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libstdc++6@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=748369630632944" type="library">
+    <component bom-ref="pkg:deb/debian/libstdc++6@10.2.1-6?arch=amd64&amp;upstream=gcc-10&amp;distro=debian-11&amp;package-id=4a2fb804fdb95bab" type="library">
       <publisher>Debian GCC Maintainers &lt;debian-gcc@lists.debian.org&gt;</publisher>
       <name>libstdc++6</name>
       <version>10.2.1-6</version>
       <licenses>
         <license>
-          <name>Artistic</name>
-        </license>
-        <license>
           <id>GFDL-1.2-only</id>
-        </license>
-        <license>
-          <name>GPL</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>GPL-3.0-only</id>
+        </license>
+        <license>
+          <name>Artistic</name>
+        </license>
+        <license>
+          <name>GPL</name>
         </license>
         <license>
           <name>LGPL</name>
@@ -2621,16 +2618,13 @@
         <property name="syft:metadata:source">gcc-10</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libsystemd0@247.3-7+deb11u1?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;package-id=4c258dc3b086d634" type="library">
+    <component bom-ref="pkg:deb/debian/libsystemd0@247.3-7+deb11u1?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;package-id=bdbab61a691ea80b" type="library">
       <publisher>Debian systemd Maintainers &lt;pkg-systemd-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libsystemd0</name>
       <version>247.3-7+deb11u1</version>
       <licenses>
         <license>
           <id>CC0-1.0</id>
-        </license>
-        <license>
-          <name>Expat</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
@@ -2643,6 +2637,9 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -2664,7 +2661,7 @@
         <property name="syft:metadata:source">systemd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtasn1-6@4.16.0-2?arch=amd64&amp;distro=debian-11&amp;package-id=8385ea5e56a5fca9" type="library">
+    <component bom-ref="pkg:deb/debian/libtasn1-6@4.16.0-2?arch=amd64&amp;distro=debian-11&amp;package-id=37d6442579030419" type="library">
       <publisher>Debian GnuTLS Maintainers &lt;pkg-gnutls-maint@lists.alioth.debian.org&gt;</publisher>
       <name>libtasn1-6</name>
       <version>4.16.0-2</version>
@@ -2676,10 +2673,10 @@
           <id>GPL-3.0-only</id>
         </license>
         <license>
-          <name>LGPL</name>
+          <id>LGPL-2.1-only</id>
         </license>
         <license>
-          <id>LGPL-2.1-only</id>
+          <name>LGPL</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libtasn1-6:libtasn1-6:4.16.0-2:*:*:*:*:*:*:*</cpe>
@@ -2702,7 +2699,7 @@
         <property name="syft:metadata:installedSize">124</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtinfo6@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=9e96601b60336037" type="library">
+    <component bom-ref="pkg:deb/debian/libtinfo6@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=25fa96d70063b73d" type="library">
       <publisher>Craig Small &lt;csmall@debian.org&gt;</publisher>
       <name>libtinfo6</name>
       <version>6.2+20201114-2</version>
@@ -2711,10 +2708,10 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <name>MIT/X11</name>
+          <id>X11</id>
         </license>
         <license>
-          <id>X11</id>
+          <name>MIT/X11</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libtinfo6:libtinfo6:6.2\+20201114-2:*:*:*:*:*:*:*</cpe>
@@ -2733,7 +2730,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtirpc-common@1.3.1-1+deb11u1?arch=all&amp;upstream=libtirpc&amp;distro=debian-11&amp;package-id=3623a1ef0b5b63b9" type="library">
+    <component bom-ref="pkg:deb/debian/libtirpc-common@1.3.1-1+deb11u1?arch=all&amp;upstream=libtirpc&amp;distro=debian-11&amp;package-id=d3160e9b8c94d2ab" type="library">
       <publisher>Josue Ortega &lt;josue@debian.org&gt;</publisher>
       <name>libtirpc-common</name>
       <version>1.3.1-1+deb11u1</version>
@@ -2771,7 +2768,7 @@
         <property name="syft:metadata:source">libtirpc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libtirpc3@1.3.1-1+deb11u1?arch=amd64&amp;upstream=libtirpc&amp;distro=debian-11&amp;package-id=c7b97f0b9d21e851" type="library">
+    <component bom-ref="pkg:deb/debian/libtirpc3@1.3.1-1+deb11u1?arch=amd64&amp;upstream=libtirpc&amp;distro=debian-11&amp;package-id=2c7867e571c97356" type="library">
       <publisher>Josue Ortega &lt;josue@debian.org&gt;</publisher>
       <name>libtirpc3</name>
       <version>1.3.1-1+deb11u1</version>
@@ -2802,16 +2799,13 @@
         <property name="syft:metadata:source">libtirpc</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libudev1@247.3-7+deb11u1?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;package-id=79c718cff72e218e" type="library">
+    <component bom-ref="pkg:deb/debian/libudev1@247.3-7+deb11u1?arch=amd64&amp;upstream=systemd&amp;distro=debian-11&amp;package-id=fbe72f96162d2f72" type="library">
       <publisher>Debian systemd Maintainers &lt;pkg-systemd-maintainers@lists.alioth.debian.org&gt;</publisher>
       <name>libudev1</name>
       <version>247.3-7+deb11u1</version>
       <licenses>
         <license>
           <id>CC0-1.0</id>
-        </license>
-        <license>
-          <name>Expat</name>
         </license>
         <license>
           <id>GPL-2.0-only</id>
@@ -2824,6 +2818,9 @@
         </license>
         <license>
           <id>LGPL-2.1-or-later</id>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -2845,19 +2842,16 @@
         <property name="syft:metadata:source">systemd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64&amp;upstream=libunistring&amp;distro=debian-11&amp;package-id=dc7fcfc9dde2b703" type="library">
+    <component bom-ref="pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64&amp;upstream=libunistring&amp;distro=debian-11&amp;package-id=1163a58ad24912f1" type="library">
       <publisher>Jörg Frings-Fürst &lt;debian@jff.email&gt;</publisher>
       <name>libunistring2</name>
       <version>0.9.10-4</version>
       <licenses>
         <license>
-          <name>FreeSoftware</name>
-        </license>
-        <license>
           <id>GFDL-1.2-only</id>
         </license>
         <license>
-          <name>GFDL-1.2+</name>
+          <id>GFDL-1.2-or-later</id>
         </license>
         <license>
           <id>GPL-2.0-only</id>
@@ -2880,6 +2874,9 @@
         <license>
           <id>MIT</id>
         </license>
+        <license>
+          <name>FreeSoftware</name>
+        </license>
       </licenses>
       <cpe>cpe:2.3:a:libunistring2:libunistring2:0.9.10-4:*:*:*:*:*:*:*</cpe>
       <purl>pkg:deb/debian/libunistring2@0.9.10-4?arch=amd64&amp;upstream=libunistring&amp;distro=debian-11</purl>
@@ -2897,7 +2894,7 @@
         <property name="syft:metadata:source">libunistring</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libuuid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=e87310d3e1426d6c" type="library">
+    <component bom-ref="pkg:deb/debian/libuuid1@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=a183ab0912a52954" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>libuuid1</name>
       <version>2.36.1-8+deb11u1</version>
@@ -2924,9 +2921,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -2948,6 +2942,9 @@
           <id>MIT</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <name>public-domain</name>
         </license>
       </licenses>
@@ -2967,7 +2964,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libxxhash0@0.8.0-2?arch=amd64&amp;upstream=xxhash&amp;distro=debian-11&amp;package-id=edc71d7591d40133" type="library">
+    <component bom-ref="pkg:deb/debian/libxxhash0@0.8.0-2?arch=amd64&amp;upstream=xxhash&amp;distro=debian-11&amp;package-id=a868c2ca05be3ba7" type="library">
       <publisher>Norbert Preining &lt;norbert@preining.info&gt;</publisher>
       <name>libxxhash0</name>
       <version>0.8.0-2</version>
@@ -2995,7 +2992,7 @@
         <property name="syft:metadata:source">xxhash</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/libzstd1@1.4.8+dfsg-2.1?arch=amd64&amp;upstream=libzstd&amp;distro=debian-11&amp;package-id=90e1680def07a674" type="library">
+    <component bom-ref="pkg:deb/debian/libzstd1@1.4.8+dfsg-2.1?arch=amd64&amp;upstream=libzstd&amp;distro=debian-11&amp;package-id=156fff5a33a4d4c0" type="library">
       <publisher>Debian Med Packaging Team &lt;debian-med-packaging@lists.alioth.debian.org&gt;</publisher>
       <name>libzstd1</name>
       <version>1.4.8+dfsg-2.1</version>
@@ -3004,13 +3001,13 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <name>Expat</name>
-        </license>
-        <license>
           <id>GPL-2.0-only</id>
         </license>
         <license>
           <id>Zlib</id>
+        </license>
+        <license>
+          <name>Expat</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:libzstd1:libzstd1:1.4.8\+dfsg-2.1:*:*:*:*:*:*:*</cpe>
@@ -3029,7 +3026,7 @@
         <property name="syft:metadata:source">libzstd</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/login@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;package-id=9cdbb92ea69c08a1" type="library">
+    <component bom-ref="pkg:deb/debian/login@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;package-id=8aa12b8095f6746e" type="library">
       <publisher>Shadow package maintainers &lt;pkg-shadow-devel@lists.alioth.debian.org&gt;</publisher>
       <name>login</name>
       <version>1:4.8.1-1</version>
@@ -3056,7 +3053,7 @@
         <property name="syft:metadata:source">shadow</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/logsave@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=77e8cce6db62952b" type="library">
+    <component bom-ref="pkg:deb/debian/logsave@1.46.2-2?arch=amd64&amp;upstream=e2fsprogs&amp;distro=debian-11&amp;package-id=9ac5cde115b8b055" type="library">
       <publisher>Theodore Y. Ts&#39;o &lt;tytso@mit.edu&gt;</publisher>
       <name>logsave</name>
       <version>1.46.2-2</version>
@@ -3084,7 +3081,7 @@
         <property name="syft:metadata:source">e2fsprogs</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/lsb-base@11.1.0?arch=all&amp;upstream=lsb&amp;distro=debian-11&amp;package-id=67f43d818d5952cf" type="library">
+    <component bom-ref="pkg:deb/debian/lsb-base@11.1.0?arch=all&amp;upstream=lsb&amp;distro=debian-11&amp;package-id=5fe2801583596a9c" type="library">
       <publisher>Debian sysvinit maintainers &lt;debian-init-diversity@chiark.greenend.org.uk&gt;</publisher>
       <name>lsb-base</name>
       <version>11.1.0</version>
@@ -3117,7 +3114,7 @@
         <property name="syft:metadata:source">lsb</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/mawk@1.3.4.20200120-2?arch=amd64&amp;distro=debian-11&amp;package-id=b91e181aea759ff5" type="library">
+    <component bom-ref="pkg:deb/debian/mawk@1.3.4.20200120-2?arch=amd64&amp;distro=debian-11&amp;package-id=7263ae1ca653432f" type="library">
       <publisher>Boyuan Yang &lt;byang@debian.org&gt;</publisher>
       <name>mawk</name>
       <version>1.3.4.20200120-2</version>
@@ -3141,7 +3138,7 @@
         <property name="syft:metadata:installedSize">242</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/mount@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=c7ff86ae9a8937ca" type="library">
+    <component bom-ref="pkg:deb/debian/mount@2.36.1-8+deb11u1?arch=amd64&amp;upstream=util-linux&amp;distro=debian-11&amp;package-id=6dad3fb630fad4a6" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>mount</name>
       <version>2.36.1-8+deb11u1</version>
@@ -3168,9 +3165,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -3192,6 +3186,9 @@
           <id>MIT</id>
         </license>
         <license>
+          <name>LGPL</name>
+        </license>
+        <license>
           <name>public-domain</name>
         </license>
       </licenses>
@@ -3211,7 +3208,7 @@
         <property name="syft:metadata:source">util-linux</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/ncurses-base@6.2+20201114-2?arch=all&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=9c2239a948284096" type="library">
+    <component bom-ref="pkg:deb/debian/ncurses-base@6.2+20201114-2?arch=all&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=27223abeffc6faef" type="library">
       <publisher>Craig Small &lt;csmall@debian.org&gt;</publisher>
       <name>ncurses-base</name>
       <version>6.2+20201114-2</version>
@@ -3220,10 +3217,10 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <name>MIT/X11</name>
+          <id>X11</id>
         </license>
         <license>
-          <id>X11</id>
+          <name>MIT/X11</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:ncurses-base:ncurses-base:6.2\+20201114-2:*:*:*:*:*:*:*</cpe>
@@ -3249,7 +3246,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/ncurses-bin@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=d98c3c34aac1c97c" type="library">
+    <component bom-ref="pkg:deb/debian/ncurses-bin@6.2+20201114-2?arch=amd64&amp;upstream=ncurses&amp;distro=debian-11&amp;package-id=b734ef7f0a9b45e2" type="library">
       <publisher>Craig Small &lt;csmall@debian.org&gt;</publisher>
       <name>ncurses-bin</name>
       <version>6.2+20201114-2</version>
@@ -3258,10 +3255,10 @@
           <id>BSD-3-Clause</id>
         </license>
         <license>
-          <name>MIT/X11</name>
+          <id>X11</id>
         </license>
         <license>
-          <id>X11</id>
+          <name>MIT/X11</name>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:ncurses-bin:ncurses-bin:6.2\+20201114-2:*:*:*:*:*:*:*</cpe>
@@ -3285,7 +3282,7 @@
         <property name="syft:metadata:source">ncurses</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/passwd@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;package-id=fdca5992b8d73b50" type="library">
+    <component bom-ref="pkg:deb/debian/passwd@1:4.8.1-1?arch=amd64&amp;upstream=shadow&amp;distro=debian-11&amp;package-id=c31ea6da71073f40" type="library">
       <publisher>Shadow package maintainers &lt;pkg-shadow-devel@lists.alioth.debian.org&gt;</publisher>
       <name>passwd</name>
       <version>1:4.8.1-1</version>
@@ -3312,22 +3309,40 @@
         <property name="syft:metadata:source">shadow</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/perl-base@5.32.1-4+deb11u2?arch=amd64&amp;upstream=perl&amp;distro=debian-11&amp;package-id=96ea9246284c94e6" type="library">
+    <component bom-ref="pkg:deb/debian/perl-base@5.32.1-4+deb11u2?arch=amd64&amp;upstream=perl&amp;distro=debian-11&amp;package-id=70fee5abfefd1735" type="library">
       <publisher>Niko Tyni &lt;ntyni@debian.org&gt;</publisher>
       <name>perl-base</name>
       <version>5.32.1-4+deb11u2</version>
       <licenses>
         <license>
-          <name>Artistic</name>
-        </license>
-        <license>
           <id>Artistic-2.0</id>
         </license>
         <license>
-          <name>Artistic-dist</name>
+          <id>BSD-3-Clause</id>
         </license>
         <license>
-          <id>BSD-3-Clause</id>
+          <id>GPL-1.0-only</id>
+        </license>
+        <license>
+          <id>GPL-1.0-or-later</id>
+        </license>
+        <license>
+          <id>GPL-2.0-only</id>
+        </license>
+        <license>
+          <id>GPL-2.0-or-later</id>
+        </license>
+        <license>
+          <id>LGPL-2.1-only</id>
+        </license>
+        <license>
+          <id>Zlib</id>
+        </license>
+        <license>
+          <name>Artistic</name>
+        </license>
+        <license>
+          <name>Artistic-dist</name>
         </license>
         <license>
           <name>BSD-3-clause-GENERIC</name>
@@ -3348,18 +3363,6 @@
           <name>Expat</name>
         </license>
         <license>
-          <id>GPL-1.0-only</id>
-        </license>
-        <license>
-          <id>GPL-1.0-or-later</id>
-        </license>
-        <license>
-          <id>GPL-2.0-only</id>
-        </license>
-        <license>
-          <id>GPL-2.0-or-later</id>
-        </license>
-        <license>
           <name>GPL-3+-WITH-BISON-EXCEPTION</name>
         </license>
         <license>
@@ -3367,9 +3370,6 @@
         </license>
         <license>
           <name>HSIEH-DERIVATIVE</name>
-        </license>
-        <license>
-          <id>LGPL-2.1-only</id>
         </license>
         <license>
           <name>REGCOMP</name>
@@ -3388,9 +3388,6 @@
         </license>
         <license>
           <name>Unicode</name>
-        </license>
-        <license>
-          <id>Zlib</id>
         </license>
       </licenses>
       <cpe>cpe:2.3:a:perl-base:perl-base:5.32.1-4\+deb11u2:*:*:*:*:*:*:*</cpe>
@@ -3428,7 +3425,7 @@
         <property name="syft:location:0:path">/usr/local/bin/redis-server</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/sed@4.7-1?arch=amd64&amp;distro=debian-11&amp;package-id=cd24b1a69c7b788a" type="library">
+    <component bom-ref="pkg:deb/debian/sed@4.7-1?arch=amd64&amp;distro=debian-11&amp;package-id=75ae8b48d310d190" type="library">
       <publisher>Clint Adams &lt;clint@debian.org&gt;</publisher>
       <name>sed</name>
       <version>4.7-1</version>
@@ -3452,7 +3449,7 @@
         <property name="syft:metadata:installedSize">883</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/sysvinit-utils@2.96-7+deb11u1?arch=amd64&amp;upstream=sysvinit&amp;distro=debian-11&amp;package-id=e0e95f2e10cb825e" type="library">
+    <component bom-ref="pkg:deb/debian/sysvinit-utils@2.96-7+deb11u1?arch=amd64&amp;upstream=sysvinit&amp;distro=debian-11&amp;package-id=f1cc7009609f4fdd" type="library">
       <publisher>Debian sysvinit maintainers &lt;debian-init-diversity@chiark.greenend.org.uk&gt;</publisher>
       <name>sysvinit-utils</name>
       <version>2.96-7+deb11u1</version>
@@ -3485,7 +3482,7 @@
         <property name="syft:metadata:source">sysvinit</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/tar@1.34+dfsg-1?arch=amd64&amp;distro=debian-11&amp;package-id=9511efaff0991270" type="library">
+    <component bom-ref="pkg:deb/debian/tar@1.34+dfsg-1?arch=amd64&amp;distro=debian-11&amp;package-id=6cd0f2a416ae6604" type="library">
       <publisher>Janos Lenart &lt;ocsi@debian.org&gt;</publisher>
       <name>tar</name>
       <version>1.34+dfsg-1</version>
@@ -3531,7 +3528,7 @@
         <property name="syft:metadata:installedSize">3393</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/util-linux@2.36.1-8+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=b8c872368f65d4a3" type="library">
+    <component bom-ref="pkg:deb/debian/util-linux@2.36.1-8+deb11u1?arch=amd64&amp;distro=debian-11&amp;package-id=7a1db5d0da40785c" type="library">
       <publisher>util-linux packagers &lt;util-linux@packages.debian.org&gt;</publisher>
       <name>util-linux</name>
       <version>2.36.1-8+deb11u1</version>
@@ -3558,9 +3555,6 @@
           <id>GPL-3.0-or-later</id>
         </license>
         <license>
-          <name>LGPL</name>
-        </license>
-        <license>
           <id>LGPL-2.0-only</id>
         </license>
         <license>
@@ -3580,6 +3574,9 @@
         </license>
         <license>
           <id>MIT</id>
+        </license>
+        <license>
+          <name>LGPL</name>
         </license>
         <license>
           <name>public-domain</name>
@@ -3607,7 +3604,7 @@
         <property name="syft:metadata:installedSize">4615</property>
       </properties>
     </component>
-    <component bom-ref="pkg:deb/debian/zlib1g@1:1.2.11.dfsg-2+deb11u2?arch=amd64&amp;upstream=zlib&amp;distro=debian-11&amp;package-id=369e996115240b62" type="library">
+    <component bom-ref="pkg:deb/debian/zlib1g@1:1.2.11.dfsg-2+deb11u2?arch=amd64&amp;upstream=zlib&amp;distro=debian-11&amp;package-id=0beb3c7281f68149" type="library">
       <publisher>Mark Brown &lt;broonie@debian.org&gt;</publisher>
       <name>zlib1g</name>
       <version>1:1.2.11.dfsg-2+deb11u2</version>
