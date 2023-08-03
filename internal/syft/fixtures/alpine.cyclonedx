@@ -1,21 +1,21 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:73f188af-f36c-46ef-b907-6406ec5c0bf4" version="1">
+<bom xmlns="http://cyclonedx.org/schema/bom/1.4" serialNumber="urn:uuid:19daaa6c-0d96-4bd6-800c-7d757618b3c7" version="1">
   <metadata>
-    <timestamp>2023-04-29T09:40:09+02:00</timestamp>
+    <timestamp>2023-08-03T15:14:16+02:00</timestamp>
     <tools>
       <tool>
         <vendor>anchore</vendor>
         <name>syft</name>
-        <version>0.79.0</version>
+        <version>0.86.1</version>
       </tool>
     </tools>
     <component bom-ref="241b78ecbec7d4b6" type="container">
-      <name>alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61</name>
-      <version>sha256:9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5</version>
+      <name>alpine</name>
+      <version>sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61</version>
     </component>
   </metadata>
   <components>
-    <component bom-ref="pkg:apk/alpine/alpine-baselayout@3.4.0-r0?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=92b19c7750fb559d" type="library">
+    <component bom-ref="pkg:apk/alpine/alpine-baselayout@3.4.0-r0?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=538dff49e6576a74" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>alpine-baselayout</name>
       <version>3.4.0-r0</version>
@@ -52,7 +52,7 @@
         <property name="syft:metadata:size">8890</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/alpine-baselayout-data@3.4.0-r0?arch=x86_64&amp;upstream=alpine-baselayout&amp;distro=alpine-3.17.0_rc1&amp;package-id=291d1267b40d636f" type="library">
+    <component bom-ref="pkg:apk/alpine/alpine-baselayout-data@3.4.0-r0?arch=x86_64&amp;upstream=alpine-baselayout&amp;distro=alpine-3.17.0_rc1&amp;package-id=2b13c37ad68dba47" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>alpine-baselayout-data</name>
       <version>3.4.0-r0</version>
@@ -91,7 +91,7 @@
         <property name="syft:metadata:size">11664</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/alpine-keys@2.4-r1?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=2b5e23d349b556cf" type="library">
+    <component bom-ref="pkg:apk/alpine/alpine-keys@2.4-r1?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=52cdfe05331430a5" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>alpine-keys</name>
       <version>2.4-r1</version>
@@ -126,7 +126,7 @@
         <property name="syft:metadata:size">13361</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/apk-tools@2.12.10-r1?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=e5f757b0df1f62bc" type="library">
+    <component bom-ref="pkg:apk/alpine/apk-tools@2.12.10-r1?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=1d0d53b03364a499" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>apk-tools</name>
       <version>2.12.10-r1</version>
@@ -182,7 +182,7 @@
         <property name="syft:location:0:path">/bin/busybox</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/busybox@1.35.0-r27?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=757a346b43f898cc" type="library">
+    <component bom-ref="pkg:apk/alpine/busybox@1.35.0-r27?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=db8f2e0215e78df1" type="library">
       <publisher>Sören Tempel &lt;soeren+alpine@soeren-tempel.net&gt;</publisher>
       <name>busybox</name>
       <version>1.35.0-r27</version>
@@ -214,7 +214,7 @@
         <property name="syft:metadata:size">509577</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/busybox-binsh@1.35.0-r27?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.17.0_rc1&amp;package-id=6dd813189bb733c8" type="library">
+    <component bom-ref="pkg:apk/alpine/busybox-binsh@1.35.0-r27?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.17.0_rc1&amp;package-id=afd7fb2b76317ef2" type="library">
       <publisher>Sören Tempel &lt;soeren+alpine@soeren-tempel.net&gt;</publisher>
       <name>busybox-binsh</name>
       <version>1.35.0-r27</version>
@@ -252,21 +252,13 @@
         <property name="syft:metadata:size">1543</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/ca-certificates-bundle@20220614-r2?arch=x86_64&amp;upstream=ca-certificates&amp;distro=alpine-3.17.0_rc1&amp;package-id=893d472df8998cbd" type="library">
+    <component bom-ref="pkg:apk/alpine/ca-certificates-bundle@20220614-r2?arch=x86_64&amp;upstream=ca-certificates&amp;distro=alpine-3.17.0_rc1&amp;package-id=4f3ed727b35c3fba" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>ca-certificates-bundle</name>
       <version>20220614-r2</version>
       <description>Pre generated bundle of Mozilla certificates</description>
       <licenses>
-        <license>
-          <id>MPL-2.0</id>
-        </license>
-        <license>
-          <name>AND</name>
-        </license>
-        <license>
-          <id>MIT</id>
-        </license>
+        <expression>MPL-2.0 AND MIT</expression>
       </licenses>
       <cpe>cpe:2.3:a:ca-certificates-bundle:ca-certificates-bundle:20220614-r2:*:*:*:*:*:*:*</cpe>
       <purl>pkg:apk/alpine/ca-certificates-bundle@20220614-r2?arch=x86_64&amp;upstream=ca-certificates&amp;distro=alpine-3.17.0_rc1</purl>
@@ -300,21 +292,13 @@
         <property name="syft:metadata:size">126291</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/libc-utils@0.7.2-r3?arch=x86_64&amp;upstream=libc-dev&amp;distro=alpine-3.17.0_rc1&amp;package-id=8126b232e2d3c608" type="library">
+    <component bom-ref="pkg:apk/alpine/libc-utils@0.7.2-r3?arch=x86_64&amp;upstream=libc-dev&amp;distro=alpine-3.17.0_rc1&amp;package-id=3da1da8b4149460f" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>libc-utils</name>
       <version>0.7.2-r3</version>
       <description>Meta package to pull in correct libc</description>
       <licenses>
-        <license>
-          <id>BSD-2-Clause</id>
-        </license>
-        <license>
-          <name>AND</name>
-        </license>
-        <license>
-          <id>BSD-3-Clause</id>
-        </license>
+        <expression>BSD-2-Clause AND BSD-3-Clause</expression>
       </licenses>
       <cpe>cpe:2.3:a:libc-utils:libc-utils:0.7.2-r3:*:*:*:*:*:*:*</cpe>
       <purl>pkg:apk/alpine/libc-utils@0.7.2-r3?arch=x86_64&amp;upstream=libc-dev&amp;distro=alpine-3.17.0_rc1</purl>
@@ -342,7 +326,7 @@
         <property name="syft:metadata:size">1485</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/libcrypto3@3.0.7-r0?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.17.0_rc1&amp;package-id=20fd21bab4a9be13" type="library">
+    <component bom-ref="pkg:apk/alpine/libcrypto3@3.0.7-r0?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.17.0_rc1&amp;package-id=a70eec9a6565b463" type="library">
       <publisher>Ariadne Conill &lt;ariadne@dereferenced.org&gt;</publisher>
       <name>libcrypto3</name>
       <version>3.0.7-r0</version>
@@ -377,7 +361,7 @@
         <property name="syft:metadata:size">1707237</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/libssl3@3.0.7-r0?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.17.0_rc1&amp;package-id=7ae494d499484cc8" type="library">
+    <component bom-ref="pkg:apk/alpine/libssl3@3.0.7-r0?arch=x86_64&amp;upstream=openssl&amp;distro=alpine-3.17.0_rc1&amp;package-id=ad13da443052d69b" type="library">
       <publisher>Ariadne Conill &lt;ariadne@dereferenced.org&gt;</publisher>
       <name>libssl3</name>
       <version>3.0.7-r0</version>
@@ -413,7 +397,7 @@
         <property name="syft:metadata:size">246098</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/musl@1.2.3-r4?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=d9700f02cf26e8b8" type="library">
+    <component bom-ref="pkg:apk/alpine/musl@1.2.3-r4?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=a82a419b6960f70b" type="library">
       <publisher>Timo Teräs &lt;timo.teras@iki.fi&gt;</publisher>
       <name>musl</name>
       <version>1.2.3-r4</version>
@@ -446,27 +430,13 @@
         <property name="syft:metadata:size">388955</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/musl-utils@1.2.3-r4?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.17.0_rc1&amp;package-id=f71ecf5267e6c37b" type="library">
+    <component bom-ref="pkg:apk/alpine/musl-utils@1.2.3-r4?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.17.0_rc1&amp;package-id=96aaf79fc685e220" type="library">
       <publisher>Timo Teräs &lt;timo.teras@iki.fi&gt;</publisher>
       <name>musl-utils</name>
       <version>1.2.3-r4</version>
       <description>the musl c library (libc) implementation</description>
       <licenses>
-        <license>
-          <id>MIT</id>
-        </license>
-        <license>
-          <name>AND</name>
-        </license>
-        <license>
-          <id>BSD-2-Clause</id>
-        </license>
-        <license>
-          <name>AND</name>
-        </license>
-        <license>
-          <id>GPL-2.0-or-later</id>
-        </license>
+        <expression>MIT AND BSD-2-Clause AND GPL-2.0-or-later</expression>
       </licenses>
       <cpe>cpe:2.3:a:musl-utils:musl-utils:1.2.3-r4:*:*:*:*:*:*:*</cpe>
       <purl>pkg:apk/alpine/musl-utils@1.2.3-r4?arch=x86_64&amp;upstream=musl&amp;distro=alpine-3.17.0_rc1</purl>
@@ -502,7 +472,7 @@
         <property name="syft:metadata:size">36697</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/scanelf@1.3.5-r1?arch=x86_64&amp;upstream=pax-utils&amp;distro=alpine-3.17.0_rc1&amp;package-id=e903138d19e85b80" type="library">
+    <component bom-ref="pkg:apk/alpine/scanelf@1.3.5-r1?arch=x86_64&amp;upstream=pax-utils&amp;distro=alpine-3.17.0_rc1&amp;package-id=014ce49f90e359d5" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>scanelf</name>
       <version>1.3.5-r1</version>
@@ -534,7 +504,7 @@
         <property name="syft:metadata:size">37687</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/ssl_client@1.35.0-r27?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.17.0_rc1&amp;package-id=3e67765eb67607e0" type="library">
+    <component bom-ref="pkg:apk/alpine/ssl_client@1.35.0-r27?arch=x86_64&amp;upstream=busybox&amp;distro=alpine-3.17.0_rc1&amp;package-id=c772ac8d3166a947" type="library">
       <publisher>Sören Tempel &lt;soeren+alpine@soeren-tempel.net&gt;</publisher>
       <name>ssl_client</name>
       <version>1.35.0-r27</version>
@@ -573,7 +543,7 @@
         <property name="syft:metadata:size">4919</property>
       </properties>
     </component>
-    <component bom-ref="pkg:apk/alpine/zlib@1.2.13-r0?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=94014313cfcd2b71" type="library">
+    <component bom-ref="pkg:apk/alpine/zlib@1.2.13-r0?arch=x86_64&amp;distro=alpine-3.17.0_rc1&amp;package-id=b8ee1f66780f175f" type="library">
       <publisher>Natanael Copa &lt;ncopa@alpinelinux.org&gt;</publisher>
       <name>zlib</name>
       <version>1.2.13-r0</version>

@@ -42,25 +42,21 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	input, err := source.ParseInput(fmt.Sprintf("registry:%s", img.ImageID), "")
+	detection, err := source.Detect(fmt.Sprintf("registry:%s", img.ImageID), source.DefaultDetectConfig())
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to parse input registry:%s: %w", img.ImageID, err)).Error("Input-Parsing failed")
 		return "", err
 	}
 
 	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img, s.proxyRegistryMap)}
-	src, cleanup, err := source.New(*input, opts, nil)
+	src, err := detection.NewSource(source.DetectionSourceConfig{RegistryOptions: opts})
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
 		return "", err
 	}
 
-	if cleanup != nil {
-		defer cleanup()
-	}
-
 	result := sbom.SBOM{
-		Source: src.Metadata,
+		Source: src.Describe(),
 		Descriptor: sbom.Descriptor{
 			Name:    "syft",
 			Version: s.resolveVersion(),
