@@ -142,6 +142,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20230801084829-019db2afb18d h1:N5OBr8J7QV
 github.com/ckotzbauer/libk8soci v0.0.0-20230801084829-019db2afb18d/go.mod h1:ZpWNRsj8ioRD2PIytdIHsHCFTRKMGwyplle9KUdaiMg=
 github.com/ckotzbauer/libstandard v0.0.0-20230701051533-20f87d3d6d46 h1:CTpWL2Jf7zvYjOx83enKyTWgdwbjYtJuLRS1DfFT1zU=
 github.com/ckotzbauer/libstandard v0.0.0-20230701051533-20f87d3d6d46/go.mod h1:bfNkCUvafg2uS/RC6KYe7ofej6sD8bUn1cuEBsnL2T4=
+github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41 h1:2A7/T7jb/822x5Qu1gLvOSLCwWYGTrgXhgsEw9DI/uM=
+github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41/go.mod h1:ZAn0S0+iT1oQrx3Y21GegMUA0/C/bqT3oWHRS11+odU=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/cloudflare/circl v1.3.3 h1:fE/Qz0QdIGqeWfnwq0RE0R7MI51s0M2E4Ga9kq5AEMs=
 github.com/cloudflare/circl v1.3.3/go.mod h1:5XYMA4rFBvNIrhs50XuiBJ15vF2pZn4nnUKZrLbUZFA=
@@ -395,6 +397,8 @@ github.com/huandu/xstrings v1.3.3 h1:/Gcsuc1x8JVbJ9/rlye4xZnVAbEkGauT8lbebqcQws4
 github.com/huandu/xstrings v1.3.3/go.mod h1:y5/lhBue+AyNmUVz9RLU9xbLR0o4KIIExikq4ovT0aE=
 github.com/iancoleman/strcase v0.2.0 h1:05I4QRnGpI0m37iZQRuskXh+w77mr6Z41lwQzuHLwW0=
 github.com/iancoleman/strcase v0.2.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
+github.com/iancoleman/strcase v0.3.0 h1:nTXanmYxhfFAMjZL34Ov6gkzEsSJZ5DbhxWjvSASxEI=
+github.com/iancoleman/strcase v0.3.0/go.mod h1:iwCmte+B7n89clKwxIoIXy/HfoL7AsD47ZCWhYzw7ho=
 github.com/ianlancetaylor/demangle v0.0.0-20181102032728-5e5cf60278f6/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/ianlancetaylor/demangle v0.0.0-20200824232613-28f6c0f3b639/go.mod h1:aSSvb/t6k1mPoxDqO4vJh6VOCGPwU4O0C2/Eqndh1Sc=
 github.com/imdario/mergo v0.3.11/go.mod h1:jmQim1M+e3UYxmgPu/WyfjB3N3VflVyUjjjwH0dnCYA=
