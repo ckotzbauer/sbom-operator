@@ -7,7 +7,7 @@ require (
 	github.com/anchore/stereoscope v0.0.0-20230727211946-d1f3d766295e
 	github.com/anchore/syft v0.86.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20230801084829-019db2afb18d
-	github.com/ckotzbauer/libstandard v0.0.0-20230701051533-20f87d3d6d46
+	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
 	github.com/google/uuid v1.3.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
@@ -73,7 +73,7 @@ require (
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/huandu/xstrings v1.3.3 // indirect
-	github.com/iancoleman/strcase v0.2.0 // indirect
+	github.com/iancoleman/strcase v0.3.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/jbenet/go-context v0.0.0-20150711004518-d14ea06fba99 // indirect
 	github.com/jinzhu/copier v0.3.5 // indirect
