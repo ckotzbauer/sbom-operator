@@ -14,7 +14,7 @@ require (
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.7.0
 	github.com/stretchr/testify v1.8.4
-	golang.org/x/exp v0.0.0-20230801115018-d63ba01acd4b
+	golang.org/x/exp v0.0.0-20230811145659-89c5cff77bcb
 	k8s.io/api v0.27.4
 	k8s.io/apimachinery v0.27.4
 	k8s.io/client-go v0.27.4
