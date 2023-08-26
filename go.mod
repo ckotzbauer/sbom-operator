@@ -8,7 +8,7 @@ require (
 	github.com/anchore/syft v0.87.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20230801084829-019db2afb18d
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
-	github.com/google/uuid v1.3.0
+	github.com/google/uuid v1.3.1
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.3
@@ -170,7 +170,7 @@ require (
 
 replace (
 	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.11.0
-	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.12.0
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.13.0
 	golang.org/x/net => golang.org/x/net v0.14.0
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 )

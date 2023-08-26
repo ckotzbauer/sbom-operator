@@ -363,6 +363,8 @@ github.com/google/uuid v1.1.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+
 github.com/google/uuid v1.1.2/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/google/uuid v1.3.0 h1:t6JiXgmwXMjEs8VusXIJk2BXHsn+wx8BZdTaoZ5fu7I=
 github.com/google/uuid v1.3.0/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
+github.com/google/uuid v1.3.1 h1:KjJaJ9iWZ3jOFZIf1Lqf4laDRCasjl0BCmnEGxkdLb4=
+github.com/google/uuid v1.3.1/go.mod h1:TIyPZe4MgqvfeYDBFedMoGGpEw/LqOeaOT+nhxU+yHo=
 github.com/googleapis/gax-go/v2 v2.0.4/go.mod h1:0Wqv26UfaUD9n4G6kQubkQ+KchISgw+vpHVxEJEs9eg=
 github.com/googleapis/gax-go/v2 v2.0.5/go.mod h1:DWXyrwAJ9X0FpwwEdw+IPEYBICEFu5mhpdKc/us6bOk=
 github.com/googleapis/gax-go/v2 v2.1.0/go.mod h1:Q3nei7sK6ybPYH7twZdmQpAd1MKb7pfu6SK+H1/DsU0=
@@ -640,6 +642,8 @@ github.com/sylabs/sif/v2 v2.11.5 h1:7ssPH3epSonsTrzbS1YxeJ9KuqAN7ISlSM61a7j/mQM=
 github.com/sylabs/sif/v2 v2.11.5/go.mod h1:GBoZs9LU3e4yJH1dcZ3Akf/jsqYgy5SeguJQC+zd75Y=
 github.com/sylabs/sif/v2 v2.12.0 h1:mghM4elFasymxIWYZ8q/eLnDRMOOhRrrKLrEceVQm08=
 github.com/sylabs/sif/v2 v2.12.0/go.mod h1:Gn6bQvH4q4CH2h8BR9Qkuc1LvhYsfhOxCU7U6gS8jto=
+github.com/sylabs/sif/v2 v2.13.0 h1:dK/PQ/ohLAA4hptbjNuU0qoqkJ9Kl07hiSHArMNSKsQ=
+github.com/sylabs/sif/v2 v2.13.0/go.mod h1:qEFrmE29XNbW2uyBagTsw9dgM82MwsckNYUFPweF2ek=
 github.com/sylabs/squashfs v0.6.1 h1:4hgvHnD9JGlYWwT0bPYNt9zaz23mAV3Js+VEgQoRGYQ=
 github.com/sylabs/squashfs v0.6.1/go.mod h1:ZwpbPCj0ocIvMy2br6KZmix6Gzh6fsGQcCnydMF+Kx8=
 github.com/therootcompany/xz v1.0.1 h1:CmOtsn1CbtmyYiusbfmhmkpAAETj0wBIH6kCYaX+xzw=
