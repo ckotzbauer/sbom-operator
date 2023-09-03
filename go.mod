@@ -2,8 +2,6 @@ module github.com/ckotzbauer/sbom-operator
 
 go 1.21
 
-toolchain go1.21.0
-
 require (
 	github.com/DependencyTrack/client-go v0.12.0
 	github.com/anchore/stereoscope v0.0.0-20230919183137-5841b53a0375
