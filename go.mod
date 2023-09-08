@@ -4,7 +4,7 @@ go 1.20
 
 require (
 	github.com/DependencyTrack/client-go v0.12.0
-	github.com/anchore/stereoscope v0.0.0-20230829142608-334c2222e137
+	github.com/anchore/stereoscope v0.0.0-20230907152702-057dda3667e7
 	github.com/anchore/syft v0.87.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20230901102908-0dccca8bc1e1
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
@@ -33,6 +33,7 @@ require (
 	github.com/ProtonMail/go-crypto v0.0.0-20230717121422-5aa5874ade95 // indirect
 	github.com/acobaugh/osrelease v0.1.0 // indirect
 	github.com/acomagu/bufpipe v1.0.4 // indirect
+	github.com/adrg/xdg v0.4.0 // indirect
 	github.com/anchore/go-logger v0.0.0-20230531193951-db5ae83e7dbe // indirect
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
 	github.com/anchore/go-struct-converter v0.0.0-20221118182256-c68fdcfa2092 // indirect
