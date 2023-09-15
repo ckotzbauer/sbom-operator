@@ -108,6 +108,8 @@ github.com/anchore/stereoscope v0.0.0-20230829142608-334c2222e137 h1:ZuiAV3lYKbG
 github.com/anchore/stereoscope v0.0.0-20230829142608-334c2222e137/go.mod h1:jkylrnuv++srUa2rsqCnG0n1ShD+0k2Xa6YtoNoRjAY=
 github.com/anchore/stereoscope v0.0.0-20230907152702-057dda3667e7 h1:mbYk+Cvvlfr/kRUz7LqATmjOT4+mV0YufNtj3aqU2fw=
 github.com/anchore/stereoscope v0.0.0-20230907152702-057dda3667e7/go.mod h1:bEbCTAbTx/Ot+kSWVfXgInyU+88+0gP+G8L+LPgrunw=
+github.com/anchore/stereoscope v0.0.0-20230911191510-2fc2d6c2503b h1:TFqPfhf7Q+59gW1RuZixnEhh8lYY/FdqTRpSHYKcOsw=
+github.com/anchore/stereoscope v0.0.0-20230911191510-2fc2d6c2503b/go.mod h1:CpgmJLpFsMBSq4WnWpBIfk2etTvv/jx00q15MWnzKDY=
 github.com/anchore/syft v0.86.1 h1:XYD1iBbLekkyWvpmZoWQAdVYUJT1S0OPqCTlfr3WWk0=
 github.com/anchore/syft v0.86.1/go.mod h1:I0dtaA+YkEMEGPqc5ho3Q8VxoRgg4fmvHZ44m0OvFPs=
 github.com/anchore/syft v0.87.1 h1:S9xAQzvSRjGTqnkHXxGNX7TQAU0vzr2HAbuD2Sklc1s=
@@ -679,6 +681,8 @@ github.com/wagoodman/go-partybus v0.0.0-20230516145632-8ccac152c651 h1:jIVmlAFIq
 github.com/wagoodman/go-partybus v0.0.0-20230516145632-8ccac152c651/go.mod h1:b26F2tHLqaoRQf8DywqzVaV1MQ9yvjb0OMcNl7Nxu20=
 github.com/wagoodman/go-progress v0.0.0-20230301185719-21920a456ad5 h1:lwgTsTy18nYqASnH58qyfRW/ldj7Gt2zzBvgYPzdA4s=
 github.com/wagoodman/go-progress v0.0.0-20230301185719-21920a456ad5/go.mod h1:jLXFoL31zFaHKAAyZUh+sxiTDFe1L1ZHrcK2T1itVKA=
+github.com/wagoodman/go-progress v0.0.0-20230911172108-cf810b7e365c h1:mM8T8YhiD19d2wYv3vqZn8xpe1ZFJrUJCGlK4IV05xM=
+github.com/wagoodman/go-progress v0.0.0-20230911172108-cf810b7e365c/go.mod h1:jLXFoL31zFaHKAAyZUh+sxiTDFe1L1ZHrcK2T1itVKA=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=
 github.com/xanzy/ssh-agent v0.3.3/go.mod h1:6dzNDKs0J9rVPHPhaGCukekBHKqfl+L3KghI1Bc68Uw=
 github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 h1:nIPpBwaJSVYIxUFsDv3M8ofmx9yWTog9BfvIu0q41lo=
