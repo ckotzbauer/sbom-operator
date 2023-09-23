@@ -192,7 +192,7 @@ require (
 
 replace (
 	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.11.0
-	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.13.0
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.14.1
 	golang.org/x/net => golang.org/x/net v0.15.0
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 )
