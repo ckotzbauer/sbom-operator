@@ -31,12 +31,12 @@ spec:
             fieldRef:
               fieldPath: metadata.uid
         # Free account
-        - name: SBOM_JOB_CAS_API_KEY
+        - name: SBOM_JOB_VCN_API_KEY
           value: ""
         args:
           # example values
           - --cron="0 6 * * * *"
-          - --job-image=ghcr.io/ckotzbauer/sbom-operator/cas:0.10.0
+          - --job-image=ghcr.io/ckotzbauer/sbom-operator/vcn:0.10.0
           #- --pod-label-selector=sbom-operator\=true
         ports:
         - containerPort: 8080

@@ -23,22 +23,6 @@ jobs:
       pat: ${{ secrets.REPO_ACCESS }}
       ghcr-password: ${{ secrets.GHCR_PASSWORD }}
 
-  job-image-cas:
-    uses: ckotzbauer/sbom-operator/.github/workflows/release-job-image.yml@main
-    needs: [release]
-    with:
-      version: ${{ github.event.inputs.version }}
-      job-image: cas
-      docker-platforms: linux/amd64
-      docker-tags: |
-        ghcr.io/ckotzbauer/sbom-operator/cas:${{ github.event.inputs.version }}
-        ghcr.io/ckotzbauer/sbom-operator/cas:latest
-      cosign-repository: ghcr.io/ckotzbauer/sbom-operator-metadata
-    secrets:
-      token: ${{ secrets.GITHUB_TOKEN }}
-      pat: ${{ secrets.REPO_ACCESS }}
-      ghcr-password: ${{ secrets.GHCR_PASSWORD }}
-
   job-image-vcn:
     uses: ckotzbauer/sbom-operator/.github/workflows/release-job-image.yml@main
     needs: [release]

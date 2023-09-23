@@ -253,14 +253,13 @@ the SBOMs on its own. Currently there are two possible integrations:
 
 | Tool | Description |
 | ---- | ----------- |
-| [Codenotary CAS](job-images/cas/README.md) | The Community Attestation Service from Codenotary can notarize your images in the Codenotary Cloud. (free) |
 | [Codenotary VCN](job-images/vcn/README.md) | The VCN-Tool from Codenotary can notarize your images in the Codenotary Cloud. (chargeable) |
 
 This feature is built as generic approach. Any image which follows [these specs](job-images/SPEC.md) can be used as job-image.
 
 e.g. Manifest (`deploy/job-image`):
 ```yaml
---job-image=ghcr.io/ckotzbauer/sbom-operator/cas:<TAG>
+--job-image=ghcr.io/ckotzbauer/sbom-operator/vcn:<TAG>
 ```
 
 e.g. Helm:
@@ -268,7 +267,7 @@ e.g. Helm:
 jobImageMode: true
 
 envVars:
-  - name: SBOM_JOB_CAS_API_KEY
+  - name: SBOM_JOB_VCN_LC_API_KEY
     value: "<KEY>"
 ```
 

@@ -76,14 +76,3 @@ jobs:
           verify: true
           attest: true
           cosign-repository: ${{ inputs.cosign-repository }}
-
-      - name: Generate Provenance
-        uses: ckotzbauer/actions-toolkit/slsa-provenance@0.36.0
-        with:
-          action-sha: "0.22.0"
-          images: ${{ inputs.docker-tags }}
-          artifact-path: job-images/${{ inputs.job-image }}
-          sign: true
-          verify: true
-          attest: true
-          cosign-repository: ${{ inputs.cosign-repository }}
