@@ -115,6 +115,8 @@ github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44 h1:dKMvcpgqsRr
 github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44/go.mod h1:RtbeDCho0pxkPqrB1QNf/Jlxfc9juLmtYZAf2UbpJfk=
 github.com/anchore/syft v0.91.0 h1:pAZ3QwxY7orDWBLktbgOpXufHyb4EYGA/uZUAWfydmA=
 github.com/anchore/syft v0.91.0/go.mod h1:wLO4ucIMsTUSpRGvrdC+sYNT9aLE6R9rKhaMlnKFNdA=
+github.com/anchore/syft v0.92.0 h1:Xafpp4CA5s4XeN9dJJfKPyE83Q47mmsJIMbHOLfhDXQ=
+github.com/anchore/syft v0.92.0/go.mod h1:ZBqHdoy2979KDRL35fKvsC0obdN062D+HBAmNBP1lH0=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.0.1/go.mod h1:loMXtMfwqflxFJPmdbJO0a3KNoPuLBgiu3qAvBg8x/Y=
 github.com/andybalholm/brotli v1.0.5 h1:8uQZIdzKmjc/iuPu7O2ioW48L81FgatrcpfFmiq/cCs=
@@ -696,6 +698,8 @@ github.com/spf13/afero v1.3.3/go.mod h1:5KUK8ByomD5Ti5Artl0RtHeI5pTF7MIDuXL3yY52
 github.com/spf13/afero v1.6.0/go.mod h1:Ai8FlHk4v/PARR026UzYexafAt9roJ7LcLMAmO6Z93I=
 github.com/spf13/afero v1.9.5 h1:stMpOSZFs//0Lv29HduCmli3GUfpFoF3Y1Q/aXj/wVM=
 github.com/spf13/afero v1.9.5/go.mod h1:UBogFpq8E9Hx+xc5CNTTEpTnuHVmXDwZcZcE1eb/UhQ=
+github.com/spf13/afero v1.10.0 h1:EaGW2JJh15aKOejeuJ+wpFSHnbd7GE6Wvp3TsNhb6LY=
+github.com/spf13/afero v1.10.0/go.mod h1:UBogFpq8E9Hx+xc5CNTTEpTnuHVmXDwZcZcE1eb/UhQ=
 github.com/spf13/cast v1.3.1/go.mod h1:Qx5cxh0v+4UWYiBimWS+eyWzqEqokIECu5etghLkUJE=
 github.com/spf13/cast v1.4.1/go.mod h1:Qx5cxh0v+4UWYiBimWS+eyWzqEqokIECu5etghLkUJE=
 github.com/spf13/cast v1.5.1 h1:R+kOtfhWQE6TVQzY+4D7wJLBgkdVasCEFxSUBYBYIlA=

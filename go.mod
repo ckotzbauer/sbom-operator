@@ -5,7 +5,7 @@ go 1.21.0
 require (
 	github.com/DependencyTrack/client-go v0.12.0
 	github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44
-	github.com/anchore/syft v0.91.0
+	github.com/anchore/syft v0.92.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230901102908-0dccca8bc1e1
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
 	github.com/google/uuid v1.3.1
@@ -144,7 +144,7 @@ require (
 	github.com/shopspring/decimal v1.2.0 // indirect
 	github.com/skeema/knownhosts v1.2.0 // indirect
 	github.com/spdx/tools-golang v0.5.3 // indirect
-	github.com/spf13/afero v1.9.5 // indirect
+	github.com/spf13/afero v1.10.0 // indirect
 	github.com/spf13/cast v1.5.1 // indirect
 	github.com/spf13/jwalterweatherman v1.1.0 // indirect
 	github.com/spf13/viper v1.16.0 // indirect
