@@ -111,6 +111,8 @@ github.com/anchore/packageurl-go v0.1.1-0.20230104203445-02e0a6721501 h1:AV7qjwM
 github.com/anchore/packageurl-go v0.1.1-0.20230104203445-02e0a6721501/go.mod h1:Blo6OgJNiYF41ufcgHKkbCKF2MDOMlrqhXv/ij6ocR4=
 github.com/anchore/stereoscope v0.0.0-20230919183137-5841b53a0375 h1:lpeR4D5PMFXg80QVJgwlJs0QyS8FTBVuFW45Y+3Tat0=
 github.com/anchore/stereoscope v0.0.0-20230919183137-5841b53a0375/go.mod h1:75uRHom5WV5ENe3iSK2B37BQvB+47o9HYjpCYaSwlPQ=
+github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44 h1:dKMvcpgqsRrX1ZWyqG53faVW+BahlaAO1RUEc7/rOjA=
+github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44/go.mod h1:RtbeDCho0pxkPqrB1QNf/Jlxfc9juLmtYZAf2UbpJfk=
 github.com/anchore/syft v0.91.0 h1:pAZ3QwxY7orDWBLktbgOpXufHyb4EYGA/uZUAWfydmA=
 github.com/anchore/syft v0.91.0/go.mod h1:wLO4ucIMsTUSpRGvrdC+sYNT9aLE6R9rKhaMlnKFNdA=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
@@ -757,6 +759,8 @@ github.com/wagoodman/go-partybus v0.0.0-20230516145632-8ccac152c651 h1:jIVmlAFIq
 github.com/wagoodman/go-partybus v0.0.0-20230516145632-8ccac152c651/go.mod h1:b26F2tHLqaoRQf8DywqzVaV1MQ9yvjb0OMcNl7Nxu20=
 github.com/wagoodman/go-progress v0.0.0-20230911172108-cf810b7e365c h1:mM8T8YhiD19d2wYv3vqZn8xpe1ZFJrUJCGlK4IV05xM=
 github.com/wagoodman/go-progress v0.0.0-20230911172108-cf810b7e365c/go.mod h1:jLXFoL31zFaHKAAyZUh+sxiTDFe1L1ZHrcK2T1itVKA=
+github.com/wagoodman/go-progress v0.0.0-20230925121702-07e42b3cdba0 h1:0KGbf+0SMg+UFy4e1A/CPVvXn21f1qtWdeJwxZFoQG8=
+github.com/wagoodman/go-progress v0.0.0-20230925121702-07e42b3cdba0/go.mod h1:jLXFoL31zFaHKAAyZUh+sxiTDFe1L1ZHrcK2T1itVKA=
 github.com/xanzy/ssh-agent v0.3.3 h1:+/15pJfg/RsTxqYcX6fHqOXZwwMP+2VyYWJeWM2qQFM=
 github.com/xanzy/ssh-agent v0.3.3/go.mod h1:6dzNDKs0J9rVPHPhaGCukekBHKqfl+L3KghI1Bc68Uw=
 github.com/xeipuuv/gojsonpointer v0.0.0-20190905194746-02993c407bfb h1:zGWFAtiMcyryUHoUjUJX0/lt1H2+i2Ka2n+D3DImSNo=

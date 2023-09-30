@@ -4,7 +4,7 @@ go 1.21.0
 
 require (
 	github.com/DependencyTrack/client-go v0.12.0
-	github.com/anchore/stereoscope v0.0.0-20230919183137-5841b53a0375
+	github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44
 	github.com/anchore/syft v0.91.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20230901102908-0dccca8bc1e1
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
@@ -157,7 +157,7 @@ require (
 	github.com/vbatts/tar-split v0.11.3 // indirect
 	github.com/vifraa/gopom v1.0.0 // indirect
 	github.com/wagoodman/go-partybus v0.0.0-20230516145632-8ccac152c651 // indirect
-	github.com/wagoodman/go-progress v0.0.0-20230911172108-cf810b7e365c // indirect
+	github.com/wagoodman/go-progress v0.0.0-20230925121702-07e42b3cdba0 // indirect
 	github.com/xanzy/ssh-agent v0.3.3 // indirect
 	github.com/xi2/xz v0.0.0-20171230120015-48954b6210f8 // indirect
 	github.com/xo/terminfo v0.0.0-20210125001918-ca9a967f8778 // indirect
