@@ -5,7 +5,7 @@ go 1.21.0
 require (
 	github.com/DependencyTrack/client-go v0.12.0
 	github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44
-	github.com/anchore/syft v0.92.0
+	github.com/anchore/syft v0.93.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20231003123721-9d2e6875ea4c
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
 	github.com/google/uuid v1.3.1
@@ -58,8 +58,9 @@ require (
 	github.com/containerd/typeurl/v2 v2.1.0 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/deitch/magic v0.0.0-20230404182410-1ff89d7342da // indirect
+	github.com/distribution/reference v0.5.0 // indirect
 	github.com/docker/cli v24.0.6+incompatible // indirect
-	github.com/docker/distribution v2.8.2+incompatible // indirect
+	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v24.0.6+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
@@ -136,7 +137,7 @@ require (
 	github.com/pkg/profile v1.7.0 // indirect
 	github.com/pmezard/go-difflib v1.0.0 // indirect
 	github.com/rivo/uniseg v0.2.0 // indirect
-	github.com/saferwall/pe v1.4.5 // indirect
+	github.com/saferwall/pe v1.4.7 // indirect
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/sassoftware/go-rpmutils v0.2.0 // indirect
 	github.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect
