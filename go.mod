@@ -8,7 +8,7 @@ require (
 	github.com/anchore/syft v0.94.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20231003123721-9d2e6875ea4c
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
-	github.com/google/uuid v1.3.1
+	github.com/google/uuid v1.4.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.3
