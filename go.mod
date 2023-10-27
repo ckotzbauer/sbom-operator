@@ -4,7 +4,7 @@ go 1.21.0
 
 require (
 	github.com/DependencyTrack/client-go v0.12.0
-	github.com/anchore/stereoscope v0.0.0-20230925132944-bf05af58eb44
+	github.com/anchore/stereoscope v0.0.0-20231027135531-5909e353ee88
 	github.com/anchore/syft v0.94.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20231003123721-9d2e6875ea4c
 	github.com/ckotzbauer/libstandard v0.0.0-20230801082608-4e352616bf41
@@ -22,8 +22,8 @@ require (
 
 require (
 	dario.cat/mergo v1.0.0 // indirect
-	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230106234847-43070de90fa1 // indirect
-	github.com/AdamKorcz/go-118-fuzz-build v0.0.0-20221215162035-5330a85ea652 // indirect
+	github.com/AdaLogics/go-fuzz-headers v0.0.0-20230811130428-ced1acdcaa24 // indirect
+	github.com/AdamKorcz/go-118-fuzz-build v0.0.0-20230306123547-8075edf89bb0 // indirect
 	github.com/Azure/go-ansiterm v0.0.0-20230124172434-306776ec8161 // indirect
 	github.com/CycloneDX/cyclonedx-go v0.7.2 // indirect
 	github.com/DataDog/zstd v1.5.2 // indirect
@@ -32,7 +32,7 @@ require (
 	github.com/Masterminds/semver/v3 v3.2.0 // indirect
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
-	github.com/Microsoft/hcsshim v0.10.0-rc.7 // indirect
+	github.com/Microsoft/hcsshim v0.11.1 // indirect
 	github.com/ProtonMail/go-crypto v0.0.0-20230828082145-3c4c8a2d2371 // indirect
 	github.com/acobaugh/osrelease v0.1.0 // indirect
 	github.com/acomagu/bufpipe v1.0.4 // indirect
@@ -50,12 +50,13 @@ require (
 	github.com/bmatcuk/doublestar/v4 v4.6.0 // indirect
 	github.com/cloudflare/circl v1.3.3 // indirect
 	github.com/containerd/cgroups v1.1.0 // indirect
-	github.com/containerd/containerd v1.7.0 // indirect
-	github.com/containerd/continuity v0.3.0 // indirect
+	github.com/containerd/containerd v1.7.8 // indirect
+	github.com/containerd/continuity v0.4.2 // indirect
 	github.com/containerd/fifo v1.1.0 // indirect
+	github.com/containerd/log v0.1.0 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.14.3 // indirect
-	github.com/containerd/ttrpc v1.2.1 // indirect
-	github.com/containerd/typeurl/v2 v2.1.0 // indirect
+	github.com/containerd/ttrpc v1.2.2 // indirect
+	github.com/containerd/typeurl/v2 v2.1.1 // indirect
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/deitch/magic v0.0.0-20230404182410-1ff89d7342da // indirect
 	github.com/distribution/reference v0.5.0 // indirect
@@ -171,8 +172,9 @@ require (
 	golang.org/x/sync v0.4.0 // indirect
 	golang.org/x/tools v0.14.0 // indirect
 	golang.org/x/xerrors v0.0.0-20220907171357-04be3eba64a2 // indirect
-	google.golang.org/genproto v0.0.0-20230410155749-daa745c078e1 // indirect
-	google.golang.org/grpc v1.55.0 // indirect
+	google.golang.org/genproto v0.0.0-20230711160842-782d3b101e98 // indirect
+	google.golang.org/genproto/googleapis/rpc v0.0.0-20230711160842-782d3b101e98 // indirect
+	google.golang.org/grpc v1.58.3 // indirect
 	gopkg.in/ini.v1 v1.67.0 // indirect
 	gopkg.in/warnings.v0 v0.1.2 // indirect
 )
@@ -193,7 +195,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/net v0.17.0 // indirect
-	golang.org/x/oauth2 v0.8.0 // indirect
+	golang.org/x/oauth2 v0.10.0 // indirect
 	golang.org/x/sys v0.13.0 // indirect
 	golang.org/x/term v0.13.0 // indirect
 	golang.org/x/text v0.13.0 // indirect
