@@ -1,3 +1,38 @@
+## Version 0.29.0 (2023-11-09)
+
+### Features and improvements
+
+* [[`a8b97684`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a8b97684)] - **feat**: update golang
+* [[`9229f1be`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9229f1be)] - **feat**: update syft
+
+### Dependency updates
+
+* [[`ec7ec9d8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ec7ec9d8)] - **deps**: update module github.com&#x2F;spf13&#x2F;cobra to v1.8.0
+* [[`a78b7c76`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a78b7c76)] - **deps**: update module github.com&#x2F;docker&#x2F;docker to v24.0.7+incompatible [security] (#514)
+* [[`b5ee7069`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b5ee7069)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 363c909 (#512)
+* [[`985e0265`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/985e0265)] - **deps**: update sigstore&#x2F;cosign-installer digest to 4b014e3 (#513)
+* [[`055b5eb8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/055b5eb8)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to b432e7a (#511)
+* [[`469b4a9d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/469b4a9d)] - **deps**: update codenotary&#x2F;vcn docker tag to v1.0.9 (#509)
+* [[`1d61d1c7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1d61d1c7)] - **deps**: update sigstore&#x2F;cosign-installer digest to 38ab09d (#508)
+* [[`85e98a08`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/85e98a08)] - **deps**: update module github.com&#x2F;google&#x2F;uuid to v1.4.0 (#510)
+* [[`ea688230`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ea688230)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to 5909e35
+* [[`a758d9c3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a758d9c3)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.94.0
+* [[`3c867288`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3c867288)] - **deps**: update kubernetes versions to v0.28.3
+* [[`ccebc4ed`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ccebc4ed)] - **deps**: update actions&#x2F;checkout digest to b4ffde6
+* [[`045e0acc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/045e0acc)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.17.0 [security] (#500)
+* [[`74b85d4d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/74b85d4d)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.93.0
+* [[`b5b6f90a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b5b6f90a)] - **deps**: update actions&#x2F;checkout digest to 8530928
+* [[`d9e2e83e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d9e2e83e)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.17.0 [security]
+* [[`51503ebb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/51503ebb)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.16.0 (#498)
+* [[`856b75ee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/856b75ee)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.15.0
+* [[`18c4255f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/18c4255f)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 7918f67
+* [[`59f2508b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/59f2508b)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 9d2e687
+* [[`d927f620`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d927f620)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.92.0
+* [[`cd4958c3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cd4958c3)] - **deps**: update sigstore&#x2F;cosign-installer digest to 9c520b9
+* [[`097dbd46`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/097dbd46)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to bf05af5
+* [[`7fa93c62`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7fa93c62)] - **deps**: update alpine:3.18 docker digest to eece025
+
+
 ## Version 0.28.0 (2023-09-23)
 
 ### Bug fixes
