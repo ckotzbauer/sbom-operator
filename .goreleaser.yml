@@ -10,6 +10,9 @@ builds:
     goarm:
       - "6"
       - "7"
+    goarch:
+      - "amd64"
+      - "arm64"
     ignore:
       - goos: linux
         goarch: "386"
