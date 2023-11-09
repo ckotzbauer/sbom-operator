@@ -7,6 +7,15 @@ import (
 
 	"github.com/anchore/stereoscope/pkg/image"
 	"github.com/anchore/syft/syft"
+	"github.com/anchore/syft/syft/format"
+	"github.com/anchore/syft/syft/format/cyclonedxjson"
+	"github.com/anchore/syft/syft/format/cyclonedxxml"
+	"github.com/anchore/syft/syft/format/github"
+	"github.com/anchore/syft/syft/format/spdxjson"
+	"github.com/anchore/syft/syft/format/spdxtagvalue"
+	"github.com/anchore/syft/syft/format/syftjson"
+	"github.com/anchore/syft/syft/format/table"
+	"github.com/anchore/syft/syft/format/text"
 	"github.com/anchore/syft/syft/pkg/cataloger"
 	"github.com/anchore/syft/syft/sbom"
 
@@ -77,13 +86,42 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	result.Relationships = relationships
 
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
-	b, err := syft.Encode(result, syft.FormatByName(s.sbomFormat))
+	encoder, err := GetEncoder(s.sbomFormat)
+	if err != nil {
+		logrus.WithError(err).Error("Could not resolve encoder")
+		return "", err
+	}
+
+	b, err := format.Encode(result, encoder)
 	if err != nil {
 		logrus.WithError(err).Error("Encoding of result failed")
 		return "", err
 	}
 
 	return string(b), nil
+}
+
+func GetEncoder(sbomFormat string) (sbom.FormatEncoder, error) {
+	switch sbomFormat {
+	case "json", "syftjson":
+		return syftjson.NewFormatEncoder(), nil
+	case "cyclonedx", "cyclone", "cyclonedxxml":
+		return cyclonedxxml.NewFormatEncoderWithConfig(cyclonedxxml.DefaultEncoderConfig())
+	case "cyclonedxjson":
+		return cyclonedxjson.NewFormatEncoderWithConfig(cyclonedxjson.DefaultEncoderConfig())
+	case "spdx", "spdxtv", "spdxtagvalue":
+		return spdxtagvalue.NewFormatEncoderWithConfig(spdxtagvalue.DefaultEncoderConfig())
+	case "spdxjson":
+		return spdxjson.NewFormatEncoderWithConfig(spdxjson.DefaultEncoderConfig())
+	case "github", "githubjson":
+		return github.NewFormatEncoder(), nil
+	case "text":
+		return text.NewFormatEncoder(), nil
+	case "table":
+		return table.NewFormatEncoder(), nil
+	default:
+		return syftjson.NewFormatEncoder(), nil
+	}
 }
 
 func GetFileName(sbomFormat string) string {

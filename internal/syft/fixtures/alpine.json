@@ -1,11 +1,11 @@
 {
  "artifacts": [
   {
-   "id": "538dff49e6576a74",
+   "id": "0a3b4a9dae4049aa",
    "name": "alpine-baselayout",
    "version": "3.4.0-r0",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -42,7 +42,7 @@
     "cpe:2.3:a:alpine:alpine_baselayout:3.4.0-r0:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/alpine-baselayout@3.4.0-r0?arch=x86_64&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "alpine-baselayout",
     "originPackage": "alpine-baselayout",
@@ -387,11 +387,11 @@
    }
   },
   {
-   "id": "2b13c37ad68dba47",
+   "id": "008bcc1445f44203",
    "name": "alpine-baselayout-data",
    "version": "3.4.0-r0",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -432,7 +432,7 @@
     "cpe:2.3:a:alpine:alpine_baselayout_data:3.4.0-r0:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/alpine-baselayout-data@3.4.0-r0?arch=x86_64&upstream=alpine-baselayout&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "alpine-baselayout-data",
     "originPackage": "alpine-baselayout",
@@ -566,11 +566,11 @@
    }
   },
   {
-   "id": "52cdfe05331430a5",
+   "id": "f0def3051a26afc8",
    "name": "alpine-keys",
    "version": "2.4-r1",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -607,7 +607,7 @@
     "cpe:2.3:a:alpine:alpine_keys:2.4-r1:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/alpine-keys@2.4-r1?arch=x86_64&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "alpine-keys",
     "originPackage": "alpine-keys",
@@ -1019,11 +1019,11 @@
    }
   },
   {
-   "id": "1d0d53b03364a499",
+   "id": "0faf8749e7caad06",
    "name": "apk-tools",
    "version": "2.12.10-r1",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1060,7 +1060,7 @@
     "cpe:2.3:a:apk:apk_tools:2.12.10-r1:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/apk-tools@2.12.10-r1?arch=x86_64&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "apk-tools",
     "originPackage": "apk-tools",
@@ -1143,49 +1143,11 @@
    }
   },
   {
-   "id": "c39d25e7a774b551",
-   "name": "busybox",
-   "version": "1.35.0",
-   "type": "binary",
-   "foundBy": "binary-cataloger",
-   "locations": [
-    {
-     "path": "/bin/busybox",
-     "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
-     "annotations": {
-      "evidence": "primary"
-     }
-    }
-   ],
-   "licenses": [],
-   "language": "",
-   "cpes": [
-    "cpe:2.3:a:busybox:busybox:1.35.0:*:*:*:*:*:*:*",
-    "cpe:2.3:a:busybox:busybox:1.35.0:*:*:*:*:*:*:*"
-   ],
-   "purl": "",
-   "metadataType": "BinaryMetadata",
-   "metadata": {
-    "matches": [
-     {
-      "classifier": "busybox-binary",
-      "location": {
-       "path": "/bin/busybox",
-       "layerID": "sha256:af57c4b7f0528a43b8203bc339c656496635b7ce67b94c3f034b00a62e6fdf82",
-       "annotations": {
-        "evidence": "primary"
-       }
-      }
-     }
-    ]
-   }
-  },
-  {
-   "id": "db8f2e0215e78df1",
+   "id": "31360fb6d4d09b93",
    "name": "busybox",
    "version": "1.35.0-r27",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1217,7 +1179,7 @@
     "cpe:2.3:a:busybox:busybox:1.35.0-r27:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/busybox@1.35.0-r27?arch=x86_64&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "busybox",
     "originPackage": "busybox",
@@ -1358,11 +1320,11 @@
    }
   },
   {
-   "id": "afd7fb2b76317ef2",
+   "id": "ca81043f9ab6a474",
    "name": "busybox-binsh",
    "version": "1.35.0-r27",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1399,7 +1361,7 @@
     "cpe:2.3:a:busybox:busybox_binsh:1.35.0-r27:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/busybox-binsh@1.35.0-r27?arch=x86_64&upstream=busybox&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "busybox-binsh",
     "originPackage": "busybox",
@@ -1437,11 +1399,11 @@
    }
   },
   {
-   "id": "4f3ed727b35c3fba",
+   "id": "a90861b1a9bea145",
    "name": "ca-certificates-bundle",
    "version": "20220614-r2",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1484,7 +1446,7 @@
     "cpe:2.3:a:ca:ca_certificates_bundle:20220614-r2:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/ca-certificates-bundle@20220614-r2?arch=x86_64&upstream=ca-certificates&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "ca-certificates-bundle",
     "originPackage": "ca-certificates",
@@ -1555,11 +1517,11 @@
    }
   },
   {
-   "id": "3da1da8b4149460f",
+   "id": "f95be16d8615d51f",
    "name": "libc-utils",
    "version": "0.7.2-r3",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1596,7 +1558,7 @@
     "cpe:2.3:a:libc:libc_utils:0.7.2-r3:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/libc-utils@0.7.2-r3?arch=x86_64&upstream=libc-dev&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "libc-utils",
     "originPackage": "libc-dev",
@@ -1617,11 +1579,11 @@
    }
   },
   {
-   "id": "a70eec9a6565b463",
+   "id": "183e6f9eca266ae2",
    "name": "libcrypto3",
    "version": "3.0.7-r0",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1656,7 +1618,7 @@
     "cpe:2.3:a:libcrypto:libcrypto:3.0.7-r0:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/libcrypto3@3.0.7-r0?arch=x86_64&upstream=openssl&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "libcrypto3",
     "originPackage": "openssl",
@@ -1838,11 +1800,11 @@
    }
   },
   {
-   "id": "ad13da443052d69b",
+   "id": "b3530326a5221e56",
    "name": "libssl3",
    "version": "3.0.7-r0",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1877,7 +1839,7 @@
     "cpe:2.3:a:libssl:libssl:3.0.7-r0:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/libssl3@3.0.7-r0?arch=x86_64&upstream=openssl&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "libssl3",
     "originPackage": "openssl",
@@ -1931,11 +1893,11 @@
    }
   },
   {
-   "id": "a82a419b6960f70b",
+   "id": "adaa708f703652d6",
    "name": "musl",
    "version": "1.2.3-r4",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -1969,7 +1931,7 @@
     "cpe:2.3:a:musl:musl:1.2.3-r4:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/musl@1.2.3-r4?arch=x86_64&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "musl",
     "originPackage": "musl",
@@ -2014,11 +1976,11 @@
    }
   },
   {
-   "id": "96aaf79fc685e220",
+   "id": "c0d6e0f3841a7244",
    "name": "musl-utils",
    "version": "1.2.3-r4",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -2057,7 +2019,7 @@
     "cpe:2.3:a:musl:musl_utils:1.2.3-r4:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/musl-utils@1.2.3-r4?arch=x86_64&upstream=musl&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "musl-utils",
     "originPackage": "musl",
@@ -2145,11 +2107,11 @@
    }
   },
   {
-   "id": "014ce49f90e359d5",
+   "id": "544ec51c3fe9a624",
    "name": "scanelf",
    "version": "1.3.5-r1",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -2181,7 +2143,7 @@
     "cpe:2.3:a:scanelf:scanelf:1.3.5-r1:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/scanelf@1.3.5-r1?arch=x86_64&upstream=pax-utils&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "scanelf",
     "originPackage": "pax-utils",
@@ -2221,11 +2183,11 @@
    }
   },
   {
-   "id": "c772ac8d3166a947",
+   "id": "6d806de36875b820",
    "name": "ssl_client",
    "version": "1.35.0-r27",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -2262,7 +2224,7 @@
     "cpe:2.3:a:ssl:ssl_client:1.35.0-r27:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/ssl_client@1.35.0-r27?arch=x86_64&upstream=busybox&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "ssl_client",
     "originPackage": "busybox",
@@ -2304,11 +2266,11 @@
    }
   },
   {
-   "id": "b8ee1f66780f175f",
+   "id": "6ad7c0b45a22318c",
    "name": "zlib",
    "version": "1.2.13-r0",
    "type": "apk",
-   "foundBy": "apkdb-cataloger",
+   "foundBy": "apk-db-cataloger",
    "locations": [
     {
      "path": "/lib/apk/db/installed",
@@ -2340,7 +2302,7 @@
     "cpe:2.3:a:zlib:zlib:1.2.13-r0:*:*:*:*:*:*:*"
    ],
    "purl": "pkg:apk/alpine/zlib@1.2.13-r0?arch=x86_64&distro=alpine-3.17.0_rc1",
-   "metadataType": "ApkMetadata",
+   "metadataType": "apk-db-entry",
    "metadata": {
     "package": "zlib",
     "originPackage": "zlib",
@@ -2389,669 +2351,649 @@
  ],
  "artifactRelationships": [
   {
-   "parent": "014ce49f90e359d5",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "014ce49f90e359d5",
-   "child": "96aaf79fc685e220",
+   "parent": "008bcc1445f44203",
+   "child": "0a3b4a9dae4049aa",
    "type": "dependency-of"
   },
   {
-   "parent": "014ce49f90e359d5",
-   "child": "9d90ebcafcd55681",
-   "type": "contains"
-  },
-  {
-   "parent": "1d0d53b03364a499",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "1d0d53b03364a499",
-   "child": "b62941e48f78a551",
-   "type": "contains"
-  },
-  {
-   "parent": "1d0d53b03364a499",
-   "child": "c17c353c764ceca6",
-   "type": "contains"
-  },
-  {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "1b3dea58788a55c9",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "297728d38e6c3b1e",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "30e74f29ee03c324",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "420bcb99f42f9b4e",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "43760edd5f076d95",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "4cfcb9beb5ec158e",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
-   "child": "538dff49e6576a74",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "6ee813d1f1b96196",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "82e81eb835f5928a",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "86286181da6fdaf1",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "94c1e38e73ebdcfa",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "f4005cf7c106187b",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "f570f9d78db7024c",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "f821e8e904e3074e",
    "type": "contains"
   },
   {
-   "parent": "2b13c37ad68dba47",
+   "parent": "008bcc1445f44203",
    "child": "f93a6627074e5146",
    "type": "contains"
   },
   {
-   "parent": "3da1da8b4149460f",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "4f3ed727b35c3fba",
-   "child": "1d0d53b03364a499",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "4f3ed727b35c3fba",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "4f3ed727b35c3fba",
-   "child": "b3e5c4ebfc3fb889",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "02304fbb06e0b918",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "09291d424386d91c",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "0cee099824762ede",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "100dbb1df2ee43bb",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "1b2d2e4d9cafb7a0",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "33ae754a8456140a",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "3942e7f08442fb9f",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "3e6faedd4c78c48c",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "4c2790666ef81ec8",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "5c52b5071103b8a7",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "74ad339a5039a9ee",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "7fba3ded81003204",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "82960f74611c4c79",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "867f08ec2c8a6f71",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "8f43d3ae34ebf166",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "9002ef3c8cc647b3",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "93a4e70ff064f35c",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "9da547fc150a5d17",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "a997fb045b34b877",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "c60cba03839369ce",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "d6adeff2a04b45cc",
-   "type": "contains"
-  },
-  {
-   "parent": "52cdfe05331430a5",
-   "child": "ea87b9084cefdae6",
-   "type": "contains"
-  },
-  {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "094bea11cff9f19c",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "36878a3c636cdc1c",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "66d89f7c176eb3f0",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "8a949d754445a148",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "a6604088a2ee324b",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "ab06f2cdb343e5ef",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "c31a39c4fccebddc",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "cce2bc161789055e",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "da92fc1d4e9d944b",
    "type": "contains"
   },
   {
-   "parent": "538dff49e6576a74",
+   "parent": "0a3b4a9dae4049aa",
    "child": "f20d3b4d133262e7",
    "type": "contains"
   },
   {
-   "parent": "96aaf79fc685e220",
-   "child": "0e0d5a5e09228031",
-   "type": "contains"
-  },
-  {
-   "parent": "96aaf79fc685e220",
-   "child": "2fd74bf1d1727fee",
-   "type": "contains"
-  },
-  {
-   "parent": "96aaf79fc685e220",
-   "child": "3da1da8b4149460f",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "96aaf79fc685e220",
-   "child": "3f46a173249bb671",
-   "type": "contains"
-  },
-  {
-   "parent": "96aaf79fc685e220",
+   "parent": "0faf8749e7caad06",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "96aaf79fc685e220",
-   "child": "a07d64adfc747525",
+   "parent": "0faf8749e7caad06",
+   "child": "b62941e48f78a551",
    "type": "contains"
   },
   {
-   "parent": "96aaf79fc685e220",
-   "child": "ecbdb7fee3bb5035",
+   "parent": "0faf8749e7caad06",
+   "child": "c17c353c764ceca6",
    "type": "contains"
   },
   {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "014ce49f90e359d5",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "1d0d53b03364a499",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "2b13c37ad68dba47",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "3da1da8b4149460f",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "4f3ed727b35c3fba",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "52cdfe05331430a5",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "538dff49e6576a74",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "96aaf79fc685e220",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "a70eec9a6565b463",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "a82a419b6960f70b",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "ad13da443052d69b",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "afd7fb2b76317ef2",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "b8ee1f66780f175f",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "c39d25e7a774b551",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "c772ac8d3166a947",
-   "type": "contains"
-  },
-  {
-   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
-   "child": "db8f2e0215e78df1",
-   "type": "contains"
-  },
-  {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "0ccd614acff73002",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
-   "child": "1d0d53b03364a499",
+   "parent": "183e6f9eca266ae2",
+   "child": "0faf8749e7caad06",
    "type": "dependency-of"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "2af827ce4eb04c44",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "2fb145001610fece",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "5600d1c6edad3f99",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "5d597ac17bab796d",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
+   "child": "6d806de36875b820",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "183e6f9eca266ae2",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "8737e8bacc56825b",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "8915f671c2566a43",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "8a6819249a7e7dc1",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "a5bf1607543b5b59",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
-   "child": "ad13da443052d69b",
+   "parent": "183e6f9eca266ae2",
+   "child": "b3530326a5221e56",
    "type": "dependency-of"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "b64485e55e0c989f",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "be9f89b7fe9dfe59",
    "type": "contains"
   },
   {
-   "parent": "a70eec9a6565b463",
-   "child": "c772ac8d3166a947",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a70eec9a6565b463",
+   "parent": "183e6f9eca266ae2",
    "child": "fa8cba6e97a51f3f",
    "type": "contains"
   },
   {
-   "parent": "a82a419b6960f70b",
-   "child": "014ce49f90e359d5",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "1d0d53b03364a499",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "1d0d53b03364a499",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "221fe91bb61ea3b7",
-   "type": "contains"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "96aaf79fc685e220",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "a70eec9a6565b463",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "ad13da443052d69b",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "b8ee1f66780f175f",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "c772ac8d3166a947",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "a82a419b6960f70b",
-   "child": "db8f2e0215e78df1",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "ad13da443052d69b",
-   "child": "1d0d53b03364a499",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "ad13da443052d69b",
-   "child": "3849cef6b5fb9ae5",
-   "type": "contains"
-  },
-  {
-   "parent": "ad13da443052d69b",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "ad13da443052d69b",
-   "child": "c772ac8d3166a947",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "afd7fb2b76317ef2",
+   "parent": "31360fb6d4d09b93",
    "child": "0a21cea1ea334e33",
    "type": "contains"
   },
   {
-   "parent": "afd7fb2b76317ef2",
-   "child": "538dff49e6576a74",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "afd7fb2b76317ef2",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "b8ee1f66780f175f",
-   "child": "1d0d53b03364a499",
-   "type": "dependency-of"
-  },
-  {
-   "parent": "b8ee1f66780f175f",
-   "child": "33c427473a67bcab",
-   "type": "contains"
-  },
-  {
-   "parent": "b8ee1f66780f175f",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "c39d25e7a774b551",
-   "child": "0a21cea1ea334e33",
-   "type": "evident-by"
-  },
-  {
-   "parent": "c772ac8d3166a947",
-   "child": "7b5c82bc092e5140",
-   "type": "evident-by"
-  },
-  {
-   "parent": "c772ac8d3166a947",
-   "child": "93acda700c901314",
-   "type": "contains"
-  },
-  {
-   "parent": "db8f2e0215e78df1",
-   "child": "0a21cea1ea334e33",
-   "type": "contains"
-  },
-  {
-   "parent": "db8f2e0215e78df1",
+   "parent": "31360fb6d4d09b93",
    "child": "4e3b122247ba4ffb",
    "type": "contains"
   },
   {
-   "parent": "db8f2e0215e78df1",
+   "parent": "31360fb6d4d09b93",
    "child": "63a52656586953e0",
    "type": "contains"
   },
   {
-   "parent": "db8f2e0215e78df1",
+   "parent": "31360fb6d4d09b93",
    "child": "7b5c82bc092e5140",
    "type": "evident-by"
   },
   {
-   "parent": "db8f2e0215e78df1",
-   "child": "afd7fb2b76317ef2",
+   "parent": "31360fb6d4d09b93",
+   "child": "ca81043f9ab6a474",
    "type": "dependency-of"
   },
   {
-   "parent": "db8f2e0215e78df1",
-   "child": "c39d25e7a774b551",
-   "type": "ownership-by-file-overlap",
-   "metadata": {
-    "files": [
-     "/bin/busybox"
-    ]
-   }
-  },
-  {
-   "parent": "db8f2e0215e78df1",
+   "parent": "31360fb6d4d09b93",
    "child": "e3e2f3630e2006e6",
    "type": "contains"
   },
   {
-   "parent": "db8f2e0215e78df1",
+   "parent": "31360fb6d4d09b93",
    "child": "e62ee70c9a64f2d6",
    "type": "contains"
   },
   {
-   "parent": "db8f2e0215e78df1",
+   "parent": "31360fb6d4d09b93",
    "child": "fdb291b1d0d63808",
    "type": "contains"
+  },
+  {
+   "parent": "544ec51c3fe9a624",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "544ec51c3fe9a624",
+   "child": "9d90ebcafcd55681",
+   "type": "contains"
+  },
+  {
+   "parent": "544ec51c3fe9a624",
+   "child": "c0d6e0f3841a7244",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "6ad7c0b45a22318c",
+   "child": "0faf8749e7caad06",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "6ad7c0b45a22318c",
+   "child": "33c427473a67bcab",
+   "type": "contains"
+  },
+  {
+   "parent": "6ad7c0b45a22318c",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "6d806de36875b820",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "6d806de36875b820",
+   "child": "93acda700c901314",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "008bcc1445f44203",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "0a3b4a9dae4049aa",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "0faf8749e7caad06",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "183e6f9eca266ae2",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "31360fb6d4d09b93",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "544ec51c3fe9a624",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "6ad7c0b45a22318c",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "6d806de36875b820",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "a90861b1a9bea145",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "adaa708f703652d6",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "b3530326a5221e56",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "c0d6e0f3841a7244",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "ca81043f9ab6a474",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "f0def3051a26afc8",
+   "type": "contains"
+  },
+  {
+   "parent": "9dd89930b3a7cc289bb4c70b85b7a910acb21240f52c405e586ca54db078a0c5",
+   "child": "f95be16d8615d51f",
+   "type": "contains"
+  },
+  {
+   "parent": "a90861b1a9bea145",
+   "child": "0faf8749e7caad06",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "a90861b1a9bea145",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "a90861b1a9bea145",
+   "child": "b3e5c4ebfc3fb889",
+   "type": "contains"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "0faf8749e7caad06",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "0faf8749e7caad06",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "183e6f9eca266ae2",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "221fe91bb61ea3b7",
+   "type": "contains"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "31360fb6d4d09b93",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "544ec51c3fe9a624",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "6ad7c0b45a22318c",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "6d806de36875b820",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "b3530326a5221e56",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "adaa708f703652d6",
+   "child": "c0d6e0f3841a7244",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "b3530326a5221e56",
+   "child": "0faf8749e7caad06",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "b3530326a5221e56",
+   "child": "3849cef6b5fb9ae5",
+   "type": "contains"
+  },
+  {
+   "parent": "b3530326a5221e56",
+   "child": "6d806de36875b820",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "b3530326a5221e56",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "0e0d5a5e09228031",
+   "type": "contains"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "2fd74bf1d1727fee",
+   "type": "contains"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "3f46a173249bb671",
+   "type": "contains"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "a07d64adfc747525",
+   "type": "contains"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "ecbdb7fee3bb5035",
+   "type": "contains"
+  },
+  {
+   "parent": "c0d6e0f3841a7244",
+   "child": "f95be16d8615d51f",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "ca81043f9ab6a474",
+   "child": "0a21cea1ea334e33",
+   "type": "contains"
+  },
+  {
+   "parent": "ca81043f9ab6a474",
+   "child": "0a3b4a9dae4049aa",
+   "type": "dependency-of"
+  },
+  {
+   "parent": "ca81043f9ab6a474",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "02304fbb06e0b918",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "09291d424386d91c",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "0cee099824762ede",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "100dbb1df2ee43bb",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "1b2d2e4d9cafb7a0",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "33ae754a8456140a",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "3942e7f08442fb9f",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "3e6faedd4c78c48c",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "4c2790666ef81ec8",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "5c52b5071103b8a7",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "74ad339a5039a9ee",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "7fba3ded81003204",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "82960f74611c4c79",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "867f08ec2c8a6f71",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "8f43d3ae34ebf166",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "9002ef3c8cc647b3",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "93a4e70ff064f35c",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "9da547fc150a5d17",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "a997fb045b34b877",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "c60cba03839369ce",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "d6adeff2a04b45cc",
+   "type": "contains"
+  },
+  {
+   "parent": "f0def3051a26afc8",
+   "child": "ea87b9084cefdae6",
+   "type": "contains"
+  },
+  {
+   "parent": "f95be16d8615d51f",
+   "child": "7b5c82bc092e5140",
+   "type": "evident-by"
   }
  ],
  "files": [
@@ -3640,26 +3582,8 @@
  },
  "descriptor": {
   "name": "syft",
-  "version": "0.86.1",
+  "version": "0.95.0",
   "configuration": {
-   "configPath": "",
-   "verbosity": 0,
-   "quiet": false,
-   "output": [
-    "json"
-   ],
-   "output-template-path": "",
-   "file": "",
-   "check-for-app-update": true,
-   "dev": {
-    "profile-cpu": false,
-    "profile-mem": false
-   },
-   "log": {
-    "structured": false,
-    "level": "warn",
-    "file-location": ""
-   },
    "catalogers": null,
    "package": {
     "cataloger": {
@@ -3676,13 +3600,17 @@
     "proxy": "",
     "no-proxy": ""
    },
+   "java": {
+    "use-network": false,
+    "maven-url": "",
+    "max-parent-recursive-depth": 0
+   },
    "linux-kernel": {
     "catalog-modules": true
    },
    "python": {
     "guess-unpinned-requirements": false
    },
-   "attest": {},
    "file-metadata": {
     "cataloger": {
      "enabled": false,
@@ -3704,22 +3632,23 @@
      "scope": "Squashed"
     },
     "skip-files-above-size": 1048576,
-    "globs": []
+    "globs": null
    },
    "secrets": {
     "cataloger": {
      "enabled": false,
      "scope": "AllLayers"
     },
-    "additional-patterns": {},
-    "exclude-pattern-names": [],
+    "additional-patterns": null,
+    "exclude-pattern-names": null,
     "reveal-values": false,
     "skip-files-above-size": 1048576
    },
    "registry": {
     "insecure-skip-tls-verify": false,
     "insecure-use-http": false,
-    "auth": []
+    "auth": null,
+    "ca-cert": ""
    },
    "exclude": [],
    "platform": "",
@@ -3735,11 +3664,12 @@
    },
    "parallelism": 1,
    "default-image-pull-source": "",
-   "base-path": ""
+   "base-path": "",
+   "exclude-binary-overlap-by-ownership": true
   }
  },
  "schema": {
-  "version": "10.0.0",
-  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-10.0.0.json"
+  "version": "12.0.0",
+  "url": "https://raw.githubusercontent.com/anchore/syft/main/schema/json/schema-12.0.0.json"
  }
 }
