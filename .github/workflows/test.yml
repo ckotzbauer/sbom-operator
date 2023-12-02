@@ -8,7 +8,7 @@ on:
 
 jobs:
   test:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-build-test.yml@0.37.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-build-test.yml@0.37.2
     with:
       install-go: true
       go-version: "1.21.4"
