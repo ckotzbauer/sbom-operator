@@ -1,5 +1,5 @@
 FROM codenotary/vcn:v1.1.0 as vcn
-FROM alpine:3.18
+FROM alpine:3.19
 
 COPY --from=vcn /bin/vcn /bin/vcn
 COPY entrypoint.sh /
