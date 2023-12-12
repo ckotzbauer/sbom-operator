@@ -2,6 +2,8 @@ package syft
 
 import (
 	"fmt"
+	"os"
+	"path/filepath"
 	"runtime/debug"
 	"strings"
 
@@ -98,7 +100,9 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	return string(b), nil
+	bom := string(b)
+	removeContents("/tmp")
+	return bom, nil
 }
 
 func GetEncoder(sbomFormat string) (sbom.FormatEncoder, error) {
@@ -154,4 +158,23 @@ func getSyftVersion() string {
 	}
 
 	return ""
+}
+
+func removeContents(dir string) error {
+	d, err := os.Open(dir)
+	if err != nil {
+		return err
+	}
+	defer d.Close()
+	names, err := d.Readdirnames(-1)
+	if err != nil {
+		return err
+	}
+	for _, name := range names {
+		err = os.RemoveAll(filepath.Join(dir, name))
+		if err != nil {
+			return err
+		}
+	}
+	return nil
 }
