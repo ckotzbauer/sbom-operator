@@ -2,6 +2,7 @@ package syft
 
 import (
 	"fmt"
+	"io"
 	"os"
 	"path/filepath"
 	"runtime/debug"
@@ -101,7 +102,12 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	bom := string(b)
-	removeContents("/tmp")
+	err = removeTempContents()
+	if err != nil {
+		logrus.WithError(err).Warn("Could not cleanup tmp directory")
+		return "", err
+	}
+
 	return bom, nil
 }
 
@@ -160,12 +166,13 @@ func getSyftVersion() string {
 	return ""
 }
 
-func removeContents(dir string) error {
+func removeTempContents() error {
+	dir := "/tmp"
 	d, err := os.Open(dir)
 	if err != nil {
 		return err
 	}
-	defer d.Close()
+	defer closeOrLog(d)
 	names, err := d.Readdirnames(-1)
 	if err != nil {
 		return err
@@ -177,4 +184,10 @@ func removeContents(dir string) error {
 		}
 	}
 	return nil
+}
+
+func closeOrLog(c io.Closer) {
+	if err := c.Close(); err != nil {
+		logrus.WithError(err).Warnf("Could not close file")
+	}
 }
