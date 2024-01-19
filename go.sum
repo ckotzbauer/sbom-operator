@@ -123,6 +123,8 @@ github.com/anchore/stereoscope v0.0.0-20231215220732-4b999b76ca89 h1:dymFMCwnENq
 github.com/anchore/stereoscope v0.0.0-20231215220732-4b999b76ca89/go.mod h1:GKAnytSVV1hoqB5r5Gd9M5Ph3Rzqq0zPdEJesewjC2w=
 github.com/anchore/stereoscope v0.0.0-20231220161148-590920dabc54 h1:i2YK5QEs9H2YB3B2zv+AGR44ves0nmAGOD07lMphH14=
 github.com/anchore/stereoscope v0.0.0-20231220161148-590920dabc54/go.mod h1:IylG7ofLoUKHwS1XDF6rPhOmaE3GgpAgsMdvvYfooTU=
+github.com/anchore/stereoscope v0.0.0-20240118133533-eb656fc71793 h1:wji+qdjsV7ooolBwb3faVZnEK3WtY/kcT5473kxVZS4=
+github.com/anchore/stereoscope v0.0.0-20240118133533-eb656fc71793/go.mod h1:IylG7ofLoUKHwS1XDF6rPhOmaE3GgpAgsMdvvYfooTU=
 github.com/anchore/syft v0.95.0 h1:hojCrgQ8hi2MOXuFEwsUkRJoa6lHH9KZcT6cUUchs80=
 github.com/anchore/syft v0.95.0/go.mod h1:gwAW3l1ZXkejZR8HBBCXyKkUr05Q+BdYrORKlM0/ZwU=
 github.com/anchore/syft v0.96.0 h1:01H7gq2vqAPhZ4ZViJYRJ7FZNgNmSspTnRtRERZwU8Q=
