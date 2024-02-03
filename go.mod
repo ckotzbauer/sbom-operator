@@ -7,7 +7,7 @@ require (
 	github.com/anchore/stereoscope v0.0.1
 	github.com/anchore/syft v0.100.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20240203082707-8e9124192d82
-	github.com/ckotzbauer/libstandard v0.0.0-20240101033336-f46a1d181db1
+	github.com/ckotzbauer/libstandard v0.0.0-20240203082525-6a3e8502fbde
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
@@ -40,7 +40,7 @@ require (
 	github.com/anchore/go-macholibre v0.0.0-20220308212642-53e6d0aaf6fb // indirect
 	github.com/anchore/go-struct-converter v0.0.0-20221118182256-c68fdcfa2092 // indirect
 	github.com/anchore/packageurl-go v0.1.1-0.20230104203445-02e0a6721501 // indirect
-	github.com/andybalholm/brotli v1.0.6 // indirect
+	github.com/andybalholm/brotli v1.1.0 // indirect
 	github.com/aquasecurity/go-pep440-version v0.0.0-20210121094942-22b2f8951d46 // indirect
 	github.com/aquasecurity/go-version v0.0.0-20210121072130-637058cfe492 // indirect
 	github.com/becheran/wildmatch-go v1.0.0 // indirect
