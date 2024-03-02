@@ -190,6 +190,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20240101144212-ce1086f4635c h1:lC6D+ZwvPN
 github.com/ckotzbauer/libk8soci v0.0.0-20240101144212-ce1086f4635c/go.mod h1:iyI22QX1hBAtBXk/D+xGjgqU3GduaZGnEPb379S+mEo=
 github.com/ckotzbauer/libk8soci v0.0.0-20240203082707-8e9124192d82 h1:tilB5a3hfZfMUvXm4jdlHSk+QUACcg6F9ADZ0/sxi8E=
 github.com/ckotzbauer/libk8soci v0.0.0-20240203082707-8e9124192d82/go.mod h1:Bx7spyVnacGivE+t/Tl2IGzCEwN76QAwpW2/riIz5NE=
+github.com/ckotzbauer/libk8soci v0.0.0-20240301142541-e65c4c2c5d09 h1:OEd4Qtz38cZaYAGh/Qmm7xkbNm/oeSNP8pG6BbIqVV0=
+github.com/ckotzbauer/libk8soci v0.0.0-20240301142541-e65c4c2c5d09/go.mod h1:VoOIPB4ludEFMeUC63IQkXwXBeu1pxS8XIsHTO4pnM0=
 github.com/ckotzbauer/libstandard v0.0.0-20231101043320-363c9097d706 h1:M5hjzxDFr9w/4wrUlD10g93HYVXNVX/HAD9rtmSnecg=
 github.com/ckotzbauer/libstandard v0.0.0-20231101043320-363c9097d706/go.mod h1:fVF/bvtVI8a+LQU29cEWZbahTSb9rGglWPCG1/Rj+8c=
 github.com/ckotzbauer/libstandard v0.0.0-20231201034509-640c25cb1a52 h1:qcIhu3x1CFUQeUw6OCO3HQI/b/Z8510gtmri97H+SbA=
@@ -256,6 +258,8 @@ github.com/docker/cli v24.0.7+incompatible h1:wa/nIwYFW7BVTGa7SWPVyyXU9lgORqUb1x
 github.com/docker/cli v24.0.7+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v25.0.2+incompatible h1:6GEdvxwEA451/+Y3GtqIGn/MNjujQazUlxC6uGu8Tog=
 github.com/docker/cli v25.0.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v25.0.3+incompatible h1:KLeNs7zws74oFuVhgZQ5ONGZiXUUdgsdy6/EsX/6284=
+github.com/docker/cli v25.0.3+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v24.0.7+incompatible h1:Wo6l37AuwP3JaMnZa226lzVXGA3F9Ig1seQen0cKYlM=
@@ -810,6 +814,8 @@ github.com/stretchr/testify v1.8.1/go.mod h1:w2LPCIKwWwSfY2zedu0+kehJoqGctiVI29o
 github.com/stretchr/testify v1.8.3/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
 github.com/stretchr/testify v1.8.4 h1:CcVxjf3Q8PM0mHUKJCdn+eZZtm5yQwehR5yeSVQQcUk=
 github.com/stretchr/testify v1.8.4/go.mod h1:sz/lmYIOXD/1dqDmKjjqLyZ2RngseejIcXlSw2iwfAo=
+github.com/stretchr/testify v1.9.0 h1:HtqpIVDClZ4nwg75+f6Lvsy/wHu+3BoSGCbBAcpTsTg=
+github.com/stretchr/testify v1.9.0/go.mod h1:r2ic/lqez/lEtzL7wO/rwa5dbSLXVDPFyf8C91i36aY=
 github.com/subosito/gotenv v1.2.0/go.mod h1:N0PQaV/YGNqwC0u51sEeR/aUtSLEXKX9iv69rRypqCw=
 github.com/subosito/gotenv v1.4.2 h1:X1TuBLAMDFbaTAChgCBLu3DU3UPyELpnF2jjJ2cz/S8=
 github.com/subosito/gotenv v1.4.2/go.mod h1:ayKnFf/c6rvx/2iiLrJUk1e6plDbT3edrFNGqEflhK0=

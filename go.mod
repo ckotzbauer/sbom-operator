@@ -6,14 +6,14 @@ require (
 	github.com/DependencyTrack/client-go v0.13.0
 	github.com/anchore/stereoscope v0.0.1
 	github.com/anchore/syft v0.100.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20240203082707-8e9124192d82
+	github.com/ckotzbauer/libk8soci v0.0.0-20240301142541-e65c4c2c5d09
 	github.com/ckotzbauer/libstandard v0.0.0-20240203082525-6a3e8502fbde
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.3
 	github.com/spf13/cobra v1.8.0
-	github.com/stretchr/testify v1.8.4
+	github.com/stretchr/testify v1.9.0
 	golang.org/x/exp v0.0.0-20240119083558-1b970713d09a
 	k8s.io/api v0.29.1
 	k8s.io/apimachinery v0.29.1
@@ -57,7 +57,7 @@ require (
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/deitch/magic v0.0.0-20230404182410-1ff89d7342da // indirect
 	github.com/distribution/reference v0.5.0 // indirect
-	github.com/docker/cli v25.0.2+incompatible // indirect
+	github.com/docker/cli v25.0.3+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v24.0.7+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
