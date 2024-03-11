@@ -211,6 +211,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 								logrus.Infof(`Found parent project with name "%s:%s" and UUID "%s" for container "%s": %+v\n`, parentProjectName, parentProjectVersion, parentProject.UUID, containerName, parentProject)
 								project.ParentRef = &dtrack.ParentRef{UUID: parentProject.UUID}
 							}
+							break
 						}
 					} else {
 						logrus.Errorf(`Empty value for parent project annotation "%s". Skip setting parent project.`, podAnnotationKey)
@@ -218,7 +219,6 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 				} else {
 					logrus.Errorf(`Containername could not be determined from annotation "%s". Skip setting parent project.`, podAnnotationKey)
 				}
-				break
 			}
 		}
 	}
