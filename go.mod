@@ -188,7 +188,7 @@ require (
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
 	github.com/golang/protobuf v1.5.4 // indirect
 	github.com/google/go-cmp v0.6.0 // indirect
-	github.com/google/go-containerregistry v0.19.0
+	github.com/google/go-containerregistry v0.19.1
 	github.com/google/gofuzz v1.2.0 // indirect
 	github.com/imdario/mergo v0.3.15 // indirect
 	github.com/json-iterator/go v1.1.12 // indirect
@@ -216,7 +216,7 @@ require (
 
 replace (
 	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.12.0
-	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.15.2
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.16.0
 	golang.org/x/net => golang.org/x/net v0.22.0
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 )
