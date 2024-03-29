@@ -1,3 +1,71 @@
+## Version 0.31.0 (2024-03-29)
+
+### Build and testing
+
+* [[`333091f6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/333091f6)] - **build**: update pipelines
+
+### Documentation
+
+* [[`dd701f1b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/dd701f1b)] - **doc**: update doc
+
+### Dependency updates
+
+* [[`ce13e652`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ce13e652)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.1.0 (#567)
+* [[`5c78bd16`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5c78bd16)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to a85f2c6 (#591)
+* [[`b124eac3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b124eac3)] - **deps**: update sigstore&#x2F;cosign-installer digest to 162dfdf (#596)
+* [[`cb22274f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cb22274f)] - **deps**: update module github.com&#x2F;docker&#x2F;docker to v24.0.9+incompatible [security] (#598)
+* [[`7d6375f9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7d6375f9)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.16.0 (#597)
+* [[`76cd4272`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/76cd4272)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.12.0
+* [[`c57852c2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c57852c2)] - **deps**: update dependency go to v1.22.1
+* [[`fb972368`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fb972368)] - **deps**: update kubernetes versions to v0.29.3
+* [[`8220ea84`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8220ea84)] - **deps**: update actions&#x2F;checkout digest to cd7d8d6
+* [[`a40119e7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a40119e7)] - **deps**: update module google.golang.org&#x2F;protobuf to v1.33.0 [security]
+* [[`35efd8c0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/35efd8c0)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.22.0
+* [[`0eeb0c97`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0eeb0c97)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 814bf88
+* [[`6fbff4f5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6fbff4f5)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.15.2
+* [[`7102a0ee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7102a0ee)] - **deps**: update actions&#x2F;checkout digest to 8eb1f6a
+* [[`9961214a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9961214a)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.11.3
+* [[`ffa859f6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ffa859f6)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 212a58c
+* [[`2be1f77e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2be1f77e)] - **deps**: update kubernetes versions to v0.29.2
+* [[`d4c20565`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d4c20565)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to e65c4c2
+* [[`57be4d17`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/57be4d17)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.38.0 (#577)
+* [[`152ad665`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/152ad665)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 6a3e850 (#576)
+* [[`ab9c922b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ab9c922b)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 8e91241
+* [[`b9fc2791`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b9fc2791)] - **deps**: update module github.com&#x2F;opencontainers&#x2F;runc to v1.1.12 [security] (#574)
+* [[`41f12f31`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/41f12f31)] - **deps**: update sigstore&#x2F;cosign-installer digest to e1523de (#571)
+* [[`e9be46f6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e9be46f6)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.0.1 (#572)
+* [[`60f63eb9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/60f63eb9)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.19.0 (#573)
+* [[`c09683e9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c09683e9)] - **deps**: update alpine:3.19 docker digest to c5b1261
+* [[`b969e50c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b969e50c)] - **deps**: update module github.com&#x2F;google&#x2F;uuid to v1.6.0
+* [[`403368f1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/403368f1)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.11.2 (#561)
+* [[`ade6322c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ade6322c)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.18.0 (#568)
+* [[`ba4155f0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ba4155f0)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 1b97071 (#565)
+* [[`0b393f65`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0b393f65)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to eb656fc
+* [[`309902b5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/309902b5)] - **deps**: update kubernetes versions to v0.29.1 (#566)
+* [[`4c58e11d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4c58e11d)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to db7319d (#559)
+* [[`c176d5b9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c176d5b9)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.20.0
+* [[`47394b46`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/47394b46)] - **deps**: update dependency go to v1.21.6
+* [[`404398bd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/404398bd)] - **deps**: update module github.com&#x2F;cloudflare&#x2F;circl to v1.3.7 [security] (#558)
+* [[`18ba6e4b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/18ba6e4b)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.100.0
+* [[`42edcbea`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/42edcbea)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.11.1
+* [[`e7b56926`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e7b56926)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to f46a1d1
+* [[`da61c369`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/da61c369)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to be819d1
+* [[`aa97425e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aa97425e)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to ce1086f
+* [[`73a23bef`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/73a23bef)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 02704c9
+* [[`ce57b5ef`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ce57b5ef)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd to v1.7.11 [security] (#550)
+* [[`6e8014ef`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6e8014ef)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to 590920d (#545)
+* [[`8e393398`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8e393398)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to dc181d7 (#546)
+* [[`38cfad7b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/38cfad7b)] - **deps**: update sigstore&#x2F;cosign-installer digest to b18d21a (#547)
+* [[`9603e24c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9603e24c)] - **deps**: update module github.com&#x2F;sylabs&#x2F;sif&#x2F;v2 to v2.15.1 (#548)
+* [[`b0352a59`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b0352a59)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v0.99.0 (#549)
+* [[`cc5e8da6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cc5e8da6)] - **deps**: update kubernetes versions to v0.29.0
+* [[`eab8cab4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eab8cab4)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to 4b999b7 (#539)
+* [[`b633e522`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b633e522)] - **deps**: update module github.com&#x2F;google&#x2F;uuid to v1.5.0 (#544)
+* [[`d59b7e7a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d59b7e7a)] - **deps**: update module github.com&#x2F;dependencytrack&#x2F;client-go to v0.13.0
+* [[`5832e7de`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5832e7de)] - **deps**: update sigstore&#x2F;cosign-installer digest to 9614fae
+* [[`16f46f04`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/16f46f04)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to aacd6d4
+
+
 ## Version 0.30.0 (2023-12-12)
 
 ### Bug fixes
