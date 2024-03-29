@@ -59,7 +59,7 @@ func marshalCyclonedx(t *testing.T, x interface{}) string {
 
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
-	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 
 	assert.NoError(t, err)
@@ -83,7 +83,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
-	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -103,7 +103,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
-	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -127,7 +127,7 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 // test for analysing an image completely without pullSecret
 func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
-	s := syft.New(format, map[string]string{}).WithVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -177,7 +177,7 @@ func TestSyft(t *testing.T) {
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
 			format: "cyclonedx",
 		},
-		/*{
+		{
 			image:  "alpine",
 			digest: "alpine@sha256:36a03c95c2f0c83775d500101869054b927143a8320728f0e135dc151cb8ae61",
 			format: "spdxjson",
@@ -191,7 +191,7 @@ func TestSyft(t *testing.T) {
 			image:  "node",
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
 			format: "spdxjson",
-		},*/
+		},
 	}
 
 	for _, v := range tests {
