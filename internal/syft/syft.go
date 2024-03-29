@@ -1,6 +1,8 @@
 package syft
 
 import (
+	"context"
+	"crypto"
 	"fmt"
 	"io"
 	"os"
@@ -10,6 +12,8 @@ import (
 
 	"github.com/anchore/stereoscope/pkg/image"
 	"github.com/anchore/syft/syft"
+	"github.com/anchore/syft/syft/cataloging/filecataloging"
+	"github.com/anchore/syft/syft/file"
 	"github.com/anchore/syft/syft/format"
 	"github.com/anchore/syft/syft/format/cyclonedxjson"
 	"github.com/anchore/syft/syft/format/cyclonedxxml"
@@ -19,7 +23,6 @@ import (
 	"github.com/anchore/syft/syft/format/syftjson"
 	"github.com/anchore/syft/syft/format/table"
 	"github.com/anchore/syft/syft/format/text"
-	"github.com/anchore/syft/syft/pkg/cataloger"
 	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
@@ -32,17 +35,19 @@ type Syft struct {
 	sbomFormat       string
 	resolveVersion   func() string
 	proxyRegistryMap map[string]string
+	appVersion       string
 }
 
-func New(sbomFormat string, proxyRegistryMap map[string]string) *Syft {
+func New(sbomFormat string, proxyRegistryMap map[string]string, appVersion string) *Syft {
 	return &Syft{
 		sbomFormat:       sbomFormat,
 		resolveVersion:   getSyftVersion,
 		proxyRegistryMap: proxyRegistryMap,
+		appVersion:       appVersion,
 	}
 }
 
-func (s Syft) WithVersion(version string) Syft {
+func (s Syft) WithSyftVersion(version string) Syft {
 	s.resolveVersion = func() string { return version }
 	return s
 }
@@ -54,39 +59,38 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	detection, err := source.Detect(fmt.Sprintf("registry:%s", img.ImageID), source.DefaultDetectConfig())
-	if err != nil {
-		logrus.WithError(fmt.Errorf("failed to parse input registry:%s: %w", img.ImageID, err)).Error("Input-Parsing failed")
-		return "", err
-	}
-
 	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img, s.proxyRegistryMap)}
-	src, err := detection.NewSource(source.DetectionSourceConfig{RegistryOptions: opts})
+	src, err := getSource(context.Background(), opts, img.ImageID)
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
 		return "", err
 	}
 
-	result := sbom.SBOM{
-		Source: src.Describe(),
-		Descriptor: sbom.Descriptor{
-			Name:    "syft",
-			Version: s.resolveVersion(),
-		},
-		// TODO: we should have helper functions for getting this built from exported library functions
-	}
+	defer func() {
+		if src != nil {
+			if err := src.Close(); err != nil {
+				logrus.WithError(err).Infof("unable to close source")
+			}
+		}
+	}()
 
-	c := cataloger.DefaultConfig()
-	c.Search.Scope = source.SquashedScope
-	packageCatalog, relationships, theDistro, err := syft.CatalogPackages(src, c)
+	cfg := syft.DefaultCreateSBOMConfig().
+		WithParallelism(5).
+		WithTool("sbom-operator", s.appVersion).
+		WithFilesConfig(
+			filecataloging.DefaultConfig().
+				WithSelection(file.FilesOwnedByPackageSelection).
+				WithHashers(
+					crypto.SHA1,
+					crypto.SHA256,
+				),
+		)
+
+	result, err := syft.CreateSBOM(context.Background(), src, cfg)
 	if err != nil {
-		logrus.WithError(err).Error("CatalogPackages failed")
+		logrus.WithError(err).Error("SBOM-Creation failed")
 		return "", err
 	}
-
-	result.Artifacts.Packages = packageCatalog
-	result.Artifacts.LinuxDistribution = theDistro
-	result.Relationships = relationships
 
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
 	encoder, err := GetEncoder(s.sbomFormat)
@@ -95,7 +99,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	b, err := format.Encode(result, encoder)
+	b, err := format.Encode(*result, encoder)
 	if err != nil {
 		logrus.WithError(err).Error("Encoding of result failed")
 		return "", err
@@ -109,6 +113,20 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	return bom, nil
+}
+
+func getSource(ctx context.Context, registryOptions *image.RegistryOptions, userInput string) (source.Source, error) {
+	cfg := syft.DefaultGetSourceConfig().
+		WithSources("registry").
+		WithRegistryOptions(registryOptions)
+
+	var err error
+	src, err := syft.GetSource(ctx, userInput, cfg)
+	if err != nil {
+		return nil, fmt.Errorf("could not determine source: %w", err)
+	}
+
+	return src, nil
 }
 
 func GetEncoder(sbomFormat string) (sbom.FormatEncoder, error) {

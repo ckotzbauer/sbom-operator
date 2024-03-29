@@ -36,10 +36,10 @@ func newRootCmd() *cobra.Command {
 			printVersion()
 
 			if internal.OperatorConfig.Cron != "" {
-				daemon.Start(internal.OperatorConfig.Cron)
+				daemon.Start(internal.OperatorConfig.Cron, Version)
 			} else {
 				k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
+				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version)
 				p := processor.New(k8s, sy)
 				p.ListenForPods()
 			}
