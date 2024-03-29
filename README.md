@@ -18,32 +18,14 @@ The image contains versions of `k8s.io/client-go`. Kubernetes aims to provide fo
 
 | sbom-operator   | k8s.io/{api,apimachinery,client-go} | expected kubernetes compatibility |
 |-----------------|-------------------------------------|-----------------------------------|
-| main            | v0.26.2                             | 1.25.x, 1.26.x, 1.27.x            |
-| 0.25.0          | v0.26.2                             | 1.25.x, 1.26.x, 1.27.x            |
-| 0.24.0          | v0.26.0                             | 1.25.x, 1.26.x, 1.27.x            |
-| 0.23.0          | v0.26.0                             | 1.25.x, 1.26.x, 1.27.x            |
+| main            | v0.29.3                             | 1.28.x, 1.29.x, 1.30.x            |
+| 0.31.0          | v0.29.3                             | 1.28.x, 1.29.x, 1.30.x            |
+| 0.30.0          | v0.28.4                             | 1.27.x, 1.28.x, 1.29.x            |
+| 0.28.0          | v0.27.4                             | 1.26.x, 1.27.x, 1.28.x            |
+| 0.26.0          | v0.26.3                             | 1.25.x, 1.26.x, 1.27.x            |
 | 0.22.0          | v0.25.4                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.21.0          | v0.25.3                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.20.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.19.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.18.0          | v0.25.2                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.17.0          | v0.25.1                             | 1.24.x, 1.25.x, 1.26.x            |
-| 0.16.0          | v0.25.0                             | 1.24.x, 1.25.x, 1.26.x            |
 | 0.15.0          | v0.24.4                             | 1.23.x, 1.24.x, 1.25.x            |
-| 0.14.0          | v0.24.3                             | 1.23.x, 1.24.x, 1.25.x            |
-| 0.13.0          | v0.24.2                             | 1.23.x, 1.24.x, 1.25.x            |
-| 0.12.0          | v0.24.1                             | 1.23.x, 1.24.x, 1.25.x            |
-| 0.11.0          | v0.24.0                             | 1.23.x, 1.24.x, 1.25.x            |
 | 0.10.0          | v0.23.6                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.9.0           | v0.23.5                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.8.0           | v0.23.5                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.7.0           | v0.23.4                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.6.0           | v0.23.4                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.5.0           | v0.23.4                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.4.1           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.3.1           | v0.23.3                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.2.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
-| 0.1.0           | v0.23.2                             | 1.22.x, 1.23.x, 1.24.x            |
 
 However, the operator will work with more versions of Kubernetes in general.
 
@@ -276,7 +258,7 @@ All operator-environment variables prefixed with `SBOM_JOB_` are passed to the K
 
 ## Security
 
-The docker-image is based on a [distroless git-image](https://github.com/ckotzbauer/distroless-git-slim) to reduce the attack-surface and keep the image small.
+The docker-image is based on a scratch-image to reduce the attack-surface and keep the image small.
 Furthermore the image and release-artifacts are signed with [cosign](https://github.com/sigstore/cosign) and attested with provenance-files.
 The release-process satisfies SLSA Level 2. All of those "metadata files" are  also stored in a dedicated repository `ghcr.io/ckotzbauer/sbom-operator-metadata`.
 When discovering security issues please refer to the [Security process](https://github.com/ckotzbauer/.github/blob/main/SECURITY.md).
