@@ -1,3 +1,22 @@
+## Version 0.32.0 (2024-04-05)
+
+### Bug fixes
+
+* [[`cbfae8c6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cbfae8c6)] - **fix**: adjust net-replace
+* [[`9002ba45`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9002ba45)] - **fix**: update golang.org&#x2F;x&#x2F;net
+* [[`521bf3cf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/521bf3cf)] - **fix**: update containerd
+
+### Dependency updates
+
+* [[`9d6a4691`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9d6a4691)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.40.0
+* [[`968c3ecf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/968c3ecf)] - **deps**: update codenotary&#x2F;vcn docker tag to v1.1.1
+* [[`f96c6e47`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f96c6e47)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to a685a6e
+
+### Common changes
+
+* [[`a715b4f2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a715b4f2)] - **chore**: Add new flags to toggle deletion of orphan images, setting parent project and dtrack project name by k8s pod annotation (#563)
+
+
 ## Version 0.31.0 (2024-03-29)
 
 ### Build and testing
