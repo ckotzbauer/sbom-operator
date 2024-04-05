@@ -75,7 +75,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitHubAppInstallationId, "", "GitHub App Installation ID (for authentication).")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyPodLabelSelector, "", "Kubernetes Label-Selector for pods.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyNamespaceLabelSelector, "", "Kubernetes Label-Selector for namespaces.")
-	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDeleteOrphanProjects, true, "Set to false to disable automatic removal of orphan projects")
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDeleteOrphanImages, true, "Set to false to disable automatic removal of orphan images")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackBaseUrl, "", "Dependency-Track base URL, e.g. 'https://dtrack.example.com'")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackApiKey, "", "Dependency-Track API key")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackLabelTagMatcher, "", "Dependency-Track Pod-Label-Tag matcher regex")

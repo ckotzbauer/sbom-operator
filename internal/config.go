@@ -19,7 +19,7 @@ type Config struct {
 	GitHubPrivateKey                 string   `yaml:"githubAppPrivateKey" env:"SBOM_GITHUB_APP_PRIVATE_KEY"`
 	PodLabelSelector                 string   `yaml:"podLabelSelector" env:"SBOM_POD_LABEL_SELECTOR" flag:"pod-label-selector"`
 	NamespaceLabelSelector           string   `yaml:"namespaceLabelSelector" env:"SBOM_NAMESPACE_LABEL_SELECTOR" flag:"namespace-label-selector"`
-	DeleteOrphanProjects             bool     `yaml:"deleteOrphanProjects" env:"SBOM_DELETRE_ORPHAN_PROJECTS" flag:"delete-orphan-projects"`
+	DeleteOrphanImages             bool     `yaml:"deleteOrphanImages" env:"SBOM_DELETRE_ORPHAN_IMAGES" flag:"delete-orphan-images"`
 	DtrackBaseUrl                    string   `yaml:"dtrackBaseUrl" env:"SBOM_DTRACK_BASE_URL" flag:"dtrack-base-url"`
 	DtrackApiKey                     string   `yaml:"dtrackApiKey" env:"SBOM_DTRACK_API_KEY" flag:"dtrack-api-key"`
 	DtrackLabelTagMatcher            string   `yaml:"dtrackLabelTagMatcher" env:"SBOM_DTRACK_LABEL_TAG_MATCHER" flag:"dtrack-label-tag-matcher"`
@@ -58,7 +58,7 @@ var (
 	ConfigKeyGitHubAppInstallationId = "github-app-installation-id"
 	ConfigKeyPodLabelSelector        = "pod-label-selector"
 	ConfigKeyNamespaceLabelSelector  = "namespace-label-selector"
-	ConfigKeyDeleteOrphanProjects    = "delete-orphan-projects"
+	ConfigKeyDeleteOrphanImages    = "delete-orphan-images"
 	ConfigKeyDependencyTrackBaseUrl  = "dtrack-base-url"
 	/* #nosec */
 	ConfigKeyDependencyTrackApiKey                           = "dtrack-api-key"

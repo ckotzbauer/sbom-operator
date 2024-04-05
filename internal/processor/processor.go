@@ -197,7 +197,7 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 			}
 		}
 
-		if len(removableImages) > 0 && internal.OperatorConfig.DeleteOrphanProjects {
+		if len(removableImages) > 0 && internal.OperatorConfig.DeleteOrphanImages {
 			t.Remove(removableImages)
 		}
 	}
@@ -304,7 +304,7 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 
 	if len(images) > 0 {
 		for _, t := range p.Targets {
-			if internal.OperatorConfig.DeleteOrphanProjects {
+			if internal.OperatorConfig.DeleteOrphanImages {
 				t.Remove(images)
 			}
 		}
