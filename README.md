@@ -68,6 +68,7 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 | `fallback-image-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
 | `registry-proxy` | `false` | `[]` | Proxy-Registry-Hosts to use. Flag can be used multiple times. Value-Mapping e.g. `docker.io=ghcr.io` |
+| `delete-orphan-images` | `false` | `true` | Delete orphan images automatically |
 
 
 ### Example Helm-Config
@@ -122,12 +123,63 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-ca-cert-file` | `false` | `""` | CA-Certificate filepath when using mTLS to connect to dtrack |
 | `dtrack-client-cert-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Certificate filepath when using mTLS to connect to dtrack |
 | `dtrack-client-key-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Key filepath when using mTLS to connect to dtrack |
+| `dtrack-parent-project-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set parent project automatically, e.g. "my.pod.annotation" |
+| `dtrack-project-name-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set custom dtrack project name automatically, e.g. "my.pod.annotation" |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
 
 Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version.
 When there's no image-tag, but a digest, the digest is used as project-version.
 The `autoCreate` option of DT is used. You have to set the `--format` flag to `cyclonedx` with this target.
 
+---
+#### Custom dtrack project name:
+
+The key at kubernetes has to be suffixed with the container name the project is for. e.g. `my.project.name/my-nginx`.
+> [!IMPORTANT]
+> The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.project.name`
+
+The value for a custom project name in dtrack by annotation at the specific Pod is written in the format of `project:version` or just `project` where version defaults to `latest`. E.g. `MyParentProject` or `MyParentProject:1.0`
+
+---
+
+#### Setting parent project at Dependency Track automatically:
+
+The key at kubernetes has to be suffixed with the container name the parent project is for. e.g. `my.parent.project/my-nginx`.
+The value for the parent project annotation at the specific Pod is written in the format of `project:version` or just `project` where version defaults to `latest`. E.g. `MyParentProject` or `MyParentProject:1.0`
+
+> [!IMPORTANT]
+> The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.parent.project`
+
+---
+
+#### Example Pod Annotation:
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  annotations:
+    my.parent.project/my-nginx: MyParentProject
+    my.project.name/my-nginx: MyNginxProject:1.0
+    my.parent.project/my-sidecar: MyOtherParentProject
+    my.project.name/my-sidecar: MySidecarProject:1.0.1
+spec:
+  containers:
+    - image: nginx:latest
+      name: my-nginx
+    ...
+    - image: some-other-image:latest
+      name: my-sidecar
+    ...
+...
+```
+---
+
+#### sbom-operator config:
+```bash
+--dtrack-parent-project-annotation-key=my.parent.project
+--dtrack-project-name-annotation-key=my.project.name
+```
+---
 
 ### Git
 

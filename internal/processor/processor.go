@@ -135,11 +135,13 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			baseUrl := internal.OperatorConfig.DtrackBaseUrl
 			apiKey := internal.OperatorConfig.DtrackApiKey
 			podLabelTagMatcher := internal.OperatorConfig.DtrackLabelTagMatcher
+			parentProjectAnnotationKey := internal.OperatorConfig.DtrackParentProjectAnnotationKey
+			projectNameAnnotationKey := internal.OperatorConfig.DtrackProjectNameAnnotationKey
 			caCertFile := internal.OperatorConfig.DtrackCaCertFile
 			clientCertFile := internal.OperatorConfig.DtrackClientCertFile
 			clientKeyFile := internal.OperatorConfig.DtrackClientKeyFile
 			k8sClusterId := internal.OperatorConfig.KubernetesClusterId
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId)
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, parentProjectAnnotationKey, projectNameAnnotationKey)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {
@@ -195,7 +197,7 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 			}
 		}
 
-		if len(removableImages) > 0 {
+		if len(removableImages) > 0 && internal.OperatorConfig.DeleteOrphanImages {
 			t.Remove(removableImages)
 		}
 	}
@@ -302,7 +304,9 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 
 	if len(images) > 0 {
 		for _, t := range p.Targets {
-			t.Remove(images)
+			if internal.OperatorConfig.DeleteOrphanImages {
+				t.Remove(images)
+			}
 		}
 	}
 }
