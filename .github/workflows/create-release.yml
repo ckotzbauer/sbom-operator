@@ -9,9 +9,8 @@ on:
 
 jobs:
   release:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@0.40.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@0.41.0
     with:
-      go-version: 1.22.1
       version: ${{ github.event.inputs.version }}
       docker-platforms: linux/amd64,linux/arm64
       docker-tags: |
