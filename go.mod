@@ -6,7 +6,7 @@ require (
 	github.com/DependencyTrack/client-go v0.13.0
 	github.com/anchore/stereoscope v0.0.2-0.20240229175558-fe426d1b1c84
 	github.com/anchore/syft v1.1.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20240301142541-e65c4c2c5d09
+	github.com/ckotzbauer/libk8soci v0.0.0-20240405094728-21d21fe55fc4
 	github.com/ckotzbauer/libstandard v0.0.0-20240301142550-212a58c050dd
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
@@ -62,7 +62,7 @@ require (
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/deitch/magic v0.0.0-20230404182410-1ff89d7342da // indirect
 	github.com/distribution/reference v0.5.0 // indirect
-	github.com/docker/cli v25.0.3+incompatible // indirect
+	github.com/docker/cli v26.0.0+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v26.0.0+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
@@ -151,9 +151,9 @@ require (
 	github.com/saintfish/chardet v0.0.0-20230101081208-5e3ef4b5456d // indirect
 	github.com/sassoftware/go-rpmutils v0.3.0 // indirect
 	github.com/scylladb/go-set v1.0.3-0.20200225121959-cc7b2070d91e // indirect
-	github.com/sergi/go-diff v1.3.1 // indirect
+	github.com/sergi/go-diff v1.3.2-0.20230802210424-5b0b94c5c0d3 // indirect
 	github.com/shopspring/decimal v1.2.0 // indirect
-	github.com/skeema/knownhosts v1.2.1 // indirect
+	github.com/skeema/knownhosts v1.2.2 // indirect
 	github.com/sourcegraph/conc v0.3.0 // indirect
 	github.com/spdx/tools-golang v0.5.3 // indirect
 	github.com/spf13/afero v1.11.0 // indirect
@@ -194,7 +194,7 @@ require (
 
 require (
 	github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc // indirect
-	github.com/go-git/go-git/v5 v5.11.0 // indirect
+	github.com/go-git/go-git/v5 v5.12.0 // indirect
 	github.com/go-logr/logr v1.3.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/golang-jwt/jwt v3.2.2+incompatible // indirect
