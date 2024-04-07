@@ -172,6 +172,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20240405094728-21d21fe55fc4 h1:ohvzdV9rn+
 github.com/ckotzbauer/libk8soci v0.0.0-20240405094728-21d21fe55fc4/go.mod h1:4dawwf053jKKAMLege600PE3JFQZq1eTt9ExBDqzN2I=
 github.com/ckotzbauer/libk8soci v0.0.0-20240406100723-92bb5deeff2b h1:q2xlDAv555nZbWoSTkslVKG6k9K/J5QILxP1M0S1SC4=
 github.com/ckotzbauer/libk8soci v0.0.0-20240406100723-92bb5deeff2b/go.mod h1:4dawwf053jKKAMLege600PE3JFQZq1eTt9ExBDqzN2I=
+github.com/ckotzbauer/libk8soci v0.0.0-20240407085239-08c9609d5b59 h1:HXUFmiyc5PwPswGZWDR2UeEA0a4Z0honTDESrmp3JDQ=
+github.com/ckotzbauer/libk8soci v0.0.0-20240407085239-08c9609d5b59/go.mod h1:4dawwf053jKKAMLege600PE3JFQZq1eTt9ExBDqzN2I=
 github.com/ckotzbauer/libstandard v0.0.0-20240301142550-212a58c050dd h1:CIyM18tj2DPKnr8QVE22xcAnHLJ2EsWKnAUvj5x86e8=
 github.com/ckotzbauer/libstandard v0.0.0-20240301142550-212a58c050dd/go.mod h1:U+WHaP3l0/ON/8QEhZNaKGKqevqScGHpy6KpovsXKDs=
 github.com/ckotzbauer/libstandard v0.0.0-20240403164659-5c9a96730d77 h1:9/54MwKByh4VnjSUB4AVkTS7oiwVMgLGJqK42qe+vmM=
