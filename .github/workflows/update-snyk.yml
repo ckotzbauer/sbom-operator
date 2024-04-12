@@ -7,7 +7,7 @@ on:
 
 jobs:
   update-snyk:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan-snyk.yml@0.42.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan-snyk.yml@v0.42.1
     with:
       install-go: true
       scan-commands: snyk monitor
