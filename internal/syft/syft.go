@@ -109,7 +109,6 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	err = removeTempContents()
 	if err != nil {
 		logrus.WithError(err).Warn("Could not cleanup tmp directory")
-		return "", err
 	}
 
 	return bom, nil
