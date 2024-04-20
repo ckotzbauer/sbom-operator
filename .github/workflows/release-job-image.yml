@@ -52,10 +52,10 @@ jobs:
         uses: sigstore/cosign-installer@59acb6260d9c0ba8f4a2f9d9b48431a222b68e20
 
       - name: Setup Syft
-        uses: ckotzbauer/actions-toolkit/setup-syft@v0.42.1
+        uses: ckotzbauer/actions-toolkit/setup-syft@0.43.0
 
       - name: Build and push image
-        uses: ckotzbauer/actions-toolkit/docker@v0.42.1
+        uses: ckotzbauer/actions-toolkit/docker@0.43.0
         with:
           ghcr-password: ${{ secrets.ghcr-password }}
           dockerhub-user: ${{ secrets.dockerhub-user }}
@@ -69,7 +69,7 @@ jobs:
           tags: ${{ inputs.docker-tags }}
 
       - name: Generate SBOM
-        uses: ckotzbauer/actions-toolkit/sbom@v0.42.1
+        uses: ckotzbauer/actions-toolkit/sbom@0.43.0
         with:
           images: ${{ inputs.docker-tags }}
           sign: true
