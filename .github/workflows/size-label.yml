@@ -5,7 +5,7 @@ on:
 
 jobs:
   size-label:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-size-label.yml@v0.42.1
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-size-label.yml@0.43.0
     secrets:
       token: ${{ secrets.GITHUB_TOKEN }}
 
