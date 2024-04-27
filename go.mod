@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/DependencyTrack/client-go v0.13.0
-	github.com/anchore/stereoscope v0.0.2-0.20240229175558-fe426d1b1c84
+	github.com/anchore/stereoscope v0.0.2
 	github.com/anchore/syft v1.2.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20240407085239-08c9609d5b59
 	github.com/ckotzbauer/libstandard v0.0.0-20240407085248-18b1ef5a63f1
@@ -209,7 +209,7 @@ require (
 	github.com/modern-go/reflect2 v1.0.2 // indirect
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/net v0.24.0 // indirect
-	golang.org/x/oauth2 v0.15.0 // indirect
+	golang.org/x/oauth2 v0.18.0 // indirect
 	golang.org/x/sys v0.19.0 // indirect
 	golang.org/x/term v0.19.0 // indirect
 	golang.org/x/text v0.14.0 // indirect

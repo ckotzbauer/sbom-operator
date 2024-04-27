@@ -109,6 +109,8 @@ github.com/anchore/packageurl-go v0.1.1-0.20240312213626-055233e539b4 h1:SjemQ90
 github.com/anchore/packageurl-go v0.1.1-0.20240312213626-055233e539b4/go.mod h1:Blo6OgJNiYF41ufcgHKkbCKF2MDOMlrqhXv/ij6ocR4=
 github.com/anchore/stereoscope v0.0.2-0.20240229175558-fe426d1b1c84 h1:/E74wU51M87fX5UWHubLZiENXbuAci+xtbSb+JFsIYg=
 github.com/anchore/stereoscope v0.0.2-0.20240229175558-fe426d1b1c84/go.mod h1:evQiJMQG56Z7/L5uhA8kfhhjF6ESJUZzUH9ms6bQ2Co=
+github.com/anchore/stereoscope v0.0.2 h1:UTFHB/I3w7dfKvgf0K8+3T5MLZ5/hGhgbNUPVU4T26s=
+github.com/anchore/stereoscope v0.0.2/go.mod h1:ckIamHiRMp8iBwWoTtE5Xkt9VQ5QC+6+O4VzwqyZr5Q=
 github.com/anchore/syft v1.2.0 h1:e6cJVzHErrZuYTWlSjxI/JbXS5ipaN8cdjXwGpd34MQ=
 github.com/anchore/syft v1.2.0/go.mod h1:0oY5LHY9MC/Mui6ZTjd0jcJRU6U6HNxaoQPWbZ4RhhY=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
@@ -933,6 +935,8 @@ golang.org/x/oauth2 v0.0.0-20211005180243-6b3c2da341f1/go.mod h1:KelEdhl1UZF7XfJ
 golang.org/x/oauth2 v0.0.0-20211104180415-d3ed0bb246c8/go.mod h1:KelEdhl1UZF7XfJ4dDtk6s++YSgaE7mD/BuKKDLBl4A=
 golang.org/x/oauth2 v0.15.0 h1:s8pnnxNVzjWyrvYdFUQq5llS1PX2zhPXmccZv99h7uQ=
 golang.org/x/oauth2 v0.15.0/go.mod h1:q48ptWNTY5XWf+JNten23lcvHpLJ0ZSxF5ttTHKVCAM=
+golang.org/x/oauth2 v0.18.0 h1:09qnuIAgzdx1XplqJvW6CQqMCtGZykZWcXzPMPUusvI=
+golang.org/x/oauth2 v0.18.0/go.mod h1:Wf7knwG0MPoWIMMBgFlEaSUDaKskp0dCfrlJRJXbBi8=
 golang.org/x/sync v0.0.0-20180314180146-1d60e4601c6f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181108010431-42b317875d0f/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
 golang.org/x/sync v0.0.0-20181221193216-37e7f081c4d4/go.mod h1:RxMgew5VJxzue5/jJTE5uejpjVlOe/izrB70Jof72aM=
