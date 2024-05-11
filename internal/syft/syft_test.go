@@ -57,6 +57,13 @@ func marshalCyclonedx(t *testing.T, x interface{}) string {
 	return string(s)
 }
 
+func writeErroredSbom(t *testing.T, assertResult bool, data, name, format string) {
+	if !assertResult {
+		err := os.WriteFile("./fixtures/"+name+"_generated."+format, []byte(data), 0644)
+		assert.NoError(t, err)
+	}
+}
+
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
 	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
@@ -75,10 +82,14 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 	err = json.Unmarshal(data, &fixture)
 	assert.NoError(t, err)
 
-	assert.JSONEq(t, marshalJson(t, output.Artifacts), marshalJson(t, fixture.Artifacts))
-	assert.JSONEq(t, marshalJson(t, output.ArtifactRelationships), marshalJson(t, fixture.ArtifactRelationships))
-	assert.JSONEq(t, marshalJson(t, output.Files), marshalJson(t, fixture.Files))
-	assert.JSONEq(t, marshalJson(t, output.Distro), marshalJson(t, fixture.Distro))
+	assertResult := assert.JSONEq(t, marshalJson(t, output.Artifacts), marshalJson(t, fixture.Artifacts))
+	writeErroredSbom(t, assertResult, sbom, name, format)
+	assertResult = assert.JSONEq(t, marshalJson(t, output.ArtifactRelationships), marshalJson(t, fixture.ArtifactRelationships))
+	writeErroredSbom(t, assertResult, sbom, name, format)
+	assertResult = assert.JSONEq(t, marshalJson(t, output.Files), marshalJson(t, fixture.Files))
+	writeErroredSbom(t, assertResult, sbom, name, format)
+	assertResult = assert.JSONEq(t, marshalJson(t, output.Distro), marshalJson(t, fixture.Distro))
+	writeErroredSbom(t, assertResult, sbom, name, format)
 }
 
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
@@ -98,7 +109,8 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	err = xml.Unmarshal(data, &fixture)
 	assert.NoError(t, err)
 
-	assert.Equal(t, marshalCyclonedx(t, output.Components), marshalCyclonedx(t, fixture.Components))
+	assertResult := assert.Equal(t, marshalCyclonedx(t, output.Components), marshalCyclonedx(t, fixture.Components))
+	writeErroredSbom(t, assertResult, sbom, name, format)
 }
 
 func testSpdxSbom(t *testing.T, name, imageID string) {
@@ -118,10 +130,14 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 	err = json.Unmarshal(data, &fixture)
 	assert.NoError(t, err)
 
-	assert.JSONEq(t, marshalJson(t, output.Packages), marshalJson(t, fixture.Packages))
-	assert.JSONEq(t, marshalJson(t, output.Relationships), marshalJson(t, fixture.Relationships))
-	assert.JSONEq(t, marshalJson(t, output.Files), marshalJson(t, fixture.Files))
-	assert.Equal(t, output.SpdxVersion, fixture.SpdxVersion)
+	assertResult := assert.JSONEq(t, marshalJson(t, output.Packages), marshalJson(t, fixture.Packages))
+	writeErroredSbom(t, assertResult, sbom, name, format)
+	assertResult = assert.JSONEq(t, marshalJson(t, output.Relationships), marshalJson(t, fixture.Relationships))
+	writeErroredSbom(t, assertResult, sbom, name, format)
+	assertResult = assert.JSONEq(t, marshalJson(t, output.Files), marshalJson(t, fixture.Files))
+	writeErroredSbom(t, assertResult, sbom, name, format)
+	assertResult = assert.Equal(t, output.SpdxVersion, fixture.SpdxVersion)
+	writeErroredSbom(t, assertResult, sbom, name, format)
 }
 
 // test for analysing an image completely without pullSecret
@@ -142,7 +158,8 @@ func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	err = xml.Unmarshal(data, &fixture)
 	assert.NoError(t, err)
 
-	assert.Equal(t, marshalCyclonedx(t, output.Components), marshalCyclonedx(t, fixture.Components))
+	assertResult := assert.Equal(t, marshalCyclonedx(t, output.Components), marshalCyclonedx(t, fixture.Components))
+	writeErroredSbom(t, assertResult, sbom, name, format)
 }
 
 func TestSyft(t *testing.T) {
