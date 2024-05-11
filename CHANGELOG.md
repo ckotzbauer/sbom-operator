@@ -1,3 +1,13 @@
+## Version 0.34.0 (2024-05-11)
+
+### Dependency updates
+
+* [[`86730764`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/86730764)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.4.1 (#636)
+* [[`99f67bca`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/99f67bca)] - **deps**: update module golang.org&#x2F;x&#x2F;net to v0.25.0 (#637)
+* [[`7669800f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7669800f)] - **deps**: update module golang.org&#x2F;x&#x2F;exp to v0.0.0-20240506185415-9bf2ced13842
+* [[`b4bac56a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b4bac56a)] - **deps**: update sigstore&#x2F;cosign-installer digest to 8d927bd
+
+
 ## Version 0.33.0 (2024-05-09)
 
 ### Build and testing
