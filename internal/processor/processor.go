@@ -185,11 +185,6 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 		targetImages := t.LoadImages()
 		removableImages := make([]*liboci.RegistryImage, 0)
 		for _, t := range targetImages {
-			err := kubernetes.ApplyProxyRegistry(t, false, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
-			if err != nil {
-				logrus.WithError(err).Debugf("Could not parse image")
-			}
-
 			if !containsImage(allImages, t.ImageID) {
 				removableImages = append(removableImages, t)
 				delete(p.imageMap, t.ImageID)
@@ -362,6 +357,10 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 					pod := po.(*corev1.Pod)
 					info := p.K8s.Client.ExtractPodInfos(*pod)
 					for _, c := range info.Containers {
+						err := kubernetes.ApplyProxyRegistry(c.Image, true, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
+						if err != nil {
+							logrus.WithError(err).Debugf("Could not parse image %s", c.Image.ImageID)
+						}
 						allImages = append(allImages, c.Image)
 						if !containsImage(targetImages, c.Image.ImageID) && !p.K8s.HasAnnotation(info.Annotations, c) {
 							missingPods = append(missingPods, info)
