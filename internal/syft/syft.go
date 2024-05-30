@@ -54,6 +54,10 @@ func (s Syft) WithSyftVersion(version string) Syft {
 
 func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
+
+	oriImage := img.Image
+	oriImageID := img.ImageID
+
 	err := kubernetes.ApplyProxyRegistry(img, true, s.proxyRegistryMap)
 	if err != nil {
 		return "", err
@@ -61,6 +65,11 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 
 	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img, s.proxyRegistryMap)}
 	src, err := getSource(context.Background(), opts, img.ImageID)
+
+	// revert image info to the original value - we want to register with original names
+	img.Image = oriImage
+	img.ImageID = oriImageID
+
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
 		return "", err
