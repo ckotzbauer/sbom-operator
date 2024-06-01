@@ -6,7 +6,7 @@ require (
 	github.com/DependencyTrack/client-go v0.13.0
 	github.com/anchore/stereoscope v0.0.3-0.20240501181043-2e9894674185
 	github.com/anchore/syft v1.5.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20240504122132-f3ca271bd874
+	github.com/ckotzbauer/libk8soci v0.0.0-20240601075043-0e7bdd45d14a
 	github.com/ckotzbauer/libstandard v0.0.0-20240501040150-01588ea4e1cc
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
@@ -63,7 +63,7 @@ require (
 	github.com/cyphar/filepath-securejoin v0.2.4 // indirect
 	github.com/deitch/magic v0.0.0-20230404182410-1ff89d7342da // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/cli v26.1.1+incompatible // indirect
+	github.com/docker/cli v26.1.3+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v26.1.3+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
