@@ -7,7 +7,6 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
-	"github.com/ckotzbauer/libstandard"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/job"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
@@ -185,11 +184,6 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 		targetImages := t.LoadImages()
 		removableImages := make([]*liboci.RegistryImage, 0)
 		for _, t := range targetImages {
-			err := kubernetes.ApplyProxyRegistry(t, false, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
-			if err != nil {
-				logrus.WithError(err).Debugf("Could not parse image")
-			}
-
 			if !containsImage(allImages, t.ImageID) {
 				removableImages = append(removableImages, t)
 				delete(p.imageMap, t.ImageID)
@@ -287,11 +281,6 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 		for _, po := range allPods {
 			pod := po.(*corev1.Pod)
 			info := p.K8s.Client.ExtractPodInfos(*pod)
-			err := kubernetes.ApplyProxyRegistry(c.Image, false, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
-			if err != nil {
-				logrus.WithError(err).Debugf("Could not parse image")
-			}
-
 			found = found || containsContainerImage(info.Containers, c.Image.ImageID)
 		}
 
