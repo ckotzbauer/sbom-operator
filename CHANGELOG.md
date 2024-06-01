@@ -1,3 +1,23 @@
+## Version 0.35.0 (2024-06-01)
+
+### Bug fixes
+
+* [[`1aa9c4b9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1aa9c4b9)] - **fix**: don&#39;t map the image name in sbom reports (#647)
+
+### Dependency updates
+
+* [[`04e5896c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/04e5896c)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 0e7bdd4 (#650)
+* [[`aaf78a5d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aaf78a5d)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.5.0 (#649)
+* [[`05fefed3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/05fefed3)] - **deps**: update module github.com&#x2F;emicklei&#x2F;go-restful&#x2F;v3 to v3.12.1
+* [[`77e2e9be`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/77e2e9be)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to fd00a4e
+* [[`dc191d84`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/dc191d84)] - **deps**: update alpine docker tag to v3.20
+* [[`d1c90fc7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d1c90fc7)] - **deps**: update sigstore&#x2F;cosign-installer digest to b49ef6b
+* [[`31783ca8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/31783ca8)] - **deps**: update actions&#x2F;checkout digest to b80ff79
+* [[`1e7a2262`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1e7a2262)] - **deps**: update actions&#x2F;checkout digest to a5ac7e5 (#638)
+* [[`de9cf446`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/de9cf446)] - **deps**: update kubernetes versions to v0.30.1
+* [[`e1255fdd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e1255fdd)] - **deps**: update sigstore&#x2F;cosign-installer digest to 7a59e5a
+
+
 ## Version 0.34.0 (2024-05-11)
 
 ### Dependency updates
