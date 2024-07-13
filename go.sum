@@ -129,6 +129,8 @@ github.com/anchore/stereoscope v0.0.3-0.20240501181043-2e9894674185 h1:SuViDJ27n
 github.com/anchore/stereoscope v0.0.3-0.20240501181043-2e9894674185/go.mod h1:ckIamHiRMp8iBwWoTtE5Xkt9VQ5QC+6+O4VzwqyZr5Q=
 github.com/anchore/stereoscope v0.0.3-0.20240705165118-e46739e21796 h1:mb2i23zBKaSloS4RHMwBCKTCB3X5HnObcRvjxrvvMr8=
 github.com/anchore/stereoscope v0.0.3-0.20240705165118-e46739e21796/go.mod h1:6r8piaIGsYZuVkFw+fAXYtEGFI58dZuni/jNdvK+IxQ=
+github.com/anchore/stereoscope v0.0.3-0.20240711134149-487b11e5ba26 h1:nOTfmXionIzGtg487nREmvDNr7QbR9vf6HbC2Z6n1ZE=
+github.com/anchore/stereoscope v0.0.3-0.20240711134149-487b11e5ba26/go.mod h1:DcQdMes8SwpFli3rDH0v+Vd9qU9Jariq7JSHNJV5X/A=
 github.com/anchore/syft v1.2.0 h1:e6cJVzHErrZuYTWlSjxI/JbXS5ipaN8cdjXwGpd34MQ=
 github.com/anchore/syft v1.2.0/go.mod h1:0oY5LHY9MC/Mui6ZTjd0jcJRU6U6HNxaoQPWbZ4RhhY=
 github.com/anchore/syft v1.3.0 h1:UxwhJoU2diapaY+x8omyE4D17nMprStt6kxaG5dL3XI=
@@ -352,6 +354,8 @@ github.com/fsnotify/fsnotify v1.7.0 h1:8JEhPFa5W2WU7YfeZzPNqzMP6Lwt7L2715Ggo0nos
 github.com/fsnotify/fsnotify v1.7.0/go.mod h1:40Bi/Hjc2AVfZrqy+aj+yEI+/bRxZnMJyTJwOpGvigM=
 github.com/gabriel-vasile/mimetype v1.4.0 h1:Cn9dkdYsMIu56tGho+fqzh7XmvY2YyGU0FnbhiOsEro=
 github.com/gabriel-vasile/mimetype v1.4.0/go.mod h1:fA8fi6KUiG7MgQQ+mEWotXoEOvmxRtOJlERCzSmRvr8=
+github.com/gabriel-vasile/mimetype v1.4.4 h1:QjV6pZ7/XZ7ryI2KuyeEDE8wnh7fHP9YnQy+R0LnH8I=
+github.com/gabriel-vasile/mimetype v1.4.4/go.mod h1:JwLei5XPtWdGiMFB5Pjle1oEeoSeEuJfJE+TtfvdB/s=
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/github/go-spdx/v2 v2.2.0 h1:yBBLMasHA70Ujd35OpL/OjJOWWVNXcJGbars0GinGRI=
 github.com/github/go-spdx/v2 v2.2.0/go.mod h1:hMCrsFgT0QnCwn7G8gxy/MxMpy67WgZrwFeISTn0o6w=
@@ -735,6 +739,8 @@ github.com/pelletier/go-toml/v2 v2.1.0/go.mod h1:tJU2Z3ZkXwnxa4DPO899bsyIoywizdU
 github.com/pierrec/lz4/v4 v4.1.2/go.mod h1:gZWDp/Ze/IJXGXf23ltt2EXimqmTUXEy0GFuRQyBid4=
 github.com/pierrec/lz4/v4 v4.1.15 h1:MO0/ucJhngq7299dKLwIMtgTfbkoSPF6AoMYDd8Q4q0=
 github.com/pierrec/lz4/v4 v4.1.15/go.mod h1:gZWDp/Ze/IJXGXf23ltt2EXimqmTUXEy0GFuRQyBid4=
+github.com/pierrec/lz4/v4 v4.1.19 h1:tYLzDnjDXh9qIxSTKHwXwOYmm9d887Y7Y1ZkyXYHAN4=
+github.com/pierrec/lz4/v4 v4.1.19/go.mod h1:gZWDp/Ze/IJXGXf23ltt2EXimqmTUXEy0GFuRQyBid4=
 github.com/pjbgf/sha1cd v0.3.0 h1:4D5XXmUUBUl/xQ6IjCkEAbqXskkq/4O7LmGn0AqMDs4=
 github.com/pjbgf/sha1cd v0.3.0/go.mod h1:nZ1rrWOcGJ5uZgEEVL1VUM9iRQiZvWdbZjkKyFzPPsI=
 github.com/pkg/errors v0.8.0/go.mod h1:bwawxfHBFNV+L2hUp1rHADufV3IMtnDRdf1r5NINEl0=
@@ -887,6 +893,8 @@ github.com/sylabs/sif/v2 v2.18.0 h1:eXugsS1qx7St2Wu/AJ21KnsQiVCpouPlTigABh+6KYI=
 github.com/sylabs/sif/v2 v2.18.0/go.mod h1:GOQj7LIBqp15fjqH5i8ZEbLp8SXJi9S+xbRO+QQAdRo=
 github.com/sylabs/squashfs v0.6.1 h1:4hgvHnD9JGlYWwT0bPYNt9zaz23mAV3Js+VEgQoRGYQ=
 github.com/sylabs/squashfs v0.6.1/go.mod h1:ZwpbPCj0ocIvMy2br6KZmix6Gzh6fsGQcCnydMF+Kx8=
+github.com/sylabs/squashfs v1.0.0 h1:xAyMS21ogglkuR5HaY55PCfqY3H32ma9GkasTYo28Zg=
+github.com/sylabs/squashfs v1.0.0/go.mod h1:rhWzvgefq1X+R+LZdts10hfMsTg3g74OfGunW8tvg/4=
 github.com/terminalstatic/go-xsd-validate v0.1.5 h1:RqpJnf6HGE2CB/lZB1A8BYguk8uRtcvYAPLCF15qguo=
 github.com/terminalstatic/go-xsd-validate v0.1.5/go.mod h1:18lsvYFofBflqCrvo1umpABZ99+GneNTw2kEEc8UPJw=
 github.com/therootcompany/xz v1.0.1 h1:CmOtsn1CbtmyYiusbfmhmkpAAETj0wBIH6kCYaX+xzw=

@@ -4,7 +4,7 @@ go 1.22.2
 
 require (
 	github.com/DependencyTrack/client-go v0.13.0
-	github.com/anchore/stereoscope v0.0.3-0.20240705165118-e46739e21796
+	github.com/anchore/stereoscope v0.0.3-0.20240711134149-487b11e5ba26
 	github.com/anchore/syft v1.9.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20240601075043-0e7bdd45d14a
 	github.com/ckotzbauer/libstandard v0.0.0-20240708111010-b630d6532107
@@ -81,7 +81,7 @@ require (
 	github.com/felixge/fgprof v0.9.3 // indirect
 	github.com/felixge/httpsnoop v1.0.3 // indirect
 	github.com/fsnotify/fsnotify v1.7.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.0 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.4 // indirect
 	github.com/github/go-spdx/v2 v2.3.1 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.5.0 // indirect
@@ -142,7 +142,7 @@ require (
 	github.com/pborman/indent v1.2.1 // indirect
 	github.com/pelletier/go-toml v1.9.5 // indirect
 	github.com/pelletier/go-toml/v2 v2.1.0 // indirect
-	github.com/pierrec/lz4/v4 v4.1.15 // indirect
+	github.com/pierrec/lz4/v4 v4.1.19 // indirect
 	github.com/pjbgf/sha1cd v0.3.0 // indirect
 	github.com/pkg/errors v0.9.1 // indirect
 	github.com/pkg/profile v1.7.0 // indirect
@@ -165,7 +165,7 @@ require (
 	github.com/spf13/viper v1.18.2 // indirect
 	github.com/subosito/gotenv v1.6.0 // indirect
 	github.com/sylabs/sif/v2 v2.17.1 // indirect
-	github.com/sylabs/squashfs v0.6.1 // indirect
+	github.com/sylabs/squashfs v1.0.0 // indirect
 	github.com/therootcompany/xz v1.0.1 // indirect
 	github.com/ulikunitz/xz v0.5.12 // indirect
 	github.com/vbatts/go-mtree v0.5.4 // indirect
