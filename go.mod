@@ -1,6 +1,6 @@
 module github.com/ckotzbauer/sbom-operator
 
-go 1.22.2
+go 1.22.5
 
 require (
 	github.com/DependencyTrack/client-go v0.13.0
