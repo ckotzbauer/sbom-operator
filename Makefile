@@ -36,5 +36,5 @@ $(TEMPDIR):
 
 .PHONY: bootstrap-tools
 bootstrap-tools: $(TEMPDIR)
-	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -d -b $(TEMPDIR)/ v1.54.2
-	curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -d -b $(TEMPDIR)/ v2.15.0
+	curl -sSfL https://raw.githubusercontent.com/golangci/golangci-lint/master/install.sh | sh -s -- -d -b $(TEMPDIR)/ v1.59.1
+	curl -sfL https://raw.githubusercontent.com/securego/gosec/master/install.sh | sh -s -- -d -b $(TEMPDIR)/ v2.20.0
