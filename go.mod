@@ -6,7 +6,7 @@ require (
 	github.com/DependencyTrack/client-go v0.13.0
 	github.com/anchore/stereoscope v0.0.3-0.20240711134149-487b11e5ba26
 	github.com/anchore/syft v1.9.0
-	github.com/ckotzbauer/libk8soci v0.0.0-20240708110713-7490a0d4e431
+	github.com/ckotzbauer/libk8soci v0.0.0-20240713081350-053011338f16
 	github.com/ckotzbauer/libstandard v0.0.0-20240708111010-b630d6532107
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
