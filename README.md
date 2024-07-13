@@ -67,7 +67,7 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack`, `oci`, `configmap`. Ignored with a `job-image` |
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
-| `fallback-image-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
+| `fallback-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
 | `registry-proxy` | `false` | `[]` | Proxy-Registry-Hosts to use. Flag can be used multiple times. Value-Mapping e.g. `docker.io=ghcr.io` |
 | `delete-orphan-images` | `false` | `true` | Delete orphan images automatically |
 
