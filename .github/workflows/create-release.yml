@@ -9,7 +9,7 @@ on:
 
 jobs:
   release:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@0.45.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@0.45.1
     with:
       version: ${{ github.event.inputs.version }}
       docker-platforms: linux/amd64,linux/arm64
