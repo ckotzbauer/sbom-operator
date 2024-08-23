@@ -232,7 +232,7 @@ require (
 
 replace (
 	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.12.1
-	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.18.0
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.19.1
 	golang.org/x/net => golang.org/x/net v0.28.0
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 )
