@@ -5,7 +5,7 @@ go 1.22.5
 require (
 	github.com/DependencyTrack/client-go v0.13.0
 	github.com/anchore/stereoscope v0.0.3
-	github.com/anchore/syft v1.11.0
+	github.com/anchore/syft v1.11.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20240810135526-c1ac5a827c6b
 	github.com/ckotzbauer/libstandard v0.0.0-20240714072944-bb20d4a8e76a
 	github.com/google/uuid v1.6.0
@@ -66,7 +66,7 @@ require (
 	github.com/distribution/reference v0.6.0 // indirect
 	github.com/docker/cli v27.1.1+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
-	github.com/docker/docker v27.1.1+incompatible // indirect
+	github.com/docker/docker v27.1.2+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.7.0 // indirect
 	github.com/docker/go-connections v0.4.0 // indirect
 	github.com/docker/go-events v0.0.0-20190806004212-e31b211e4f1c // indirect
@@ -213,7 +213,7 @@ require (
 	github.com/spf13/pflag v1.0.5 // indirect
 	golang.org/x/net v0.28.0 // indirect
 	golang.org/x/oauth2 v0.21.0 // indirect
-	golang.org/x/sys v0.23.0 // indirect
+	golang.org/x/sys v0.24.0 // indirect
 	golang.org/x/term v0.23.0 // indirect
 	golang.org/x/text v0.17.0 // indirect
 	golang.org/x/time v0.5.0 // indirect
