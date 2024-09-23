@@ -268,7 +268,7 @@ The operator needs the Registry-URL, a user and a token as password to authentic
 This target stores the SBOM as Kubernetes-ConfigMap. They are placed in the same namespace as the corresponding pod and the name
 consists of the pod- and container-name. The configmap is labeled with `ckotzbauer.sbom-operator.io=true` and 
 annotated with `ckotzbauer.sbom-operator.io/image-id=<full-image-repo-with-digest>`.
-The content is stored as broli-compressed binary-data with the configmap-key `sbom`.
+The content is stored as brotli-compressed binary-data with the configmap-key `sbom`.
 
 
 ## Job-Images
