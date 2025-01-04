@@ -33,7 +33,7 @@ require (
 	github.com/Masterminds/sprig/v3 v3.2.3 // indirect
 	github.com/Microsoft/go-winio v0.6.1 // indirect
 	github.com/Microsoft/hcsshim v0.11.4 // indirect
-	github.com/ProtonMail/go-crypto v1.0.0 // indirect
+	github.com/ProtonMail/go-crypto v1.1.3 // indirect
 	github.com/acobaugh/osrelease v0.1.0 // indirect
 	github.com/adrg/xdg v0.5.0 // indirect
 	github.com/anchore/clio v0.0.0-20240522144804-d81e109008aa // indirect
@@ -232,7 +232,7 @@ require (
 
 replace (
 	github.com/emicklei/go-restful/v3 => github.com/emicklei/go-restful/v3 v3.12.1
-	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.19.1
+	github.com/sylabs/sif/v2 => github.com/sylabs/sif/v2 v2.20.2
 	golang.org/x/net => golang.org/x/net v0.33.0
 	gopkg.in/yaml.v3 => gopkg.in/yaml.v3 v3.0.1
 )
