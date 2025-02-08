@@ -3,7 +3,7 @@ module github.com/ckotzbauer/sbom-operator
 go 1.23.4
 
 require (
-	github.com/DependencyTrack/client-go v0.13.0
+	github.com/DependencyTrack/client-go v0.15.0
 	github.com/anchore/stereoscope v0.0.3
 	github.com/anchore/syft v1.11.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20240810135526-c1ac5a827c6b
