@@ -104,7 +104,10 @@ func printVersion() {
 
 func health(w http.ResponseWriter, req *http.Request) {
 	w.WriteHeader(200)
-	fmt.Fprint(w, "Running!")
+	_, err := fmt.Fprint(w, "Running!")
+	if err != nil {
+		logrus.WithError(err).Error("Failed to write response for health check")
+	}
 }
 
 func main() {

@@ -213,6 +213,7 @@ func TestSyft(t *testing.T) {
 
 	for _, v := range tests {
 		t.Run(fmt.Sprintf("%s-%s", v.image, v.format), func(t *testing.T) {
+			// nolint QF1003
 			if v.format == "json" {
 				testJsonSbom(t, v.image, v.digest)
 			} else if v.format == "cyclonedx" {
