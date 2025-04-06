@@ -113,6 +113,7 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 	for _, ta := range internal.OperatorConfig.Targets {
 		var err error
 
+		// nolint QF1003
 		if ta == "git" {
 			workingTree := internal.OperatorConfig.GitWorkingTree
 			workPath := internal.OperatorConfig.GitPath
