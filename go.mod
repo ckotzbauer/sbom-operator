@@ -4,7 +4,7 @@ go 1.24.2
 
 require (
 	github.com/DependencyTrack/client-go v0.15.0
-	github.com/anchore/stereoscope v0.1.2
+	github.com/anchore/stereoscope v0.1.3
 	github.com/anchore/syft v1.22.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5
 	github.com/ckotzbauer/libstandard v0.0.0-20250406094508-04839b4e0063
