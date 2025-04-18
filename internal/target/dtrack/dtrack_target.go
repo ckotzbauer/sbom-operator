@@ -2,7 +2,6 @@ package dtrack
 
 import (
 	"context"
-	"encoding/base64"
 	"fmt"
 	"regexp"
 	"strings"
@@ -142,10 +141,9 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
 
-	sbomBase64 := base64.StdEncoding.EncodeToString([]byte(ctx.Sbom))
 	uploadToken, err := client.BOM.PostBom(
 		context.Background(),
-		dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, AutoCreate: true, BOM: sbomBase64},
+		dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, AutoCreate: true, BOM: ctx.Sbom},
 	)
 	if err != nil {
 		logrus.Errorf("Could not upload BOM: %v", err)
