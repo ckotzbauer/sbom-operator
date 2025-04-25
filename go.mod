@@ -4,7 +4,7 @@ go 1.24.2
 
 require (
 	github.com/DependencyTrack/client-go v0.15.0
-	github.com/anchore/stereoscope v0.1.3
+	github.com/anchore/stereoscope v0.1.4
 	github.com/anchore/syft v1.22.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5
 	github.com/ckotzbauer/libstandard v0.0.0-20250406094508-04839b4e0063
@@ -82,9 +82,9 @@ require (
 	github.com/cyphar/filepath-securejoin v0.4.1 // indirect
 	github.com/deitch/magic v0.0.0-20240306090643-c67ab88f10cb // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/cli v28.0.4+incompatible // indirect
+	github.com/docker/cli v28.1.1+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
-	github.com/docker/docker v28.0.4+incompatible // indirect
+	github.com/docker/docker v28.1.1+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.3 // indirect
 	github.com/docker/go-connections v0.5.0 // indirect
 	github.com/docker/go-events v0.0.0-20250114142523-c867878c5e32 // indirect
@@ -99,7 +99,7 @@ require (
 	github.com/felixge/httpsnoop v1.0.4 // indirect
 	github.com/fsnotify/fsnotify v1.9.0 // indirect
 	github.com/fxamacker/cbor/v2 v2.8.0 // indirect
-	github.com/gabriel-vasile/mimetype v1.4.8 // indirect
+	github.com/gabriel-vasile/mimetype v1.4.9 // indirect
 	github.com/github/go-spdx/v2 v2.3.2 // indirect
 	github.com/go-git/gcfg v1.5.1-0.20230307220236-3a3c6141e376 // indirect
 	github.com/go-git/go-billy/v5 v5.6.2 // indirect
