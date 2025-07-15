@@ -1,3 +1,31 @@
+## Version 0.37.1 (2025-07-15)
+
+### Dependency updates
+
+* [[`1583d7ff`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1583d7ff)] - **deps**: update kubernetes versions to v0.33.2 (#738)
+* [[`a6ea4913`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a6ea4913)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 6ae5c78 (#751)
+* [[`2af8462d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2af8462d)] - **deps**: update module github.com&#x2F;dependencytrack&#x2F;client-go to v0.17.0 (#736)
+* [[`34871171`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/34871171)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to b7579e2 (#740)
+* [[`0624e6f2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0624e6f2)] - **deps**: update github.com&#x2F;sirupsen&#x2F;logrus digest to 70b8093 (#750)
+* [[`7636756e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7636756e)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.28.0 (#739)
+* [[`d5d1484c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d5d1484c)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.6 (#737)
+* [[`ce422e3a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ce422e3a)] - **deps**: update sigstore&#x2F;cosign-installer digest to e40248c (#733)
+* [[`630b9404`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/630b9404)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 91ab926 (#747)
+* [[`4e9d7b1b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4e9d7b1b)] - **deps**: update module github.com&#x2F;go-viper&#x2F;mapstructure&#x2F;v2 to v2.3.0 [security] (#749)
+* [[`77322425`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/77322425)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.48.0 (#741)
+* [[`c66fd953`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c66fd953)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 7e4ce0a (#702)
+* [[`57bd7fe8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/57bd7fe8)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.3 (#735)
+* [[`a8917745`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a8917745)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 04839b4 (#712)
+* [[`fea609ae`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fea609ae)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to c37ef66 (#720)
+* [[`8ef1f17e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8ef1f17e)] - **deps**: update alpine docker tag to v3.21 (#715)
+* [[`f07dd37f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f07dd37f)] - **deps**: update actions&#x2F;checkout digest to 85e6279 (#706)
+* [[`4bc0cf93`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4bc0cf93)] - **deps**: update sigstore&#x2F;cosign-installer digest to d7d6bc7 (#707)
+
+### Common changes
+
+* [[`6ff354ac`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6ff354ac)] - **dtrack**: client.BOM.PostBom function does not support base64 encoding (#734)
+
+
 ## Version 0.37.0 (2025-04-06)
 
 ### Features and improvements
