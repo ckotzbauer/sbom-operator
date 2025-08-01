@@ -720,6 +720,8 @@ github.com/anchore/stereoscope v0.1.7-0.20250716200927-94c6f92877d4 h1:5UGwBBUAK
 github.com/anchore/stereoscope v0.1.7-0.20250716200927-94c6f92877d4/go.mod h1:ejAlYkAb/cRvSMlxQlrG2dMruqQpcJAh4w2Fu02FEYQ=
 github.com/anchore/stereoscope v0.1.7-0.20250722155837-fa91dfcbdaa1 h1:qIu8tBvlD2xCvcPBPn0KKwBV+uDU7mCxslCPEiSDsLI=
 github.com/anchore/stereoscope v0.1.7-0.20250722155837-fa91dfcbdaa1/go.mod h1:YlrdUIQeJze0jYQbcxyi2m6p9r8emHhcB5ouXGIg77Q=
+github.com/anchore/stereoscope v0.1.8 h1:K1NRFUqGy6z/jp4ADHNXZWbZ+xd6fPr0Kn4gYp1zm1c=
+github.com/anchore/stereoscope v0.1.8/go.mod h1:VA9zyFcUzN7GIFsXfe8lj3Z6Ocs4CP5QZqbmFc1I7ag=
 github.com/anchore/syft v1.22.0 h1:lmNuy1uQ9GZeO6HPms3ik3W0hTE9MxP46vtC3vssBe4=
 github.com/anchore/syft v1.22.0/go.mod h1:5U0av1cf7i/O2VusM29HTsVYUsARjBvgPCbP4RtSEyk=
 github.com/anchore/syft v1.28.0 h1:uLdCvWNb2btvCyfIawWOsXD238v6eDTaz5RTfS2lMqA=
@@ -912,6 +914,8 @@ github.com/docker/docker v28.2.2+incompatible h1:CjwRSksz8Yo4+RmQ339Dp/D2tGO5Jxw
 github.com/docker/docker v28.2.2+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/docker v28.3.2+incompatible h1:wn66NJ6pWB1vBZIilP8G3qQPqHy5XymfYn5vsqeA5oA=
 github.com/docker/docker v28.3.2+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
+github.com/docker/docker v28.3.3+incompatible h1:Dypm25kh4rmk49v1eiVbsAtpAsYURjYkaKubwuBdxEI=
+github.com/docker/docker v28.3.3+incompatible/go.mod h1:eEKB0N0r5NX/I1kEveEz05bcu8tLC/8azJZsviup8Sk=
 github.com/docker/docker-credential-helpers v0.9.3 h1:gAm/VtF9wgqJMoxzT3Gj5p4AqIjCBS4wrsOh9yRqcz8=
 github.com/docker/docker-credential-helpers v0.9.3/go.mod h1:x+4Gbw9aGmChi3qTLZj8Dfn0TD20M/fuWy0E5+WDeCo=
 github.com/docker/go-connections v0.5.0 h1:USnMq7hx7gwdVZq1L49hLXaFtUdTADjXGp+uj1Br63c=
