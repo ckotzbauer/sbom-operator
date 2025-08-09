@@ -7,7 +7,7 @@ require (
 	github.com/anchore/stereoscope v0.1.8
 	github.com/anchore/syft v1.29.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5
-	github.com/ckotzbauer/libstandard v0.0.0-20250701055134-91ab926df52e
+	github.com/ckotzbauer/libstandard v0.0.0-20250801065007-0dacc563548a
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
@@ -276,7 +276,7 @@ require (
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.2 // indirect
-	github.com/spf13/pflag v1.0.6 // indirect
+	github.com/spf13/pflag v1.0.7 // indirect
 	golang.org/x/net v0.43.0 // indirect
 	golang.org/x/oauth2 v0.30.0 // indirect
 	golang.org/x/sys v0.35.0 // indirect
