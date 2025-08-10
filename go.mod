@@ -11,7 +11,7 @@ require (
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
-	github.com/sirupsen/logrus v1.9.4-0.20250620175740-70b809335b84
+	github.com/sirupsen/logrus v1.9.4-0.20250804143300-cb253f3080f1
 	github.com/spf13/cobra v1.9.1
 	github.com/stretchr/testify v1.10.0
 	golang.org/x/exp v0.0.0-20250808145144-a408d31f581a
