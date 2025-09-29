@@ -29,6 +29,7 @@ import (
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/sirupsen/logrus"
+	"golang.org/x/oauth2/google"
 )
 
 type Syft struct {
@@ -63,7 +64,21 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 		return "", err
 	}
 
-	opts := &image.RegistryOptions{Credentials: oci.ConvertSecrets(*img, s.proxyRegistryMap)}
+	credentials := oci.ConvertSecrets(*img, s.proxyRegistryMap)
+	
+	var opts *image.RegistryOptions
+	if len(credentials) == 0 && isGCPArtifactRegistry(img.ImageID) {
+		logrus.Debugf("No pull secrets found for GCP Artifact Registry %s, attempting Workload Identity", img.ImageID)
+		if gcpCreds := getGCPCredentials(context.Background()); gcpCreds != nil {
+			opts = &image.RegistryOptions{Credentials: []image.RegistryCredentials{*gcpCreds}}
+		} else {
+			logrus.Debugf("Failed to get GCP credentials, using empty options")
+			opts = &image.RegistryOptions{}
+		}
+	} else {
+		opts = &image.RegistryOptions{Credentials: credentials}
+	}
+
 	src, err := getSource(context.Background(), opts, img.ImageID)
 
 	// revert image info to the original value - we want to register with original names
@@ -215,5 +230,30 @@ func removeTempContents() error {
 func closeOrLog(c io.Closer) {
 	if err := c.Close(); err != nil {
 		logrus.WithError(err).Warnf("Could not close file")
+	}
+}
+
+func isGCPArtifactRegistry(imageID string) bool {
+	return strings.Contains(imageID, "-docker.pkg.dev/")
+}
+
+func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
+	creds, err := google.FindDefaultCredentials(ctx, "https://www.googleapis.com/auth/cloud-platform")
+	if err != nil {
+		logrus.WithError(err).Debug("Failed to find default GCP credentials")
+		return nil
+	}
+
+	token, err := creds.TokenSource.Token()
+	if err != nil {
+		logrus.WithError(err).Debug("Failed to get GCP access token")
+		return nil
+	}
+
+	logrus.Debugf("Successfully obtained GCP access token via default credentials (expires: %v)", token.Expiry)
+
+	return &image.RegistryCredentials{
+		Username: "oauth2accesstoken",
+		Password: token.AccessToken,
 	}
 }
