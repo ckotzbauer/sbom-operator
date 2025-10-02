@@ -47,11 +47,11 @@ func (g *ConfigMapTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return err
 }
 
-func (g *ConfigMapTarget) LoadImages() []*libk8s.RegistryImage {
+func (g *ConfigMapTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	configMaps, err := g.k8s.ListConfigMaps()
 	if err != nil {
 		logrus.WithError(err).Error("Could not load configmaps.")
-		return []*libk8s.RegistryImage{}
+		return nil, err
 	}
 
 	images := make([]*libk8s.RegistryImage, 0)
@@ -63,13 +63,14 @@ func (g *ConfigMapTarget) LoadImages() []*libk8s.RegistryImage {
 		}
 	}
 
-	return images
+	return images, nil
 }
 
-func (g *ConfigMapTarget) Remove(allImages []*libk8s.RegistryImage) {
+func (g *ConfigMapTarget) Remove(allImages []*libk8s.RegistryImage) error {
 	configMaps, err := g.k8s.ListConfigMaps()
 	if err != nil {
 		logrus.WithError(err).Error("failed to load configmaps")
+		return err
 	}
 
 	for _, i := range allImages {
@@ -82,4 +83,6 @@ func (g *ConfigMapTarget) Remove(allImages []*libk8s.RegistryImage) {
 			}
 		}
 	}
+
+	return nil
 }

@@ -228,17 +228,21 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	if g.imageProjectMap == nil {
 		// prepropulate imageProjectMap
-		g.LoadImages()
+		_, err := g.LoadImages()
+		if err != nil {
+			return err
+		}
 	}
 
 	g.imageProjectMap[ctx.Image.ImageID] = project.UUID
 	return nil
 }
 
-func (g *DependencyTrackTarget) LoadImages() []*libk8s.RegistryImage {
+func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
+		return nil, err
 	}
 
 	if g.imageProjectMap == nil {
@@ -258,6 +262,7 @@ func (g *DependencyTrackTarget) LoadImages() []*libk8s.RegistryImage {
 		})
 		if err != nil {
 			logrus.Errorf("Could not load projects: %v", err)
+			return nil, err
 		}
 
 		var imageId string
@@ -295,18 +300,22 @@ func (g *DependencyTrackTarget) LoadImages() []*libk8s.RegistryImage {
 		pageNumber++
 	}
 
-	return images
+	return images, nil
 }
 
-func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
+func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) error {
 	if g.imageProjectMap == nil {
 		// prepropulate imageProjectMap
-		g.LoadImages()
+		_, err := g.LoadImages()
+		if err != nil {
+			return err
+		}
 	}
 
 	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
+		return err
 	}
 
 	for _, img := range images {
@@ -356,6 +365,8 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) {
 			}
 		}
 	}
+
+	return nil
 }
 
 func getNameAndVersionFromString(input string, delimiter string) (string, string) {

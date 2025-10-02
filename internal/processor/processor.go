@@ -182,7 +182,12 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 	}
 
 	for _, t := range p.Targets {
-		targetImages := t.LoadImages()
+		targetImages, err := t.LoadImages()
+		if err != nil {
+			logrus.WithError(err).Error("Failed to load images from target")
+			continue
+		}
+
 		removableImages := make([]*liboci.RegistryImage, 0)
 		for _, t := range targetImages {
 			if !containsImage(allImages, t.ImageID) {
@@ -193,7 +198,10 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 		}
 
 		if len(removableImages) > 0 && internal.OperatorConfig.DeleteOrphanImages {
-			t.Remove(removableImages)
+			err := t.Remove(removableImages)
+			if err != nil {
+				logrus.WithError(err).Error("Failed to remove images from target")
+			}
 		}
 	}
 }
@@ -295,7 +303,10 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 	if len(images) > 0 {
 		for _, t := range p.Targets {
 			if internal.OperatorConfig.DeleteOrphanImages {
-				t.Remove(images)
+				err := t.Remove(images)
+				if err != nil {
+					logrus.WithError(err).Error("Failed to remove images from target")
+				}
 			}
 		}
 	}
@@ -347,7 +358,12 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			allImages := make([]*liboci.RegistryImage, 0)
 
 			for _, t := range p.Targets {
-				targetImages := t.LoadImages()
+				targetImages, err := t.LoadImages()
+				if err != nil {
+					logrus.WithError(err).Error("Failed to load images from target")
+					continue
+				}
+
 				for _, po := range pods {
 					pod := po.(*corev1.Pod)
 					info := p.K8s.Client.ExtractPodInfos(*pod)
