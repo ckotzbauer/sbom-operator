@@ -65,7 +65,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	credentials := oci.ConvertSecrets(*img, s.proxyRegistryMap)
-	
+
 	var opts *image.RegistryOptions
 	if len(credentials) == 0 && isGCPArtifactRegistry(img.ImageID) {
 		logrus.Debugf("No pull secrets found for GCP Artifact Registry %s, attempting Workload Identity", img.ImageID)
