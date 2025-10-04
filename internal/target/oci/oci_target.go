@@ -92,9 +92,10 @@ func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return err
 }
 
-func (g *OciTarget) LoadImages() []*libk8s.RegistryImage {
-	return []*libk8s.RegistryImage{}
+func (g *OciTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
+	return []*libk8s.RegistryImage{}, nil
 }
 
-func (g *OciTarget) Remove(allImages []*libk8s.RegistryImage) {
+func (g *OciTarget) Remove(allImages []*libk8s.RegistryImage) error {
+	return nil
 }

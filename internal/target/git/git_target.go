@@ -86,7 +86,7 @@ func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) LoadImages() []*libk8s.RegistryImage {
+func (g *GitTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	ignoreDirs := []string{".git"}
 	fileName := syft.GetFileName(g.sbomFormat)
 	basePath := filepath.Join(g.workingTree, g.workPath)
@@ -118,13 +118,13 @@ func (g *GitTarget) LoadImages() []*libk8s.RegistryImage {
 
 	if err != nil {
 		logrus.WithError(err).Error("Could not list all SBOMs")
-		return []*libk8s.RegistryImage{}
+		return nil, err
 	}
 
-	return images
+	return images, nil
 }
 
-func (g *GitTarget) Remove(images []*libk8s.RegistryImage) {
+func (g *GitTarget) Remove(images []*libk8s.RegistryImage) error {
 	logrus.Debug("Start to remove old SBOMs")
 	sbomFiles := g.mapToFiles(images)
 
@@ -142,7 +142,10 @@ func (g *GitTarget) Remove(images []*libk8s.RegistryImage) {
 	err := g.gitAccount.CommitAndPush(g.workingTree, "Deleted old SBOMs")
 	if err != nil {
 		logrus.WithError(err).Error("Could not commit SBOM removal to git")
+		return err
 	}
+
+	return nil
 }
 
 func (g *GitTarget) mapToFiles(allImages []*libk8s.RegistryImage) []string {

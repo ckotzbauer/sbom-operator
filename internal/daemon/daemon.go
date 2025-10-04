@@ -1,6 +1,7 @@
 package daemon
 
 import (
+	"sync"
 	"time"
 
 	"github.com/ckotzbauer/libstandard"
@@ -15,9 +16,9 @@ import (
 type CronService struct {
 	cron      string
 	processor *processor.Processor
+	mu        sync.Mutex
+	running   bool
 }
-
-var running = false
 
 func Start(cronTime string, appVersion string) {
 	cr := libstandard.Unescape(cronTime)
@@ -50,11 +51,23 @@ func (c *CronService) printNextExecution() {
 }
 
 func (c *CronService) runBackgroundService() {
-	if running {
+	// Atomically check and set running flag
+	c.mu.Lock()
+	if c.running {
+		c.mu.Unlock()
+		logrus.Info("Background-service already running, skipping execution")
 		return
 	}
+	c.running = true
+	c.mu.Unlock()
 
-	running = true
+	// Ensure running flag is reset even on panic
+	defer func() {
+		c.mu.Lock()
+		c.running = false
+		c.mu.Unlock()
+	}()
+
 	logrus.Info("Execute background-service")
 
 	if !processor.HasJobImage() {
@@ -64,7 +77,10 @@ func (c *CronService) runBackgroundService() {
 				logrus.WithError(err).Fatal("Target could not be initialized,")
 			}
 
-			t.LoadImages()
+			_, err = t.LoadImages()
+			if err != nil {
+				logrus.WithError(err).Error("Failed to load images from target")
+			}
 		}
 	}
 
@@ -72,7 +88,6 @@ func (c *CronService) runBackgroundService() {
 	namespaces, err := c.processor.K8s.Client.ListNamespaces(namespaceSelector)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to list namespaces with selector: %s, abort background-service", namespaceSelector)
-		running = false
 		return
 	}
 
@@ -81,5 +96,4 @@ func (c *CronService) runBackgroundService() {
 	c.processor.ProcessAllPods(pods, allImages)
 
 	c.printNextExecution()
-	running = false
 }

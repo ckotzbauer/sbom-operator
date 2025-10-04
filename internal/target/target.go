@@ -16,8 +16,8 @@ type Target interface {
 	Initialize() error
 	ValidateConfig() error
 	ProcessSbom(ctx *TargetContext) error
-	LoadImages() []*oci.RegistryImage
-	Remove(images []*oci.RegistryImage)
+	LoadImages() ([]*oci.RegistryImage, error)
+	Remove(images []*oci.RegistryImage) error
 }
 
 func NewContext(sbom string, image *oci.RegistryImage, container *libk8s.ContainerInfo, pod *libk8s.PodInfo) *TargetContext {
