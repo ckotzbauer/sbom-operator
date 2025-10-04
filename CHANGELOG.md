@@ -1,3 +1,33 @@
+## Version 0.38.0 (2025-10-04)
+
+### Features and improvements
+
+* [[`d2a517f1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d2a517f1)] - **feat**: Support GKE workload identity for Syft image pulling (#776)
+
+### Bug fixes
+
+* [[`4848240d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4848240d)] - **fix**: Handle target errors gracefully and prevent cron from getting stuck (#777)
+
+### Build and testing
+
+* [[`7d90a905`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7d90a905)] - **build**: update dependencies and tools
+
+### Dependency updates
+
+* [[`a460f953`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a460f953)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to a408d31 (#763)
+* [[`d922db37`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d922db37)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.49.0 (#761)
+* [[`b4e31137`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b4e31137)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.29.1 (#760)
+* [[`be4f70ce`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/be4f70ce)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.8 (#759)
+* [[`a8c0331a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a8c0331a)] - **deps**: update github.com&#x2F;anchore&#x2F;stereoscope digest to fa91dfc (#757)
+* [[`b3ef862f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b3ef862f)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.29.0 (#756)
+* [[`8be71770`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8be71770)] - **deps**: update actions&#x2F;checkout digest to 8edcb1b (#746)
+* [[`028589ea`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/028589ea)] - **deps**: update alpine docker tag to v3.22 (#744)
+* [[`615043b0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/615043b0)] - **deps**: update kubernetes versions to v0.33.3 (#755)
+* [[`1ea7af90`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1ea7af90)] - **deps**: update sigstore&#x2F;cosign-installer digest to d58896d (#754)
+* [[`9d8de428`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9d8de428)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 645b1fa (#753)
+* [[`6294fa4a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6294fa4a)] - **deps**: update alpine:3.21 docker digest to b6a6be0 (#752)
+
+
 ## Version 0.37.1 (2025-07-15)
 
 ### Dependency updates
