@@ -10,6 +10,7 @@ import (
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/stretchr/testify/assert"
+	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
 )
 
 type simpleTestData struct {
@@ -177,6 +178,11 @@ func TestSyft(t *testing.T) {
 		{
 			image:  "node",
 			digest: "node@sha256:f527a6118422b888c35162e0a7e2fb2febced4c85a23d96e1342f9edc2789fec",
+			format: "json",
+		},
+		{
+			image:  "fedora",
+			digest: "fedora@sha256:89ed3ea10de7194c36524a290665960ddd4dae876a40beeadde2a9b4a0276681",
 			format: "json",
 		},
 		{
