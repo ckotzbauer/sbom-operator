@@ -14,6 +14,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
+	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
 )
 
 var (
