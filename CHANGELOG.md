@@ -1,3 +1,17 @@
+## Version 0.38.1 (2025-10-11)
+
+### Bug fixes
+
+* [[`bfd85b7f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bfd85b7f)] - **fix**: Register SQLite driver for RPM database cataloging (#778)
+
+### Dependency updates
+
+* [[`b3f75d02`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b3f75d02)] - **deps**: update sigstore&#x2F;cosign-installer digest to d7543c9 (#769)
+* [[`4056c1ba`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4056c1ba)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to d2f985d (#766)
+* [[`52d6fc15`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/52d6fc15)] - **deps**: update actions&#x2F;checkout digest to ff7abcd (#765)
+* [[`3885429f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3885429f)] - **deps**: update github.com&#x2F;sirupsen&#x2F;logrus digest to cb253f3 (#762)
+
+
 ## Version 0.38.0 (2025-10-04)
 
 ### Features and improvements
