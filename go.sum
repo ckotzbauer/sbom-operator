@@ -132,6 +132,8 @@ github.com/anchore/fangs v0.0.0-20250924221602-895877cb39ec h1:6R1lEYjwSkH1GmRUp
 github.com/anchore/fangs v0.0.0-20250924221602-895877cb39ec/go.mod h1:RmTGtCeeZT3Uz1Kb3iRNUBFNLkpa1wAXXAs3ya3ELCM=
 github.com/anchore/go-collections v0.0.0-20250717130425-e4a173a279ef h1:XzwHR9N3SoIqH2aP7Gm90FyH6hhV3BkxNDJwBxkoOUI=
 github.com/anchore/go-collections v0.0.0-20250717130425-e4a173a279ef/go.mod h1:1aiktV46ATCkuVg0O573ZrH56BUawTECPETbZyBcqT8=
+github.com/anchore/go-collections v0.0.0-20251016125210-a3c352120e8c h1:eoJXyC0n7DZ4YvySG/ETdYkTar2Due7eH+UmLK6FbrA=
+github.com/anchore/go-collections v0.0.0-20251016125210-a3c352120e8c/go.mod h1:1aiktV46ATCkuVg0O573ZrH56BUawTECPETbZyBcqT8=
 github.com/anchore/go-homedir v0.0.0-20250319154043-c29668562e4d h1:gT69osH9AsdpOfqxbRwtxcNnSZ1zg4aKy2BevO3ZBdc=
 github.com/anchore/go-homedir v0.0.0-20250319154043-c29668562e4d/go.mod h1:PhSnuFYknwPZkOWKB1jXBNToChBA+l0FjwOxtViIc50=
 github.com/anchore/go-logger v0.0.0-20250813181427-74728f89a619 h1:G7a3bZv0QlY39xRKKoMK16AficGWVJo+5uuMziPZ2W8=
@@ -161,6 +163,8 @@ github.com/anchore/syft v1.33.0 h1:pYUEplww99PyB0OVPBfDu8VODLvZ3i9v1ngl4S1W9oo=
 github.com/anchore/syft v1.33.0/go.mod h1:yowzB+qYX2fbAW5Y0O0wpX885FEqDqYITqDGltbvobw=
 github.com/anchore/syft v1.34.2 h1:q7Zr5I624MaU20wfwzidTtHi8nqS8MzrJGGcIvEAWsI=
 github.com/anchore/syft v1.34.2/go.mod h1:J9fOxYe2o9I5sML6ntNF2uiPYZ+vwcWVPM26tCSyf3M=
+github.com/anchore/syft v1.36.0 h1:vmrQz/eCPEdniHi2XRqEXxpvO3Q3wHL9o+YcE45XtUI=
+github.com/anchore/syft v1.36.0/go.mod h1:DdJMDHhI2V7pOjC/5FL98BKbG2DkbIT5zYmig6AORdU=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
 github.com/andybalholm/brotli v1.2.0/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
@@ -423,6 +427,8 @@ github.com/gabriel-vasile/mimetype v1.4.10/go.mod h1:d+9Oxyo1wTzWdyVUPMmXFvp4F9t
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/github/go-spdx/v2 v2.3.3 h1:QI7evnHWEfWkT54eJwkoV/f3a0xD3gLlnVmT5wQG6LE=
 github.com/github/go-spdx/v2 v2.3.3/go.mod h1:2ZxKsOhvBp+OYBDlsGnUMcchLeo2mrpEBn2L1C+U3IQ=
+github.com/github/go-spdx/v2 v2.3.4 h1:6VNAsYWvQge+SOeoubTlH81MY21d5uekXNIRGfXMNXo=
+github.com/github/go-spdx/v2 v2.3.4/go.mod h1:7LYNCshU2Gj17qZ0heJ5CQUKWWmpd98K7o93K8fJSMk=
 github.com/glebarez/go-sqlite v1.20.3 h1:89BkqGOXR9oRmG58ZrzgoY/Fhy5x0M+/WV48U5zVrZ4=
 github.com/glebarez/go-sqlite v1.20.3/go.mod h1:u3N6D/wftiAzIOJtZl6BmedqxmmkDfH3q+ihjqxC9u0=
 github.com/gliderlabs/ssh v0.3.8 h1:a4YXD1V7xMF9g5nTkdfnja3Sxy1PVDCj1Zg4Wb8vY6c=
