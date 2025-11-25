@@ -22,6 +22,7 @@ type DependencyTrackTarget struct {
 	baseUrl                    string
 	apiKey                     string
 	podLabelTagMatcher         string
+	defaultParentProject       string
 	parentProjectAnnotationKey string
 	projectNameAnnotationKey   string
 	caCertFile                 string
@@ -29,6 +30,8 @@ type DependencyTrackTarget struct {
 	clientKeyFile              string
 	k8sClusterId               string
 	imageProjectMap            map[string]uuid.UUID
+
+	defaultParentProjectParsed *uuid.UUID
 }
 
 const (
@@ -38,7 +41,7 @@ const (
 	podNamespaceTagKey = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, parentProjectAnnotationKey string, projectNameAnnotationKey string) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:                    baseUrl,
 		apiKey:                     apiKey,
@@ -47,6 +50,7 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 		clientCertFile:             clientCertFile,
 		clientKeyFile:              clientKeyFile,
 		k8sClusterId:               k8sClusterId,
+		defaultParentProject:       defaultParentProject,
 		parentProjectAnnotationKey: parentProjectAnnotationKey,
 		projectNameAnnotationKey:   projectNameAnnotationKey,
 	}
@@ -75,6 +79,17 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 				internal.ConfigKeyDependencyTrackClientKeyFile,
 			)
 		}
+	}
+	if g.defaultParentProject != "" {
+		uuid, err := uuid.Parse(g.defaultParentProject)
+		if err != nil {
+			return fmt.Errorf(
+				"default parent project is not a valid UUID",
+			)
+		}
+		g.defaultParentProjectParsed = &uuid
+	} else {
+		g.defaultParentProjectParsed = nil
 	}
 
 	return nil
@@ -219,6 +234,10 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 				}
 			}
 		}
+	}
+
+	if project.ParentRef == nil && g.defaultParentProjectParsed != nil {
+		project.ParentRef = &dtrack.ParentRef{UUID: *g.defaultParentProjectParsed}
 	}
 
 	_, err = client.Project.Update(context.Background(), project)
