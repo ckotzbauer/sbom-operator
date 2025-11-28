@@ -29,6 +29,7 @@ type DependencyTrackTarget struct {
 	clientCertFile             string
 	clientKeyFile              string
 	k8sClusterId               string
+	useShortName               bool
 	imageProjectMap            map[string]uuid.UUID
 
 	defaultParentProjectParsed *uuid.UUID
@@ -41,7 +42,7 @@ const (
 	podNamespaceTagKey = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:                    baseUrl,
 		apiKey:                     apiKey,
@@ -53,6 +54,7 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 		defaultParentProject:       defaultParentProject,
 		parentProjectAnnotationKey: parentProjectAnnotationKey,
 		projectNameAnnotationKey:   projectNameAnnotationKey,
+		useShortName:               useShortName,
 	}
 }
 
@@ -140,7 +142,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	// If projectNameAnnotationKey is not set or could not be parsed correctly, use image instead
 	if projectName == "" || version == "" {
-		projectName, version = getRepoWithVersion(ctx.Image)
+		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName)
 	}
 
 	if ctx.Sbom == "" {
@@ -426,14 +428,19 @@ func removeTag(tags []dtrack.Tag, tagString string) []dtrack.Tag {
 	return newTags
 }
 
-func getRepoWithVersion(image *libk8s.RegistryImage) (string, string) {
+func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool) (string, string) {
 	imageRef, err := parser.Parse(image.ImageID)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", image.ImageID)
 		return "", ""
 	}
 
-	projectName := imageRef.Repository()
+	var projectName string
+	if useShortName {
+		projectName = imageRef.ShortName()
+	} else {
+		projectName = imageRef.Repository()
+	}
 
 	if strings.Index(image.Image, "sha256") != 0 {
 		imageRef, err = parser.Parse(image.Image)

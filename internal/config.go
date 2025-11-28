@@ -29,6 +29,7 @@ type Config struct {
 	DtrackDefaultParentProject       string   `yaml:"dtrackDefaultParentProject" env:"SBOM_DTRACK_DEFAULT_PARENT_PROJECT" flag:"dtrack-default-parent-project"`
 	DtrackParentProjectAnnotationKey string   `yaml:"dtrackParentProjectAnnotationKey" env:"SBOM_DTRACK_PARENT_PROJECT_ANNOTATION_KEY" flag:"dtrack-parent-project-annotation-key"`
 	DtrackProjectNameAnnotationKey   string   `yaml:"dtrackProjectNameAnnotationKey" env:"SBOM_DTRACK_PROJECT_NAME_ANNOTATION_KEY" flag:"dtrack-project-name-annotation-key"`
+	DtrackUseShortName               bool     `yaml:"dtrackUseShortName" env:"SBOM_DTRACK_USE_SHORT_NAME" flag:"dtrack-use-short-name"`
 	KubernetesClusterId              string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
 	JobImage                         string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
 	JobImagePullSecret               string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
@@ -70,6 +71,7 @@ var (
 	ConfigKeyDefaultParentProject                            = "dtrack-default-parent-project"
 	ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey = "dtrack-parent-project-annotation-key"
 	ConfigKeyDependencyTrackDtrackProjectNameAnnotationKey   = "dtrack-project-name-annotation-key"
+	ConfigKeyDependencyTrackUseShortName                     = "dtrack-use-short-name"
 	ConfigKeyKubernetesClusterId                             = "kubernetes-cluster-id"
 	ConfigKeyJobImage                                        = "job-image"
 	/* #nosec */
