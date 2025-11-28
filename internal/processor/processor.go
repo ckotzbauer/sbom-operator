@@ -3,6 +3,7 @@ package processor
 import (
 	"os"
 	"os/signal"
+	"sync"
 	"syscall"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
@@ -20,13 +21,16 @@ import (
 	"k8s.io/client-go/tools/cache"
 
 	corev1 "k8s.io/api/core/v1"
+	"k8s.io/apimachinery/pkg/labels"
 )
 
 type Processor struct {
-	K8s      *kubernetes.KubeClient
-	sy       *syft.Syft
-	Targets  []target.Target
-	imageMap map[string]bool
+	K8s               *kubernetes.KubeClient
+	sy                *syft.Syft
+	Targets           []target.Target
+	imageMap          map[string]bool
+	allowedNamespaces map[string]bool
+	namespaceMutex    sync.RWMutex
 }
 
 func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
@@ -36,15 +40,83 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 		targets = initTargets(k8s)
 	}
 
-	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool)}
+	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool), allowedNamespaces: make(map[string]bool)}
 }
 
 func (p *Processor) ListenForPods() {
+	// Load allowed namespaces based on namespace-label-selector
+	namespaceSelector := internal.OperatorConfig.NamespaceLabelSelector
+	if namespaceSelector != "" {
+		// Initial load of namespaces
+		namespaces, err := p.K8s.Client.ListNamespaces(namespaceSelector)
+		if err != nil {
+			logrus.WithError(err).Fatalf("Failed to list namespaces with selector: %s", namespaceSelector)
+			return
+		}
+
+		logrus.Debugf("Discovered %v namespaces matching selector '%s'", len(namespaces), namespaceSelector)
+		for _, ns := range namespaces {
+			p.allowedNamespaces[ns.Name] = true
+			logrus.Tracef("Allowing namespace: %s", ns.Name)
+		}
+
+		// Start namespace informer to watch for namespace changes
+		// We use an unfiltered informer and check labels manually to properly handle
+		// the case where a namespace's labels are updated to no longer match the selector
+		namespaceInformer, err := p.K8s.StartNamespaceInformer("", cache.ResourceEventHandlerFuncs{
+			AddFunc: func(obj interface{}) {
+				ns := obj.(*corev1.Namespace)
+				// Check if namespace matches the selector
+				if p.namespaceLabelMatches(ns.Labels, namespaceSelector) {
+					p.addAllowedNamespace(ns.Name)
+				}
+			},
+			UpdateFunc: func(old, new interface{}) {
+				newNs := new.(*corev1.Namespace)
+				wasAllowed := p.isNamespaceAllowed(newNs.Name)
+				shouldBeAllowed := p.namespaceLabelMatches(newNs.Labels, namespaceSelector)
+
+				if shouldBeAllowed && !wasAllowed {
+					p.addAllowedNamespace(newNs.Name)
+				} else if !shouldBeAllowed && wasAllowed {
+					p.removeAllowedNamespace(newNs.Name)
+				}
+			},
+			DeleteFunc: func(obj interface{}) {
+				ns := obj.(*corev1.Namespace)
+				// Only remove if it was in the allowed list
+				if p.isNamespaceAllowed(ns.Name) {
+					p.removeAllowedNamespace(ns.Name)
+				}
+			},
+		})
+
+		if err != nil {
+			logrus.WithError(err).Fatal("Can't create namespace informer")
+			return
+		}
+
+		// Start the namespace informer asynchronously
+		go func() {
+			logrus.Info("Starting namespace informer")
+			namespaceInformer.Run(make(chan struct{}))
+		}()
+	} else {
+		logrus.Debug("No namespace-label-selector configured, all namespaces will be processed")
+	}
+
 	var informer cache.SharedIndexInformer
 	informer, err := p.K8s.StartPodInformer(internal.OperatorConfig.PodLabelSelector, cache.ResourceEventHandlerFuncs{
 		UpdateFunc: func(old, new interface{}) {
 			oldPod := old.(*corev1.Pod)
 			newPod := new.(*corev1.Pod)
+
+			// Filter by namespace if selector is configured
+			if !p.isNamespaceAllowed(newPod.Namespace) {
+				logrus.Tracef("Skipping pod %s/%s - namespace not in allowed list", newPod.Namespace, newPod.Name)
+				return
+			}
+
 			oldInfo := p.K8s.Client.ExtractPodInfos(*oldPod)
 			newInfo := p.K8s.Client.ExtractPodInfos(*newPod)
 			logrus.Tracef("Pod %s/%s was updated.", newInfo.PodNamespace, newInfo.PodName)
@@ -56,6 +128,13 @@ func (p *Processor) ListenForPods() {
 		},
 		DeleteFunc: func(obj interface{}) {
 			pod := obj.(*corev1.Pod)
+
+			// Filter by namespace if selector is configured
+			if !p.isNamespaceAllowed(pod.Namespace) {
+				logrus.Tracef("Skipping pod %s/%s - namespace not in allowed list", pod.Namespace, pod.Name)
+				return
+			}
+
 			info := p.K8s.Client.ExtractPodInfos(*pod)
 			logrus.Tracef("Pod %s/%s was removed.", info.PodNamespace, info.PodName)
 			p.cleanupImagesIfNeeded(info.Containers, informer.GetStore().List())
@@ -68,6 +147,44 @@ func (p *Processor) ListenForPods() {
 	}
 
 	p.runInformerAsync(informer)
+}
+
+func (p *Processor) isNamespaceAllowed(namespace string) bool {
+	// If no namespace selector is configured, allow all namespaces
+	if internal.OperatorConfig.NamespaceLabelSelector == "" {
+		return true
+	}
+
+	// Check if namespace is in the allowed list (thread-safe read)
+	p.namespaceMutex.RLock()
+	defer p.namespaceMutex.RUnlock()
+	return p.allowedNamespaces[namespace]
+}
+
+func (p *Processor) addAllowedNamespace(namespace string) {
+	p.namespaceMutex.Lock()
+	defer p.namespaceMutex.Unlock()
+	p.allowedNamespaces[namespace] = true
+	logrus.Infof("Namespace %s is now allowed for scanning", namespace)
+}
+
+func (p *Processor) removeAllowedNamespace(namespace string) {
+	p.namespaceMutex.Lock()
+	defer p.namespaceMutex.Unlock()
+	delete(p.allowedNamespaces, namespace)
+	logrus.Infof("Namespace %s is no longer allowed for scanning", namespace)
+}
+
+func (p *Processor) namespaceLabelMatches(nsLabels map[string]string, selector string) bool {
+	// Parse the label selector
+	labelSelector, err := labels.Parse(selector)
+	if err != nil {
+		logrus.WithError(err).Errorf("Failed to parse namespace label selector: %s", selector)
+		return false
+	}
+
+	// Check if the namespace labels match the selector
+	return labelSelector.Matches(labels.Set(nsLabels))
 }
 
 func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.RegistryImage) {
@@ -368,6 +485,13 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 
 				for _, po := range pods {
 					pod := po.(*corev1.Pod)
+
+					// Filter by namespace if selector is configured
+					if !p.isNamespaceAllowed(pod.Namespace) {
+						logrus.Tracef("Skipping pod %s/%s during initial sync - namespace not in allowed list", pod.Namespace, pod.Name)
+						continue
+					}
+
 					info := p.K8s.Client.ExtractPodInfos(*pod)
 					for _, c := range info.Containers {
 						allImages = append(allImages, c.Image)

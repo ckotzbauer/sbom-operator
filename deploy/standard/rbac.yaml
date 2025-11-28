@@ -11,10 +11,10 @@ rules:
 - apiGroups:
   - ""
   resources:
-  - pods
   - namespaces
   verbs:
   - list
+  - watch
 - apiGroups:
   - ""
   resources:
@@ -27,6 +27,7 @@ rules:
   - pods
   verbs:
   - get
+  - list
   - update
   - watch
 ---
