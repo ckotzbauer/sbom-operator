@@ -1,3 +1,17 @@
+## Version 0.39.0 (2025-11-28)
+
+### Features and improvements
+
+* [[`ab3d77ea`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ab3d77ea)] - **feat**: allow to specify a default DT parent project (#796)
+
+### Dependency updates
+
+* [[`31109f1d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/31109f1d)] - **deps**: update sigstore&#x2F;cosign-installer digest to dbac2a8 (#783)
+* [[`dee4b7f5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/dee4b7f5)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to a4bb9ff (#782)
+* [[`2632e803`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2632e803)] - **deps**: update github.com&#x2F;sirupsen&#x2F;logrus digest to b61f268 (#786)
+* [[`8c943155`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8c943155)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.34.2 (#785)
+
+
 ## Version 0.38.1 (2025-10-11)
 
 ### Bug fixes
