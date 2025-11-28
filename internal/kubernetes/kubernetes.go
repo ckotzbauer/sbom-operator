@@ -10,7 +10,9 @@ import (
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/apimachinery/pkg/api/errors"
 	meta "k8s.io/apimachinery/pkg/apis/meta/v1"
+	"k8s.io/apimachinery/pkg/runtime"
 	"k8s.io/apimachinery/pkg/types"
+	"k8s.io/apimachinery/pkg/watch"
 	"k8s.io/client-go/tools/cache"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
@@ -64,6 +66,45 @@ func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cach
 				},
 				Spec: corev1.PodSpec{
 					ImagePullSecrets: pod.Spec.ImagePullSecrets,
+				},
+			},
+			nil
+	})
+
+	return informer, err
+}
+
+func (client *KubeClient) StartNamespaceInformer(namespaceLabelSelector string, handler cache.ResourceEventHandlerFuncs) (cache.SharedIndexInformer, error) {
+	// Create a namespace informer manually using the client-go library
+	informer := cache.NewSharedIndexInformer(
+		&cache.ListWatch{
+			ListFunc: func(options meta.ListOptions) (runtime.Object, error) {
+				options.LabelSelector = namespaceLabelSelector
+				return client.Client.Client.CoreV1().Namespaces().List(context.Background(), options)
+			},
+			WatchFunc: func(options meta.ListOptions) (watch.Interface, error) {
+				options.LabelSelector = namespaceLabelSelector
+				return client.Client.Client.CoreV1().Namespaces().Watch(context.Background(), options)
+			},
+		},
+		&corev1.Namespace{},
+		0, // No resync period
+		cache.Indexers{},
+	)
+
+	_, err := informer.AddEventHandler(handler)
+	if err != nil {
+		return nil, err
+	}
+
+	err = informer.SetTransform(func(x interface{}) (interface{}, error) {
+		ns := x.(*corev1.Namespace).DeepCopy()
+		logrus.Tracef("Transform namespace %s", ns.Name)
+
+		return &corev1.Namespace{
+				ObjectMeta: meta.ObjectMeta{
+					Name:   ns.Name,
+					Labels: ns.Labels,
 				},
 			},
 			nil
