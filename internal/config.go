@@ -26,6 +26,7 @@ type Config struct {
 	DtrackCaCertFile                 string   `yaml:"dtrackCaCertFile" env:"SBOM_DTRACK_CA_CERT_FILE" flag:"dtrack-ca-cert-file"`
 	DtrackClientCertFile             string   `yaml:"dtrackClientCertFile" env:"SBOM_DTRACK_CLIENT_CERT_FILE" flag:"dtrack-client-cert-file"`
 	DtrackClientKeyFile              string   `yaml:"dtrackClientKeyFile" env:"SBOM_DTRACK_CLIENT_KEY_FILE" flag:"dtrack-client-key-file"`
+	DtrackDefaultParentProject       string   `yaml:"dtrackDefaultParentProject" env:"SBOM_DTRACK_DEFAULT_PARENT_PROJECT" flag:"dtrack-default-parent-project"`
 	DtrackParentProjectAnnotationKey string   `yaml:"dtrackParentProjectAnnotationKey" env:"SBOM_DTRACK_PARENT_PROJECT_ANNOTATION_KEY" flag:"dtrack-parent-project-annotation-key"`
 	DtrackProjectNameAnnotationKey   string   `yaml:"dtrackProjectNameAnnotationKey" env:"SBOM_DTRACK_PROJECT_NAME_ANNOTATION_KEY" flag:"dtrack-project-name-annotation-key"`
 	KubernetesClusterId              string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
@@ -66,6 +67,7 @@ var (
 	ConfigKeyDependencyTrackCaCertFile                       = "dtrack-ca-cert-file"
 	ConfigKeyDependencyTrackClientCertFile                   = "dtrack-client-cert-file"
 	ConfigKeyDependencyTrackClientKeyFile                    = "dtrack-client-key-file"
+	ConfigKeyDefaultParentProject                            = "dtrack-default-parent-project"
 	ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey = "dtrack-parent-project-annotation-key"
 	ConfigKeyDependencyTrackDtrackProjectNameAnnotationKey   = "dtrack-project-name-annotation-key"
 	ConfigKeyKubernetesClusterId                             = "kubernetes-cluster-id"
