@@ -7,7 +7,7 @@ require (
 	github.com/anchore/stereoscope v0.1.13
 	github.com/anchore/syft v1.34.2
 	github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5
-	github.com/ckotzbauer/libstandard v0.0.0-20250801065007-0dacc563548a
+	github.com/ckotzbauer/libstandard v0.0.0-20251101051505-f074bcc5daaf
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0

@@ -310,6 +310,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5 h1:GqBcvMr9K8
 github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5/go.mod h1:M3sLlJekzkE232tRiFa7AGSTX9jache7h4Si4gX8Zd4=
 github.com/ckotzbauer/libstandard v0.0.0-20250801065007-0dacc563548a h1:DAdamDRUxFnGKyRafzfALDyt23Xi/1gHR75o4/sfWSM=
 github.com/ckotzbauer/libstandard v0.0.0-20250801065007-0dacc563548a/go.mod h1:FAO2AVp8WDEpTE6Iyx4tSOm8i/66xDqNxeLB31bf2Mg=
+github.com/ckotzbauer/libstandard v0.0.0-20251101051505-f074bcc5daaf h1:4JXjf578tZBtvFXc/ZcCPIfi1fPuiPIY23AuLgtyZZM=
+github.com/ckotzbauer/libstandard v0.0.0-20251101051505-f074bcc5daaf/go.mod h1:EFmP+3zSkESgkKRCuzGon37wAHKp+bmqs5qtlIejg5U=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/clipperhouse/uax29/v2 v2.2.0 h1:ChwIKnQN3kcZteTXMgb1wztSgaU+ZemkgWdohwgs8tY=
 github.com/clipperhouse/uax29/v2 v2.2.0/go.mod h1:EFJ2TJMRUaplDxHKj1qAEhCtQPW2tJSwu5BF98AuoVM=
