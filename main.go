@@ -83,6 +83,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDefaultParentProject, "", "Dependency-Track: Dependency-Track: Default parent project UUID")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey, "", "Dependency-Track: kubernetes annotation-key for setting parent project")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackProjectNameAnnotationKey, "", "Dependency-Track: kubernetes annotation-key for setting custom project name")
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDependencyTrackUseShortName, false, "Dependency-Track: use short image name (without registry) for project names")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyKubernetesClusterId, "default", "Kubernetes Cluster ID")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImage, "", "Custom Job-Image")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyJobImagePullSecret, "", "Custom Job-Image-Pull-Secret")
