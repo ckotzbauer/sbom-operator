@@ -53,7 +53,7 @@ func (s Syft) WithSyftVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
+func (s *Syft) GetSBOM(img *oci.RegistryImage) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	oriImage := img.Image
