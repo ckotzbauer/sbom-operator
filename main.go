@@ -36,6 +36,8 @@ func initSource() (sources.SBOMSource, error) {
 
 	if sourceOption == "syft" {
 		return syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version), nil
+	} else if sourceOption == "cosign" {
+		return cosign.New(), nil
 	} else {
 		return nil, fmt.Errorf("unknown source option `%s` provided", sourceOption)
 	}
