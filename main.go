@@ -12,8 +12,6 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/processor"
 	"github.com/ckotzbauer/sbom-operator/internal/sources"
-	"github.com/ckotzbauer/sbom-operator/internal/sources/cosign"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
@@ -26,22 +24,6 @@ var (
 	Date    = ""
 	BuiltBy = ""
 )
-
-func initSource() (sources.SBOMSource, error) {
-	sourceOption := internal.OperatorConfig.Source
-	// set syft as default source
-	if sourceOption == "" {
-		sourceOption = "syft"
-	}
-
-	if sourceOption == "syft" {
-		return syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version), nil
-	} else if sourceOption == "cosign" {
-		return cosign.New(), nil
-	} else {
-		return nil, fmt.Errorf("unknown source option `%s` provided", sourceOption)
-	}
-}
 
 func newRootCmd() *cobra.Command {
 	rootCmd := &cobra.Command{
@@ -58,7 +40,7 @@ func newRootCmd() *cobra.Command {
 				daemon.Start(internal.OperatorConfig.Cron, Version)
 			} else {
 				k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-				source, err := initSource()
+				source, err := sources.InitSource(Version)
 				if err != nil {
 					logrus.Fatal(err)
 				}

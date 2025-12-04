@@ -8,7 +8,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/processor"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources"
 	"github.com/robfig/cron"
 	"github.com/sirupsen/logrus"
 )
@@ -25,14 +25,17 @@ func Start(cronTime string, appVersion string) {
 	logrus.Debugf("Cron set to: %v", cr)
 
 	k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-	sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), appVersion)
+	sy, err := sources.InitSource(appVersion)
+	if err != nil {
+		logrus.Fatal(err)
+	}
 	processor := processor.New(k8s, sy)
 
 	cs := CronService{cron: cr, processor: processor}
 	cs.printNextExecution()
 
 	c := cron.New()
-	err := c.AddFunc(cr, func() { cs.runBackgroundService() })
+	err = c.AddFunc(cr, func() { cs.runBackgroundService() })
 	if err != nil {
 		logrus.WithError(err).Fatal("Could not configure cron")
 	}
