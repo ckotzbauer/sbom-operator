@@ -7,7 +7,7 @@ import (
 	"github.com/ckotzbauer/libstandard"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/sources/cosign"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources/syft"
 )
 
 type SBOMSource interface {

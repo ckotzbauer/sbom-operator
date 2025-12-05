@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources/syft"
 	"github.com/stretchr/testify/assert"
 	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
 )
