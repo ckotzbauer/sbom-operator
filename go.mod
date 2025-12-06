@@ -12,7 +12,7 @@ require (
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
 	github.com/sirupsen/logrus v1.9.4-0.20251023124752-b61f268f75b6
-	github.com/spf13/cobra v1.10.1
+	github.com/spf13/cobra v1.10.2
 	github.com/stretchr/testify v1.11.1
 	golang.org/x/exp v0.0.0-20251125195548-87e1e737ad39
 	k8s.io/api v0.34.2
