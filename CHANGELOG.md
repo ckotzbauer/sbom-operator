@@ -1,3 +1,34 @@
+## Version 0.40.0 (2025-12-06)
+
+### Features and improvements
+
+* [[`6c009d1c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6c009d1c)] - **feat**: add timezone data into image (#806)
+* [[`9002d489`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9002d489)] - **feat**: namespace label in Informer mode (#801)
+* [[`f2b89f02`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f2b89f02)] - **feat**: add useShortName option to put short name without registry to dtrack (#800)
+
+### Build and testing
+
+* [[`62647970`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/62647970)] - **build**: updated golang and actions
+
+### Dependency updates
+
+* [[`bdecf4ca`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bdecf4ca)] - **deps**: update actions&#x2F;checkout digest to 8e8c483 (#802)
+* [[`d678b043`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d678b043)] - **deps**: update sigstore&#x2F;cosign-installer digest to 29bcfa8 (#803)
+* [[`cf9efd05`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cf9efd05)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.20.7 (#804)
+* [[`b453216b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b453216b)] - **deps**: update module github.com&#x2F;spf13&#x2F;cobra to v1.10.2 (#807)
+* [[`2a4ce3cb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2a4ce3cb)] - **deps**: update alpine docker tag to v3.23 (#808)
+* [[`4c5d3460`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4c5d3460)] - **deps**: update module golang.org&#x2F;x&#x2F;oauth2 to v0.33.0 (#779)
+* [[`277f908e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/277f908e)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 87e1e73 (#794)
+* [[`eca22657`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/eca22657)] - **deps**: update module modernc.org&#x2F;sqlite to v1.40.1 (#791)
+* [[`2df4b56c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2df4b56c)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to f074bcc (#788)
+* [[`2d8db100`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2d8db100)] - **deps**: update actions&#x2F;checkout digest to 1af3b93 (#789)
+* [[`9c54d2d0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9c54d2d0)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.13 (#790)
+* [[`57263171`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/57263171)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd to v1.7.29 [security] (#792)
+* [[`ab7ba5d0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ab7ba5d0)] - **deps**: update module github.com&#x2F;opencontainers&#x2F;selinux to v1.13.0 [security] (#793)
+* [[`b1848060`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b1848060)] - **deps**: update kubernetes versions to v0.34.2 (#795)
+* [[`8e86e0b8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8e86e0b8)] - **deps**: update module golang.org&#x2F;x&#x2F;crypto to v0.45.0 [security] (#798)
+
+
 ## Version 0.39.0 (2025-11-28)
 
 ### Features and improvements
