@@ -2,6 +2,7 @@ package sources
 
 import (
 	"fmt"
+	"strings"
 
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/libstandard"
@@ -21,11 +22,27 @@ func InitSource(appVersion string) (SBOMSource, error) {
 		sourceOption = "syft"
 	}
 
-	if sourceOption == "syft" {
-		return syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), appVersion), nil
-	} else if sourceOption == "cosign" {
-		return cosign.New(), nil
-	} else {
-		return nil, fmt.Errorf("unknown source option `%s` provided", sourceOption)
+	// multiple sources are supported, they are separated by ","
+	sources := strings.Split(sourceOption, ",")
+	multiSBOMSource := &MultiSBOMSource{}
+
+	for _, sourceKey := range sources {
+		switch sourceKey {
+		case "syft":
+			multiSBOMSource.AddSBOMSource(
+				sourceKey,
+				syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), appVersion),
+			)
+		case "cosign":
+			multiSBOMSource.AddSBOMSource(
+				sourceKey,
+				cosign.New(),
+			)
+		default:
+			return nil, fmt.Errorf("unknown source option `%s` provided", sourceOption)
+		}
+
 	}
+
+	return multiSBOMSource, nil
 }

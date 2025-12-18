@@ -64,7 +64,7 @@ func newRootCmd() *cobra.Command {
 	libstandard.AddVerbosityFlag(rootCmd)
 	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "", "Backround-Service interval (CRON)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormat, "json", "SBOM-Format.")
-	rootCmd.PersistentFlags().String(internal.ConfigKeySource, "syft", "The source of the SBOM.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeySource, "syft", "The source of the SBOM. Multiple sources can be specified separated with a comma and they will be used until the first source provides a SBOM.")
 	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeyTargets, []string{"git"}, "Targets for created SBOMs (git, dtrack, oci, configmap).")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyIgnoreAnnotations, false, "Force analyzing of all images, including those from annotated pods.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitWorkingTree, "/work", "Directory to place the git-repo.")
