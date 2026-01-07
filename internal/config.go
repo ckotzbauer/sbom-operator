@@ -31,6 +31,7 @@ type Config struct {
 	DtrackProjectNameAnnotationKey   string   `yaml:"dtrackProjectNameAnnotationKey" env:"SBOM_DTRACK_PROJECT_NAME_ANNOTATION_KEY" flag:"dtrack-project-name-annotation-key"`
 	DtrackUseShortName               bool     `yaml:"dtrackUseShortName" env:"SBOM_DTRACK_USE_SHORT_NAME" flag:"dtrack-use-short-name"`
 	KubernetesClusterId              string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
+	KubernetesCommonPrefix           string   `yaml:"kubernetesCommonPrefix" env:"SBOM_KUBERNETES_COMMON_PREFIX" flag:"kubernetes-common-prefix"`
 	JobImage                         string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
 	JobImagePullSecret               string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
 	JobTimeout                       int64    `yaml:"jobTimeout" env:"SBOM_JOB_TIMEOUT" flag:"job-timeout"`
