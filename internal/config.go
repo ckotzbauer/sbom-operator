@@ -30,8 +30,8 @@ type Config struct {
 	DtrackParentProjectAnnotationKey string   `yaml:"dtrackParentProjectAnnotationKey" env:"SBOM_DTRACK_PARENT_PROJECT_ANNOTATION_KEY" flag:"dtrack-parent-project-annotation-key"`
 	DtrackProjectNameAnnotationKey   string   `yaml:"dtrackProjectNameAnnotationKey" env:"SBOM_DTRACK_PROJECT_NAME_ANNOTATION_KEY" flag:"dtrack-project-name-annotation-key"`
 	DtrackUseShortName               bool     `yaml:"dtrackUseShortName" env:"SBOM_DTRACK_USE_SHORT_NAME" flag:"dtrack-use-short-name"`
+	DtrackKubernetesClusterIdMode    string   `yaml:"dtrackKubernetesClusterIdMode" env:"SBOM_DTRACK_KUBERNETES_CLUSTER_ID_MODE" flag:"dtrack-kubernetes-cluster-id-mode"`
 	KubernetesClusterId              string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
-	KubernetesCommonPrefix           string   `yaml:"kubernetesCommonPrefix" env:"SBOM_KUBERNETES_COMMON_PREFIX" flag:"kubernetes-common-prefix"`
 	JobImage                         string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
 	JobImagePullSecret               string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
 	JobTimeout                       int64    `yaml:"jobTimeout" env:"SBOM_JOB_TIMEOUT" flag:"job-timeout"`
@@ -70,6 +70,7 @@ var (
 	ConfigKeyDependencyTrackClientCertFile                   = "dtrack-client-cert-file"
 	ConfigKeyDependencyTrackClientKeyFile                    = "dtrack-client-key-file"
 	ConfigKeyDefaultParentProject                            = "dtrack-default-parent-project"
+	ConfigKeyDependencyTrackDtrackKubernetesClusterIdMode    = "dtrack-kubernetes-cluster-id-mode"
 	ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey = "dtrack-parent-project-annotation-key"
 	ConfigKeyDependencyTrackDtrackProjectNameAnnotationKey   = "dtrack-project-name-annotation-key"
 	ConfigKeyDependencyTrackUseShortName                     = "dtrack-use-short-name"

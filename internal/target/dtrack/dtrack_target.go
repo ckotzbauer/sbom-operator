@@ -29,7 +29,7 @@ type DependencyTrackTarget struct {
 	clientCertFile             string
 	clientKeyFile              string
 	k8sClusterId               string
-	k8sCommonPrefix            string
+	k8sClusterIdMode           string
 	useShortName               bool
 	imageProjectMap            map[string]uuid.UUID
 
@@ -43,7 +43,7 @@ const (
 	podNamespaceTagKey = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sCommonPrefix string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:                    baseUrl,
 		apiKey:                     apiKey,
@@ -52,7 +52,7 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 		clientCertFile:             clientCertFile,
 		clientKeyFile:              clientKeyFile,
 		k8sClusterId:               k8sClusterId,
-		k8sCommonPrefix:            k8sCommonPrefix,
+		k8sClusterIdMode:           k8sClusterIdMode,
 		defaultParentProject:       defaultParentProject,
 		parentProjectAnnotationKey: parentProjectAnnotationKey,
 		projectNameAnnotationKey:   projectNameAnnotationKey,
@@ -144,7 +144,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	// If projectNameAnnotationKey is not set or could not be parsed correctly, use image instead
 	if projectName == "" || version == "" {
-		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName, g.k8sCommonPrefix)
+		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName, g.k8sClusterId, g.k8sClusterIdMode)
 	}
 
 	if ctx.Sbom == "" {
@@ -178,9 +178,16 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	}
 
 	kubernetesClusterTag := kubernetesCluster + "=" + g.k8sClusterId
-	if !containsTag(project.Tags, kubernetesClusterTag) {
-		project.Tags = append(project.Tags, dtrack.Tag{Name: kubernetesClusterTag})
+	if g.k8sClusterIdMode == "tag" {
+		if !containsTag(project.Tags, kubernetesClusterTag) {
+			project.Tags = append(project.Tags, dtrack.Tag{Name: kubernetesClusterTag})
+		}
+	} else {
+		if containsTag(project.Tags, kubernetesClusterTag) {
+			project.Tags = removeTag(project.Tags, kubernetesClusterTag)
+		}
 	}
+
 	if !containsTag(project.Tags, sbomOperator) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: sbomOperator})
 	}
@@ -294,8 +301,14 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 			sbomOperatorPropFound := false
 			imageRelatesToCluster := false
 			imageId = ""
+
+			//extend lookup logic to support `prefix` mode to resolve image association
+			if g.k8sClusterIdMode == "prefix" {
+				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId)
+			}
+
 			for _, tag := range project.Tags {
-				if strings.Index(tag.Name, kubernetesCluster) == 0 {
+				if g.k8sClusterIdMode == "tag" && strings.Index(tag.Name, kubernetesCluster) == 0 {
 					clusterId := string(tag.Name[len(kubernetesCluster)+1:])
 					if clusterId == g.k8sClusterId {
 						imageRelatesToCluster = true
@@ -354,10 +367,32 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) error {
 			continue
 		}
 
-		// check all tags, remove the current cluster and aggregate a list of other clusters
 		currentImageName := fmt.Sprintf("%v:%v", project.Name, project.Version)
 		otherClusterIds := []string{}
 		sbomOperatorPropFound := false
+
+		for _, tag := range project.Tags {
+			if tag.Name == sbomOperator {
+				sbomOperatorPropFound = true
+			}
+		}
+
+		if !sbomOperatorPropFound {
+			continue
+		}
+
+		if g.k8sClusterIdMode != "tag" {
+			// Prefix mode: dt-projects are cluster-specific by name. These are safe to be deleted.
+			logrus.Infof("Image not running in any cluster - removing %v", currentImageName)
+			err := client.Project.Delete(context.Background(), project.UUID)
+			delete(g.imageProjectMap, img.ImageID)
+			if err != nil {
+				logrus.WithError(err).Warnf("Project %s could not be deleted", project.UUID.String())
+			}
+			continue
+		}
+
+		// Tag mode: check all tags, remove the current cluster and aggregate a list of other clusters
 		for _, tag := range project.Tags {
 			if strings.Index(tag.Name, kubernetesCluster) == 0 {
 				clusterId := string(tag.Name[len(kubernetesCluster)+1:])
@@ -373,13 +408,10 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) error {
 					otherClusterIds = append(otherClusterIds, clusterId)
 				}
 			}
-			if tag.Name == sbomOperator {
-				sbomOperatorPropFound = true
-			}
 		}
 
 		// if not in other cluster delete the project
-		if sbomOperatorPropFound && len(otherClusterIds) == 0 {
+		if len(otherClusterIds) == 0 {
 			logrus.Infof("Image not running in any cluster - removing %v", currentImageName)
 			err := client.Project.Delete(context.Background(), project.UUID)
 			delete(g.imageProjectMap, img.ImageID)
@@ -430,7 +462,7 @@ func removeTag(tags []dtrack.Tag, tagString string) []dtrack.Tag {
 	return newTags
 }
 
-func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sCommonPrefix string) (string, string) {
+func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClusterId string, k8sClusterIdMode string) (string, string) {
 	imageRef, err := parser.Parse(image.ImageID)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", image.ImageID)
@@ -439,8 +471,8 @@ func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sCommo
 
 	var projectName string
 	if useShortName {
-		if k8sCommonPrefix != "" {
-			projectName = k8sCommonPrefix
+		if k8sClusterIdMode == "prefix" {
+			projectName = k8sClusterId + "-"
 		}
 		projectName += imageRef.ShortName()
 	} else {
