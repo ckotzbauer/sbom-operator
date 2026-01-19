@@ -29,7 +29,7 @@ func (c *Cosign) GetSBOM(img *oci.RegistryImage) (string, error) {
 	builder := new(strings.Builder)
 	err := download.AttestationCmd(context.Background(), opt, atopt, img.ImageID, builder)
 	if err != nil {
-		logrus.Warn("Error downloading attestation", err)
+		logrus.Warn("error downloading attestation", err)
 		return "", err
 	}
 
@@ -39,7 +39,7 @@ func (c *Cosign) GetSBOM(img *oci.RegistryImage) (string, error) {
 	var protoBundle protobundle.Bundle
 	err = protojson.Unmarshal([]byte(builder.String()), &protoBundle)
 	if err != nil {
-		logrus.Warn("Error parsing attestation", err)
+		logrus.Warn("error parsing attestation", err)
 		return "", err
 	}
 
@@ -50,19 +50,19 @@ func (c *Cosign) GetSBOM(img *oci.RegistryImage) (string, error) {
 	var attestationPayload in_toto.SPDXStatement
 	err = json.Unmarshal(protoBundle.GetDsseEnvelope().Payload, &attestationPayload)
 	if err != nil {
-		logrus.Warn("Error parsing attestation", err)
+		logrus.Warn("error parsing attestation", err)
 		return "", err
 	}
 
 	predicateMap, ok := attestationPayload.Predicate.(map[string]interface{})
 	if !ok {
-		logrus.Warn("Error parsing attestation")
+		logrus.Warn("error parsing attestation")
 		return "", nil
 	}
 
 	predicateBytes, err := json.Marshal(predicateMap)
 	if err != nil {
-		logrus.Warn("Error marshaling predicate", err)
+		logrus.Warn("error marshaling predicate", err)
 		return "", err
 	}
 

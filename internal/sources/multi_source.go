@@ -23,11 +23,11 @@ func (s MultiSBOMSource) GetSBOM(img *oci.RegistryImage) (string, error) {
 	for sourceKey, v := range s.sources {
 		sbom, err := v.GetSBOM(img)
 		if err != nil {
-			logrus.Warnf("Source %s did not find an appropriate SBOM. See Error above.", sourceKey)
+			logrus.Warnf("source %s did not find an appropriate SBOM. See Error above.", sourceKey)
 		} else {
 			return sbom, nil
 		}
 	}
 
-	return "", fmt.Errorf("Could not find an SBOM for image %s", img.ImageID)
+	return "", fmt.Errorf("could not find an SBOM for image %s", img.ImageID)
 }
