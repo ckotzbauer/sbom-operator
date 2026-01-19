@@ -11,7 +11,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/job"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/ckotzbauer/sbom-operator/internal/target/configmap"
 	"github.com/ckotzbauer/sbom-operator/internal/target/dtrack"
@@ -26,14 +26,14 @@ import (
 
 type Processor struct {
 	K8s               *kubernetes.KubeClient
-	sy                *syft.Syft
+	sy                sources.SBOMSource
 	Targets           []target.Target
 	imageMap          map[string]bool
 	allowedNamespaces map[string]bool
 	namespaceMutex    sync.RWMutex
 }
 
-func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
+func New(k8s *kubernetes.KubeClient, sy sources.SBOMSource) *Processor {
 	targets := make([]target.Target, 0)
 	if !HasJobImage() {
 		logrus.Debugf("Targets set to: %v", internal.OperatorConfig.Targets)
@@ -207,7 +207,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		}
 
 		p.imageMap[container.Image.ImageID] = true
-		sbom, err := p.sy.ExecuteSyft(container.Image)
+		sbom, err := p.sy.GetSBOM(container.Image)
 		if err != nil {
 			// Error is already handled from syft module.
 			continue

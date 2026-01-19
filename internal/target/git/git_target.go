@@ -10,7 +10,7 @@ import (
 	"github.com/ckotzbauer/libk8soci/pkg/git"
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/sirupsen/logrus"
 )

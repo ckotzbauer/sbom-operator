@@ -8,7 +8,7 @@ import (
 	"testing"
 
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources/syft"
 	"github.com/stretchr/testify/assert"
 	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
 )
@@ -68,7 +68,7 @@ func writeErroredSbom(t *testing.T, assertResult bool, data, name, format string
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
 	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, err := s.GetSBOM(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 
 	assert.NoError(t, err)
 
@@ -96,7 +96,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, err := s.GetSBOM(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput
@@ -117,7 +117,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
 	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, err := s.GetSBOM(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftSpdxOutput
@@ -145,7 +145,7 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, err := s.GetSBOM(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput

@@ -11,7 +11,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/daemon"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/ckotzbauer/sbom-operator/internal/processor"
-	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/ckotzbauer/sbom-operator/internal/sources"
 	"github.com/sirupsen/logrus"
 	"github.com/spf13/cobra"
 	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
@@ -40,8 +40,11 @@ func newRootCmd() *cobra.Command {
 				daemon.Start(internal.OperatorConfig.Cron, Version)
 			} else {
 				k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version)
-				p := processor.New(k8s, sy)
+				source, err := sources.InitSource(Version)
+				if err != nil {
+					logrus.Fatal(err)
+				}
+				p := processor.New(k8s, source)
 				p.ListenForPods()
 			}
 
@@ -61,6 +64,7 @@ func newRootCmd() *cobra.Command {
 	libstandard.AddVerbosityFlag(rootCmd)
 	rootCmd.PersistentFlags().String(internal.ConfigKeyCron, "", "Backround-Service interval (CRON)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormat, "json", "SBOM-Format.")
+	rootCmd.PersistentFlags().String(internal.ConfigKeySource, "syft", "The source of the SBOM. Multiple sources can be specified separated with a comma and they will be used until the first source provides a SBOM.")
 	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeyTargets, []string{"git"}, "Targets for created SBOMs (git, dtrack, oci, configmap).")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyIgnoreAnnotations, false, "Force analyzing of all images, including those from annotated pods.")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyGitWorkingTree, "/work", "Directory to place the git-repo.")

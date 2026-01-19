@@ -3,6 +3,7 @@ package internal
 type Config struct {
 	Cron                             string   `yaml:"cron" env:"SBOM_CRON" flag:"cron"`
 	Format                           string   `yaml:"format" env:"SBOM_FORMAT" flag:"format"`
+	Source                           string   `yaml:"source" env:"SBOM_SOURCE" flag:"source"`
 	Targets                          []string `yaml:"targets" env:"SBOM_TARGETS" flag:"targets"`
 	IgnoreAnnotations                bool     `yaml:"ignoreAnnotations" env:"SBOM_IGNORE_ANNOTATIONS" flag:"ignore-annotations"`
 	GitWorkingTree                   string   `yaml:"gitWorkingTree" env:"SBOM_GIT_WORKINGTREE" flag:"git-workingtree"`
@@ -45,6 +46,7 @@ type Config struct {
 var (
 	ConfigKeyCron                    = "cron"
 	ConfigKeyFormat                  = "format"
+	ConfigKeySource                  = "source"
 	ConfigKeyTargets                 = "targets"
 	ConfigKeyIgnoreAnnotations       = "ignore-annotations"
 	ConfigKeyGitWorkingTree          = "git-workingtree"
