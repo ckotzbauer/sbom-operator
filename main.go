@@ -81,6 +81,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackApiKey, "", "Dependency-Track API key")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackLabelTagMatcher, "", "Dependency-Track Pod-Label-Tag matcher regex")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDefaultParentProject, "", "Dependency-Track: Dependency-Track: Default parent project UUID")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackKubernetesClusterIdMode, "tag", "Dependency-Track: Kubernetes Cluster ID mode (tag|prefix)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey, "", "Dependency-Track: kubernetes annotation-key for setting parent project")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackProjectNameAnnotationKey, "", "Dependency-Track: kubernetes annotation-key for setting custom project name")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDependencyTrackUseShortName, false, "Dependency-Track: use short image name (without registry) for project names")

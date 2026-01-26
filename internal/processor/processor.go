@@ -258,9 +258,10 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			clientCertFile := internal.OperatorConfig.DtrackClientCertFile
 			clientKeyFile := internal.OperatorConfig.DtrackClientKeyFile
 			k8sClusterId := internal.OperatorConfig.KubernetesClusterId
+			k8sClusterIdMode := internal.OperatorConfig.DtrackKubernetesClusterIdMode
 			defaultParentProject := internal.OperatorConfig.DtrackDefaultParentProject
 			useShortName := internal.OperatorConfig.DtrackUseShortName
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName)
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {
