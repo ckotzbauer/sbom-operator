@@ -4,7 +4,7 @@ go 1.25.5
 
 require (
 	github.com/DependencyTrack/client-go v0.18.0
-	github.com/anchore/stereoscope v0.1.18
+	github.com/anchore/stereoscope v0.1.19
 	github.com/anchore/syft v1.40.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20250406121731-c37ef6659ff5
 	github.com/ckotzbauer/libstandard v0.0.0-20260101092638-f0410f1718ab
@@ -125,7 +125,7 @@ require (
 	github.com/deitch/magic v0.0.0-20240306090643-c67ab88f10cb // indirect
 	github.com/diskfs/go-diskfs v1.7.0 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/cli v29.1.4+incompatible // indirect
+	github.com/docker/cli v29.1.5+incompatible // indirect
 	github.com/docker/distribution v2.8.3+incompatible // indirect
 	github.com/docker/docker v28.5.2+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.4 // indirect
