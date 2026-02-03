@@ -127,6 +127,7 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-client-key-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Key filepath when using mTLS to connect to dtrack |
 | `dtrack-default-parent-project` | `false` | `""` | The default parent project UUID that should be used. This is overwritten in case a parent project annotation is set and found |
 | `dtrack-use-short-name` | `false` | `""` | Use short image name (without registry) for project names |
+| `dtrack-kubernetes-cluster-id-mode`| `false`| `"tag"` | Mode for using the kubernetes-cluster-id. Options: tag (adds cluster ID as a project tag) or prefix (prefixes the project name with the cluster ID). |
 | `dtrack-parent-project-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set parent project automatically, e.g. "my.pod.annotation" |
 | `dtrack-project-name-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set custom dtrack project name automatically, e.g. "my.pod.annotation" |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
