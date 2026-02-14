@@ -180,6 +180,8 @@ github.com/anchore/stereoscope v0.1.18 h1:Mj34pRtxwfdFJkYKtKjiO9Xn7qs0RTCi59ofRY
 github.com/anchore/stereoscope v0.1.18/go.mod h1:y8P4BURfBj0DVRly9cPHsSuZdI/AsZs3ee/x/HusEe4=
 github.com/anchore/stereoscope v0.1.19 h1:1G5LVmRN1Sz6qNezpVAEeN7QfWwCE9zw9TJK1ZGnkvw=
 github.com/anchore/stereoscope v0.1.19/go.mod h1:+laNHlk05xA2YqgEzq8mxkFzclL3NRdeNIsiQQVeZZ4=
+github.com/anchore/stereoscope v0.1.20 h1:32720yZ/YtvzF5tvsoRL/ibdAJzOdIaR444fDXW4arQ=
+github.com/anchore/stereoscope v0.1.20/go.mod h1:6Ef0xQAuN2Ito7eV9A9pYjD1x/0cX5fy56MwgEGyrB4=
 github.com/anchore/syft v1.34.2 h1:q7Zr5I624MaU20wfwzidTtHi8nqS8MzrJGGcIvEAWsI=
 github.com/anchore/syft v1.34.2/go.mod h1:J9fOxYe2o9I5sML6ntNF2uiPYZ+vwcWVPM26tCSyf3M=
 github.com/anchore/syft v1.38.2 h1:SMTvnJerKmWO6rjH+yBOYKvZdGgj8rmEoNWO5FWeik8=
@@ -303,6 +305,8 @@ github.com/bmatcuk/doublestar/v4 v4.9.1 h1:X8jg9rRZmJd4yRy7ZeNDRnM+T3ZfHv15JiBJ/
 github.com/bmatcuk/doublestar/v4 v4.9.1/go.mod h1:xBQ8jztBU6kakFMg+8WGxn0c6z1fTSPVIjEY1Wr7jzc=
 github.com/bmatcuk/doublestar/v4 v4.9.2 h1:b0mc6WyRSYLjzofB2v/0cuDUZ+MqoGyH3r0dVij35GI=
 github.com/bmatcuk/doublestar/v4 v4.9.2/go.mod h1:xBQ8jztBU6kakFMg+8WGxn0c6z1fTSPVIjEY1Wr7jzc=
+github.com/bmatcuk/doublestar/v4 v4.10.0 h1:zU9WiOla1YA122oLM6i4EXvGW62DvKZVxIe6TYWexEs=
+github.com/bmatcuk/doublestar/v4 v4.10.0/go.mod h1:xBQ8jztBU6kakFMg+8WGxn0c6z1fTSPVIjEY1Wr7jzc=
 github.com/bodgit/plumbing v1.3.0 h1:pf9Itz1JOQgn7vEOE7v7nlEfBykYqvUYioC61TwWCFU=
 github.com/bodgit/plumbing v1.3.0/go.mod h1:JOTb4XiRu5xfnmdnDJo6GmSbSbtSyufrsyZFByMtKEs=
 github.com/bodgit/sevenzip v1.6.1 h1:kikg2pUMYC9ljU7W9SaqHXhym5HyKm8/M/jd31fYan4=
@@ -443,6 +447,8 @@ github.com/docker/cli v29.1.4+incompatible h1:AI8fwZhqsAsrqZnVv9h6lbexeW/LzNTasf
 github.com/docker/cli v29.1.4+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.1.5+incompatible h1:GckbANUt3j+lsnQ6eCcQd70mNSOismSHWt8vk2AX8ao=
 github.com/docker/cli v29.1.5+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.2.0+incompatible h1:9oBd9+YM7rxjZLfyMGxjraKBKE4/nVyvVfN4qNl9XRM=
+github.com/docker/cli v29.2.0+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaftjlSWt4AFexzM=
