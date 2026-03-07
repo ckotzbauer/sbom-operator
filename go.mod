@@ -4,7 +4,7 @@ go 1.25.5
 
 require (
 	github.com/DependencyTrack/client-go v0.18.0
-	github.com/anchore/stereoscope v0.1.19
+	github.com/anchore/stereoscope v0.1.20
 	github.com/anchore/syft v1.41.1
 	github.com/ckotzbauer/libk8soci v0.0.0-20260307151612-1beb131c210d
 	github.com/ckotzbauer/libstandard v0.0.0-20260201142830-9154854495bb
@@ -92,7 +92,7 @@ require (
 	github.com/bgentry/go-netrc v0.0.0-20140422174119-9fd32a8b3d3d // indirect
 	github.com/bitnami/go-version v0.0.0-20250916072751-cb23e8405957 // indirect
 	github.com/blakesmith/ar v0.0.0-20190502131153-809d4375e1fb // indirect
-	github.com/bmatcuk/doublestar/v4 v4.9.2 // indirect
+	github.com/bmatcuk/doublestar/v4 v4.10.0 // indirect
 	github.com/bodgit/plumbing v1.3.0 // indirect
 	github.com/bodgit/sevenzip v1.6.1 // indirect
 	github.com/bodgit/windows v1.0.1 // indirect
