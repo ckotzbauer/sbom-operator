@@ -13,9 +13,7 @@
       "reviewers": [
         "ckotzbauer"
       ],
-      "groupName": [
-        "Kubernetes versions"
-      ]
+      "groupName": "Kubernetes versions"
     }
   ]
 }
