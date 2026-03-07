@@ -20,4 +20,3 @@ jobs:
       coverage-file: cover.out
       build-image: true
       docker-tag: ghcr.io/ckotzbauer/sbom-operator:latest
-      scan-image: true
