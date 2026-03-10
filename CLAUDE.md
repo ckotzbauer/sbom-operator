@@ -12,26 +12,26 @@ The operator watches for pod changes via Kubernetes informers (real-time mode) o
 
 ## Tech Stack
 
-| Component | Details |
-|---|---|
-| Language | Go 1.25.6 |
-| CLI framework | `github.com/spf13/cobra` v1.10.2 |
-| Configuration | `github.com/ckotzbauer/libstandard` (struct tags: `yaml`, `env`, `flag`) |
-| Kubernetes client | `k8s.io/client-go` v0.35.0, `k8s.io/api` v0.35.0, `k8s.io/apimachinery` v0.35.0 |
-| Kubernetes helpers | `github.com/ckotzbauer/libk8soci` (pod/image extraction, git operations, OCI auth) |
-| SBOM generation | `github.com/anchore/syft` v1.42.1, `github.com/anchore/stereoscope` v0.1.20 |
-| Dependency Track client | `github.com/DependencyTrack/client-go` v0.18.0 |
-| OCI registry | `github.com/google/go-containerregistry` v0.21.2 |
-| Docker image parsing | `github.com/novln/docker-parser` v1.0.0 |
-| CRON scheduling | `github.com/robfig/cron` v1.2.0 |
-| Logging | `github.com/sirupsen/logrus` v1.9.4 |
-| Testing | `github.com/stretchr/testify` v1.11.1 |
-| SQLite (Syft RPM cataloging) | `modernc.org/sqlite` v1.44.3 |
-| GCP auth | `golang.org/x/oauth2/google` |
-| Build | GoReleaser v2 (`.goreleaser.yml`) |
-| Linting | golangci-lint v2.5.0, gosec v2.22.9 |
-| Signing | cosign (release artifacts and container images) |
-| Dependency management | Renovate (extends `ckotzbauer/renovate-config`) |
+| Component                    | Details                                                                            |
+| ---------------------------- | ---------------------------------------------------------------------------------- |
+| Language                     | Go 1.26.1                                                                          |
+| CLI framework                | `github.com/spf13/cobra` v1.10.2                                                   |
+| Configuration                | `github.com/ckotzbauer/libstandard` (struct tags: `yaml`, `env`, `flag`)           |
+| Kubernetes client            | `k8s.io/client-go` v0.35.0, `k8s.io/api` v0.35.0, `k8s.io/apimachinery` v0.35.0    |
+| Kubernetes helpers           | `github.com/ckotzbauer/libk8soci` (pod/image extraction, git operations, OCI auth) |
+| SBOM generation              | `github.com/anchore/syft` v1.42.1, `github.com/anchore/stereoscope` v0.1.20        |
+| Dependency Track client      | `github.com/DependencyTrack/client-go` v0.18.0                                     |
+| OCI registry                 | `github.com/google/go-containerregistry` v0.21.2                                   |
+| Docker image parsing         | `github.com/novln/docker-parser` v1.0.0                                            |
+| CRON scheduling              | `github.com/robfig/cron` v1.2.0                                                    |
+| Logging                      | `github.com/sirupsen/logrus` v1.9.4                                                |
+| Testing                      | `github.com/stretchr/testify` v1.11.1                                              |
+| SQLite (Syft RPM cataloging) | `modernc.org/sqlite` v1.44.3                                                       |
+| GCP auth                     | `golang.org/x/oauth2/google`                                                       |
+| Build                        | GoReleaser v2 (`.goreleaser.yml`)                                                  |
+| Linting                      | golangci-lint v2.5.0, gosec v2.22.9                                                |
+| Signing                      | cosign (release artifacts and container images)                                    |
+| Dependency management        | Renovate (extends `ckotzbauer/renovate-config`)                                    |
 
 ## Project Structure
 
@@ -130,6 +130,7 @@ For GCP Artifact Registry images (`*-docker.pkg.dev/*`), the operator automatica
 ### Configuration
 
 Configuration is loaded via `github.com/ckotzbauer/libstandard` with three binding layers:
+
 - CLI flags (highest priority)
 - Environment variables (prefixed `SBOM_`)
 - YAML config file
@@ -140,7 +141,7 @@ Key environment variables: `POD_NAMESPACE`, `POD_NAME`, `POD_UID` (used for Job 
 
 ### Prerequisites
 
-- Go 1.25.6+
+- Go 1.26.1+
 - GoReleaser v2
 - Docker (for test runner and container builds)
 - cosign, syft CLI (for release workflow)
@@ -170,6 +171,7 @@ make run
 ### Docker Image
 
 Multi-stage build (`Dockerfile`):
+
 1. `alpine:latest` stage: installs `ca-certificates` and `tzdata`
 2. `scratch` final stage: copies certs, timezone data, and the built binary
 3. Entrypoint: `/usr/local/bin/sbom-operator`
@@ -192,6 +194,7 @@ make test
 ```
 
 The `hack/run-tests.sh` script:
+
 1. Builds a timestamped Docker image and pushes to `ttl.sh` (ephemeral registry, 1h TTL)
 2. Generates an SBOM fixture using `syft`
 3. Runs `go test ./... -coverprofile cover.out`
@@ -199,16 +202,17 @@ The `hack/run-tests.sh` script:
 
 ### Test Files
 
-| Test file | What it tests |
-|---|---|
-| `internal/kubernetes/image_test.go` | Registry proxy mapping (`ApplyProxyRegistry`) |
-| `internal/syft/syft_test.go` | End-to-end SBOM generation against real images (alpine, redis, node, fedora) in JSON, CycloneDX XML, SPDX JSON formats. Uses fixture files for comparison. |
-| `internal/target/git/git_target_test.go` | `ImageIDToFilePath` conversion logic |
-| `internal/target/oci/oci_target_test.go` | OCI target integration test (requires `TEST_DIGEST` and `DATE` env vars) |
+| Test file                                | What it tests                                                                                                                                              |
+| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `internal/kubernetes/image_test.go`      | Registry proxy mapping (`ApplyProxyRegistry`)                                                                                                              |
+| `internal/syft/syft_test.go`             | End-to-end SBOM generation against real images (alpine, redis, node, fedora) in JSON, CycloneDX XML, SPDX JSON formats. Uses fixture files for comparison. |
+| `internal/target/git/git_target_test.go` | `ImageIDToFilePath` conversion logic                                                                                                                       |
+| `internal/target/oci/oci_target_test.go` | OCI target integration test (requires `TEST_DIGEST` and `DATE` env vars)                                                                                   |
 
 ### SBOM Format Test Coverage
 
 Tests validate output against fixtures for multiple formats:
+
 - Syft JSON (`json`)
 - CycloneDX XML (`cyclonedx`)
 - SPDX JSON (`spdxjson`)
@@ -253,16 +257,16 @@ All workflows use reusable workflows from `ckotzbauer/actions-toolkit`.
 
 ### Workflows
 
-| Workflow | Trigger | Purpose |
-|---|---|---|
-| `test.yml` | push, PR | Build (`make build`), test (`make test`), coverage report, Docker image build |
-| `code-checks.yml` | push, PR | golangci-lint (`make lint`) and gosec (`make lintsec`) |
-| `create-release.yml` | manual (`workflow_dispatch`) | GoReleaser release, multi-arch Docker image (amd64/arm64), cosign signing, VCN job image release |
-| `release-job-image.yml` | called by `create-release` | Build/push/sign job images, generate and attest SBOMs |
-| `stale.yml` | daily cron (`0 0 * * *`) | Mark stale issues/PRs |
-| `update-snyk.yml` | weekly Monday (`0 12 * * 1`) | Snyk monitoring scan |
-| `label-issues.yml` | issue comment | Label management via commands |
-| `size-label.yml` | PR | Automatic PR size labeling |
+| Workflow                | Trigger                      | Purpose                                                                                          |
+| ----------------------- | ---------------------------- | ------------------------------------------------------------------------------------------------ |
+| `test.yml`              | push, PR                     | Build (`make build`), test (`make test`), coverage report, Docker image build                    |
+| `code-checks.yml`       | push, PR                     | golangci-lint (`make lint`) and gosec (`make lintsec`)                                           |
+| `create-release.yml`    | manual (`workflow_dispatch`) | GoReleaser release, multi-arch Docker image (amd64/arm64), cosign signing, VCN job image release |
+| `release-job-image.yml` | called by `create-release`   | Build/push/sign job images, generate and attest SBOMs                                            |
+| `stale.yml`             | daily cron (`0 0 * * *`)     | Mark stale issues/PRs                                                                            |
+| `update-snyk.yml`       | weekly Monday (`0 12 * * 1`) | Snyk monitoring scan                                                                             |
+| `label-issues.yml`      | issue comment                | Label management via commands                                                                    |
+| `size-label.yml`        | PR                           | Automatic PR size labeling                                                                       |
 
 ### Release Process
 
