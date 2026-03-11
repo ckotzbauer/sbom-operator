@@ -208,10 +208,10 @@ func TestProcessSbomMinimal(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		if r.URL.Path == "/api/v1/project" {
-			w.Write([]byte("[]"))
+			_, _ = w.Write([]byte("[]"))
 			return
 		}
-		w.Write([]byte("{\"version\": \"4.8.0\", \"token\": \"uuid-token\", \"name\": \"alpine\", \"version\": \"3.14\", \"uuid\": \"8c940608-8e62-431a-ac5d-2092b7c41372\", \"totalCount\": 0}"))
+		_, _ = w.Write([]byte("{\"version\": \"4.8.0\", \"token\": \"uuid-token\", \"name\": \"alpine\", \"version\": \"3.14\", \"uuid\": \"8c940608-8e62-431a-ac5d-2092b7c41372\", \"totalCount\": 0}"))
 	}))
 	defer ts.Close()
 
@@ -226,7 +226,7 @@ func TestProcessSbomMinimal(t *testing.T) {
 		Sbom:      "{}",
 	}
 
-	g.ProcessSbom(ctx)
+	_ = g.ProcessSbom(ctx)
 }
 
 func TestRemoveMinimal(t *testing.T) {
@@ -234,10 +234,10 @@ func TestRemoveMinimal(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		if r.URL.Path == "/api/v1/project" {
-			w.Write([]byte("[]"))
+			_, _ = w.Write([]byte("[]"))
 			return
 		}
-		w.Write([]byte("{\"version\": \"4.8.0\", \"totalCount\": 0}"))
+		_, _ = w.Write([]byte("{\"version\": \"4.8.0\", \"totalCount\": 0}"))
 	}))
 	defer ts.Close()
 
@@ -249,7 +249,7 @@ func TestRemoveMinimal(t *testing.T) {
 		{ImageID: "alpine:3.14", Image: "alpine:3.14"},
 	}
 
-	g.Remove(images)
+	_ = g.Remove(images)
 }
 
 func TestLoadImagesTagMode(t *testing.T) {
@@ -257,18 +257,18 @@ func TestLoadImagesTagMode(t *testing.T) {
 		w.Header().Set("Content-Type", "application/json")
 		w.WriteHeader(http.StatusOK)
 		if r.URL.Path == "/api/v1/project" && r.Method == "GET" {
-			w.Write([]byte("[{\"name\": \"alpine\", \"version\": \"3.14\", \"tags\": [{\"name\": \"kubernetes-cluster=my-cluster\"}], \"uuid\": \"8c940608-8e62-431a-ac5d-2092b7c41372\"}]"))
+			_, _ = w.Write([]byte("[{\"name\": \"alpine\", \"version\": \"3.14\", \"tags\": [{\"name\": \"kubernetes-cluster=my-cluster\"}], \"uuid\": \"8c940608-8e62-431a-ac5d-2092b7c41372\"}]"))
 			return
 		}
 		if r.Method == "PATCH" {
-			w.Write([]byte("{}"))
+			_, _ = w.Write([]byte("{}"))
 			return
 		}
 		if r.URL.Path == "/api/v1/version" {
-			w.Write([]byte("{\"version\": \"4.8.0\"}"))
+			_, _ = w.Write([]byte("{\"version\": \"4.8.0\"}"))
 			return
 		}
-		w.Write([]byte("{\"totalCount\": 1}"))
+		_, _ = w.Write([]byte("{\"totalCount\": 1}"))
 	}))
 	defer ts.Close()
 
@@ -276,5 +276,5 @@ func TestLoadImagesTagMode(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	g.LoadImages()
+	_, _ = g.LoadImages()
 }

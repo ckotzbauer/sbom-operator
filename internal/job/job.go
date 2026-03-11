@@ -77,7 +77,7 @@ func (j JobClient) StartJob(pods []libk8s.PodInfo) (*batchv1.Job, error) {
 		}
 	}
 
-	bytes, err := json.Marshal(maps.Values(images))
+	bytes, err := json.Marshal(maps.Values(images)) /* #nosec G117 */
 	if err != nil {
 		logrus.WithError(err).Error("Error occurred during config-marshal")
 		return nil, err
