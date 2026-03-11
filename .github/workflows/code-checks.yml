@@ -8,7 +8,7 @@ on:
 
 jobs:
   gosec:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-lint.yml@4d43609588f06b292be03b3c2c39c8c9ee36abaf # 0.53.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-lint.yml@5eba4a9063c75ab16cc2c98722ea493f71159331 # 0.53.1
     with:
       install-go: true
       lint-commands: |
@@ -16,7 +16,7 @@ jobs:
         make lintsec
 
   golint:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-lint.yml@4d43609588f06b292be03b3c2c39c8c9ee36abaf # 0.53.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-lint.yml@5eba4a9063c75ab16cc2c98722ea493f71159331 # 0.53.1
     with:
       install-go: true
       lint-commands: |
