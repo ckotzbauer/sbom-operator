@@ -41,12 +41,11 @@ source:
 
 signs:
   - cmd: cosign
-    certificate: '${artifact}.pem'
+    signature: "\${artifact}.sigstore.json"
     args:
       - sign-blob
       - '-y'
-      - '--output-certificate=${certificate}'
-      - '--output-signature=${signature}'
+      - '--bundle=\${signature}'
       - '${artifact}'
     artifacts: all
     output: true
