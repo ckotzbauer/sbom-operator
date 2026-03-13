@@ -7,6 +7,12 @@ on:
         description: "Version"
         required: true
 
+permissions:
+  actions: read
+  contents: write
+  id-token: write
+  packages: write
+
 jobs:
   release:
     uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-release-goreleaser.yml@5eba4a9063c75ab16cc2c98722ea493f71159331 # 0.53.1

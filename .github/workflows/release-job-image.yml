@@ -34,6 +34,11 @@ on:
       ghcr-password:
         required: false
 
+permissions:
+  actions: read
+  contents: read
+  packages: read
+
 jobs:
   release-job-image:
     permissions:

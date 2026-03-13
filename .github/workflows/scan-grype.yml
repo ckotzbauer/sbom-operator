@@ -1,0 +1,22 @@
+name: scan-grype
+
+on:
+  schedule:
+    - cron: "0 12 * * 1"
+  workflow_dispatch: {}
+
+permissions:
+  contents: read
+  packages: read
+  security-events: write
+
+jobs:
+  scan-scan:
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan.yml@0.55.1
+    with:
+      docker-tag: ghcr.io/ckotzbauer/sbom-operator:latest
+
+  scan-vcn:
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan.yml@0.55.1
+    with:
+      docker-tag: ghcr.io/ckotzbauer/sbom-operator/vcn:latest
