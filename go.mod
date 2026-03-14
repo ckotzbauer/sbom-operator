@@ -6,7 +6,7 @@ require (
 	github.com/DependencyTrack/client-go v0.18.0
 	github.com/anchore/stereoscope v0.1.21
 	github.com/anchore/syft v1.42.2
-	github.com/ckotzbauer/libk8soci v0.0.0-20260310173759-9bd06a08b816
+	github.com/ckotzbauer/libk8soci v0.0.0-20260313203611-a724a0c76b4f
 	github.com/ckotzbauer/libstandard v0.0.0-20260310174054-a09a97261b95
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
@@ -166,6 +166,7 @@ require (
 	github.com/goccy/go-json v0.10.5 // indirect
 	github.com/goccy/go-yaml v1.19.2 // indirect
 	github.com/gohugoio/hashstructure v0.6.0 // indirect
+	github.com/golang-jwt/jwt/v5 v5.3.0 // indirect
 	github.com/golang/groupcache v0.0.0-20241129210726-2c02b8208cf8 // indirect
 	github.com/google/gnostic-models v0.7.1 // indirect
 	github.com/google/licensecheck v0.3.1 // indirect
