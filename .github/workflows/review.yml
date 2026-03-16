@@ -11,6 +11,6 @@ permissions:
 
 jobs:
   review:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-review.yml@203116543badcfcd7abcca662aced7ffcaf438d4 # 0.55.4
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-review.yml@45d0839af5e9f59dad1371664bd28d2ecf24ff93 # 0.55.5
     secrets:
       openrouter-token: ${{ secrets.OPENROUTER_TOKEN }}
