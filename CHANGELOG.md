@@ -1,3 +1,67 @@
+## Version 0.41.0 (2026-03-16)
+
+### Features and improvements
+
+* [[`6dd5c7ac`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6dd5c7ac)] - **feat**: Create unique DT-projects per k8s cluster (#823)
+
+### Bug fixes
+
+* [[`99b48f10`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/99b48f10)] - **fix**: linting issues
+
+### Build and testing
+
+* [[`61949552`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/61949552)] - **build**: update workflows
+* [[`0ce2a8d4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0ce2a8d4)] - **build**: updated dependencies
+* [[`19ddddcc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/19ddddcc)] - **build**: update tools
+* [[`f20dda9e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f20dda9e)] - **build**: update workflows
+* [[`269600ca`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/269600ca)] - **build**: disable scanning
+
+### Dependency updates
+
+* [[`f6af4cc3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f6af4cc3)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 7ab1446 (#840)
+* [[`ceb7df31`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ceb7df31)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to eadee4e (#860)
+* [[`a3956d79`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a3956d79)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 6e609a2 (#859)
+* [[`9e5fe36d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9e5fe36d)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.55.1 (#845)
+* [[`c61a5791`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c61a5791)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.2 (#844)
+* [[`b41c60fc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b41c60fc)] - **deps**: update module golang.org&#x2F;x&#x2F;oauth2 to v0.36.0 (#852)
+* [[`fcab9313`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fcab9313)] - **deps**: update module github.com&#x2F;cloudflare&#x2F;circl to v1.6.3 [security] (#846)
+* [[`0abd8946`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0abd8946)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.42.1 (#837)
+* [[`6227bc23`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6227bc23)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 1beb131 (#851)
+* [[`93684b59`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/93684b59)] - **deps**: pin dependencies (#850)
+* [[`0f6a6d23`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0f6a6d23)] - **deps**: update module golang.org&#x2F;x&#x2F;oauth2 to v0.35.0 (#838)
+* [[`050f3600`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/050f3600)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 9154854 (#836)
+* [[`1849d34b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1849d34b)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.41.1 (#835)
+* [[`5da57074`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5da57074)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.19 (#834)
+* [[`07ed937b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/07ed937b)] - **deps**: update module modernc.org&#x2F;sqlite to v1.44.3 (#827)
+* [[`ad38c5b3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ad38c5b3)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.40.1 (#831)
+* [[`f9b5aa30`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f9b5aa30)] - **deps**: update module github.com&#x2F;sirupsen&#x2F;logrus to v1.9.4 (#832)
+* [[`a21fd7db`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a21fd7db)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 716be56 (#828)
+* [[`63db831f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/63db831f)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.40.0 (#826)
+* [[`ea6fb085`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ea6fb085)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.17 (#825)
+* [[`763e531a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/763e531a)] - **deps**: update actions&#x2F;checkout digest to 0c366fd (#824)
+* [[`d87d3863`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d87d3863)] - **deps**: update module github.com&#x2F;dependencytrack&#x2F;client-go to v0.18.0 (#821)
+* [[`6b89b4fb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6b89b4fb)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to f0410f1 (#820)
+* [[`cc789a4c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/cc789a4c)] - **deps**: update module modernc.org&#x2F;sqlite to v1.42.2 (#819)
+* [[`94ea9927`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/94ea9927)] - **deps**: update module modernc.org&#x2F;sqlite to v1.42.1 (#816)
+* [[`0c6ca6ff`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0c6ca6ff)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.39.0 (#818)
+* [[`f8e7d77a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f8e7d77a)] - **deps**: update sigstore&#x2F;cosign-installer digest to 4d14d7f (#817)
+* [[`e649712f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e649712f)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 944ab1f (#813)
+* [[`94c8ec23`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/94c8ec23)] - **deps**: update kubernetes versions to v0.35.0 (#815)
+* [[`90e91310`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/90e91310)] - **deps**: update sigstore&#x2F;cosign-installer digest to f148005 (#814)
+* [[`7f85ab54`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7f85ab54)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.38.2 (#787)
+* [[`4e34df12`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4e34df12)] - **deps**: update module golang.org&#x2F;x&#x2F;oauth2 to v0.34.0 (#812)
+* [[`3105f5d7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3105f5d7)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 8475f28 (#809)
+* [[`645e24ff`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/645e24ff)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.16 (#811)
+* [[`fe7eb1b1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fe7eb1b1)] - **deps**: update kubernetes versions to v0.34.3 (#810)
+
+### Common changes
+
+* [[`8c260fa5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8c260fa5)] - **chore**: Replace scan-snyk with scan-grype and fix workflow permissions (#857)
+* [[`e908fea1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e908fea1)] - **chore**: migrate cosign signing to v3 bundle format and update actions (#856)
+* [[`7e8e1846`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7e8e1846)] - **chore**: Add CLAUDE.md (#853)
+* [[`80cc56b1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/80cc56b1)] - **config**: migrate config renovate.json (#849)
+
+
 ## Version 0.40.0 (2025-12-06)
 
 ### Features and improvements
