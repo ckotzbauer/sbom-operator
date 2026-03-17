@@ -1,0 +1,18 @@
+name: auto-release
+
+on:
+  schedule:
+    - cron: "0 8 * * 2"
+  workflow_dispatch: {}
+
+permissions:
+  actions: read
+  contents: write
+
+jobs:
+  auto-release:
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-auto-release.yml@03866bc944c4ad3e496d7104efe7429ce3c9d8c4 # 0.54.5
+    with:
+      release-workflow: create-release.yml
+    secrets:
+      token: ${{ secrets.REPO_ACCESS }}
