@@ -43,3 +43,30 @@ jobs:
       token: ${{ secrets.GITHUB_TOKEN }}
       pat: ${{ secrets.REPO_ACCESS }}
       ghcr-password: ${{ secrets.GHCR_PASSWORD }}
+
+  get-digest:
+    needs: [job-image-vcn]
+    runs-on: ubuntu-latest
+    outputs:
+      digest: ${{ steps.digest.outputs.digest }}
+    steps:
+      - name: Setup Crane
+        uses: imjasonh/setup-crane@6da1ae018866400525525ce74ff892880c099987 # v0.5
+
+      - name: Get image digest
+        id: digest
+        env:
+          GHCR_PASSWORD: ${{ secrets.GHCR_PASSWORD }}
+        run: |
+          crane auth login ghcr.io -u ${{ github.actor }} -p "${GHCR_PASSWORD}"
+          DIGEST=$(crane digest "ghcr.io/ckotzbauer/sbom-operator:${{ github.event.inputs.version }}")
+          echo "digest=${DIGEST}" >> "$GITHUB_OUTPUT"
+
+  bump-chart:
+    needs: [get-digest]
+    uses: ckotzbauer/helm-charts/.github/workflows/bump-chart.yaml@main
+    with:
+      chart: sbom-operator
+      app-version: ${{ github.event.inputs.version }}
+      image-digest: ${{ needs.get-digest.outputs.digest }}
+    secrets: inherit
