@@ -15,8 +15,3 @@ jobs:
     uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan.yml@127bf24eda432e06ca81296442031074473d58f4 # 0.55.9
     with:
       docker-tag: ghcr.io/ckotzbauer/sbom-operator:latest
-
-  scan-vcn:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan.yml@127bf24eda432e06ca81296442031074473d58f4 # 0.55.9
-    with:
-      docker-tag: ghcr.io/ckotzbauer/sbom-operator/vcn:latest
