@@ -1,3 +1,21 @@
+## Version 0.41.1 (2026-03-20)
+
+### Build and testing
+
+* [[`25a6b071`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/25a6b071)] - **build**: remove vcn-scan
+* [[`3a3df6e4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3a3df6e4)] - **build**: update toolkit
+* [[`ee8e8cc4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ee8e8cc4)] - **build**: add auto-release workflow (#861)
+* [[`b5af5f24`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b5af5f24)] - **build**: update actions
+
+### Dependency updates
+
+* [[`32be2f09`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/32be2f09)] - **deps**: update module google.golang.org&#x2F;grpc to v1.79.3 [security] (#864)
+
+### Common changes
+
+* [[`46954221`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/46954221)] - **ci**: trigger bump-chart workflow on release (#862)
+
+
 ## Version 0.41.0 (2026-03-16)
 
 ### Features and improvements
