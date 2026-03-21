@@ -4,8 +4,8 @@ go 1.26.1
 
 require (
 	github.com/DependencyTrack/client-go v0.18.0
-	github.com/anchore/stereoscope v0.1.21
-	github.com/anchore/syft v1.42.2
+	github.com/anchore/stereoscope v0.1.22
+	github.com/anchore/syft v1.42.3
 	github.com/ckotzbauer/libk8soci v0.0.0-20260314082933-6e609a297e7e
 	github.com/ckotzbauer/libstandard v0.0.0-20260314081514-eadee4e13404
 	github.com/google/uuid v1.6.0
@@ -179,7 +179,7 @@ require (
 	github.com/hashicorp/aws-sdk-go-base/v2 v2.0.0-beta.71 // indirect
 	github.com/hashicorp/errwrap v1.1.0 // indirect
 	github.com/hashicorp/go-cleanhttp v0.5.2 // indirect
-	github.com/hashicorp/go-getter v1.8.4 // indirect
+	github.com/hashicorp/go-getter v1.8.5 // indirect
 	github.com/hashicorp/go-multierror v1.1.1 // indirect
 	github.com/hashicorp/go-version v1.8.0 // indirect
 	github.com/hashicorp/golang-lru/v2 v2.0.7 // indirect
@@ -225,7 +225,7 @@ require (
 	github.com/olekukonko/cat v0.0.0-20250911104152-50322a0618f6 // indirect
 	github.com/olekukonko/errors v1.2.0 // indirect
 	github.com/olekukonko/ll v0.1.7 // indirect
-	github.com/olekukonko/tablewriter v1.1.3 // indirect
+	github.com/olekukonko/tablewriter v1.1.4 // indirect
 	github.com/opencontainers/go-digest v1.0.0 // indirect
 	github.com/opencontainers/image-spec v1.1.1 // indirect
 	github.com/opencontainers/runtime-spec v1.3.0 // indirect
