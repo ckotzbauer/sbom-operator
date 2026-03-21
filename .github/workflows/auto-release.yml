@@ -11,7 +11,7 @@ permissions:
 
 jobs:
   auto-release:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-auto-release.yml@03866bc944c4ad3e496d7104efe7429ce3c9d8c4 # 0.54.5
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-auto-release.yml@127bf24eda432e06ca81296442031074473d58f4 # 0.55.9
     with:
       release-workflow: create-release.yml
     secrets:
