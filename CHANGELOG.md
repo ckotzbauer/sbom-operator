@@ -1,3 +1,15 @@
+## Version 0.41.2 (2026-03-24)
+
+### Dependency updates
+
+* [[`fc0ed3e4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fc0ed3e4)] - **deps**: update kubernetes versions to v0.35.3 (#870)
+* [[`450bff6a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/450bff6a)] - **deps**: update module modernc.org&#x2F;sqlite to v1.47.0 (#869)
+* [[`271d3bbc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/271d3bbc)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.55.9 (#868)
+* [[`f3d366fe`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f3d366fe)] - **deps**: update module k8s.io&#x2F;apimachinery to v0.35.3 (#867)
+* [[`ed3faa59`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ed3faa59)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.3 (#866)
+* [[`38a0a7c1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/38a0a7c1)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.42.3 [security] (#865)
+
+
 ## Version 0.41.1 (2026-03-20)
 
 ### Build and testing
