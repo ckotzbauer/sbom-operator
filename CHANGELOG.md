@@ -1,3 +1,14 @@
+## Version 0.41.3 (2026-03-31)
+
+### Build and testing
+
+* [[`df276ec1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/df276ec1)] - **build**: add permissions for actions in scan-grype workflow
+
+### Dependency updates
+
+* [[`1add1575`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1add1575)] - **deps**: update sigstore&#x2F;cosign-installer action to v4.1.1 (#872)
+
+
 ## Version 0.41.2 (2026-03-24)
 
 ### Dependency updates
