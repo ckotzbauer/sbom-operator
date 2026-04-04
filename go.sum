@@ -204,6 +204,8 @@ github.com/anchore/syft v1.42.3/go.mod h1:i2PZ+276IdPcnd/n32aeIv849iO/QqdjRknbIc
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.2.0 h1:ukwgCxwYrmACq68yiUqwIWnGY0cTPox/M94sVwToPjQ=
 github.com/andybalholm/brotli v1.2.0/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
+github.com/andybalholm/brotli v1.2.1 h1:R+f5xP285VArJDRgowrfb9DqL18yVK0gKAW/F+eTWro=
+github.com/andybalholm/brotli v1.2.1/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
 github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be h1:9AeTilPcZAjCFIImctFaOjnTIavg87rW78vTPkQqLI8=
 github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be/go.mod h1:ySMOLuWl6zY27l47sB3qLNK6tF2fkHG55UZxx8oIVo4=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
@@ -378,6 +380,8 @@ github.com/ckotzbauer/libstandard v0.0.0-20260310174054-a09a97261b95 h1:25xUp2uB
 github.com/ckotzbauer/libstandard v0.0.0-20260310174054-a09a97261b95/go.mod h1:r9Z+zz6tCfO+PW8VB5usqkbBM9SuynfiSDDzk1KhXe0=
 github.com/ckotzbauer/libstandard v0.0.0-20260314081514-eadee4e13404 h1:Wr5XWg82xvqsxzly6wpip2GZ5k7roihgQ61uhpBBInU=
 github.com/ckotzbauer/libstandard v0.0.0-20260314081514-eadee4e13404/go.mod h1:3S7oO01BnzNCQdb/OoLItaBj24X5J48BNEO7HVd2iF8=
+github.com/ckotzbauer/libstandard v0.0.0-20260401050649-ac2b5dc82049 h1:ry7dNagECG4CD61yxxZ6TblwgOkhIEqGxnO6lB791UM=
+github.com/ckotzbauer/libstandard v0.0.0-20260401050649-ac2b5dc82049/go.mod h1:owLsyQxDmtbKTb4Om4xakCCYQTBbF8ege2m6CE0tKi4=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/clipperhouse/displaywidth v0.9.0 h1:Qb4KOhYwRiN3viMv1v/3cTBlz3AcAZX3+y9OLhMtAtA=
 github.com/clipperhouse/displaywidth v0.9.0/go.mod h1:aCAAqTlh4GIVkhQnJpbL0T/WfcrJXHcj8C0yjYcjOZA=
