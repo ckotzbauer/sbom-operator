@@ -1,3 +1,13 @@
+## Version 0.41.4 (2026-04-07)
+
+### Dependency updates
+
+* [[`8b24edf1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8b24edf1)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to ac2b5dc (#875)
+* [[`080789bf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/080789bf)] - **deps**: update module github.com&#x2F;go-jose&#x2F;go-jose&#x2F;v4 to v4.1.4 [security] (#877)
+* [[`edebcf6f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/edebcf6f)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 34b5e81 (#874)
+* [[`b4864ae2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b4864ae2)] - **deps**: update module github.com&#x2F;go-git&#x2F;go-git&#x2F;v5 to v5.17.1 [security] (#873)
+
+
 ## Version 0.41.3 (2026-03-31)
 
 ### Build and testing
