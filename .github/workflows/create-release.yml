@@ -30,7 +30,7 @@ jobs:
       ghcr-password: ${{ secrets.GHCR_PASSWORD }}
 
   job-image-vcn:
-    uses: ckotzbauer/sbom-operator/.github/workflows/release-job-image.yml@main
+    uses: ckotzbauer/sbom-operator/.github/workflows/release-job-image.yml@54fe4e3d3eeb8a9ca1922a8ba777522d276acd17 # main
     needs: [release]
     with:
       version: ${{ github.event.inputs.version }}
@@ -65,7 +65,7 @@ jobs:
 
   bump-chart:
     needs: [get-digest]
-    uses: ckotzbauer/helm-charts/.github/workflows/bump-chart.yaml@main
+    uses: ckotzbauer/helm-charts/.github/workflows/bump-chart.yaml@a7f56baaa7fb9a44d690396faa9291f2a5850e5d # main
     with:
       chart: sbom-operator
       app-version: ${{ github.event.inputs.version }}
