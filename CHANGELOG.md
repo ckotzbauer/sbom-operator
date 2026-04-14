@@ -1,3 +1,23 @@
+## Version 0.41.5 (2026-04-14)
+
+### Build and testing
+
+* [[`7c2031e3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7c2031e3)] - **build**: enable caching (#881)
+
+### Dependency updates
+
+* [[`54fe4e3d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/54fe4e3d)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.42.4 (#888)
+* [[`8a1da7d1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8a1da7d1)] - **deps**: update module modernc.org&#x2F;sqlite to v1.48.2 (#886)
+* [[`937d2f1c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/937d2f1c)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 1718214 (#884)
+* [[`53e1f7e4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/53e1f7e4)] - **deps**: update module github.com&#x2F;hashicorp&#x2F;go-getter to v1.8.6 [security] (#887)
+* [[`8eb0f3ee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8eb0f3ee)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.4 (#885)
+* [[`524c7337`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/524c7337)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to e9417ba (#883)
+* [[`58b1b91a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/58b1b91a)] - **deps**: update module modernc.org&#x2F;sqlite to v1.48.0 (#876)
+* [[`d8741a16`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d8741a16)] - **deps**: update module github.com&#x2F;aws&#x2F;aws-sdk-go-v2&#x2F;service&#x2F;s3 to v1.97.3 [security] (#879)
+* [[`9039dee3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9039dee3)] - **deps**: update module go.opentelemetry.io&#x2F;otel&#x2F;sdk to v1.43.0 [security] (#880)
+* [[`567ff55d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/567ff55d)] - **deps**: update module github.com&#x2F;aws&#x2F;aws-sdk-go-v2&#x2F;aws&#x2F;protocol&#x2F;eventstream to v1.7.8 [security] (#878)
+
+
 ## Version 0.41.4 (2026-04-07)
 
 ### Dependency updates
