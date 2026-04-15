@@ -191,9 +191,15 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	if !containsTag(project.Tags, sbomOperator) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: sbomOperator})
 	}
-	if !containsTag(project.Tags, rawImageId) {
-		project.Tags = append(project.Tags, dtrack.Tag{Name: fmt.Sprintf("%s=%s", rawImageId, ctx.Image.ImageID)})
-	}
+
+	// Ensure the raw-image-id tag reflects the current container digest. Previously
+	// `containsTag(project.Tags, rawImageId)` was a prefix match, so any
+	// `raw-image-id=...` tag prevented the new one from being added. When the same
+	// (projectName, version) pair was backed by different digests (mutable `:latest`,
+	// re-pushed tag, multiple pods), DT kept the first digest forever. During cleanup
+	// this caused `LoadImages()` to emit a stale digest and `Remove()` to operate on
+	// the still-live project, deleting it.
+	project.Tags = rotateRawImageIdTag(project.Tags, ctx.Image.ImageID)
 	podNamespaceTag := podNamespaceTagKey + "=" + ctx.Pod.PodNamespace
 	if !containsTag(project.Tags, podNamespaceTag) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
@@ -275,9 +281,13 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 		return nil, err
 	}
 
-	if g.imageProjectMap == nil {
-		g.imageProjectMap = make(map[string]uuid.UUID)
-	}
+	// Always rebuild the imageProjectMap from DT state. Previously the map was
+	// only initialised when nil, so entries accumulated across reconcile cycles.
+	// After a pod/image update, stale `digest -> UUID` entries kept pointing at
+	// UUIDs of still-live projects (because rotation of raw-image-id was broken,
+	// see ProcessSbom). That caused `Remove()` to operate on live projects.
+	// Resetting here guarantees the map mirrors the current DT state.
+	g.imageProjectMap = make(map[string]uuid.UUID)
 
 	var (
 		pageNumber = 1
@@ -460,6 +470,21 @@ func removeTag(tags []dtrack.Tag, tagString string) []dtrack.Tag {
 		}
 	}
 	return newTags
+}
+
+// rotateRawImageIdTag drops any existing `raw-image-id=*` tag(s) from the slice
+// and appends a single `raw-image-id=<digest>` tag with the current digest. Used
+// to keep the project's recorded digest in sync with the container that the
+// operator just processed. See ProcessSbom for the rationale.
+func rotateRawImageIdTag(tags []dtrack.Tag, currentImageID string) []dtrack.Tag {
+	prefix := rawImageId + "="
+	out := make([]dtrack.Tag, 0, len(tags)+1)
+	for _, tag := range tags {
+		if !strings.HasPrefix(tag.Name, prefix) {
+			out = append(out, tag)
+		}
+	}
+	return append(out, dtrack.Tag{Name: prefix + currentImageID})
 }
 
 func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClusterId string, k8sClusterIdMode string) (string, string) {
