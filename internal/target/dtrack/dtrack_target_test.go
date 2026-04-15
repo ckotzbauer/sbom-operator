@@ -3,12 +3,14 @@ package dtrack
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	dtrack "github.com/DependencyTrack/client-go"
 	libk8s_real "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
+	"github.com/google/uuid"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -250,6 +252,118 @@ func TestRemoveMinimal(t *testing.T) {
 	}
 
 	_ = g.Remove(images)
+}
+
+// TestRawImageIdTagIsRotated ensures the raw-image-id tag is updated to reflect
+// the current container digest each time ProcessSbom runs against an existing
+// project. The previous behaviour froze the first digest forever and produced
+// false orphans during cleanup when the same (projectName, version) was backed
+// by a different digest (mutable :latest, re-pushed tag, multiple pods).
+func TestRawImageIdTagIsRotated(t *testing.T) {
+	t.Run("first digest is added", func(t *testing.T) {
+		project := dtrack.Project{Tags: []dtrack.Tag{{Name: sbomOperator}}}
+		ctx := &target.TargetContext{Image: &liboci.RegistryImage{ImageID: "alpine@sha256:aaa"}}
+
+		project.Tags = rotateRawImageIdTag(project.Tags, ctx.Image.ImageID)
+
+		assert.Len(t, project.Tags, 2)
+		assert.Equal(t, sbomOperator, project.Tags[0].Name)
+		assert.Equal(t, "raw-image-id=alpine@sha256:aaa", project.Tags[1].Name)
+	})
+
+	t.Run("existing digest is replaced, not appended", func(t *testing.T) {
+		project := dtrack.Project{Tags: []dtrack.Tag{
+			{Name: sbomOperator},
+			{Name: "raw-image-id=alpine@sha256:aaa"},
+			{Name: "kubernetes-cluster=my-cluster"},
+		}}
+
+		project.Tags = rotateRawImageIdTag(project.Tags, "alpine@sha256:bbb")
+
+		assert.Len(t, project.Tags, 3)
+		// raw-image-id replaced, other tags kept
+		var rawTags []string
+		for _, tag := range project.Tags {
+			if strings.HasPrefix(tag.Name, "raw-image-id=") {
+				rawTags = append(rawTags, tag.Name)
+			}
+		}
+		assert.Equal(t, []string{"raw-image-id=alpine@sha256:bbb"}, rawTags)
+		assert.True(t, containsTag(project.Tags, sbomOperator))
+		assert.True(t, containsTag(project.Tags, "kubernetes-cluster=my-cluster"))
+	})
+
+	t.Run("multiple stale raw-image-id tags collapsed to one", func(t *testing.T) {
+		project := dtrack.Project{Tags: []dtrack.Tag{
+			{Name: "raw-image-id=alpine@sha256:aaa"},
+			{Name: "raw-image-id=alpine@sha256:bbb"},
+			{Name: sbomOperator},
+		}}
+
+		project.Tags = rotateRawImageIdTag(project.Tags, "alpine@sha256:ccc")
+
+		var rawTags []string
+		for _, tag := range project.Tags {
+			if strings.HasPrefix(tag.Name, "raw-image-id=") {
+				rawTags = append(rawTags, tag.Name)
+			}
+		}
+		assert.Equal(t, []string{"raw-image-id=alpine@sha256:ccc"}, rawTags)
+	})
+}
+
+// TestLoadImagesResetsImageProjectMap ensures stale digest -> UUID entries do
+// not survive across LoadImages calls. Without this, a re-pulled image would
+// leave a stale entry pointing at a still-live project's UUID, and a subsequent
+// Remove() on the stale digest would operate on the live project.
+func TestLoadImagesResetsImageProjectMap(t *testing.T) {
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		w.WriteHeader(http.StatusOK)
+		if r.URL.Path == "/api/v1/project" && r.Method == "GET" {
+			// One project tagged for our cluster, current raw-image-id=alpine@sha256:new
+			_, _ = w.Write([]byte(`[{
+				"name": "alpine", "version": "3.14",
+				"uuid": "8c940608-8e62-431a-ac5d-2092b7c41372",
+				"tags": [
+					{"name": "kubernetes-cluster=my-cluster"},
+					{"name": "sbom-operator"},
+					{"name": "raw-image-id=alpine@sha256:new"}
+				]
+			}]`))
+			return
+		}
+		if r.URL.Path == "/api/v1/version" {
+			_, _ = w.Write([]byte(`{"version": "4.8.0"}`))
+			return
+		}
+		_, _ = w.Write([]byte(`{"totalCount": 1}`))
+	}))
+	defer ts.Close()
+
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true)
+	err := g.Initialize()
+	assert.NoError(t, err)
+
+	// Seed a stale entry from a previous reconcile cycle.
+	g.imageProjectMap = map[string]uuid.UUID{
+		"alpine@sha256:OLD": uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372"),
+	}
+
+	images, err := g.LoadImages()
+	assert.NoError(t, err)
+
+	// Returned set reflects the current DT state only.
+	assert.Len(t, images, 1)
+	assert.Equal(t, "alpine@sha256:new", images[0].ImageID)
+
+	// The stale entry must be gone; only the current digest remains.
+	_, staleStillPresent := g.imageProjectMap["alpine@sha256:OLD"]
+	assert.False(t, staleStillPresent, "stale digest entry must be cleared on LoadImages")
+
+	currentUUID, currentPresent := g.imageProjectMap["alpine@sha256:new"]
+	assert.True(t, currentPresent)
+	assert.Equal(t, "8c940608-8e62-431a-ac5d-2092b7c41372", currentUUID.String())
 }
 
 func TestLoadImagesTagMode(t *testing.T) {
