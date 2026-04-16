@@ -314,7 +314,7 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 
 			//extend lookup logic to support `prefix` mode to resolve image association
 			if g.k8sClusterIdMode == "prefix" {
-				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId)
+				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId+"-")
 			}
 
 			for _, tag := range project.Tags {
