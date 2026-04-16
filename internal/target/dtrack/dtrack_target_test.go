@@ -25,7 +25,7 @@ func TestGetRepoWithVersion(t *testing.T) {
 		expectedVersion  string
 	}{
 		{
-			name:             "Long name, no prefix",
+			name:             "Long name, tag mode",
 			image:            &liboci.RegistryImage{ImageID: "docker.io/library/alpine:3.14", Image: "alpine:3.14"},
 			useShortName:     false,
 			k8sClusterId:     "my-cluster",
@@ -34,6 +34,15 @@ func TestGetRepoWithVersion(t *testing.T) {
 			expectedVersion:  "3.14",
 		},
 		{
+			name:             "Long name, prefix mode",
+			image:            &liboci.RegistryImage{ImageID: "docker.io/library/alpine:3.14", Image: "alpine:3.14"},
+			useShortName:     false,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "prefix",
+			expectedName:     "my-cluster-docker.io/library/alpine",
+			expectedVersion:  "3.14",
+		},
+    {
 			name:             "Short name, prefix mode",
 			image:            &liboci.RegistryImage{ImageID: "docker.io/library/alpine:3.14", Image: "alpine:3.14"},
 			useShortName:     true,

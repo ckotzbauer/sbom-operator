@@ -314,7 +314,7 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 
 			//extend lookup logic to support `prefix` mode to resolve image association
 			if g.k8sClusterIdMode == "prefix" {
-				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId)
+				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId+"-")
 			}
 
 			for _, tag := range project.Tags {
@@ -495,13 +495,14 @@ func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClust
 	}
 
 	var projectName string
+	//add Cluster prefix to projectName if prefix mode is set
+	if k8sClusterIdMode == "prefix" {
+		projectName = k8sClusterId + "-"
+	}
 	if useShortName {
-		if k8sClusterIdMode == "prefix" {
-			projectName = k8sClusterId + "-"
-		}
 		projectName += imageRef.ShortName()
 	} else {
-		projectName = imageRef.Repository()
+		projectName += imageRef.Repository()
 	}
 
 	if strings.Index(image.Image, "sha256") != 0 {
