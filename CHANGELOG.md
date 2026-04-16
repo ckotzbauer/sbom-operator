@@ -1,3 +1,11 @@
+## Version 0.42.0 (2026-04-16)
+
+### Common changes
+
+* [[`bfa52124`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bfa52124)] - **dtrack**: Cluster ID prefix only added to short project name (#892)
+* [[`35b72c60`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/35b72c60)] - **dtrack**: preserve live projects on cleanup when (name, version) has multiple digests (#890)
+
+
 ## Version 0.41.5 (2026-04-14)
 
 ### Build and testing
