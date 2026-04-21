@@ -1,3 +1,15 @@
+## Version 0.42.1 (2026-04-21)
+
+### Dependency updates
+
+* [[`18c6f512`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/18c6f512)] - **deps**: update kubernetes versions to v0.35.4 (#901)
+* [[`7a3b0706`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7a3b0706)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to ee428ed (#900)
+* [[`147dd7fd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/147dd7fd)] - **deps**: update module k8s.io&#x2F;apimachinery to v0.35.4 (#898)
+* [[`4996b871`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4996b871)] - **deps**: update module github.com&#x2F;go-git&#x2F;go-git&#x2F;v5 to v5.18.0 [security] (#899)
+* [[`c395e2c1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c395e2c1)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.5 (#897)
+* [[`d35f0cf3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d35f0cf3)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 746e56f (#896)
+
+
 ## Version 0.42.0 (2026-04-16)
 
 ### Common changes
