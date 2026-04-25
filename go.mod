@@ -4,7 +4,7 @@ go 1.26.1
 
 require (
 	github.com/DependencyTrack/client-go v0.18.0
-	github.com/anchore/stereoscope v0.1.22
+	github.com/anchore/stereoscope v0.1.23
 	github.com/anchore/syft v1.42.4
 	github.com/ckotzbauer/libk8soci v0.0.0-20260418123424-ee428ed0abd0
 	github.com/ckotzbauer/libstandard v0.0.0-20260410122238-17182142e3bb
@@ -51,9 +51,9 @@ require (
 	github.com/agext/levenshtein v1.2.3 // indirect
 	github.com/anchore/clio v0.0.0-20260302164412-3ffbbe8c23a9 // indirect
 	github.com/anchore/fangs v0.0.0-20260302165001-7b3d34e1cfff // indirect
-	github.com/anchore/go-collections v0.0.0-20260302190843-dc98b39e97d0 // indirect
-	github.com/anchore/go-homedir v0.0.0-20260305212341-13a3ebb9e637 // indirect
-	github.com/anchore/go-logger v0.0.0-20260217144723-3bb369b8046c // indirect
+	github.com/anchore/go-collections v0.1.0 // indirect
+	github.com/anchore/go-homedir v0.1.0 // indirect
+	github.com/anchore/go-logger v0.1.0 // indirect
 	github.com/anchore/go-lzo v0.1.0 // indirect
 	github.com/anchore/go-macholibre v0.0.0-20260304203047-c7f47cdd7bca // indirect
 	github.com/anchore/go-rpmdb v0.0.0-20260303175756-c791f00b2705 // indirect
@@ -107,13 +107,13 @@ require (
 	github.com/containerd/cgroups/v3 v3.1.3 // indirect
 	github.com/containerd/containerd v1.7.30 // indirect
 	github.com/containerd/containerd/api v1.10.0 // indirect
-	github.com/containerd/containerd/v2 v2.2.1 // indirect
+	github.com/containerd/containerd/v2 v2.2.2 // indirect
 	github.com/containerd/continuity v0.4.5 // indirect
 	github.com/containerd/errdefs v1.0.0 // indirect
 	github.com/containerd/errdefs/pkg v0.3.0 // indirect
 	github.com/containerd/fifo v1.1.0 // indirect
 	github.com/containerd/log v0.1.0 // indirect
-	github.com/containerd/platforms v1.0.0-rc.2 // indirect
+	github.com/containerd/platforms v1.0.0-rc.4 // indirect
 	github.com/containerd/plugin v1.0.0 // indirect
 	github.com/containerd/stargz-snapshotter/estargz v0.18.2 // indirect
 	github.com/containerd/ttrpc v1.2.8 // indirect
