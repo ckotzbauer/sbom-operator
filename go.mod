@@ -5,7 +5,7 @@ go 1.26.1
 require (
 	github.com/DependencyTrack/client-go v0.18.0
 	github.com/anchore/stereoscope v0.1.23
-	github.com/anchore/syft v1.42.4
+	github.com/anchore/syft v1.43.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20260418123424-ee428ed0abd0
 	github.com/ckotzbauer/libstandard v0.0.0-20260410122238-17182142e3bb
 	github.com/google/uuid v1.6.0
@@ -49,18 +49,18 @@ require (
 	github.com/acobaugh/osrelease v0.1.0 // indirect
 	github.com/adrg/xdg v0.5.3 // indirect
 	github.com/agext/levenshtein v1.2.3 // indirect
-	github.com/anchore/clio v0.0.0-20260302164412-3ffbbe8c23a9 // indirect
-	github.com/anchore/fangs v0.0.0-20260302165001-7b3d34e1cfff // indirect
+	github.com/anchore/clio v0.1.0 // indirect
+	github.com/anchore/fangs v0.1.0 // indirect
 	github.com/anchore/go-collections v0.1.0 // indirect
 	github.com/anchore/go-homedir v0.1.0 // indirect
 	github.com/anchore/go-logger v0.1.0 // indirect
 	github.com/anchore/go-lzo v0.1.0 // indirect
-	github.com/anchore/go-macholibre v0.0.0-20260304203047-c7f47cdd7bca // indirect
-	github.com/anchore/go-rpmdb v0.0.0-20260303175756-c791f00b2705 // indirect
+	github.com/anchore/go-macholibre v0.1.0 // indirect
+	github.com/anchore/go-rpmdb v0.1.0 // indirect
 	github.com/anchore/go-struct-converter v0.1.0 // indirect
-	github.com/anchore/go-sync v0.0.0-20260305212413-e8f05f968235 // indirect
+	github.com/anchore/go-sync v0.1.0 // indirect
 	github.com/anchore/go-version v1.2.2-0.20200701162849-18adb9c92b9b // indirect
-	github.com/anchore/packageurl-go v0.1.1-0.20250220190351-d62adb6e1115 // indirect
+	github.com/anchore/packageurl-go v0.2.0 // indirect
 	github.com/andybalholm/brotli v1.2.1 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/aquasecurity/go-pep440-version v0.0.1 // indirect
