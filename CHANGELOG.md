@@ -1,3 +1,15 @@
+## Version 0.42.2 (2026-05-05)
+
+### Dependency updates
+
+* [[`747445d7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/747445d7)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.44.0 (#907)
+* [[`5c64eec5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5c64eec5)] - **deps**: update module modernc.org&#x2F;sqlite to v1.50.0 (#906)
+* [[`25ba8583`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/25ba8583)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.43.0 (#904)
+* [[`0e7e406a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0e7e406a)] - **deps**: update kubernetes versions to v0.36.0 (#905)
+* [[`4b0142bb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4b0142bb)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.1.23 (#903)
+* [[`a0afdc24`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a0afdc24)] - **deps**: update module modernc.org&#x2F;sqlite to v1.49.1 (#902)
+
+
 ## Version 0.42.1 (2026-04-21)
 
 ### Dependency updates
