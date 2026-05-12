@@ -1,3 +1,10 @@
+## Version 0.42.3 (2026-05-12)
+
+### Dependency updates
+
+* [[`92e6d403`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/92e6d403)] - **deps**: update sigstore&#x2F;cosign-installer action to v4.1.2 (#909)
+
+
 ## Version 0.42.2 (2026-05-05)
 
 ### Dependency updates
