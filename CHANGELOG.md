@@ -1,3 +1,15 @@
+## Version 0.42.4 (2026-05-19)
+
+### Dependency updates
+
+* [[`15d0ebb6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/15d0ebb6)] - **deps**: update kubernetes versions to v0.36.1 (#913)
+* [[`bd7a84ee`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bd7a84ee)] - **deps**: update module github.com&#x2F;dependencytrack&#x2F;client-go to v0.19.0 (#915)
+* [[`f5e269cb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f5e269cb)] - **deps**: update module modernc.org&#x2F;sqlite to v1.50.1 (#914)
+* [[`07ba38ba`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/07ba38ba)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 74f9aab (#912)
+* [[`ea8175ec`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ea8175ec)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 71de0ac (#911)
+* [[`8018f1e0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8018f1e0)] - **deps**: update module github.com&#x2F;go-git&#x2F;go-git&#x2F;v5 to v5.19.0 [security] (#910)
+
+
 ## Version 0.42.3 (2026-05-12)
 
 ### Dependency updates
