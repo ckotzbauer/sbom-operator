@@ -9,6 +9,8 @@ import (
 	"path/filepath"
 	"runtime/debug"
 	"strings"
+	"sync"
+	"time"
 
 	"github.com/anchore/stereoscope/pkg/image"
 	"github.com/anchore/syft/syft"
@@ -256,4 +258,38 @@ func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
 		Username: "oauth2accesstoken",
 		Password: token.AccessToken,
 	}
+}
+
+type tokenCacheEntry struct {
+	username string
+	password string
+	expiry   time.Time
+}
+
+type tokenCache struct {
+	mu      sync.RWMutex
+	entries map[string]tokenCacheEntry
+}
+
+func newTokenCache() *tokenCache {
+	return &tokenCache{entries: map[string]tokenCacheEntry{}}
+}
+
+func (c *tokenCache) get(registry string) (username, password string, ok bool) {
+	c.mu.RLock()
+	defer c.mu.RUnlock()
+	entry, found := c.entries[registry]
+	if !found {
+		return "", "", false
+	}
+	if time.Until(entry.expiry) < 5*time.Minute {
+		return "", "", false
+	}
+	return entry.username, entry.password, true
+}
+
+func (c *tokenCache) put(registry, username, password string, expiry time.Time) {
+	c.mu.Lock()
+	defer c.mu.Unlock()
+	c.entries[registry] = tokenCacheEntry{username: username, password: password, expiry: expiry}
 }
