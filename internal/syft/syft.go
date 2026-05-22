@@ -74,7 +74,10 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	credentials := oci.ConvertSecrets(*img, s.proxyRegistryMap)
 
 	var opts *image.RegistryOptions
-	if len(credentials) == 0 && isGCPArtifactRegistry(img.ImageID) {
+	switch {
+	case len(credentials) > 0:
+		opts = &image.RegistryOptions{Credentials: credentials}
+	case isGCPArtifactRegistry(img.ImageID):
 		logrus.Debugf("No pull secrets found for GCP Artifact Registry %s, attempting Workload Identity", img.ImageID)
 		if gcpCreds := getGCPCredentials(context.Background()); gcpCreds != nil {
 			opts = &image.RegistryOptions{Credentials: []image.RegistryCredentials{*gcpCreds}}
@@ -82,7 +85,15 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 			logrus.Debugf("Failed to get GCP credentials, using empty options")
 			opts = &image.RegistryOptions{}
 		}
-	} else {
+	case isECRRegistry(img.ImageID):
+		logrus.Debugf("No pull secrets found for AWS ECR %s, attempting IRSA / Pod Identity", img.ImageID)
+		if ecrCreds := getECRCredentials(context.Background(), img.ImageID); ecrCreds != nil {
+			opts = &image.RegistryOptions{Credentials: []image.RegistryCredentials{*ecrCreds}}
+		} else {
+			logrus.Debugf("Failed to get ECR credentials, using empty options")
+			opts = &image.RegistryOptions{}
+		}
+	default:
 		opts = &image.RegistryOptions{Credentials: credentials}
 	}
 
