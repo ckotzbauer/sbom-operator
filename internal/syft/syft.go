@@ -243,6 +243,19 @@ func isECRRegistry(imageID string) bool {
 	return strings.Contains(imageID, ".dkr.ecr.") && strings.Contains(imageID, ".amazonaws.com")
 }
 
+func parseECRRegistry(imageID string) (registry, region string, err error) {
+	host := imageID
+	if slash := strings.Index(host, "/"); slash >= 0 {
+		host = host[:slash]
+	}
+	// Expected layout: <account>.dkr.ecr.<region>.amazonaws.com
+	parts := strings.Split(host, ".")
+	if len(parts) < 6 || parts[1] != "dkr" || parts[2] != "ecr" || parts[len(parts)-2] != "amazonaws" || parts[len(parts)-1] != "com" {
+		return "", "", fmt.Errorf("not a valid ECR host: %q", imageID)
+	}
+	return host, parts[3], nil
+}
+
 func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
 	creds, err := google.FindDefaultCredentials(ctx, "https://www.googleapis.com/auth/cloud-platform")
 	if err != nil {

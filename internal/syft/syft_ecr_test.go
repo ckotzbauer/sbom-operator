@@ -84,6 +84,65 @@ func TestTokenCache_ConcurrentAccessNoRaces(t *testing.T) {
 	wg.Wait()
 }
 
+func TestParseECRRegistry(t *testing.T) {
+	tests := []struct {
+		input            string
+		expectedRegistry string
+		expectedRegion   string
+		expectError      bool
+	}{
+		{
+			input:            "123456789012.dkr.ecr.us-east-1.amazonaws.com/myrepo:tag",
+			expectedRegistry: "123456789012.dkr.ecr.us-east-1.amazonaws.com",
+			expectedRegion:   "us-east-1",
+			expectError:      false,
+		},
+		{
+			input:            "123456789012.dkr.ecr.eu-central-1.amazonaws.com/path/sub/image@sha256:abc",
+			expectedRegistry: "123456789012.dkr.ecr.eu-central-1.amazonaws.com",
+			expectedRegion:   "eu-central-1",
+			expectError:      false,
+		},
+		{
+			input:       "docker.io/library/alpine:latest",
+			expectError: true,
+		},
+		{
+			input:       "notarealhost",
+			expectError: true,
+		},
+		{
+			input:       "",
+			expectError: true,
+		},
+		{
+			input:       "123456789012.dkr.ecr.amazonaws.com/x",
+			expectError: true, // missing region segment
+		},
+		{
+			input:       "123456789012.foo.ecr.us-east-1.amazonaws.com/repo",
+			expectError: true, // parts[1] != "dkr"
+		},
+		{
+			input:       "123456789012.dkr.foo.us-east-1.amazonaws.com/repo",
+			expectError: true, // parts[2] != "ecr"
+		},
+	}
+
+	for _, v := range tests {
+		t.Run(v.input, func(t *testing.T) {
+			registry, region, err := parseECRRegistry(v.input)
+			if v.expectError {
+				assert.Error(t, err)
+				return
+			}
+			assert.NoError(t, err)
+			assert.Equal(t, v.expectedRegistry, registry)
+			assert.Equal(t, v.expectedRegion, region)
+		})
+	}
+}
+
 func TestIsECRRegistry(t *testing.T) {
 	tests := []struct {
 		input    string
