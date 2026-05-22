@@ -3,6 +3,7 @@ package syft
 import (
 	"context"
 	"crypto"
+	"encoding/base64"
 	"fmt"
 	"io"
 	"os"
@@ -28,11 +29,15 @@ import (
 	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
+	"github.com/aws/aws-sdk-go-v2/config"
+	"github.com/aws/aws-sdk-go-v2/service/ecr"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/sirupsen/logrus"
 	"golang.org/x/oauth2/google"
 )
+
+var ecrTokenCache = newTokenCache()
 
 type Syft struct {
 	sbomFormat       string
@@ -254,6 +259,65 @@ func parseECRRegistry(imageID string) (registry, region string, err error) {
 		return "", "", fmt.Errorf("not a valid ECR host: %q", imageID)
 	}
 	return host, parts[3], nil
+}
+
+func getECRCredentials(ctx context.Context, imageID string) *image.RegistryCredentials {
+	registry, region, err := parseECRRegistry(imageID)
+	if err != nil {
+		logrus.WithError(err).Debug("Failed to parse ECR registry host")
+		return nil
+	}
+
+	if username, password, ok := ecrTokenCache.get(registry); ok {
+		return &image.RegistryCredentials{Username: username, Password: password}
+	}
+
+	ctxTimeout, cancel := context.WithTimeout(ctx, 10*time.Second)
+	defer cancel()
+
+	cfg, err := config.LoadDefaultConfig(ctxTimeout, config.WithRegion(region))
+	if err != nil {
+		logrus.WithError(err).Debug("Failed to load AWS default config")
+		return nil
+	}
+
+	out, err := ecr.NewFromConfig(cfg).GetAuthorizationToken(ctxTimeout, &ecr.GetAuthorizationTokenInput{})
+	if err != nil {
+		logrus.WithError(err).Debug("Failed to call ecr:GetAuthorizationToken")
+		return nil
+	}
+	if len(out.AuthorizationData) == 0 || out.AuthorizationData[0].AuthorizationToken == nil {
+		logrus.Debug("ECR returned empty authorization data")
+		return nil
+	}
+
+	tokenB64 := *out.AuthorizationData[0].AuthorizationToken
+	decoded, err := base64.StdEncoding.DecodeString(tokenB64)
+	if err != nil {
+		logrus.WithError(err).Debug("Failed to base64-decode ECR token")
+		return nil
+	}
+	parts := strings.SplitN(string(decoded), ":", 2)
+	if len(parts) != 2 {
+		logrus.Debug("Decoded ECR token has unexpected format")
+		return nil
+	}
+	username, password := parts[0], parts[1] /* #nosec G101 */
+
+	now := time.Now()
+	maxExpiry := now.Add(11 * time.Hour)
+	awsExpiry := maxExpiry // fallback if API gives no expiry
+	if out.AuthorizationData[0].ExpiresAt != nil {
+		awsExpiry = out.AuthorizationData[0].ExpiresAt.Add(-5 * time.Minute)
+	}
+	effectiveExpiry := awsExpiry
+	if effectiveExpiry.After(maxExpiry) {
+		effectiveExpiry = maxExpiry
+	}
+
+	ecrTokenCache.put(registry, username, password, effectiveExpiry)
+
+	return &image.RegistryCredentials{Username: username, Password: password}
 }
 
 func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
