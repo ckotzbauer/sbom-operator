@@ -239,6 +239,10 @@ func isGCPArtifactRegistry(imageID string) bool {
 	return strings.Contains(imageID, "-docker.pkg.dev/")
 }
 
+func isECRRegistry(imageID string) bool {
+	return strings.Contains(imageID, ".dkr.ecr.") && strings.Contains(imageID, ".amazonaws.com")
+}
+
 func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
 	creds, err := google.FindDefaultCredentials(ctx, "https://www.googleapis.com/auth/cloud-platform")
 	if err != nil {

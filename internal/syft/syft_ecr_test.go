@@ -83,3 +83,25 @@ func TestTokenCache_ConcurrentAccessNoRaces(t *testing.T) {
 	}
 	wg.Wait()
 }
+
+func TestIsECRRegistry(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected bool
+	}{
+		{"123456789012.dkr.ecr.us-east-1.amazonaws.com/myrepo:tag", true},
+		{"123456789012.dkr.ecr.eu-central-1.amazonaws.com/myrepo@sha256:abcd", true},
+		{"123456789012.dkr.ecr.amazonaws.com/x", true}, // malformed - substring still matches; parseECRRegistry rejects later
+		{"public.ecr.aws/library/alpine:latest", false},
+		{"gcr.io/project/image:tag", false},
+		{"docker.io/library/alpine:latest", false},
+		{"myregistry.example.com/x", false},
+		{"", false},
+	}
+
+	for _, v := range tests {
+		t.Run(v.input, func(t *testing.T) {
+			assert.Equal(t, v.expected, isECRRegistry(v.input))
+		})
+	}
+}
