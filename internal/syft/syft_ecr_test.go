@@ -5,8 +5,66 @@ import (
 	"testing"
 	"time"
 
+	"github.com/anchore/stereoscope/pkg/image"
 	"github.com/stretchr/testify/assert"
 )
+
+func TestHasUsableCredentials(t *testing.T) {
+	tests := []struct {
+		name     string
+		creds    []image.RegistryCredentials
+		expected bool
+	}{
+		{
+			name:     "empty slice",
+			creds:    nil,
+			expected: false,
+		},
+		{
+			name: "single phantom entry (only Authority set)",
+			creds: []image.RegistryCredentials{
+				{Authority: "123.dkr.ecr.eu-west-1.amazonaws.com"},
+			},
+			expected: false,
+		},
+		{
+			name: "single real entry with username and password",
+			creds: []image.RegistryCredentials{
+				{Authority: "docker.io", Username: "user", Password: "pass"},
+			},
+			expected: true,
+		},
+		{
+			name: "token-only entry",
+			creds: []image.RegistryCredentials{
+				{Authority: "ghcr.io", Token: "ghp_abc"},
+			},
+			expected: true,
+		},
+		{
+			name: "mixed phantom and real - at least one real",
+			creds: []image.RegistryCredentials{
+				{Authority: "123.dkr.ecr.eu-west-1.amazonaws.com"},
+				{Authority: "docker.io", Username: "user", Password: "pass"},
+			},
+			expected: true,
+		},
+		{
+			name: "all phantom entries",
+			creds: []image.RegistryCredentials{
+				{Authority: "host1"},
+				{Authority: "host2"},
+			},
+			expected: false,
+		},
+	}
+
+	for _, tc := range tests {
+		t.Run(tc.name, func(t *testing.T) {
+			assert.Equal(t, tc.expected, hasUsableCredentials(tc.creds))
+		})
+	}
+}
 
 func TestTokenCache_EmptyReturnsNotOk(t *testing.T) {
 	c := newTokenCache()

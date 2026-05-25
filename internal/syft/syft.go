@@ -75,7 +75,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 
 	var opts *image.RegistryOptions
 	switch {
-	case len(credentials) > 0:
+	case hasUsableCredentials(credentials):
 		opts = &image.RegistryOptions{Credentials: credentials}
 	case isGCPArtifactRegistry(img.ImageID):
 		logrus.Debugf("No pull secrets found for GCP Artifact Registry %s, attempting Workload Identity", img.ImageID)
@@ -253,6 +253,21 @@ func closeOrLog(c io.Closer) {
 
 func isGCPArtifactRegistry(imageID string) bool {
 	return strings.Contains(imageID, "-docker.pkg.dev/")
+}
+
+// hasUsableCredentials reports whether at least one credential entry carries
+// a non-empty Username, Password, or Token. libk8soci's ConvertSecrets always
+// returns one entry per pod pull secret, even when the secret has no auth for
+// the image's registry - in that case the entry has only Authority set and
+// empty u/p/t. Counting such phantom entries would block GCP/ECR auto-auth
+// branches whenever a pod carries any unrelated pull secret.
+func hasUsableCredentials(creds []image.RegistryCredentials) bool {
+	for _, c := range creds {
+		if c.Username != "" || c.Password != "" || c.Token != "" {
+			return true
+		}
+	}
+	return false
 }
 
 func isECRRegistry(imageID string) bool {
