@@ -185,6 +185,22 @@ func TestParseECRRegistry(t *testing.T) {
 			input:       "123456789012.dkr.foo.us-east-1.amazonaws.com/repo",
 			expectError: true, // parts[2] != "ecr"
 		},
+		{
+			input:            "123456789012.dkr.ecr.us-gov-west-1.amazonaws.com/myrepo:tag",
+			expectedRegistry: "123456789012.dkr.ecr.us-gov-west-1.amazonaws.com",
+			expectedRegion:   "us-gov-west-1",
+			expectError:      false,
+		},
+		{
+			input:            "123456789012.dkr.ecr.cn-north-1.amazonaws.com.cn/myrepo:tag",
+			expectedRegistry: "123456789012.dkr.ecr.cn-north-1.amazonaws.com.cn",
+			expectedRegion:   "cn-north-1",
+			expectError:      false,
+		},
+		{
+			input:       "123456789012.dkr.ecr.us-east-1.amazonaws.com.evil.com/myrepo",
+			expectError: true, // host suffix isn't amazonaws.com / .com.cn
+		},
 	}
 
 	for _, v := range tests {

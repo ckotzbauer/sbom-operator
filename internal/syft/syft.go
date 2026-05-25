@@ -279,9 +279,14 @@ func parseECRRegistry(imageID string) (registry, region string, err error) {
 	if slash := strings.Index(host, "/"); slash >= 0 {
 		host = host[:slash]
 	}
-	// Expected layout: <account>.dkr.ecr.<region>.amazonaws.com
+	// Expected layouts:
+	//   <account>.dkr.ecr.<region>.amazonaws.com     (commercial + GovCloud)
+	//   <account>.dkr.ecr.<region>.amazonaws.com.cn  (China partition)
 	parts := strings.Split(host, ".")
-	if len(parts) < 6 || parts[1] != "dkr" || parts[2] != "ecr" || parts[len(parts)-2] != "amazonaws" || parts[len(parts)-1] != "com" {
+	if len(parts) < 6 || parts[1] != "dkr" || parts[2] != "ecr" {
+		return "", "", fmt.Errorf("not a valid ECR host: %q", imageID)
+	}
+	if !strings.HasSuffix(host, ".amazonaws.com") && !strings.HasSuffix(host, ".amazonaws.com.cn") {
 		return "", "", fmt.Errorf("not a valid ECR host: %q", imageID)
 	}
 	return host, parts[3], nil
