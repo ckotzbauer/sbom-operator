@@ -255,15 +255,17 @@ func isGCPArtifactRegistry(imageID string) bool {
 	return strings.Contains(imageID, "-docker.pkg.dev/")
 }
 
-// hasUsableCredentials reports whether at least one credential entry carries
-// a non-empty Username, Password, or Token. libk8soci's ConvertSecrets always
-// returns one entry per pod pull secret, even when the secret has no auth for
-// the image's registry - in that case the entry has only Authority set and
-// empty u/p/t. Counting such phantom entries would block GCP/ECR auto-auth
-// branches whenever a pod carries any unrelated pull secret.
+// hasUsableCredentials reports whether at least one credential entry can
+// actually authenticate against an OCI registry. stereoscope requires both
+// Username AND Password for basic auth, or a Token for bearer auth, or an
+// explicit Authenticator. libk8soci's ConvertSecrets always returns one entry
+// per pod pull secret, even when the secret has no auth for the image's
+// registry - in that case the entry has only Authority set and empty u/p/t.
+// Counting such phantom entries would block GCP/ECR auto-auth branches
+// whenever a pod carries any unrelated pull secret.
 func hasUsableCredentials(creds []image.RegistryCredentials) bool {
 	for _, c := range creds {
-		if c.Username != "" || c.Password != "" || c.Token != "" {
+		if (c.Username != "" && c.Password != "") || c.Token != "" || c.Authenticator != nil {
 			return true
 		}
 	}
@@ -300,7 +302,7 @@ func getECRCredentials(ctx context.Context, imageID string) *image.RegistryCrede
 	}
 
 	if username, password, ok := ecrTokenCache.get(registry); ok {
-		return &image.RegistryCredentials{Username: username, Password: password}
+		return &image.RegistryCredentials{Authority: registry, Username: username, Password: password}
 	}
 
 	ctxTimeout, cancel := context.WithTimeout(ctx, 10*time.Second)
@@ -348,7 +350,7 @@ func getECRCredentials(ctx context.Context, imageID string) *image.RegistryCrede
 
 	ecrTokenCache.put(registry, username, password, effectiveExpiry)
 
-	return &image.RegistryCredentials{Username: username, Password: password}
+	return &image.RegistryCredentials{Authority: registry, Username: username, Password: password}
 }
 
 func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {

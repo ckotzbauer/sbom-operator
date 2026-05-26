@@ -57,6 +57,20 @@ func TestHasUsableCredentials(t *testing.T) {
 			},
 			expected: false,
 		},
+		{
+			name: "username-only entry is not usable (stereoscope basic-auth needs both)",
+			creds: []image.RegistryCredentials{
+				{Authority: "docker.io", Username: "user"},
+			},
+			expected: false,
+		},
+		{
+			name: "password-only entry is not usable",
+			creds: []image.RegistryCredentials{
+				{Authority: "docker.io", Password: "pass"},
+			},
+			expected: false,
+		},
 	}
 
 	for _, tc := range tests {
