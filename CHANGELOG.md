@@ -1,3 +1,15 @@
+## Version 0.42.5 (2026-05-26)
+
+### Dependency updates
+
+* [[`213243ac`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/213243ac)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.2.0 (#921)
+* [[`6e2614b2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6e2614b2)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.6 (#920)
+* [[`2146fe1b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2146fe1b)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to 12e4c30 (#919)
+* [[`ed7aa31a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ed7aa31a)] - **deps**: update module github.com&#x2F;go-git&#x2F;go-git&#x2F;v5 to v5.19.1 [security] (#918)
+* [[`5ba5c3e3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5ba5c3e3)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd&#x2F;v2 to v2.2.4 [security] (#917)
+* [[`8b48f4dd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8b48f4dd)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd to v1.7.32 [security] (#916)
+
+
 ## Version 0.42.4 (2026-05-19)
 
 ### Dependency updates
