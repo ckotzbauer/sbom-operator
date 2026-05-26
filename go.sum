@@ -506,6 +506,8 @@ github.com/containerd/containerd/api v1.10.0 h1:5n0oHYVBwN4VhoX9fFykCV9dF1/BvAXe
 github.com/containerd/containerd/api v1.10.0/go.mod h1:NBm1OAk8ZL+LG8R0ceObGxT5hbUYj7CzTmR3xh0DlMM=
 github.com/containerd/containerd/api v1.11.0 h1:smv4e74S/wwIx0Sj7lhwO1t3M/oi+mSzk2VXqHq8aO0=
 github.com/containerd/containerd/api v1.11.0/go.mod h1:CaQFRu+N1MtbgL6JDOJLUB1hCKESU1lD6MuTJhgtdlw=
+github.com/containerd/containerd/api v1.11.1 h1:h8nfoDW9+fNsC/9TwiAHj8B1GzXKtR4eFtkhi/X5RLU=
+github.com/containerd/containerd/api v1.11.1/go.mod h1:CaQFRu+N1MtbgL6JDOJLUB1hCKESU1lD6MuTJhgtdlw=
 github.com/containerd/containerd/v2 v2.2.1 h1:TpyxcY4AL5A+07dxETevunVS5zxqzuq7ZqJXknM11yk=
 github.com/containerd/containerd/v2 v2.2.1/go.mod h1:NR70yW1iDxe84F2iFWbR9xfAN0N2F0NcjTi1OVth4nU=
 github.com/containerd/containerd/v2 v2.2.2 h1:mjVQdtfryzT7lOqs5EYUFZm8ioPVjOpkSoG1GJPxEMY=
@@ -514,6 +516,8 @@ github.com/containerd/containerd/v2 v2.2.4 h1:8x2UdXqww7NYqGNabQ7i1nAgB5LegzjC9K
 github.com/containerd/containerd/v2 v2.2.4/go.mod h1:YBcTO8D9149QY9zNmUjy04Mhuc4DlrZQ8FIOwKZEM7o=
 github.com/containerd/containerd/v2 v2.3.0 h1:qpB5dyToxPqea1OdedyAiAnnor5wxTM+Py9nWt5CnWY=
 github.com/containerd/containerd/v2 v2.3.0/go.mod h1:+chyhxLNeqUVOcTJGgaSu/IbDGX6p3+d8AJjAaerAS8=
+github.com/containerd/containerd/v2 v2.3.1 h1:4dVXBdlvotRBlaP2TmNbY/EGc06KJrMDDUqQdxX/HOk=
+github.com/containerd/containerd/v2 v2.3.1/go.mod h1:xVoxGPWZBwwph8DF2IbDhriLKdHfjdpO0b3wFP9wQ1I=
 github.com/containerd/continuity v0.4.5 h1:ZRoN1sXq9u7V6QoHMcVWGhOwDFqZ4B9i5H6un1Wh0x4=
 github.com/containerd/continuity v0.4.5/go.mod h1:/lNJvtJKUQStBzpVQ1+rasXO1LAWtUQssk28EZvJ3nE=
 github.com/containerd/continuity v0.5.0 h1:7a85HZpCSs+1Zps0Ee3DPSuAWY+0SJM1JNM51nlEVDg=
