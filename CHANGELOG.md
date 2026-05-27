@@ -1,8 +1,3 @@
-## [Unreleased]
-
-* feat(syft): add native AWS ECR authentication via IRSA and EKS Pod Identity
-
-
 ## Version 0.42.5 (2026-05-26)
 
 ### Dependency updates
