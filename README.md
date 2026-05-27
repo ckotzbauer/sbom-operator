@@ -107,6 +107,21 @@ a one-time analysis at startup to sync the targets with the actual cluster-state
 startup sync.
 
 
+### AWS ECR (IRSA / Pod Identity)
+
+When images are hosted in private AWS Elastic Container Registry
+(`*.dkr.ecr.*.amazonaws.com`) and no pull secrets are configured on the
+pod, sbom-operator automatically obtains a registry token via the AWS
+SDK default credentials chain. IRSA, EKS Pod Identity, and EC2 instance
+roles are all supported transparently. The required IAM permission for
+the operator's role is `ecr:GetAuthorizationToken`. For successful image
+layer pulls, the role also needs `ecr:BatchGetImage` and
+`ecr:GetDownloadUrlForLayer` on the relevant repositories.
+
+ECR Public (`public.ecr.aws/*`) and cross-account ECR via assume-role are
+not supported by this auto-detection. Use `--fallback-pull-secret` for
+those scenarios.
+
 ## Targets
 
 It is possible to store the generated SBOMs to different targets (even multple at once). All targets are using Syft as analyzer.
