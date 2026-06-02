@@ -1,3 +1,18 @@
+## Version 0.43.0 (2026-06-02)
+
+### Dependency updates
+
+* [[`35d1d157`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/35d1d157)] - **deps**: update module modernc.org&#x2F;sqlite to v1.51.0 (#925)
+* [[`7e5852d1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7e5852d1)] - **deps**: update module github.com&#x2F;aws&#x2F;aws-sdk-go-v2&#x2F;service&#x2F;ecr to v1.57.2 (#924)
+* [[`c9b31dab`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c9b31dab)] - **deps**: update alpine:latest docker digest to 5b10f43 (#895)
+* [[`42337d1f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/42337d1f)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd&#x2F;v2 to v2.3.1 [security] (#922)
+
+### Common changes
+
+* [[`936c459e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/936c459e)] - **chore**: Clean up CHANGELOG by removing unreleased section
+* [[`9125713b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9125713b)] - **syft**: add native AWS ECR authentication (#923)
+
+
 ## Version 0.42.5 (2026-05-26)
 
 ### Dependency updates
