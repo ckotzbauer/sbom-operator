@@ -1,3 +1,12 @@
+## Version 0.43.1 (2026-06-09)
+
+### Dependency updates
+
+* [[`bd7f8267`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bd7f8267)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 055de63 (#929)
+* [[`9564bebb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9564bebb)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.45.0 (#928)
+* [[`0e0924d4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0e0924d4)] - **deps**: update imjasonh&#x2F;setup-crane action to v0.6 (#927)
+
+
 ## Version 0.43.0 (2026-06-02)
 
 ### Dependency updates
