@@ -4,7 +4,7 @@ go 1.26.3
 
 require (
 	github.com/DependencyTrack/client-go v0.19.0
-	github.com/anchore/stereoscope v0.2.0
+	github.com/anchore/stereoscope v0.2.1
 	github.com/anchore/syft v1.45.0
 	github.com/aws/aws-sdk-go-v2/config v1.32.18
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.57.2
