@@ -105,7 +105,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 func initTargets() []Target {
 	targets := make([]Target, 0)
 
-	t := NewDevGuardTarget(OperatorConfig.DevGuardToken, OperatorConfig.DevGuardApiURL, OperatorConfig.DevGuardProjectName, nil)
+	t := NewDevGuardTarget(OperatorConfig.DevGuardToken, OperatorConfig.DevGuardApiURL, nil)
 	targets = append(targets, t)
 
 	return targets
@@ -159,9 +159,18 @@ func getChangedContainers(oldPod, newPod libk8s.PodInfo) ([]*libk8s.ContainerInf
 	return addedContainers, removedContainers
 }
 
-func containsImage(images []kubernetes.ImageInNamespace, image kubernetes.ImageInNamespace) bool {
-	for _, i := range images {
-		if i.String() == image.String() {
+func containsImage(images []kubernetes.ImageInNamespace, target kubernetes.ImageInNamespace) bool {
+	targetRef := target.Image.Image
+	if !strings.Contains(targetRef, "/") {
+		targetRef = "docker.io/library/" + targetRef
+	}
+
+	for _, candidate := range images {
+		candidateRef := candidate.Image.Image
+		if !strings.Contains(candidateRef, "/") {
+			candidateRef = "docker.io/library/" + candidateRef
+		}
+		if candidate.Namespace == target.Namespace && candidateRef == targetRef {
 			return true
 		}
 	}
@@ -226,13 +235,6 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 
 	go func() {
 
-		for _, t := range p.Targets {
-			err := t.Initialize()
-			if err != nil {
-				slog.Error("Target could not be initialized", "err", err)
-			}
-		}
-
 		slog.Info("Start pod-informer")
 		informer.Run(stop)
 		slog.Info("Pod-informer has stopped")
@@ -265,6 +267,7 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 				info := p.K8s.Client.ExtractPodInfos(*pod)
 				for _, c := range info.Containers {
 					allImages = append(allImages, kubernetes.ImageInNamespace{Namespace: info.PodNamespace, Image: c.Image})
+
 					if !containsImage(targetImages, kubernetes.ImageInNamespace{
 						Image:     c.Image,
 						Namespace: info.PodNamespace,

@@ -60,12 +60,6 @@ func (c *CronService) runBackgroundService() {
 	slog.Info("Execute background-service")
 
 	for _, t := range c.processor.Targets {
-		err := t.Initialize()
-		if err != nil {
-			slog.Error("Target could not be initialized", "err", err)
-			continue
-		}
-
 		t.LoadImages()
 	}
 

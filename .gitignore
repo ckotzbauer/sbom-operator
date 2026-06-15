@@ -26,3 +26,4 @@ dist
 
 work
 /auth
+devguard-operator.yaml

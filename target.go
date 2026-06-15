@@ -14,8 +14,6 @@ type TargetContext struct {
 }
 
 type Target interface {
-	Initialize() error
-	ValidateConfig() error
 	ProcessSbom(ctx *TargetContext) error
 	LoadImages() ([]kubernetes.ImageInNamespace, error)
 	Remove(images []kubernetes.ImageInNamespace) error
