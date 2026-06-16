@@ -1,3 +1,15 @@
+## Version 0.43.2 (2026-06-16)
+
+### Dependency updates
+
+* [[`825944d1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/825944d1)] - **deps**: update aws-sdk-go-v2 monorepo to v1.32.25 (#936)
+* [[`987086c4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/987086c4)] - **deps**: update alpine docker tag to v3.24 (#935)
+* [[`2d30705f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2d30705f)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.45.1 (#933)
+* [[`499f9008`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/499f9008)] - **deps**: update module modernc.org&#x2F;sqlite to v1.52.0 (#934)
+* [[`de4d0177`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/de4d0177)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.2.1 (#932)
+* [[`6c1f07b8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6c1f07b8)] - **deps**: update aws-sdk-go-v2 monorepo (#926)
+
+
 ## Version 0.43.1 (2026-06-09)
 
 ### Dependency updates
