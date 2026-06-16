@@ -148,6 +148,13 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	bom := string(b)
+	if src != nil {
+		if err := src.Close(); err != nil {
+			logrus.WithError(err).Infof("unable to close source")
+		}
+		src = nil
+	}
+
 	err = removeTempContents()
 	if err != nil {
 		logrus.WithError(err).Warn("Could not cleanup tmp directory")
