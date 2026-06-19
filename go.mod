@@ -113,6 +113,7 @@ require (
 	github.com/containerd/log v0.1.0 // indirect
 	github.com/containerd/platforms v1.0.0-rc.4 // indirect
 	github.com/containerd/plugin v1.1.0 // indirect
+	github.com/containerd/stargz-snapshotter/estargz v0.18.2 // indirect
 	github.com/containerd/ttrpc v1.2.8 // indirect
 	github.com/containerd/typeurl/v2 v2.2.3 // indirect
 	github.com/cyphar/filepath-securejoin v0.6.1 // indirect
@@ -259,6 +260,7 @@ require (
 	github.com/therootcompany/xz v1.0.1 // indirect
 	github.com/ulikunitz/xz v0.5.15 // indirect
 	github.com/vbatts/go-mtree v0.7.0 // indirect
+	github.com/vbatts/tar-split v0.12.2 // indirect
 	github.com/vifraa/gopom v1.0.0 // indirect
 	github.com/wagoodman/go-partybus v0.0.0-20230516145632-8ccac152c651 // indirect
 	github.com/wagoodman/go-progress v0.0.0-20260303201901-10176f79b2c0 // indirect
@@ -326,3 +328,10 @@ require (
 	sigs.k8s.io/json v0.0.0-20250730193827-2d320260d730 // indirect
 	sigs.k8s.io/yaml v1.6.0 // indirect
 )
+
+// go-containerregistry v0.21.6 added a concurrent-pull limiter (pkg/v1/remote/limiter.go)
+// that deadlocks stereoscope on images with 5+ layers: stereoscope keeps all layer readers
+// open while the limiter only frees its 4 token slots on reader Close(). v0.21.7 does not fix
+// it (limiter.go is unchanged). syft v1.45.1 requires v0.21.6, so MVS overrides a plain
+// require -- force v0.21.5 via replace until the upstream reader-lifecycle issue is fixed.
+replace github.com/google/go-containerregistry => github.com/google/go-containerregistry v0.21.5
