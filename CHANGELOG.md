@@ -1,3 +1,10 @@
+## Version 0.43.3 (2026-06-19)
+
+### Dependency updates
+
+* [[`4120bc48`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4120bc48)] - **deps**: downgrade go-containerregistry to v0.21.5 (#930)
+
+
 ## Version 0.43.2 (2026-06-16)
 
 ### Dependency updates
