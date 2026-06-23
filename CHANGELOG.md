@@ -1,3 +1,14 @@
+## Version 0.43.4 (2026-06-23)
+
+### Dependency updates
+
+* [[`37341f9e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/37341f9e)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.7 (#942)
+* [[`17236ca9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/17236ca9)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd&#x2F;v2 to v2.3.2 [security] (#944)
+* [[`68045193`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/68045193)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd to v1.7.33 [security] (#943)
+* [[`aeed88dc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aeed88dc)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to c48552f (#937)
+* [[`838cf05f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/838cf05f)] - **deps**: update kubernetes versions to v0.36.2 (#941)
+
+
 ## Version 0.43.3 (2026-06-19)
 
 ### Dependency updates
