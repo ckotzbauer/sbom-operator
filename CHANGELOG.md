@@ -1,3 +1,11 @@
+## Version 0.43.5 (2026-06-30)
+
+### Dependency updates
+
+* [[`aefbb29b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aefbb29b)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.2.2 (#946)
+* [[`26eba9ab`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/26eba9ab)] - **deps**: update module modernc.org&#x2F;sqlite to v1.53.0 (#945)
+
+
 ## Version 0.43.4 (2026-06-23)
 
 ### Dependency updates
