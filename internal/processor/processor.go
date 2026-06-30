@@ -31,6 +31,8 @@ type Processor struct {
 	imageMap          map[string]bool
 	allowedNamespaces map[string]bool
 	namespaceMutex    sync.RWMutex
+	scanMutex         sync.Mutex
+	executeSyft       func(*liboci.RegistryImage) (string, error)
 }
 
 func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
@@ -40,7 +42,7 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 		targets = initTargets(k8s)
 	}
 
-	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool), allowedNamespaces: make(map[string]bool)}
+	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool), allowedNamespaces: make(map[string]bool), executeSyft: sy.ExecuteSyft}
 }
 
 func (p *Processor) ListenForPods() {
@@ -196,6 +198,9 @@ func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.Re
 }
 
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
+	p.scanMutex.Lock()
+	defer p.scanMutex.Unlock()
+
 	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
 
@@ -207,7 +212,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		}
 
 		p.imageMap[container.Image.ImageID] = true
-		sbom, err := p.sy.ExecuteSyft(container.Image)
+		sbom, err := p.executeImageScan(container.Image)
 		if err != nil {
 			// Error is already handled from syft module.
 			continue
@@ -222,6 +227,14 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	if !errOccurred && len(pod.Containers) > 0 {
 		p.K8s.UpdatePodAnnotation(pod)
 	}
+}
+
+func (p *Processor) executeImageScan(img *liboci.RegistryImage) (string, error) {
+	if p.executeSyft != nil {
+		return p.executeSyft(img)
+	}
+
+	return p.sy.ExecuteSyft(img)
 }
 
 func initTargets(k8s *kubernetes.KubeClient) []target.Target {
@@ -312,7 +325,7 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 		for _, t := range targetImages {
 			if !containsImage(allImages, t.ImageID) {
 				removableImages = append(removableImages, t)
-				delete(p.imageMap, t.ImageID)
+				p.deleteImageFromMap(t.ImageID)
 				logrus.Debugf("Image %s marked for removal", t.ImageID)
 			}
 		}
@@ -415,7 +428,7 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 
 		if !found {
 			images = append(images, c.Image)
-			delete(p.imageMap, c.Image.ImageID)
+			p.deleteImageFromMap(c.Image.ImageID)
 			logrus.Debugf("Image %s marked for removal", c.Image.ImageID)
 		}
 	}
@@ -430,6 +443,12 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 			}
 		}
 	}
+}
+
+func (p *Processor) deleteImageFromMap(imageID string) {
+	p.scanMutex.Lock()
+	defer p.scanMutex.Unlock()
+	delete(p.imageMap, imageID)
 }
 
 func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
