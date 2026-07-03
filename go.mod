@@ -9,7 +9,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.32.25
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.58.4
 	github.com/ckotzbauer/libk8soci v0.0.0-20260519192830-12e4c30ff61a
-	github.com/ckotzbauer/libstandard v0.0.0-20260410122238-17182142e3bb
+	github.com/ckotzbauer/libstandard v0.0.0-20260701005036-4e449e168e98
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
@@ -62,7 +62,7 @@ require (
 	github.com/anchore/go-sync v0.1.0 // indirect
 	github.com/anchore/go-version v1.2.2-0.20200701162849-18adb9c92b9b // indirect
 	github.com/anchore/packageurl-go v0.2.0 // indirect
-	github.com/andybalholm/brotli v1.2.1 // indirect
+	github.com/andybalholm/brotli v1.2.2 // indirect
 	github.com/apparentlymart/go-textseg/v15 v15.0.0 // indirect
 	github.com/aquasecurity/go-pep440-version v0.0.1 // indirect
 	github.com/aquasecurity/go-version v0.0.1 // indirect

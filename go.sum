@@ -163,6 +163,8 @@ github.com/anchore/syft v1.45.1/go.mod h1:gWscKBIWLpNe8zJI8K3jXi3Af2tRZ+PLcIXszF
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.2.1 h1:R+f5xP285VArJDRgowrfb9DqL18yVK0gKAW/F+eTWro=
 github.com/andybalholm/brotli v1.2.1/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
+github.com/andybalholm/brotli v1.2.2 h1:HzTuoo2ErYQqf5qvcJInB8uvqSVxRttzkFexPWtnceM=
+github.com/andybalholm/brotli v1.2.2/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
 github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be h1:9AeTilPcZAjCFIImctFaOjnTIavg87rW78vTPkQqLI8=
 github.com/anmitsu/go-shlex v0.0.0-20200514113438-38f4b401e2be/go.mod h1:ySMOLuWl6zY27l47sB3qLNK6tF2fkHG55UZxx8oIVo4=
 github.com/antihax/optional v1.0.0/go.mod h1:uupD/76wgC+ih3iEmQUL+0Ugr19nfwCT1kdvxnR2qWY=
@@ -281,6 +283,8 @@ github.com/ckotzbauer/libk8soci v0.0.0-20260519192830-12e4c30ff61a h1:HC2QVfxdwJ
 github.com/ckotzbauer/libk8soci v0.0.0-20260519192830-12e4c30ff61a/go.mod h1:pgOdxblcXswQOxyOqjOqLoU54AvPIkiYTxueyqxW+dA=
 github.com/ckotzbauer/libstandard v0.0.0-20260410122238-17182142e3bb h1:PY0dIl+H3iextKFo70j/86YmcZ3LPInY5KC+ooCqdxw=
 github.com/ckotzbauer/libstandard v0.0.0-20260410122238-17182142e3bb/go.mod h1:owLsyQxDmtbKTb4Om4xakCCYQTBbF8ege2m6CE0tKi4=
+github.com/ckotzbauer/libstandard v0.0.0-20260701005036-4e449e168e98 h1:XKl8ddXpt2x9u3BbowFNZ/9mhuIyeN4REBcu6pQ1kkU=
+github.com/ckotzbauer/libstandard v0.0.0-20260701005036-4e449e168e98/go.mod h1:nBD0FPwNKWVD3aHyr+q0BABnHFnWKrBFD8/LiUTomic=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/clipperhouse/displaywidth v0.11.0 h1:lBc6kY44VFw+TDx4I8opi/EtL9m20WSEFgwIwO+UVM8=
 github.com/clipperhouse/displaywidth v0.11.0/go.mod h1:bkrFNkf81G8HyVqmKGxsPufD3JhNl3dSqnGhOoSD/o0=
