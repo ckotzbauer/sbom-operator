@@ -1,3 +1,14 @@
+## Version 0.43.6 (2026-07-07)
+
+### Dependency updates
+
+* [[`b2bc2c2d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b2bc2c2d)] - **deps**: update aws-sdk-go-v2 monorepo (#951)
+* [[`8dc82160`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8dc82160)] - **deps**: update imjasonh&#x2F;setup-crane action to v0.7 (#950)
+* [[`aacf1705`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/aacf1705)] - **deps**: update aws-sdk-go-v2 monorepo (#949)
+* [[`86350c35`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/86350c35)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 4e449e1 (#948)
+* [[`3bd8ae70`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3bd8ae70)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.46.0 (#947)
+
+
 ## Version 0.43.5 (2026-06-30)
 
 ### Dependency updates
