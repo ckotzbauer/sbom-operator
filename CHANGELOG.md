@@ -1,3 +1,11 @@
+## Version 0.43.7 (2026-07-14)
+
+### Dependency updates
+
+* [[`6a2af9ba`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6a2af9ba)] - **deps**: update module github.com&#x2F;aws&#x2F;aws-sdk-go-v2&#x2F;config to v1.32.29 (#953)
+* [[`5d12e882`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5d12e882)] - **deps**: update aws-sdk-go-v2 monorepo (#952)
+
+
 ## Version 0.43.6 (2026-07-07)
 
 ### Dependency updates
