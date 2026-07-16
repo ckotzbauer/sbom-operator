@@ -65,12 +65,65 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `cron` | `false` | `""` | Backround-Service interval (CRON). See [Trigger](#analysis-trigger) for details. |
 | `ignore-annotations` | `false` | `false` | Force analyzing of all images, including those from annotated pods. |
 | `format` | `false` | `json` | SBOM-Format. (One of `json`, `syftjson`, `cyclonedxjson`, `spdxjson`, `github`, `githubjson`, `cyclonedx`, `cyclone`, `cyclonedxxml`, `spdx`, `spdxtv`, `spdxtagvalue`, `text`, `table`) |
+| `format-version` | `false` | *(see below)* | SBOM-Format-Version. Overrides the Syft encoder specification version for version-aware families (`cyclonedxjson`, `cyclonedxxml`, `spdxjson`, `spdxtagvalue`). Flag can be set via `SBOM_FORMAT_VERSION` env var or `formatVersion` in YAML. See [Format Versions](#format-versions) for the complete supported-matrix. |
 | `targets` | `false` | `git` | Comma-delimited list of targets to sent the generated SBOMs to. Possible targets `git`, `dtrack`, `oci`, `configmap`. Ignored with a `job-image` |
 | `pod-label-selector` | `false` | `""` | Kubernetes Label-Selector for pods. |
 | `namespace-label-selector` | `false` | `""` | Kubernetes Label-Selector for namespaces. |
 | `fallback-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
 | `registry-proxy` | `false` | `[]` | Proxy-Registry-Hosts to use. Flag can be used multiple times. Value-Mapping e.g. `docker.io=ghcr.io` |
 | `delete-orphan-images` | `false` | `true` | Delete orphan images automatically |
+
+
+### Format Versions
+
+The `--format-version` flag (env: `SBOM_FORMAT_VERSION`, YAML: `formatVersion`) pins the CycloneDX or SPDX specification version used by the embedded Syft encoder. It only applies when `--format` selects a **version-aware family**; for non-version-aware formats (`json`, `syftjson`, `text`, `table`, `github`) the flag is silently accepted and Syft defaults are used.
+
+#### Family / Alias Matrix
+
+| Family | Canonical alias | Aliases | Version-aware? | Default source |
+|--------|----------------|---------|----------------|----------------|
+| CycloneDX JSON | `cyclonedxjson` | — | Yes | Bundled Syft |
+| CycloneDX XML | `cyclonedxxml` | `cyclonedx`, `cyclone` | Yes | Bundled Syft |
+| SPDX JSON | `spdxjson` | — | Yes | Bundled Syft |
+| SPDX Tag-Value | `spdxtagvalue` | `spdx`, `spdxtv` | Yes | Bundled Syft |
+| Syft JSON | `json`, `syftjson` | — | No | — |
+| Plain output | `text`, `table` | — | No | — |
+| GitHub | `github`, `githubjson` | — | No | — |
+
+Exact supported revisions and defaults come from the Syft version bundled in each operator release. Run `sbom-operator --help` to see the authoritative values for the installed binary.
+
+#### Usage Examples
+
+**CLI flag (explicit CycloneDX 1.3 JSON):**
+```bash
+sbom-operator --format=cyclonedxjson --format-version=1.3
+```
+
+**Environment variable (SPDX 2.3):**
+```bash
+export SBOM_FORMAT_VERSION=2.3
+sbom-operator --format=spdxjson
+```
+
+**Helm YAML:**
+```yaml
+args:
+  format: cyclonedxxml
+  formatVersion: "1.5"
+```
+
+#### Invalid Combinations
+
+Starting the operator with a version not supported by the selected family produces a hard `Fatal` error **before** any Kubernetes runtime initialization. The error includes the requested family, rejected version, and the versions supported by the bundled Syft release.
+
+#### Unknown Format Fallback
+
+An unknown format name (not in the alias matrix) with an omitted or whitespace-only `format-version` delegates to Syft's default JSON encoder, preserving backward compatibility with custom format strings:
+```bash
+sbom-operator --format=custom-format --format-version=""
+```
+
+When an unknown format is paired with a version-like string (e.g. `--format-version=1.2`), the version is resolved to its family (CycloneDX 1.2 → `cyclonedxjson`) and the operator logs the concrete effective version at startup.
 
 
 ### Example Helm-Config

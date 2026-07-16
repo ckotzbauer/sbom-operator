@@ -40,6 +40,7 @@ type Config struct {
 	OciToken                         string   `yaml:"ociToken" env:"SBOM_OCI_TOKEN" flag:"oci-token"`
 	FallbackPullSecret               string   `yaml:"fallbackPullSecret" env:"SBOM_FALLBACK_PULL_SECRET" flag:"fallback-pull-secret"`
 	RegistryProxies                  []string `yaml:"registryProxy" env:"SBOM_REGISTRY_PROXY" flag:"registry-proxy"`
+	FormatVersion                    string   `yaml:"formatVersion" env:"SBOM_FORMAT_VERSION" flag:"format-version"`
 	Verbosity                        string   `env:"SBOM_VERBOSITY" flag:"verbosity"`
 }
 
@@ -84,6 +85,7 @@ var (
 	ConfigKeyOciToken           = "oci-token"
 	ConfigKeyFallbackPullSecret = "fallback-pull-secret"
 	ConfigKeyRegistryProxy      = "registry-proxy"
+	ConfigKeyFormatVersion      = "format-version"
 
 	OperatorConfig *Config
 )

@@ -11,6 +11,9 @@ dist
 # Test binary, build with `go test -c`
 *.test
 
+# Test files used as diagnostic output
+internal/syft/fixtures/*_generated.*
+
 # Output of the go coverage tool, specifically when used with LiteIDE
 *.out
 

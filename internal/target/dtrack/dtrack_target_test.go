@@ -42,7 +42,7 @@ func TestGetRepoWithVersion(t *testing.T) {
 			expectedName:     "my-cluster-docker.io/library/alpine",
 			expectedVersion:  "3.14",
 		},
-    {
+		{
 			name:             "Short name, prefix mode",
 			image:            &liboci.RegistryImage{ImageID: "docker.io/library/alpine:3.14", Image: "alpine:3.14"},
 			useShortName:     true,

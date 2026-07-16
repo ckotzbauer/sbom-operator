@@ -44,14 +44,16 @@ type Syft struct {
 	resolveVersion   func() string
 	proxyRegistryMap map[string]string
 	appVersion       string
+	resolvedFormat   *FormatVersion
 }
 
-func New(sbomFormat string, proxyRegistryMap map[string]string, appVersion string) *Syft {
+func New(sbomFormat string, proxyRegistryMap map[string]string, appVersion string, resolvedFormat *FormatVersion) *Syft {
 	return &Syft{
 		sbomFormat:       sbomFormat,
 		resolveVersion:   getSyftVersion,
 		proxyRegistryMap: proxyRegistryMap,
 		appVersion:       appVersion,
+		resolvedFormat:   resolvedFormat,
 	}
 }
 
@@ -135,7 +137,11 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
-	encoder, err := GetEncoder(s.sbomFormat)
+	var resolved FormatVersion
+	if s.resolvedFormat != nil {
+		resolved = *s.resolvedFormat
+	}
+	encoder, err := GetEncoderWithVersion(resolved, s.sbomFormat)
 	if err != nil {
 		logrus.WithError(err).Error("Could not resolve encoder")
 		return "", err
