@@ -1,3 +1,15 @@
+## Version 0.44.0 (2026-07-17)
+
+### Features and improvements
+
+* [[`fde05ef2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fde05ef2)] - **feat**: add configurable SBOM specification versions (#956)
+
+### Dependency updates
+
+* [[`6fccb7a5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6fccb7a5)] - **deps**: update alpine:latest docker digest to 28bd5fe (#931)
+* [[`563e4be8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/563e4be8)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 9ea1abe (#954)
+
+
 ## Version 0.43.7 (2026-07-14)
 
 ### Dependency updates
