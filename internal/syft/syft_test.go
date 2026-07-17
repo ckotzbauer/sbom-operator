@@ -67,7 +67,7 @@ func writeErroredSbom(t *testing.T, assertResult bool, data, name, format string
 
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
-	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0", nil).WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 
 	assert.NoError(t, err)
@@ -95,7 +95,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
-	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0", nil).WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -116,7 +116,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
-	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0", nil).WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
@@ -144,7 +144,7 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 // test for analysing an image completely without pullSecret
 func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
-	s := syft.New(format, map[string]string{}, "0.0.0").WithSyftVersion("v9.9.9")
+	s := syft.New(format, map[string]string{}, "0.0.0", nil).WithSyftVersion("v9.9.9")
 	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 

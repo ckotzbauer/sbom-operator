@@ -31,16 +31,46 @@ func newRootCmd() *cobra.Command {
 		Short: "An operator for cataloguing all k8s-cluster-images to multiple targets.",
 		PersistentPreRunE: func(cmd *cobra.Command, args []string) error {
 			internal.OperatorConfig = &internal.Config{}
-			return libstandard.DefaultInitializer(internal.OperatorConfig, cmd, "sbom-operator")
+			if err := libstandard.DefaultInitializer(internal.OperatorConfig, cmd, "sbom-operator"); err != nil {
+				return err
+			}
+			// Resolve format-version through the single unified entry point.
+			// Both daemon and informer paths receive the same resolved value.
+			fv := syft.ResolveFormatVersionWithFamily(
+				internal.OperatorConfig.Format,
+				internal.OperatorConfig.FormatVersion,
+			)
+			if fv.Err != nil {
+				logrus.WithFields(logrus.Fields{
+					"format":         internal.OperatorConfig.Format,
+					"format_version": internal.OperatorConfig.FormatVersion,
+				}).WithError(fv.Err).Fatal("Invalid format-version configuration")
+			}
+			// Store resolved value in config for daemon/informer use.
+			// Log effective format version for version-aware formats.
+			if fv.Family != "" {
+				logrus.WithFields(logrus.Fields{
+					"sbom_format":  internal.OperatorConfig.Format,
+					"sbom_family":  fv.Family,
+					"sbom_version": fv.Version,
+				}).Info("Resolved SBOM format version")
+			}
+			return nil
 		},
 		Run: func(cmd *cobra.Command, args []string) {
 			printVersion()
 
+			// Use the unified resolver (same result as PersistentPreRunE).
+			fv := syft.ResolveFormatVersionWithFamily(
+				internal.OperatorConfig.Format,
+				internal.OperatorConfig.FormatVersion,
+			)
+
 			if internal.OperatorConfig.Cron != "" {
-				daemon.Start(internal.OperatorConfig.Cron, Version)
+				daemon.Start(internal.OperatorConfig.Cron, Version, &fv)
 			} else {
 				k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version)
+				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version, &fv)
 				p := processor.New(k8s, sy)
 				p.ListenForPods()
 			}
@@ -94,6 +124,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciRegistry, "", "OCI-Registry")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciUser, "", "OCI-User")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyFormatVersion, "", syft.FormatVersionHelp())
 
 	return rootCmd
 }
@@ -114,10 +145,49 @@ func health(w http.ResponseWriter, req *http.Request) {
 	}
 }
 
+// validateFormatVersion resolves the format-version and validates it against
+// the pinned Syft library.  It returns a deterministic actionable error when
+// the version is unsupported.  Non-version-aware formats (json, text …)
+// are accepted without error since versioning is only a CycloneDX / SPDX concern.
+func validateFormatVersion(format, formatVersion string) error {
+	// First check for CycloneDX family.
+	fv := syft.ResolveCycloneDXFormatVersion(formatVersion)
+	if fv.Family != "" {
+		if fv.Err != nil {
+			return fv.Err // unsupported CycloneDX version
+		}
+		return nil // valid CycloneDX alias or version
+	}
+
+	// Then check for SPDX family.
+	spdxFv := syft.ResolveSPDXFormatVersion(formatVersion)
+	if spdxFv.Family != "" {
+		if spdxFv.Err != nil {
+			return spdxFv.Err // unsupported SPDX version
+		}
+		// When a version-like string was explicitly provided (not an alias),
+		// validate it against the user's requested format family.
+		// E.g. "3.0" resolves to spdxjson; if the user asked for "spdx"
+		// (tag-value), ValidateSPDXFormatVersion catches that 3.0 is not
+		// supported by tag-value.  Shared versions (2.2, 2.3) pass because
+		// they belong to both families.  Alias-only requests (no explicit
+		// version string) pass through without per-family validation.
+		if syft.IsVersionLike(formatVersion) {
+			if userFamily := syft.ResolveSPDXFormatVersion(format).Family; userFamily != "" {
+				if err := syft.ValidateSPDXFormatVersion(userFamily, spdxFv.Version); err != nil {
+					return err
+				}
+			}
+		}
+		return nil // valid SPDX alias or version
+	}
+
+	return nil // not a version-aware format — no validation needed
+}
+
 func main() {
 	rootCmd := newRootCmd()
-	err := rootCmd.Execute()
-	if err != nil {
+	if err := rootCmd.Execute(); err != nil {
 		panic(err)
 	}
 }
