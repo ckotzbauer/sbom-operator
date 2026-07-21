@@ -1,3 +1,13 @@
+## Version 0.44.1 (2026-07-21)
+
+### Dependency updates
+
+* [[`ee7e286c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ee7e286c)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.48.0 (#960)
+* [[`bbcbac49`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bbcbac49)] - **deps**: update module modernc.org&#x2F;sqlite to v1.54.0 (#959)
+* [[`42a4bef6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/42a4bef6)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to a559dec (#958)
+* [[`7fd2378e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7fd2378e)] - **deps**: update aws-sdk-go-v2 monorepo (#957)
+
+
 ## Version 0.44.0 (2026-07-17)
 
 ### Features and improvements
