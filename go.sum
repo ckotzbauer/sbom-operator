@@ -156,6 +156,8 @@ github.com/anchore/go-macholibre v0.1.1 h1:sTBHi3S1WVIOCamc6NyT8Sn9mBmD30DCTfjfV
 github.com/anchore/go-macholibre v0.1.1/go.mod h1:YNq2610RlvGCK0Za+Klz/OCMtUaEnwwAGA/VfUAQaro=
 github.com/anchore/go-rpmdb v0.1.0 h1:Q8dc208/HYzCqhx0L1zurfm1UPil24hlo9NjkdFmLdE=
 github.com/anchore/go-rpmdb v0.1.0/go.mod h1:eQVa6QFGzKy0qMcnW2pez0XBczvgwSjw9vA23qifEyU=
+github.com/anchore/go-rpmdb v0.2.0 h1:ixcyMg/guhBL9XjBVwhTv9CG48xO07Qkg2uDX2+zx/c=
+github.com/anchore/go-rpmdb v0.2.0/go.mod h1:ATsRlpCXstnoYfzqBfhwGw0U2dolx1BBQ9rAU8jWBAw=
 github.com/anchore/go-struct-converter v0.1.0 h1:2rDRssAl6mgKBSLNiVCMADgZRhoqtw9dedlWa0OhD30=
 github.com/anchore/go-struct-converter v0.1.0/go.mod h1:rYqSE9HbjzpHTI74vwPvae4ZVYZd1lue2ta6xHPdblA=
 github.com/anchore/go-struct-converter v0.2.0-rc2 h1:q+859fW2/jbHJHB2etbNfRlFwYpknyvbqqk1hUdamQ4=
@@ -180,6 +182,8 @@ github.com/anchore/syft v1.46.0 h1:qIXMOJMlznWsWgzOT6xzK8aDhpOG7wnkbA0BS2UKF0c=
 github.com/anchore/syft v1.46.0/go.mod h1:LwBimjMV20nC1zAsN5jzpGTg/6f0X4Acvvx1WymA53g=
 github.com/anchore/syft v1.48.0 h1:N/twtN1gGKjYrmvYYiUa/BNEv+7Blh7An7KDHSXTzxE=
 github.com/anchore/syft v1.48.0/go.mod h1:dTnqn+Yd2KBh7rUhBR7uHcNesdR+7UrZkNz9H6hIl6Q=
+github.com/anchore/syft v1.49.0 h1:eaVZWqcl0jIr1jc1MVzNw5QTHOX7CIy3ajh5YXLfNGk=
+github.com/anchore/syft v1.49.0/go.mod h1:GoYAbp7yMJqX3XYzPpWu0yAaIK92iYbVeARrUw4t0DQ=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.2.1 h1:R+f5xP285VArJDRgowrfb9DqL18yVK0gKAW/F+eTWro=
 github.com/andybalholm/brotli v1.2.1/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
