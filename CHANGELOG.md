@@ -1,3 +1,15 @@
+## Version 0.44.2 (2026-07-28)
+
+### Dependency updates
+
+* [[`39f6b60e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/39f6b60e)] - **deps**: update kubernetes versions to v0.36.3 (#966)
+* [[`f70a524f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f70a524f)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.49.0 (#964)
+* [[`d3693095`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d3693095)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.3.0 (#963)
+* [[`dbf93550`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/dbf93550)] - **deps**: update module google.golang.org&#x2F;grpc to v1.82.1 [security] (#965)
+* [[`98d11d9a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/98d11d9a)] - **deps**: update aws-sdk-go-v2 monorepo (#962)
+* [[`08211536`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/08211536)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 764159d (#961)
+
+
 ## Version 0.44.1 (2026-07-21)
 
 ### Dependency updates
