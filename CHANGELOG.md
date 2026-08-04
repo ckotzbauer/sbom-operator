@@ -1,3 +1,12 @@
+## Version 0.44.3 (2026-08-04)
+
+### Dependency updates
+
+* [[`15c33b72`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/15c33b72)] - **deps**: update module modernc.org&#x2F;sqlite to v1.55.0 (#970)
+* [[`14a573cf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/14a573cf)] - **deps**: update aws-sdk-go-v2 monorepo (#968)
+* [[`0c49e8c2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0c49e8c2)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to b88d891 (#967)
+
+
 ## Version 0.44.2 (2026-07-28)
 
 ### Dependency updates
