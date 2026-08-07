@@ -204,6 +204,9 @@ Each image in the cluster is created as project with the full-image name (regist
 When there's no image-tag, but a digest, the digest is used as project-version.
 The `autoCreate` option of DT is used. You have to set the `--format` flag to `cyclonedx` with this target.
 
+> [!IMPORTANT]
+> Dependency-Track 5.0.x rejects CycloneDX 1.7, which is the default emitted by the Syft version currently bundled with sbom-operator. Configure `--format-version=1.6` (or `SBOM_FORMAT_VERSION=1.6` / `formatVersion: "1.6"`) when using the `dtrack` target. If the version is omitted, the operator logs a startup warning but preserves Syft's default.
+
 ---
 #### Custom dtrack project name:
 
