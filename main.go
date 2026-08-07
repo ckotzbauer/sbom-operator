@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"net/http"
 	"runtime"
+	"strings"
 	"time"
 
 	"github.com/ckotzbauer/libstandard"
@@ -34,6 +35,7 @@ func newRootCmd() *cobra.Command {
 			if err := libstandard.DefaultInitializer(internal.OperatorConfig, cmd, "sbom-operator"); err != nil {
 				return err
 			}
+			warnAboutDtrackCycloneDXDefault(internal.OperatorConfig)
 			// Resolve format-version through the single unified entry point.
 			// Both daemon and informer paths receive the same resolved value.
 			fv := syft.ResolveFormatVersionWithFamily(
@@ -127,6 +129,33 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormatVersion, "", syft.FormatVersionHelp())
 
 	return rootCmd
+}
+
+func warnAboutDtrackCycloneDXDefault(config *internal.Config) {
+	if strings.TrimSpace(config.FormatVersion) != "" {
+		return
+	}
+
+	usesDtrack := false
+	for _, configuredTarget := range config.Targets {
+		if configuredTarget == "dtrack" {
+			usesDtrack = true
+			break
+		}
+	}
+	if !usesDtrack {
+		return
+	}
+
+	formatVersion := syft.ResolveCycloneDXFormatVersion(config.Format)
+	if formatVersion.Family == "" {
+		return
+	}
+
+	logrus.WithFields(logrus.Fields{
+		"sbom_family":  formatVersion.Family,
+		"sbom_version": formatVersion.Version,
+	}).Warn("Dependency-Track releases through 5.0.x reject the bundled default CycloneDX version; set --format-version=1.6")
 }
 
 func printVersion() {

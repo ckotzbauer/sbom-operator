@@ -3,13 +3,91 @@ package main
 import (
 	"io"
 	"os"
+	"strings"
 	"testing"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/sirupsen/logrus"
+	logrustest "github.com/sirupsen/logrus/hooks/test"
+	"github.com/spf13/cobra"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
+
+func TestDtrackDefaultCycloneDXStartupWarning(t *testing.T) {
+	tests := []struct {
+		name     string
+		args     []string
+		wantWarn bool
+	}{
+		{
+			name:     "Dependency-Track with default CycloneDX XML",
+			args:     []string{"--targets", "dtrack", "--format", "cyclonedx"},
+			wantWarn: true,
+		},
+		{
+			name:     "Dependency-Track among multiple targets",
+			args:     []string{"--targets", "git,dtrack", "--format", "cyclonedxjson"},
+			wantWarn: true,
+		},
+		{
+			name:     "explicit compatible version",
+			args:     []string{"--targets", "dtrack", "--format", "cyclonedx", "--format-version", "1.6"},
+			wantWarn: false,
+		},
+		{
+			name:     "non-CycloneDX format",
+			args:     []string{"--targets", "dtrack", "--format", "json"},
+			wantWarn: false,
+		},
+		{
+			name:     "non-Dependency-Track target",
+			args:     []string{"--targets", "git", "--format", "cyclonedx"},
+			wantWarn: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			entries := executeStartupAndCollectLogs(t, tt.args)
+			warning := findDtrackVersionWarning(entries)
+			if tt.wantWarn {
+				require.NotNil(t, warning)
+				assert.Equal(t, "1.7", warning.Data["sbom_version"])
+			} else {
+				assert.Nil(t, warning)
+			}
+		})
+	}
+}
+
+func executeStartupAndCollectLogs(t *testing.T, args []string) []*logrus.Entry {
+	t.Helper()
+
+	cmd := newRootCmd()
+	cmd.SetArgs(args)
+	cmd.Run = func(cmd *cobra.Command, args []string) {}
+
+	logger := logrus.StandardLogger()
+	previousHooks := logger.ReplaceHooks(make(logrus.LevelHooks))
+	t.Cleanup(func() {
+		logger.ReplaceHooks(previousHooks)
+	})
+	hook := logrustest.NewGlobal()
+
+	require.NoError(t, cmd.Execute())
+	return hook.AllEntries()
+}
+
+func findDtrackVersionWarning(entries []*logrus.Entry) *logrus.Entry {
+	for _, entry := range entries {
+		if strings.Contains(entry.Message, "--format-version=1.6") {
+			return entry
+		}
+	}
+	return nil
+}
 
 // TestValidateFormatVersion_StartupBoundary verifies that the startup
 // boundary (PersistentPreRunE) rejects invalid CycloneDX versions before
@@ -381,6 +459,11 @@ func TestREADMEFormatVersionDocumentation(t *testing.T) {
 	assert.Contains(t, readme, "sbom-operator --format=cyclonedxjson --format-version=1.3")
 	assert.Contains(t, readme, "export SBOM_FORMAT_VERSION=2.3")
 	assert.Contains(t, readme, "custom-format")
+
+	// 1f. Dependency-Track 5.0.x users are directed to the compatible
+	// CycloneDX version without changing the global Syft default.
+	assert.Contains(t, readme, "Dependency-Track 5.0.x rejects CycloneDX 1.7")
+	assert.Contains(t, readme, "`--format-version=1.6`")
 }
 
 func TestFormatVersionFlagHelpUsesSyftMetadata(t *testing.T) {
