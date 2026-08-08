@@ -316,7 +316,7 @@ require (
 	github.com/go-logr/logr v1.4.3 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
 	github.com/google/go-cmp v0.7.0 // indirect
-	github.com/google/go-containerregistry v0.21.8
+	github.com/google/go-containerregistry v0.21.9
 	github.com/json-iterator/go v1.1.12 // indirect
 	github.com/modern-go/concurrent v0.0.0-20180306012644-bacd9c7ef1dd // indirect
 	github.com/modern-go/reflect2 v1.0.3-0.20250322232337-35a7c28c31ee // indirect
@@ -342,4 +342,4 @@ require (
 // open while the limiter only frees its 4 token slots on reader Close(). v0.21.7 does not fix
 // it (limiter.go is unchanged). syft v1.45.1 requires v0.21.6, so MVS overrides a plain
 // require -- force v0.21.5 via replace until the upstream reader-lifecycle issue is fixed.
-replace github.com/google/go-containerregistry => github.com/google/go-containerregistry v0.21.8
+replace github.com/google/go-containerregistry => github.com/google/go-containerregistry v0.21.9
