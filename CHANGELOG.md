@@ -1,3 +1,20 @@
+## Version 0.44.4 (2026-08-11)
+
+### Bug fixes
+
+* [[`d5c757a0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d5c757a0)] - **fix**: warn on incompatible dtrack SBOM version (#973)
+
+### Dependency updates
+
+* [[`9ff619b1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9ff619b1)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.9 (#978)
+* [[`1ac517b1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1ac517b1)] - **deps**: update aws-sdk-go-v2 monorepo (#977)
+* [[`48c43dd5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/48c43dd5)] - **deps**: update module github.com&#x2F;go-git&#x2F;go-git&#x2F;v5 to v5.19.2 [security] (#976)
+* [[`2967d723`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2967d723)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.50.0 (#969)
+* [[`3af5172b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3af5172b)] - **deps**: update module modernc.org&#x2F;sqlite to v1.56.0 (#975)
+* [[`9d7a4d32`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9d7a4d32)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.21.8 (#974)
+* [[`7d68b23f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7d68b23f)] - **deps**: update aws-sdk-go-v2 monorepo (#971)
+
+
 ## Version 0.44.3 (2026-08-04)
 
 ### Dependency updates
