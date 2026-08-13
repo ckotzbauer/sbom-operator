@@ -241,11 +241,6 @@ func TestProcessSbomMinimal(t *testing.T) {
 	_ = g.ProcessSbom(ctx)
 }
 
-// TestProcessSbomParentProject verifies the parent project lookup no longer
-// requires a version in the pod annotation. The operator queries
-// `GET /api/v1/project?name=XXX&onlyRoot=true` (GetProjectsForName) instead of
-// `GET /api/v1/project/lookup` so collection projects without a version can be
-// used as parents. See issue #979.
 func TestProcessSbomParentProject(t *testing.T) {
 	parentUUID := "aaaaaaaa-1111-2222-3333-444444444444"
 
