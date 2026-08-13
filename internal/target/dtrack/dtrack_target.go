@@ -544,6 +544,10 @@ func (g *DependencyTrackTarget) Deactivate(images []*libk8s.RegistryImage) error
 			}
 		}
 
+		if !project.Active {
+			continue
+		}
+
 		logrus.Infof("Image not running in any cluster - deactivating %v:%v", project.Name, project.Version)
 		_, err = client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
 			Active:   false,
@@ -586,6 +590,9 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 			continue
 		}
 		if !containsTag(sibling.Tags, sbomOperator) {
+			continue
+		}
+		if !sibling.Active {
 			continue
 		}
 

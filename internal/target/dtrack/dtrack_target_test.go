@@ -503,6 +503,7 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 	activeUUID := "11111111-2222-3333-4444-555555555555"
 	siblingUUID := "66666666-7777-8888-9999-000000000000"
 	untaggedSiblingUUID := "77777777-8888-9999-aaaa-bbbbbbbbbbbb"
+	inactiveSiblingUUID := "88888888-9999-aaaa-bbbb-cccccccccccc"
 
 	var patchUUIDs []string
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -534,7 +535,10 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 					 "tags": [{"name": "sbom-operator"}]},
 					{"name": "library/alpine", "version": "3.12", "active": true,
 					 "uuid": "` + untaggedSiblingUUID + `", "parent": {"uuid": "` + parentUUID + `"},
-					 "tags": []}
+					 "tags": []},
+					{"name": "library/alpine", "version": "3.11", "active": false,
+					 "uuid": "` + inactiveSiblingUUID + `", "parent": {"uuid": "` + parentUUID + `"},
+					 "tags": [{"name": "sbom-operator"}]}
 				]`))
 			} else {
 				_, _ = w.Write([]byte(`[]`))
@@ -562,8 +566,9 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 	}
 
 	_ = g.ProcessSbom(ctx)
-	// Only the sbom-operator-tagged sibling should be patched as inactive. Neither
-	// the current project nor the untagged sibling may be touched.
+	// Only the active, sbom-operator-tagged sibling should be patched as inactive.
+	// The current project, the untagged sibling, and the already-inactive sibling
+	// must not be touched.
 	assert.Equal(t, []string{siblingUUID}, patchUUIDs)
 }
 
@@ -571,6 +576,7 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 // deleting them.
 func TestDeactivate(t *testing.T) {
 	projectUUID := "11111111-2222-3333-4444-555555555555"
+	inactiveUUID := "88888888-9999-aaaa-bbbb-cccccccccccc"
 	var patchCount, deleteCount int
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
@@ -578,21 +584,17 @@ func TestDeactivate(t *testing.T) {
 		switch {
 		case r.URL.Path == "/api/v1/version":
 			_, _ = w.Write([]byte(`{"version": "5.0.0"}`))
-		case r.URL.Path == "/api/v1/project" && r.Method == "GET":
-			_, _ = w.Write([]byte(`[{
-				"name": "library/alpine", "version": "3.13", "active": true,
-				"uuid": "` + projectUUID + `",
-				"tags": [
-					{"name": "kubernetes-cluster=my-cluster"},
-					{"name": "sbom-operator"},
-					{"name": "raw-image-id=alpine:3.13"}
-				]
-			}]`))
 		case r.URL.Path == "/api/v1/project/"+projectUUID && r.Method == "GET":
 			_, _ = w.Write([]byte(`{
 				"name": "library/alpine", "version": "3.13", "active": true,
 				"uuid": "` + projectUUID + `",
 				"tags": [{"name": "sbom-operator"}, {"name": "raw-image-id=alpine:3.13"}]
+			}`))
+		case r.URL.Path == "/api/v1/project/"+inactiveUUID && r.Method == "GET":
+			_, _ = w.Write([]byte(`{
+				"name": "library/alpine", "version": "3.12", "active": false,
+				"uuid": "` + inactiveUUID + `",
+				"tags": [{"name": "sbom-operator"}, {"name": "raw-image-id=alpine:3.12"}]
 			}`))
 		case strings.HasPrefix(r.URL.Path, "/api/v1/project/") && r.Method == "PATCH":
 			patchCount++
@@ -610,9 +612,20 @@ func TestDeactivate(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	images := []*liboci.RegistryImage{{ImageID: "alpine:3.13", Image: "alpine:3.13"}}
+	// Seed the map directly with one active and one already-inactive project.
+	g.imageProjectMap = map[string]uuid.UUID{
+		"alpine:3.13": uuid.MustParse(projectUUID),
+		"alpine:3.12": uuid.MustParse(inactiveUUID),
+	}
+
+	images := []*liboci.RegistryImage{
+		{ImageID: "alpine:3.13", Image: "alpine:3.13"},
+		{ImageID: "alpine:3.12", Image: "alpine:3.12"},
+	}
 	_ = g.Deactivate(images)
-	assert.Equal(t, 1, patchCount, "project should be patched as inactive")
+	// Only the active project should be patched as inactive; the already-inactive
+	// one must be skipped (no 304 PATCH).
+	assert.Equal(t, 1, patchCount, "only the active project should be patched as inactive")
 	assert.Equal(t, 0, deleteCount, "project must not be deleted")
 	assert.True(t, g.ShouldDeactivateOrphans())
 }
