@@ -59,7 +59,7 @@ sbom-git-operator/
 │       │   ├── git_target.go        # Git target: stores SBOMs as files in a git repository
 │       │   └── git_target_test.go   # Tests for ImageIDToFilePath
 │       ├── dtrack/
-│       │   └── dtrack_target.go     # Dependency Track target: uploads BOMs via API, manages project tags
+│       │   └── dtrack_target.go     # Dependency Track target: uploads BOMs, manages project tags, project active/inactive lifecycle
 │       ├── oci/
 │       │   ├── oci_target.go        # OCI registry target: pushes SBOMs as OCI artifacts
 │       │   ├── oci.go               # OCI image/layer construction, media type mapping
@@ -106,6 +106,18 @@ type Target interface {
 ```
 
 Four implementations: `git`, `dtrack`, `oci`, `configmap`. Selected via `--targets` flag (comma-separated list).
+
+An optional extension interface `DeactivateTarget` is implemented by the dtrack target:
+
+```go
+type DeactivateTarget interface {
+    Target
+    Deactivate(images []*oci.RegistryImage) error
+    ShouldDeactivateOrphans() bool
+}
+```
+
+When `ShouldDeactivateOrphans()` returns true, the processor calls `Deactivate()` (rather than `Remove()`) for orphaned images, regardless of the global `--delete-orphan-images` flag. Other targets do not implement it and fall back to `Remove()`.
 
 ### Job Image Mode
 
@@ -202,12 +214,13 @@ The `hack/run-tests.sh` script:
 
 ### Test Files
 
-| Test file                                | What it tests                                                                                                                                              |
-| ---------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `internal/kubernetes/image_test.go`      | Registry proxy mapping (`ApplyProxyRegistry`)                                                                                                              |
-| `internal/syft/syft_test.go`             | End-to-end SBOM generation against real images (alpine, redis, node, fedora) in JSON, CycloneDX XML, SPDX JSON formats. Uses fixture files for comparison. |
-| `internal/target/git/git_target_test.go` | `ImageIDToFilePath` conversion logic                                                                                                                       |
-| `internal/target/oci/oci_target_test.go` | OCI target integration test (requires `TEST_DIGEST` and `DATE` env vars)                                                                                   |
+| Test file                                      | What it tests                                                                                                                                              |
+| ---------------------------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `internal/kubernetes/image_test.go`            | Registry proxy mapping (`ApplyProxyRegistry`)                                                                                                              |
+| `internal/syft/syft_test.go`                   | End-to-end SBOM generation against real images (alpine, redis, node, fedora) in JSON, CycloneDX XML, SPDX JSON formats. Uses fixture files for comparison. |
+| `internal/target/git/git_target_test.go`       | `ImageIDToFilePath` conversion logic                                                                                                                       |
+| `internal/target/oci/oci_target_test.go`       | OCI target integration test (requires `TEST_DIGEST` and `DATE` env vars)                                                                                   |
+| `internal/target/dtrack/dtrack_target_test.go` | Project active/inactive lifecycle, sibling deactivation, orphan deactivation, LoadImages inactive filter, reactivation without re-upload                   |
 
 ### SBOM Format Test Coverage
 
@@ -311,6 +324,7 @@ kubectl apply -f deploy/job-image/
 - **SBOM file naming**: Files are named `sbom.json`, `sbom.xml`, `sbom.spdx`, or `sbom.txt` depending on format (see `syft.GetFileName()`).
 - **Git path structure**: Image IDs are converted to file paths by replacing `@` with `/` and `:` with `_` (e.g., `alpine@sha256:abc...` becomes `alpine/sha256_abc.../sbom.json`).
 - **Dependency Track tags**: Projects are tagged with `kubernetes-cluster=<id>`, `sbom-operator`, `raw-image-id=<id>`, and `namespace=<ns>`. Multi-cluster awareness is built in -- cluster tags are managed per cluster ID.
+- **Dependency Track project lifecycle management**: When `--dtrack-manage-project-active-status` is enabled, the dtrack target manages project active/isLatest state. On SBOM processing, the running version is set `Active=true, IsLatest=true` and sibling versions under the same parent are deactivated. Orphaned projects are deactivated (not deleted) via the optional `DeactivateTarget` interface, preserving version history. `--delete-orphan-images` is bypassed for dtrack when active. A parent project (via `--dtrack-parent-project-annotation-key` or `--dtrack-default-parent-project`) is required. On rollback to a previously deployed image with a matching digest, an inactive project is reactivated without re-uploading the BOM. Requires DT v4.12.0+ for `isLatest`.
 - **Security context**: The container runs as non-root (UID 101), read-only root filesystem, all capabilities dropped, seccomp RuntimeDefault profile.
 - **Health endpoint**: `GET :8080/health` returns 200 with body "Running!".
 - **Scratch-based image**: Final container image is built FROM scratch with only the static binary, CA certs, and timezone data.

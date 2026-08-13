@@ -261,7 +261,8 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			k8sClusterIdMode := internal.OperatorConfig.DtrackKubernetesClusterIdMode
 			defaultParentProject := internal.OperatorConfig.DtrackDefaultParentProject
 			useShortName := internal.OperatorConfig.DtrackUseShortName
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName)
+			manageProjectActiveStatus := internal.OperatorConfig.DtrackManageProjectActiveStatus
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {
@@ -317,11 +318,8 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 			}
 		}
 
-		if len(removableImages) > 0 && internal.OperatorConfig.DeleteOrphanImages {
-			err := t.Remove(removableImages)
-			if err != nil {
-				logrus.WithError(err).Error("Failed to remove images from target")
-			}
+		if len(removableImages) > 0 {
+			p.handleOrphanImages(t, removableImages)
 		}
 	}
 }
@@ -422,12 +420,26 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 
 	if len(images) > 0 {
 		for _, t := range p.Targets {
-			if internal.OperatorConfig.DeleteOrphanImages {
-				err := t.Remove(images)
-				if err != nil {
-					logrus.WithError(err).Error("Failed to remove images from target")
-				}
-			}
+			p.handleOrphanImages(t, images)
+		}
+	}
+}
+
+// handleOrphanImages dispatches orphan cleanup for a single target. Targets that
+// implement DeactivateTarget and opt in via ShouldDeactivateOrphans have their
+// orphans deactivated (rather than deleted) regardless of the global
+// delete-orphan-images flag. All other targets follow delete-orphan-images.
+func (p *Processor) handleOrphanImages(t target.Target, images []*liboci.RegistryImage) {
+	if dt, ok := t.(target.DeactivateTarget); ok && dt.ShouldDeactivateOrphans() {
+		if err := dt.Deactivate(images); err != nil {
+			logrus.WithError(err).Error("Failed to deactivate images in target")
+		}
+		return
+	}
+
+	if internal.OperatorConfig.DeleteOrphanImages {
+		if err := t.Remove(images); err != nil {
+			logrus.WithError(err).Error("Failed to remove images from target")
 		}
 	}
 }
