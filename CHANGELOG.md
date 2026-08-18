@@ -1,3 +1,13 @@
+## Version 0.44.5 (2026-08-18)
+
+### Dependency updates
+
+* [[`88ee2c20`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/88ee2c20)] - **deps**: update module github.com&#x2F;sirupsen&#x2F;logrus to v1.10.0 (#986)
+* [[`8274b134`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8274b134)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to c1d0aac (#985)
+* [[`861db119`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/861db119)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.51.0 (#984)
+* [[`d54c02f8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d54c02f8)] - **deps**: update aws-sdk-go-v2 monorepo (#983)
+
+
 ## Version 0.44.4 (2026-08-11)
 
 ### Bug fixes
