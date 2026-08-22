@@ -31,6 +31,7 @@ type DependencyTrackTarget struct {
 	k8sClusterId               string
 	k8sClusterIdMode           string
 	useShortName               bool
+	manageProjectActiveStatus  bool
 	imageProjectMap            map[string]uuid.UUID
 
 	defaultParentProjectParsed *uuid.UUID
@@ -43,7 +44,7 @@ const (
 	podNamespaceTagKey = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:                    baseUrl,
 		apiKey:                     apiKey,
@@ -57,6 +58,7 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 		parentProjectAnnotationKey: parentProjectAnnotationKey,
 		projectNameAnnotationKey:   projectNameAnnotationKey,
 		useShortName:               useShortName,
+		manageProjectActiveStatus:  manageProjectActiveStatus,
 	}
 }
 
@@ -94,6 +96,15 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 		g.defaultParentProjectParsed = &uuid
 	} else {
 		g.defaultParentProjectParsed = nil
+	}
+
+	if g.manageProjectActiveStatus && g.parentProjectAnnotationKey == "" && g.defaultParentProjectParsed == nil {
+		return fmt.Errorf(
+			"%s is enabled but no parent project is configured (set %s or %s)",
+			internal.ConfigKeyDependencyTrackManageProjectActiveStatus,
+			internal.ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey,
+			internal.ConfigKeyDefaultParentProject,
+		)
 	}
 
 	return nil
@@ -158,23 +169,38 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		return err
 	}
 
-	logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
-
-	uploadToken, err := client.BOM.PostBom(
-		context.Background(),
-		dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, AutoCreate: true, BOM: ctx.Sbom},
-	)
-	if err != nil {
-		logrus.Errorf("Could not upload BOM: %v", err)
-		return err
+	// When active-status management is enabled, try to reactivate an existing
+	// inactive project without re-uploading the SBOM (e.g. a rollback to a
+	// previously deployed image with a matching digest).
+	project, skipUpload := dtrack.Project{}, false
+	if g.manageProjectActiveStatus {
+		existing, lookupErr := client.Project.Lookup(context.Background(), projectName, version)
+		if lookupErr == nil && !existing.Active && getRawImageId(existing.Tags) == ctx.Image.ImageID {
+			project = existing
+			skipUpload = true
+			logrus.Infof("Reactivating existing project %s:%s without re-uploading SBOM", projectName, version)
+		}
 	}
 
-	logrus.Infof("Uploaded SBOM (upload-token=%s)", uploadToken)
+	if !skipUpload {
+		logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
+		uploadToken, err := client.BOM.PostBom(
+			context.Background(),
+			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, AutoCreate: true, BOM: ctx.Sbom},
+		)
+		if err != nil {
+			logrus.Errorf("Could not upload BOM: %v", err)
+			return err
+		}
+		logrus.Infof("Uploaded SBOM (upload-token=%s)", uploadToken)
+	}
 
-	project, err := client.Project.Lookup(context.Background(), projectName, version)
-	if err != nil {
-		logrus.Errorf("Could not find project: %v", err)
-		return err
+	if !skipUpload {
+		project, err = client.Project.Lookup(context.Background(), projectName, version)
+		if err != nil {
+			logrus.Errorf("Could not find project: %v", err)
+			return err
+		}
 	}
 
 	kubernetesClusterTag := kubernetesCluster + "=" + g.k8sClusterId
@@ -257,9 +283,18 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		project.ParentRef = &dtrack.ParentRef{UUID: *g.defaultParentProjectParsed}
 	}
 
+	if g.manageProjectActiveStatus {
+		project.Active = true
+		project.IsLatest = dtrack.OptionalBoolOf(true)
+	}
+
 	_, err = client.Project.Update(context.Background(), project)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not update project")
+	}
+
+	if g.manageProjectActiveStatus {
+		g.deactivateSiblingVersions(client, project)
 	}
 
 	if g.imageProjectMap == nil {
@@ -331,6 +366,13 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 				if strings.Index(tag.Name, rawImageId) == 0 {
 					imageId = string(tag.Name[len(rawImageId)+1:])
 				}
+			}
+
+			// When active-status management is enabled, inactive projects are not
+			// returned so they neither appear as orphans on every cycle nor block
+			// re-scanning of a rolled-back image.
+			if g.manageProjectActiveStatus && !project.Active {
+				continue
 			}
 
 			if imageRelatesToCluster && sbomOperatorPropFound && len(imageId) > 0 {
@@ -434,6 +476,137 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) error {
 	return nil
 }
 
+// Deactivate sets the given projects as inactive (and not latest) instead of
+// deleting them, preserving them for version history. Only invoked when
+// ShouldDeactivateOrphans returns true. All tags are kept.
+func (g *DependencyTrackTarget) Deactivate(images []*libk8s.RegistryImage) error {
+	if g.imageProjectMap == nil {
+		_, err := g.LoadImages()
+		if err != nil {
+			return err
+		}
+	}
+
+	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	if err != nil {
+		logrus.WithError(err).Errorf("failed to init dtrack client")
+		return err
+	}
+
+	for _, img := range images {
+		uuid := g.imageProjectMap[img.ImageID]
+		if uuid.String() == "00000000-0000-0000-0000-000000000000" {
+			logrus.Warnf("No project found for imageID: %s", img.ImageID)
+			continue
+		}
+
+		project, err := client.Project.Get(context.Background(), uuid)
+		if err != nil {
+			logrus.Errorf("Could not load project: %v", err)
+			continue
+		}
+
+		sbomOperatorPropFound := false
+		for _, tag := range project.Tags {
+			if tag.Name == sbomOperator {
+				sbomOperatorPropFound = true
+				break
+			}
+		}
+		if !sbomOperatorPropFound {
+			continue
+		}
+
+		if g.k8sClusterIdMode == "tag" {
+			// Tag mode: remove the current cluster tag and only deactivate if no
+			// other cluster is still using this project. This avoids deactivating
+			// a project that other clusters still run.
+			otherClusterIds := []string{}
+			for _, tag := range project.Tags {
+				if strings.Index(tag.Name, kubernetesCluster) == 0 {
+					clusterId := string(tag.Name[len(kubernetesCluster)+1:])
+					if clusterId == g.k8sClusterId {
+						logrus.Infof("Removing %v=%v tag from project %v:%v", kubernetesCluster, g.k8sClusterId, project.Name, project.Version)
+						project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
+					} else {
+						otherClusterIds = append(otherClusterIds, clusterId)
+					}
+				}
+			}
+
+			if len(otherClusterIds) > 0 {
+				_, err := client.Project.Update(context.Background(), project)
+				delete(g.imageProjectMap, img.ImageID)
+				if err != nil {
+					logrus.WithError(err).Warnf("Project %s could not be updated", project.UUID.String())
+				}
+				continue
+			}
+		}
+
+		if !project.Active {
+			continue
+		}
+
+		logrus.Infof("Image not running in any cluster - deactivating %v:%v", project.Name, project.Version)
+		_, err = client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
+			Active:   false,
+			IsLatest: dtrack.OptionalBoolOf(false),
+		})
+		if err != nil {
+			logrus.WithError(err).Warnf("Project %s could not be deactivated", project.UUID.String())
+		}
+	}
+
+	return nil
+}
+
+func (g *DependencyTrackTarget) ShouldDeactivateOrphans() bool {
+	return g.manageProjectActiveStatus
+}
+
+// deactivateSiblingVersions sets all other versions of the same project name
+// under the same parent as inactive (and not latest), so that only the currently
+// running version stays active.
+func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client, project dtrack.Project) {
+	if project.ParentRef == nil {
+		return
+	}
+
+	siblings, err := client.Project.GetProjectsForName(context.Background(), project.Name, false, false)
+	if err != nil {
+		logrus.WithError(err).Errorf("Could not load sibling projects for name %s", project.Name)
+		return
+	}
+
+	for _, sibling := range siblings {
+		if sibling.UUID == project.UUID {
+			continue
+		}
+		if sibling.ParentRef == nil || sibling.ParentRef.UUID != project.ParentRef.UUID {
+			continue
+		}
+		if sibling.Version == project.Version {
+			continue
+		}
+		if !containsTag(sibling.Tags, sbomOperator) {
+			continue
+		}
+		if !sibling.Active {
+			continue
+		}
+
+		logrus.Infof("Deactivating sibling version %s:%s under parent %s", sibling.Name, sibling.Version, project.ParentRef.UUID)
+		_, err := client.Project.Patch(context.Background(), sibling.UUID, dtrack.Project{
+			Active:   false,
+			IsLatest: dtrack.OptionalBoolOf(false),
+		})
+		if err != nil {
+			logrus.WithError(err).Warnf("Sibling project %s:%s could not be deactivated", sibling.Name, sibling.Version)
+		}
+	}
+}
+
 func getNameAndVersionFromString(input string, delimiter string) (string, string) {
 	parts := strings.Split(input, delimiter)
 	name := parts[0]
@@ -470,6 +643,18 @@ func removeTag(tags []dtrack.Tag, tagString string) []dtrack.Tag {
 		}
 	}
 	return newTags
+}
+
+// getRawImageId returns the value of the first `raw-image-id=<id>` tag, or an
+// empty string if none is present.
+func getRawImageId(tags []dtrack.Tag) string {
+	prefix := rawImageId + "="
+	for _, tag := range tags {
+		if strings.HasPrefix(tag.Name, prefix) {
+			return strings.TrimPrefix(tag.Name, prefix)
+		}
+	}
+	return ""
 }
 
 // rotateRawImageIdTag drops any existing `raw-image-id=*` tag(s) from the slice

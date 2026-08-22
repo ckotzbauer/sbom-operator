@@ -198,6 +198,7 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-kubernetes-cluster-id-mode`| `false`| `"tag"` | Mode for using the kubernetes-cluster-id. Options: tag (adds cluster ID as a project tag) or prefix (prefixes the project name with the cluster ID). |
 | `dtrack-parent-project-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set parent project automatically, e.g. "my.pod.annotation" |
 | `dtrack-project-name-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set custom dtrack project name automatically, e.g. "my.pod.annotation" |
+| `dtrack-manage-project-active-status` | `true` when enabled without parent config | `false` | Manage project active/isLatest status based on running pods. Orphans are deactivated instead of deleted. Requires a parent project. |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
 
 Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version.
@@ -225,6 +226,21 @@ The value for the parent project annotation at the specific Pod is written in th
 
 > [!IMPORTANT]
 > The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.parent.project`
+
+---
+
+#### Project active/inactive lifecycle management
+
+When `--dtrack-manage-project-active-status` is enabled, the operator manages project active/isLatest state in Dependency Track:
+
+- **Running version**: set `Active=true, IsLatest=true`
+- **Sibling versions** under the same parent (matched by project name): set `Active=false, IsLatest=false`
+- **Orphaned projects** (no longer running in any cluster): deactivated instead of deleted, preserving version history. The global `--delete-orphan-images` flag is bypassed for dtrack when this is active.
+- **Rollback**: when a pod rolls back to a previously deployed image with a matching digest, the inactive project is reactivated without re-uploading the BOM.
+
+A parent project is required — either `--dtrack-parent-project-annotation-key` or `--dtrack-default-parent-project`. In multi-cluster tag mode, the current cluster's tag is removed first and the project is only deactivated if no other clusters are still using it.
+
+Requires Dependency Track v4.12.0+ for the `isLatest` field.
 
 ---
 
