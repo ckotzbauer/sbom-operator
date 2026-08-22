@@ -222,7 +222,7 @@ The value for a custom project name in dtrack by annotation at the specific Pod 
 #### Setting parent project at Dependency Track automatically:
 
 The key at kubernetes has to be suffixed with the container name the parent project is for. e.g. `my.parent.project/my-nginx`.
-The value for the parent project annotation at the specific Pod is written in the format of `project:version` or just `project` where version defaults to `latest`. E.g. `MyParentProject` or `MyParentProject:1.0`
+The value for the parent project annotation at the specific Pod is written in the format of `project:version` or just `project`. The version is optional: collection projects (parents that only aggregate children) usually do not carry a version, so a bare name like `MyParentProject` is sufficient. If a version is provided, e.g. `MyParentProject:1.0`, the parent project is matched by name and version.
 
 > [!IMPORTANT]
 > The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.parent.project`

@@ -259,13 +259,38 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 						// correct container found?
 						if containerName == ctx.Container.Name {
 							parentProjectName, parentProjectVersion := getNameAndVersionFromString(podAnnotationValue, ":")
+							hasExplicitVersion := strings.Contains(podAnnotationValue, ":")
 							logrus.Debugf("Try to find parent project by name from annotation \"%s\", for container %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", podAnnotationKey, containerName, parentProjectName, parentProjectVersion)
-							parentProject, err := client.Project.Lookup(context.Background(), parentProjectName, parentProjectVersion)
+							parentProjects, err := client.Project.GetProjectsForName(context.Background(), parentProjectName, false, true)
 							if err != nil {
 								logrus.WithError(err).Errorf(`Could not find parent project "%s"`, parentProjectName)
+							} else if len(parentProjects) == 0 {
+								logrus.Errorf(`No parent project found with name "%s"`, parentProjectName)
 							} else {
-								logrus.Infof(`Found parent project with name "%s:%s" and UUID "%s" for container "%s": %+v\n`, parentProjectName, parentProjectVersion, parentProject.UUID, containerName, parentProject)
-								project.ParentRef = &dtrack.ParentRef{UUID: parentProject.UUID}
+								var parentProject dtrack.Project
+								found := false
+								if hasExplicitVersion {
+									for _, p := range parentProjects {
+										if p.Version == parentProjectVersion {
+											parentProject = p
+											found = true
+											break
+										}
+									}
+									if !found {
+										logrus.Errorf(`No parent project found with name "%s" and version "%s"`, parentProjectName, parentProjectVersion)
+									}
+								} else {
+									if len(parentProjects) > 1 {
+										logrus.Warnf(`Multiple root projects found with name "%s", using the first one`, parentProjectName)
+									}
+									parentProject = parentProjects[0]
+									found = true
+								}
+								if found {
+									logrus.Infof(`Found parent project with name "%s" and UUID "%s" for container "%s"`, parentProjectName, parentProject.UUID, containerName)
+									project.ParentRef = &dtrack.ParentRef{UUID: parentProject.UUID}
+								}
 							}
 							break
 						}

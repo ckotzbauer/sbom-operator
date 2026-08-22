@@ -275,6 +275,89 @@ func TestProcessSbomMinimal(t *testing.T) {
 	_ = g.ProcessSbom(ctx)
 }
 
+func TestProcessSbomParentProject(t *testing.T) {
+	parentUUID := "aaaaaaaa-1111-2222-3333-444444444444"
+
+	tests := []struct {
+		name            string
+		annotationValue string
+		parentProjects  string
+		expectParentRef bool
+	}{
+		{
+			name:            "parent project by name only (no version)",
+			annotationValue: "MyParentProject",
+			parentProjects:  `[{"name":"MyParentProject","version":"","uuid":"` + parentUUID + `"}]`,
+			expectParentRef: true,
+		},
+		{
+			name:            "parent project by name and version",
+			annotationValue: "MyParentProject:1.0",
+			parentProjects:  `[{"name":"MyParentProject","version":"1.0","uuid":"` + parentUUID + `"}]`,
+			expectParentRef: true,
+		},
+		{
+			name:            "explicit version does not match any returned project",
+			annotationValue: "MyParentProject:2.0",
+			parentProjects:  `[{"name":"MyParentProject","version":"1.0","uuid":"` + parentUUID + `"}]`,
+			expectParentRef: false,
+		},
+		{
+			name:            "no parent project found",
+			annotationValue: "MyParentProject",
+			parentProjects:  `[]`,
+			expectParentRef: false,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			updateBody := ""
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("Content-Type", "application/json")
+				w.WriteHeader(http.StatusOK)
+				switch {
+				case r.URL.Path == "/api/v1/bom":
+					_, _ = w.Write([]byte(`{"token": "uuid-token"}`))
+				case r.URL.Path == "/api/v1/project/lookup":
+					_, _ = w.Write([]byte(`{"name":"alpine","version":"3.14","uuid":"8c940608-8e62-431a-ac5d-2092b7c41372"}`))
+				case r.URL.Path == "/api/v1/project" && r.Method == http.MethodGet:
+					// GetProjectsForName for parent lookup
+					_, _ = w.Write([]byte(tt.parentProjects))
+				default:
+					// Project.Update - capture the body to inspect ParentRef
+					buf, _ := io.ReadAll(r.Body)
+					updateBody = string(buf)
+					_, _ = w.Write([]byte(`{}`))
+				}
+			}))
+			defer ts.Close()
+
+			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "my.parent.project", "", true)
+			err := g.Initialize()
+			assert.NoError(t, err)
+			// Pre-populate so LoadImages is skipped during ProcessSbom.
+			g.imageProjectMap = map[string]uuid.UUID{}
+
+			ctx := &target.TargetContext{
+				Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+				Pod:       &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
+				Container: &libk8s_real.ContainerInfo{Name: "alpine"},
+				Sbom:      "{}",
+			}
+
+			err = g.ProcessSbom(ctx)
+			assert.NoError(t, err)
+
+			if tt.expectParentRef {
+				assert.Contains(t, updateBody, parentUUID)
+			} else {
+				assert.NotContains(t, updateBody, parentUUID)
+			}
+		})
+	}
+}
+
 func TestRemoveMinimal(t *testing.T) {
 	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		w.Header().Set("Content-Type", "application/json")
