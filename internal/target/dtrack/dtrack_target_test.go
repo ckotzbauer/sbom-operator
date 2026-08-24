@@ -333,7 +333,7 @@ func TestProcessSbomParentProject(t *testing.T) {
 			}))
 			defer ts.Close()
 
-			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "my.parent.project", "", true)
+			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "my.parent.project", "", true, false)
 			err := g.Initialize()
 			assert.NoError(t, err)
 			// Pre-populate so LoadImages is skipped during ProcessSbom.
