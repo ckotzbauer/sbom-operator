@@ -1,3 +1,19 @@
+## Version 0.45.0 (2026-08-25)
+
+### Dependency updates
+
+* [[`8a1cdc01`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8a1cdc01)] - **deps**: update module modernc.org&#x2F;sqlite to v1.57.0 (#991)
+* [[`5aa15c19`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5aa15c19)] - **deps**: update module github.com&#x2F;sirupsen&#x2F;logrus to v1.10.1 (#990)
+* [[`b986c216`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b986c216)] - **deps**: update module github.com&#x2F;stretchr&#x2F;testify to v1.12.0 (#989)
+* [[`f6281a47`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f6281a47)] - **deps**: update aws-sdk-go-v2 monorepo (#988)
+* [[`10f44f73`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/10f44f73)] - **deps**: update module github.com&#x2F;moby&#x2F;go-archive to v0.3.0 [security] (#987)
+
+### Common changes
+
+* [[`f22d13d7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f22d13d7)] - **target&#x2F;dtrack**: make version optional in parent project annotation (#981)
+* [[`8fef7582`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8fef7582)] - **target&#x2F;dtrack**: manage project&#39;s active&#x2F;isLatest state (#982)
+
+
 ## Version 0.44.5 (2026-08-18)
 
 ### Dependency updates
