@@ -1,3 +1,18 @@
+## Version 0.45.1 (2026-09-01)
+
+### Dependency updates
+
+* [[`ed5d21a8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ed5d21a8)] - **deps**: update aws-sdk-go-v2 monorepo (#1000)
+* [[`fa0927c1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/fa0927c1)] - **deps**: update module github.com&#x2F;sirupsen&#x2F;logrus to v1.10.2 (#998)
+* [[`f05aeae0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f05aeae0)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.22.0 (#999)
+* [[`0ce985e3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0ce985e3)] - **deps**: update aws-sdk-go-v2 monorepo (#996)
+* [[`14e504f9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/14e504f9)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to e88cd73 (#994)
+
+### Common changes
+
+* [[`8ae1ccb4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8ae1ccb4)] - **internal&#x2F;dtrack**: add missing parameter (#997)
+
+
 ## Version 0.45.0 (2026-08-25)
 
 ### Dependency updates
