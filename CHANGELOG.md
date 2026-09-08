@@ -1,3 +1,10 @@
+## Version 0.45.2 (2026-09-08)
+
+### Dependency updates
+
+* [[`85edde33`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/85edde33)] - **deps**: update module google.golang.org&#x2F;grpc to v1.83.1 [security] (#1003)
+
+
 ## Version 0.45.1 (2026-09-01)
 
 ### Dependency updates
