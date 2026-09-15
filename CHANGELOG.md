@@ -1,3 +1,21 @@
+## Version 0.45.3 (2026-09-15)
+
+### Dependency updates
+
+* [[`36eae4e4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/36eae4e4)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.51.1 (#1002)
+* [[`9c4e263b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9c4e263b)] - **deps**: update aws-sdk-go-v2 monorepo (#1012)
+* [[`b4f8c3c6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b4f8c3c6)] - **deps**: update module modernc.org&#x2F;sqlite to v1.58.0 (#1005)
+* [[`4f9ec4c0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4f9ec4c0)] - **deps**: update module golang.org&#x2F;x&#x2F;oauth2 to v0.37.0 (#1011)
+* [[`a7e877be`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a7e877be)] - **deps**: update kubernetes versions to v0.37.0 (#995)
+* [[`1f578183`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1f578183)] - **deps**: update aws-sdk-go-v2 monorepo (#1004)
+* [[`9d717789`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9d717789)] - **deps**: update module github.com&#x2F;google&#x2F;go-containerregistry to v0.22.1 (#1010)
+* [[`9370ead5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9370ead5)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.3.1 (#1001)
+* [[`1f2a3b49`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1f2a3b49)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 85c1c22 (#1009)
+* [[`5153a982`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5153a982)] - **deps**: update module google.golang.org&#x2F;grpc to v1.83.2 [security] (#1008)
+* [[`f4c00691`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f4c00691)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd&#x2F;v2 to v2.3.5 [security] (#1007)
+* [[`c01fb422`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c01fb422)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd to v1.7.35 [security] (#1006)
+
+
 ## Version 0.45.2 (2026-09-08)
 
 ### Dependency updates
