@@ -1,3 +1,12 @@
+## Version 0.45.4 (2026-09-22)
+
+### Dependency updates
+
+* [[`3e5c78f4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3e5c78f4)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.3.2 (#1016)
+* [[`d88c57c1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d88c57c1)] - **deps**: update aws-sdk-go-v2 monorepo (#1014)
+* [[`dbc7b215`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/dbc7b215)] - **deps**: update module go.opentelemetry.io&#x2F;otel&#x2F;sdk to v1.45.0 [security] (#1013)
+
+
 ## Version 0.45.3 (2026-09-15)
 
 ### Dependency updates
