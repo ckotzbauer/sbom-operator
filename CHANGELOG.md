@@ -1,3 +1,13 @@
+## Version 0.45.5 (2026-09-29)
+
+### Dependency updates
+
+* [[`a4507306`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a4507306)] - **deps**: update kubernetes versions to v0.37.1 (#1020)
+* [[`e7efd68d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e7efd68d)] - **deps**: update module modernc.org&#x2F;sqlite to v1.59.0 (#1015)
+* [[`e38dd29e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e38dd29e)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd&#x2F;v2 to v2.3.6 [security] (#1019)
+* [[`973e7d13`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/973e7d13)] - **deps**: update module github.com&#x2F;containerd&#x2F;containerd to v1.7.36 [security] (#1018)
+
+
 ## Version 0.45.4 (2026-09-22)
 
 ### Dependency updates
