@@ -25,7 +25,7 @@ func Start(cronTime string, appVersion string, resolvedFormat *syft.FormatVersio
 	logrus.Debugf("Cron set to: %v", cr)
 
 	k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-	sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), appVersion, resolvedFormat)
+	sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), appVersion, resolvedFormat, internal.OperatorConfig.StripCpes)
 	processor := processor.New(k8s, sy)
 
 	cs := CronService{cron: cr, processor: processor}

@@ -72,7 +72,7 @@ func newRootCmd() *cobra.Command {
 				daemon.Start(internal.OperatorConfig.Cron, Version, &fv)
 			} else {
 				k8s := kubernetes.NewClient(internal.OperatorConfig.IgnoreAnnotations, internal.OperatorConfig.FallbackPullSecret)
-				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version, &fv)
+				sy := syft.New(internal.OperatorConfig.Format, libstandard.ToMap(internal.OperatorConfig.RegistryProxies), Version, &fv, internal.OperatorConfig.StripCpes)
 				p := processor.New(k8s, sy)
 				p.ListenForPods()
 			}
@@ -128,6 +128,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciUser, "", "OCI-User")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormatVersion, "", syft.FormatVersionHelp())
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyStripCpes, false, "Strip CPE attributes from all components in generated SBOMs. Disables Syft CPE generation and removes cataloger-sourced CPEs.")
 
 	return rootCmd
 }

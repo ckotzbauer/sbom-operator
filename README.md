@@ -72,6 +72,7 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `fallback-pull-secret` | `false` | `""` | Kubernetes Pull-Secret Name to load as a fallback when all others fail (must be in the same namespace as the sbom-operator) |
 | `registry-proxy` | `false` | `[]` | Proxy-Registry-Hosts to use. Flag can be used multiple times. Value-Mapping e.g. `docker.io=ghcr.io` |
 | `delete-orphan-images` | `false` | `true` | Delete orphan images automatically |
+| `strip-cpes` | `false` | `false` | Strip CPE attributes from all components in generated SBOMs (Syft-JSON `cpes`, CycloneDX `cpe`). Disables Syft CPE generation and removes cataloger-sourced CPEs. Flag can be set via `SBOM_STRIP_CPES` env var or `stripCpes` in YAML. |
 
 
 ### Format Versions

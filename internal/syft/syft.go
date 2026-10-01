@@ -15,6 +15,7 @@ import (
 
 	"github.com/anchore/stereoscope/pkg/image"
 	"github.com/anchore/syft/syft"
+	"github.com/anchore/syft/syft/cataloging"
 	"github.com/anchore/syft/syft/cataloging/filecataloging"
 	"github.com/anchore/syft/syft/file"
 	"github.com/anchore/syft/syft/format"
@@ -26,6 +27,7 @@ import (
 	"github.com/anchore/syft/syft/format/syftjson"
 	"github.com/anchore/syft/syft/format/table"
 	"github.com/anchore/syft/syft/format/text"
+	"github.com/anchore/syft/syft/pkg"
 	"github.com/anchore/syft/syft/sbom"
 
 	"github.com/anchore/syft/syft/source"
@@ -45,15 +47,17 @@ type Syft struct {
 	proxyRegistryMap map[string]string
 	appVersion       string
 	resolvedFormat   *FormatVersion
+	stripCpes        bool
 }
 
-func New(sbomFormat string, proxyRegistryMap map[string]string, appVersion string, resolvedFormat *FormatVersion) *Syft {
+func New(sbomFormat string, proxyRegistryMap map[string]string, appVersion string, resolvedFormat *FormatVersion, stripCpes bool) *Syft {
 	return &Syft{
 		sbomFormat:       sbomFormat,
 		resolveVersion:   getSyftVersion,
 		proxyRegistryMap: proxyRegistryMap,
 		appVersion:       appVersion,
 		resolvedFormat:   resolvedFormat,
+		stripCpes:        stripCpes,
 	}
 }
 
@@ -130,10 +134,18 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 				),
 		)
 
+	if s.stripCpes {
+		cfg = cfg.WithDataGenerationConfig(cataloging.DefaultDataGenerationConfig().WithGenerateCPEs(false))
+	}
+
 	result, err := syft.CreateSBOM(context.Background(), src, cfg)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM-Creation failed")
 		return "", err
+	}
+
+	if s.stripCpes {
+		stripCPEs(result)
 	}
 
 	// you can use other formats such as format.CycloneDxJSONOption or format.SPDXJSONOption ...
@@ -160,6 +172,23 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	return bom, nil
+}
+
+// stripCPEs removes all CPE attributes from the SBOM's packages. CPEs are
+// excluded from the package ID hash, so IDs and relationships stay unchanged.
+// The package collection exposes no in-place mutation API (every accessor
+// returns copies), so the collection is rebuilt with CPEs cleared.
+func stripCPEs(document *sbom.SBOM) {
+	if document == nil || document.Artifacts.Packages == nil {
+		return
+	}
+
+	stripped := pkg.NewCollection()
+	for p := range document.Artifacts.Packages.Enumerate() {
+		p.CPEs = nil
+		stripped.Add(p)
+	}
+	document.Artifacts.Packages = stripped
 }
 
 func getSource(ctx context.Context, registryOptions *image.RegistryOptions, userInput string) (source.Source, error) {
