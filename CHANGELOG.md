@@ -1,3 +1,23 @@
+## Version 0.46.0 (2026-10-06)
+
+### Features and improvements
+
+* [[`2c258c12`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2c258c12)] - **feat**: allow disabling CPE identifiers in syft-generated SBOMs (#1022)
+
+### Dependency updates
+
+* [[`4371171b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4371171b)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.53.0 (#1031)
+* [[`91ebeac6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/91ebeac6)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to af0742f (#1028)
+* [[`af0742fb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/af0742fb)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 6d8a369 (#1027)
+* [[`6d8a3698`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6d8a3698)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 61e1315 (#1026)
+* [[`61e13157`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/61e13157)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.52.0 (#1017)
+* [[`2fa93a64`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2fa93a64)] - **deps**: update module modernc.org&#x2F;sqlite to v1.60.1 (#1025)
+* [[`e956baf2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e956baf2)] - **deps**: update aws-sdk-go-v2 monorepo (#1021)
+* [[`a945fe37`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a945fe37)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 0d82f83 (#1024)
+* [[`0fef32d0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0fef32d0)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to 1c4b873 (#1023)
+* [[`0d82f83e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0d82f83e)] - **deps**: pin dependencies (#893)
+
+
 ## Version 0.45.5 (2026-09-29)
 
 ### Dependency updates
