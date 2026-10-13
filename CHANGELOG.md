@@ -1,3 +1,22 @@
+## Version 0.46.1 (2026-10-13)
+
+### Dependency updates
+
+* [[`21e897dd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/21e897dd)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to c759e72 (#1042)
+* [[`853406c0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/853406c0)] - **deps**: update aws-sdk-go-v2 monorepo (#1040)
+* [[`b321bcf0`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b321bcf0)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 49a33e2 (#1039)
+* [[`49a33e25`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/49a33e25)] - **deps**: update alpine:3.24 docker digest to 294b683 (#940)
+* [[`ba3ccc29`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ba3ccc29)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to e34a029 (#1038)
+* [[`e34a0295`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e34a0295)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.54.1 (#1036)
+* [[`60581566`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/60581566)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to b718ea1 (#1037)
+* [[`b718ea18`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b718ea18)] - **deps**: update aws-sdk-go-v2 monorepo (#1035)
+* [[`e6f941eb`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e6f941eb)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 8f7bf0a (#1033)
+* [[`d9ed0aa6`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d9ed0aa6)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to 4e17604 (#1034)
+* [[`0d53b35c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0d53b35c)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to 9c3e88c (#1032)
+* [[`8f7bf0a9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8f7bf0a9)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.3.4 (#1030)
+* [[`5d08f9a2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5d08f9a2)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 91ebeac (#1029)
+
+
 ## Version 0.46.0 (2026-10-06)
 
 ### Features and improvements
