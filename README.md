@@ -245,7 +245,7 @@ The value for the parent project annotation at the specific Pod is written in th
 When `--dtrack-manage-project-active-status` is enabled, the operator manages project active/isLatest state in Dependency Track:
 
 - **Running version**: set `Active=true, IsLatest=true`
-- **Sibling versions** under the same parent (matched by project name): set `Active=false, IsLatest=false`
+- **Sibling versions** under the same parent (matched by project name): set `Active=false, IsLatest=false` if running in no cluster anymore
 - **Orphaned projects** (no longer running in any cluster): deactivated instead of deleted, preserving version history. The global `--delete-orphan-images` flag is bypassed for dtrack when this is active.
 - **Rollback**: when a pod rolls back to a previously deployed image with a matching digest, the inactive project is reactivated without re-uploading the BOM.
 
