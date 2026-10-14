@@ -825,3 +825,111 @@ func TestLoadImagesSkipsInactiveProjects(t *testing.T) {
 	_, inactivePresent := g.imageProjectMap["alpine:3.13"]
 	assert.False(t, inactivePresent, "inactive project must not populate imageProjectMap")
 }
+
+func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
+	parentUUID := uuid.New()
+	currentUUID := uuid.New()
+	siblingOtherClusterOnlyUUID := uuid.New()
+	siblingSharedClusterUUID := uuid.New()
+	siblingOwnClusterOnlyUUID := uuid.New()
+
+	var updatedProjects []dtrack.Project
+
+	mux := http.NewServeMux()
+	mux.HandleFunc("/api/v1/project", func(w http.ResponseWriter, r *http.Request) {
+		switch r.Method {
+			case http.MethodGet:
+				siblings := []dtrack.Project{
+					{
+						UUID:      currentUUID,
+						Name:      "order-service-container",
+						Version:   "1.2.0",
+						Active:    true,
+						ParentRef: &dtrack.ParentRef{UUID: parentUUID},
+						Tags: []dtrack.Tag{
+							{Name: "sbom-operator"},
+							{Name: "kubernetes-cluster=approval_eu"},
+						},
+					}, {// Scenario 1: Running only in live_eu -> must NOT be touched by approval_eu
+						UUID:      siblingOtherClusterOnlyUUID,
+						Name:      "order-service-container",
+						Version:   "1.0.0",
+						Active:    true,
+						ParentRef: &dtrack.ParentRef{UUID: parentUUID},
+						Tags: []dtrack.Tag{
+							{Name: "sbom-operator"},
+							{Name: "kubernetes-cluster=live_eu"},
+						},
+					}, { // Scenario 2: Running in approval_eu AND approval_nar -> remove approval_eu tag, keep Active: true
+						UUID:      siblingSharedClusterUUID,
+						Name:      "order-service-container",
+						Version:   "1.1.0-rc1",
+						Active:    true,
+						ParentRef: &dtrack.ParentRef{UUID: parentUUID},
+						Tags: []dtrack.Tag{
+						{Name: "sbom-operator"},
+							{Name: "kubernetes-cluster=approval_eu"},
+							{Name: "kubernetes-cluster=approval_nar"},
+						},
+					}, {// Scenario 3: Running ONLY in approval_eu -> remove approval_eu tag AND set Active: false
+						UUID:      siblingOwnClusterOnlyUUID,
+						Name:      "order-service-container",
+						Version:   "1.0.9",
+						Active:    true,
+						ParentRef: &dtrack.ParentRef{UUID: parentUUID},
+						Tags: []dtrack.Tag{
+							{Name: "sbom-operator"},
+							{Name: "kubernetes-cluster=approval_eu"},
+						},
+					},
+				}
+				w.Header().Set("Content-Type", "application/json")
+				_ = json.NewEncoder(w).Encode(siblings)
+	
+			case http.MethodPost:
+				var p dtrack.Project
+				_ = json.NewDecoder(r.Body).Decode(&p)
+				updatedProjects = append(updatedProjects, p)
+				w.Header().Set("Content-Type", "application/json")
+				_ = json.NewEncoder(w).Encode(p)
+		}
+	})
+
+	server := httptest.NewServer(mux)
+	defer server.Close()
+
+	client, err := dtrack.NewClient(server.URL)
+	require.NoError(t, err)
+
+	target := &DependencyTrackTarget{
+		k8sClusterId:               "approval_eu",
+		k8sClusterIdMode:           "tag",
+		manageProjectActiveStatus:  true,
+	}
+
+	currentProject := dtrack.Project{
+		UUID:      currentUUID,
+		Name:      "order-service-container",
+		Version:   "1.2.0",
+		Active:    true,
+		ParentRef: &dtrack.ParentRef{UUID: parentUUID},
+	}
+
+	target.deactivateSiblingVersions(client, currentProject)
+
+	// Scenario 1 (siblingOtherClusterOnlyUUID) must not be updated at all
+	require.Len(t, updatedProjects, 2)
+
+	// Scenario 2 (siblingSharedClusterUUID): still active, only approval_nar tag remains
+	shared := updatedProjects[0]
+	assert.Equal(t, siblingSharedClusterUUID, shared.UUID)
+	assert.True(t, shared.Active)
+	assert.False(t, containsTag(shared.Tags, "kubernetes-cluster=approval_eu"))
+	assert.True(t, containsTag(shared.Tags, "kubernetes-cluster=approval_nar"))
+
+	// Scenario 3 (siblingOwnClusterOnlyUUID): deactivated and cluster tag removed
+	ownOnly := updatedProjects[1]
+	assert.Equal(t, siblingOwnClusterOnlyUUID, ownOnly.UUID)
+	assert.False(t, ownOnly.Active)
+	assert.False(t, containsTag(ownOnly.Tags, "kubernetes-cluster=approval_eu"))
+}
