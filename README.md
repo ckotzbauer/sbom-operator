@@ -73,7 +73,15 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `registry-proxy` | `false` | `[]` | Proxy-Registry-Hosts to use. Flag can be used multiple times. Value-Mapping e.g. `docker.io=ghcr.io` |
 | `delete-orphan-images` | `false` | `true` | Delete orphan images automatically |
 | `strip-cpes` | `false` | `false` | Strip CPE attributes from all components in generated SBOMs (Syft-JSON `cpes`, CycloneDX `cpe`). Disables Syft CPE generation and removes cataloger-sourced CPEs. Flag can be set via `SBOM_STRIP_CPES` env var or `stripCpes` in YAML. |
+| `fetch-oci-attestations` | `false` | `false` | Fetch SBOMs from OCI attestations via cosign (Main SBOM of image & optional configured additional SBOMs). In case main SBOM from image can't be found, falls back to syft generation. Flag can be set via `FETCH_OCI_ATTESTATIONS` env var or `fetchOciAttestations` in YAML. |
 
+### Fetching SBOM from OCI
+
+In case parameter flag `fetch-oci-attestations` is set, following applies:
+SBOMs can be uploaded through cosign to the image. e.g. `cosign attest --predicate image.sbom $IMAGE`.
+sbom-operator now will try to find that SBOM attestation and in case it finds it uses it. Otherwise will fallback to syft generation of SBOM.
+There can be also multiple SBOMs attached as attestation in the image using the annotation `sbom.scope`. e.g. `cosign attest --annotation sbom.scope=app --predicate image.sbom $IMAGE`.
+Currently only Dependency-Track target would support additional SBOMs to be uploaded. How to map the `sbom.scope` to the project name can be found in the Dependency-Track section.
 
 ### Format Versions
 
@@ -217,6 +225,8 @@ The key at kubernetes has to be suffixed with the container name the project is 
 > The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.project.name`
 
 The value for a custom project name in dtrack by annotation at the specific Pod is written in the format of `project:version` or just `project` where version defaults to `latest`. E.g. `MyParentProject` or `MyParentProject:1.0`
+
+In case of flag `fetch-oci-attestations` was set, there might be additional SBOMs which were attached to the image. To configure the project name for these, additional "/" after which the "sbom.scope" annotation value needs to be located. e.g. `my.project.name/my-nginx/app`.
 
 ---
 

@@ -10,6 +10,8 @@ type TargetContext struct {
 	Container *libk8s.ContainerInfo
 	Pod       *libk8s.PodInfo
 	Sbom      string
+	Scope     string
+	MediaType string
 }
 
 type Target interface {
@@ -31,5 +33,16 @@ type DeactivateTarget interface {
 }
 
 func NewContext(sbom string, image *oci.RegistryImage, container *libk8s.ContainerInfo, pod *libk8s.PodInfo) *TargetContext {
-	return &TargetContext{image, container, pod, sbom}
+	return &TargetContext{
+		Image:     image,
+		Container: container,
+		Pod:       pod,
+		Sbom:      sbom,
+	}
+}
+
+func (c *TargetContext) WithAttestation(scope string, mediaType string) *TargetContext {
+	c.Scope = scope
+	c.MediaType = mediaType
+	return c
 }

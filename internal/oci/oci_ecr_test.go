@@ -1,4 +1,4 @@
-package syft
+package oci
 
 import (
 	"sync"
