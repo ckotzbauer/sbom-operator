@@ -65,7 +65,7 @@ jobs:
 
   bump-chart:
     needs: [get-digest]
-    uses: ckotzbauer/helm-charts/.github/workflows/bump-chart.yaml@c759e72483bbc02c435eed3bb0edeac465ac0036 # main
+    uses: ckotzbauer/helm-charts/.github/workflows/bump-chart.yaml@b76af014cbced550430bea5cd9a8e6b3737bfd04 # main
     with:
       chart: sbom-operator
       app-version: ${{ github.event.inputs.version }}
