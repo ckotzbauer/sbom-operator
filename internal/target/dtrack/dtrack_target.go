@@ -13,6 +13,7 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 )
 
@@ -123,6 +124,10 @@ func (g *DependencyTrackTarget) Initialize() error {
 }
 
 func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
+	if ctx.MediaType != "" && ctx.MediaType != oci.CycloneDXJSONMediaType && ctx.MediaType != oci.CycloneDXXMLMediaType {
+		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Scope, ctx.MediaType)
+		return nil
+	}
 	projectName := ""
 	version := ""
 
@@ -133,14 +138,14 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
 			if strings.HasPrefix(podAnnotationKey, g.projectNameAnnotationKey) {
 				if podAnnotationValue != "" {
-					// determine container name from annotation key
-					containerName := getContainerNameFromAnnotationKey(podAnnotationKey, "/")
+					// determine container name and scope from annotation key
+					containerName, scope := getContainerNameAndScopeFromAnnotationKey(podAnnotationKey, "/")
 					if containerName != "" {
 						logrus.Debugf(`ContainerName found: "%s"`, containerName)
 						// correct container?
-						if containerName == ctx.Container.Name {
+						if containerName == ctx.Container.Name && scope == ctx.Scope {
 							projectName, version = getNameAndVersionFromString(podAnnotationValue, ":")
-							logrus.Infof(`Custom project name found at annotation "%s" for container "%s": "%s:%s"`, podAnnotationKey, containerName, projectName, version)
+							logrus.Infof(`Custom project name found at annotation "%s" for container "%s" and scope "%s": "%s:%s"`, podAnnotationKey, containerName, scope, projectName, version)
 							break
 						}
 					} else {
@@ -155,7 +160,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	// If projectNameAnnotationKey is not set or could not be parsed correctly, use image instead
 	if projectName == "" || version == "" {
-		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName, g.k8sClusterId, g.k8sClusterIdMode)
+		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName, g.k8sClusterId, g.k8sClusterIdMode, ctx.Scope)
 	}
 
 	if ctx.Sbom == "" {
@@ -252,12 +257,12 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
 			logrus.Debugf("AnnotationKey %s starts with %s?", podAnnotationKey, g.parentProjectAnnotationKey)
 			if strings.HasPrefix(podAnnotationKey, g.parentProjectAnnotationKey) {
-				// determine container name from annotation key
-				containerName := getContainerNameFromAnnotationKey(podAnnotationKey, "/")
+				// determine container name and scope from annotation key
+				containerName, scope := getContainerNameAndScopeFromAnnotationKey(podAnnotationKey, "/")
 				if containerName != "" {
 					if podAnnotationValue != "" {
 						// correct container found?
-						if containerName == ctx.Container.Name {
+						if containerName == ctx.Container.Name && scope == ctx.Scope {
 							parentProjectName, parentProjectVersion := getNameAndVersionFromString(podAnnotationValue, ":")
 							hasExplicitVersion := strings.Contains(podAnnotationValue, ":")
 							logrus.Debugf("Try to find parent project by name from annotation \"%s\", for container %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", podAnnotationKey, containerName, parentProjectName, parentProjectVersion)
@@ -642,13 +647,17 @@ func getNameAndVersionFromString(input string, delimiter string) (string, string
 	return name, version
 }
 
-func getContainerNameFromAnnotationKey(annotationKey string, delimiter string) string {
+func getContainerNameAndScopeFromAnnotationKey(annotationKey string, delimiter string) (string, string) {
 	parts := strings.Split(annotationKey, delimiter)
 	containerName := ""
-	if len(parts) == 2 {
+	scope := ""
+	if len(parts) >= 2 {
 		containerName = parts[1]
 	}
-	return containerName
+	if len(parts) == 3 {
+		scope = parts[2]
+	}
+	return containerName, scope
 }
 
 func containsTag(tags []dtrack.Tag, tagString string) bool {
@@ -697,7 +706,7 @@ func rotateRawImageIdTag(tags []dtrack.Tag, currentImageID string) []dtrack.Tag 
 	return append(out, dtrack.Tag{Name: prefix + currentImageID})
 }
 
-func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClusterId string, k8sClusterIdMode string) (string, string) {
+func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClusterId string, k8sClusterIdMode string, scope string) (string, string) {
 	imageRef, err := parser.Parse(image.ImageID)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", image.ImageID)
@@ -713,6 +722,9 @@ func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClust
 		projectName += imageRef.ShortName()
 	} else {
 		projectName += imageRef.Repository()
+	}
+	if scope != "" {
+		projectName += "-" + scope
 	}
 
 	if strings.Index(image.Image, "sha256") != 0 {

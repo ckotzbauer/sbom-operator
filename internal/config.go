@@ -44,6 +44,7 @@ type Config struct {
 	FormatVersion                    string   `yaml:"formatVersion" env:"SBOM_FORMAT_VERSION" flag:"format-version"`
 	StripCpes                        bool     `yaml:"stripCpes" env:"SBOM_STRIP_CPES" flag:"strip-cpes"`
 	Verbosity                        string   `env:"SBOM_VERBOSITY" flag:"verbosity"`
+	FetchOciAttestations             bool     `yaml:"fetchOciAttestations" env:"FETCH_OCI_ATTESTATIONS" flag:"fetch-oci-attestations"`
 }
 
 var (
@@ -80,6 +81,7 @@ var (
 	ConfigKeyDependencyTrackManageProjectActiveStatus        = "dtrack-manage-project-active-status"
 	ConfigKeyKubernetesClusterId                             = "kubernetes-cluster-id"
 	ConfigKeyJobImage                                        = "job-image"
+	ConfigKeyFetchOciAttestations                            = "fetch-oci-attestations"
 	/* #nosec */
 	ConfigKeyJobImagePullSecret = "job-image-pull-secret"
 	ConfigKeyJobTimeout         = "job-timeout"

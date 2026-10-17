@@ -19,7 +19,7 @@ const (
 	CycloneDXJSONMediaType = "application/vnd.cyclonedx+json"
 	SyftMediaType          = "application/vnd.syft+json"
 	SPDXMediaType          = "text/spdx"
-	SPDXJSONMediaType      = "spdx+json"
+	SPDXJSONMediaType      = "application/spdx+json"
 )
 
 func GetMediaType(format string) types.MediaType {

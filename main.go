@@ -129,7 +129,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyOciToken, "", "OCI-Token")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormatVersion, "", syft.FormatVersionHelp())
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyStripCpes, false, "Strip CPE attributes from all components in generated SBOMs. Disables Syft CPE generation and removes cataloger-sourced CPEs.")
-
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyFetchOciAttestations, false, "Fetch additional CycloneDX SBOMs from OCI attestations")
 	return rootCmd
 }
 

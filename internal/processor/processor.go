@@ -1,6 +1,7 @@
 package processor
 
 import (
+	"context"
 	"os"
 	"os/signal"
 	"sync"
@@ -8,15 +9,17 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
+	"github.com/ckotzbauer/libstandard"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/job"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	"github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/ckotzbauer/sbom-operator/internal/target/configmap"
 	"github.com/ckotzbauer/sbom-operator/internal/target/dtrack"
 	"github.com/ckotzbauer/sbom-operator/internal/target/git"
-	"github.com/ckotzbauer/sbom-operator/internal/target/oci"
+	targetoci "github.com/ckotzbauer/sbom-operator/internal/target/oci"
 	"github.com/sirupsen/logrus"
 	"k8s.io/client-go/tools/cache"
 
@@ -207,15 +210,35 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		}
 
 		p.imageMap[container.Image.ImageID] = true
-		sbom, err := p.sy.ExecuteSyft(container.Image)
-		if err != nil {
-			// Error is already handled from syft module.
-			continue
-		}
 
-		for _, t := range p.Targets {
-			err = t.ProcessSbom(target.NewContext(sbom, container.Image, container, &pod))
-			errOccurred = errOccurred || err != nil
+		foundDefaultScopeSBom := false
+		var sbomContexts []*target.TargetContext
+		if internal.OperatorConfig.FetchOciAttestations {
+			attSboms, attErr := oci.FetchSbomAttestations(context.Background(), container.Image, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
+			if attErr != nil {
+				logrus.WithError(attErr).Warnf("Could not fetch OCI attestations for image %s", container.Image.ImageID)
+			} else {
+				for _, att := range attSboms {
+					if att.Scope == "" {
+						foundDefaultScopeSBom = true
+					}
+					sbomContexts = append(sbomContexts, target.NewContext(att.Sbom, container.Image, container, &pod).WithAttestation(att.Scope, string(att.MediaType)))
+				}
+			}
+		}
+		if !foundDefaultScopeSBom {
+			// Execute syft only if there is no SBOM attached in OCI for the image
+			sbom, err := p.sy.ExecuteSyft(container.Image)
+			if err != nil {
+				continue // Error is already handled from syft module.
+			}
+			sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, container, &pod))
+		}
+		for _, ctx := range sbomContexts {
+			for _, t := range p.Targets {
+				err := t.ProcessSbom(ctx)
+				errOccurred = errOccurred || err != nil
+			}
 		}
 	}
 
@@ -270,7 +293,7 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			username := internal.OperatorConfig.OciUser
 			token := internal.OperatorConfig.OciToken
 			format := internal.OperatorConfig.Format
-			t := oci.NewOciTarget(registry, username, token, format)
+			t := targetoci.NewOciTarget(registry, username, token, format)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "configmap" {

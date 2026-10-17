@@ -5,6 +5,7 @@ import (
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/google/go-containerregistry/pkg/authn"
 	"github.com/google/go-containerregistry/pkg/name"
@@ -70,15 +71,15 @@ func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
 		})),
 	}
 
-	dstRef, err := CreateTag(ref, g.registry)
+	dstRef, err := oci.CreateTag(ref, g.registry)
 	if err != nil {
 		logrus.WithError(err).Error("failed to create tag")
 		return err
 	}
 
-	sbomType := GetMediaType(g.sbomFormat)
+	sbomType := oci.GetMediaType(g.sbomFormat)
 	logrus.Debugf("Uploading SBOM file for [%s] to [%s] with mediaType [%s]", ref.Name(), dstRef.Name(), sbomType)
-	img, err := CreateImage(b, sbomType)
+	img, err := oci.CreateImage(b, sbomType)
 	if err != nil {
 		logrus.WithError(err).Error("failed to create image")
 		return err

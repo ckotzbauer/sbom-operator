@@ -24,6 +24,7 @@ func TestGetRepoWithVersion(t *testing.T) {
 		k8sClusterIdMode string
 		expectedName     string
 		expectedVersion  string
+		scope            string
 	}{
 		{
 			name:             "Long name, tag mode",
@@ -70,11 +71,21 @@ func TestGetRepoWithVersion(t *testing.T) {
 			expectedName:     "library/alpine",
 			expectedVersion:  "sha256:21a3deaa0d32a8057914f36584b5288d2e5ecc984380bc0118285c70fa8c9300",
 		},
+		{
+			name:             "SHA version",
+			image:            &liboci.RegistryImage{ImageID: "docker.io/library/alpine:3.14", Image: "alpine:3.14"},
+			useShortName:     true,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "tag",
+			scope:            "testScope",
+			expectedName:     "library/alpine-testScope",
+			expectedVersion:  "3.14",
+		},
 	}
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			name, version := getRepoWithVersion(tt.image, tt.useShortName, tt.k8sClusterId, tt.k8sClusterIdMode)
+			name, version := getRepoWithVersion(tt.image, tt.useShortName, tt.k8sClusterId, tt.k8sClusterIdMode, tt.scope)
 			assert.Equal(t, tt.expectedName, name)
 			assert.Equal(t, tt.expectedVersion, version)
 		})
@@ -118,11 +129,19 @@ func TestGetNameAndVersionFromString(t *testing.T) {
 }
 
 func TestGetContainerNameFromAnnotationKey(t *testing.T) {
-	c := getContainerNameFromAnnotationKey("prefix/container", "/")
+	c, s := getContainerNameAndScopeFromAnnotationKey("prefix/container", "/")
 	assert.Equal(t, "container", c)
+	assert.Equal(t, "", s)
 
-	c = getContainerNameFromAnnotationKey("container", "/")
+	c, s = getContainerNameAndScopeFromAnnotationKey("container", "/")
 	assert.Equal(t, "", c)
+	assert.Equal(t, "", s)
+}
+
+func TestGetScopeFromAnnotationKey(t *testing.T) {
+	c, s := getContainerNameAndScopeFromAnnotationKey("prefix/container/scope", "/")
+	assert.Equal(t, "container", c)
+	assert.Equal(t, "scope", s)
 }
 
 func TestNewDependencyTrackTarget(t *testing.T) {
@@ -243,6 +262,19 @@ func TestValidateConfig(t *testing.T) {
 			}
 		})
 	}
+}
+
+func TestProcessSbomUnsupportedMediaType(t *testing.T) {
+	ctx := &target.TargetContext{
+		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
+		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
+		Sbom:      "{}",
+		MediaType: "unsupported",
+	}
+	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	err := g.ProcessSbom(ctx)
+	assert.NoError(t, err)
 }
 
 func TestProcessSbomMinimal(t *testing.T) {
