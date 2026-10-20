@@ -123,15 +123,9 @@ func (g *DependencyTrackTarget) Initialize() error {
 	return nil
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
-	if ctx.MediaType != "" && ctx.MediaType != oci.CycloneDXJSONMediaType && ctx.MediaType != oci.CycloneDXXMLMediaType {
-		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Scope, ctx.MediaType)
-		return nil
-	}
+func (g *DependencyTrackTarget) identifyProjectNameAndVersion(ctx *target.TargetContext) (string, string) {
 	projectName := ""
 	version := ""
-
-	logrus.Debugf("%v", g)
 	// Set custom project name by kubernetes annotation?
 	if g.projectNameAnnotationKey != "" {
 		logrus.Debugf(`Try to set project name by configured annotationkey "%s"`, g.projectNameAnnotationKey)
@@ -152,6 +146,75 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	if projectName == "" || version == "" {
 		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName, g.k8sClusterId, g.k8sClusterIdMode, ctx.Scope)
 	}
+	return projectName, version
+}
+
+func (g *DependencyTrackTarget) identifiyParentProjectUuid(ctx *target.TargetContext, client *dtrack.Client) *uuid.UUID {
+	if g.parentProjectAnnotationKey != "" {
+		logrus.Debugf("Try to set parent project by configured annotationkey %s", g.parentProjectAnnotationKey)
+		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
+			logrus.Debugf("AnnotationKey %s starts with %s?", podAnnotationKey, g.parentProjectAnnotationKey)
+
+			parentProjectName, parentProjectVersion, err := g.getContainerNameAndVersion(podAnnotationKey, podAnnotationValue, g.parentProjectAnnotationKey, ctx)
+			if err != nil {
+				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", ctx.Image.Image)
+				continue
+			}
+			if parentProjectName == "" {
+				continue
+			}
+			parentProjectUuid, err := uuid.Parse(parentProjectName)
+			if err == nil {
+				return &parentProjectUuid
+			}
+			hasExplicitVersion := strings.Contains(podAnnotationValue, ":")
+			logrus.Debugf("Try to find parent project by name from annotation \"%s\", for image %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", podAnnotationKey, ctx.Image.Image, parentProjectName, parentProjectVersion)
+			parentProjects, err := client.Project.GetProjectsForName(context.Background(), parentProjectName, false, true)
+			if err != nil {
+				logrus.WithError(err).Errorf(`Could not find parent project "%s"`, parentProjectName)
+			} else if len(parentProjects) == 0 {
+				logrus.Errorf(`No parent project found with name "%s"`, parentProjectName)
+			} else {
+				var parentProject dtrack.Project
+				found := false
+				if hasExplicitVersion {
+					for _, p := range parentProjects {
+						if p.Version == parentProjectVersion {
+							parentProject = p
+							found = true
+							break
+						}
+					}
+					if !found {
+						logrus.Errorf(`No parent project found with name "%s" and version "%s"`, parentProjectName, parentProjectVersion)
+					}
+				} else {
+					if len(parentProjects) > 1 {
+						logrus.Warnf(`Multiple root projects found with name "%s", using the first one`, parentProjectName)
+					}
+					parentProject = parentProjects[0]
+					found = true
+				}
+				if found {
+					logrus.Infof(`Found parent project with name "%s" and UUID "%s" for image "%s"`, parentProjectName, parentProject.UUID, ctx.Image.Image)
+					return &parentProject.UUID
+				}
+			}
+			break
+
+		}
+	}
+	return g.defaultParentProjectParsed
+}
+
+func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
+	if ctx.MediaType != "" && ctx.MediaType != oci.CycloneDXJSONMediaType && ctx.MediaType != oci.CycloneDXXMLMediaType {
+		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Scope, ctx.MediaType)
+		return nil
+	}
+
+	logrus.Debugf("%v", g)
+	projectName, version := g.identifyProjectNameAndVersion(ctx)
 
 	if ctx.Sbom == "" {
 		logrus.Infof("Empty SBOM - skip image (image=%s)", ctx.Image.ImageID)
@@ -163,7 +226,6 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return err
 	}
-
 	// When active-status management is enabled, try to reactivate an existing
 	// inactive project without re-uploading the SBOM (e.g. a rollback to a
 	// previously deployed image with a matching digest).
@@ -177,11 +239,12 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		}
 	}
 
+	parentUuid := g.identifiyParentProjectUuid(ctx, client)
 	if !skipUpload {
 		logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
 		uploadToken, err := client.BOM.PostBom(
 			context.Background(),
-			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, AutoCreate: true, BOM: ctx.Sbom},
+			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, ParentUUID: parentUuid, AutoCreate: true, BOM: ctx.Sbom},
 		)
 		if err != nil {
 			logrus.Errorf("Could not upload BOM: %v", err)
@@ -198,6 +261,9 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		}
 	}
 
+	if parentUuid != nil {
+		project.ParentRef = &dtrack.ParentRef{UUID: *parentUuid}
+	}
 	kubernetesClusterTag := kubernetesCluster + "=" + g.k8sClusterId
 	if g.k8sClusterIdMode == "tag" {
 		if !containsTag(project.Tags, kubernetesClusterTag) {
@@ -242,61 +308,6 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		}
 	}
 
-	if g.parentProjectAnnotationKey != "" {
-		logrus.Debugf("Try to set parent project by configured annotationkey %s", g.parentProjectAnnotationKey)
-		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
-			logrus.Debugf("AnnotationKey %s starts with %s?", podAnnotationKey, g.parentProjectAnnotationKey)
-
-			parentProjectName, parentProjectVersion, err := g.getContainerNameAndVersion(podAnnotationKey, podAnnotationValue, g.parentProjectAnnotationKey, ctx)
-			if err != nil {
-				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", ctx.Image.Image)
-				continue
-			}
-			if parentProjectName == "" {
-				continue
-			}
-			hasExplicitVersion := strings.Contains(podAnnotationValue, ":")
-			logrus.Debugf("Try to find parent project by name from annotation \"%s\", for image %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", podAnnotationKey, ctx.Image.Image, parentProjectName, parentProjectVersion)
-			parentProjects, err := client.Project.GetProjectsForName(context.Background(), parentProjectName, false, true)
-			if err != nil {
-				logrus.WithError(err).Errorf(`Could not find parent project "%s"`, parentProjectName)
-			} else if len(parentProjects) == 0 {
-				logrus.Errorf(`No parent project found with name "%s"`, parentProjectName)
-			} else {
-				var parentProject dtrack.Project
-				found := false
-				if hasExplicitVersion {
-					for _, p := range parentProjects {
-						if p.Version == parentProjectVersion {
-							parentProject = p
-							found = true
-							break
-						}
-					}
-					if !found {
-						logrus.Errorf(`No parent project found with name "%s" and version "%s"`, parentProjectName, parentProjectVersion)
-					}
-				} else {
-					if len(parentProjects) > 1 {
-						logrus.Warnf(`Multiple root projects found with name "%s", using the first one`, parentProjectName)
-					}
-					parentProject = parentProjects[0]
-					found = true
-				}
-				if found {
-					logrus.Infof(`Found parent project with name "%s" and UUID "%s" for image "%s"`, parentProjectName, parentProject.UUID, ctx.Image.Image)
-					project.ParentRef = &dtrack.ParentRef{UUID: parentProject.UUID}
-				}
-			}
-			break
-
-		}
-	}
-
-	if project.ParentRef == nil && g.defaultParentProjectParsed != nil {
-		project.ParentRef = &dtrack.ParentRef{UUID: *g.defaultParentProjectParsed}
-	}
-
 	if g.manageProjectActiveStatus {
 		project.Active = true
 		project.IsLatest = dtrack.OptionalBoolOf(true)
@@ -327,22 +338,19 @@ func (g *DependencyTrackTarget) getContainerNameAndVersion(podAnnotationKey stri
 	if strings.HasPrefix(podAnnotationKey, expectedAnnotationKey) {
 		// determine container name and scope from annotation key
 		containerName, scope := getContainerNameAndScopeFromAnnotationKey(podAnnotationKey, "/")
-
-		if containerName != "" {
-			if podAnnotationValue != "" {
-				// correct container found?
-				for _, c := range ctx.Containers {
-					if containerName == c.Name && scope == ctx.Scope {
-						name, version := getNameAndVersionFromString(podAnnotationValue, ":")
-						logrus.Infof(`custom '%s' found at annotation '%s' for container '%s' and scope '%s': '%s:%s'`, expectedAnnotationKey, podAnnotationKey, containerName, scope, name, version)
-						return name, version, nil
-					}
+		if podAnnotationValue != "" {
+			// correct container found?
+			for _, c := range ctx.Containers {
+				if (containerName == "" || containerName == c.Name) && scope == ctx.Scope {
+					name, version := getNameAndVersionFromString(podAnnotationValue, ":")
+					logrus.Infof(`Custom '%s' found at annotation '%s' for container '%s' and scope '%s': '%s:%s'`, expectedAnnotationKey, podAnnotationKey, containerName, scope, name, version)
+					return name, version, nil
+				} else {
+					logrus.Debugf("skipping container '%s' as not configured for annotation key '%s'", c.Name, expectedAnnotationKey)
 				}
-			} else {
-				return "", "", fmt.Errorf(`empty value for annotation '%s' in image '%s'`, podAnnotationKey, ctx.Image.Image)
 			}
 		} else {
-			return "", "", fmt.Errorf(`container name could not be determined from annotation '%s' for image '%s'`, podAnnotationKey, ctx.Image.Image)
+			return "", "", fmt.Errorf(`empty value for annotation '%s' in image '%s'`, podAnnotationKey, ctx.Image.Image)
 		}
 	}
 	return "", "", nil

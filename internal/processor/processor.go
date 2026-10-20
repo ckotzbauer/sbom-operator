@@ -212,6 +212,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	for imageId, containerList := range containerNames {
 		var sbomContexts []*target.TargetContext
 		for _, container := range containerList {
+			logrus.Tracef("Scanning container '%s'", container.Name)
 			alreadyScanned := p.imageMap[container.Image.ImageID]
 
 			if !alreadyScanned {

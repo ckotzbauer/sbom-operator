@@ -13,6 +13,7 @@ import (
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/google/uuid"
+	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -342,6 +343,12 @@ func TestProcessSbomParentProject(t *testing.T) {
 			parentProjects:  `[]`,
 			expectParentRef: false,
 		},
+		{
+			name:            "parent project with uuuid",
+			annotationValue: "aaaaaaaa-1111-2222-3333-44444444444",
+			parentProjects:  `[{"name":"MyParentProject","version":"","uuid":"` + parentUUID + `"}]`,
+			expectParentRef: true,
+		},
 	}
 
 	for _, tt := range tests {
@@ -358,10 +365,14 @@ func TestProcessSbomParentProject(t *testing.T) {
 				case r.URL.Path == "/api/v1/project" && r.Method == http.MethodGet:
 					// GetProjectsForName for parent lookup
 					_, _ = w.Write([]byte(tt.parentProjects))
-				default:
+				case r.URL.Path == "/api/v1/project" && r.Method == http.MethodPost:
 					// Project.Update - capture the body to inspect ParentRef
 					buf, _ := io.ReadAll(r.Body)
 					updateBody = string(buf)
+					logrus.Infof("%s", updateBody)
+					_, _ = w.Write([]byte(`{}`))
+				default:
+					// any other output
 					_, _ = w.Write([]byte(`{}`))
 				}
 			}))
