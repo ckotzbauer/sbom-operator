@@ -1,16 +1,20 @@
 package target
 
 import (
+	"time"
+
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
 )
 
 type TargetContext struct {
-	Image       *oci.RegistryImage
-	Containers  []*libk8s.ContainerInfo
-	Pod         *libk8s.PodInfo
-	Attestation *internaloci.AttestationSbom
+	Image           *oci.RegistryImage
+	Containers      []*libk8s.ContainerInfo
+	Pod             *libk8s.PodInfo
+	Attestation     *internaloci.AttestationSbom
+	DeploymentTime  time.Time // Birth date, i.e. first deployment
+	PodCreationTime time.Time // Pod creation timestamp. Useful for rollbacks.
 }
 
 type Target interface {
@@ -40,15 +44,13 @@ type DeactivateTarget interface {
 	ShouldDeactivateOrphans() bool
 }
 
-func NewContext(image *oci.RegistryImage, pod *libk8s.PodInfo, attestation *internaloci.AttestationSbom) *TargetContext {
+func NewContext(image *oci.RegistryImage, pod *libk8s.PodInfo, attestation *internaloci.AttestationSbom, deploymentTime time.Time, podCreationTime time.Time, containers []*libk8s.ContainerInfo) *TargetContext {
 	return &TargetContext{
-		Image:       image,
-		Pod:         pod,
-		Attestation: attestation,
+		Image:           image,
+		Pod:             pod,
+		Attestation:     attestation,
+		DeploymentTime:  deploymentTime,
+		PodCreationTime: podCreationTime,
+		Containers:      containers,
 	}
-}
-
-func (c *TargetContext) WithContainers(containers []*libk8s.ContainerInfo) *TargetContext {
-	c.Containers = containers
-	return c
 }

@@ -6,6 +6,7 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+	"time"
 
 	dtrack "github.com/DependencyTrack/client-go"
 	"github.com/google/uuid"
@@ -44,11 +45,13 @@ type DependencyTrackTarget struct {
 }
 
 const (
-	kubernetesCluster  string = "kubernetes-cluster"
-	sbomOperator       string = "sbom-operator"
-	rawImageId         string = "raw-image-id"
-	sbomScopeTagKey    string = "sbom-scope"
-	podNamespaceTagKey string = "namespace"
+	kubernetesCluster        string = "kubernetes-cluster"
+	sbomOperator             string = "sbom-operator"
+	rawImageId               string = "raw-image-id"
+	sbomScopeTagKey          string = "sbom-scope"
+	podNamespaceTagKey       string = "namespace"
+	deploymentTimestampGroup string = "deployment-timestamp"
+	tsPropertyType           string = "STRING"
 )
 
 func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool, templateProjectName string) *DependencyTrackTarget {
@@ -350,9 +353,10 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	if parentUuid != nil {
 		project.ParentRef = &dtrack.ParentRef{UUID: *parentUuid}
 	}
-	kubernetesClusterTag := kubernetesCluster + "=" + g.k8sClusterId
+	alreadyOnCluster := false
+	clusterId := g.k8sClusterId
 	if g.isNamespaceMode() {
-		kubernetesClusterTag += "/" + ctx.Pod.PodNamespace
+		clusterId += "/" + ctx.Pod.PodNamespace
 	} else {
 		// don't add namespace tag in namespace mode as it is already in clusterId tag
 		podNamespaceTag := podNamespaceTagKey + "=" + ctx.Pod.PodNamespace
@@ -360,9 +364,12 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
 		}
 	}
+	kubernetesClusterTag := kubernetesCluster + "=" + clusterId
 	if g.isTagMode() {
 		if !containsTag(project.Tags, kubernetesClusterTag) {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: kubernetesClusterTag})
+		} else {
+			alreadyOnCluster = true
 		}
 	} else {
 		if containsTag(project.Tags, kubernetesClusterTag) {
@@ -418,8 +425,8 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		g.deactivateSiblingVersions(client, &project, ctx.Image, ctx.Pod)
 	}
 
+	g.syncStageIntervalProperty(context.Background(), client, project, clusterId, alreadyOnCluster, ctx.DeploymentTime, ctx.PodCreationTime)
 	err = g.addProjectToCache(ctx.Pod.PodNamespace, ctx.Image.ImageID, project)
-
 	return err
 }
 
@@ -831,6 +838,9 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 		if sibling.Version == project.Version {
 			continue
 		}
+		if !sibling.Active {
+			continue
+		}
 		_ = g.handleProjectDeactivation(client, &sibling, &target.TargetImage{RegistryImage: img, Namespace: pod.PodNamespace}, false)
 	}
 }
@@ -924,60 +934,36 @@ func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, us
 // and persists the updated tags. If no other clusters are referencing the
 // project anymore, it patches the project to be inactive (and not latest).
 func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client, project *dtrack.Project, img *target.TargetImage, deleteProject bool) error {
-	if !project.Active {
-		return nil
-	}
-	sbomOperatorPropFound := false
+	ctx := context.Background()
 	podNsPrefix := podNamespaceTagKey + "="
-	remainingNamespacesOnProject := 0
-
-	// 1. Pre-scan tags once to verify ownership and count remaining active namespaces
-	for _, tag := range project.Tags {
-		if tag.Name == sbomOperator {
-			sbomOperatorPropFound = true
-		} else if img.Namespace != "" && strings.HasPrefix(tag.Name, podNsPrefix) {
-			if strings.TrimPrefix(tag.Name, podNsPrefix) != img.Namespace {
-				remainingNamespacesOnProject++
-			}
-		}
-	}
-	if !sbomOperatorPropFound {
-		return nil
-	}
-
-	// 2. Check if another namespace in our cluster still uses this project (relevant for standard tag mode)
-	sameProjectInOtherNs := remainingNamespacesOnProject > 0
-	if !sameProjectInOtherNs && g.isTagMode() && !g.isNamespaceMode() && img.Namespace != "" {
-		for ns, nsImages := range g.imageProjectMap[img.ImageID] {
-			if ns != img.Namespace {
-				if _, exists := nsImages[project.UUID]; exists {
-					sameProjectInOtherNs = true
-					break
-				}
-			}
-		}
-	}
+	clusterPrefix := kubernetesCluster + "="
 
 	expectedClusterId := g.k8sClusterId
 	if g.isNamespaceMode() {
 		expectedClusterId = g.k8sClusterId + "/" + img.Namespace
 	}
-	clusterPrefix := kubernetesCluster + "="
 
-	// 3. Single-pass tag filtering for both "namespace=" and "kubernetes-cluster=" tags
+	sameProjectInOtherNs := g.isStillUsedInOtherNamespace(project, img)
+
+	// 1. Single-pass tag check & filtering
+	isManaged := false
 	tagsModified := false
 	stillInUse := false
 	filteredTags := make([]dtrack.Tag, 0, len(project.Tags))
 
 	for _, tag := range project.Tags {
-		// Remove stale "namespace=<ns>" tag
+		if tag.Name == sbomOperator {
+			isManaged = true
+		}
+
+		// Drop stale "namespace=<ns>" tag
 		if img.Namespace != "" && tag.Name == podNsPrefix+img.Namespace {
 			tagsModified = true
 			logrus.Infof("Removing %s tag from project '%s:%s'", tag.Name, project.Name, project.Version)
 			continue
 		}
 
-		// Handle "kubernetes-cluster=" tags in tag mode
+		// Drop or retain "kubernetes-cluster=" tags in tag mode
 		if g.isTagMode() && strings.HasPrefix(tag.Name, clusterPrefix) {
 			clusterId := strings.TrimPrefix(tag.Name, clusterPrefix)
 			if !sameProjectInOtherNs && clusterId == expectedClusterId {
@@ -985,50 +971,194 @@ func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client,
 				logrus.Infof("Removing %s tag from project '%s:%s'", tag.Name, project.Name, project.Version)
 				continue
 			}
-			// Another cluster (or our own cluster via another active namespace) still holds a tag
 			stillInUse = true
 		}
 
 		filteredTags = append(filteredTags, tag)
 	}
-	project.Tags = filteredTags
 
-	// 4. only update tags if modified AND the project won't be deleted right after
-	if tagsModified && (!deleteProject || stillInUse) {
-		if _, err := client.Project.Update(context.Background(), *project); err != nil {
-			logrus.WithError(err).Warnf("Project tags could not be updated for project '%s:%s'", project.Name, project.Version)
-			return err
-		}
-	}
-
-	g.projectDeleted(project, img)
-
-	if stillInUse {
+	if !isManaged {
 		return nil
 	}
 
-	// 5. No other clusters/namespaces are using it -> deactivate or delete
-	if deleteProject {
+	g.projectDeleted(project, img)
+	// 2. Fast exit if the project is completely orphaned and should be deleted
+	if !stillInUse && deleteProject {
 		logrus.Infof("Deleting project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
-		if err := client.Project.Delete(context.Background(), project.UUID); err != nil {
+		if err := client.Project.Delete(ctx, project.UUID); err != nil {
 			logrus.WithError(err).Warnf("Project could not be deleted '%s:%s'", project.Name, project.Version)
 			return err
 		}
 		return nil
 	}
 
-	logrus.Infof("Deactivating project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
-	if _, err := client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
-		Active:   false,
-		IsLatest: dtrack.OptionalBoolOf(false),
-	}); err != nil {
-		logrus.WithError(err).Warnf("Project '%s:%s' could not be deactivated", project.Name, project.Version)
-		return err
+	// 3. Immediately persist tag/status changes to minimize the race window after Project.Get
+	project.Tags = filteredTags
+	activenessChange := project.Active != stillInUse
+	if activenessChange {
+		if stillInUse {
+			logrus.Infof("Activating project '%s:%s' as it is still used by other clusters", project.Name, project.Version)
+		} else {
+			logrus.Infof("Deactivating project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
+		}
+	}
+	var isLatest *bool
+	if stillInUse && project.Active {
+		isLatest = project.IsLatest
+	} else {
+		isLatest = new(false)
+	}
+	if activenessChange {
+		project.Active = stillInUse
+		project.IsLatest = isLatest
+	}
+	if tagsModified {
+		project.Tags = filteredTags
+	}
+	if activenessChange || tagsModified { // Only patch if there actually was a change
+		if _, err := client.Project.Update(ctx, *project); err != nil {
+			logrus.WithError(err).Warnf("Project '%s:%s' could not be updated", project.Name, project.Version)
+			return err
+		}
+	}
+
+	// 4. Close stage deployment interval last (only if we actually found that project is to be removed in namespace)
+	if tagsModified {
+		return g.closeStageInterval(ctx, expectedClusterId, client, project)
 	}
 
 	return nil
 }
 
+// isStillUsedInOtherNamespace checks if another namespace in the same cluster still uses this project.
+func (g *DependencyTrackTarget) isStillUsedInOtherNamespace(project *dtrack.Project, img *target.TargetImage) bool {
+	if !g.isTagMode() || g.isNamespaceMode() || img.Namespace == "" {
+		return false
+	}
+
+	podNsPrefix := podNamespaceTagKey + "="
+	for _, tag := range project.Tags {
+		if strings.HasPrefix(tag.Name, podNsPrefix) && strings.TrimPrefix(tag.Name, podNsPrefix) != img.Namespace {
+			return true
+		}
+	}
+
+	for ns, nsImages := range g.imageProjectMap[img.ImageID] {
+		if ns != img.Namespace {
+			if _, exists := nsImages[project.UUID]; exists {
+				return true
+			}
+		}
+	}
+	return false
+}
+
+// closeStageInterval closes the active ISO-8601 deployment timestamp interval for the current cluster.
+func (g *DependencyTrackTarget) closeStageInterval(ctx context.Context, clusterId string, client *dtrack.Client, project *dtrack.Project) error {
+	props, err := client.ProjectProperty.GetAll(ctx, project.UUID, dtrack.PageOptions{})
+	if err != nil {
+		logrus.WithError(err).Warnf("Project properties could not be updated for project '%s:%s'", project.Name, project.Version)
+		return err
+	}
+
+	if existingVal, ok := findProperty(props.Items, clusterId); ok {
+		closedVal := CloseStageInterval(existingVal, time.Now().UTC())
+		_ = g.upsertProjectProperty(
+			ctx,
+			client,
+			project.UUID,
+			props.Items,
+			clusterId,
+			closedVal,
+			"ISO-8601 deployment intervals in stage "+clusterId,
+		)
+	}
+	return nil
+}
+
 func (g *DependencyTrackTarget) IsNamespaceAware() bool {
 	return !g.isPrefixMode()
+}
+
+// upsertProjectProperty creates a new ProjectProperty or updates its value if it already exists.
+func (g *DependencyTrackTarget) upsertProjectProperty(
+	ctx context.Context,
+	client *dtrack.Client,
+	projectUUID uuid.UUID,
+	existingProps []dtrack.ProjectProperty,
+	propName string,
+	propValue string,
+	description string,
+) error {
+	for _, p := range existingProps {
+		if p.Group == deploymentTimestampGroup && p.Name == propName {
+			if p.Value == propValue {
+				return nil // Value is already up to date, no API call required
+			}
+			p.Value = propValue
+			_, err := client.ProjectProperty.Update(ctx, projectUUID, p)
+			return err
+		}
+	}
+
+	_, err := client.ProjectProperty.Create(ctx, projectUUID, dtrack.ProjectProperty{
+		Group:       deploymentTimestampGroup,
+		Name:        propName,
+		Value:       propValue,
+		Type:        "STRING",
+		Description: description,
+	})
+	return err
+}
+
+func findProperty(props []dtrack.ProjectProperty, propName string) (string, bool) {
+	for _, p := range props {
+		if p.Group == deploymentTimestampGroup && p.Name == propName && p.Value != "" {
+			return p.Value, true
+		}
+	}
+	return "", false
+}
+
+// syncStageIntervalProperty opens or updates the ISO-8601 deployment interval for the given stage.
+func (g *DependencyTrackTarget) syncStageIntervalProperty(
+	ctx context.Context,
+	client *dtrack.Client,
+	project dtrack.Project,
+	clusterId string,
+	wasAlreadyActiveInCluster bool,
+	releaseTimestamp time.Time,
+	podTimestamp time.Time,
+) {
+	props, err := client.ProjectProperty.GetAll(ctx, project.UUID, dtrack.PageOptions{})
+	if err != nil {
+		logrus.WithError(err).Warnf("Failed to fetch properties for project %s", project.UUID)
+		props.Items = project.Properties
+	}
+
+	existingVal, hasExistingInterval := findProperty(props.Items, clusterId)
+
+	// Determine the appropriate timestamp:
+	// - Initial deployment in this stage (!hasExistingInterval): use ReleaseTimestamp (ReplicaSet creation time).
+	// - Rollback in this stage (hasExistingInterval && !wasAlreadyActiveInCluster): use PodTimestamp (rollback pod creation time).
+	// - Already active in this stage: pass ReleaseTimestamp so OpenStageInterval can adjust if an older ReplicaSet was found.
+	startTime := releaseTimestamp
+	if hasExistingInterval && !wasAlreadyActiveInCluster && !podTimestamp.IsZero() {
+		startTime = podTimestamp
+	}
+	if startTime.IsZero() {
+		startTime = time.Now().UTC()
+	}
+
+	newVal := OpenStageInterval(existingVal, startTime)
+
+	_ = g.upsertProjectProperty(
+		ctx,
+		client,
+		project.UUID,
+		props.Items,
+		clusterId,
+		newVal,
+		"ISO-8601 deployment intervals in stage "+clusterId,
+	)
 }

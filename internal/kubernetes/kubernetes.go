@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"time"
 
 	"github.com/sirupsen/logrus"
 	batchv1 "k8s.io/api/batch/v1"
@@ -347,4 +348,46 @@ func (client *KubeClient) ListConfigMaps() ([]corev1.ConfigMap, error) {
 
 func (client *KubeClient) DeleteConfigMap(cm corev1.ConfigMap) error {
 	return client.Client.Client.CoreV1().ConfigMaps(cm.Namespace).Delete(context.Background(), cm.Name, meta.DeleteOptions{})
+}
+
+// ResolvePodTimestamps queries the Kubernetes API to retrieve the creation timestamp
+// of the owning ReplicaSet (initial release time) and the Pod's own creation timestamp (rollback/start time).
+func (k *KubeClient) ResolvePodTimestamps(ctx context.Context, podInfo libk8s.PodInfo) (time.Time, time.Time) {
+	now := time.Now().UTC()
+	if k == nil || k.Client == nil || k.Client.Client == nil {
+		return now, now
+	}
+	if podInfo.PodName == "" || podInfo.PodNamespace == "" {
+		return now, now
+	}
+
+	pod, err := k.Client.Client.CoreV1().Pods(podInfo.PodNamespace).Get(ctx, podInfo.PodName, meta.GetOptions{})
+	if err != nil {
+		logrus.WithError(err).Debugf("Could not fetch pod %s/%s to resolve timestamps", podInfo.PodNamespace, podInfo.PodName)
+		return now, now
+	}
+
+	podTime := now
+	if !pod.CreationTimestamp.IsZero() {
+		podTime = pod.CreationTimestamp.UTC()
+	} else if pod.Status.StartTime != nil && !pod.Status.StartTime.IsZero() {
+		podTime = pod.Status.StartTime.UTC()
+	}
+
+	// Default release timestamp to the pod timestamp if no owning ReplicaSet exists (e.g., DaemonSet, StatefulSet, naked Pod)
+	rsTime := podTime
+
+	for _, owner := range pod.OwnerReferences {
+		if owner.Kind == "ReplicaSet" && owner.Name != "" {
+			rs, err := k.Client.Client.AppsV1().ReplicaSets(pod.Namespace).Get(ctx, owner.Name, meta.GetOptions{})
+			if err == nil && !rs.CreationTimestamp.IsZero() {
+				rsTime = rs.CreationTimestamp.UTC()
+				break
+			} else {
+				logrus.WithError(err).Warnf("ReplicaSet creation time can not be read out for pod %s/%s. Falling back to Pod CreationTime.", podInfo.PodNamespace, podInfo.PodName)
+			}
+		}
+	}
+
+	return rsTime, podTime
 }
