@@ -13,6 +13,7 @@ import (
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/google/uuid"
+	"github.com/sirupsen/logrus"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 )
@@ -268,11 +269,11 @@ func TestValidateConfig(t *testing.T) {
 
 func TestProcessSbomUnsupportedMediaType(t *testing.T) {
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
-		MediaType: "unsupported",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
+		MediaType:  "unsupported",
 	}
 	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
 	err := g.ProcessSbom(ctx)
@@ -300,10 +301,10 @@ func TestProcessSbomMinimal(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -342,6 +343,12 @@ func TestProcessSbomParentProject(t *testing.T) {
 			parentProjects:  `[]`,
 			expectParentRef: false,
 		},
+		{
+			name:            "parent project with uuuid",
+			annotationValue: "aaaaaaaa-1111-2222-3333-44444444444",
+			parentProjects:  `[{"name":"MyParentProject","version":"","uuid":"` + parentUUID + `"}]`,
+			expectParentRef: true,
+		},
 	}
 
 	for _, tt := range tests {
@@ -358,10 +365,14 @@ func TestProcessSbomParentProject(t *testing.T) {
 				case r.URL.Path == "/api/v1/project" && r.Method == http.MethodGet:
 					// GetProjectsForName for parent lookup
 					_, _ = w.Write([]byte(tt.parentProjects))
-				default:
+				case r.URL.Path == "/api/v1/project" && r.Method == http.MethodPost:
 					// Project.Update - capture the body to inspect ParentRef
 					buf, _ := io.ReadAll(r.Body)
 					updateBody = string(buf)
+					logrus.Infof("%s", updateBody)
+					_, _ = w.Write([]byte(`{}`))
+				default:
+					// any other output
 					_, _ = w.Write([]byte(`{}`))
 				}
 			}))
@@ -374,10 +385,10 @@ func TestProcessSbomParentProject(t *testing.T) {
 			g.imageProjectMap = map[string]uuid.UUID{}
 
 			ctx := &target.TargetContext{
-				Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-				Pod:       &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
-				Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-				Sbom:      "{}",
+				Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+				Pod:        &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
+				Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+				Sbom:       "{}",
 			}
 
 			err = g.ProcessSbom(ctx)
@@ -603,10 +614,10 @@ func TestProcessSbomReactivateWithoutUpload(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -676,10 +687,10 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
 	}
 
 	_ = g.ProcessSbom(ctx)

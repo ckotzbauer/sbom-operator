@@ -7,7 +7,7 @@ import (
 )
 
 func TestTargetContextWithAttestation(t *testing.T) {
-	ctx := NewContext("dummy-sbom", nil, nil, nil)
+	ctx := NewContext("dummy-sbom", nil, nil)
 	assert.Empty(t, ctx.Scope)
 	assert.Empty(t, ctx.MediaType)
 

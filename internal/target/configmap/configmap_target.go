@@ -36,12 +36,14 @@ func (g *ConfigMapTarget) ProcessSbom(ctx *target.TargetContext) error {
 		return err
 	}
 
-	name := fmt.Sprintf("%s-%s", ctx.Pod.PodName, ctx.Container.Name)
-	err = g.k8s.CreateConfigMap(ctx.Pod.PodNamespace, name, ctx.Image.ImageID, compressed)
-	if err != nil {
-		logrus.WithError(err).Errorf("Could not create configmap %s/%s.", ctx.Pod.PodNamespace, name)
-	} else {
-		logrus.Debugf("Created configmap %s/%s.", ctx.Pod.PodNamespace, name)
+	for _, container := range ctx.Containers {
+		name := fmt.Sprintf("%s-%s", ctx.Pod.PodName, container.Name)
+		err = g.k8s.CreateConfigMap(ctx.Pod.PodNamespace, name, ctx.Image.ImageID, compressed)
+		if err != nil {
+			logrus.WithError(err).Errorf("Could not create configmap %s/%s.", ctx.Pod.PodNamespace, name)
+		} else {
+			logrus.Debugf("Created configmap %s/%s.", ctx.Pod.PodNamespace, name)
+		}
 	}
 
 	return err
