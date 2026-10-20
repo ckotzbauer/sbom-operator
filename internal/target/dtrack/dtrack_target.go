@@ -4,7 +4,9 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"strconv"
 	"strings"
+	"time"
 
 	dtrack "github.com/DependencyTrack/client-go"
 	"github.com/google/uuid"
@@ -39,10 +41,12 @@ type DependencyTrackTarget struct {
 }
 
 const (
-	kubernetesCluster  = "kubernetes-cluster"
-	sbomOperator       = "sbom-operator"
-	rawImageId         = "raw-image-id"
-	podNamespaceTagKey = "namespace"
+	kubernetesCluster        = "kubernetes-cluster"
+	sbomOperator             = "sbom-operator"
+	rawImageId               = "raw-image-id"
+	podNamespaceTagKey       = "namespace"
+	deploymentTimestampGroup = "deployment-timestamp"
+	tsPropertyType           = "STRING"
 )
 
 func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool) *DependencyTrackTarget {
@@ -264,10 +268,13 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	if parentUuid != nil {
 		project.ParentRef = &dtrack.ParentRef{UUID: *parentUuid}
 	}
+	alreadyOnCluster := false
 	kubernetesClusterTag := kubernetesCluster + "=" + g.k8sClusterId
 	if g.k8sClusterIdMode == "tag" {
 		if !containsTag(project.Tags, kubernetesClusterTag) {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: kubernetesClusterTag})
+		} else {
+			alreadyOnCluster = true
 		}
 	} else {
 		if containsTag(project.Tags, kubernetesClusterTag) {
@@ -321,7 +328,9 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	if g.manageProjectActiveStatus {
 		g.deactivateSiblingVersions(client, project)
 	}
-
+	if err := g.upsertDeploymentTimestampProperty(client, ctx, project, alreadyOnCluster); err != nil {
+		logrus.WithError(err).Warnf("Could not set deployment timestamp property for project '%s:%s'", project.Name, project.Version)
+	}
 	if g.imageProjectMap == nil {
 		// prepropulate imageProjectMap
 		_, err := g.LoadImages()
@@ -752,4 +761,76 @@ func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client,
 	}
 
 	return nil
+}
+
+func (g *DependencyTrackTarget) deploymentPropertyName() string {
+	clusterID := g.k8sClusterId
+	if clusterID == "" {
+		clusterID = "default"
+	}
+	if g.k8sClusterIdMode == "tag" {
+		return fmt.Sprintf("%s=%s", kubernetesCluster, clusterID)
+	}
+	return clusterID
+}
+
+func (g *DependencyTrackTarget) upsertDeploymentTimestampProperty(
+	client *dtrack.Client,
+	ctx *target.TargetContext,
+	project dtrack.Project,
+	alreadyOnCluster bool,
+) error {
+	ts := time.Now().UTC()
+	if ctx != nil && !ctx.DeploymentTime.IsZero() {
+		ts = ctx.DeploymentTime.UTC()
+	}
+
+	propName := g.deploymentPropertyName()
+	prop := dtrack.ProjectProperty{
+		Group:       deploymentTimestampGroup,
+		Name:        propName,
+		Value:       strconv.FormatInt(ts.UnixMilli(), 10),
+		Type:        tsPropertyType,
+		Description: "Deployment timestamp reported by sbom-operator",
+	}
+
+	// Properties needs to be loaded using ProjectProperty-API separatly
+	existingProps, err := client.ProjectProperty.GetAll(context.Background(), project.UUID, dtrack.PageOptions{})
+	if err != nil {
+		return fmt.Errorf("fetching project properties: %w", err)
+	}
+
+	propertyExists := hasProjectProperty(existingProps.Items, prop.Group, prop.Name)
+
+	// 1. Project was already active on this Cluster (e.g. Operator restart / new replica)
+	//    and property already existss -> hold original Deployment-Timestamp!
+	if alreadyOnCluster && propertyExists {
+		logrus.Debugf("Project %s:%s already active on %s, keeping existing deployment timestamp", project.Name, project.Version, propName)
+		return nil
+	}
+
+	// 2. Property already exists, but project was again deployed on this stage (Rollback / Redeploy) -> POST (Update)
+	if propertyExists {
+		logrus.Infof("Updating deployment timestamp property (%s/%s) for redeployed project %s:%s", prop.Group, prop.Name, project.Name, project.Version)
+		_, err = client.ProjectProperty.Update(context.Background(), project.UUID, prop)
+		return err
+	}
+
+	// 3. Property does not exist yet -> PUT (Create)
+	logrus.Infof("Creating deployment timestamp property (%s/%s) for project %s:%s", prop.Group, prop.Name, project.Name, project.Version)
+	_, err = client.ProjectProperty.Create(context.Background(), project.UUID, prop)
+	if err != nil && err.(*dtrack.APIError).StatusCode == 409 {
+		logrus.Debugf("Property (%s/%s) was created concurrently for project '%s:%s', ignoring 409 conflict", prop.Group, prop.Name, project.Name, project.Version)
+		return nil
+	}
+	return err
+}
+
+func hasProjectProperty(props []dtrack.ProjectProperty, group, name string) bool {
+	for _, p := range props {
+		if p.Group == group && p.Name == name {
+			return true
+		}
+	}
+	return false
 }

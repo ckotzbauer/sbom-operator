@@ -1,17 +1,20 @@
 package target
 
 import (
+	"time"
+
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 )
 
 type TargetContext struct {
-	Image      *oci.RegistryImage
-	Containers []*libk8s.ContainerInfo
-	Pod        *libk8s.PodInfo
-	Sbom       string
-	Scope      string
-	MediaType  string
+	Image          *oci.RegistryImage
+	Containers     []*libk8s.ContainerInfo
+	Pod            *libk8s.PodInfo
+	Sbom           string
+	Scope          string
+	MediaType      string
+	DeploymentTime time.Time
 }
 
 type Target interface {
@@ -34,15 +37,23 @@ type DeactivateTarget interface {
 
 func NewContext(sbom string, image *oci.RegistryImage, pod *libk8s.PodInfo) *TargetContext {
 	return &TargetContext{
-		Image: image,
-		Pod:   pod,
-		Sbom:  sbom,
+		Image:          image,
+		Pod:            pod,
+		Sbom:           sbom,
+		DeploymentTime: time.Now().UTC(),
 	}
 }
 
 func (c *TargetContext) WithAttestation(scope string, mediaType string) *TargetContext {
 	c.Scope = scope
 	c.MediaType = mediaType
+	return c
+}
+
+func (c *TargetContext) WithDeploymentTime(t time.Time) *TargetContext {
+	if !t.IsZero() {
+		c.DeploymentTime = t.UTC()
+	}
 	return c
 }
 

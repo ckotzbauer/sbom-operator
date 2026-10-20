@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
@@ -201,6 +202,7 @@ func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.Re
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
+	deploymentTime := time.Now().UTC()
 	containerNames := make(map[string][]*libk8s.ContainerInfo)
 	for _, container := range pod.Containers {
 		if p.K8s.HasAnnotation(pod.Annotations, container) {
@@ -229,7 +231,8 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 								foundDefaultScopeSBom = true
 							}
 							sbomContexts = append(sbomContexts, target.NewContext(att.Sbom, container.Image, &pod).
-								WithAttestation(att.Scope, string(att.MediaType)))
+								WithAttestation(att.Scope, string(att.MediaType)).
+								WithDeploymentTime(deploymentTime))
 						}
 					}
 				}
@@ -239,7 +242,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 					if err != nil {
 						continue // Error is already handled from syft module.
 					}
-					sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, &pod))
+					sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, &pod).WithDeploymentTime(deploymentTime))
 				}
 			}
 		}

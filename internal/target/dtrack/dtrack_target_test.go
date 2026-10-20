@@ -2,11 +2,14 @@ package dtrack
 
 import (
 	"encoding/json"
+	"fmt"
 	"io"
 	"net/http"
 	"net/http/httptest"
+	"strconv"
 	"strings"
 	"testing"
+	"time"
 
 	dtrack "github.com/DependencyTrack/client-go"
 	libk8s_real "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
@@ -991,4 +994,159 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 
 	// Szenario 3 (siblingOwnClusterOnlyUUID): Deaktiviert per PATCH (und Szenario 1 wurde komplett ignoriert)
 	assert.Equal(t, []string{siblingOwnClusterOnlyUUID.String()}, patchedUUIDs)
+}
+
+func TestUpsertDeploymentTimestampProperty_CreateUpdateAndSkip(t *testing.T) {
+	projectUUID := uuid.New()
+	expectedPath := fmt.Sprintf("/api/v1/project/%s/property", projectUUID.String())
+
+	t.Run("initial deployment creates property via PUT", func(t *testing.T) {
+		var methodsCalled []string
+		var createdProp dtrack.ProjectProperty
+
+		mux := http.NewServeMux()
+		mux.HandleFunc("/api/version", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			_, _ = w.Write([]byte(`{"version":"4.11.0"}`))
+		})
+		mux.HandleFunc(expectedPath, func(w http.ResponseWriter, r *http.Request) {
+			methodsCalled = append(methodsCalled, r.Method)
+			w.Header().Set("Content-Type", "application/json")
+
+			switch r.Method {
+			case http.MethodGet:
+				// GetAll liefert leere Liste nach Lookup
+				w.Header().Set("X-Total-Count", "0")
+				_, _ = w.Write([]byte(`[]`))
+			case http.MethodPut:
+				require.NoError(t, json.NewDecoder(r.Body).Decode(&createdProp))
+				w.WriteHeader(http.StatusCreated)
+				_ = json.NewEncoder(w).Encode(createdProp)
+			}
+		})
+
+		srv := httptest.NewServer(mux)
+		defer srv.Close()
+
+		client, err := dtrack.NewClient(srv.URL)
+		require.NoError(t, err)
+
+		dt := &DependencyTrackTarget{
+			k8sClusterId:     "live_eu",
+			k8sClusterIdMode: "tag",
+		}
+
+		deployTime := time.Date(2026, 10, 19, 8, 0, 0, 0, time.UTC)
+		ctx := &target.TargetContext{DeploymentTime: deployTime}
+		project := dtrack.Project{UUID: projectUUID, Name: "order-service", Version: "1.0.0"}
+
+		err = dt.upsertDeploymentTimestampProperty(client, ctx, project, false)
+		require.NoError(t, err)
+
+		assert.Equal(t, []string{http.MethodGet, http.MethodPut}, methodsCalled)
+		assert.Equal(t, deploymentTimestampGroup, createdProp.Group)
+		assert.Equal(t, "kubernetes-cluster=live_eu", createdProp.Name)
+		assert.Equal(t, strconv.FormatInt(deployTime.UnixMilli(), 10), createdProp.Value)
+		assert.Equal(t, tsPropertyType, createdProp.Type)
+	})
+
+	t.Run("rollback updates existing property via POST", func(t *testing.T) {
+		var methodsCalled []string
+		var updatedProp dtrack.ProjectProperty
+
+		mux := http.NewServeMux()
+		mux.HandleFunc("/api/version", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			_, _ = w.Write([]byte(`{"version":"4.11.0"}`))
+		})
+		mux.HandleFunc(expectedPath, func(w http.ResponseWriter, r *http.Request) {
+			methodsCalled = append(methodsCalled, r.Method)
+			w.Header().Set("Content-Type", "application/json")
+
+			switch r.Method {
+			case http.MethodGet:
+				// GetAll liefert bereits vorhandene Property von früherem Deployment
+				w.Header().Set("X-Total-Count", "1")
+				existing := []dtrack.ProjectProperty{
+					{
+						Group: deploymentTimestampGroup,
+						Name:  "kubernetes-cluster=live_eu",
+						Value: "1700000000000",
+						Type:  tsPropertyType,
+					},
+				}
+				_ = json.NewEncoder(w).Encode(existing)
+			case http.MethodPost:
+				require.NoError(t, json.NewDecoder(r.Body).Decode(&updatedProp))
+				w.WriteHeader(http.StatusOK)
+				_ = json.NewEncoder(w).Encode(updatedProp)
+			}
+		})
+
+		srv := httptest.NewServer(mux)
+		defer srv.Close()
+
+		client, err := dtrack.NewClient(srv.URL)
+		require.NoError(t, err)
+
+		dt := &DependencyTrackTarget{
+			k8sClusterId:     "live_eu",
+			k8sClusterIdMode: "tag",
+		}
+
+		rollbackTime := time.Date(2026, 10, 19, 9, 30, 0, 0, time.UTC)
+		ctx := &target.TargetContext{DeploymentTime: rollbackTime}
+		project := dtrack.Project{UUID: projectUUID, Name: "order-service", Version: "1.0.0"}
+
+		// alreadyOnCluster == false signalisiert ein erneutes Ausrollen (Rollback)
+		err = dt.upsertDeploymentTimestampProperty(client, ctx, project, false)
+		require.NoError(t, err)
+
+		assert.Equal(t, []string{http.MethodGet, http.MethodPost}, methodsCalled)
+		assert.Equal(t, strconv.FormatInt(rollbackTime.UnixMilli(), 10), updatedProp.Value)
+	})
+
+	t.Run("rescan on active cluster keeps existing timestamp without PUT or POST", func(t *testing.T) {
+		var methodsCalled []string
+
+		mux := http.NewServeMux()
+		mux.HandleFunc("/api/version", func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			_, _ = w.Write([]byte(`{"version":"4.11.0"}`))
+		})
+		mux.HandleFunc(expectedPath, func(w http.ResponseWriter, r *http.Request) {
+			methodsCalled = append(methodsCalled, r.Method)
+			w.Header().Set("Content-Type", "application/json")
+			w.Header().Set("X-Total-Count", "1")
+			existing := []dtrack.ProjectProperty{
+				{
+					Group: deploymentTimestampGroup,
+					Name:  "kubernetes-cluster=live_eu",
+					Value: "1700000000000",
+					Type:  tsPropertyType,
+				},
+			}
+			_ = json.NewEncoder(w).Encode(existing)
+		})
+
+		srv := httptest.NewServer(mux)
+		defer srv.Close()
+
+		client, err := dtrack.NewClient(srv.URL)
+		require.NoError(t, err)
+
+		dt := &DependencyTrackTarget{
+			k8sClusterId:     "live_eu",
+			k8sClusterIdMode: "tag",
+		}
+
+		ctx := &target.TargetContext{DeploymentTime: time.Now().UTC()}
+		project := dtrack.Project{UUID: projectUUID, Name: "order-service", Version: "1.0.0"}
+
+		// alreadyOnCluster == true -> nur GET (GetAll), kein Überschreiben!
+		err = dt.upsertDeploymentTimestampProperty(client, ctx, project, true)
+		require.NoError(t, err)
+
+		assert.Equal(t, []string{http.MethodGet}, methodsCalled)
+	})
 }
