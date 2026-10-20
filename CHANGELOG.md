@@ -1,3 +1,24 @@
+## Version 0.47.0 (2026-10-20)
+
+### Features and improvements
+
+* [[`3180fc6d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3180fc6d)] - **feat**: SBOM download from oci cosign attestation if found including additional SBOMs which are found there (#1044)
+
+### Dependency updates
+
+* [[`0a690656`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0a690656)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to f3cca52 (#1050)
+* [[`f3cca523`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f3cca523)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 8ad567f (#1049)
+* [[`8ad567f4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8ad567f4)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to bcc9cca (#1048)
+* [[`bcc9ccac`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bcc9ccac)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 3180fc6 (#1041)
+* [[`7152f889`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7152f889)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to b76af01 (#1045)
+* [[`62bf799a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/62bf799a)] - **deps**: update aws-sdk-go-v2 monorepo (#1047)
+* [[`924c65c7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/924c65c7)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to f0251eb (#1046)
+
+### Common changes
+
+* [[`d7966b73`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d7966b73)] - **target&#x2F;dtrack**: respect multi-cluster tags, when deactivating siblings (#1043)
+
+
 ## Version 0.46.1 (2026-10-13)
 
 ### Dependency updates
