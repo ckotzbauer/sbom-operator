@@ -201,45 +201,54 @@ func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.Re
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
-
+	containerNames := make(map[string][]*libk8s.ContainerInfo)
 	for _, container := range pod.Containers {
-		alreadyScanned := p.imageMap[container.Image.ImageID]
-		if p.K8s.HasAnnotation(pod.Annotations, container) || alreadyScanned {
+		if p.K8s.HasAnnotation(pod.Annotations, container) {
 			logrus.Debugf("Skip image %s", container.Image.ImageID)
 			continue
 		}
-
-		p.imageMap[container.Image.ImageID] = true
-
-		foundDefaultScopeSBom := false
+		containerNames[container.Image.ImageID] = append(containerNames[container.Image.ImageID], container)
+	}
+	for imageId, containerList := range containerNames {
 		var sbomContexts []*target.TargetContext
-		if internal.OperatorConfig.FetchOciAttestations {
-			attSboms, attErr := oci.FetchSbomAttestations(context.Background(), container.Image, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
-			if attErr != nil {
-				logrus.WithError(attErr).Warnf("Could not fetch OCI attestations for image %s", container.Image.ImageID)
-			} else {
-				for _, att := range attSboms {
-					if att.Scope == "" {
-						foundDefaultScopeSBom = true
+		for _, container := range containerList {
+			alreadyScanned := p.imageMap[container.Image.ImageID]
+
+			if !alreadyScanned {
+				p.imageMap[container.Image.ImageID] = true
+
+				foundDefaultScopeSBom := false
+				if internal.OperatorConfig.FetchOciAttestations {
+					attSboms, attErr := oci.FetchSbomAttestations(context.Background(), container.Image, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
+					if attErr != nil {
+						logrus.WithError(attErr).Warnf("Could not fetch OCI attestations for image %s", imageId)
+					} else {
+						for _, att := range attSboms {
+							if att.Scope == "" {
+								foundDefaultScopeSBom = true
+							}
+							sbomContexts = append(sbomContexts, target.NewContext(att.Sbom, container.Image, &pod).
+								WithAttestation(att.Scope, string(att.MediaType)))
+						}
 					}
-					sbomContexts = append(sbomContexts, target.NewContext(att.Sbom, container.Image, container, &pod).WithAttestation(att.Scope, string(att.MediaType)))
+				}
+				if !foundDefaultScopeSBom {
+					// Execute syft only if there is no SBOM attached in OCI for the image
+					sbom, err := p.sy.ExecuteSyft(container.Image)
+					if err != nil {
+						continue // Error is already handled from syft module.
+					}
+					sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, &pod))
 				}
 			}
 		}
-		if !foundDefaultScopeSBom {
-			// Execute syft only if there is no SBOM attached in OCI for the image
-			sbom, err := p.sy.ExecuteSyft(container.Image)
-			if err != nil {
-				continue // Error is already handled from syft module.
-			}
-			sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, container, &pod))
-		}
 		for _, ctx := range sbomContexts {
 			for _, t := range p.Targets {
-				err := t.ProcessSbom(ctx)
+				err := t.ProcessSbom(ctx.WithContainers(containerList))
 				errOccurred = errOccurred || err != nil
 			}
 		}
+
 	}
 
 	if !errOccurred && len(pod.Containers) > 0 {

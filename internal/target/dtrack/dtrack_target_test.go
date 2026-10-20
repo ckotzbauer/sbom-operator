@@ -268,11 +268,11 @@ func TestValidateConfig(t *testing.T) {
 
 func TestProcessSbomUnsupportedMediaType(t *testing.T) {
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
-		MediaType: "unsupported",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
+		MediaType:  "unsupported",
 	}
 	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
 	err := g.ProcessSbom(ctx)
@@ -300,10 +300,10 @@ func TestProcessSbomMinimal(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -374,10 +374,10 @@ func TestProcessSbomParentProject(t *testing.T) {
 			g.imageProjectMap = map[string]uuid.UUID{}
 
 			ctx := &target.TargetContext{
-				Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-				Pod:       &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
-				Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-				Sbom:      "{}",
+				Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+				Pod:        &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
+				Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+				Sbom:       "{}",
 			}
 
 			err = g.ProcessSbom(ctx)
@@ -603,10 +603,10 @@ func TestProcessSbomReactivateWithoutUpload(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -676,10 +676,10 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:     &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:       &libk8s_real.PodInfo{PodNamespace: "default"},
-		Container: &libk8s_real.ContainerInfo{Name: "alpine"},
-		Sbom:      "{}",
+		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Sbom:       "{}",
 	}
 
 	_ = g.ProcessSbom(ctx)

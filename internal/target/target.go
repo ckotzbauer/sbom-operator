@@ -6,12 +6,12 @@ import (
 )
 
 type TargetContext struct {
-	Image     *oci.RegistryImage
-	Container *libk8s.ContainerInfo
-	Pod       *libk8s.PodInfo
-	Sbom      string
-	Scope     string
-	MediaType string
+	Image      *oci.RegistryImage
+	Containers []*libk8s.ContainerInfo
+	Pod        *libk8s.PodInfo
+	Sbom       string
+	Scope      string
+	MediaType  string
 }
 
 type Target interface {
@@ -32,17 +32,21 @@ type DeactivateTarget interface {
 	ShouldDeactivateOrphans() bool
 }
 
-func NewContext(sbom string, image *oci.RegistryImage, container *libk8s.ContainerInfo, pod *libk8s.PodInfo) *TargetContext {
+func NewContext(sbom string, image *oci.RegistryImage, pod *libk8s.PodInfo) *TargetContext {
 	return &TargetContext{
-		Image:     image,
-		Container: container,
-		Pod:       pod,
-		Sbom:      sbom,
+		Image: image,
+		Pod:   pod,
+		Sbom:  sbom,
 	}
 }
 
 func (c *TargetContext) WithAttestation(scope string, mediaType string) *TargetContext {
 	c.Scope = scope
 	c.MediaType = mediaType
+	return c
+}
+
+func (c *TargetContext) WithContainers(containers []*libk8s.ContainerInfo) *TargetContext {
+	c.Containers = containers
 	return c
 }
