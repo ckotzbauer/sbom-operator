@@ -536,56 +536,7 @@ func (g *DependencyTrackTarget) Deactivate(images []*libk8s.RegistryImage) error
 			continue
 		}
 
-		sbomOperatorPropFound := false
-		for _, tag := range project.Tags {
-			if tag.Name == sbomOperator {
-				sbomOperatorPropFound = true
-				break
-			}
-		}
-		if !sbomOperatorPropFound {
-			continue
-		}
-
-		if g.k8sClusterIdMode == "tag" {
-			// Tag mode: remove the current cluster tag and only deactivate if no
-			// other cluster is still using this project. This avoids deactivating
-			// a project that other clusters still run.
-			otherClusterIds := []string{}
-			for _, tag := range project.Tags {
-				if strings.Index(tag.Name, kubernetesCluster) == 0 {
-					clusterId := string(tag.Name[len(kubernetesCluster)+1:])
-					if clusterId == g.k8sClusterId {
-						logrus.Infof("Removing %v=%v tag from project %v:%v", kubernetesCluster, g.k8sClusterId, project.Name, project.Version)
-						project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
-					} else {
-						otherClusterIds = append(otherClusterIds, clusterId)
-					}
-				}
-			}
-
-			if len(otherClusterIds) > 0 {
-				_, err := client.Project.Update(context.Background(), project)
-				delete(g.imageProjectMap, img.ImageID)
-				if err != nil {
-					logrus.WithError(err).Warnf("Project %s could not be updated", project.UUID.String())
-				}
-				continue
-			}
-		}
-
-		if !project.Active {
-			continue
-		}
-
-		logrus.Infof("Image not running in any cluster - deactivating %v:%v", project.Name, project.Version)
-		_, err = client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
-			Active:   false,
-			IsLatest: dtrack.OptionalBoolOf(false),
-		})
-		if err != nil {
-			logrus.WithError(err).Warnf("Project %s could not be deactivated", project.UUID.String())
-		}
+		_ = g.handleProjectDeactivation(client, &project)
 	}
 
 	return nil
@@ -619,21 +570,7 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 		if sibling.Version == project.Version {
 			continue
 		}
-		if !containsTag(sibling.Tags, sbomOperator) {
-			continue
-		}
-		if !sibling.Active {
-			continue
-		}
-
-		logrus.Infof("Deactivating sibling version %s:%s under parent %s", sibling.Name, sibling.Version, project.ParentRef.UUID)
-		_, err := client.Project.Patch(context.Background(), sibling.UUID, dtrack.Project{
-			Active:   false,
-			IsLatest: dtrack.OptionalBoolOf(false),
-		})
-		if err != nil {
-			logrus.WithError(err).Warnf("Sibling project %s:%s could not be deactivated", sibling.Name, sibling.Version)
-		}
+		_ = g.handleProjectDeactivation(client, &sibling)
 	}
 }
 
@@ -737,4 +674,65 @@ func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClust
 
 	version := imageRef.Tag()
 	return projectName, version
+}
+
+// handleProjectDeactivation removes the current cluster tag in "tag" mode
+// and persists the updated tags. If no other clusters are referencing the
+// project anymore, it patches the project to be inactive (and not latest).
+func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client, project *dtrack.Project) error {
+	if !project.Active {
+		return nil
+	}
+	sbomOperatorPropFound := false
+	for _, tag := range project.Tags {
+		if tag.Name == sbomOperator {
+			sbomOperatorPropFound = true
+			break
+		}
+	}
+	if !sbomOperatorPropFound {
+		return nil
+	}
+
+	if g.k8sClusterIdMode == "tag" {
+		ownClusterTagFound := false
+		otherClusterIds := []string{}
+
+		for _, tag := range project.Tags {
+			if strings.Index(tag.Name, kubernetesCluster) == 0 {
+				clusterId := string(tag.Name[len(kubernetesCluster)+1:])
+				if clusterId == g.k8sClusterId {
+					ownClusterTagFound = true
+					logrus.Infof("Removing %s=%s tag from project '%s:%s'", kubernetesCluster, g.k8sClusterId, project.Name, project.Version)
+					project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
+				} else {
+					otherClusterIds = append(otherClusterIds, clusterId)
+				}
+			}
+		}
+
+		if len(otherClusterIds) > 0 {
+			if ownClusterTagFound {
+				_, err := client.Project.Update(context.Background(), *project)
+				if err != nil {
+					logrus.WithError(err).Warnf("Project tags could not be updated for project '%s:%s'", project.Name, project.Version)
+					return err
+				}
+			}
+			return nil
+		}
+	}
+
+	// No other clusters are using it (or tag mode is disabled) -> deactivate
+	logrus.Infof("Deactivating project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
+	_, err := client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
+		Active:   false,
+		IsLatest: dtrack.OptionalBoolOf(false),
+	})
+	if err != nil {
+		logrus.WithError(err).Warnf("Project '%s:%s' could not be deactivated", project.Name, project.Version)
+		return err
+	}
+
+	return nil
 }
