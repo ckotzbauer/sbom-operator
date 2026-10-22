@@ -1,6 +1,7 @@
 package dtrack
 
 import (
+	"bytes"
 	"context"
 	"fmt"
 	"regexp"
@@ -10,6 +11,8 @@ import (
 	"github.com/google/uuid"
 	parser "github.com/novln/docker-parser"
 	"github.com/sirupsen/logrus"
+
+	"text/template"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
@@ -39,10 +42,10 @@ type DependencyTrackTarget struct {
 }
 
 const (
-	kubernetesCluster  = "kubernetes-cluster"
-	sbomOperator       = "sbom-operator"
-	rawImageId         = "raw-image-id"
-	podNamespaceTagKey = "namespace"
+	kubernetesCluster  string = "kubernetes-cluster"
+	sbomOperator       string = "sbom-operator"
+	rawImageId         string = "raw-image-id"
+	podNamespaceTagKey string = "namespace"
 )
 
 func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool) *DependencyTrackTarget {
@@ -334,6 +337,11 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return nil
 }
 
+type TemplateData struct {
+	ContainerName string
+	SbomScope     string
+}
+
 func (g *DependencyTrackTarget) getContainerNameAndVersion(podAnnotationKey string, podAnnotationValue string, expectedAnnotationKey string, ctx *target.TargetContext) (string, string, error) {
 	if strings.HasPrefix(podAnnotationKey, expectedAnnotationKey) {
 		// determine container name and scope from annotation key
@@ -343,6 +351,16 @@ func (g *DependencyTrackTarget) getContainerNameAndVersion(podAnnotationKey stri
 			for _, c := range ctx.Containers {
 				if (containerName == "" || containerName == c.Name) && scope == ctx.Scope {
 					name, version := getNameAndVersionFromString(podAnnotationValue, ":")
+					tmpl, err := template.New("NameTemplate").Parse(name)
+					if err != nil {
+						return "", "", err
+					}
+					var buf bytes.Buffer
+					data := TemplateData{ContainerName: c.Name, SbomScope: ctx.Scope}
+					if err := tmpl.Execute(&buf, data); err != nil {
+						return "", "", err
+					}
+					name = buf.String()
 					logrus.Infof(`Custom '%s' found at annotation '%s' for container '%s' and scope '%s': '%s:%s'`, expectedAnnotationKey, podAnnotationKey, containerName, scope, name, version)
 					return name, version, nil
 				} else {
