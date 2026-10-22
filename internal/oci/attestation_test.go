@@ -61,8 +61,8 @@ func TestExtractFromDsseEnvelope(t *testing.T) {
 	envBytes, _ := json.Marshal(env)
 
 	t.Run("Valid DSSE Envelope Extraction", func(t *testing.T) {
-		sbom, mt, ok := extractFromDsseEnvelope(envBytes)
-		assert.True(t, ok)
+		sbom, mt, err := extractFromDsseEnvelope(envBytes)
+		assert.NoError(t, err)
 		assert.Equal(t, GetMediaType(CycloneDXJSONMediaType), mt)
 		assert.Contains(t, sbom, "CycloneDX")
 	})
@@ -74,8 +74,8 @@ func TestExtractFromDsseEnvelope(t *testing.T) {
 		}
 		badBytes, _ := json.Marshal(badEnv)
 
-		_, _, ok := extractFromDsseEnvelope(badBytes)
-		assert.False(t, ok)
+		_, _, err := extractFromDsseEnvelope(badBytes)
+		assert.Error(t, err)
 	})
 }
 
