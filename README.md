@@ -78,9 +78,18 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 ### Fetching SBOM from OCI
 
 In case parameter flag `fetch-oci-attestations` is set, following applies:
-SBOMs can be uploaded through cosign to the image. e.g. `cosign attest --predicate image.sbom $IMAGE`.
+SBOMs can be uploaded through cosign/oras to the image. e.g. `cosign attest --type cyclonedx --predicate sbom.json $IMAGE`.
 sbom-operator now will try to find that SBOM attestation and in case it finds it uses it. Otherwise will fallback to syft generation of SBOM.
-There can be also multiple SBOMs attached as attestation in the image using the annotation `sbom.scope`. e.g. `cosign attest --annotation sbom.scope=app --predicate image.sbom $IMAGE`.
+There can be also multiple SBOMs attached as attestation in the image using the annotation `dev.sigstore.sbom.scope`.
+
+**Example**
+```console
+oras attach "localhost:5000/my-nginx:dev" \
+  --artifact-type application/vnd.cyclonedx+json \
+  --annotation "dev.sigstore.sbom.scope=application" 
+  sbom.json:application/vnd.cyclonedx+json
+````
+.
 Currently only Dependency-Track target would support additional SBOMs to be uploaded. How to map the `sbom.scope` to the project name can be found in the Dependency-Track section.
 
 ### Format Versions
@@ -214,19 +223,41 @@ Each image in the cluster is created as project with the full-image name (regist
 When there's no image-tag, but a digest, the digest is used as project-version.
 The `autoCreate` option of DT is used. You have to set the `--format` flag to `cyclonedx` with this target.
 
-> [!IMPORTANT]
-> Dependency-Track 5.0.x rejects CycloneDX 1.7, which is the default emitted by the Syft version currently bundled with sbom-operator. Configure `--format-version=1.6` (or `SBOM_FORMAT_VERSION=1.6` / `formatVersion: "1.6"`) when using the `dtrack` target. If the version is omitted, the operator logs a startup warning but preserves Syft's default.
-
 ---
 #### Custom dtrack project name:
 
-The key at kubernetes has to be suffixed with the container name the project is for. e.g. `my.project.name/my-nginx`.
+The annotation key must match the value configured in the `sbom-operator` via `dtrack-project-name-annotation-key`.
+To further filter the for which container that configuration applies, the container name can be suffixed to that key. e.g.  `my.project.name/my-nginx`.
+
 > [!IMPORTANT]
 > The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.project.name`
 
+****
+
 The value for a custom project name in dtrack by annotation at the specific Pod is written in the format of `project:version` or just `project` where version defaults to `latest`. E.g. `MyParentProject` or `MyParentProject:1.0`
 
-In case of flag `fetch-oci-attestations` was set, there might be additional SBOMs which were attached to the image. To configure the project name for these, additional "/" after which the "sbom.scope" annotation value needs to be located. e.g. `my.project.name/my-nginx/app`.
+The value can also contain variables. It follows the [go template](https://pkg.go.dev/text/template) specification.
+Available variables:
+- `ContainerNames` (`[]string`) There might be multiple containers which shares the same image
+- `SbomScope`      (`string`)   The scope of the SBOM which was obtained from OCI attestation or through syft scan. Defaults to `all`.
+- `ImageId`        (`string`)   The ImageID
+- `ImageName`      (`string`)   The Image name as specified in the Pod
+- `ShortName`      (`string`)   The image name without registry information
+- `Repository`     (`string`)   The repository information
+- `Tag`            (`string`)   The image's tag (can be used for the version)
+
+**Example**
+
+```yaml
+dtrack.project.name.key: '{{index .ContainerNames 0}}/{{if or (eq .SbomScope "") (eq .SbomScope "all")}}container{{else}}{{.SbomScope}}{{end}}:{{.Tag}}'
+````
+| Input | Output
+|-----------|----------|
+| `SbomScope`: "all", `ContainerNames[0]`: "nginx", `Tag`: 1.2.0 | `name`: nginx/container `version`: 1.2.0
+| `SbomScope`: "app", `ContainerNames[0]`: "nginx", `Tag`: dev | `name`: nginx/app `version`: dev
+
+
+In case of flag `fetch-oci-attestations` was set, there might be additional SBOMs which were attached to the image. For all scoped SBOMs there will be it's own project created and a tag `sbom.scope=<scope>` will be created.
 
 ---
 

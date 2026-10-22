@@ -91,7 +91,8 @@ func TestGetRepoWithVersion(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			name, version := getRepoWithVersion(tt.image, tt.useShortName, tt.k8sClusterId, tt.k8sClusterIdMode, tt.scope)
+			ctx := &target.TargetContext{Image: tt.image, Scope: tt.scope}
+			name, version := getRepoWithVersion(ctx, tt.useShortName, tt.k8sClusterId, tt.k8sClusterIdMode)
 			assert.Equal(t, tt.expectedName, name)
 			assert.Equal(t, tt.expectedVersion, version)
 		})
@@ -135,19 +136,11 @@ func TestGetNameAndVersionFromString(t *testing.T) {
 }
 
 func TestGetContainerNameFromAnnotationKey(t *testing.T) {
-	c, s := getContainerNameAndScopeFromAnnotationKey("prefix/container", "/")
+	c := getContainerNameFromAnnotationKey("prefix/container", "/")
 	assert.Equal(t, "container", c)
-	assert.Equal(t, "", s)
 
-	c, s = getContainerNameAndScopeFromAnnotationKey("container", "/")
+	c = getContainerNameFromAnnotationKey("container", "/")
 	assert.Equal(t, "", c)
-	assert.Equal(t, "", s)
-}
-
-func TestGetScopeFromAnnotationKey(t *testing.T) {
-	c, s := getContainerNameAndScopeFromAnnotationKey("prefix/container/scope", "/")
-	assert.Equal(t, "container", c)
-	assert.Equal(t, "scope", s)
 }
 
 func TestNewDependencyTrackTarget(t *testing.T) {
@@ -385,7 +378,7 @@ func TestProcessSbomParentProject(t *testing.T) {
 			err := g.Initialize()
 			assert.NoError(t, err)
 			// Pre-populate so LoadImages is skipped during ProcessSbom.
-			g.imageProjectMap = map[string]uuid.UUID{}
+			g.imageProjectMap = map[string][]*uuid.UUID{}
 
 			ctx := &target.TargetContext{
 				Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
@@ -521,8 +514,9 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Seed a stale entry from a previous reconcile cycle.
-	g.imageProjectMap = map[string]uuid.UUID{
-		"alpine@sha256:OLD": uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372"),
+	staleUUID := uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372")
+	g.imageProjectMap = map[string][]*uuid.UUID{
+		"alpine@sha256:OLD": {&staleUUID},
 	}
 
 	images, err := g.LoadImages()
@@ -538,7 +532,8 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 
 	currentUUID, currentPresent := g.imageProjectMap["alpine@sha256:new"]
 	assert.True(t, currentPresent)
-	assert.Equal(t, "8c940608-8e62-431a-ac5d-2092b7c41372", currentUUID.String())
+	assert.Len(t, currentUUID, 1)
+	assert.Equal(t, "8c940608-8e62-431a-ac5d-2092b7c41372", currentUUID[0].String())
 }
 
 func TestLoadImagesTagMode(t *testing.T) {
@@ -744,9 +739,11 @@ func TestDeactivate(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Seed the map directly with one active and one already-inactive project.
-	g.imageProjectMap = map[string]uuid.UUID{
-		"alpine:3.13": uuid.MustParse(projectUUID),
-		"alpine:3.12": uuid.MustParse(inactiveUUID),
+	activeProjectUUID := uuid.MustParse(projectUUID)
+	inactiveProjectUUID := uuid.MustParse(inactiveUUID)
+	g.imageProjectMap = map[string][]*uuid.UUID{
+		"alpine:3.13": {&activeProjectUUID},
+		"alpine:3.12": {&inactiveProjectUUID},
 	}
 
 	images := []*liboci.RegistryImage{
@@ -905,7 +902,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 					},
 				},
 				{
-					// Szenario 1: Läuft nur in live_eu -> darf von approval_eu NICHT angefasst werden
+					// Scenario 1: Runs only in live_eu -> MUST NOT been touched by approval_eu
 					UUID:      siblingOtherClusterOnlyUUID,
 					Name:      "order-service-container",
 					Version:   "1.0.0",
@@ -917,7 +914,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 					},
 				},
 				{
-					// Szenario 2: Läuft in approval_eu UND approval_nar -> Tag approval_eu entfernen (POST), bleibt Active: true
+					// Scenario 2: Runs in approval_eu AND approval_nar -> delete tag approval_eu (POST), stays active: true
 					UUID:      siblingSharedClusterUUID,
 					Name:      "order-service-container",
 					Version:   "1.1.0-rc1",
@@ -930,7 +927,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 					},
 				},
 				{
-					// Szenario 3: Läuft NUR in approval_eu -> wird deaktiviert (PATCH)
+					// Scenario 3: Runs ONLY in approval_eu -> will be deactivated (PATCH)
 					UUID:      siblingOwnClusterOnlyUUID,
 					Name:      "order-service-container",
 					Version:   "1.0.9",
@@ -982,17 +979,17 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 		ParentRef: &dtrack.ParentRef{UUID: parentUUID},
 	}
 
-	target.deactivateSiblingVersions(client, currentProject)
+	target.deactivateSiblingVersions(client, currentProject, &liboci.RegistryImage{})
 
-	// Szenario 2 (siblingSharedClusterUUID): Nur Tag-Update per POST, bleibt aktiv
-	require.Len(t, updatedProjects, 1)
+	// Scenario 2 (siblingSharedClusterUUID): Only Tag-Update via POST, is active
+	require.Len(t, updatedProjects, 2)
 	shared := updatedProjects[0]
 	assert.Equal(t, siblingSharedClusterUUID, shared.UUID)
 	assert.True(t, shared.Active)
 	assert.False(t, containsTag(shared.Tags, "kubernetes-cluster=approval_eu"))
 	assert.True(t, containsTag(shared.Tags, "kubernetes-cluster=approval_nar"))
 
-	// Szenario 3 (siblingOwnClusterOnlyUUID): Deaktiviert per PATCH (und Szenario 1 wurde komplett ignoriert)
+	// Scenario 3 (siblingOwnClusterOnlyUUID): Deactivates via PATCH (and scenario 1 was ignored)
 	assert.Equal(t, []string{siblingOwnClusterOnlyUUID.String()}, patchedUUIDs)
 }
 
