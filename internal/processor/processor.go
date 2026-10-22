@@ -220,11 +220,14 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 
 				foundDefaultScopeSBom := false
 				if internal.OperatorConfig.FetchOciAttestations {
+					logrus.Tracef("Starting to fecth SBOM attestations")
 					attSboms, attErr := oci.FetchSbomAttestations(context.Background(), container.Image, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
 					if attErr != nil {
 						logrus.WithError(attErr).Warnf("Could not fetch OCI attestations for image %s", imageId)
 					} else {
+						logrus.Tracef("Fetched %d sbom attestations", len(attSboms))
 						for _, att := range attSboms {
+							logrus.Tracef("Fetched sbom attestation (MediaType: %s, Scope: %s)", att.MediaType, att.Scope)
 							if att.Scope == "" {
 								foundDefaultScopeSBom = true
 							}
@@ -239,7 +242,8 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 					if err != nil {
 						continue // Error is already handled from syft module.
 					}
-					sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, &pod))
+					sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, &pod)).
+						WithAttestation(oci.ScopeAll, oci.CycloneDXJSONMediaType)
 				}
 			}
 		}
