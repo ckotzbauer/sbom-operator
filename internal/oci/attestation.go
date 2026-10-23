@@ -9,6 +9,7 @@ import (
 	"strings"
 
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	"github.com/google/go-containerregistry/pkg/name"
 	v1 "github.com/google/go-containerregistry/pkg/v1"
@@ -64,7 +65,11 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 
 	credentials := ResolveCredentials(img, proxyRegistryMap)
 
-	ref, err := name.ParseReference(img.ImageID)
+	var refOpts []name.Option
+	if internal.OperatorConfig.InsecureHttpRegistry {
+		refOpts = append(refOpts, name.Insecure)
+	}
+	ref, err := name.ParseReference(img.ImageID, refOpts...)
 	if err != nil {
 		return nil, fmt.Errorf("parsing image reference %s: %w", img.ImageID, err)
 	}
