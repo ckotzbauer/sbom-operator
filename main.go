@@ -130,6 +130,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormatVersion, "", syft.FormatVersionHelp())
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyStripCpes, false, "Strip CPE attributes from all components in generated SBOMs. Disables Syft CPE generation and removes cataloger-sourced CPEs.")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyFetchOciAttestations, false, "Fetch additional CycloneDX SBOMs from OCI attestations")
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyInsecureHttpRegistry, false, "Use HTTP instead of HTTPS for fetching data from registry (OCI)")
 	return rootCmd
 }
 

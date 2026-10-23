@@ -74,6 +74,8 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `delete-orphan-images` | `false` | `true` | Delete orphan images automatically |
 | `strip-cpes` | `false` | `false` | Strip CPE attributes from all components in generated SBOMs (Syft-JSON `cpes`, CycloneDX `cpe`). Disables Syft CPE generation and removes cataloger-sourced CPEs. Flag can be set via `SBOM_STRIP_CPES` env var or `stripCpes` in YAML. |
 | `fetch-oci-attestations` | `false` | `false` | Fetch SBOMs from OCI attestations via cosign (Main SBOM of image & optional configured additional SBOMs). In case main SBOM from image can't be found, falls back to syft generation. Flag can be set via `FETCH_OCI_ATTESTATIONS` env var or `fetchOciAttestations` in YAML. |
+| `insecure-http-registry` | `false` | `false` | Use HTTP instead of HTTPS for any connection to registry (downloading of attestation/image). Useful for development purposes. Flag can be set via `INSECURE_HTTP_REGISTRY` env var or `insecureHttpRegistry` in YAML. |
+
 
 ### Fetching SBOM from OCI
 
