@@ -31,9 +31,16 @@ type Processor struct {
 	K8s               *kubernetes.KubeClient
 	sy                *syft.Syft
 	Targets           []target.Target
-	imageMap          map[string]bool
+	imageMap          map[string]*cachedImage
 	allowedNamespaces map[string]bool
 	namespaceMutex    sync.RWMutex
+}
+
+// cachedImage holds the scanned SBOM attestations once per image ID
+// and tracks which namespaces have already processed them via ProcessSbom.
+type cachedImage struct {
+	attestations []*oci.AttestationSbom
+	namespaces   map[string]struct{}
 }
 
 func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
@@ -43,7 +50,7 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 		targets = initTargets(k8s)
 	}
 
-	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]bool), allowedNamespaces: make(map[string]bool)}
+	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]*cachedImage), allowedNamespaces: make(map[string]bool)}
 }
 
 func (p *Processor) ListenForPods() {
@@ -127,7 +134,7 @@ func (p *Processor) ListenForPods() {
 			var removedContainers []*libk8s.ContainerInfo
 			newInfo.Containers, removedContainers = getChangedContainers(oldInfo, newInfo)
 			p.scanPod(newInfo)
-			p.cleanupImagesIfNeeded(removedContainers, informer.GetStore().List())
+			p.cleanupImagesIfNeeded(removedContainers, oldInfo.PodNamespace, informer.GetStore().List())
 		},
 		DeleteFunc: func(obj interface{}) {
 			pod := obj.(*corev1.Pod)
@@ -140,7 +147,7 @@ func (p *Processor) ListenForPods() {
 
 			info := p.K8s.Client.ExtractPodInfos(*pod)
 			logrus.Tracef("Pod %s/%s was removed.", info.PodNamespace, info.PodName)
-			p.cleanupImagesIfNeeded(info.Containers, informer.GetStore().List())
+			p.cleanupImagesIfNeeded(info.Containers, info.PodNamespace, informer.GetStore().List())
 		},
 	})
 
@@ -190,7 +197,7 @@ func (p *Processor) namespaceLabelMatches(nsLabels map[string]string, selector s
 	return labelSelector.Matches(labels.Set(nsLabels))
 }
 
-func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.RegistryImage) {
+func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage) {
 	if !HasJobImage() {
 		p.executeSyftScans(pods, allImages)
 	} else {
@@ -198,62 +205,121 @@ func (p *Processor) ProcessAllPods(pods []libk8s.PodInfo, allImages []*liboci.Re
 	}
 }
 
+// imageScanned records the attestations for the given imageId and marks
+// the namespace as processed.
+func (p *Processor) imageScanned(namespace string, imageId string, attestations []*oci.AttestationSbom) {
+	if p.imageMap == nil {
+		p.imageMap = make(map[string]*cachedImage)
+	}
+
+	entry, exists := p.imageMap[imageId]
+	if !exists {
+		entry = &cachedImage{
+			attestations: attestations,
+			namespaces:   make(map[string]struct{}),
+		}
+		p.imageMap[imageId] = entry
+	}
+	entry.namespaces[namespace] = struct{}{}
+}
+
+// getCachedAttestations checks the cache:
+// - alreadyInNamespace == true: ProcessSbom was already called for this namespace (skip everything).
+// - attestations != nil: Image was scanned in another namespace (skip Syft, but run ProcessSbom).
+// - both false/nil: Image has never been scanned (run Syft + ProcessSbom).
+func (p *Processor) getCachedAttestations(namespace string, imageId string) (alreadyInNamespace bool, attestations []*oci.AttestationSbom) {
+	entry, exists := p.imageMap[imageId]
+	if !exists {
+		return false, nil
+	}
+
+	if _, processed := entry.namespaces[namespace]; processed {
+		return true, nil
+	}
+
+	return false, entry.attestations
+}
+
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
-	containerNames := make(map[string][]*libk8s.ContainerInfo)
+
+	// Group containers by ImageID to avoid duplicate scans within the same pod
+	containersByImageID := make(map[string][]*libk8s.ContainerInfo)
+	imageByID := make(map[string]*liboci.RegistryImage)
+
 	for _, container := range pod.Containers {
 		if p.K8s.HasAnnotation(pod.Annotations, container) {
 			logrus.Debugf("Skip image %s", container.Image.ImageID)
 			continue
 		}
-		containerNames[container.Image.ImageID] = append(containerNames[container.Image.ImageID], container)
+		imgID := container.Image.ImageID
+		containersByImageID[imgID] = append(containersByImageID[imgID], container)
+		imageByID[imgID] = container.Image
 	}
-	for imageId, containerList := range containerNames {
-		var sbomContexts []*target.TargetContext
-		for _, container := range containerList {
-			logrus.Tracef("Scanning container '%s'", container.Name)
-			alreadyScanned := p.imageMap[container.Image.ImageID]
 
-			if !alreadyScanned {
-				p.imageMap[container.Image.ImageID] = true
+	for imgID, containerList := range containersByImageID {
+		image := imageByID[imgID]
 
-				foundDefaultScopeSBom := false
-				if internal.OperatorConfig.FetchOciAttestations {
-					logrus.Tracef("Starting to fecth SBOM attestations")
-					attSboms, attErr := oci.FetchSbomAttestations(context.Background(), container.Image, libstandard.ToMap(internal.OperatorConfig.RegistryProxies))
-					if attErr != nil {
-						logrus.WithError(attErr).Warnf("Could not fetch OCI attestations for image %s", imageId)
-					} else {
-						logrus.Tracef("Fetched %d sbom attestations", len(attSboms))
-						for _, att := range attSboms {
-							logrus.Tracef("Fetched sbom attestation (MediaType: %s, Scope: %s)", att.MediaType, att.Scope)
-							if att.Scope == "" {
-								foundDefaultScopeSBom = true
-							}
-							sbomContexts = append(sbomContexts, target.NewContext(att.Sbom, container.Image, &pod).
-								WithAttestation(att.Scope, string(att.MediaType)))
+		alreadyInNs, cachedAttestations := p.getCachedAttestations(pod.PodNamespace, imgID)
+		if alreadyInNs {
+			continue // Already scanned and sent to targets for this namespace -> nothing to do
+		}
+
+		attestations := cachedAttestations
+		if len(attestations) == 0 {
+			// Image has not been scanned in any namespace yet -> fetch OCI or run Syft
+			foundDefaultScopeSbom := false
+			if internal.OperatorConfig.FetchOciAttestations {
+				logrus.Tracef("Starting to fetch SBOM attestations")
+				fetchedAttestations, err := oci.FetchSbomAttestations(
+					context.Background(),
+					image,
+					libstandard.ToMap(internal.OperatorConfig.RegistryProxies),
+				)
+				if err != nil {
+					logrus.WithError(err).Warnf("Could not fetch OCI attestations for image %s", imgID)
+				} else {
+					for _, attestation := range fetchedAttestations {
+						if attestation.Scope == oci.ScopeAll {
+							foundDefaultScopeSbom = true
+							logrus.Debugf("Found attestation for image with MediaType: %s. Skipping Syft scan...", attestation.MediaType)
 						}
+						attestations = append(attestations, attestation)
 					}
-				}
-				if !foundDefaultScopeSBom {
-					// Execute syft only if there is no SBOM attached in OCI for the image
-					sbom, err := p.sy.ExecuteSyft(container.Image)
-					if err != nil {
-						continue // Error is already handled from syft module.
-					}
-					sbomContexts = append(sbomContexts, target.NewContext(sbom, container.Image, &pod)).
-						WithAttestation(oci.ScopeAll, oci.CycloneDXJSONMediaType)
 				}
 			}
-		}
-		for _, ctx := range sbomContexts {
-			for _, t := range p.Targets {
-				err := t.ProcessSbom(ctx.WithContainers(containerList))
-				errOccurred = errOccurred || err != nil
+
+			if !foundDefaultScopeSbom {
+				sbom, err := p.sy.ExecuteSyft(image)
+				if err != nil {
+					errOccurred = true
+					continue
+				}
+				attestations = append(attestations, &oci.AttestationSbom{
+					Scope:     oci.ScopeAll,
+					MediaType: oci.CycloneDXJSONMediaType,
+					Sbom:      sbom,
+				})
 			}
 		}
 
+		// Send attestations to all targets for the current pod's namespace
+		imageErr := false
+		for _, att := range attestations {
+			for _, t := range p.Targets {
+				ctx := target.NewContext(image, &pod, att)
+				if err := t.ProcessSbom(ctx.WithContainers(containerList)); err != nil {
+					imageErr = true
+					errOccurred = true
+				}
+			}
+		}
+
+		// Mark this namespace as processed and cache the attestations for other namespaces
+		if !imageErr {
+			p.imageScanned(pod.PodNamespace, imgID, attestations)
+		}
 	}
 
 	if !errOccurred && len(pod.Containers) > 0 {
@@ -334,11 +400,61 @@ func HasJobImage() bool {
 	return internal.OperatorConfig.JobImage != ""
 }
 
-func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.RegistryImage) {
+// ImageRemoved removes the namespace association for an image from the cache.
+// If no namespace uses the image anymore (or if namespace is empty),
+// the entire entry including the cached SBOM is freed from memory.
+func (p *Processor) imageRemoved(imageId string, namespace string) {
+	if p.imageMap == nil {
+		return
+	}
+
+	entry, exists := p.imageMap[imageId]
+	if !exists {
+		return
+	}
+
+	if namespace == "" {
+		delete(p.imageMap, imageId)
+		return
+	}
+
+	delete(entry.namespaces, namespace)
+	if len(entry.namespaces) == 0 {
+		// Last namespace removed this image -> free SBOM payload from RAM
+		delete(p.imageMap, imageId)
+	}
+}
+
+func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage) {
 	for _, pod := range pods {
 		p.scanPod(pod)
 	}
 
+	// Build O(1) lookup sets of currently active images in the cluster
+	globalActiveIDs := make(map[string]struct{})
+	nsActiveIDs := make(map[string]map[string]struct{}, len(allImages))
+
+	for ns, imgs := range allImages {
+		nsSet := make(map[string]struct{}, len(imgs))
+		for _, img := range imgs {
+			globalActiveIDs[img.ImageID] = struct{}{}
+			nsSet[img.ImageID] = struct{}{}
+		}
+		nsActiveIDs[ns] = nsSet
+	}
+
+	// Sync Processor cache with cluster reality (independent of target configurations)
+	for imgID, cached := range p.imageMap {
+		for ns := range cached.namespaces {
+			if activeInNs, ok := nsActiveIDs[ns]; !ok {
+				p.imageRemoved(imgID, ns) // Entire namespace has no active images anymore
+			} else if _, stillRunning := activeInNs[imgID]; !stillRunning {
+				p.imageRemoved(imgID, ns) // Image is no longer running in this specific namespace
+			}
+		}
+	}
+
+	// Reconcile orphan images per target
 	for _, t := range p.Targets {
 		targetImages, err := t.LoadImages()
 		if err != nil {
@@ -346,12 +462,18 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages []*liboci.
 			continue
 		}
 
-		removableImages := make([]*liboci.RegistryImage, 0)
-		for _, t := range targetImages {
-			if !containsImage(allImages, t.ImageID) {
-				removableImages = append(removableImages, t)
-				delete(p.imageMap, t.ImageID)
-				logrus.Debugf("Image %s marked for removal", t.ImageID)
+		var removableImages []*target.TargetImage
+		for _, targetImg := range targetImages {
+			var isActive bool
+			if !t.IsNamespaceAware() || targetImg.Namespace == "" {
+				_, isActive = globalActiveIDs[targetImg.ImageID]
+			} else if nsSet, ok := nsActiveIDs[targetImg.Namespace]; ok {
+				_, isActive = nsSet[targetImg.ImageID]
+			}
+
+			if !isActive {
+				removableImages = append(removableImages, targetImg)
+				logrus.Debugf("Image %s marked for removal in namespace %s", targetImg.ImageID, targetImg.Namespace)
 			}
 		}
 
@@ -417,9 +539,9 @@ func getChangedContainers(oldPod, newPod libk8s.PodInfo) ([]*libk8s.ContainerInf
 	return addedContainers, removedContainers
 }
 
-func containsImage(images []*liboci.RegistryImage, image string) bool {
+func containsImage(images []*target.TargetImage, namespace string, image string) bool {
 	for _, i := range images {
-		if i.ImageID == image {
+		if i.ImageID == image && (namespace == "" || i.Namespace == namespace) {
 			return true
 		}
 	}
@@ -437,27 +559,64 @@ func containsContainerImage(containers []*libk8s.ContainerInfo, image string) bo
 	return false
 }
 
-func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerInfo, allPods []interface{}) {
-	images := make([]*liboci.RegistryImage, 0)
+func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerInfo, namespace string, allPods []interface{}) {
+	if len(removedContainers) == 0 {
+		return
+	}
+
+	var namespaceOrphans []*target.TargetImage
+	var globalOrphans []*target.TargetImage
 
 	for _, c := range removedContainers {
-		found := false
+		foundInNamespace := false
+		foundInCluster := false
+
 		for _, po := range allPods {
-			pod := po.(*corev1.Pod)
+			pod, ok := po.(*corev1.Pod)
+			if !ok {
+				continue
+			}
+
 			info := p.K8s.Client.ExtractPodInfos(*pod)
-			found = found || containsContainerImage(info.Containers, c.Image.ImageID)
+			if containsContainerImage(info.Containers, c.Image.ImageID) {
+				foundInCluster = true
+				if pod.Namespace == namespace {
+					foundInNamespace = true
+					break
+				}
+			}
 		}
 
-		if !found {
-			images = append(images, c.Image)
-			delete(p.imageMap, c.Image.ImageID)
-			logrus.Debugf("Image %s marked for removal", c.Image.ImageID)
+		// Not running in this namespace anymore -> remove namespace from Processor cache
+		if !foundInNamespace {
+			namespaceOrphans = append(namespaceOrphans, &target.TargetImage{
+				RegistryImage: c.Image,
+				Namespace:     namespace,
+			})
+			// Remove only this namespace association from the cache. If no other namespace uses it, ImageRemoved automatically deletes the whole entry.
+			p.imageRemoved(c.Image.ImageID, namespace)
+			logrus.Debugf("Image %s marked for removal in namespace %s", c.Image.ImageID, namespace)
+		}
+
+		// Not running anywhere in the cluster anymore -> relevant for non-namespace-aware targets
+		if !foundInCluster {
+			globalOrphans = append(globalOrphans, &target.TargetImage{
+				RegistryImage: c.Image,
+				Namespace:     "",
+			})
+			logrus.Debugf("Image %s marked for global removal", c.Image.ImageID)
 		}
 	}
 
-	if len(images) > 0 {
-		for _, t := range p.Targets {
-			p.handleOrphanImages(t, images)
+	for _, t := range p.Targets {
+		if t.IsNamespaceAware() {
+			if len(namespaceOrphans) > 0 {
+				p.handleOrphanImages(t, namespaceOrphans)
+			}
+		} else {
+			if len(globalOrphans) > 0 {
+				p.handleOrphanImages(t, globalOrphans)
+			}
 		}
 	}
 }
@@ -466,18 +625,38 @@ func (p *Processor) cleanupImagesIfNeeded(removedContainers []*libk8s.ContainerI
 // implement DeactivateTarget and opt in via ShouldDeactivateOrphans have their
 // orphans deactivated (rather than deleted) regardless of the global
 // delete-orphan-images flag. All other targets follow delete-orphan-images.
-func (p *Processor) handleOrphanImages(t target.Target, images []*liboci.RegistryImage) {
-	if dt, ok := t.(target.DeactivateTarget); ok && dt.ShouldDeactivateOrphans() {
-		if err := dt.Deactivate(images); err != nil {
+func (p *Processor) handleOrphanImages(t target.Target, images []*target.TargetImage) {
+	dt, isDeactivatable := t.(target.DeactivateTarget)
+	shouldDeactivate := isDeactivatable && dt.ShouldDeactivateOrphans()
+
+	if !shouldDeactivate && !internal.OperatorConfig.DeleteOrphanImages {
+		return
+	}
+
+	actualOrphanedImages := images
+	if !t.IsNamespaceAware() {
+		seen := make(map[string]struct{}, len(images))
+		actualOrphanedImages = make([]*target.TargetImage, 0, len(images))
+		for _, img := range images {
+			if _, exists := seen[img.ImageID]; !exists {
+				seen[img.ImageID] = struct{}{}
+				actualOrphanedImages = append(actualOrphanedImages, &target.TargetImage{
+					RegistryImage: img.RegistryImage,
+					Namespace:     "",
+				})
+			}
+		}
+	}
+
+	if shouldDeactivate {
+		if err := dt.Deactivate(actualOrphanedImages); err != nil {
 			logrus.WithError(err).Error("Failed to deactivate images in target")
 		}
 		return
 	}
 
-	if internal.OperatorConfig.DeleteOrphanImages {
-		if err := t.Remove(images); err != nil {
-			logrus.WithError(err).Error("Failed to remove images from target")
-		}
+	if err := t.Remove(actualOrphanedImages); err != nil {
+		logrus.WithError(err).Error("Failed to remove images from target")
 	}
 }
 
@@ -524,39 +703,70 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			logrus.Info("Finished cache sync")
 			pods := informer.GetStore().List()
 			missingPods := make([]libk8s.PodInfo, 0)
-			allImages := make([]*liboci.RegistryImage, 0)
+			allImages := make(map[string][]*liboci.RegistryImage)
 
+			validPods := make([]libk8s.PodInfo, 0, len(pods))
+			for _, po := range pods {
+				pod, ok := po.(*corev1.Pod)
+				if !ok {
+					continue
+				}
+				if !p.isNamespaceAllowed(pod.Namespace) {
+					logrus.Tracef("Skipping pod %s/%s during initial sync - namespace not in allowed list", pod.Namespace, pod.Name)
+					continue
+				}
+
+				info := p.K8s.Client.ExtractPodInfos(*pod)
+				validPods = append(validPods, info)
+
+				for _, c := range info.Containers {
+					allImages[info.PodNamespace] = append(allImages[info.PodNamespace], c.Image)
+				}
+			}
+
+			type loadedTarget struct {
+				target target.Target
+				images []*target.TargetImage
+			}
+			var activeTargets []loadedTarget
 			for _, t := range p.Targets {
 				targetImages, err := t.LoadImages()
 				if err != nil {
 					logrus.WithError(err).Error("Failed to load images from target")
 					continue
 				}
+				activeTargets = append(activeTargets, loadedTarget{target: t, images: targetImages})
+			}
 
-				for _, po := range pods {
-					pod := po.(*corev1.Pod)
-
-					// Filter by namespace if selector is configured
-					if !p.isNamespaceAllowed(pod.Namespace) {
-						logrus.Tracef("Skipping pod %s/%s during initial sync - namespace not in allowed list", pod.Namespace, pod.Name)
+			for _, info := range validPods {
+				podNeedsScan := false
+				for _, c := range info.Containers {
+					if p.K8s.HasAnnotation(info.Annotations, c) {
 						continue
 					}
+					for _, lt := range activeTargets {
+						expectedNs := ""
+						if lt.target.IsNamespaceAware() {
+							expectedNs = info.PodNamespace
+						}
 
-					info := p.K8s.Client.ExtractPodInfos(*pod)
-					for _, c := range info.Containers {
-						allImages = append(allImages, c.Image)
-						if !containsImage(targetImages, c.Image.ImageID) && !p.K8s.HasAnnotation(info.Annotations, c) {
-							missingPods = append(missingPods, info)
-							logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
+						if !containsImage(lt.images, expectedNs, c.Image.ImageID) {
+							podNeedsScan = true
 							break
 						}
 					}
+					if podNeedsScan {
+						break
+					}
+				}
+
+				if podNeedsScan {
+					missingPods = append(missingPods, info)
+					logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
 				}
 			}
 
-			if len(missingPods) > 0 {
-				p.executeSyftScans(missingPods, allImages)
-			}
+			p.executeSyftScans(missingPods, allImages)
 		}
 	}()
 }

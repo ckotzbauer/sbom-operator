@@ -90,7 +90,7 @@ oras attach "localhost:5000/my-nginx:dev" \
   --artifact-type application/vnd.cyclonedx+json \
   --annotation "dev.sigstore.sbom.scope=application" 
   sbom.json:application/vnd.cyclonedx+json
-````
+```
 .
 Currently only Dependency-Track target would support additional SBOMs to be uploaded. How to map the `sbom.scope` to the project name can be found in the Dependency-Track section.
 
@@ -215,7 +215,7 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-client-key-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Key filepath when using mTLS to connect to dtrack |
 | `dtrack-default-parent-project` | `false` | `""` | The default parent project UUID that should be used. This is overwritten in case a parent project annotation is set and found |
 | `dtrack-use-short-name` | `false` | `""` | Use short image name (without registry) for project names |
-| `dtrack-kubernetes-cluster-id-mode`| `false`| `"tag"` | Mode for using the kubernetes-cluster-id. Options: tag (adds cluster ID as a project tag) or prefix (prefixes the project name with the cluster ID). |
+| `dtrack-kubernetes-cluster-id-mode`| `false`| `"tag"` | Mode for using the kubernetes-cluster-id. Options: `"tag"` (adds cluster ID as a project tag) or `"prefix"` (prefixes the project name with the cluster ID). `"tag-namespace"` (Adds cluster ID and namespace as project tag, like `<kubernetes-cluster-id>/<cluster-namespace>`. Needed for a multi-namespace, multi-cluster setup, where the namespace in different clusters are same) |
 | `dtrack-parent-project-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set parent project automatically, e.g. "my.pod.annotation" |
 | `dtrack-project-name-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set custom dtrack project name automatically, e.g. "my.pod.annotation" |
 | `dtrack-manage-project-active-status` | `true` when enabled without parent config | `false` | Manage project active/isLatest status based on running pods. Orphans are deactivated instead of deleted. Requires a parent project. |

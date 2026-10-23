@@ -7,6 +7,7 @@ import (
 
 	"github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
+	attestation "github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/stretchr/testify/assert"
 )
@@ -19,6 +20,6 @@ func TestOci(t *testing.T) {
 	assert.NoError(t, err)
 
 	img := liboci.RegistryImage{ImageID: os.Getenv("TEST_DIGEST")}
-	err = oci.ProcessSbom(target.NewContext(string(sbom), &img, &kubernetes.PodInfo{}))
+	err = oci.ProcessSbom(target.NewContext(&img, &kubernetes.PodInfo{}, &attestation.AttestationSbom{Sbom: string(sbom)}))
 	assert.NoError(t, err)
 }

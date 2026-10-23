@@ -3,7 +3,6 @@ package oci
 import (
 	"fmt"
 
-	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
@@ -60,7 +59,7 @@ func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
 		return err
 	}
 
-	b := []byte(ctx.Sbom)
+	b := []byte(ctx.Attestation.Sbom)
 	opts := []remote.Option{
 		remote.WithAuth(authn.FromConfig(authn.AuthConfig{
 			Username:      g.userName,
@@ -93,10 +92,14 @@ func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return err
 }
 
-func (g *OciTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
-	return []*libk8s.RegistryImage{}, nil
+func (g *OciTarget) LoadImages() ([]*target.TargetImage, error) {
+	return []*target.TargetImage{}, nil
 }
 
-func (g *OciTarget) Remove(allImages []*libk8s.RegistryImage) error {
+func (g *OciTarget) Remove(allImages []*target.TargetImage) error {
 	return nil
+}
+
+func (g *OciTarget) IsNamespaceAware() bool {
+	return false
 }

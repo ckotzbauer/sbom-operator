@@ -51,7 +51,7 @@ type sigstoreBundle struct {
 
 // FetchSbomAttestations pulls OCI attestations for a given image reference
 // and extracts all supported SBOMs (via direct MediaType or DSSE In-Toto predicateType).
-func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxyRegistryMap map[string]string) ([]AttestationSbom, error) {
+func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxyRegistryMap map[string]string) ([]*AttestationSbom, error) {
 	oriImage := img.Image
 	oriImageID := img.ImageID
 
@@ -80,7 +80,7 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 	}
 	ociOpts := ociremote.WithRemoteOptions(regOpts...)
 
-	var result []AttestationSbom
+	var result []*AttestationSbom
 
 	if se, err := ociremote.SignedEntity(ref, ociOpts); err == nil {
 		// 1. Cosign SBOM Attachment (sha256-<digest>.sbom via "cosign attach sbom")
@@ -168,8 +168,8 @@ func extractFromDsseEnvelope(rawEnvelope []byte) (string, types.MediaType, error
 	return string(stmt.Predicate), mt, err
 }
 
-func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]string) []AttestationSbom {
-	var found []AttestationSbom
+func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]string) []*AttestationSbom {
+	var found []*AttestationSbom
 	manifest, err := img.Manifest()
 	if err != nil {
 		logrus.WithError(err).Debugf("Failed to fetch manifest")
@@ -218,7 +218,7 @@ func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]st
 	return found
 }
 
-func parseAttestationPayload(layerMediaType types.MediaType, rawPayload []byte, anns map[string]string) []AttestationSbom {
+func parseAttestationPayload(layerMediaType types.MediaType, rawPayload []byte, anns map[string]string) []*AttestationSbom {
 	var sbomContent string
 	var detectedMediaType types.MediaType
 	var err error
@@ -246,10 +246,10 @@ func parseAttestationPayload(layerMediaType types.MediaType, rawPayload []byte, 
 
 	// According to SBOM_SPEC.md: if "dev.sigstore.sbom.scope" is missing, the scope "all" applies.
 	scopes := resolveScopes(anns)
-	var items []AttestationSbom
+	var items []*AttestationSbom
 	for _, scope := range scopes {
 		logrus.Debugf("Extracted SBOM (mediaType=%s, scope=%s)", detectedMediaType, scope)
-		items = append(items, AttestationSbom{
+		items = append(items, &AttestationSbom{
 			Scope:     scope,
 			MediaType: detectedMediaType,
 			Sbom:      sbomContent,
