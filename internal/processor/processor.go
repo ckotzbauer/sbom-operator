@@ -413,6 +413,20 @@ func getChangedContainers(oldPod, newPod libk8s.PodInfo) ([]*libk8s.ContainerInf
 	return addedContainers, removedContainers
 }
 
+// collectPodImages returns the images of the pod's containers and whether the pod needs to be analyzed.
+func (p *Processor) collectPodImages(info libk8s.PodInfo, targetImages []*liboci.RegistryImage) ([]*liboci.RegistryImage, bool) {
+	images := make([]*liboci.RegistryImage, 0, len(info.Containers))
+	needsAnalysis := false
+	for _, c := range info.Containers {
+		images = append(images, c.Image)
+		if !needsAnalysis && !containsImage(targetImages, c.Image.ImageID) && !p.K8s.HasAnnotation(info.Annotations, c) {
+			needsAnalysis = true
+		}
+	}
+
+	return images, needsAnalysis
+}
+
 func containsImage(images []*liboci.RegistryImage, image string) bool {
 	for _, i := range images {
 		if i.ImageID == image {
@@ -539,13 +553,11 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 					}
 
 					info := p.K8s.Client.ExtractPodInfos(*pod)
-					for _, c := range info.Containers {
-						allImages = append(allImages, c.Image)
-						if !containsImage(targetImages, c.Image.ImageID) && !p.K8s.HasAnnotation(info.Annotations, c) {
-							missingPods = append(missingPods, info)
-							logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
-							break
-						}
+					images, needsAnalysis := p.collectPodImages(info, targetImages)
+					allImages = append(allImages, images...)
+					if needsAnalysis {
+						missingPods = append(missingPods, info)
+						logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
 					}
 				}
 			}
