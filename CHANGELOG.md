@@ -1,3 +1,24 @@
+## Version 0.48.0 (2026-10-27)
+
+### Dependency updates
+
+* [[`c07d0732`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c07d0732)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 4fb9a41 (#1071)
+* [[`4fb9a418`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4fb9a418)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 2279641 (#1070)
+* [[`22796419`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/22796419)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 8195aea (#1067)
+* [[`8195aeae`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8195aeae)] - **deps**: update aws-sdk-go-v2 monorepo (#1066)
+* [[`7a0be61e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7a0be61e)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 9108f32 (#1062)
+* [[`9108f32e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/9108f32e)] - **deps**: update module modernc.org&#x2F;sqlite to v1.61.0 (#1061)
+* [[`39a4fb5a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/39a4fb5a)] - **deps**: update module github.com&#x2F;aws&#x2F;aws-sdk-go-v2&#x2F;service&#x2F;ecr to v1.66.5 (#1058)
+* [[`194b1776`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/194b1776)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.55.0 (#1060)
+* [[`5abfcd95`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5abfcd95)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libk8soci digest to d2781e9 (#1057)
+* [[`0b853be8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0b853be8)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 698dbeb (#1056)
+* [[`698dbebc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/698dbebc)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 0a69065 (#1051)
+
+### Common changes
+
+* [[`e963ece7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e963ece7)] - **dtrack**: Global configuration per pod for parent projects (#1053)
+
+
 ## Version 0.47.0 (2026-10-20)
 
 ### Features and improvements
