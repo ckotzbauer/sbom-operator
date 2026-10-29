@@ -24,15 +24,15 @@ const (
 
 func GetMediaType(format string) types.MediaType {
 	switch format {
-	case "json":
+	case "json", SyftMediaType:
 		return types.MediaType(SyftMediaType)
-	case "cyclonedx":
+	case "cyclonedx", CycloneDXXMLMediaType:
 		return types.MediaType(CycloneDXXMLMediaType)
-	case "cyclonedxjson":
+	case "cyclonedxjson", CycloneDXJSONMediaType:
 		return types.MediaType(CycloneDXJSONMediaType)
-	case "spdx":
+	case "spdx", SPDXMediaType:
 		return types.MediaType(SPDXMediaType)
-	case "spdxjson":
+	case "spdxjson", SPDXJSONMediaType:
 		return types.MediaType(SPDXJSONMediaType)
 	default:
 		return types.MediaType(SyftMediaType)
