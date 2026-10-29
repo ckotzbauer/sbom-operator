@@ -131,7 +131,7 @@ func TestGetNameAndVersionFromString(t *testing.T) {
 
 	n, v = getNameAndVersionFromString("name", ":")
 	assert.Equal(t, "name", n)
-	assert.Equal(t, "latest", v)
+	assert.Equal(t, "", v)
 }
 
 func TestGetContainerNameFromAnnotationKey(t *testing.T) {
@@ -143,7 +143,7 @@ func TestGetContainerNameFromAnnotationKey(t *testing.T) {
 }
 
 func TestNewDependencyTrackTarget(t *testing.T) {
-	target := NewDependencyTrackTarget("url", "api", "matcher", "ca", "cert", "key", "cluster", "tag", "parent", "p-ann", "n-ann", true, true)
+	target := NewDependencyTrackTarget("url", "api", "matcher", "ca", "cert", "key", "cluster", "tag", "parent", "p-ann", "n-ann", true, true, "")
 	assert.Equal(t, "url", target.baseUrl)
 	assert.Equal(t, "api", target.apiKey)
 	assert.Equal(t, "matcher", target.podLabelTagMatcher)
@@ -269,7 +269,7 @@ func TestProcessSbomUnsupportedMediaType(t *testing.T) {
 		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
 		Attestation: &oci.AttestationSbom{MediaType: "unsupported"},
 	}
-	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "")
 	err := g.ProcessSbom(ctx)
 	assert.NoError(t, err)
 }
@@ -290,7 +290,7 @@ func TestProcessSbomMinimal(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -372,7 +372,7 @@ func TestProcessSbomParentProject(t *testing.T) {
 			}))
 			defer ts.Close()
 
-			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "my.parent.project", "", true, false)
+			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "my.parent.project", "", true, false, "")
 			err := g.Initialize()
 			assert.NoError(t, err)
 			// Pre-populate so LoadImages is skipped during ProcessSbom.
@@ -409,7 +409,7 @@ func TestRemoveMinimal(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -506,7 +506,7 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -559,7 +559,7 @@ func TestLoadImagesTagMode(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -610,7 +610,7 @@ func TestProcessSbomReactivateWithoutUpload(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "8c940608-8e62-431a-ac5d-2092b7c41372", "", true, true)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "8c940608-8e62-431a-ac5d-2092b7c41372", "", true, true, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -683,7 +683,7 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "8c940608-8e62-431a-ac5d-2092b7c41372", "", true, true)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "8c940608-8e62-431a-ac5d-2092b7c41372", "", true, true, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -737,7 +737,7 @@ func TestDeactivate(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -811,7 +811,7 @@ func TestDeactivateTagModeMultiCluster(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -865,7 +865,7 @@ func TestLoadImagesSkipsInactiveProjects(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true, "")
 	err := g.Initialize()
 	assert.NoError(t, err)
 
@@ -1080,7 +1080,7 @@ func TestPrefixMode_RemoveAndDeactivateOrphans(t *testing.T) {
 			defer ts.Close()
 
 			// Initialize target in "prefix" mode
-			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "prefix", "", "", "", true, !tt.removeAction)
+			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "prefix", "", "", "", true, !tt.removeAction, "")
 			require.NoError(t, g.Initialize())
 
 			// Precondition: prefix mode must report IsNamespaceAware() == false
@@ -1143,7 +1143,7 @@ func TestHandleProjectDeactivation_TagMode_RemovesNamespaceTagAndProtectsUnscann
 	defer ts.Close()
 
 	// Initialize in standard "tag" mode (NOT tag-namespace mode)
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "")
 	require.NoError(t, g.Initialize())
 
 	// Scenario: In-memory cache ONLY knows about "ns-a" (simulating incomplete cache / unscanned "ns-b")

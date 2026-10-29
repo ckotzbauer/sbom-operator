@@ -39,6 +39,8 @@ type DependencyTrackTarget struct {
 	manageProjectActiveStatus  bool
 	imageProjectMap            map[string]map[string]map[uuid.UUID]struct{}
 	defaultParentProjectParsed *uuid.UUID
+	templateProjectName        string
+	parsedProjectTemplate      *template.Template
 }
 
 const (
@@ -49,7 +51,7 @@ const (
 	podNamespaceTagKey string = "namespace"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool, templateProjectName string) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:                    baseUrl,
 		apiKey:                     apiKey,
@@ -64,6 +66,7 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 		projectNameAnnotationKey:   projectNameAnnotationKey,
 		useShortName:               useShortName,
 		manageProjectActiveStatus:  manageProjectActiveStatus,
+		templateProjectName:        templateProjectName,
 	}
 }
 
@@ -116,8 +119,15 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 		case "tag", "tag-namespace", "prefix":
 			break
 		default:
-			return fmt.Errorf("'dtrack-kubernetes-cluster-id-mode' has unknown value: %s", g.k8sClusterId)
+			return fmt.Errorf("'dtrack-kubernetes-cluster-id-mode' has unknown value: %s", g.k8sClusterIdMode)
 		}
+	}
+	if g.templateProjectName != "" {
+		tmpl, err := template.New("GlobalNameTemplate").Option("missingkey=error").Parse(g.templateProjectName)
+		if err != nil {
+			return fmt.Errorf("invalid global project name template %q: %w", g.templateProjectName, err)
+		}
+		g.parsedProjectTemplate = tmpl
 	}
 	return nil
 }
@@ -135,57 +145,111 @@ func (g *DependencyTrackTarget) Initialize() error {
 }
 
 func (g *DependencyTrackTarget) identifyProjectNameAndVersion(ctx *target.TargetContext) (string, string) {
-	projectName := ""
-	version := ""
-	// Set custom project name by kubernetes annotation?
-	if g.projectNameAnnotationKey != "" {
-		logrus.Debugf(`Try to set project name by configured annotationkey "%s"`, g.projectNameAnnotationKey)
-		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
+	projectName, version := g.getRepoWithVersion(ctx, g.useShortName, g.k8sClusterId)
+	if g.templateProjectName != "" {
+		var err error
+		projectName, version, err = g.getTemplatedNameAndVersion(ctx, g.templateProjectName, ctx.Containers, projectName, version)
+		if err != nil {
+			logrus.WithError(err).Warnf("Failed to parse templated project name '%s'.", g.templateProjectName)
+		}
+	}
+
+	// 1. Priority: Custom project name via Kubernetes pod annotation
+	if g.projectNameAnnotationKey != "" && ctx.Pod != nil {
+		logrus.Debugf("Try to set project name by configured annotationkey '%s'", g.projectNameAnnotationKey)
+
+		// Step 1a: Evaluate pod-wide annotation first (exact key match)
+		if podWideValue, ok := ctx.Pod.Annotations[g.projectNameAnnotationKey]; ok {
 			var err error
-			projectName, version, err = g.getContainerNameAndVersion(podAnnotationKey, podAnnotationValue, g.projectNameAnnotationKey, ctx)
+			_, projectName, version, err = g.getContainerNameAndVersion(projectName, version, g.projectNameAnnotationKey, podWideValue, g.projectNameAnnotationKey, ctx)
+			if err != nil {
+				logrus.WithError(err).Errorf("Wrong project name configuration. Skip setting custom project name for image '%s'", ctx.Image.Image)
+			}
+		}
+
+		// Step 1b: Evaluate container-specific annotations ("<key>/<containerName>"), taking precedence
+		containerPrefix := g.projectNameAnnotationKey + "/"
+		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
+			if !strings.HasPrefix(podAnnotationKey, containerPrefix) {
+				continue
+			}
+
+			var err error
+			var found bool
+			found, projectName, version, err = g.getContainerNameAndVersion(projectName, version, podAnnotationKey, podAnnotationValue, g.projectNameAnnotationKey, ctx)
 			if err != nil {
 				logrus.WithError(err).Errorf("Wrong project name configuration. Skip setting custom project name for image '%s'", ctx.Image.Image)
 				continue
 			}
-			if projectName != "" {
+			if found {
 				break
 			}
 		}
 	}
 
-	// If projectNameAnnotationKey is not set or could not be parsed correctly, use image instead
-	if projectName == "" || version == "" {
-		logrus.Debugf("No custom project name configured (correctly). Falling back to name identification using image.")
-		projectName, version = g.getRepoWithVersion(ctx, g.useShortName, g.k8sClusterId)
-	}
 	return projectName, version
 }
 
-func (g *DependencyTrackTarget) identifiyParentProjectUuid(ctx *target.TargetContext, client *dtrack.Client) *uuid.UUID {
-	if g.parentProjectAnnotationKey != "" {
+func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx *target.TargetContext, client *dtrack.Client) *uuid.UUID {
+	if g.parentProjectAnnotationKey != "" && ctx.Pod != nil {
 		logrus.Debugf("Try to set parent project by configured annotationkey %s", g.parentProjectAnnotationKey)
+
+		parentProjectName := ""
+		parentProjectVersion := ""
+		matchedAnnotationKey := ""
+		matchedAnnotationValue := ""
+
+		// 1. Evaluate pod-wide parent annotation first (exact key match)
+		if podWideValue, ok := ctx.Pod.Annotations[g.parentProjectAnnotationKey]; ok {
+			found, name, version, err := g.getContainerNameAndVersion(parentProjectName, parentProjectVersion, g.parentProjectAnnotationKey, podWideValue, g.parentProjectAnnotationKey, ctx)
+			if err != nil {
+				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", ctx.Image.Image)
+			} else if found {
+				parentProjectName = name
+				parentProjectVersion = version
+				matchedAnnotationKey = g.parentProjectAnnotationKey
+				matchedAnnotationValue = podWideValue
+			}
+		}
+
+		// 2. Evaluate container-specific parent annotations ("<key>/<containerName>"), taking precedence
+		containerPrefix := g.parentProjectAnnotationKey + "/"
 		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
+			if !strings.HasPrefix(podAnnotationKey, containerPrefix) {
+				continue
+			}
 			logrus.Debugf("AnnotationKey %s starts with %s?", podAnnotationKey, g.parentProjectAnnotationKey)
 
-			parentProjectName, parentProjectVersion, err := g.getContainerNameAndVersion(podAnnotationKey, podAnnotationValue, g.parentProjectAnnotationKey, ctx)
+			found, name, version, err := g.getContainerNameAndVersion(parentProjectName, parentProjectVersion, podAnnotationKey, podAnnotationValue, g.parentProjectAnnotationKey, ctx)
 			if err != nil {
 				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", ctx.Image.Image)
 				continue
 			}
-			if parentProjectName == "" {
-				continue
+			if found {
+				parentProjectName = name
+				parentProjectVersion = version
+				matchedAnnotationKey = podAnnotationKey
+				matchedAnnotationValue = podAnnotationValue
+				break
 			}
+		}
+
+		if parentProjectName != "" {
+			// Directly return if the resolved parent project name is already a valid UUID
 			parentProjectUuid, err := uuid.Parse(parentProjectName)
 			if err == nil {
 				return &parentProjectUuid
 			}
-			hasExplicitVersion := strings.Contains(podAnnotationValue, ":")
-			logrus.Debugf("Try to find parent project by name from annotation \"%s\", for image %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", podAnnotationKey, ctx.Image.Image, parentProjectName, parentProjectVersion)
+
+			// Only check for explicit version if the annotation value actually contained ":"
+			// (because getNameAndVersionFromString defaults version to "latest" when ":" is absent)
+			hasExplicitVersion := strings.Contains(matchedAnnotationValue, ":")
+			logrus.Debugf("Try to find parent project by name from annotation \"%s\", for image %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", matchedAnnotationKey, ctx.Image.Image, parentProjectName, parentProjectVersion)
 			parentProjects, err := client.Project.GetProjectsForName(context.Background(), parentProjectName, false, true)
 			if err != nil {
-				logrus.WithError(err).Errorf(`Could not find parent project "%s"`, parentProjectName)
+				logrus.WithError(err).Errorf("Could not find parent project \"%s\"", parentProjectName)
 			} else if len(parentProjects) == 0 {
-				logrus.Errorf(`No parent project found with name "%s"`, parentProjectName)
+				logrus.Errorf("No parent project found with name \"%s\"", parentProjectName)
 			} else {
 				var parentProject dtrack.Project
 				found := false
@@ -198,22 +262,20 @@ func (g *DependencyTrackTarget) identifiyParentProjectUuid(ctx *target.TargetCon
 						}
 					}
 					if !found {
-						logrus.Errorf(`No parent project found with name "%s" and version "%s"`, parentProjectName, parentProjectVersion)
+						logrus.Errorf("No parent project found with name \"%s\" and version \"%s\"", parentProjectName, parentProjectVersion)
 					}
 				} else {
 					if len(parentProjects) > 1 {
-						logrus.Warnf(`Multiple root projects found with name "%s", using the first one`, parentProjectName)
+						logrus.Warnf("Multiple root projects found with name \"%s\", using the first one", parentProjectName)
 					}
 					parentProject = parentProjects[0]
 					found = true
 				}
 				if found {
-					logrus.Infof(`Found parent project with name "%s" and UUID "%s" for image "%s"`, parentProjectName, parentProject.UUID, ctx.Image.Image)
+					logrus.Infof("Found parent project with name \"%s\" and UUID \"%s\" for image \"%s\"", parentProjectName, parentProject.UUID, ctx.Image.Image)
 					return &parentProject.UUID
 				}
 			}
-			break
-
 		}
 	}
 	return g.defaultParentProjectParsed
@@ -263,7 +325,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		}
 	}
 
-	parentUuid := g.identifiyParentProjectUuid(ctx, client)
+	parentUuid := g.identifyParentProjectUuid(ctx, client)
 	if !skipUpload {
 		logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s, parent=%s)", projectName, version, parentUuid)
 		uploadToken, err := client.BOM.PostBom(
@@ -379,89 +441,171 @@ func (g *DependencyTrackTarget) addProjectToCache(namespace string, imageId stri
 	return nil
 }
 
+// TemplateData holds the context fields exposed to project name templates.
 type TemplateData struct {
-	ContainerNames []string
-	SbomScope      string
-	ImageId        string
-	ImageName      string
-	ShortName      string
-	Repository     string
-	Tag            string
+	ContainerNames    []string
+	SbomScope         string
+	ImageId           string
+	ImageName         string
+	ShortName         string
+	Repository        string
+	Tag               string
+	Namespace         string // Helpful for cluster-wide templates!
+	PredefinedName    string
+	PredefinedVersion string
 }
 
-func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo) TemplateData {
+func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) TemplateData {
+	var shortName, repository, tag string
+
 	imageRef, err := parser.Parse(ctx.Image.ImageID)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
-	}
-	var shortName, repository, tag string
-	if imageRef != nil {
+	} else if imageRef != nil {
 		shortName = imageRef.ShortName()
 		repository = imageRef.Repository()
+		tag = imageRef.Tag()
 	}
 
 	if strings.Index(ctx.Image.Image, "sha256") != 0 {
-		imageRef, err = parser.Parse(ctx.Image.Image)
-		if err != nil {
+		if parsedImg, err := parser.Parse(ctx.Image.Image); err != nil {
 			logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.Image)
+		} else if parsedImg != nil {
+			if shortName == "" {
+				shortName = parsedImg.ShortName()
+			}
+			if repository == "" {
+				repository = parsedImg.Repository()
+			}
+			tag = parsedImg.Tag()
 		}
 	}
-	tag = imageRef.Tag()
+
 	cNames := make([]string, 0, len(containers))
 	for _, container := range containers {
-		cNames = append(cNames, container.Name)
+		if container != nil {
+			cNames = append(cNames, container.Name)
+		}
 	}
+
+	var namespace string
+	if ctx.Pod != nil {
+		namespace = ctx.Pod.PodNamespace
+	}
+
+	var sbomScope string
+	if ctx.Attestation != nil {
+		sbomScope = ctx.Attestation.Scope
+	}
+
 	return TemplateData{
-		ContainerNames: cNames,
-		SbomScope:      ctx.Attestation.Scope,
-		ImageId:        ctx.Image.ImageID,
-		ImageName:      ctx.Image.Image,
-		ShortName:      shortName,
-		Repository:     repository,
-		Tag:            tag,
+		ContainerNames:    cNames,
+		SbomScope:         sbomScope,
+		ImageId:           ctx.Image.ImageID,
+		ImageName:         ctx.Image.Image,
+		ShortName:         shortName,
+		Repository:        repository,
+		Tag:               tag,
+		Namespace:         namespace,
+		PredefinedName:    predefinedName,
+		PredefinedVersion: predefinedVersion,
 	}
 }
 
-func (g *DependencyTrackTarget) getContainerNameAndVersion(podAnnotationKey string, podAnnotationValue string, expectedAnnotationKey string, ctx *target.TargetContext) (string, string, error) {
-	if strings.HasPrefix(podAnnotationKey, expectedAnnotationKey) {
-		// determine container name and scope from annotation key
-		containerName := getContainerNameFromAnnotationKey(podAnnotationKey, "/")
+// getTemplatedNameAndVersion parses and executes a template string (used for dynamic pod annotations).
+func (g *DependencyTrackTarget) getTemplatedNameAndVersion(ctx *target.TargetContext, templateContent string, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) (string, string, error) {
+	if templateContent == "" {
+		return predefinedName, predefinedVersion, nil
+	}
+
+	// Reuse pre-compiled template if it matches the global template configuration
+	var tmpl *template.Template
+	if templateContent == g.templateProjectName && g.parsedProjectTemplate != nil {
+		tmpl = g.parsedProjectTemplate
+	} else {
+		var err error
+		tmpl, err = template.New("NameTemplate").Option("missingkey=error").Parse(templateContent)
+		if err != nil {
+			return predefinedName, predefinedVersion, err
+		}
+	}
+
+	return g.executeNameTemplate(ctx, tmpl, containers, predefinedName, predefinedVersion)
+}
+
+func (g *DependencyTrackTarget) executeNameTemplate(ctx *target.TargetContext, tmpl *template.Template, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) (string, string, error) {
+	data := extractTemplateData(ctx, containers, predefinedName, predefinedVersion)
+
+	var buf bytes.Buffer
+	if err := tmpl.Execute(&buf, data); err != nil {
+		return predefinedName, predefinedVersion, err
+	}
+
+	parsedValue := strings.TrimSpace(buf.String())
+	if parsedValue == "" {
+		return predefinedName, predefinedVersion, nil
+	}
+
+	name, version := getNameAndVersionFromString(parsedValue, ":")
+	if name == "" {
+		name = predefinedName
+	}
+	if version == "" {
+		if predefinedVersion != "" {
+			version = predefinedVersion
+		} else {
+			version = "latest"
+		}
+	}
+	return name, version, nil
+}
+
+func (g *DependencyTrackTarget) getContainerNameAndVersion(foundProjectName string, foundVersion string, podAnnotationKey string, podAnnotationValue string, expectedAnnotationKey string, ctx *target.TargetContext) (bool, string, string, error) {
+	// Match only exact pod-wide key ("<key>") or container-specific key ("<key>/<container>")
+	if podAnnotationKey == expectedAnnotationKey || strings.HasPrefix(podAnnotationKey, expectedAnnotationKey+"/") {
+		// Extract container name relative to expectedAnnotationKey so slashes inside expectedAnnotationKey do not break parsing
+		containerName := strings.TrimPrefix(podAnnotationKey, expectedAnnotationKey)
+		containerName = strings.TrimPrefix(containerName, "/")
+
 		if podAnnotationValue != "" {
-			var data TemplateData
-			dataFound := false
+			var containers []*kubernetes.ContainerInfo
 			if containerName == "" {
-				data = extractTemplateData(ctx, ctx.Containers)
-				dataFound = true
+				containers = ctx.Containers
 			} else {
 				for _, c := range ctx.Containers {
 					if containerName == c.Name {
-						data = extractTemplateData(ctx, []*kubernetes.ContainerInfo{c})
-						dataFound = true
+						containers = []*kubernetes.ContainerInfo{c}
 						break
 					} else {
 						logrus.Debugf("skipping container '%s' as not configured for annotation key '%s'", c.Name, expectedAnnotationKey)
 					}
 				}
 			}
-			if dataFound {
-				tmpl, err := template.New("NameTemplate").Parse(podAnnotationValue)
+			if len(containers) > 0 {
+				name, version, err := g.getTemplatedNameAndVersion(ctx, podAnnotationValue, containers, foundProjectName, foundVersion)
 				if err != nil {
-					return "", "", err
+					return false, foundProjectName, foundVersion, err
 				}
-				var buf bytes.Buffer
-				if err := tmpl.Execute(&buf, data); err != nil {
-					return "", "", err
+
+				logger := logrus.WithFields(logrus.Fields{
+					"expectedAnnotation": expectedAnnotationKey,
+					"podAnnotation":      podAnnotationKey,
+					"container":          containerName,
+					"name":               name,
+					"version":            version,
+				})
+
+				if ctx.Attestation != nil {
+					logger = logger.WithField("scope", ctx.Attestation.Scope)
 				}
-				parsedValue := buf.String()
-				name, version := getNameAndVersionFromString(parsedValue, ":")
-				logrus.Infof(`Custom '%s' found at annotation '%s' for container '%s' with scope: '%s': '%s:%s'`, expectedAnnotationKey, podAnnotationKey, containerName, ctx.Attestation.Scope, name, version)
-				return name, version, nil
+				logger.Info("Custom name annotation found")
+				return true, name, version, nil
 			}
 		} else {
-			return "", "", fmt.Errorf(`empty value for annotation '%s' in image '%s'`, podAnnotationKey, ctx.Image.Image)
+			return false, foundProjectName, foundVersion, fmt.Errorf("empty value for annotation '%s' in image '%s'", podAnnotationKey, ctx.Image.Image)
 		}
 	}
-	return "", "", nil
+	return false, foundProjectName, foundVersion, nil
 }
 
 func (g *DependencyTrackTarget) LoadImages() ([]*target.TargetImage, error) {
@@ -694,7 +838,7 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 func getNameAndVersionFromString(input string, delimiter string) (string, string) {
 	parts := strings.Split(input, delimiter)
 	name := strings.TrimSpace(parts[0])
-	version := "latest"
+	version := ""
 	if len(parts) == 2 {
 		version = strings.TrimSpace(parts[1])
 	}
@@ -757,7 +901,7 @@ func rotateRawImageIdTag(tags []dtrack.Tag, currentImageID string) []dtrack.Tag 
 }
 
 func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, useShortName bool, k8sClusterId string) (string, string) {
-	data := extractTemplateData(ctx, ctx.Containers)
+	data := extractTemplateData(ctx, ctx.Containers, "", "")
 
 	var projectName string
 	//add Cluster prefix to projectName if prefix mode is set
