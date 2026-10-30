@@ -78,7 +78,7 @@ func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
 	}
 
 	/* #nosec */
-	err = os.WriteFile(filePath, []byte(ctx.Sbom), 0640)
+	err = os.WriteFile(filePath, []byte(ctx.Attestation.Sbom), 0640)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
 	}
@@ -86,11 +86,11 @@ func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
+func (g *GitTarget) LoadImages() ([]*target.TargetImage, error) {
 	ignoreDirs := []string{".git"}
 	fileName := syft.GetFileName(g.sbomFormat)
 	basePath := filepath.Join(g.workingTree, g.workPath)
-	images := make([]*libk8s.RegistryImage, 0)
+	images := make([]*target.TargetImage, 0)
 
 	err := filepath.Walk(basePath, func(p string, info os.FileInfo, err error) error {
 		if err != nil {
@@ -110,7 +110,7 @@ func (g *GitTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 		if filepath.Base(p) == fileName {
 			sbomPath, _ := filepath.Rel(basePath, p)
 			s := filepath.Dir(sbomPath)
-			images = append(images, &libk8s.RegistryImage{ImageID: strings.Replace(s, "/sha256_", "@sha256:", 1)})
+			images = append(images, &target.TargetImage{RegistryImage: &libk8s.RegistryImage{ImageID: strings.Replace(s, "/sha256_", "@sha256:", 1)}})
 		}
 
 		return nil
@@ -124,7 +124,7 @@ func (g *GitTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	return images, nil
 }
 
-func (g *GitTarget) Remove(images []*libk8s.RegistryImage) error {
+func (g *GitTarget) Remove(images []*target.TargetImage) error {
 	logrus.Debug("Start to remove old SBOMs")
 	sbomFiles := g.mapToFiles(images)
 
@@ -148,7 +148,7 @@ func (g *GitTarget) Remove(images []*libk8s.RegistryImage) error {
 	return nil
 }
 
-func (g *GitTarget) mapToFiles(allImages []*libk8s.RegistryImage) []string {
+func (g *GitTarget) mapToFiles(allImages []*target.TargetImage) []string {
 	paths := []string{}
 	for _, img := range allImages {
 		paths = append(paths, g.ImageIDToFilePath(img.ImageID))
@@ -161,4 +161,8 @@ func (g *GitTarget) ImageIDToFilePath(id string) string {
 	fileName := syft.GetFileName(g.sbomFormat)
 	filePath := strings.ReplaceAll(id, "@", "/")
 	return strings.ReplaceAll(path.Join(g.workingTree, g.workPath, filePath, fileName), ":", "_")
+}
+
+func (g *GitTarget) IsNamespaceAware() bool {
+	return false
 }

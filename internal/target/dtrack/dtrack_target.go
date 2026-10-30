@@ -14,6 +14,7 @@ import (
 
 	"text/template"
 
+	"github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/oci"
@@ -36,8 +37,7 @@ type DependencyTrackTarget struct {
 	k8sClusterIdMode           string
 	useShortName               bool
 	manageProjectActiveStatus  bool
-	imageProjectMap            map[string]uuid.UUID
-
+	imageProjectMap            map[string]map[string]map[uuid.UUID]struct{}
 	defaultParentProjectParsed *uuid.UUID
 }
 
@@ -45,6 +45,7 @@ const (
 	kubernetesCluster  string = "kubernetes-cluster"
 	sbomOperator       string = "sbom-operator"
 	rawImageId         string = "raw-image-id"
+	sbomScopeTagKey    string = "sbom-scope"
 	podNamespaceTagKey string = "namespace"
 )
 
@@ -110,7 +111,14 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 			internal.ConfigKeyDefaultParentProject,
 		)
 	}
-
+	if g.k8sClusterIdMode != "" {
+		switch g.k8sClusterIdMode {
+		case "tag", "tag-namespace", "prefix":
+			break
+		default:
+			return fmt.Errorf("'dtrack-kubernetes-cluster-id-mode' has unknown value: %s", g.k8sClusterId)
+		}
+	}
 	return nil
 }
 
@@ -147,7 +155,8 @@ func (g *DependencyTrackTarget) identifyProjectNameAndVersion(ctx *target.Target
 
 	// If projectNameAnnotationKey is not set or could not be parsed correctly, use image instead
 	if projectName == "" || version == "" {
-		projectName, version = getRepoWithVersion(ctx.Image, g.useShortName, g.k8sClusterId, g.k8sClusterIdMode, ctx.Scope)
+		logrus.Debugf("No custom project name configured (correctly). Falling back to name identification using image.")
+		projectName, version = g.getRepoWithVersion(ctx, g.useShortName, g.k8sClusterId)
 	}
 	return projectName, version
 }
@@ -210,16 +219,28 @@ func (g *DependencyTrackTarget) identifiyParentProjectUuid(ctx *target.TargetCon
 	return g.defaultParentProjectParsed
 }
 
+func (g *DependencyTrackTarget) isTagMode() bool {
+	return strings.HasPrefix(g.k8sClusterIdMode, "tag")
+}
+
+func (g *DependencyTrackTarget) isNamespaceMode() bool {
+	return strings.HasSuffix(g.k8sClusterIdMode, "namespace")
+}
+
+func (g *DependencyTrackTarget) isPrefixMode() bool {
+	return strings.HasPrefix(g.k8sClusterIdMode, "prefix")
+}
+
 func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
-	if ctx.MediaType != "" && ctx.MediaType != oci.CycloneDXJSONMediaType && ctx.MediaType != oci.CycloneDXXMLMediaType {
-		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Scope, ctx.MediaType)
+	if ctx.Attestation.MediaType != "" && ctx.Attestation.MediaType != oci.CycloneDXJSONMediaType && ctx.Attestation.MediaType != oci.CycloneDXXMLMediaType {
+		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Attestation.Scope, ctx.Attestation.MediaType)
 		return nil
 	}
 
 	logrus.Debugf("%v", g)
 	projectName, version := g.identifyProjectNameAndVersion(ctx)
 
-	if ctx.Sbom == "" {
+	if ctx.Attestation.Sbom == "" {
 		logrus.Infof("Empty SBOM - skip image (image=%s)", ctx.Image.ImageID)
 		return nil
 	}
@@ -244,22 +265,22 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	parentUuid := g.identifiyParentProjectUuid(ctx, client)
 	if !skipUpload {
-		logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s)", projectName, version)
+		logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s, parent=%s)", projectName, version, parentUuid)
 		uploadToken, err := client.BOM.PostBom(
 			context.Background(),
-			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, ParentUUID: parentUuid, AutoCreate: true, BOM: ctx.Sbom},
+			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, ParentUUID: parentUuid, AutoCreate: true, BOM: ctx.Attestation.Sbom},
 		)
 		if err != nil {
 			logrus.Errorf("Could not upload BOM: %v", err)
 			return err
 		}
-		logrus.Infof("Uploaded SBOM (upload-token=%s)", uploadToken)
+		logrus.Infof("Uploaded SBOM for project '%s:%s' (upload-token=%s)", projectName, version, uploadToken)
 	}
 
 	if !skipUpload {
 		project, err = client.Project.Lookup(context.Background(), projectName, version)
 		if err != nil {
-			logrus.Errorf("Could not find project: %v", err)
+			logrus.Errorf("Could not find project '%s:%s': %v", projectName, version, err)
 			return err
 		}
 	}
@@ -268,7 +289,16 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		project.ParentRef = &dtrack.ParentRef{UUID: *parentUuid}
 	}
 	kubernetesClusterTag := kubernetesCluster + "=" + g.k8sClusterId
-	if g.k8sClusterIdMode == "tag" {
+	if g.isNamespaceMode() {
+		kubernetesClusterTag += "/" + ctx.Pod.PodNamespace
+	} else {
+		// don't add namespace tag in namespace mode as it is already in clusterId tag
+		podNamespaceTag := podNamespaceTagKey + "=" + ctx.Pod.PodNamespace
+		if !containsTag(project.Tags, podNamespaceTag) {
+			project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
+		}
+	}
+	if g.isTagMode() {
 		if !containsTag(project.Tags, kubernetesClusterTag) {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: kubernetesClusterTag})
 		}
@@ -290,11 +320,12 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	// this caused `LoadImages()` to emit a stale digest and `Remove()` to operate on
 	// the still-live project, deleting it.
 	project.Tags = rotateRawImageIdTag(project.Tags, ctx.Image.ImageID)
-	podNamespaceTag := podNamespaceTagKey + "=" + ctx.Pod.PodNamespace
-	if !containsTag(project.Tags, podNamespaceTag) {
-		project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
+	if ctx.Attestation.Scope != "" && ctx.Attestation.Scope != oci.ScopeAll {
+		scopeTag := sbomScopeTagKey + "=" + ctx.Attestation.Scope
+		if !containsTag(project.Tags, scopeTag) {
+			project.Tags = append(project.Tags, dtrack.Tag{Name: scopeTag})
+		}
 	}
-
 	var reg *regexp.Regexp
 	if g.podLabelTagMatcher != "" {
 		reg, err = regexp.Compile(g.podLabelTagMatcher)
@@ -322,9 +353,15 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	}
 
 	if g.manageProjectActiveStatus {
-		g.deactivateSiblingVersions(client, project)
+		g.deactivateSiblingVersions(client, &project, ctx.Image, ctx.Pod)
 	}
 
+	err = g.addProjectToCache(ctx.Pod.PodNamespace, ctx.Image.ImageID, project)
+
+	return err
+}
+
+func (g *DependencyTrackTarget) addProjectToCache(namespace string, imageId string, project dtrack.Project) error {
 	if g.imageProjectMap == nil {
 		// prepropulate imageProjectMap
 		_, err := g.LoadImages()
@@ -332,40 +369,93 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 			return err
 		}
 	}
-
-	g.imageProjectMap[ctx.Image.ImageID] = project.UUID
+	if _, ok := g.imageProjectMap[imageId]; !ok {
+		g.imageProjectMap[imageId] = make(map[string]map[uuid.UUID]struct{})
+	}
+	if _, ok := g.imageProjectMap[imageId][namespace]; !ok {
+		g.imageProjectMap[imageId][namespace] = make(map[uuid.UUID]struct{})
+	}
+	g.imageProjectMap[imageId][namespace][project.UUID] = struct{}{}
 	return nil
 }
 
 type TemplateData struct {
-	ContainerName string
-	SbomScope     string
+	ContainerNames []string
+	SbomScope      string
+	ImageId        string
+	ImageName      string
+	ShortName      string
+	Repository     string
+	Tag            string
+}
+
+func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo) TemplateData {
+	imageRef, err := parser.Parse(ctx.Image.ImageID)
+	if err != nil {
+		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
+	}
+	var shortName, repository, tag string
+	if imageRef != nil {
+		shortName = imageRef.ShortName()
+		repository = imageRef.Repository()
+	}
+
+	if strings.Index(ctx.Image.Image, "sha256") != 0 {
+		imageRef, err = parser.Parse(ctx.Image.Image)
+		if err != nil {
+			logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.Image)
+		}
+	}
+	tag = imageRef.Tag()
+	cNames := make([]string, 0, len(containers))
+	for _, container := range containers {
+		cNames = append(cNames, container.Name)
+	}
+	return TemplateData{
+		ContainerNames: cNames,
+		SbomScope:      ctx.Attestation.Scope,
+		ImageId:        ctx.Image.ImageID,
+		ImageName:      ctx.Image.Image,
+		ShortName:      shortName,
+		Repository:     repository,
+		Tag:            tag,
+	}
 }
 
 func (g *DependencyTrackTarget) getContainerNameAndVersion(podAnnotationKey string, podAnnotationValue string, expectedAnnotationKey string, ctx *target.TargetContext) (string, string, error) {
 	if strings.HasPrefix(podAnnotationKey, expectedAnnotationKey) {
 		// determine container name and scope from annotation key
-		containerName, scope := getContainerNameAndScopeFromAnnotationKey(podAnnotationKey, "/")
+		containerName := getContainerNameFromAnnotationKey(podAnnotationKey, "/")
 		if podAnnotationValue != "" {
-			// correct container found?
-			for _, c := range ctx.Containers {
-				if (containerName == "" || containerName == c.Name) && scope == ctx.Scope {
-					name, version := getNameAndVersionFromString(podAnnotationValue, ":")
-					tmpl, err := template.New("NameTemplate").Parse(name)
-					if err != nil {
-						return "", "", err
+			var data TemplateData
+			dataFound := false
+			if containerName == "" {
+				data = extractTemplateData(ctx, ctx.Containers)
+				dataFound = true
+			} else {
+				for _, c := range ctx.Containers {
+					if containerName == c.Name {
+						data = extractTemplateData(ctx, []*kubernetes.ContainerInfo{c})
+						dataFound = true
+						break
+					} else {
+						logrus.Debugf("skipping container '%s' as not configured for annotation key '%s'", c.Name, expectedAnnotationKey)
 					}
-					var buf bytes.Buffer
-					data := TemplateData{ContainerName: c.Name, SbomScope: ctx.Scope}
-					if err := tmpl.Execute(&buf, data); err != nil {
-						return "", "", err
-					}
-					name = buf.String()
-					logrus.Infof(`Custom '%s' found at annotation '%s' for container '%s' and scope '%s': '%s:%s'`, expectedAnnotationKey, podAnnotationKey, containerName, scope, name, version)
-					return name, version, nil
-				} else {
-					logrus.Debugf("skipping container '%s' as not configured for annotation key '%s'", c.Name, expectedAnnotationKey)
 				}
+			}
+			if dataFound {
+				tmpl, err := template.New("NameTemplate").Parse(podAnnotationValue)
+				if err != nil {
+					return "", "", err
+				}
+				var buf bytes.Buffer
+				if err := tmpl.Execute(&buf, data); err != nil {
+					return "", "", err
+				}
+				parsedValue := buf.String()
+				name, version := getNameAndVersionFromString(parsedValue, ":")
+				logrus.Infof(`Custom '%s' found at annotation '%s' for container '%s' with scope: '%s': '%s:%s'`, expectedAnnotationKey, podAnnotationKey, containerName, ctx.Attestation.Scope, name, version)
+				return name, version, nil
 			}
 		} else {
 			return "", "", fmt.Errorf(`empty value for annotation '%s' in image '%s'`, podAnnotationKey, ctx.Image.Image)
@@ -374,7 +464,7 @@ func (g *DependencyTrackTarget) getContainerNameAndVersion(podAnnotationKey stri
 	return "", "", nil
 }
 
-func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
+func (g *DependencyTrackTarget) LoadImages() ([]*target.TargetImage, error) {
 	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
@@ -387,14 +477,14 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	// UUIDs of still-live projects (because rotation of raw-image-id was broken,
 	// see ProcessSbom). That caused `Remove()` to operate on live projects.
 	// Resetting here guarantees the map mirrors the current DT state.
-	g.imageProjectMap = make(map[string]uuid.UUID)
+	g.imageProjectMap = make(map[string]map[string]map[uuid.UUID]struct{})
 
 	var (
 		pageNumber = 1
 		pageSize   = 50
 	)
 
-	images := make([]*libk8s.RegistryImage, 0)
+	images := make([]*target.TargetImage, 0)
 	for {
 		projectsPage, err := client.Project.GetAll(context.Background(), dtrack.PageOptions{
 			PageNumber: pageNumber,
@@ -408,31 +498,6 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 		var imageId string
 
 		for _, project := range projectsPage.Items {
-			sbomOperatorPropFound := false
-			imageRelatesToCluster := false
-			imageId = ""
-
-			//extend lookup logic to support `prefix` mode to resolve image association
-			if g.k8sClusterIdMode == "prefix" {
-				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId+"-")
-			}
-
-			for _, tag := range project.Tags {
-				if g.k8sClusterIdMode == "tag" && strings.Index(tag.Name, kubernetesCluster) == 0 {
-					clusterId := string(tag.Name[len(kubernetesCluster)+1:])
-					if clusterId == g.k8sClusterId {
-						imageRelatesToCluster = true
-					}
-				}
-				if tag.Name == sbomOperator {
-					sbomOperatorPropFound = true
-				}
-
-				if strings.Index(tag.Name, rawImageId) == 0 {
-					imageId = string(tag.Name[len(rawImageId)+1:])
-				}
-			}
-
 			// When active-status management is enabled, inactive projects are not
 			// returned so they neither appear as orphans on every cycle nor block
 			// re-scanning of a rolled-back image.
@@ -440,9 +505,59 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 				continue
 			}
 
+			sbomOperatorPropFound := false
+			imageRelatesToCluster := false
+			imageId = ""
+			var namespaces []string
+
+			if g.isPrefixMode() {
+				imageRelatesToCluster = strings.HasPrefix(project.Name, g.k8sClusterId+"-")
+			}
+
+			podNsPrefix := podNamespaceTagKey + "="
+			clusterPrefix := kubernetesCluster + "="
+			rawImgPrefix := rawImageId + "="
+
+			for _, tag := range project.Tags {
+				if strings.HasPrefix(tag.Name, podNsPrefix) {
+					namespaces = append(namespaces, strings.TrimPrefix(tag.Name, podNsPrefix))
+				}
+
+				if g.isTagMode() && strings.HasPrefix(tag.Name, clusterPrefix) {
+					clusterId := strings.TrimPrefix(tag.Name, clusterPrefix)
+
+					if g.isNamespaceMode() {
+						ownClusterPrefix := g.k8sClusterId + "/"
+						if strings.HasPrefix(clusterId, ownClusterPrefix) {
+							imageRelatesToCluster = true
+							ns := strings.TrimPrefix(clusterId, ownClusterPrefix)
+							if ns != "" {
+								namespaces = append(namespaces, ns)
+							}
+
+						}
+					} else if clusterId == g.k8sClusterId {
+						imageRelatesToCluster = true
+					}
+				}
+
+				if tag.Name == sbomOperator {
+					sbomOperatorPropFound = true
+				}
+
+				if strings.HasPrefix(tag.Name, rawImgPrefix) {
+					imageId = strings.TrimPrefix(tag.Name, rawImgPrefix)
+				}
+			}
+
 			if imageRelatesToCluster && sbomOperatorPropFound && len(imageId) > 0 {
-				images = append(images, &libk8s.RegistryImage{ImageID: imageId})
-				g.imageProjectMap[imageId] = project.UUID
+				for _, ns := range namespaces {
+					images = append(images, &target.TargetImage{
+						RegistryImage: &libk8s.RegistryImage{ImageID: imageId},
+						Namespace:     ns,
+					})
+					_ = g.addProjectToCache(ns, imageId, project)
+				}
 			}
 		}
 
@@ -456,9 +571,39 @@ func (g *DependencyTrackTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	return images, nil
 }
 
-func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) error {
+func (g *DependencyTrackTarget) projectDeleted(project *dtrack.Project, img *target.TargetImage) {
+	nsMap, ok := g.imageProjectMap[img.ImageID]
+	if !ok {
+		return
+	}
+	// If Namespace is empty (e.g. prefix mode / non-namespace-aware),
+	// remove the project UUID across all cached namespaces for this image.
+	if img.Namespace == "" {
+		for ns, projects := range nsMap {
+			delete(projects, project.UUID)
+			if len(projects) == 0 {
+				delete(nsMap, ns)
+			}
+		}
+		if len(nsMap) == 0 {
+			delete(g.imageProjectMap, img.ImageID)
+		}
+		return
+	}
+
+	if projects, ok := nsMap[img.Namespace]; ok {
+		delete(projects, project.UUID)
+		if len(projects) == 0 {
+			delete(nsMap, img.Namespace)
+			if len(nsMap) == 0 {
+				delete(g.imageProjectMap, img.ImageID)
+			}
+		}
+	}
+}
+
+func (g *DependencyTrackTarget) removeOrDeactivate(images []*target.TargetImage, remove bool) error {
 	if g.imageProjectMap == nil {
-		// prepropulate imageProjectMap
 		_, err := g.LoadImages()
 		if err != nil {
 			return err
@@ -472,109 +617,46 @@ func (g *DependencyTrackTarget) Remove(images []*libk8s.RegistryImage) error {
 	}
 
 	for _, img := range images {
-		uuid := g.imageProjectMap[img.ImageID]
-		if uuid.String() == "00000000-0000-0000-0000-000000000000" {
-			logrus.Warnf("No project found for imageID: %s", img.ImageID)
-			continue
-		}
-
-		project, err := client.Project.Get(context.Background(), uuid)
-		if err != nil {
-			logrus.Errorf("Could not load project: %v", err)
-			continue
-		}
-
-		currentImageName := fmt.Sprintf("%v:%v", project.Name, project.Version)
-		otherClusterIds := []string{}
-		sbomOperatorPropFound := false
-
-		for _, tag := range project.Tags {
-			if tag.Name == sbomOperator {
-				sbomOperatorPropFound = true
-			}
-		}
-
-		if !sbomOperatorPropFound {
-			continue
-		}
-
-		if g.k8sClusterIdMode != "tag" {
-			// Prefix mode: dt-projects are cluster-specific by name. These are safe to be deleted.
-			logrus.Infof("Image not running in any cluster - removing %v", currentImageName)
-			err := client.Project.Delete(context.Background(), project.UUID)
-			delete(g.imageProjectMap, img.ImageID)
-			if err != nil {
-				logrus.WithError(err).Warnf("Project %s could not be deleted", project.UUID.String())
-			}
-			continue
-		}
-
-		// Tag mode: check all tags, remove the current cluster and aggregate a list of other clusters
-		for _, tag := range project.Tags {
-			if strings.Index(tag.Name, kubernetesCluster) == 0 {
-				clusterId := string(tag.Name[len(kubernetesCluster)+1:])
-				if clusterId == g.k8sClusterId {
-					logrus.Infof("Removing %v=%v tag from project %v", kubernetesCluster, g.k8sClusterId, currentImageName)
-					project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
-					_, err := client.Project.Update(context.Background(), project)
-					delete(g.imageProjectMap, img.ImageID)
-					if err != nil {
-						logrus.WithError(err).Warnf("Project %s could not be updated", project.UUID.String())
-					}
-				} else {
-					otherClusterIds = append(otherClusterIds, clusterId)
+		var projects map[uuid.UUID]struct{}
+		if img.Namespace == "" {
+			projects = make(map[uuid.UUID]struct{})
+			for _, nsProjects := range g.imageProjectMap[img.ImageID] {
+				for projectUUID := range nsProjects {
+					projects[projectUUID] = struct{}{}
 				}
 			}
+		} else {
+			projects = g.imageProjectMap[img.ImageID][img.Namespace]
 		}
 
-		// if not in other cluster delete the project
-		if len(otherClusterIds) == 0 {
-			logrus.Infof("Image not running in any cluster - removing %v", currentImageName)
-			err := client.Project.Delete(context.Background(), project.UUID)
-			delete(g.imageProjectMap, img.ImageID)
-			if err != nil {
-				logrus.WithError(err).Warnf("Project %s could not be deleted", project.UUID.String())
+		for projectUUID := range projects {
+			if projectUUID == uuid.Nil {
+				logrus.Warnf("No project found for imageID: %s", img.ImageID)
+				continue
 			}
+
+			project, err := client.Project.Get(context.Background(), projectUUID)
+			if err != nil {
+				logrus.Errorf("Could not load project: %v", err)
+				continue
+			}
+
+			_ = g.handleProjectDeactivation(client, &project, img, remove)
 		}
 	}
 
 	return nil
 }
 
+func (g *DependencyTrackTarget) Remove(images []*target.TargetImage) error {
+	return g.removeOrDeactivate(images, true)
+}
+
 // Deactivate sets the given projects as inactive (and not latest) instead of
 // deleting them, preserving them for version history. Only invoked when
 // ShouldDeactivateOrphans returns true. All tags are kept.
-func (g *DependencyTrackTarget) Deactivate(images []*libk8s.RegistryImage) error {
-	if g.imageProjectMap == nil {
-		_, err := g.LoadImages()
-		if err != nil {
-			return err
-		}
-	}
-
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
-	if err != nil {
-		logrus.WithError(err).Errorf("failed to init dtrack client")
-		return err
-	}
-
-	for _, img := range images {
-		uuid := g.imageProjectMap[img.ImageID]
-		if uuid.String() == "00000000-0000-0000-0000-000000000000" {
-			logrus.Warnf("No project found for imageID: %s", img.ImageID)
-			continue
-		}
-
-		project, err := client.Project.Get(context.Background(), uuid)
-		if err != nil {
-			logrus.Errorf("Could not load project: %v", err)
-			continue
-		}
-
-		_ = g.handleProjectDeactivation(client, &project)
-	}
-
-	return nil
+func (g *DependencyTrackTarget) Deactivate(images []*target.TargetImage) error {
+	return g.removeOrDeactivate(images, false)
 }
 
 func (g *DependencyTrackTarget) ShouldDeactivateOrphans() bool {
@@ -584,7 +666,7 @@ func (g *DependencyTrackTarget) ShouldDeactivateOrphans() bool {
 // deactivateSiblingVersions sets all other versions of the same project name
 // under the same parent as inactive (and not latest), so that only the currently
 // running version stays active.
-func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client, project dtrack.Project) {
+func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client, project *dtrack.Project, img *libk8s.RegistryImage, pod *kubernetes.PodInfo) {
 	if project.ParentRef == nil {
 		return
 	}
@@ -605,31 +687,27 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 		if sibling.Version == project.Version {
 			continue
 		}
-		_ = g.handleProjectDeactivation(client, &sibling)
+		_ = g.handleProjectDeactivation(client, &sibling, &target.TargetImage{RegistryImage: img, Namespace: pod.PodNamespace}, false)
 	}
 }
 
 func getNameAndVersionFromString(input string, delimiter string) (string, string) {
 	parts := strings.Split(input, delimiter)
-	name := parts[0]
+	name := strings.TrimSpace(parts[0])
 	version := "latest"
 	if len(parts) == 2 {
-		version = parts[1]
+		version = strings.TrimSpace(parts[1])
 	}
 	return name, version
 }
 
-func getContainerNameAndScopeFromAnnotationKey(annotationKey string, delimiter string) (string, string) {
+func getContainerNameFromAnnotationKey(annotationKey string, delimiter string) string {
 	parts := strings.Split(annotationKey, delimiter)
 	containerName := ""
-	scope := ""
-	if len(parts) >= 2 {
+	if len(parts) == 2 {
 		containerName = parts[1]
 	}
-	if len(parts) == 3 {
-		scope = parts[2]
-	}
-	return containerName, scope
+	return containerName
 }
 
 func containsTag(tags []dtrack.Tag, tagString string) bool {
@@ -678,96 +756,135 @@ func rotateRawImageIdTag(tags []dtrack.Tag, currentImageID string) []dtrack.Tag 
 	return append(out, dtrack.Tag{Name: prefix + currentImageID})
 }
 
-func getRepoWithVersion(image *libk8s.RegistryImage, useShortName bool, k8sClusterId string, k8sClusterIdMode string, scope string) (string, string) {
-	imageRef, err := parser.Parse(image.ImageID)
-	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse image %s", image.ImageID)
-		return "", ""
-	}
+func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, useShortName bool, k8sClusterId string) (string, string) {
+	data := extractTemplateData(ctx, ctx.Containers)
 
 	var projectName string
 	//add Cluster prefix to projectName if prefix mode is set
-	if k8sClusterIdMode == "prefix" {
+	if g.isPrefixMode() {
 		projectName = k8sClusterId + "-"
 	}
 	if useShortName {
-		projectName += imageRef.ShortName()
+		projectName += data.ShortName
 	} else {
-		projectName += imageRef.Repository()
+		projectName += data.Repository
 	}
-	if scope != "" {
-		projectName += "-" + scope
-	}
-
-	if strings.Index(image.Image, "sha256") != 0 {
-		imageRef, err = parser.Parse(image.Image)
-		if err != nil {
-			logrus.WithError(err).Errorf("Could not parse image %s", image.Image)
-			return "", ""
-		}
+	if data.SbomScope != "" && data.SbomScope != oci.ScopeAll {
+		projectName += "-" + data.SbomScope
 	}
 
-	version := imageRef.Tag()
-	return projectName, version
+	return projectName, data.Tag
 }
 
 // handleProjectDeactivation removes the current cluster tag in "tag" mode
 // and persists the updated tags. If no other clusters are referencing the
 // project anymore, it patches the project to be inactive (and not latest).
-func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client, project *dtrack.Project) error {
+func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client, project *dtrack.Project, img *target.TargetImage, deleteProject bool) error {
 	if !project.Active {
 		return nil
 	}
 	sbomOperatorPropFound := false
+	podNsPrefix := podNamespaceTagKey + "="
+	remainingNamespacesOnProject := 0
+
+	// 1. Pre-scan tags once to verify ownership and count remaining active namespaces
 	for _, tag := range project.Tags {
 		if tag.Name == sbomOperator {
 			sbomOperatorPropFound = true
-			break
+		} else if img.Namespace != "" && strings.HasPrefix(tag.Name, podNsPrefix) {
+			if strings.TrimPrefix(tag.Name, podNsPrefix) != img.Namespace {
+				remainingNamespacesOnProject++
+			}
 		}
 	}
 	if !sbomOperatorPropFound {
 		return nil
 	}
 
-	if g.k8sClusterIdMode == "tag" {
-		ownClusterTagFound := false
-		otherClusterIds := []string{}
-
-		for _, tag := range project.Tags {
-			if strings.Index(tag.Name, kubernetesCluster) == 0 {
-				clusterId := string(tag.Name[len(kubernetesCluster)+1:])
-				if clusterId == g.k8sClusterId {
-					ownClusterTagFound = true
-					logrus.Infof("Removing %s=%s tag from project '%s:%s'", kubernetesCluster, g.k8sClusterId, project.Name, project.Version)
-					project.Tags = removeTag(project.Tags, kubernetesCluster+"="+g.k8sClusterId)
-				} else {
-					otherClusterIds = append(otherClusterIds, clusterId)
+	// 2. Check if another namespace in our cluster still uses this project (relevant for standard tag mode)
+	sameProjectInOtherNs := remainingNamespacesOnProject > 0
+	if !sameProjectInOtherNs && g.isTagMode() && !g.isNamespaceMode() && img.Namespace != "" {
+		for ns, nsImages := range g.imageProjectMap[img.ImageID] {
+			if ns != img.Namespace {
+				if _, exists := nsImages[project.UUID]; exists {
+					sameProjectInOtherNs = true
+					break
 				}
 			}
-		}
-
-		if len(otherClusterIds) > 0 {
-			if ownClusterTagFound {
-				_, err := client.Project.Update(context.Background(), *project)
-				if err != nil {
-					logrus.WithError(err).Warnf("Project tags could not be updated for project '%s:%s'", project.Name, project.Version)
-					return err
-				}
-			}
-			return nil
 		}
 	}
 
-	// No other clusters are using it (or tag mode is disabled) -> deactivate
+	expectedClusterId := g.k8sClusterId
+	if g.isNamespaceMode() {
+		expectedClusterId = g.k8sClusterId + "/" + img.Namespace
+	}
+	clusterPrefix := kubernetesCluster + "="
+
+	// 3. Single-pass tag filtering for both "namespace=" and "kubernetes-cluster=" tags
+	tagsModified := false
+	stillInUse := false
+	filteredTags := make([]dtrack.Tag, 0, len(project.Tags))
+
+	for _, tag := range project.Tags {
+		// Remove stale "namespace=<ns>" tag
+		if img.Namespace != "" && tag.Name == podNsPrefix+img.Namespace {
+			tagsModified = true
+			logrus.Infof("Removing %s tag from project '%s:%s'", tag.Name, project.Name, project.Version)
+			continue
+		}
+
+		// Handle "kubernetes-cluster=" tags in tag mode
+		if g.isTagMode() && strings.HasPrefix(tag.Name, clusterPrefix) {
+			clusterId := strings.TrimPrefix(tag.Name, clusterPrefix)
+			if !sameProjectInOtherNs && clusterId == expectedClusterId {
+				tagsModified = true
+				logrus.Infof("Removing %s tag from project '%s:%s'", tag.Name, project.Name, project.Version)
+				continue
+			}
+			// Another cluster (or our own cluster via another active namespace) still holds a tag
+			stillInUse = true
+		}
+
+		filteredTags = append(filteredTags, tag)
+	}
+	project.Tags = filteredTags
+
+	// 4. only update tags if modified AND the project won't be deleted right after
+	if tagsModified && (!deleteProject || stillInUse) {
+		if _, err := client.Project.Update(context.Background(), *project); err != nil {
+			logrus.WithError(err).Warnf("Project tags could not be updated for project '%s:%s'", project.Name, project.Version)
+			return err
+		}
+	}
+
+	g.projectDeleted(project, img)
+
+	if stillInUse {
+		return nil
+	}
+
+	// 5. No other clusters/namespaces are using it -> deactivate or delete
+	if deleteProject {
+		logrus.Infof("Deleting project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
+		if err := client.Project.Delete(context.Background(), project.UUID); err != nil {
+			logrus.WithError(err).Warnf("Project could not be deleted '%s:%s'", project.Name, project.Version)
+			return err
+		}
+		return nil
+	}
+
 	logrus.Infof("Deactivating project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
-	_, err := client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
+	if _, err := client.Project.Patch(context.Background(), project.UUID, dtrack.Project{
 		Active:   false,
 		IsLatest: dtrack.OptionalBoolOf(false),
-	})
-	if err != nil {
+	}); err != nil {
 		logrus.WithError(err).Warnf("Project '%s:%s' could not be deactivated", project.Name, project.Version)
 		return err
 	}
 
 	return nil
+}
+
+func (g *DependencyTrackTarget) IsNamespaceAware() bool {
+	return !g.isPrefixMode()
 }

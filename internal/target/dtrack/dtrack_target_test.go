@@ -11,6 +11,7 @@ import (
 	dtrack "github.com/DependencyTrack/client-go"
 	libk8s_real "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
+	"github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/google/uuid"
 	"github.com/sirupsen/logrus"
@@ -88,7 +89,9 @@ func TestGetRepoWithVersion(t *testing.T) {
 
 	for _, tt := range tests {
 		t.Run(tt.name, func(t *testing.T) {
-			name, version := getRepoWithVersion(tt.image, tt.useShortName, tt.k8sClusterId, tt.k8sClusterIdMode, tt.scope)
+			dtrackTarget := &DependencyTrackTarget{k8sClusterIdMode: tt.k8sClusterIdMode}
+			ctx := &target.TargetContext{Image: tt.image, Attestation: &oci.AttestationSbom{Scope: tt.scope}}
+			name, version := dtrackTarget.getRepoWithVersion(ctx, tt.useShortName, tt.k8sClusterId)
 			assert.Equal(t, tt.expectedName, name)
 			assert.Equal(t, tt.expectedVersion, version)
 		})
@@ -132,19 +135,11 @@ func TestGetNameAndVersionFromString(t *testing.T) {
 }
 
 func TestGetContainerNameFromAnnotationKey(t *testing.T) {
-	c, s := getContainerNameAndScopeFromAnnotationKey("prefix/container", "/")
+	c := getContainerNameFromAnnotationKey("prefix/container", "/")
 	assert.Equal(t, "container", c)
-	assert.Equal(t, "", s)
 
-	c, s = getContainerNameAndScopeFromAnnotationKey("container", "/")
+	c = getContainerNameFromAnnotationKey("container", "/")
 	assert.Equal(t, "", c)
-	assert.Equal(t, "", s)
-}
-
-func TestGetScopeFromAnnotationKey(t *testing.T) {
-	c, s := getContainerNameAndScopeFromAnnotationKey("prefix/container/scope", "/")
-	assert.Equal(t, "container", c)
-	assert.Equal(t, "scope", s)
 }
 
 func TestNewDependencyTrackTarget(t *testing.T) {
@@ -269,11 +264,10 @@ func TestValidateConfig(t *testing.T) {
 
 func TestProcessSbomUnsupportedMediaType(t *testing.T) {
 	ctx := &target.TargetContext{
-		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
-		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
-		Sbom:       "{}",
-		MediaType:  "unsupported",
+		Image:       &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:         &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Attestation: &oci.AttestationSbom{MediaType: "unsupported"},
 	}
 	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
 	err := g.ProcessSbom(ctx)
@@ -301,10 +295,10 @@ func TestProcessSbomMinimal(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
-		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
-		Sbom:       "{}",
+		Image:       &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:         &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Attestation: &oci.AttestationSbom{},
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -382,13 +376,13 @@ func TestProcessSbomParentProject(t *testing.T) {
 			err := g.Initialize()
 			assert.NoError(t, err)
 			// Pre-populate so LoadImages is skipped during ProcessSbom.
-			g.imageProjectMap = map[string]uuid.UUID{}
+			g.imageProjectMap = make(map[string]map[string]map[uuid.UUID]struct{})
 
 			ctx := &target.TargetContext{
-				Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-				Pod:        &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
-				Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
-				Sbom:       "{}",
+				Image:       &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+				Pod:         &libk8s_real.PodInfo{PodNamespace: "default", Annotations: map[string]string{"my.parent.project/alpine": tt.annotationValue}},
+				Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+				Attestation: &oci.AttestationSbom{Sbom: "{}"},
 			}
 
 			err = g.ProcessSbom(ctx)
@@ -419,9 +413,7 @@ func TestRemoveMinimal(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	images := []*liboci.RegistryImage{
-		{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-	}
+	images := []*target.TargetImage{{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"}}}
 
 	_ = g.Remove(images)
 }
@@ -500,7 +492,8 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 				"tags": [
 					{"name": "kubernetes-cluster=my-cluster"},
 					{"name": "sbom-operator"},
-					{"name": "raw-image-id=alpine@sha256:new"}
+					{"name": "raw-image-id=alpine@sha256:new"},
+					{"name": "namespace=default"}
 				]
 			}]`))
 			return
@@ -518,16 +511,21 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Seed a stale entry from a previous reconcile cycle.
-	g.imageProjectMap = map[string]uuid.UUID{
-		"alpine@sha256:OLD": uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372"),
+	staleUUID := uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372")
+	g.imageProjectMap = map[string]map[string]map[uuid.UUID]struct{}{
+		"alpine@sha256:OLD": {
+			"default": {staleUUID: {}},
+		},
 	}
 
 	images, err := g.LoadImages()
 	assert.NoError(t, err)
 
 	// Returned set reflects the current DT state only.
-	assert.Len(t, images, 1)
-	assert.Equal(t, "alpine@sha256:new", images[0].ImageID)
+	if assert.Len(t, images, 1) {
+		assert.Equal(t, "alpine@sha256:new", images[0].ImageID)
+		assert.Equal(t, "default", images[0].Namespace)
+	}
 
 	// The stale entry must be gone; only the current digest remains.
 	_, staleStillPresent := g.imageProjectMap["alpine@sha256:OLD"]
@@ -535,7 +533,10 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 
 	currentUUID, currentPresent := g.imageProjectMap["alpine@sha256:new"]
 	assert.True(t, currentPresent)
-	assert.Equal(t, "8c940608-8e62-431a-ac5d-2092b7c41372", currentUUID.String())
+	assert.Len(t, currentUUID, 1)
+	assert.Equal(t, map[string]map[uuid.UUID]struct{}{
+		"default": {uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372"): {}},
+	}, currentUUID)
 }
 
 func TestLoadImagesTagMode(t *testing.T) {
@@ -614,10 +615,10 @@ func TestProcessSbomReactivateWithoutUpload(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:      &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"},
-		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
-		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
-		Sbom:       "{}",
+		Image:       &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"},
+		Pod:         &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Attestation: &oci.AttestationSbom{},
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -687,10 +688,10 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 	assert.NoError(t, err)
 
 	ctx := &target.TargetContext{
-		Image:      &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
-		Pod:        &libk8s_real.PodInfo{PodNamespace: "default"},
-		Containers: []*libk8s_real.ContainerInfo{{Name: "alpine"}},
-		Sbom:       "{}",
+		Image:       &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:         &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Attestation: &oci.AttestationSbom{Sbom: "{}"},
 	}
 
 	_ = g.ProcessSbom(ctx)
@@ -741,16 +742,18 @@ func TestDeactivate(t *testing.T) {
 	assert.NoError(t, err)
 
 	// Seed the map directly with one active and one already-inactive project.
-	g.imageProjectMap = map[string]uuid.UUID{
-		"alpine:3.13": uuid.MustParse(projectUUID),
-		"alpine:3.12": uuid.MustParse(inactiveUUID),
+	activeProjectUUID := uuid.MustParse(projectUUID)
+	inactiveProjectUUID := uuid.MustParse(inactiveUUID)
+	g.imageProjectMap = map[string]map[string]map[uuid.UUID]struct{}{
+		"alpine:3.13": {"": {activeProjectUUID: {}}},
+		"alpine:3.12": {"": {inactiveProjectUUID: {}}},
 	}
 
-	images := []*liboci.RegistryImage{
-		{ImageID: "alpine:3.13", Image: "alpine:3.13"},
-		{ImageID: "alpine:3.12", Image: "alpine:3.12"},
+	targetImages := []*target.TargetImage{
+		{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"}},
+		{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.12", Image: "alpine:3.12"}},
 	}
-	_ = g.Deactivate(images)
+	_ = g.Deactivate(targetImages)
 	// Only the active project should be patched as inactive; the already-inactive
 	// one must be skipped (no 304 PATCH).
 	assert.Equal(t, 1, patchCount, "only the active project should be patched as inactive")
@@ -780,7 +783,8 @@ func TestDeactivateTagModeMultiCluster(t *testing.T) {
 					{"name": "kubernetes-cluster=my-cluster"},
 					{"name": "kubernetes-cluster=other-cluster"},
 					{"name": "sbom-operator"},
-					{"name": "raw-image-id=alpine:3.13"}
+					{"name": "raw-image-id=alpine:3.13"},
+					{"name": "namespace="}
 				]
 			}]`))
 		case r.URL.Path == "/api/v1/project/"+projectUUID && r.Method == "GET":
@@ -811,8 +815,8 @@ func TestDeactivateTagModeMultiCluster(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	images := []*liboci.RegistryImage{{ImageID: "alpine:3.13", Image: "alpine:3.13"}}
-	_ = g.Deactivate(images)
+	targetImages := []*target.TargetImage{{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"}}}
+	_ = g.Deactivate(targetImages)
 
 	// Project must NOT be patched as inactive because another cluster still uses it.
 	assert.Equal(t, 0, patchCount, "project must not be deactivated while another cluster uses it")
@@ -839,14 +843,16 @@ func TestLoadImagesSkipsInactiveProjects(t *testing.T) {
 				 "tags": [
 					{"name": "kubernetes-cluster=my-cluster"},
 					{"name": "sbom-operator"},
-					{"name": "raw-image-id=alpine:3.14"}
+					{"name": "raw-image-id=alpine:3.14"},
+					{"name": "namespace=default"}
 				 ]},
 				{"name": "library/alpine", "version": "3.13", "active": false,
 				 "uuid": "` + inactiveUUID + `",
 				 "tags": [
 					{"name": "kubernetes-cluster=my-cluster"},
 					{"name": "sbom-operator"},
-					{"name": "raw-image-id=alpine:3.13"}
+					{"name": "raw-image-id=alpine:3.13"},
+					{"name": "namespace=default"}
 				 ]}
 			]`))
 			return
@@ -902,7 +908,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 					},
 				},
 				{
-					// Szenario 1: Läuft nur in live_eu -> darf von approval_eu NICHT angefasst werden
+					// Scenario 1: Runs only in live_eu -> MUST NOT been touched by approval_eu
 					UUID:      siblingOtherClusterOnlyUUID,
 					Name:      "order-service-container",
 					Version:   "1.0.0",
@@ -914,7 +920,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 					},
 				},
 				{
-					// Szenario 2: Läuft in approval_eu UND approval_nar -> Tag approval_eu entfernen (POST), bleibt Active: true
+					// Scenario 2: Runs in approval_eu AND approval_nar -> delete tag approval_eu (POST), stays active: true
 					UUID:      siblingSharedClusterUUID,
 					Name:      "order-service-container",
 					Version:   "1.1.0-rc1",
@@ -927,7 +933,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 					},
 				},
 				{
-					// Szenario 3: Läuft NUR in approval_eu -> wird deaktiviert (PATCH)
+					// Scenario 3: Runs ONLY in approval_eu -> will be deactivated (PATCH)
 					UUID:      siblingOwnClusterOnlyUUID,
 					Name:      "order-service-container",
 					Version:   "1.0.9",
@@ -979,16 +985,211 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 		ParentRef: &dtrack.ParentRef{UUID: parentUUID},
 	}
 
-	target.deactivateSiblingVersions(client, currentProject)
+	target.deactivateSiblingVersions(client, &currentProject, &liboci.RegistryImage{}, &libk8s_real.PodInfo{})
 
-	// Szenario 2 (siblingSharedClusterUUID): Nur Tag-Update per POST, bleibt aktiv
-	require.Len(t, updatedProjects, 1)
+	// Scenario 2 (siblingSharedClusterUUID): Only Tag-Update via POST, is active
+	require.Len(t, updatedProjects, 2)
 	shared := updatedProjects[0]
 	assert.Equal(t, siblingSharedClusterUUID, shared.UUID)
 	assert.True(t, shared.Active)
 	assert.False(t, containsTag(shared.Tags, "kubernetes-cluster=approval_eu"))
 	assert.True(t, containsTag(shared.Tags, "kubernetes-cluster=approval_nar"))
 
-	// Szenario 3 (siblingOwnClusterOnlyUUID): Deaktiviert per PATCH (und Szenario 1 wurde komplett ignoriert)
+	// Scenario 3 (siblingOwnClusterOnlyUUID): Deactivates via PATCH (and scenario 1 was ignored)
 	assert.Equal(t, []string{siblingOwnClusterOnlyUUID.String()}, patchedUUIDs)
+}
+
+func TestPrefixMode_RemoveAndDeactivateOrphans(t *testing.T) {
+	projectUUID := uuid.MustParse("8c940608-8e62-431a-ac5d-2092b7c41372")
+	const imageID = "alpine@sha256:prefix123"
+
+	tests := []struct {
+		name           string
+		removeAction   bool // true = Remove(), false = Deactivate()
+		expectedMethod string
+	}{
+		{
+			name:           "Prefix mode Remove deletes orphaned project seeded under real namespace tag",
+			removeAction:   true,
+			expectedMethod: http.MethodDelete,
+		},
+		{
+			name:           "Prefix mode Deactivate patches orphaned project seeded under real namespace tag",
+			removeAction:   false,
+			expectedMethod: http.MethodPatch,
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			actionCalled := false
+
+			ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+				w.Header().Set("Content-Type", "application/json")
+
+				// 1. LoadImages endpoint: returns a prefix-mode project with a real namespace tag
+				if r.Method == http.MethodGet && r.URL.Path == "/api/v1/project" {
+					w.WriteHeader(http.StatusOK)
+					_, _ = w.Write([]byte(`[{
+						"uuid": "` + projectUUID.String() + `",
+						"name": "my-cluster-alpine",
+						"version": "3.18",
+						"active": true,
+						"tags": [
+						{"name": "namespace=production"},
+						{"name": "sbom-operator"},
+						{"name": "raw-image-id=` + imageID + `"}
+						]
+						}]`))
+					return
+				}
+
+				// 2. Single project GET during removeOrDeactivate
+				if r.Method == http.MethodGet && r.URL.Path == "/api/v1/project/"+projectUUID.String() {
+					w.WriteHeader(http.StatusOK)
+					_, _ = w.Write([]byte(`{
+						"uuid": "` + projectUUID.String() + `",
+						"name": "my-cluster-alpine",
+						"version": "3.18",
+						"active": true,
+						"tags": [
+						{"name": "namespace=production"},
+						{"name": "sbom-operator"},
+						{"name": "raw-image-id=` + imageID + `"}
+						]
+						}`))
+					return
+				}
+
+				// 3. Verify DELETE or PATCH call on the project UUID
+				if r.Method == tt.expectedMethod && r.URL.Path == "/api/v1/project/"+projectUUID.String() {
+					actionCalled = true
+					w.WriteHeader(http.StatusOK)
+					return
+				}
+
+				if r.URL.Path == "/api/v1/version" {
+					w.WriteHeader(http.StatusOK)
+					_, _ = w.Write([]byte(`{"version": "4.10.0"}`))
+					return
+				}
+
+				w.WriteHeader(http.StatusOK)
+				_, _ = w.Write([]byte(`{"totalCount": "1"}`))
+			}))
+			defer ts.Close()
+
+			// Initialize target in "prefix" mode
+			g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "prefix", "", "", "", true, !tt.removeAction)
+			require.NoError(t, g.Initialize())
+
+			// Precondition: prefix mode must report IsNamespaceAware() == false
+			assert.False(t, g.IsNamespaceAware(), "Prefix mode must not be namespace-aware")
+
+			// Step 1: LoadImages populates imageProjectMap under the real namespace ("production"), NOT ""
+			loaded, err := g.LoadImages()
+			require.NoError(t, err)
+			require.Len(t, loaded, 1)
+			require.Contains(t, g.imageProjectMap[imageID], "production")
+
+			// Step 2: Processor passes Namespace == "" for non-namespace-aware targets
+			orphanInput := []*target.TargetImage{
+				{
+					RegistryImage: &liboci.RegistryImage{ImageID: imageID},
+					Namespace:     "", // Crucial: simulates handleOrphanImages / globalOrphans behavior
+				},
+			}
+
+			if tt.removeAction {
+				err = g.Remove(orphanInput)
+			} else {
+				err = g.Deactivate(orphanInput)
+			}
+			require.NoError(t, err)
+
+			// Step 3: Verify DT API was called and local cache entry was cleaned up
+			assert.True(t, actionCalled, "Expected %s request to be sent to Dependency-Track for prefix-mode project", tt.expectedMethod)
+			assert.NotContains(t, g.imageProjectMap, imageID, "Expected project entry to be removed from imageProjectMap after cleanup")
+		})
+	}
+}
+
+func TestHandleProjectDeactivation_TagMode_RemovesNamespaceTagAndProtectsUnscannedNamespace(t *testing.T) {
+	projectUUID := uuid.New()
+	updateCalled := false
+	deactivateOrDeleteCalled := false
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+
+		// Expect Project.Update (PUT /api/v1/project) to persist removal of "namespace=ns-a"
+		if r.Method == http.MethodPost && r.URL.Path == "/api/v1/project" {
+			updateCalled = true
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write([]byte(`{"uuid": "` + projectUUID.String() + `"}`))
+			return
+		}
+
+		// Neither DELETE nor PATCH (deactivate) must be called while ns-b is still on the project tags!
+		if (r.Method == http.MethodDelete || r.Method == http.MethodPatch) && r.URL.Path == "/api/v1/project/"+projectUUID.String() {
+			deactivateOrDeleteCalled = true
+			w.WriteHeader(http.StatusOK)
+			return
+		}
+
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte(`{"version": "4.10.0"}`))
+	}))
+	defer ts.Close()
+
+	// Initialize in standard "tag" mode (NOT tag-namespace mode)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false)
+	require.NoError(t, g.Initialize())
+
+	// Scenario: In-memory cache ONLY knows about "ns-a" (simulating incomplete cache / unscanned "ns-b")
+	g.imageProjectMap = map[string]map[string]map[uuid.UUID]struct{}{
+		"alpine@sha256:shared": {
+			"ns-a": {projectUUID: {}},
+		},
+	}
+
+	// However, the DT project itself has tags for BOTH "ns-a" and "ns-b"
+	project := &dtrack.Project{
+		UUID:    projectUUID,
+		Name:    "alpine",
+		Version: "3.18",
+		Active:  true,
+		Tags: []dtrack.Tag{
+			{Name: "kubernetes-cluster=my-cluster"},
+			{Name: podNamespaceTagKey + "=ns-a"},
+			{Name: podNamespaceTagKey + "=ns-b"},
+			{Name: "sbom-operator"},
+			{Name: "raw-image-id=alpine@sha256:shared"},
+		},
+	}
+
+	imgToRemove := &target.TargetImage{
+		RegistryImage: &liboci.RegistryImage{ImageID: "alpine@sha256:shared"},
+		Namespace:     "ns-a",
+	}
+
+	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	require.NoError(t, err)
+
+	err = g.handleProjectDeactivation(client, project, imgToRemove, false)
+	require.NoError(t, err)
+
+	// Verify "namespace=ns-a" was removed and Project.Update was called
+	assert.True(t, updateCalled, "Expected Project.Update to be called to remove stale namespace=ns-a tag")
+
+	remainingTags := make([]string, 0, len(project.Tags))
+	for _, tag := range project.Tags {
+		remainingTags = append(remainingTags, tag.Name)
+	}
+	assert.NotContains(t, remainingTags, podNamespaceTagKey+"=ns-a", "Stale namespace tag must be removed")
+	assert.Contains(t, remainingTags, podNamespaceTagKey+"=ns-b", "Other active namespace tag must be kept")
+	assert.Contains(t, remainingTags, "kubernetes-cluster=my-cluster", "Cluster tag must be kept while ns-b is active")
+
+	// Verify project was NOT prematurely deactivated despite ns-b missing from local imageProjectMap
+	assert.False(t, deactivateOrDeleteCalled, "Project must not be deactivated while another namespace tag exists on the project")
 }

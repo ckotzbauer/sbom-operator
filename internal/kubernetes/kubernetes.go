@@ -137,13 +137,13 @@ func (client *KubeClient) InjectPullSecrets(pod libk8s.PodInfo) {
 	}
 }
 
-func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.PodInfo, []*oci.RegistryImage) {
+func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabelSelector string) ([]libk8s.PodInfo, map[string][]*oci.RegistryImage) {
 	podInfos := client.Client.LoadPodInfos(namespaces, podLabelSelector)
-	allImages := make([]*oci.RegistryImage, 0)
+	allImages := make(map[string][]*oci.RegistryImage, 0)
 
 	for _, pod := range podInfos {
 		for _, container := range pod.Containers {
-			allImages = append(allImages, container.Image)
+			allImages[pod.PodNamespace] = append(allImages[pod.PodNamespace], container.Image)
 		}
 	}
 

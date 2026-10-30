@@ -3,15 +3,13 @@ package target
 import (
 	"testing"
 
+	"github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/stretchr/testify/assert"
 )
 
 func TestTargetContextWithAttestation(t *testing.T) {
-	ctx := NewContext("dummy-sbom", nil, nil)
-	assert.Empty(t, ctx.Scope)
-	assert.Empty(t, ctx.MediaType)
-
-	ctx.WithAttestation("application", "application/vnd.cyclonedx+json")
-	assert.Equal(t, "application", ctx.Scope)
-	assert.Equal(t, "application/vnd.cyclonedx+json", ctx.MediaType)
+	ctx := NewContext(nil, nil, &oci.AttestationSbom{Sbom: "dummy-sbom", Scope: "application", MediaType: oci.GetMediaType(oci.CycloneDXJSONMediaType)})
+	assert.Equal(t, "application", ctx.Attestation.Scope)
+	assert.Equal(t, oci.GetMediaType("application/vnd.cyclonedx+json"), ctx.Attestation.MediaType)
+	assert.Equal(t, "dummy-sbom", ctx.Attestation.Sbom)
 }

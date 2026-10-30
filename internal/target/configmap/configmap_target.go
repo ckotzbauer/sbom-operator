@@ -29,7 +29,7 @@ func (g *ConfigMapTarget) Initialize() error {
 }
 
 func (g *ConfigMapTarget) ProcessSbom(ctx *target.TargetContext) error {
-	b := []byte(ctx.Sbom)
+	b := []byte(ctx.Attestation.Sbom)
 	compressed, err := libstandard.Compress(b)
 	if err != nil {
 		logrus.WithError(err).Error("Could not compress data.")
@@ -49,17 +49,17 @@ func (g *ConfigMapTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return err
 }
 
-func (g *ConfigMapTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
+func (g *ConfigMapTarget) LoadImages() ([]*target.TargetImage, error) {
 	configMaps, err := g.k8s.ListConfigMaps()
 	if err != nil {
 		logrus.WithError(err).Error("Could not load configmaps.")
 		return nil, err
 	}
 
-	images := make([]*libk8s.RegistryImage, 0)
+	images := make([]*target.TargetImage, 0)
 	for _, c := range configMaps {
 		if imageId, ok := c.Annotations[fmt.Sprintf(kubernetes.AnnotationTemplate, "image-id")]; ok {
-			images = append(images, &libk8s.RegistryImage{ImageID: imageId})
+			images = append(images, &target.TargetImage{RegistryImage: &libk8s.RegistryImage{ImageID: imageId}, Namespace: c.Namespace})
 		} else {
 			logrus.Warnf("ConfigMap %s/%s has no image-id annotation.", c.Namespace, c.Name)
 		}
@@ -68,7 +68,7 @@ func (g *ConfigMapTarget) LoadImages() ([]*libk8s.RegistryImage, error) {
 	return images, nil
 }
 
-func (g *ConfigMapTarget) Remove(allImages []*libk8s.RegistryImage) error {
+func (g *ConfigMapTarget) Remove(allImages []*target.TargetImage) error {
 	configMaps, err := g.k8s.ListConfigMaps()
 	if err != nil {
 		logrus.WithError(err).Error("failed to load configmaps")
@@ -77,14 +77,20 @@ func (g *ConfigMapTarget) Remove(allImages []*libk8s.RegistryImage) error {
 
 	for _, i := range allImages {
 		for _, cm := range configMaps {
-			if imageId, ok := cm.Annotations[fmt.Sprintf(kubernetes.AnnotationTemplate, "image-id")]; ok && imageId == i.ImageID {
-				err = g.k8s.DeleteConfigMap(cm)
-				if err != nil {
-					logrus.WithError(err).Errorf("Could not delete configmap from imageID %s.", i.ImageID)
+			if cm.Namespace == i.Namespace {
+				if imageId, ok := cm.Annotations[fmt.Sprintf(kubernetes.AnnotationTemplate, "image-id")]; ok && imageId == i.ImageID {
+					err = g.k8s.DeleteConfigMap(cm)
+					if err != nil {
+						logrus.WithError(err).Errorf("Could not delete configmap from imageID %s.", i.ImageID)
+					}
 				}
 			}
 		}
 	}
 
 	return nil
+}
+
+func (g *ConfigMapTarget) IsNamespaceAware() bool {
+	return true
 }

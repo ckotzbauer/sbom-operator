@@ -45,6 +45,7 @@ type Config struct {
 	StripCpes                        bool     `yaml:"stripCpes" env:"SBOM_STRIP_CPES" flag:"strip-cpes"`
 	Verbosity                        string   `env:"SBOM_VERBOSITY" flag:"verbosity"`
 	FetchOciAttestations             bool     `yaml:"fetchOciAttestations" env:"FETCH_OCI_ATTESTATIONS" flag:"fetch-oci-attestations"`
+	InsecureHttpRegistry             bool     `yaml:"insecureHttpRegistry" env:"INSECURE_HTTP_REGISTRY" flag:"insecure-http-registry"`
 }
 
 var (
@@ -82,6 +83,7 @@ var (
 	ConfigKeyKubernetesClusterId                             = "kubernetes-cluster-id"
 	ConfigKeyJobImage                                        = "job-image"
 	ConfigKeyFetchOciAttestations                            = "fetch-oci-attestations"
+	ConfigKeyInsecureHttpRegistry                            = "insecure-http-registry"
 	/* #nosec */
 	ConfigKeyJobImagePullSecret = "job-image-pull-secret"
 	ConfigKeyJobTimeout         = "job-timeout"

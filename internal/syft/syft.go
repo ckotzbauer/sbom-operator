@@ -28,6 +28,7 @@ import (
 	"github.com/anchore/syft/syft/sbom"
 	"github.com/anchore/syft/syft/source"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
+	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/sirupsen/logrus"
@@ -68,9 +69,11 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	if err != nil {
 		return "", err
 	}
-	opts := image.RegistryOptions{Credentials: internaloci.ResolveCredentials(img, s.proxyRegistryMap)}
+	opts := image.RegistryOptions{InsecureUseHTTP: internal.OperatorConfig.InsecureHttpRegistry, Credentials: internaloci.ResolveCredentials(img, s.proxyRegistryMap)}
 	src, err := getSource(context.Background(), &opts, img.ImageID)
-
+	if err != nil {
+		src, err = getSource(context.Background(), &opts, img.Image)
+	}
 	// revert image info to the original value - we want to register with original names
 	img.Image = oriImage
 	img.ImageID = oriImageID

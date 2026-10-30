@@ -113,7 +113,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackApiKey, "", "Dependency-Track API key")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackLabelTagMatcher, "", "Dependency-Track Pod-Label-Tag matcher regex")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDefaultParentProject, "", "Dependency-Track: Dependency-Track: Default parent project UUID")
-	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackKubernetesClusterIdMode, "tag", "Dependency-Track: Kubernetes Cluster ID mode (tag|prefix)")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackKubernetesClusterIdMode, "tag", "Dependency-Track: Kubernetes Cluster ID mode (tag|tag-namespace|prefix)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackParentProjectAnnotationKey, "", "Dependency-Track: kubernetes annotation-key for setting parent project")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDependencyTrackDtrackProjectNameAnnotationKey, "", "Dependency-Track: kubernetes annotation-key for setting custom project name")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDependencyTrackUseShortName, false, "Dependency-Track: use short image name (without registry) for project names")
@@ -130,6 +130,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().String(internal.ConfigKeyFormatVersion, "", syft.FormatVersionHelp())
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyStripCpes, false, "Strip CPE attributes from all components in generated SBOMs. Disables Syft CPE generation and removes cataloger-sourced CPEs.")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyFetchOciAttestations, false, "Fetch additional CycloneDX SBOMs from OCI attestations")
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyInsecureHttpRegistry, false, "Use HTTP instead of HTTPS for fetching data from registry (OCI)")
 	return rootCmd
 }
 
@@ -153,11 +154,6 @@ func warnAboutDtrackCycloneDXDefault(config *internal.Config) {
 	if formatVersion.Family == "" {
 		return
 	}
-
-	logrus.WithFields(logrus.Fields{
-		"sbom_family":  formatVersion.Family,
-		"sbom_version": formatVersion.Version,
-	}).Warn("Dependency-Track releases through 5.0.x reject the bundled default CycloneDX version; set --format-version=1.6")
 }
 
 func printVersion() {
