@@ -91,7 +91,7 @@ oras attach "localhost:5000/my-nginx:dev" \
   --annotation "dev.sigstore.sbom.scope=application" 
   sbom.json:application/vnd.cyclonedx+json
 ```
-.
+
 Currently only Dependency-Track target would support additional SBOMs to be uploaded. How to map the `sbom.scope` to the project name can be found in the Dependency-Track section.
 
 ### Format Versions
@@ -215,6 +215,7 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-client-key-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Key filepath when using mTLS to connect to dtrack |
 | `dtrack-default-parent-project` | `false` | `""` | The default parent project UUID that should be used. This is overwritten in case a parent project annotation is set and found |
 | `dtrack-use-short-name` | `false` | `""` | Use short image name (without registry) for project names |
+| `dtrack-templated-project-name` | `false` | `""` | The (default) project name using a go template. |
 | `dtrack-kubernetes-cluster-id-mode`| `false`| `"tag"` | Mode for using the kubernetes-cluster-id. Options: `"tag"` (adds cluster ID as a project tag) or `"prefix"` (prefixes the project name with the cluster ID). `"tag-namespace"` (Adds cluster ID and namespace as project tag, like `<kubernetes-cluster-id>/<cluster-namespace>`. Needed for a multi-namespace, multi-cluster setup, where the namespace in different clusters are same) |
 | `dtrack-parent-project-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set parent project automatically, e.g. "my.pod.annotation" |
 | `dtrack-project-name-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set custom dtrack project name automatically, e.g. "my.pod.annotation" |
@@ -226,41 +227,97 @@ When there's no image-tag, but a digest, the digest is used as project-version.
 The `autoCreate` option of DT is used. You have to set the `--format` flag to `cyclonedx` with this target.
 
 ---
-#### Custom dtrack project name:
+### Project Name & Version Resolution (Templating & Annotations)
+ 
+For the Dependency-Track target, the operator resolves the project name and version (`<name>:<version>`) using a **4-stage enrichment pipeline**. Each stage has access to the resolved name and version from the previous stage via `{{.PredefinedName}}` and `{{.PredefinedVersion}}`.
+ 
+#### Resolution Hierarchy (Lowest to Highest Priority)
+ 
+1. **Image Fallback (Default):**
+   Extracts the repository name (or short name if `--dtrack-use-short-name` is enabled) and image tag/digest.
+2. **Global Cluster Template (`--dtrack-templated-project-name` / `SBOM_DTRACK_TEMPLATE_PROJECT_NAME`):**
+   If configured, evaluates a Go `text/template` across all images in the cluster.
+3. **Pod-Wide Annotation (`--dtrack-project-name-annotation-key`):**
+   Evaluates the annotation `<annotation-key>` on the Pod. Applies to all containers in the Pod unless overridden by a container-specific annotation.
+4. **Container-Specific Annotation (`<annotation-key>/<container-name>`):**
+   Evaluates the annotation targeting a specific container within the Pod. **Always takes precedence** over the pod-wide annotation.
+ 
+> **Note:** Both the global cluster configuration and the pod annotations support Go [`text/template`](https://pkg.go.dev/text/template) syntax and expect the rendered output in the format `<project-name>:<project-version>`. If a stage fails to parse or evaluates to an empty string, the operator safely falls back to the result of the previous stage.
+ 
+> **Note:** In case no `version` is defined at all, it falls back to version `latest`
 
-The annotation key must match the value configured in the `sbom-operator` via `dtrack-project-name-annotation-key`.
-To further filter the for which container that configuration applies, the container name can be suffixed to that key. e.g.  `my.project.name/my-nginx`.
-
-> [!IMPORTANT]
-> The suffix regarding container name must not be added to the config value and must not include `/`. e.g. `my.project.name`
-
-****
-
-The value for a custom project name in dtrack by annotation at the specific Pod is written in the format of `project:version` or just `project` where version defaults to `latest`. E.g. `MyParentProject` or `MyParentProject:1.0`
-
-The value can also contain variables. It follows the [go template](https://pkg.go.dev/text/template) specification.
-Available variables:
-- `ContainerNames` (`[]string`) There might be multiple containers which shares the same image
-- `SbomScope`      (`string`)   The scope of the SBOM which was obtained from OCI attestation or through syft scan. Defaults to `all`.
-- `ImageId`        (`string`)   The ImageID
-- `ImageName`      (`string`)   The Image name as specified in the Pod
-- `ShortName`      (`string`)   The image name without registry information
-- `Repository`     (`string`)   The repository information
-- `Tag`            (`string`)   The image's tag (can be used for the version)
-
-**Example**
-
+---
+ 
+#### Available Template Fields (`TemplateData`)
+ 
+The following fields are available in both `--dtrack-templated-project-name` and pod annotations:
+ 
+| Field | Type | Description | Example |
+| :--- | :--- | :--- | :--- |
+| `.PredefinedName` | `string` | The project name resolved by the preceding stage in the hierarchy. | `eu-prod-order-service` |
+| `.PredefinedVersion` | `string` | The project version resolved by the preceding stage in the hierarchy. | `1.4.2` |
+| `.Namespace` | `string` | The Kubernetes namespace of the scanned Pod. | `production` |
+| `.ShortName` | `string` | The short image name without registry or repository path. | `order-service` |
+| `.Repository` | `string` | The full image repository path (excluding tag/digest). | `ghcr.io/my-org/order-service` |
+| `.ImageName` | `string` | The full image reference as specified in the Pod spec. | `ghcr.io/my-org/order-service:1.4.2` |
+| `.ImageId` | `string` | The resolved image digest reference. | `ghcr.io/my-org/order-service@sha256:...` |
+| `.Tag` | `string` | The image tag (empty if deployed purely by digest). | `1.4.2` |
+| `.ContainerNames` | `[]string` | Slice of container names sharing the image in the Pod. | `["order-api", "migrations"]` |
+| `.SbomScope` | `string` | The scope of the processed SBOM attestation. | `all` |
+ 
+---
+ 
+#### Configuration Examples
+ 
+##### 1. Enforcing a Cluster-Wide Naming Convention
+To prefix every project in Dependency-Track with its Kubernetes namespace while keeping the original image version:
+ 
 ```yaml
-dtrack.project.name.key: '{{index .ContainerNames 0}}/{{if or (eq .SbomScope "") (eq .SbomScope "all")}}container{{else}}{{.SbomScope}}{{end}}:{{.Tag}}'
-````
-| Input | Output
-|-----------|----------|
-| `SbomScope`: "all", `ContainerNames[0]`: "nginx", `Tag`: 1.2.0 | `name`: nginx/container `version`: 1.2.0
-| `SbomScope`: "app", `ContainerNames[0]`: "nginx", `Tag`: dev | `name`: nginx/app `version`: dev
-
-
-In case of flag `fetch-oci-attestations` was set, there might be additional SBOMs which were attached to the image. For all scoped SBOMs there will be it's own project created and a tag `sbom.scope=<scope>` will be created.
-
+# Operator configuration (CLI flag or Environment Variable)
+SBOM_DTRACK_USE_SHORT_NAME: "true"
+SBOM_DTRACK_TEMPLATE_PROJECT_NAME: "{{.Namespace}}-{{.ShortName}}:{{.PredefinedVersion}}"
+```
+*Result for `ghcr.io/my-org/order-service:1.4.2` in namespace `payment`:*
+`payment-order-service` (Version: `1.4.2`)
+ 
+##### 2. Overriding Only the Version via Pod Annotation (Chaining)
+Because `.PredefinedName` holds the result of the global cluster template, a Pod can override **only** the version via annotation while preserving the global naming convention:
+ 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: order-service
+  namespace: payment
+  annotations:
+    # Keeps "payment-order-service" from the global template, but overrides version
+    dtrack.project.name: "{{.PredefinedName}}:2026.10-release"
+```
+*Result:* `payment-order-service` (Version: `2026.10-release`)
+ 
+##### 3. Pod-Wide Default with Container-Specific Override
+In multi-container Pods, you can combine a pod-wide annotation with a container-specific annotation (`<key>/<container-name>`). The container-specific annotation always takes precedence for that container:
+ 
+```yaml
+apiVersion: v1
+kind: Pod
+metadata:
+  name: checkout-pod
+  namespace: shop
+  annotations:
+    # Default for all containers in this Pod
+    dtrack.project.name: "shop-checkout-default:{{.Tag}}"
+    # Override specifically for the "checkout-api" container
+    dtrack.project.name/checkout-api: "shop-checkout-backend:2.1.0"
+spec:
+  containers:
+    - name: checkout-api
+      image: ghcr.io/my-org/checkout:2.1.0
+    - name: envoy-sidecar
+      image: envoyproxy/envoy:v1.29.0
+```
+*Result for `checkout-api`:* `shop-checkout-backend` (Version: `2.1.0`)
+*Result for `envoy-sidecar`:* `shop-checkout-default` (Version: `v1.29.0`)
 ---
 
 #### Setting parent project at Dependency Track automatically:

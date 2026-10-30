@@ -71,9 +71,6 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 	opts := image.RegistryOptions{InsecureUseHTTP: internal.OperatorConfig.InsecureHttpRegistry, Credentials: internaloci.ResolveCredentials(img, s.proxyRegistryMap)}
 	src, err := getSource(context.Background(), &opts, img.ImageID)
-	if err != nil {
-		src, err = getSource(context.Background(), &opts, img.Image)
-	}
 	// revert image info to the original value - we want to register with original names
 	img.Image = oriImage
 	img.ImageID = oriImageID

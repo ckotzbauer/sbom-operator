@@ -43,7 +43,7 @@ func TestLoadImages_NamespaceMode(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag-namespace", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag-namespace", "", "", "", true, false, "")
 	err := g.Initialize()
 	require.NoError(t, err)
 
@@ -79,7 +79,7 @@ func TestHandleProjectDeactivation_NamespaceMode(t *testing.T) {
 	}))
 	defer ts.Close()
 
-	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "cluster-A", "tag-namespace", "", "", "", true, false)
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "cluster-A", "tag-namespace", "", "", "", true, false, "")
 	err := g.Initialize()
 	require.NoError(t, err)
 

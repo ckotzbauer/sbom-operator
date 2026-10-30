@@ -4,7 +4,6 @@ import (
 	"fmt"
 	"net/http"
 	"runtime"
-	"strings"
 	"time"
 
 	"github.com/ckotzbauer/libstandard"
@@ -35,7 +34,6 @@ func newRootCmd() *cobra.Command {
 			if err := libstandard.DefaultInitializer(internal.OperatorConfig, cmd, "sbom-operator"); err != nil {
 				return err
 			}
-			warnAboutDtrackCycloneDXDefault(internal.OperatorConfig)
 			// Resolve format-version through the single unified entry point.
 			// Both daemon and informer paths receive the same resolved value.
 			fv := syft.ResolveFormatVersionWithFamily(
@@ -131,29 +129,8 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyStripCpes, false, "Strip CPE attributes from all components in generated SBOMs. Disables Syft CPE generation and removes cataloger-sourced CPEs.")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyFetchOciAttestations, false, "Fetch additional CycloneDX SBOMs from OCI attestations")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyInsecureHttpRegistry, false, "Use HTTP instead of HTTPS for fetching data from registry (OCI)")
+	rootCmd.PersistentFlags().String(internal.ConfigKeyDtrackTemplatedProjectName, "", "The default project name in DTrack using go template. Please check documentation about available variables.")
 	return rootCmd
-}
-
-func warnAboutDtrackCycloneDXDefault(config *internal.Config) {
-	if strings.TrimSpace(config.FormatVersion) != "" {
-		return
-	}
-
-	usesDtrack := false
-	for _, configuredTarget := range config.Targets {
-		if configuredTarget == "dtrack" {
-			usesDtrack = true
-			break
-		}
-	}
-	if !usesDtrack {
-		return
-	}
-
-	formatVersion := syft.ResolveCycloneDXFormatVersion(config.Format)
-	if formatVersion.Family == "" {
-		return
-	}
 }
 
 func printVersion() {
