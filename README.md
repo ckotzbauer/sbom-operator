@@ -374,6 +374,39 @@ spec:
 ```
 ---
 
+### Deployment Timestamp Tracking
+
+The SBOM Operator automatically tracks deployment intervals for projects in Dependency-Track by maintaining ISO-8601 time intervals as **Project Properties** inside the `deployment-timestamp` property group.
+
+#### Purpose
+
+KPI calculations like Mean time to remidation (MTTR) or SLA compliance can be done using that data.
+
+#### How It Works
+ 
+1. **Active Deployments (`/` or `start/`):**
+   When an SBOM is successfully processed and uploaded for an active image in a Kubernetes cluster (or namespace), the operator ensures a deployment property exists. If a deployment is newly seen or reactivated, an ISO-8601 time interval (e.g., `2026-10-30T18:00:00Z/`) is recorded or extended.
+2. **Orphan Cleanup & Deactivation (`/end`):**
+   When pods or namespaces scale down and an image is no longer running in a specific cluster or namespace, the operator automatically closes the active deployment interval by appending the current timestamp (e.g., `2026-10-30T18:00:00Z/2026-10-30T18:02:45Z`).
+ 
+---
+ 
+#### Property Configuration & Group Details
+ 
+* **Property Group Name:** `deployment-timestamp`
+* **Property Name:** Matches the configured cluster ID (e.g., `my-cluster`) in `tag` or `prefix` mode, or the namespaced stage identifier (e.g., `my-cluster/production`) in `tag-namespace` mode.
+* **Property Value Format:** ISO-8601 interval string (`start-time/end-time` or an open-ended interval `start-time/` while active).
+ 
+```yaml
+# Example Dependency-Track Project Property Entry
+GroupName: deployment-timestamp
+PropertyName: my-cluster-prod/payment-ns
+PropertyValue: 2026-10-01T08:30:00Z/2026-10-30T18:00:00Z
+Description: ISO-8601 deployment intervals in stage my-cluster-prod/payment-ns
+```
+
+---
+
 ### Git
 
 #### Git Parameter

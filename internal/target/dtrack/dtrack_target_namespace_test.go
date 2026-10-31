@@ -3,6 +3,7 @@ package dtrack
 import (
 	"net/http"
 	"net/http/httptest"
+	"strings"
 	"testing"
 
 	dtrack "github.com/DependencyTrack/client-go"
@@ -75,7 +76,11 @@ func TestHandleProjectDeactivation_NamespaceMode(t *testing.T) {
 			return
 		}
 		w.WriteHeader(http.StatusOK)
-		_, _ = w.Write([]byte(`{"totalCount": "1"}`))
+		if r.Method == http.MethodGet && strings.HasPrefix(r.URL.Path, "/api/v1/project") {
+			_, _ = w.Write([]byte(`[]`))
+		} else {
+			_, _ = w.Write([]byte(`{}`))
+		}
 	}))
 	defer ts.Close()
 

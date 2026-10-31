@@ -243,7 +243,7 @@ func (p *Processor) getCachedAttestations(namespace string, imageId string) (alr
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
-
+	releaseTime, podTime := p.K8s.ResolvePodTimestamps(context.Background(), pod)
 	// Group containers by ImageID to avoid duplicate scans within the same pod
 	containersByImageID := make(map[string][]*libk8s.ContainerInfo)
 	imageByID := make(map[string]*liboci.RegistryImage)
@@ -308,8 +308,8 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		imageErr := false
 		for _, att := range attestations {
 			for _, t := range p.Targets {
-				ctx := target.NewContext(image, &pod, att)
-				if err := t.ProcessSbom(ctx.WithContainers(containerList)); err != nil {
+				ctx := target.NewContext(image, &pod, att, releaseTime, podTime, containerList)
+				if err := t.ProcessSbom(ctx); err != nil {
 					imageErr = true
 					errOccurred = true
 				}
