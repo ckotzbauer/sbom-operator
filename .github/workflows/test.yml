@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   test:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-build-test.yml@187b42cc2ca9bc9257d6e72bb1c1be730f1d0565 # 0.56.0
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-build-test.yml@70492262e47019908260a22d989ea8c55c549cdb # 0.58.1
     with:
       install-go: true
       install-goreleaser: true
