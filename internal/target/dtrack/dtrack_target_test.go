@@ -1180,3 +1180,65 @@ func TestHandleProjectDeactivation_TagMode_RemovesNamespaceTagAndProtectsUnscann
 	assert.Contains(t, remainingTags, "kubernetes-cluster=my-cluster", "Cluster tag must be kept while ns-b is active")
 
 }
+
+// TestHandleProjectDeactivation_TagMode_KeepsIntervalOpenWhileOtherNamespaceActive
+// verifies that the deployment interval is NOT closed when another namespace in the
+// same cluster still uses the project (tag mode shares the property across namespaces).
+func TestHandleProjectDeactivation_TagMode_KeepsIntervalOpenWhileOtherNamespaceActive(t *testing.T) {
+	projectUUID := uuid.New()
+	propertyCalled := false
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if strings.HasPrefix(r.URL.Path, "/api/v1/project/"+projectUUID.String()+"/property") {
+			propertyCalled = true
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write([]byte(`{"items": []}`))
+			return
+		}
+		if r.Method == http.MethodPut && r.URL.Path == "/api/v1/project/"+projectUUID.String() {
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write([]byte(`{"uuid": "` + projectUUID.String() + `"}`))
+			return
+		}
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte(`{}`))
+	}))
+	defer ts.Close()
+
+	g := NewDependencyTrackTarget(ts.URL, "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, true, "")
+	require.NoError(t, g.Initialize())
+
+	project := &dtrack.Project{
+		UUID:    projectUUID,
+		Name:    "shared-app",
+		Version: "1.0",
+		Active:  true,
+		Tags: []dtrack.Tag{
+			{Name: podNamespaceTagKey + "=ns-a"},
+			{Name: podNamespaceTagKey + "=ns-b"},
+			{Name: "kubernetes-cluster=my-cluster"},
+			{Name: "sbom-operator"},
+			{Name: "raw-image-id=shared@sha256:999"},
+		},
+	}
+	targetImage := &target.TargetImage{
+		RegistryImage: &liboci.RegistryImage{ImageID: "shared@sha256:999"},
+		Namespace:     "ns-a",
+	}
+
+	client, err := dtrack.NewClient(ts.URL)
+	require.NoError(t, err)
+	err = g.handleProjectDeactivation(client, project, targetImage, false)
+	assert.NoError(t, err)
+	assert.False(t, propertyCalled, "Deployment interval must not be closed while another namespace is still active")
+	assert.True(t, project.Active, "Project must remain active while another namespace uses it")
+
+	tagNames := make([]string, 0, len(project.Tags))
+	for _, tag := range project.Tags {
+		tagNames = append(tagNames, tag.Name)
+	}
+	assert.NotContains(t, tagNames, podNamespaceTagKey+"=ns-a")
+	assert.Contains(t, tagNames, podNamespaceTagKey+"=ns-b")
+	assert.Contains(t, tagNames, "kubernetes-cluster=my-cluster")
+}

@@ -358,6 +358,7 @@ func (k *KubeClient) ResolvePodTimestamps(ctx context.Context, podInfo libk8s.Po
 		return now, now
 	}
 	if podInfo.PodName == "" || podInfo.PodNamespace == "" {
+		logrus.Debugf("Skipping timestamp resolution: pod name or namespace is empty (name=%q, namespace=%q)", podInfo.PodName, podInfo.PodNamespace)
 		return now, now
 	}
 

@@ -6,6 +6,7 @@ import (
 	"os/signal"
 	"sync"
 	"syscall"
+	"time"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
@@ -243,7 +244,15 @@ func (p *Processor) getCachedAttestations(namespace string, imageId string) (alr
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
-	releaseTime, podTime := p.K8s.ResolvePodTimestamps(context.Background(), pod)
+	// Only the dtrack target consumes deployment timestamps; resolve them lazily
+	// so other targets do not pay two extra Kubernetes API calls per pod per cycle.
+	var releaseTime, podTime time.Time
+	for _, t := range p.Targets {
+		if _, ok := t.(*dtrack.DependencyTrackTarget); ok {
+			releaseTime, podTime = p.K8s.ResolvePodTimestamps(context.Background(), pod)
+			break
+		}
+	}
 	// Group containers by ImageID to avoid duplicate scans within the same pod
 	containersByImageID := make(map[string][]*libk8s.ContainerInfo)
 	imageByID := make(map[string]*liboci.RegistryImage)
