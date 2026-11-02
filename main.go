@@ -130,6 +130,7 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyFetchOciAttestations, false, "Fetch additional CycloneDX SBOMs from OCI attestations")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyInsecureHttpRegistry, false, "Use HTTP instead of HTTPS for fetching data from registry (OCI)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDtrackTemplatedProjectName, "", "The default project name in DTrack using go template. Please check documentation about available variables.")
+	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDtrackDeploymentHistory, false, "Track deployment timestamps as ISO-8601 intervals in DTrack project properties as well as a persistent `kubernetes-cluster-id` tag in the project.")
 	return rootCmd
 }
 

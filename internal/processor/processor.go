@@ -248,6 +248,9 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	// so other targets do not pay two extra Kubernetes API calls per pod per cycle.
 	var releaseTime, podTime time.Time
 	for _, t := range p.Targets {
+		if !internal.OperatorConfig.DtrackDeploymentHistory {
+			continue
+		}
 		if _, ok := t.(*dtrack.DependencyTrackTarget); ok {
 			releaseTime, podTime = p.K8s.ResolvePodTimestamps(context.Background(), pod)
 			break
@@ -375,7 +378,8 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			useShortName := internal.OperatorConfig.DtrackUseShortName
 			manageProjectActiveStatus := internal.OperatorConfig.DtrackManageProjectActiveStatus
 			templateProjectName := internal.OperatorConfig.DtrackTemplatedProjectName
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName)
+			deploymentTimestampsEnabled := internal.OperatorConfig.DtrackDeploymentHistory
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName, deploymentTimestampsEnabled)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {
