@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"os/signal"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -365,14 +366,14 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 			}
 
 			if !foundDefaultScopeSbom {
-				sbom, err := p.sy.ExecuteSyft(image)
+				sbom, format, err := p.sy.ExecuteSyft(image, resolveSyftCatalogers(pod, attestations))
 				if err != nil {
 					logrus.WithError(err).Debugf("Scan of image %s failed and will be retried", imgID)
 					continue
 				}
 				attestations = append(attestations, &oci.AttestationSbom{
 					Scope:     oci.ScopeAll,
-					MediaType: oci.CycloneDXJSONMediaType,
+					MediaType: format,
 					Sbom:      sbom,
 				})
 			}
@@ -409,6 +410,43 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	if len(annotated) > 0 {
 		p.K8s.UpdatePodAnnotation(pod, annotated)
 	}
+}
+
+// resolveSyftCatalogers determines which Syft cataloger expressions to apply for a container image.
+// Precedence:
+// 1. Scope-based rules matching the OCI attestation scope (contains logic, e.g. "application" -> "os,alpine")
+// 2. Global --syft-catalogers config (applied only if no attestations or if fallback applies)
+func resolveSyftCatalogers(pod libk8s.PodInfo, attestations []*oci.AttestationSbom) []string {
+	// Check scope-based rules (contains logic) if attestation scopes are available
+	if len(internal.OperatorConfig.SyftCatalogersScopeRules) > 0 && len(attestations) > 0 {
+		for _, rule := range internal.OperatorConfig.SyftCatalogersScopeRules {
+			parts := strings.SplitN(rule, ":", 2)
+			if len(parts) != 2 {
+				continue
+			}
+			scopePattern := strings.TrimSpace(parts[0])
+			catalogersStr := strings.TrimSpace(parts[1])
+			if scopePattern == "" || catalogersStr == "" {
+				continue
+			}
+
+			// Check if any attestation scope contains the rule pattern (contains logic)
+			for _, attestation := range attestations {
+				if strings.Contains(strings.ToLower(attestation.Scope), strings.ToLower(scopePattern)) {
+					return []string{catalogersStr}
+				}
+			}
+		}
+	}
+
+	// Global fallback
+	if len(internal.OperatorConfig.SyftCatalogers) > 0 {
+		if !internal.OperatorConfig.FetchOciAttestations || len(attestations) > 0 {
+			return internal.OperatorConfig.SyftCatalogers
+		}
+	}
+
+	return nil
 }
 
 func initTargets(k8s *kubernetes.KubeClient) []target.Target {

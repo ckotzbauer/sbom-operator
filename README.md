@@ -76,6 +76,8 @@ All parameters are cli-flags. The flags can be configured as args or as environm
 | `fetch-oci-attestations` | `false` | `false` | Fetch SBOMs from OCI attestations via cosign (Main SBOM of image & optional configured additional SBOMs). In case main SBOM from image can't be found, falls back to syft generation. Flag can be set via `FETCH_OCI_ATTESTATIONS` env var or `fetchOciAttestations` in YAML. |
 | `insecure-http-registry` | `false` | `false` | Use HTTP instead of HTTPS for any connection to registry (downloading of attestation/image). Useful for development purposes. Flag can be set via `INSECURE_HTTP_REGISTRY` env var or `insecureHttpRegistry` in YAML. |
 | `retry-interval` | `false` | `5m` | Interval at which pods with failed scans/uploads are retried in informer mode. `0s` disables retries. Flag can be set via `SBOM_RETRY_INTERVAL` env var or `retryInterval` in YAML. |
+| `syft-catalogers` | `false` | `[]` | Configure Syft cataloger selection expressions (comma-separated). Supports exact selection (`golang,javascript`), adding (`+sbom-cataloger`), and removing (`-java-archive-cataloger`) catalogers. |
+| `syft-catalogers-scope-rules` | `false` | `[]` | Mapping rules to select Syft catalogers based on OCI attestation scopes using contains logic (format: `scope-substring:cataloger1,cataloger2`). |
 
 
 ### Fetching SBOM from OCI
@@ -98,6 +100,53 @@ Currently only Dependency-Track target would support additional SBOMs to be uplo
 ### Format Versions
 
 The `--format-version` flag (env: `SBOM_FORMAT_VERSION`, YAML: `formatVersion`) pins the CycloneDX or SPDX specification version used by the embedded Syft encoder. It only applies when `--format` selects a **version-aware family**; for non-version-aware formats (`json`, `syftjson`, `text`, `table`, `github`) the flag is silently accepted and Syft defaults are used.
+
+### Configuring Syft Catalogers
+ 
+By default, the operator runs Syft's standard image cataloger set. You can customize which catalogers are executed during image scanning via `--syft-catalogers` (or `SBOM_SYFT_CATALOGERS`).
+ 
+The option accepts a comma-separated list of Syft cataloger names or tags using three expression types:
+ 
+* **`<name-or-tag>` (Select):** Restricts scanning exclusively to the specified catalogers or language/OS tags.
+* **`+<name>` (Add):** Keeps the default catalogers and enables additional catalogers that are disabled by default.
+* **`-<name-or-tag>` (Remove):** Keeps the default catalogers except for the excluded catalogers or tags.
+
+Additionally it is possible to configure rules of catalogers per SBOM scope found using OCI scanning. This just applies for `--fetch-oci-attestations` enabled.
+The rules set can be configured using the parameter `--syft-catalogers-scope-rules` with the value in format `<scope>:<catalogers>`. The `cataloger` are defined the same way as mentioned above.
+The `scope` value is a containment pattern, i.e. if the value is defined in any scope, the rule applies.
+
+#### Configuration Examples
+ 
+##### 1. Excluding Slow or Unwanted Catalogers from Defaults
+To use all default catalogers while skipping deep Java archive inspection and binary classification:
+ 
+```yaml
+# Environment variable
+SBOM_SYFT_CATALOGERS: "-java-archive-cataloger,-binary-classifier-cataloger"
+ 
+# Or via CLI flag
+--syft-catalogers="-java-archive-cataloger,-binary-classifier-cataloger"
+```
+ 
+##### 2. Restricting Scans to OS Packages and Go Binaries Only
+To speed up scans in clusters running only Go microservices on Alpine/Debian base images:
+ 
+```yaml
+SBOM_SYFT_CATALOGERS: "alpine,debian,golang"
+```
+ 
+##### 3. Enabling Optional Catalogers Alongside Defaults
+To keep all default catalogers and additionally discover nested SBOM files inside container images:
+ 
+```yaml
+SBOM_SYFT_CATALOGERS: "+sbom-cataloger"
+```
+
+##### 4. Enabling Catalogers only for scope "application"
+
+```yaml
+SBOM_SYFT_CATALOGERS_SCOPE_RULES: "application:os,alpine,infra:golang"
+```
 
 #### Family / Alias Matrix
 
