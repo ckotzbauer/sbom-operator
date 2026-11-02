@@ -4,6 +4,7 @@ import (
 	"context"
 	"os"
 	"os/signal"
+	"strings"
 	"sync"
 	"syscall"
 	"time"
@@ -365,14 +366,14 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 			}
 
 			if !foundDefaultScopeSbom {
-				sbom, err := p.sy.ExecuteSyft(image)
+				sbom, mt, err := p.sy.ExecuteSyft(image, resolveSyftCatalogers(attestations))
 				if err != nil {
 					logrus.WithError(err).Debugf("Scan of image %s failed and will be retried", imgID)
 					continue
 				}
 				attestations = append(attestations, &oci.AttestationSbom{
 					Scope:     oci.ScopeAll,
-					MediaType: oci.CycloneDXJSONMediaType,
+					MediaType: mt,
 					Sbom:      sbom,
 				})
 			}
@@ -409,6 +410,70 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	if len(annotated) > 0 {
 		p.K8s.UpdatePodAnnotation(pod, annotated)
 	}
+}
+
+type scopeCatalogerRule struct {
+	scopePattern string
+	catalogers   []string
+}
+
+// parseScopeCatalogerRules parses raw scope rule entries of the form "scope:cataloger1,cataloger2".
+// Because []string flags and environment variables are split on commas by default, an entry like
+// "application:os,alpine,infra:golang" arrives as ["application:os", "alpine", "infra:golang"].
+// Tokens without a colon are therefore appended as additional catalogers to the preceding rule.
+func parseScopeCatalogerRules(rawRules []string) []scopeCatalogerRule {
+	var rules []scopeCatalogerRule
+	for _, raw := range rawRules {
+		token := strings.TrimSpace(raw)
+		if token == "" {
+			continue
+		}
+		if strings.Contains(token, ":") {
+			parts := strings.SplitN(token, ":", 2)
+			scopePattern := strings.TrimSpace(parts[0])
+			catalogersStr := strings.TrimSpace(parts[1])
+			if scopePattern == "" {
+				continue
+			}
+			var cats []string
+			for _, c := range strings.Split(catalogersStr, ",") {
+				if trimmed := strings.TrimSpace(c); trimmed != "" {
+					cats = append(cats, trimmed)
+				}
+			}
+			rules = append(rules, scopeCatalogerRule{
+				scopePattern: scopePattern,
+				catalogers:   cats,
+			})
+		} else if len(rules) > 0 {
+			// Continuation token from comma-splitting (e.g. "alpine" after "application:os")
+			rules[len(rules)-1].catalogers = append(rules[len(rules)-1].catalogers, token)
+		}
+	}
+	return rules
+}
+
+// resolveSyftCatalogers determines which Syft cataloger expressions to apply for a container image.
+// Precedence:
+//  1. Scope-based rules (--syft-catalogers-scope-rules): evaluated in configured order using
+//     case-insensitive substring matching (strings.Contains) against existing OCI attestation scopes.
+//     The first matching rule wins and fully overrides --syft-catalogers.
+//  2. Global --syft-catalogers config
+func resolveSyftCatalogers(attestations []*oci.AttestationSbom) []string {
+	if len(internal.OperatorConfig.SyftCatalogersScopeRules) > 0 && len(attestations) > 0 {
+		for _, rule := range parseScopeCatalogerRules(internal.OperatorConfig.SyftCatalogersScopeRules) {
+			if len(rule.catalogers) == 0 {
+				continue
+			}
+			patternLower := strings.ToLower(rule.scopePattern)
+			for _, attestation := range attestations {
+				if attestation != nil && strings.Contains(strings.ToLower(attestation.Scope), patternLower) {
+					return rule.catalogers
+				}
+			}
+		}
+	}
+	return internal.OperatorConfig.SyftCatalogers
 }
 
 func initTargets(k8s *kubernetes.KubeClient) []target.Target {

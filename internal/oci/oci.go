@@ -26,7 +26,7 @@ func GetMediaType(format string) types.MediaType {
 	switch format {
 	case "json", SyftMediaType:
 		return types.MediaType(SyftMediaType)
-	case "cyclonedx", CycloneDXXMLMediaType:
+	case "cyclone", "cyclonedx", "cyclonedxxml", CycloneDXXMLMediaType:
 		return types.MediaType(CycloneDXXMLMediaType)
 	case "cyclonedxjson", CycloneDXJSONMediaType:
 		return types.MediaType(CycloneDXJSONMediaType)
