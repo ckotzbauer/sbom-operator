@@ -59,7 +59,7 @@ func (s Syft) WithSyftVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
+func (s *Syft) ExecuteSyft(img *oci.RegistryImage, catalogers []string) (string, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	oriImage := img.Image
@@ -108,7 +108,9 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	if s.stripCpes {
 		cfg = cfg.WithDataGenerationConfig(cataloging.DefaultDataGenerationConfig().WithGenerateCPEs(false))
 	}
-
+	if len(catalogers) > 0 {
+		cfg = cfg.WithCatalogerSelection(BuildCatalogerSelection(catalogers))
+	}
 	result, err := syft.CreateSBOM(context.Background(), src, cfg)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM-Creation failed")
@@ -250,4 +252,24 @@ func closeOrLog(c io.Closer) {
 	if err := c.Close(); err != nil {
 		logrus.WithError(err).Warnf("Could not close file")
 	}
+}
+
+// BuildCatalogerSelection translates the configured cataloger expressions into Syft's SelectionRequest.
+// Syft's WithExpression natively handles:
+// - "+expr": adds catalogers to the default set
+// - "-expr": removes catalogers from the default set
+// - "expr" (without prefix): restricts selection to the specified catalogers or tags
+func BuildCatalogerSelection(expressions []string) cataloging.SelectionRequest {
+	req := cataloging.NewSelectionRequest()
+
+	for _, raw := range expressions {
+		for _, token := range strings.Split(raw, ",") {
+			expr := strings.TrimSpace(token)
+			if expr != "" {
+				req = req.WithExpression(expr)
+			}
+		}
+	}
+
+	return req
 }
