@@ -1,3 +1,42 @@
+## Version 0.49.0 (2026-11-03)
+
+### Features and improvements
+
+* [[`5ffcc241`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5ffcc241)] - **feat**: global naming template (#1077)
+* [[`c9adce49`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c9adce49)] - **feat**: Consider namespaces separation (#1073)
+
+### Bug fixes
+
+* [[`3cd36b3b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3cd36b3b)] - **fix**: more standardized alignment for sbom attestations (#1074)
+
+### Dependency updates
+
+* [[`0d56b29b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0d56b29b)] - **deps**: update aws-sdk-go-v2 monorepo (#1086)
+* [[`1aee4031`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/1aee4031)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 6760390 (#1085)
+* [[`67603909`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/67603909)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 77c5a8e (#1084)
+* [[`77c5a8ed`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/77c5a8ed)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 42b794e (#1083)
+* [[`42b794e1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/42b794e1)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 8a9249c (#1082)
+* [[`8a9249cc`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8a9249cc)] - **deps**: update module github.com&#x2F;go-jose&#x2F;go-jose&#x2F;v4 to v4.1.6 [security] (#1076)
+* [[`bb2466ed`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bb2466ed)] - **deps**: update alpine:3.24 docker digest to be26560 (#1068)
+* [[`6d65e6e9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6d65e6e9)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to ab1ef6b (#1081)
+* [[`ab1ef6bf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ab1ef6bf)] - **deps**: update kubernetes versions to v0.37.2 (#1080)
+* [[`7fcaff37`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7fcaff37)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to 7f6bef0 (#1055)
+* [[`4f9380c4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4f9380c4)] - **deps**: update aws-sdk-go-v2 monorepo (#1079)
+* [[`8e5ece4e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8e5ece4e)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 5ffcc24 (#1078)
+
+### Common changes
+
+* [[`b3451e28`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b3451e28)] - **chore**: Feat&#x2F;deployment property timestamp (#1054)
+* [[`bcd33d0d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bcd33d0d)] - **dtrack**: Configurable deployment timestamps for DTrack (#1087)
+* [[`04f958f9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/04f958f9)] - **dtrack**: correct deployment interval lifecycle after #1054 merge
+* [[`31e81de8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/31e81de8)] - **dtrack**: template naming (#1075)
+* [[`bc1c084f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/bc1c084f)] - **kubernetes**: normalize image id in pod annotations
+* [[`32829da8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/32829da8)] - **processor**: drop ineffectual allImages initialization
+* [[`094386c2`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/094386c2)] - **processor**: keep all running container images during initial sync
+* [[`6376a4bd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/6376a4bd)] - **processor**: retry failed scans and annotate only successful containers
+* [[`d31c9598`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d31c9598)] - **syft**: close source before wiping &#x2F;tmp
+
+
 ## Version 0.48.0 (2026-10-27)
 
 ### Dependency updates
