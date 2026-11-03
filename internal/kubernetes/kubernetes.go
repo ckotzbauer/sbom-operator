@@ -152,9 +152,9 @@ func (client *KubeClient) LoadImageInfos(namespaces []corev1.Namespace, podLabel
 	return podInfos, allImages
 }
 
-func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
+func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo, containerNames []string) {
 	for i := 0; i < updatePodMaxRetries; i++ {
-		err := client.updatePodAnnotation(pod)
+		err := client.updatePodAnnotation(pod, containerNames)
 		if err == nil {
 			break
 		}
@@ -163,7 +163,7 @@ func (client *KubeClient) UpdatePodAnnotation(pod libk8s.PodInfo) {
 	}
 }
 
-func (client *KubeClient) updatePodAnnotation(pod libk8s.PodInfo) error {
+func (client *KubeClient) updatePodAnnotation(pod libk8s.PodInfo, containerNames []string) error {
 	newPod, err := client.Client.Client.CoreV1().Pods(pod.PodNamespace).Get(context.Background(), pod.PodName, meta.GetOptions{})
 	if err != nil {
 		if !errors.IsNotFound(err) {
@@ -173,28 +173,29 @@ func (client *KubeClient) updatePodAnnotation(pod libk8s.PodInfo) error {
 		return nil
 	}
 
+	toAnnotate := make(map[string]bool, len(containerNames))
+	for _, name := range containerNames {
+		toAnnotate[name] = true
+	}
+
 	ann := newPod.Annotations
 	if ann == nil {
 		ann = make(map[string]string)
 	}
 
-	for _, c := range newPod.Status.ContainerStatuses {
-		if c.ImageID != "" {
-			ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
+	// Only annotate containers whose scan and upload succeeded, so failed
+	// containers are retried instead of being marked as processed.
+	annotateStatuses := func(statuses []corev1.ContainerStatus) {
+		for _, c := range statuses {
+			if toAnnotate[c.Name] && c.ImageID != "" {
+				ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
+			}
 		}
 	}
 
-	for _, c := range newPod.Status.InitContainerStatuses {
-		if c.ImageID != "" {
-			ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
-		}
-	}
-
-	for _, c := range newPod.Status.EphemeralContainerStatuses {
-		if c.ImageID != "" {
-			ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
-		}
-	}
+	annotateStatuses(newPod.Status.ContainerStatuses)
+	annotateStatuses(newPod.Status.InitContainerStatuses)
+	annotateStatuses(newPod.Status.EphemeralContainerStatuses)
 
 	newPod.Annotations = ann
 

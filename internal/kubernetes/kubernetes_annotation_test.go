@@ -67,6 +67,7 @@ func TestUpdatePodAnnotationNormalizesImageID(t *testing.T) {
 				Status: corev1.PodStatus{
 					ContainerStatuses: []corev1.ContainerStatus{
 						{Name: "c1", ImageID: "docker-pullable://repo@sha256:abc"},
+						{Name: "c2", ImageID: "docker-pullable://repo@sha256:def"},
 					},
 				},
 			})
@@ -86,7 +87,20 @@ func TestUpdatePodAnnotationNormalizesImageID(t *testing.T) {
 	require.NoError(t, err)
 	k := &KubeClient{Client: &libk8s.KubeClient{Client: clientset}}
 
-	err = k.updatePodAnnotation(libk8s.PodInfo{PodName: "app-pod-1", PodNamespace: "prod"})
-	require.NoError(t, err)
-	assert.Equal(t, "repo@sha256:abc", updated.Annotations["ckotzbauer.sbom-operator.io/c1"])
+	t.Run("only the named containers are annotated", func(t *testing.T) {
+		updated = corev1.Pod{}
+		err = k.updatePodAnnotation(libk8s.PodInfo{PodName: "app-pod-1", PodNamespace: "prod"}, []string{"c1"})
+		require.NoError(t, err)
+		assert.Equal(t, "repo@sha256:abc", updated.Annotations["ckotzbauer.sbom-operator.io/c1"])
+		_, ok := updated.Annotations["ckotzbauer.sbom-operator.io/c2"]
+		assert.False(t, ok, "c2 must not be annotated when not listed")
+	})
+
+	t.Run("all containers are annotated when all are named", func(t *testing.T) {
+		updated = corev1.Pod{}
+		err = k.updatePodAnnotation(libk8s.PodInfo{PodName: "app-pod-1", PodNamespace: "prod"}, []string{"c1", "c2"})
+		require.NoError(t, err)
+		assert.Equal(t, "repo@sha256:abc", updated.Annotations["ckotzbauer.sbom-operator.io/c1"])
+		assert.Equal(t, "repo@sha256:def", updated.Annotations["ckotzbauer.sbom-operator.io/c2"])
+	})
 }

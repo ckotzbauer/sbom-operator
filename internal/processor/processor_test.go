@@ -1,13 +1,25 @@
 package processor
 
 import (
+	"encoding/json"
+	"fmt"
+	"net/http"
+	"net/http/httptest"
+	"strings"
 	"testing"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	liboci "github.com/ckotzbauer/libk8soci/pkg/oci"
 	"github.com/ckotzbauer/sbom-operator/internal"
+	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
+	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
 	"github.com/stretchr/testify/assert"
+	"github.com/stretchr/testify/require"
+	corev1 "k8s.io/api/core/v1"
+	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
+	k8s "k8s.io/client-go/kubernetes"
+	"k8s.io/client-go/rest"
 )
 
 func TestInitTargets(t *testing.T) {
@@ -60,12 +72,24 @@ type mockTarget struct {
 
 	removedImages []*target.TargetImage
 	removeCalled  bool
+
+	// failImage makes ProcessSbom fail for the given ImageID
+	failImage       string
+	processedImages []string
 }
 
-func (m *mockTarget) Initialize() error                           { return nil }
-func (m *mockTarget) ValidateConfig() error                       { return nil }
-func (m *mockTarget) ProcessSbom(ctx *target.TargetContext) error { return nil }
-func (m *mockTarget) IsNamespaceAware() bool                      { return m.namespaceAware }
+func (m *mockTarget) Initialize() error { return nil }
+func (m *mockTarget) ValidateConfig() error {
+	return nil
+}
+func (m *mockTarget) ProcessSbom(ctx *target.TargetContext) error {
+	m.processedImages = append(m.processedImages, ctx.Image.ImageID)
+	if m.failImage != "" && ctx.Image.ImageID == m.failImage {
+		return fmt.Errorf("upload failed for %s", m.failImage)
+	}
+	return nil
+}
+func (m *mockTarget) IsNamespaceAware() bool { return m.namespaceAware }
 func (m *mockTarget) LoadImages() ([]*target.TargetImage, error) {
 	return m.loadedImages, m.loadErr
 }
@@ -277,4 +301,72 @@ func TestExecuteSyftScans_NamespaceFiltering(t *testing.T) {
 			t.Errorf("expects 'img-orphan', but was: %s", globalTarget.removedImages[0].ImageID)
 		}
 	})
+}
+
+func TestScanPodAnnotatesOnlySuccessfulContainersAndRetries(t *testing.T) {
+	internal.OperatorConfig = &internal.Config{}
+
+	var updated corev1.Pod
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		switch {
+		case r.Method == http.MethodGet && strings.HasSuffix(r.URL.Path, "/pods/app-pod-1"):
+			_ = json.NewEncoder(w).Encode(&corev1.Pod{
+				ObjectMeta: metav1.ObjectMeta{Name: "app-pod-1", Namespace: "prod"},
+				Status: corev1.PodStatus{
+					ContainerStatuses: []corev1.ContainerStatus{
+						{Name: "c1", ImageID: "img-good"},
+						{Name: "c2", ImageID: "img-bad"},
+					},
+				},
+			})
+		case r.Method == http.MethodPut && strings.HasSuffix(r.URL.Path, "/pods/app-pod-1"):
+			_ = json.NewDecoder(r.Body).Decode(&updated)
+			_ = json.NewEncoder(w).Encode(&updated)
+		default:
+			w.WriteHeader(http.StatusNotFound)
+		}
+	}))
+	defer ts.Close()
+
+	clientset, err := k8s.NewForConfig(&rest.Config{
+		Host:          ts.URL,
+		ContentConfig: rest.ContentConfig{ContentType: "application/json"},
+	})
+	require.NoError(t, err)
+
+	mt := &mockTarget{failImage: "img-bad"}
+	p := &Processor{
+		K8s:     &kubernetes.KubeClient{Client: &libk8s.KubeClient{Client: clientset}},
+		Targets: []target.Target{mt},
+		imageMap: map[string]*cachedImage{
+			"img-good": {attestations: []*internaloci.AttestationSbom{{Scope: internaloci.ScopeAll, Sbom: "{}"}}, namespaces: map[string]struct{}{}},
+			"img-bad":  {attestations: []*internaloci.AttestationSbom{{Scope: internaloci.ScopeAll, Sbom: "{}"}}, namespaces: map[string]struct{}{}},
+		},
+	}
+
+	pod := libk8s.PodInfo{
+		PodName:      "app-pod-1",
+		PodNamespace: "prod",
+		Annotations:  map[string]string{},
+		Containers: []*libk8s.ContainerInfo{
+			{Name: "c1", Image: &liboci.RegistryImage{ImageID: "img-good"}},
+			{Name: "c2", Image: &liboci.RegistryImage{ImageID: "img-bad"}},
+		},
+	}
+
+	// First attempt: c1 succeeds, c2 fails.
+	p.scanPod(pod)
+	assert.Equal(t, "img-good", updated.Annotations["ckotzbauer.sbom-operator.io/c1"])
+	if _, ok := updated.Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
+		t.Fatal("failed container c2 was annotated as processed")
+	}
+
+	// Retry (as the periodic resync would do): c1 is skipped via its annotation,
+	// c2 is uploaded again because it was never marked as processed.
+	p.scanPod(pod)
+	assert.Equal(t, []string{"img-good", "img-bad", "img-bad"}, mt.processedImages)
+	if _, ok := updated.Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
+		t.Fatal("failed container c2 was annotated as processed after retry")
+	}
 }

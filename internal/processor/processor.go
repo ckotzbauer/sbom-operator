@@ -35,6 +35,9 @@ type Processor struct {
 	imageMap          map[string]*cachedImage
 	allowedNamespaces map[string]bool
 	namespaceMutex    sync.RWMutex
+	// scanMu serialises scanPod across the informer handlers, the initial
+	// sync and the retry loop so imageMap is never accessed concurrently.
+	scanMu sync.Mutex
 }
 
 // cachedImage holds the scanned SBOM attestations once per image ID
@@ -134,8 +137,10 @@ func (p *Processor) ListenForPods() {
 
 			var removedContainers []*libk8s.ContainerInfo
 			newInfo.Containers, removedContainers = getChangedContainers(oldInfo, newInfo)
+			p.scanMu.Lock()
 			p.scanPod(newInfo)
 			p.cleanupImagesIfNeeded(removedContainers, oldInfo.PodNamespace, informer.GetStore().List())
+			p.scanMu.Unlock()
 		},
 		DeleteFunc: func(obj interface{}) {
 			pod := obj.(*corev1.Pod)
@@ -148,7 +153,9 @@ func (p *Processor) ListenForPods() {
 
 			info := p.K8s.Client.ExtractPodInfos(*pod)
 			logrus.Tracef("Pod %s/%s was removed.", info.PodNamespace, info.PodName)
+			p.scanMu.Lock()
 			p.cleanupImagesIfNeeded(info.Containers, info.PodNamespace, informer.GetStore().List())
+			p.scanMu.Unlock()
 		},
 	})
 
@@ -158,6 +165,53 @@ func (p *Processor) ListenForPods() {
 	}
 
 	p.runInformerAsync(informer)
+
+	// Periodically retry pods whose scan or upload failed (they stay unannotated).
+	retryInterval := 5 * time.Minute
+	if s := internal.OperatorConfig.RetryInterval; s != "" {
+		parsed, err := time.ParseDuration(s)
+		if err != nil {
+			logrus.WithError(err).Fatal("Invalid value for retry-interval")
+		}
+		retryInterval = parsed
+	}
+
+	// shortcut: with ignore-annotations=true annotation presence can't distinguish
+	// failed from processed containers, so the retry loop would rescan the whole
+	// cluster every tick. Retry stays event-driven there. Upgrade: track failures
+	// explicitly (e.g. a failed-images set) instead of inferring them from annotations.
+	if retryInterval > 0 && !HasJobImage() && !internal.OperatorConfig.IgnoreAnnotations {
+		go p.retryFailedScans(informer, retryInterval)
+	}
+}
+
+// retryFailedScans rescans all pods that still have unannotated containers,
+// i.e. containers whose previous scan or upload failed. Annotated containers
+// and images cached in imageMap are skipped inside scanPod.
+func (p *Processor) retryFailedScans(informer cache.SharedIndexInformer, interval time.Duration) {
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+
+	for range ticker.C {
+		for _, po := range informer.GetStore().List() {
+			pod, ok := po.(*corev1.Pod)
+			if !ok || !p.isNamespaceAllowed(pod.Namespace) {
+				continue
+			}
+
+			info := p.K8s.Client.ExtractPodInfos(*pod)
+			for _, c := range info.Containers {
+				if !p.K8s.HasAnnotation(info.Annotations, c) {
+					// Lock per pod so informer handlers are not stalled by the
+					// scans/uploads of the whole retry pass.
+					p.scanMu.Lock()
+					p.scanPod(info)
+					p.scanMu.Unlock()
+					break
+				}
+			}
+		}
+	}
 }
 
 func (p *Processor) isNamespaceAllowed(namespace string) bool {
@@ -242,7 +296,6 @@ func (p *Processor) getCachedAttestations(namespace string, imageId string) (alr
 }
 
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
-	errOccurred := false
 	p.K8s.InjectPullSecrets(pod)
 	// Only the dtrack target consumes deployment timestamps; resolve them lazily
 	// so other targets do not pay two extra Kubernetes API calls per pod per cycle.
@@ -259,12 +312,16 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	// Group containers by ImageID to avoid duplicate scans within the same pod
 	containersByImageID := make(map[string][]*libk8s.ContainerInfo)
 	imageByID := make(map[string]*liboci.RegistryImage)
+	// successful tracks the containers whose scan and upload succeeded; only
+	// those get annotated so failed ones are retried later.
+	successful := make(map[string]bool)
 
 	for _, container := range pod.Containers {
 		if p.K8s.HasAnnotation(pod.Annotations, container) {
 			logrus.Debugf("Skip image %s", container.Image.ImageID)
 			continue
 		}
+		successful[container.Name] = false
 		imgID := container.Image.ImageID
 		containersByImageID[imgID] = append(containersByImageID[imgID], container)
 		imageByID[imgID] = container.Image
@@ -275,7 +332,12 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 
 		alreadyInNs, cachedAttestations := p.getCachedAttestations(pod.PodNamespace, imgID)
 		if alreadyInNs {
-			continue // Already scanned and sent to targets for this namespace -> nothing to do
+			// Image was already processed for this namespace -> nothing to do, but
+			// the container counts as processed and may be annotated.
+			for _, c := range containerList {
+				successful[c.Name] = true
+			}
+			continue
 		}
 
 		attestations := cachedAttestations
@@ -305,7 +367,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 			if !foundDefaultScopeSbom {
 				sbom, err := p.sy.ExecuteSyft(image)
 				if err != nil {
-					errOccurred = true
+					logrus.WithError(err).Debugf("Scan of image %s failed and will be retried", imgID)
 					continue
 				}
 				attestations = append(attestations, &oci.AttestationSbom{
@@ -323,7 +385,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 				ctx := target.NewContext(image, &pod, att, releaseTime, podTime, containerList)
 				if err := t.ProcessSbom(ctx); err != nil {
 					imageErr = true
-					errOccurred = true
+					logrus.WithError(err).Warnf("Upload of image %s failed and will be retried", imgID)
 				}
 			}
 		}
@@ -331,11 +393,21 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		// Mark this namespace as processed and cache the attestations for other namespaces
 		if !imageErr {
 			p.imageScanned(pod.PodNamespace, imgID, attestations)
+			for _, c := range containerList {
+				successful[c.Name] = true
+			}
 		}
 	}
 
-	if !errOccurred && len(pod.Containers) > 0 {
-		p.K8s.UpdatePodAnnotation(pod)
+	var annotated []string
+	for name, ok := range successful {
+		if ok {
+			annotated = append(annotated, name)
+		}
+	}
+
+	if len(annotated) > 0 {
+		p.K8s.UpdatePodAnnotation(pod, annotated)
 	}
 }
 
@@ -530,7 +602,11 @@ func (p *Processor) executeJobImage(pods []libk8s.PodInfo) {
 
 	if jobClient.WaitForJob(j) {
 		for _, pod := range filteredPods {
-			p.K8s.UpdatePodAnnotation(pod)
+			names := make([]string, 0, len(pod.Containers))
+			for _, c := range pod.Containers {
+				names = append(names, c.Name)
+			}
+			p.K8s.UpdatePodAnnotation(pod, names)
 		}
 	}
 }
@@ -780,7 +856,9 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 				}
 			}
 
+			p.scanMu.Lock()
 			p.executeSyftScans(missingPods, allImages)
+			p.scanMu.Unlock()
 		}
 	}()
 }

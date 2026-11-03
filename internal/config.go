@@ -48,6 +48,7 @@ type Config struct {
 	Verbosity                        string   `env:"SBOM_VERBOSITY" flag:"verbosity"`
 	FetchOciAttestations             bool     `yaml:"fetchOciAttestations" env:"FETCH_OCI_ATTESTATIONS" flag:"fetch-oci-attestations"`
 	InsecureHttpRegistry             bool     `yaml:"insecureHttpRegistry" env:"INSECURE_HTTP_REGISTRY" flag:"insecure-http-registry"`
+	RetryInterval                    string   `yaml:"retryInterval" env:"SBOM_RETRY_INTERVAL" flag:"retry-interval"`
 }
 
 var (
@@ -88,6 +89,7 @@ var (
 	ConfigKeyJobImage                                        = "job-image"
 	ConfigKeyFetchOciAttestations                            = "fetch-oci-attestations"
 	ConfigKeyInsecureHttpRegistry                            = "insecure-http-registry"
+	ConfigKeyRetryInterval                                   = "retry-interval"
 	/* #nosec */
 	ConfigKeyJobImagePullSecret = "job-image-pull-secret"
 	ConfigKeyJobTimeout         = "job-timeout"
