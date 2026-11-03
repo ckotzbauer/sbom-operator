@@ -86,6 +86,11 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 				logrus.WithError(err).Infof("unable to close source")
 			}
 		}
+		// Wipe only after src.Close(): stereoscope's own temp-dir cleanup must
+		// run first, otherwise it operates on already-deleted paths (#908).
+		if err := removeTempContents(); err != nil {
+			logrus.WithError(err).Warn("Could not cleanup tmp directory")
+		}
 	}()
 
 	cfg := syft.DefaultCreateSBOMConfig().
@@ -132,11 +137,6 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	}
 
 	bom := string(b)
-	err = removeTempContents()
-	if err != nil {
-		logrus.WithError(err).Warn("Could not cleanup tmp directory")
-	}
-
 	return bom, nil
 }
 
