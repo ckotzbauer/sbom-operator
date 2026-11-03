@@ -808,7 +808,6 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			logrus.Info("Finished cache sync")
 			pods := informer.GetStore().List()
 			missingPods := make([]libk8s.PodInfo, 0)
-			allImages := make(map[string][]*liboci.RegistryImage)
 
 			validPods := make([]libk8s.PodInfo, 0, len(pods))
 			for _, po := range pods {
@@ -827,7 +826,7 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 
 			// Collect every running container's image, independent of scan need,
 			// so SBOMs of already-processed containers are not removed as orphans.
-			allImages = collectAllImages(validPods)
+			allImages := collectAllImages(validPods)
 
 			type loadedTarget struct {
 				target target.Target
