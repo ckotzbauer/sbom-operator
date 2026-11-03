@@ -4,6 +4,7 @@ import (
 	"context"
 	"fmt"
 	"os"
+	"strings"
 	"time"
 
 	"github.com/sirupsen/logrus"
@@ -178,15 +179,21 @@ func (client *KubeClient) updatePodAnnotation(pod libk8s.PodInfo) error {
 	}
 
 	for _, c := range newPod.Status.ContainerStatuses {
-		ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = c.ImageID
+		if c.ImageID != "" {
+			ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
+		}
 	}
 
 	for _, c := range newPod.Status.InitContainerStatuses {
-		ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = c.ImageID
+		if c.ImageID != "" {
+			ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
+		}
 	}
 
 	for _, c := range newPod.Status.EphemeralContainerStatuses {
-		ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = c.ImageID
+		if c.ImageID != "" {
+			ann[fmt.Sprintf(AnnotationTemplate, c.Name)] = normalizeImageID(c.ImageID)
+		}
 	}
 
 	newPod.Annotations = ann
@@ -205,10 +212,20 @@ func (client *KubeClient) HasAnnotation(annotations map[string]string, container
 	}
 
 	if val, ok := annotations[fmt.Sprintf(AnnotationTemplate, container.Name)]; ok {
-		return val == container.Image.ImageID
+		return normalizeImageID(val) == container.Image.ImageID
 	}
 
 	return false
+}
+
+// normalizeImageID strips the runtime-specific scheme prefix (e.g. docker-pullable://)
+// so annotations match across containerd and Docker runtimes. Mirrors libk8soci's
+// ExtractPodInfos, which stores the same trimmed value in ContainerInfo.Image.ImageID.
+func normalizeImageID(imageID string) string {
+	if i := strings.LastIndex(imageID, "://"); i >= 0 {
+		return imageID[i+3:]
+	}
+	return imageID
 }
 
 func (client *KubeClient) CreateJobSecret(namespace, suffix string, data []byte) error {
