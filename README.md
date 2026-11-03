@@ -221,6 +221,7 @@ not present in the cluster anymore are removed from the configured targets (exce
 | `dtrack-project-name-annotation-key` | `false` | `""` | Kubernetes pod annotation key to set custom dtrack project name automatically, e.g. "my.pod.annotation" |
 | `dtrack-manage-project-active-status` | `true` when enabled without parent config | `false` | Manage project active/isLatest status based on running pods. Orphans are deactivated instead of deleted. Requires a parent project. |
 | `kubernetes-cluster-id` | `false` | `"default"` | Kubernetes Cluster ID (to be used in Dependency-Track or Job-Images) |
+| `dtrack-deployment-history` | `false` | `false` | Track deployment timestamps as ISO-8601-1:2019 intervals in Dependency-Track project properties and retain a persistent `deployed-stage=<stage>` tag on projects to record which stages were active at any point in time (useful for quick API v2 retrieval). |
 
 Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version.
 When there's no image-tag, but a digest, the digest is used as project-version.
@@ -341,7 +342,9 @@ When `--dtrack-manage-project-active-status` is enabled, the operator manages pr
 
 A parent project is required — either `--dtrack-parent-project-annotation-key` or `--dtrack-default-parent-project`. In multi-cluster tag mode, the current cluster's tag is removed first and the project is only deactivated if no other clusters are still using it.
 
-Requires Dependency Track v4.12.0+ for the `isLatest` field.
+> **Note:** Requires Dependency Track v4.12.0+ for the `isLatest` field.
+
+> **Note:** Project deactivation and tag cleanup use the `PATCH /api/v1/project/{uuid}` endpoint, which requires **Dependency-Track 4.8 or newer**. `--dtrack-deployment-history` is opt-in (`false` by default).
 
 ---
 
@@ -376,32 +379,33 @@ spec:
 
 ### Deployment Timestamp Tracking
 
-The SBOM Operator automatically tracks deployment intervals for projects in Dependency-Track by maintaining ISO-8601 time intervals as **Project Properties** inside the `deployment-timestamp` property group.
+When `--dtrack-deployment-history` (`SBOM_DTRACK_DEPLOYMENT_HISTORY=true`) is enabled, the SBOM Operator automatically tracks deployment intervals for projects in Dependency-Track by maintaining ISO-8601-1:2019 time intervals as **Project Properties** inside the `deployment-timestamp` property group and retaining a persistent `deployed-stage=<stage>` tag on the project.
 
 #### Purpose
 
-KPI calculations like Mean time to remidation (MTTR) or SLA compliance can be done using that data.
-
+KPI calculations like Mean Time to Remediation (MTTR) or SLA compliance can be done using that data.
+ 
 #### How It Works
- 
-1. **Active Deployments (`start/..`):**
-   When an SBOM is successfully processed and uploaded for an active image in a Kubernetes cluster (or namespace), the operator ensures a deployment property exists. If a deployment is newly seen or reactivated, an ISO-8601 time interval (e.g., `2026-10-30T18:00:00Z/..`) is recorded or extended.
+
+1. **Active Deployments (`start/..`) & Persistent Stage Tag:**
+   When an SBOM is processed for an active image in a Kubernetes cluster (or namespace), the operator attaches a persistent `deployed-stage=<stage>` tag and ensures a deployment property exists. If a deployment is newly seen (or re-deployed after a previous interval was closed), an open-ended ISO-8601 time interval (e.g., `2026-10-30T18:00:00Z/..`) is created or appended.
 2. **Orphan Cleanup & Deactivation (`start/end`):**
-   When pods or namespaces scale down and an image is no longer running in a specific cluster or namespace, the operator automatically closes the active deployment interval by appending the current timestamp (e.g., `2026-10-30T18:00:00Z/2026-10-30T18:02:45Z`).
- 
+   When pods or namespaces scale down and an image is no longer running in a specific cluster or namespace, the operator removes the active `kubernetes-cluster=<stage>` / `namespace=<ns>` tags, retains the `deployed-stage=<stage>` history tag, and automatically closes the active deployment interval for that stage by appending the current timestamp (e.g., `2026-10-30T18:00:00Z/2026-10-30T18:02:45Z`).
+
 ---
  
-#### Property Configuration & Group Details
- 
+#### Property & Tag Configuration Details
+
+* **Persistent Stage Tag:** `deployed-stage=<cluster-id>` (in `tag` or `prefix` mode) or `deployed-stage=<cluster-id>/<namespace>` (in `tag-namespace` mode). This tag remains on the project even after deactivation (or if `--dtrack-deployment-history` is later disabled) so historical deployments can be queried efficiently via Dependency-Track API v2 (`tags_all`).
 * **Property Group Name:** `deployment-timestamp`
 * **Property Name:** Matches the configured cluster ID (e.g., `my-cluster`) in `tag` or `prefix` mode, or the namespaced stage identifier (e.g., `my-cluster/production`) in `tag-namespace` mode.
-* **Property Value Format:** ISO-8601 interval string (`start-time/end-time` or an open-ended interval `start-time/..` while active).
- 
+* **Property Value Format:** Comma-separated ISO-8601-1:2019 interval string (`start-time/end-time` or an open-ended interval `start-time/..` while active).
+
 ```yaml
 # Example Dependency-Track Project Property Entry
 GroupName: deployment-timestamp
 PropertyName: my-cluster-prod/payment-ns
-PropertyValue: 2026-10-01T08:30:00Z/2026-10-30T18:00:00Z
+PropertyValue: 2026-10-01T08:30:00Z/2026-10-30T18:00:00Z,2026-10-31T09:00:00Z/..
 Description: ISO-8601 deployment intervals in stage my-cluster-prod/payment-ns
 ```
 

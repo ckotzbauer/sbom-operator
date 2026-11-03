@@ -42,6 +42,7 @@ type DependencyTrackTarget struct {
 	defaultParentProjectParsed *uuid.UUID
 	templateProjectName        string
 	parsedProjectTemplate      *template.Template
+	deploymentHistoryEnabled   bool
 }
 
 const (
@@ -50,10 +51,11 @@ const (
 	rawImageId               string = "raw-image-id"
 	sbomScopeTagKey          string = "sbom-scope"
 	podNamespaceTagKey       string = "namespace"
+	deployedStageTagKey      string = "deployed-stage"
 	deploymentTimestampGroup string = "deployment-timestamp"
 )
 
-func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool, templateProjectName string) *DependencyTrackTarget {
+func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId string, k8sClusterIdMode string, defaultParentProject string, parentProjectAnnotationKey string, projectNameAnnotationKey string, useShortName bool, manageProjectActiveStatus bool, templateProjectName string, deploymentHistoryEnabled bool) *DependencyTrackTarget {
 	return &DependencyTrackTarget{
 		baseUrl:                    baseUrl,
 		apiKey:                     apiKey,
@@ -69,6 +71,7 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 		useShortName:               useShortName,
 		manageProjectActiveStatus:  manageProjectActiveStatus,
 		templateProjectName:        templateProjectName,
+		deploymentHistoryEnabled:   deploymentHistoryEnabled,
 	}
 }
 
@@ -378,6 +381,12 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 
 	if !containsTag(project.Tags, sbomOperator) {
 		project.Tags = append(project.Tags, dtrack.Tag{Name: sbomOperator})
+	}
+	if g.deploymentHistoryEnabled {
+		deployedStageTag := deployedStageTagKey + "=" + clusterId
+		if !containsTag(project.Tags, deployedStageTag) {
+			project.Tags = append(project.Tags, dtrack.Tag{Name: deployedStageTag})
+		}
 	}
 
 	// Ensure the raw-image-id tag reflects the current container digest. Previously
@@ -982,6 +991,7 @@ func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client,
 
 	g.projectDeleted(project, img)
 	// 2. Fast exit if the project is completely orphaned and should be deleted
+	// (runs even if the project was already marked inactive in Dependency-Track)
 	if !stillInUse && deleteProject {
 		logrus.Infof("Deleting project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
 		if err := client.Project.Delete(ctx, project.UUID); err != nil {
@@ -991,35 +1001,34 @@ func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client,
 		return nil
 	}
 
-	// 3. Immediately persist tag/status changes to minimize the race window after Project.Get
-	project.Tags = filteredTags
-	activenessChange := project.Active != stillInUse
-	if activenessChange {
-		if stillInUse {
-			logrus.Infof("Activating project '%s:%s' as it is still used by other clusters", project.Name, project.Version)
-		} else {
-			logrus.Infof("Deactivating project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
+	// 3. Persist tag and/or active status changes via a single minimal PATCH call.
+	// Already-inactive projects without tag changes are skipped; already-inactive projects
+	// with stale tags have their tags cleaned up while remaining inactive.
+	shouldDeactivate := project.Active && !stillInUse
+	if shouldDeactivate || tagsModified {
+		patchReq := dtrack.Project{
+			Active: project.Active && stillInUse,
 		}
-	}
-	if activenessChange {
-		project.Active = stillInUse
-		// Keep IsLatest consistent with the reactivation path in ProcessSbom:
-		// a project still in use is the latest, an orphaned one is not.
-		project.IsLatest = dtrack.OptionalBoolOf(stillInUse)
-	}
-	if activenessChange || tagsModified { // Only patch if there actually was a change
-		if _, err := client.Project.Update(ctx, *project); err != nil {
-			logrus.WithError(err).Warnf("Project '%s:%s' could not be updated", project.Name, project.Version)
+		if shouldDeactivate {
+			logrus.Infof("Deactivating project '%s:%s' as it is not used by any other clusters", project.Name, project.Version)
+			patchReq.IsLatest = dtrack.OptionalBoolOf(false)
+		}
+		if tagsModified {
+			project.Tags = filteredTags
+			patchReq.Tags = filteredTags
+		}
+		if _, err := client.Project.Patch(ctx, project.UUID, patchReq); err != nil {
+			logrus.WithError(err).Warnf("Project '%s:%s' could not be patched", project.Name, project.Version)
 			return err
 		}
 	}
 
-	// 4. Close stage deployment interval last. Only close it when no other namespace
-	// in this cluster still uses the project: in "tag" mode the property is shared
-	// across namespaces, so closing it while another namespace is still deploying
-	// would record false downtime.
-	if tagsModified && !sameProjectInOtherNs {
-		return g.closeStageInterval(ctx, expectedClusterId, client, project)
+	// 4. Close stage deployment interval when this cluster/stage stops running the project,
+	// even if other clusters still use the project (stillInUse == true).
+	if g.deploymentHistoryEnabled && (tagsModified || !stillInUse) && !sameProjectInOtherNs {
+		if err := g.closeStageInterval(ctx, expectedClusterId, client, project); err != nil {
+			return err
+		}
 	}
 
 	return nil
@@ -1050,9 +1059,13 @@ func (g *DependencyTrackTarget) isStillUsedInOtherNamespace(project *dtrack.Proj
 
 // closeStageInterval closes the active ISO-8601 deployment timestamp interval for the current cluster.
 func (g *DependencyTrackTarget) closeStageInterval(ctx context.Context, clusterId string, client *dtrack.Client, project *dtrack.Project) error {
+	if !g.deploymentHistoryEnabled {
+		return nil
+	}
+
 	props, err := client.ProjectProperty.GetAll(ctx, project.UUID, dtrack.PageOptions{})
 	if err != nil {
-		logrus.WithError(err).Warnf("Project properties could not be updated for project '%s:%s'", project.Name, project.Version)
+		logrus.WithError(err).Warnf("Project properties could not be fetched for project '%s:%s'", project.Name, project.Version)
 		return err
 	}
 
@@ -1068,6 +1081,7 @@ func (g *DependencyTrackTarget) closeStageInterval(ctx context.Context, clusterI
 			"ISO-8601 deployment intervals in stage "+clusterId,
 		); err != nil {
 			logrus.WithError(err).Warnf("Could not close deployment interval for project '%s:%s'", project.Name, project.Version)
+			return err
 		}
 	}
 	return nil
@@ -1127,10 +1141,14 @@ func (g *DependencyTrackTarget) syncStageIntervalProperty(
 	releaseTimestamp time.Time,
 	podTimestamp time.Time,
 ) {
+	if !g.deploymentHistoryEnabled {
+		return
+	}
+
 	props, err := client.ProjectProperty.GetAll(ctx, project.UUID, dtrack.PageOptions{})
 	if err != nil {
-		logrus.WithError(err).Warnf("Failed to fetch properties for project %s", project.UUID)
-		props.Items = project.Properties
+		logrus.WithError(err).Warnf("Failed to fetch properties for project '%s:%s'", project.Name, project.Version)
+		return
 	}
 
 	existingVal, hasExistingInterval := findProperty(props.Items, clusterId)
