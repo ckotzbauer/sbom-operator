@@ -229,6 +229,34 @@ func TestHandleOrphanImages_DeactivateTarget(t *testing.T) {
 	}
 }
 
+func TestCollectAllImages_IncludesEveryContainerImage(t *testing.T) {
+	// Regression test for #1063: during initial sync, allImages must contain
+	// every running container's image, regardless of whether the pod needs
+	// analysis. Otherwise the SBOMs of containers after the first one in a pod
+	// are removed as orphans.
+	pods := []libk8s.PodInfo{
+		{
+			PodNamespace: "ns-1",
+			Containers: []*libk8s.ContainerInfo{
+				{Name: "app", Image: &liboci.RegistryImage{ImageID: "img-app"}},
+				{Name: "sidecar", Image: &liboci.RegistryImage{ImageID: "img-sidecar"}},
+			},
+		},
+	}
+
+	allImages := collectAllImages(pods)
+
+	images := allImages["ns-1"]
+	if len(images) != 2 {
+		t.Fatalf("expected 2 container images in allImages, got %d", len(images))
+	}
+	var ids []string
+	for _, img := range images {
+		ids = append(ids, img.ImageID)
+	}
+	assert.ElementsMatch(t, []string{"img-app", "img-sidecar"}, ids)
+}
+
 func TestExecuteSyftScans_NamespaceFiltering(t *testing.T) {
 	internal.OperatorConfig.DeleteOrphanImages = true
 

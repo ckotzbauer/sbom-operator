@@ -639,6 +639,21 @@ func containsImage(images []*target.TargetImage, namespace string, image string)
 	return false
 }
 
+// collectAllImages builds the set of all images currently running in the
+// cluster from every container of every pod. It must not depend on whether a
+// pod needs analysis: an image whose container is already annotated still
+// runs and must stay in the set, otherwise its SBOM is removed as an orphan.
+func collectAllImages(pods []libk8s.PodInfo) map[string][]*liboci.RegistryImage {
+	allImages := make(map[string][]*liboci.RegistryImage)
+	for _, info := range pods {
+		for _, c := range info.Containers {
+			allImages[info.PodNamespace] = append(allImages[info.PodNamespace], c.Image)
+		}
+	}
+
+	return allImages
+}
+
 func containsContainerImage(containers []*libk8s.ContainerInfo, image string) bool {
 	for _, c := range containers {
 		if c.Image.ImageID == image {
@@ -808,11 +823,11 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 
 				info := p.K8s.Client.ExtractPodInfos(*pod)
 				validPods = append(validPods, info)
-
-				for _, c := range info.Containers {
-					allImages[info.PodNamespace] = append(allImages[info.PodNamespace], c.Image)
-				}
 			}
+
+			// Collect every running container's image, independent of scan need,
+			// so SBOMs of already-processed containers are not removed as orphans.
+			allImages = collectAllImages(validPods)
 
 			type loadedTarget struct {
 				target target.Target
