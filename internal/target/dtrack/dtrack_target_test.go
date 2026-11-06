@@ -102,12 +102,15 @@ func TestContainsTag(t *testing.T) {
 	tags := []dtrack.Tag{
 		{Name: "tag1"},
 		{Name: "kubernetes-cluster=my-cluster"},
+		{Name: "kubernetes-cluster=prod-eu"},
+		{Name: "kubernetes-cluster=sandbox/app-worker"},
 	}
 
 	assert.True(t, containsTag(tags, "tag1"))
 	assert.True(t, containsTag(tags, "kubernetes-cluster=my-cluster"))
-	assert.True(t, containsTag(tags, "kubernetes-cluster="))
 	assert.False(t, containsTag(tags, "tag2"))
+	assert.False(t, containsTag(tags, "kubernetes-cluster=prod"))
+	assert.False(t, containsTag(tags, "kubernetes-cluster=sandbox/app"))
 }
 
 func TestRemoveTag(t *testing.T) {
