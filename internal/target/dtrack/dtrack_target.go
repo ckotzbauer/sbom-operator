@@ -874,7 +874,7 @@ func getContainerNameFromAnnotationKey(annotationKey string, delimiter string) s
 
 func containsTag(tags []dtrack.Tag, tagString string) bool {
 	for _, tag := range tags {
-		if tag.Name == tagString || strings.Index(tag.Name, tagString) == 0 {
+		if tag.Name == tagString {
 			return true
 		}
 	}
