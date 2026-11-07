@@ -398,6 +398,8 @@ github.com/ckotzbauer/libstandard v0.0.0-20261006062910-4e176040f4ea h1:slWKdMlV
 github.com/ckotzbauer/libstandard v0.0.0-20261006062910-4e176040f4ea/go.mod h1:CidjkMtH74jWa6NgZU3WTh3DgVdbBTPABWHpCIuM+po=
 github.com/ckotzbauer/libstandard v0.0.0-20261106162103-e5878f5ed0bd h1:4QOnDXlr3eQI7okrODsCG4BMeE89s+pUno5lhsTAF1E=
 github.com/ckotzbauer/libstandard v0.0.0-20261106162103-e5878f5ed0bd/go.mod h1:CidjkMtH74jWa6NgZU3WTh3DgVdbBTPABWHpCIuM+po=
+github.com/ckotzbauer/libstandard v0.0.0-20261107091313-f658acacaebc h1:4G8wd+PhxqPoodBHPz0ZopXFTvZZPUQpBVzb6aQyJBc=
+github.com/ckotzbauer/libstandard v0.0.0-20261107091313-f658acacaebc/go.mod h1:CidjkMtH74jWa6NgZU3WTh3DgVdbBTPABWHpCIuM+po=
 github.com/client9/misspell v0.3.4/go.mod h1:qj6jICC3Q7zFZvVWo7KLAzC3yx5G7kyvSDkc90ppPyw=
 github.com/clipperhouse/displaywidth v0.11.0 h1:lBc6kY44VFw+TDx4I8opi/EtL9m20WSEFgwIwO+UVM8=
 github.com/clipperhouse/displaywidth v0.11.0/go.mod h1:bkrFNkf81G8HyVqmKGxsPufD3JhNl3dSqnGhOoSD/o0=
