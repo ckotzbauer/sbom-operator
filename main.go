@@ -131,6 +131,8 @@ func newRootCmd() *cobra.Command {
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyInsecureHttpRegistry, false, "Use HTTP instead of HTTPS for fetching data from registry (OCI)")
 	rootCmd.PersistentFlags().String(internal.ConfigKeyDtrackTemplatedProjectName, "", "The default project name in DTrack using go template. Please check documentation about available variables.")
 	rootCmd.PersistentFlags().Bool(internal.ConfigKeyDtrackDeploymentHistory, false, "Track deployment timestamps as ISO-8601 intervals in DTrack project properties as well as a persistent `kubernetes-cluster-id` tag in the project.")
+	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeySyftCatalogers, []string{}, "Syft cataloger selection expressions (e.g. 'golang,javascript' to select only those, '+sbom-cataloger' to add, or '-java' to remove from defaults).")
+	rootCmd.PersistentFlags().StringSlice(internal.ConfigKeySyftScopeRules, []string{}, "Syft cataloger scope rules in format 'scope:catalogers' (e.g. 'application:golang,javascript' to apply to specific scopes). The scope is obtained from SBOM attestations (only if `-fetch-oci-attestations` is specified).")
 	return rootCmd
 }
 
