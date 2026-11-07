@@ -159,6 +159,8 @@ github.com/alessio/shellescape v1.4.1 h1:V7yhSDDn8LP4lc4jS8pFkt0zCnzVJlG5JXy9BVK
 github.com/alessio/shellescape v1.4.1/go.mod h1:PZAiSCk0LJaZkiCSkPv8qIobYglO3FPpyFjDCtHLS30=
 github.com/anchore/clio v0.1.1 h1:9bkYnaFbpT0J3G0qSHyQqa/lpK5zV0C9Gtgh82H/jj0=
 github.com/anchore/clio v0.1.1/go.mod h1:CFPIopJlakJbBpKtAL/EPpj4W9hgBO7PfFc8N2FAtlE=
+github.com/anchore/clio v0.1.2 h1:kCWNUkJsRJ5A103fFSLG+CSqIP9bOIFX2X5GEnup0HM=
+github.com/anchore/clio v0.1.2/go.mod h1:LqoM9TUMDolUMaPV4hslLvuooqIjpTN8J7V/rBqk/Zc=
 github.com/anchore/fangs v0.1.1 h1:NBTHocmWM2/0gNhebpoE/wEB0Z0nxh2lESww2o/Uf5M=
 github.com/anchore/fangs v0.1.1/go.mod h1:82oZuk4+RynOvAoxnXKmI1zO5xk/kbOw+5t4fAAPSsk=
 github.com/anchore/go-collections v0.1.1 h1:kGlmSehs+ctTBZr+98F2+taHeolHy+XDx1Nczl8GZc8=
@@ -187,6 +189,8 @@ github.com/anchore/stereoscope v0.4.0 h1:MDL7YFRDaGzhCdjm/s+em1D/X9HwnZMYupfgg+m
 github.com/anchore/stereoscope v0.4.0/go.mod h1:hYJsi3M8a8N1O66u+rMQSgv5TREGM7QIjKBjPPnwiD8=
 github.com/anchore/syft v1.55.0 h1:IeBZJrF/g75ba3k0ITQ8v4NCVGiGsWU3Wa1P/eSAFa0=
 github.com/anchore/syft v1.55.0/go.mod h1:mBfgoR36a4J2XG7L6EPThwJjUjdQb/fUyxghW3U72Zk=
+github.com/anchore/syft v1.56.0 h1:hpIzQsvlNPCgrz7KJZ79HX59I44yE/AyqTbvO5Q92jM=
+github.com/anchore/syft v1.56.0/go.mod h1:xSTo7HeWF/zil0aQOTxwDjGZcN3GjM2X+hkHrMZs0Hk=
 github.com/andreyvit/diff v0.0.0-20170406064948-c7f18ee00883/go.mod h1:rCTlJbsFo29Kk6CurOXKm700vrz8f0KW0JNfpkRJY/8=
 github.com/andybalholm/brotli v1.2.5 h1:BSI8V4zmx/3BAn6OKjF1PmfVq7Aoi52AdFsi6bpCx+s=
 github.com/andybalholm/brotli v1.2.5/go.mod h1:rzTDkvFWvIrjDXZHkuS16NPggd91W3kUSvPlQ1pLaKY=
@@ -475,6 +479,8 @@ github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc h1:U9qPSI2PIWSS1
 github.com/davecgh/go-spew v1.1.2-0.20180830191138-d8f796af33cc/go.mod h1:J7Y8YcW2NihsgmVo/mv3lAwl/skON4iLHjSsI+c5H38=
 github.com/deitch/magic v0.0.0-20240306090643-c67ab88f10cb h1:4W/2rQ3wzEimF5s+J6OY3ODiQtJZ5W1sForSgogVXkY=
 github.com/deitch/magic v0.0.0-20240306090643-c67ab88f10cb/go.mod h1:B3tI9iGHi4imdLi4Asdha1Sc6feLMTfPLXh9IUYmysk=
+github.com/deitch/magic v1.0.0 h1:Nma1YAj7EB8Mlv4pVhbPpUp0CV1luYj2NOnE2+2xPNE=
+github.com/deitch/magic v1.0.0/go.mod h1:B3tI9iGHi4imdLi4Asdha1Sc6feLMTfPLXh9IUYmysk=
 github.com/dgrijalva/jwt-go/v4 v4.0.0-preview1/go.mod h1:+hnT3ywWDTAFrW5aE+u2Sa/wT555ZqwoCS+pk3p6ry4=
 github.com/digitorus/pkcs7 v0.0.0-20230713084857-e76b763bdc49/go.mod h1:SKVExuS+vpu2l9IoOc0RwqE7NYnb0JlcFHFnEJkVDzc=
 github.com/digitorus/pkcs7 v0.0.0-20230818184609-3a137a874352 h1:ge14PCmCvPjpMQMIAH7uKg0lrtNSOdpYsRXlwk3QbaE=
@@ -572,6 +578,8 @@ github.com/gabriel-vasile/mimetype v1.4.16/go.mod h1:3oFFwxX8kTklZwzIl2aQEDZT0lK
 github.com/ghodss/yaml v1.0.0/go.mod h1:4dBDuWmgqj2HViK6kFavaiC9ZROes6MMH2rRYeMEF04=
 github.com/github/go-spdx/v2 v2.7.1 h1:+siV9wnsncI5pg4otH/sKvqGL8UkcLdPh16TSJYY1V4=
 github.com/github/go-spdx/v2 v2.7.1/go.mod h1:Ftc45YYG1WzpzwEPKRVm9Jv8vDqOrN4gWoCkK+bHer0=
+github.com/github/go-spdx/v2 v2.8.0 h1:WKCnF2Ee/x+zwSIEeQdm6+be0H6PiCNLQmSZ5CFmxMI=
+github.com/github/go-spdx/v2 v2.8.0/go.mod h1:Ftc45YYG1WzpzwEPKRVm9Jv8vDqOrN4gWoCkK+bHer0=
 github.com/gkampitakis/ciinfo v0.3.4 h1:5eBSibVuSMbb/H6Elc0IIEFbkzCJi3lm94n0+U7Z0KY=
 github.com/gkampitakis/ciinfo v0.3.4/go.mod h1:1NIwaOcFChN4fa/B0hEBdAb6npDlFL8Bwx4dfRLRqAo=
 github.com/gkampitakis/go-snaps v0.5.23 h1:okh5QR48zpUjpWtu65AtqxdCY8huJq+dEDuUzd1PuKg=
@@ -795,10 +803,14 @@ github.com/gookit/assert v0.1.1/go.mod h1:jS5bmIVQZTIwk42uXl4lyj4iaaxx32tqH16CFj
 github.com/gookit/color v1.2.5/go.mod h1:AhIE+pS6D4Ql0SQWbBeXPHw7gY0/sjHoA4s/n1KB7xg=
 github.com/gookit/color v1.6.2 h1:M6TJRJMuDFPYkrWmjOvMj+E0xIjcHq8lMPy7+vv0z1Y=
 github.com/gookit/color v1.6.2/go.mod h1:9ACFc7/1IpHGBW8RwuDm/0YEnhg3dwwXpoMsmtyHfjs=
+github.com/gookit/color v1.6.3 h1:m6E49x+KftGaspcLtPLMsyci2ARhWIUW0PUV1owMlhs=
+github.com/gookit/color v1.6.3/go.mod h1:9ACFc7/1IpHGBW8RwuDm/0YEnhg3dwwXpoMsmtyHfjs=
 github.com/gorilla/mux v1.8.1 h1:TuBL49tXwgrFYWhqrNgrUNEY92u81SPhu7sTdzQEiWY=
 github.com/gorilla/mux v1.8.1/go.mod h1:AKf9I4AEqPTmMytcMc0KkNouC66V3BtZ4qD5fmWSiMQ=
 github.com/gpustack/gguf-parser-go v0.26.4 h1:B9CRrQBcIB7I/MJFZvzPZ+e+cbc1xBzQJcmpi9l/mKU=
 github.com/gpustack/gguf-parser-go v0.26.4/go.mod h1:y4TwTtDqFWTK+xvprOjRUh+dowgU2TKCX37vRKvGiZ0=
+github.com/gpustack/gguf-parser-go v0.27.0 h1:eXFU9pmJEMQHOTL9qI742lXHWSa1CtlMWUU3gFce7nM=
+github.com/gpustack/gguf-parser-go v0.27.0/go.mod h1:y4TwTtDqFWTK+xvprOjRUh+dowgU2TKCX37vRKvGiZ0=
 github.com/grpc-ecosystem/go-grpc-middleware v1.4.0 h1:UH//fgunKIs4JdUbpDl1VZCDaL56wXCB/5+wF6uHfaI=
 github.com/grpc-ecosystem/go-grpc-middleware v1.4.0/go.mod h1:g5qyo/la0ALbONm6Vbp88Yd8NsDy6rZz+RcrMPxvld8=
 github.com/grpc-ecosystem/grpc-gateway v1.16.0/go.mod h1:BDjrQk3hbvj6Nolgz8mAMFbcEtjT1g+wF4CSlocrBnw=
