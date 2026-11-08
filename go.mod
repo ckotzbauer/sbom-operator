@@ -5,7 +5,7 @@ go 1.26.8
 require (
 	github.com/DependencyTrack/client-go v0.19.0
 	github.com/anchore/stereoscope v0.4.1
-	github.com/anchore/syft v1.56.0
+	github.com/anchore/syft v1.57.0
 	github.com/aws/aws-sdk-go-v2/config v1.33.15
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.67.4
 	github.com/ckotzbauer/libk8soci v0.0.0-20261022050137-d2781e9ca0bf
