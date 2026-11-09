@@ -23,6 +23,7 @@ const (
 	ScopeAnnotationKey    string          = "dev.sigstore.sbom.scope"
 	ScopeAll              string          = "all"
 	MediaTypeDsseEnvelope types.MediaType = "application/vnd.dsse.envelope.v1+json"
+	MediaTypeInToto       types.MediaType = "application/vnd.in-toto+json"
 )
 
 // dsseEnvelope represents the outer Dead Simple Signing Envelope stored by cosign attest.
@@ -146,6 +147,7 @@ func isSupportedSbomMediaType(mt types.MediaType) bool {
 
 func extractFromDsseEnvelope(rawEnvelope []byte) (string, types.MediaType, error) {
 	var env dsseEnvelope
+	logrus.Debugf("Extracting DSSE envelope with size: %d", len(rawEnvelope))
 	if err := json.Unmarshal(rawEnvelope, &env); err != nil || env.Payload == "" {
 		return "", "", err
 	}
@@ -154,9 +156,14 @@ func extractFromDsseEnvelope(rawEnvelope []byte) (string, types.MediaType, error
 	if err != nil {
 		return "", "", err
 	}
+	return extractFromInTotoStatement(decodedStatement)
+}
 
+func extractFromInTotoStatement(rawStatement []byte) (string, types.MediaType, error) {
 	var stmt inTotoStatement
-	if err := json.Unmarshal(decodedStatement, &stmt); err != nil || len(stmt.Predicate) == 0 {
+	var err error
+	logrus.Debugf("Extracting inToto statement with size: %d", len(rawStatement))
+	if err := json.Unmarshal(rawStatement, &stmt); err != nil || len(stmt.Predicate) == 0 {
 		return "", "", err
 	}
 
@@ -164,7 +171,6 @@ func extractFromDsseEnvelope(rawEnvelope []byte) (string, types.MediaType, error
 	if mt == "" {
 		return "", "", fmt.Errorf("not supported PredicateType: %s", stmt.PredicateType)
 	}
-
 	return string(stmt.Predicate), mt, err
 }
 
@@ -229,6 +235,9 @@ func parseAttestationPayload(layerMediaType types.MediaType, rawPayload []byte, 
 		detectedMediaType = layerMediaType
 		err = nil
 
+	case layerMediaType == MediaTypeInToto:
+		sbomContent, detectedMediaType, err = extractFromInTotoStatement(rawPayload)
+
 	case layerMediaType == MediaTypeDsseEnvelope:
 		sbomContent, detectedMediaType, err = extractFromDsseEnvelope(rawPayload)
 
@@ -237,6 +246,8 @@ func parseAttestationPayload(layerMediaType types.MediaType, rawPayload []byte, 
 		if err = json.Unmarshal(rawPayload, &bundle); err == nil && len(bundle.DsseEnvelope) > 0 {
 			sbomContent, detectedMediaType, err = extractFromDsseEnvelope(bundle.DsseEnvelope)
 		}
+	default:
+		logrus.Debugf("Unsupported layer MediaType: %s", layerMediaType)
 	}
 
 	if err != nil || sbomContent == "" {
