@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"net/http"
+	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -43,7 +45,13 @@ type DependencyTrackTarget struct {
 	templateProjectName        string
 	parsedProjectTemplate      *template.Template
 	deploymentHistoryEnabled   bool
+	wifTokenFile               string
+	wifProvider                string
+	wifServiceAccount          string
+	wifJwtHeader               string
 }
+
+var jwtHeaderNamePattern = regexp.MustCompile(`^[A-Za-z0-9-]+$`)
 
 const (
 	kubernetesCluster        string = "kubernetes-cluster"
@@ -75,12 +83,51 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 	}
 }
 
+// WithWorkloadIdentity configures workload identity federation: instead of an API key,
+// the token in tokenFile is exchanged for a Dependency-Track session before each operation.
+func (g *DependencyTrackTarget) WithWorkloadIdentity(tokenFile, provider, serviceAccount string) *DependencyTrackTarget {
+	g.wifTokenFile = tokenFile
+	g.wifProvider = provider
+	g.wifServiceAccount = serviceAccount
+	return g
+}
+
+// WithWorkloadIdentityJwtHeader additionally sends the workload identity token in the
+// given request header on every request (e.g. for a proxy in front of Dependency-Track).
+func (g *DependencyTrackTarget) WithWorkloadIdentityJwtHeader(name string) *DependencyTrackTarget {
+	g.wifJwtHeader = name
+	return g
+}
+
 func (g *DependencyTrackTarget) ValidateConfig() error {
 	if g.baseUrl == "" {
 		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackBaseUrl)
 	}
-	if g.apiKey == "" {
-		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackApiKey)
+	if g.apiKey == "" && g.wifTokenFile == "" {
+		return fmt.Errorf("either %s or %s must be set", internal.ConfigKeyDependencyTrackApiKey, internal.ConfigKeyDependencyTrackWifTokenFile)
+	}
+	if g.apiKey != "" && g.wifTokenFile != "" {
+		return fmt.Errorf("%s and %s are mutually exclusive", internal.ConfigKeyDependencyTrackApiKey, internal.ConfigKeyDependencyTrackWifTokenFile)
+	}
+	if g.wifTokenFile != "" {
+		if g.wifProvider == "" {
+			return fmt.Errorf("%s provided but %s is empty", internal.ConfigKeyDependencyTrackWifTokenFile, internal.ConfigKeyDependencyTrackWifProvider)
+		}
+		if g.wifServiceAccount == "" {
+			return fmt.Errorf("%s provided but %s is empty", internal.ConfigKeyDependencyTrackWifTokenFile, internal.ConfigKeyDependencyTrackWifServiceAccount)
+		}
+		// The token exchange uses its own HTTP client without the mTLS settings.
+		if g.caCertFile != "" {
+			return fmt.Errorf("%s is not supported together with %s", internal.ConfigKeyDependencyTrackWifTokenFile, internal.ConfigKeyDependencyTrackCaCertFile)
+		}
+	}
+	if g.wifJwtHeader != "" {
+		if g.wifTokenFile == "" {
+			return fmt.Errorf("%s requires %s", internal.ConfigKeyDependencyTrackWifJwtHeader, internal.ConfigKeyDependencyTrackWifTokenFile)
+		}
+		if !jwtHeaderNamePattern.MatchString(g.wifJwtHeader) || strings.EqualFold(g.wifJwtHeader, "Authorization") {
+			return fmt.Errorf("%s: invalid header name %q", internal.ConfigKeyDependencyTrackWifJwtHeader, g.wifJwtHeader)
+		}
 	}
 	if g.caCertFile != "" {
 		if g.clientCertFile == "" {
@@ -140,13 +187,46 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() error {
 	g.clientOptions = []dtrack.ClientOption{}
 
-	g.clientOptions = append(g.clientOptions, dtrack.WithAPIKey(g.apiKey))
+	if g.apiKey != "" {
+		g.clientOptions = append(g.clientOptions, dtrack.WithAPIKey(g.apiKey))
+	}
 
 	if len(g.caCertFile) > 0 {
 		g.clientOptions = append(g.clientOptions, dtrack.WithMTLS(g.caCertFile, g.clientCertFile, g.clientKeyFile))
 	}
 
 	return nil
+}
+
+// newClient creates a Dependency-Track client. With workload identity federation
+// configured, a fresh session token is exchanged for every call (no caching).
+func (g *DependencyTrackTarget) newClient(ctx context.Context) (*dtrack.Client, error) {
+	if g.wifTokenFile == "" {
+		return dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	}
+
+	exchanger := newTokenExchanger(g.baseUrl, g.wifTokenFile, g.wifProvider, g.wifServiceAccount)
+	exchanger.jwtHeader = g.wifJwtHeader
+	token, err := exchanger.Exchange(ctx)
+	if err != nil {
+		return nil, fmt.Errorf("workload identity token exchange failed: %w", err)
+	}
+
+	options := []dtrack.ClientOption{}
+	if g.wifJwtHeader != "" {
+		base, err := url.Parse(g.baseUrl)
+		if err != nil {
+			return nil, fmt.Errorf("invalid %s: %w", internal.ConfigKeyDependencyTrackBaseUrl, err)
+		}
+		// Must come first: WithBearerToken wraps the transport that is set at that point.
+		options = append(options, dtrack.WithHttpClient(&http.Client{
+			Timeout:   dtrack.DefaultTimeout,
+			Transport: &jwtHeaderTransport{header: g.wifJwtHeader, tokenFile: g.wifTokenFile, host: base.Host, base: http.DefaultTransport},
+		}))
+	}
+	options = append(options, g.clientOptions...)
+	options = append(options, dtrack.WithBearerToken(token))
+	return dtrack.NewClient(g.baseUrl, options...)
 }
 
 func (g *DependencyTrackTarget) identifyProjectNameAndVersion(ctx *target.TargetContext) (string, string) {
@@ -312,7 +392,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		return nil
 	}
 
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	client, err := g.newClient(context.Background())
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return err
@@ -624,7 +704,7 @@ func (g *DependencyTrackTarget) getContainerNameAndVersion(foundProjectName stri
 }
 
 func (g *DependencyTrackTarget) LoadImages() ([]*target.TargetImage, error) {
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	client, err := g.newClient(context.Background())
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return nil, err
@@ -769,7 +849,7 @@ func (g *DependencyTrackTarget) removeOrDeactivate(images []*target.TargetImage,
 		}
 	}
 
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	client, err := g.newClient(context.Background())
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return err

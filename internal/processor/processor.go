@@ -451,7 +451,13 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			manageProjectActiveStatus := internal.OperatorConfig.DtrackManageProjectActiveStatus
 			templateProjectName := internal.OperatorConfig.DtrackTemplatedProjectName
 			deploymentTimestampsEnabled := internal.OperatorConfig.DtrackDeploymentHistory
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName, deploymentTimestampsEnabled)
+			wifTokenFile := internal.OperatorConfig.DtrackWifTokenFile
+			wifProvider := internal.OperatorConfig.DtrackWifProvider
+			wifServiceAccount := internal.OperatorConfig.DtrackWifServiceAccount
+			wifJwtHeader := internal.OperatorConfig.DtrackWifJwtHeader
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName, deploymentTimestampsEnabled).
+				WithWorkloadIdentity(wifTokenFile, wifProvider, wifServiceAccount).
+				WithWorkloadIdentityJwtHeader(wifJwtHeader)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {
