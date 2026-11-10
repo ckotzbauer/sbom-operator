@@ -6,6 +6,7 @@ import (
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 )
 
 type TargetContext struct {
@@ -42,6 +43,12 @@ type DeactivateTarget interface {
 	Target
 	Deactivate(images []*TargetImage) error
 	ShouldDeactivateOrphans() bool
+}
+
+// FormatCapableTarget can be implemented by targets that only accept specific SBOM media types.
+// Targets that do not implement this interface (or return an empty slice) accept any SBOM format.
+type FormatCapableTarget interface {
+	SupportedMediaTypes() []types.MediaType
 }
 
 func NewContext(image *oci.RegistryImage, pod *libk8s.PodInfo, attestation *internaloci.AttestationSbom, deploymentTime time.Time, podCreationTime time.Time, containers []*libk8s.ContainerInfo) *TargetContext {
