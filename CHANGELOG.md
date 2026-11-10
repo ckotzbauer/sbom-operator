@@ -1,3 +1,28 @@
+## Version 0.49.1 (2026-11-10)
+
+### Dependency updates
+
+* [[`3b017b43`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3b017b43)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 52333e9 (#1104)
+* [[`52333e93`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/52333e93)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.57.0 (#1106)
+* [[`ca66bead`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ca66bead)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.4.1 (#1105)
+* [[`158c42be`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/158c42be)] - **deps**: update aws-sdk-go-v2 monorepo (#1102)
+* [[`113d2cb3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/113d2cb3)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to ea9acd6 (#1100)
+* [[`ea9acd6f`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/ea9acd6f)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to f658aca (#1101)
+* [[`8547be00`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8547be00)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.56.0 (#1098)
+* [[`34acf935`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/34acf935)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to 0fe8cf6 (#1099)
+* [[`a5412ad5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/a5412ad5)] - **deps**: update sigstore&#x2F;cosign-installer action to v4.1.3 (#1096)
+* [[`e85acfda`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e85acfda)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.4.0 (#1097)
+* [[`e41ce624`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e41ce624)] - **deps**: update module modernc.org&#x2F;sqlite to v1.61.1 (#1095)
+* [[`2e34f6c3`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2e34f6c3)] - **deps**: update aws-sdk-go-v2 monorepo (#1094)
+* [[`2bccc376`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/2bccc376)] - **deps**: update github.com&#x2F;ckotzbauer&#x2F;libstandard digest to e5878f5 (#1093)
+* [[`b5c48dc4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/b5c48dc4)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 251e2cc (#1092)
+* [[`4045ee29`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4045ee29)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to 2062650 (#1091)
+
+### Common changes
+
+* [[`251e2cc9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/251e2cc9)] - **dtrack**: match tags exactly in containsTag (#1090)
+
+
 ## Version 0.49.0 (2026-11-03)
 
 ### Features and improvements
