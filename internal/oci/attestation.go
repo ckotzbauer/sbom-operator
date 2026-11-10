@@ -15,15 +15,20 @@ import (
 	v1 "github.com/google/go-containerregistry/pkg/v1"
 	ggcrremote "github.com/google/go-containerregistry/pkg/v1/remote"
 	"github.com/google/go-containerregistry/pkg/v1/types"
+	sigstoreoci "github.com/sigstore/cosign/v3/pkg/oci"
 	ociremote "github.com/sigstore/cosign/v3/pkg/oci/remote"
 	"github.com/sirupsen/logrus"
 )
 
 const (
-	ScopeAnnotationKey    string          = "dev.sigstore.sbom.scope"
-	ScopeAll              string          = "all"
-	MediaTypeDsseEnvelope types.MediaType = "application/vnd.dsse.envelope.v1+json"
-	MediaTypeInToto       types.MediaType = "application/vnd.in-toto+json"
+	ScopeAnnotationKey              string          = "dev.sigstore.sbom.scope"
+	ScopeAll                        string          = "all"
+	MediaTypeDsseEnvelope           types.MediaType = "application/vnd.dsse.envelope.v1+json"
+	MediaTypeInToto                 types.MediaType = "application/vnd.in-toto+json"
+	DockerReferenceTypeAnnotation                   = "vnd.docker.reference.type"
+	DockerReferenceDigestAnnotation                 = "vnd.docker.reference.digest"
+	DockerAttestationManifestType                   = "attestation-manifest"
+	InTotoPredicateTypeAnnotation                   = "in-toto.io/predicate-type"
 )
 
 // dsseEnvelope represents the outer Dead Simple Signing Envelope stored by cosign attest.
@@ -84,16 +89,31 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 	var result []*AttestationSbom
 
 	if se, err := ociremote.SignedEntity(ref, ociOpts); err == nil {
-		// 1. Cosign SBOM Attachment (sha256-<digest>.sbom via "cosign attach sbom")
+		// 1. Check if the signed entity is a Multi-Arch Image Index (e.g. Docker BuildKit SBOM/Attestation index)
+		if sii, ok := se.(sigstoreoci.SignedImageIndex); ok {
+			if idxManifest, err := sii.IndexManifest(); err == nil && idxManifest != nil {
+				for _, m := range idxManifest.Manifests {
+					if m.Annotations[DockerReferenceTypeAnnotation] == DockerAttestationManifestType ||
+						(m.Platform != nil && m.Platform.Architecture == "unknown" && m.Platform.OS == "unknown") {
+						if attImg, err := sii.SignedImage(m.Digest); err == nil {
+							logrus.Tracef("Found index manifest. Extracting SBOMs from attestation manifest layer: %s", m.Digest)
+							result = append(result, extractSbomsFromImageLayers(attImg, m.Annotations)...)
+						}
+					}
+				}
+			}
+		}
+		// 2. Cosign SBOM Attachment (sha256-<digest>.sbom via "cosign attach sbom")
 		if f, err := se.Attachment("sbom"); err == nil && f != nil {
 			if mt, err := f.MediaType(); err == nil {
 				if rawPayload, err := f.Payload(); err == nil && len(rawPayload) > 0 {
+					logrus.Tracef("Found attachment with MediaType: %s.", mt)
 					result = append(result, parseAttestationPayload(mt, rawPayload, nil)...)
 				}
 			}
 		}
 
-		// 2. Cosign Attestations (sha256-<digest>.att via "cosign attest")
+		// 3. Cosign Attestations (sha256-<digest>.att via "cosign attest")
 		if atts, err := se.Attestations(); err == nil {
 			if sigs, err := atts.Get(); err == nil {
 				for _, sig := range sigs {
@@ -106,6 +126,7 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 						continue
 					}
 					anns, _ := sig.Annotations()
+					logrus.Tracef("Found attestation with MediaType: %s.", layerMediaType)
 					result = append(result, parseAttestationPayload(layerMediaType, rawPayload, anns)...)
 				}
 			}
@@ -114,7 +135,7 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 		logrus.WithError(err).Debugf("No signed entity found for image: '%s'", img.ImageID)
 	}
 
-	// 3. OCI 1.1 Referrers (Cosign v3 Bundles & ORAS Attached SBOMs)
+	// 4. OCI 1.1 Referrers (Cosign v3 Bundles & ORAS Attached SBOMs)
 	if digestRef, err := ociremote.ResolveDigest(ref, ociOpts); err == nil {
 		if indexManifest, err := ociremote.Referrers(digestRef, "", ociOpts); err == nil && indexManifest != nil {
 			for _, desc := range indexManifest.Manifests {
@@ -124,6 +145,7 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 					logrus.WithError(err).Debugf("Can't get referrer (MediaType: '%s', Size: '%d') for base image: '%s'", desc.MediaType, desc.Size, img.Image)
 					continue
 				}
+				logrus.Tracef("Found referrer (MediaType: '%s', Size: '%d') for base image: '%s'", desc.MediaType, desc.Size, img.Image)
 				result = append(result, extractSbomsFromImageLayers(referrerImg, desc.Annotations)...)
 			}
 		} else {
@@ -187,9 +209,7 @@ func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]st
 		logrus.WithError(err).Debugf("Failed to fetch layers")
 		return nil
 	}
-	logrus.Debugf("Found %d layers.", len(layers))
 	for i, layer := range layers {
-		logrus.Debugf("Checking layer: %d", i)
 		mt, err := layer.MediaType()
 		if err != nil {
 			logrus.WithError(err).Debugf("Failed to fetch MediaType")
@@ -212,12 +232,13 @@ func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]st
 			anns[k] = v
 		}
 		if i < len(manifest.Layers) {
-			logrus.Debugf("Checking manifest: %s", manifest.Layers[i].Digest)
+			logrus.Debugf("Checking manifest layer '%s' on layer %d/%d", manifest.Layers[i].Digest, i+1, len(manifest.Layers))
 			for k, v := range manifest.Layers[i].Annotations {
 				anns[k] = v
 			}
 		}
 
+		logrus.Tracef("Found layer with MediaType: %s.", mt)
 		found = append(found, parseAttestationPayload(mt, rawPayload, anns)...)
 	}
 
@@ -231,15 +252,24 @@ func parseAttestationPayload(layerMediaType types.MediaType, rawPayload []byte, 
 
 	switch {
 	case isSupportedSbomMediaType(layerMediaType):
-		sbomContent = string(rawPayload)
-		detectedMediaType = layerMediaType
-		err = nil
-
-	case layerMediaType == MediaTypeInToto:
-		sbomContent, detectedMediaType, err = extractFromInTotoStatement(rawPayload)
+		// Unwrap in-toto statement if an in-toto envelope was attached with a direct SBOM mediaType
+		if content, mt, inTotoErr := extractFromInTotoStatement(rawPayload); inTotoErr == nil && content != "" {
+			sbomContent = content
+			detectedMediaType = mt
+		} else {
+			sbomContent = string(rawPayload)
+			detectedMediaType = layerMediaType
+		}
 
 	case layerMediaType == MediaTypeDsseEnvelope:
 		sbomContent, detectedMediaType, err = extractFromDsseEnvelope(rawPayload)
+
+	case layerMediaType == MediaTypeInToto:
+		// Try DSSE envelope first, then fallback to unsigned in-toto statement (e.g. Docker BuildKit)
+		sbomContent, detectedMediaType, err = extractFromDsseEnvelope(rawPayload)
+		if err != nil || sbomContent == "" {
+			sbomContent, detectedMediaType, err = extractFromInTotoStatement(rawPayload)
+		}
 
 	case strings.HasPrefix(string(layerMediaType), "application/vnd.dev.sigstore.bundle"):
 		var bundle sigstoreBundle
