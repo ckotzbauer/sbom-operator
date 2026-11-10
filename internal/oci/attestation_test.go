@@ -287,16 +287,27 @@ func TestFetchSbomAttestations_BuildxImageIndex(t *testing.T) {
 	defer srv.Close()
 
 	host := strings.TrimPrefix(srv.URL, "http://")
+	prevConfig := internal.OperatorConfig
+	t.Cleanup(func() {
+		internal.OperatorConfig = prevConfig
+	})
 	internal.OperatorConfig = &internal.Config{
 		InsecureHttpRegistry: true,
 	}
 
-	// 1. Create the base linux/amd64 container image
-	baseLayer := static.NewLayer([]byte("binary-layer-content"), types.OCILayer)
+	// 1. Create base linux/amd64 and linux/arm64 container images
+	baseLayer := static.NewLayer([]byte("binary-layer-content-amd64"), types.OCILayer)
 	amd64Img, err := mutate.AppendLayers(empty.Image, baseLayer)
 	require.NoError(t, err)
 	amd64Img = mutate.MediaType(amd64Img, types.OCIManifestSchema1)
 	amd64Digest, err := amd64Img.Digest()
+	require.NoError(t, err)
+
+	arm64Layer := static.NewLayer([]byte("binary-layer-content-arm64"), types.OCILayer)
+	arm64Img, err := mutate.AppendLayers(empty.Image, arm64Layer)
+	require.NoError(t, err)
+	arm64Img = mutate.MediaType(arm64Img, types.OCIManifestSchema1)
+	arm64Digest, err := arm64Img.Digest()
 	require.NoError(t, err)
 
 	// 2. Create the Docker BuildKit attestation image containing an SPDX SBOM layer and a SLSA provenance layer
@@ -314,20 +325,35 @@ func TestFetchSbomAttestations_BuildxImageIndex(t *testing.T) {
 			Layer:     sbomLayer,
 			MediaType: MediaTypeInToto,
 			Annotations: map[string]string{
-				"in-toto.io/predicate-type": "https://spdx.dev/Document",
+				InTotoPredicateTypeAnnotation: "https://spdx.dev/Document",
 			},
 		},
 		mutate.Addendum{
 			Layer:     slsaLayer,
 			MediaType: MediaTypeInToto,
 			Annotations: map[string]string{
-				"in-toto.io/predicate-type": "https://slsa.dev/provenance/v1",
+				InTotoPredicateTypeAnnotation: "https://slsa.dev/provenance/v1",
 			},
 		},
 	)
 	require.NoError(t, err)
 
-	// 3. Assemble the OCI Image Index (matching Docker Buildx layout)
+	// Create an unrelated attestation image referencing a foreign digest (tests P2.2)
+	foreignSpdx := `{"spdxVersion":"SPDX-2.3","SPDXID":"SPDXRef-DOCUMENT","name":"foreign-sbom"}`
+	foreignStatement := `{"_type":"https://in-toto.io/Statement/v0.1","predicateType":"https://spdx.dev/Document","predicate":` + foreignSpdx + `}`
+	foreignAttImg, err := mutate.Append(
+		mutate.MediaType(empty.Image, types.OCIManifestSchema1),
+		mutate.Addendum{
+			Layer:     static.NewLayer([]byte(foreignStatement), MediaTypeInToto),
+			MediaType: MediaTypeInToto,
+			Annotations: map[string]string{
+				ScopeAnnotationKey: "foreign-scope",
+			},
+		},
+	)
+	require.NoError(t, err)
+
+	// 3. Assemble the Multi-Arch OCI Image Index (matching multi-platform Docker Buildx layout)
 	idx := mutate.IndexMediaType(empty.Index, types.OCIImageIndex)
 	idx = mutate.AppendManifests(
 		idx,
@@ -339,13 +365,42 @@ func TestFetchSbomAttestations_BuildxImageIndex(t *testing.T) {
 			},
 		},
 		mutate.IndexAddendum{
+			Add: arm64Img,
+			Descriptor: v1.Descriptor{
+				MediaType: types.OCIManifestSchema1,
+				Platform:  &v1.Platform{Architecture: "arm64", OS: "linux"},
+			},
+		},
+		mutate.IndexAddendum{
 			Add: attImg,
 			Descriptor: v1.Descriptor{
 				MediaType: types.OCIManifestSchema1,
 				Platform:  &v1.Platform{Architecture: "unknown", OS: "unknown"},
 				Annotations: map[string]string{
-					"vnd.docker.reference.type":   "attestation-manifest",
-					"vnd.docker.reference.digest": amd64Digest.String(),
+					DockerReferenceTypeAnnotation:   DockerAttestationManifestType,
+					DockerReferenceDigestAnnotation: amd64Digest.String(),
+				},
+			},
+		},
+		mutate.IndexAddendum{
+			Add: attImg,
+			Descriptor: v1.Descriptor{
+				MediaType: types.OCIManifestSchema1,
+				Platform:  &v1.Platform{Architecture: "unknown", OS: "unknown"},
+				Annotations: map[string]string{
+					DockerReferenceTypeAnnotation:   DockerAttestationManifestType,
+					DockerReferenceDigestAnnotation: arm64Digest.String(),
+				},
+			},
+		},
+		mutate.IndexAddendum{
+			Add: foreignAttImg,
+			Descriptor: v1.Descriptor{
+				MediaType: types.OCIManifestSchema1,
+				Platform:  &v1.Platform{Architecture: "unknown", OS: "unknown"},
+				Annotations: map[string]string{
+					DockerReferenceTypeAnnotation:   DockerAttestationManifestType,
+					DockerReferenceDigestAnnotation: "sha256:0000000000000000000000000000000000000000000000000000000000000000",
 				},
 			},
 		},
@@ -370,9 +425,34 @@ func TestFetchSbomAttestations_BuildxImageIndex(t *testing.T) {
 
 	attestations, err := FetchSbomAttestations(context.Background(), containerImg, nil)
 	require.NoError(t, err)
-	require.Len(t, attestations, 1, "Expected exactly 1 SBOM attestation (SLSA provenance must be filtered out)")
+	require.Len(t, attestations, 1, "Expected exactly 1 deduplicated SBOM attestation (SLSA, duplicate arm64 SBOM, and foreign digest must be filtered out)")
 
 	assert.Equal(t, "all", attestations[0].Scope)
 	assert.Equal(t, types.MediaType("application/spdx+json"), attestations[0].MediaType)
 	assert.JSONEq(t, spdxContent, attestations[0].Sbom)
+}
+
+func TestGetFormat(t *testing.T) {
+	tests := []struct {
+		mediaType   types.MediaType
+		expected    string
+		expectError bool
+	}{
+		{GetMediaType(SyftMediaType), "json", false},
+		{GetMediaType(CycloneDXXMLMediaType), "cyclonedx", false},
+		{GetMediaType(CycloneDXJSONMediaType), "cyclonedxjson", false},
+		{GetMediaType(SPDXMediaType), "spdx", false},
+		{GetMediaType(SPDXJSONMediaType), "spdxjson", false},
+		{types.MediaType("application/octet-stream"), "", true},
+	}
+
+	for _, tc := range tests {
+		fmtStr, err := GetFormat(tc.mediaType)
+		if tc.expectError {
+			assert.Error(t, err)
+		} else {
+			assert.NoError(t, err)
+			assert.Equal(t, tc.expected, fmtStr)
+		}
+	}
 }

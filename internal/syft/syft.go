@@ -31,6 +31,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 	"github.com/sirupsen/logrus"
 )
 
@@ -250,4 +251,38 @@ func closeOrLog(c io.Closer) {
 	if err := c.Close(); err != nil {
 		logrus.WithError(err).Warnf("Could not close file")
 	}
+}
+
+// ConvertSbom decodes an existing SBOM string (e.g. SPDX JSON, SPDX tag-value, or Syft JSON)
+// and re-encodes it into the requested target media type (e.g. CycloneDX JSON).
+func (s *Syft) ConvertSbom(rawSbom string, targetMediaType types.MediaType) (string, error) {
+	if strings.TrimSpace(rawSbom) == "" {
+		return "", nil
+	}
+
+	targetFormat, err := internaloci.GetFormat(targetMediaType)
+	if err != nil {
+		return "", err
+	}
+
+	parsedSbom, _, _, err := format.Decode(strings.NewReader(rawSbom))
+	if err != nil {
+		return "", fmt.Errorf("failed to decode SBOM for conversion: %w", err)
+	}
+
+	if s.stripCpes {
+		stripCPEs(parsedSbom)
+	}
+
+	encoder, err := GetEncoder(targetFormat)
+	if err != nil {
+		return "", fmt.Errorf("failed to resolve encoder for %s: %w", targetFormat, err)
+	}
+
+	encodedBytes, err := format.Encode(*parsedSbom, encoder)
+	if err != nil {
+		return "", fmt.Errorf("failed to encode SBOM to %s: %w", targetFormat, err)
+	}
+
+	return string(encodedBytes), nil
 }

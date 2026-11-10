@@ -94,7 +94,7 @@ The operator automatically detects and unwraps SBOM payloads (`CycloneDX` and `S
    * Classic `.att` DSSE attestations (`application/vnd.dsse.envelope.v1+json`), Sigstore Bundles v0.3+ (`application/vnd.dev.sigstore.bundle.v0.3+json`), and `.sbom` attachments.
 3. **Docker BuildKit / `docker buildx` Index Attestations**:
    * Multi-arch / OCI Image Indexes (`application/vnd.oci.image.index.v1+json`) containing `vnd.docker.reference.type=attestation-manifest` descriptors generated via `docker buildx build --sbom=true`.
-   * Non-SBOM attestation layers (such as SLSA provenance `https://slsa.dev/provenance/*`) are automatically filtered out.
+   * Non-SBOM attestation layers (such as SLSA provenance `[https://slsa.dev/provenance/](https://slsa.dev/provenance/)*`) are automatically filtered out.
  
 #### Distinguishing Multiple SBOMs per Image (Scope Annotation)
  
@@ -111,7 +111,7 @@ Multiple SBOMs can be attached to the same image (e.g., an application SBOM gene
  
 Simple attachment with manifest annotation:
 ```bash
-oras attach "[registry.example.com/my-app@sha256](https://registry.example.com/my-app@sha256):<digest>" \
+oras attach "registry.example.com/my-app@sha256:<digest>" \
   --artifact-type "application/vnd.cyclonedx+json" \
   --annotation "dev.sigstore.sbom.scope=application" \
   bom.json:application/vnd.cyclonedx+json

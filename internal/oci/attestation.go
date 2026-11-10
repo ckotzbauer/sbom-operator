@@ -71,11 +71,12 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 
 	credentials := ResolveCredentials(img, proxyRegistryMap)
 
-	var refOpts []name.Option
+	var nameOpts []name.Option
 	if internal.OperatorConfig.InsecureHttpRegistry {
-		refOpts = append(refOpts, name.Insecure)
+		nameOpts = append(nameOpts, name.Insecure)
 	}
-	ref, err := name.ParseReference(img.ImageID, refOpts...)
+
+	ref, err := name.ParseReference(img.ImageID, nameOpts...)
 	if err != nil {
 		return nil, fmt.Errorf("parsing image reference %s: %w", img.ImageID, err)
 	}
@@ -91,13 +92,36 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 	if se, err := ociremote.SignedEntity(ref, ociOpts); err == nil {
 		// 1. Check if the signed entity is a Multi-Arch Image Index (e.g. Docker BuildKit SBOM/Attestation index)
 		if sii, ok := se.(sigstoreoci.SignedImageIndex); ok {
-			if idxManifest, err := sii.IndexManifest(); err == nil && idxManifest != nil {
+			if idxManifest, err := sii.IndexManifest(); err != nil {
+				logrus.WithError(err).Debugf("Failed to get index manifest for image: '%s'", img.ImageID)
+			} else if idxManifest != nil {
+				subjectDigests := make(map[string]bool, len(idxManifest.Manifests))
+				for _, m := range idxManifest.Manifests {
+					if m.Annotations[DockerReferenceTypeAnnotation] != DockerAttestationManifestType &&
+						(m.Platform == nil || m.Platform.Architecture != "unknown" || m.Platform.OS != "unknown") {
+						subjectDigests[m.Digest.String()] = true
+					}
+				}
+
+				seenScopes := make(map[string]bool)
 				for _, m := range idxManifest.Manifests {
 					if m.Annotations[DockerReferenceTypeAnnotation] == DockerAttestationManifestType ||
 						(m.Platform != nil && m.Platform.Architecture == "unknown" && m.Platform.OS == "unknown") {
-						if attImg, err := sii.SignedImage(m.Digest); err == nil {
-							logrus.Tracef("Found index manifest. Extracting SBOMs from attestation manifest layer: %s", m.Digest)
-							result = append(result, extractSbomsFromImageLayers(attImg, m.Annotations)...)
+						if refDigest := m.Annotations[DockerReferenceDigestAnnotation]; refDigest != "" && !subjectDigests[refDigest] {
+							logrus.Debugf("Skipping attestation manifest %s referencing unknown subject digest %s", m.Digest, refDigest)
+							continue
+						}
+						attImg, err := sii.SignedImage(m.Digest)
+						if err != nil {
+							logrus.WithError(err).Debugf("Failed to load attestation manifest image %s from index", m.Digest)
+							continue
+						}
+						logrus.Tracef("Found index manifest. Extracting SBOMs from attestation manifest layer: %s", m.Digest)
+						for _, sbom := range extractSbomsFromImageLayers(attImg, m.Annotations) {
+							if !seenScopes[sbom.Scope] {
+								seenScopes[sbom.Scope] = true
+								result = append(result, sbom)
+							}
 						}
 					}
 				}
@@ -149,10 +173,10 @@ func FetchSbomAttestations(ctx context.Context, img *liboci.RegistryImage, proxy
 				result = append(result, extractSbomsFromImageLayers(referrerImg, desc.Annotations)...)
 			}
 		} else {
-			logrus.WithError(err).Debugf("Can't find referrers for image: '%s'", img.Image)
+			logrus.WithError(err).Debugf("No referrers found for image: '%s'", img.ImageID)
 		}
 	} else {
-		logrus.WithError(err).Debugf("Can't resolve digest for image: '%s'", img.Image)
+		logrus.WithError(err).Debugf("Could not resolve digest for image: '%s'", img.ImageID)
 	}
 
 	return result, err
@@ -170,8 +194,11 @@ func isSupportedSbomMediaType(mt types.MediaType) bool {
 func extractFromDsseEnvelope(rawEnvelope []byte) (string, types.MediaType, error) {
 	var env dsseEnvelope
 	logrus.Debugf("Extracting DSSE envelope with size: %d", len(rawEnvelope))
-	if err := json.Unmarshal(rawEnvelope, &env); err != nil || env.Payload == "" {
+	if err := json.Unmarshal(rawEnvelope, &env); err != nil {
 		return "", "", err
+	}
+	if env.Payload == "" {
+		return "", "", fmt.Errorf("empty payload in DSSE envelope")
 	}
 
 	decodedStatement, err := base64.StdEncoding.DecodeString(env.Payload)
@@ -183,17 +210,19 @@ func extractFromDsseEnvelope(rawEnvelope []byte) (string, types.MediaType, error
 
 func extractFromInTotoStatement(rawStatement []byte) (string, types.MediaType, error) {
 	var stmt inTotoStatement
-	var err error
 	logrus.Debugf("Extracting inToto statement with size: %d", len(rawStatement))
-	if err := json.Unmarshal(rawStatement, &stmt); err != nil || len(stmt.Predicate) == 0 {
+	if err := json.Unmarshal(rawStatement, &stmt); err != nil {
 		return "", "", err
+	}
+	if len(stmt.Predicate) == 0 {
+		return "", "", fmt.Errorf("empty predicate in in-toto statement")
 	}
 
 	mt := mapPredicateTypeToMediaType(stmt.PredicateType)
 	if mt == "" {
 		return "", "", fmt.Errorf("not supported PredicateType: %s", stmt.PredicateType)
 	}
-	return string(stmt.Predicate), mt, err
+	return string(stmt.Predicate), mt, nil
 }
 
 func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]string) []*AttestationSbom {
@@ -214,6 +243,12 @@ func extractSbomsFromImageLayers(img v1.Image, manifestAnnotations map[string]st
 		if err != nil {
 			logrus.WithError(err).Debugf("Failed to fetch MediaType")
 			continue
+		}
+		if i < len(manifest.Layers) {
+			if predType := manifest.Layers[i].Annotations[InTotoPredicateTypeAnnotation]; predType != "" && mapPredicateTypeToMediaType(predType) == "" {
+				logrus.Debugf("Skipping layer with unsupported in-toto predicate type: %s", predType)
+				continue
+			}
 		}
 		rc, err := layer.Uncompressed()
 		if err != nil {
