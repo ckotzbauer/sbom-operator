@@ -8,6 +8,7 @@ import (
 	"testing"
 
 	"github.com/ckotzbauer/libk8soci/pkg/oci"
+	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/stretchr/testify/assert"
 	_ "modernc.org/sqlite" // Required for RPM database cataloging in Syft
@@ -274,4 +275,33 @@ func TestGetFileName(t *testing.T) {
 			assert.Equal(t, v.expected, out)
 		})
 	}
+}
+
+func TestConvertSbom_SpdxToCycloneDX(t *testing.T) {
+	s := syft.New("json", map[string]string{}, "0.0.0", nil, false).WithSyftVersion("v9.9.9")
+
+	spdxInput := `{
+		"spdxVersion": "SPDX-2.3",
+		"dataLicense": "CC0-1.0",
+		"SPDXID": "SPDXRef-DOCUMENT",
+		"name": "alpine-test",
+		"documentNamespace": "https://anchore.com/syft/image/alpine-test-123",
+		"creationInfo": {
+			"created": "2026-11-01T10:00:00Z",
+			"creators": ["Tool: syft-test"]
+		},
+		"packages": [
+			{
+				"name": "musl",
+				"SPDXID": "SPDXRef-Package-apk-musl-1",
+				"versionInfo": "1.2.4-r2",
+				"downloadLocation": "NOASSERTION"
+			}
+		]
+	}`
+
+	converted, err := s.ConvertSbom(spdxInput, internaloci.CycloneDXJSONMediaType)
+	assert.NoError(t, err)
+	assert.Contains(t, converted, `"bomFormat":"CycloneDX"`)
+	assert.Contains(t, converted, `"musl"`)
 }

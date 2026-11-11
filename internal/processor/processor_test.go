@@ -13,7 +13,9 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
+	"github.com/ckotzbauer/sbom-operator/internal/syft"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
+	"github.com/ckotzbauer/sbom-operator/internal/target/dtrack"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	corev1 "k8s.io/api/core/v1"
@@ -397,4 +399,33 @@ func TestScanPodAnnotatesOnlySuccessfulContainersAndRetries(t *testing.T) {
 	if _, ok := updated.Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
 		t.Fatal("failed container c2 was annotated as processed after retry")
 	}
+}
+
+func TestEnsureTargetFormat_ConvertsSpdxBeforePassingToTarget(t *testing.T) {
+	p := &Processor{
+		sy: syft.New("json", map[string]string{}, "0.0.0", nil, false),
+	}
+	dtrackTarget := dtrack.NewDependencyTrackTarget("http://localhost", "key", "", "", "", "", "cluster", "tag", "", "", "", true, false, "", false)
+
+	spdxAtt := &internaloci.AttestationSbom{
+		Scope:     internaloci.ScopeAll,
+		MediaType: internaloci.GetMediaType(internaloci.SPDXJSONMediaType),
+		Sbom: `{
+			"spdxVersion": "SPDX-2.3",
+			"dataLicense": "CC0-1.0",
+			"SPDXID": "SPDXRef-DOCUMENT",
+			"name": "test-image",
+			"documentNamespace": "https://example.com/spdx/test",
+			"creationInfo": {"created": "2026-11-01T10:00:00Z", "creators": ["Tool: buildx"]},
+			"packages": [{"name": "busybox", "SPDXID": "SPDXRef-Pkg-busybox", "versionInfo": "1.36.1", "downloadLocation": "NOASSERTION"}]
+		}`,
+	}
+
+	convertedAtt, err := p.ensureTargetFormat(dtrackTarget, spdxAtt)
+	require.NoError(t, err)
+
+	// The target receives CycloneDX JSON, while the original attestation remains untouched
+	assert.Equal(t, internaloci.GetMediaType(internaloci.CycloneDXJSONMediaType), convertedAtt.MediaType)
+	assert.Contains(t, convertedAtt.Sbom, `"bomFormat":"CycloneDX"`)
+	assert.Equal(t, internaloci.GetMediaType(internaloci.SPDXJSONMediaType), spdxAtt.MediaType)
 }

@@ -380,16 +380,20 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 
 		// Send attestations to all targets for the current pod's namespace
 		imageErr := false
-		for _, att := range attestations {
-			for _, t := range p.Targets {
-				ctx := target.NewContext(image, &pod, att, releaseTime, podTime, containerList)
+		for _, t := range p.Targets {
+			for _, attestation := range attestations {
+				targetAttestation, err := p.ensureTargetFormat(t, attestation)
+				if err != nil {
+					logrus.WithError(err).Warnf("Failed to convert SBOM (media-type '%s') for target, skipping...", attestation.MediaType)
+					continue
+				}
+				ctx := target.NewContext(image, &pod, targetAttestation, releaseTime, podTime, containerList)
 				if err := t.ProcessSbom(ctx); err != nil {
 					imageErr = true
 					logrus.WithError(err).Warnf("Upload of image %s failed and will be retried", imgID)
 				}
 			}
 		}
-
 		// Mark this namespace as processed and cache the attestations for other namespaces
 		if !imageErr {
 			p.imageScanned(pod.PodNamespace, imgID, attestations)
@@ -409,6 +413,45 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	if len(annotated) > 0 {
 		p.K8s.UpdatePodAnnotation(pod, annotated)
 	}
+}
+
+// ensureTargetFormat checks whether the target accepts the attestation's current media type.
+// If the target restricts supported media types and the attestation does not match,
+// the processor converts the SBOM into the target's preferred media type before passing it to ProcessSbom.
+func (p *Processor) ensureTargetFormat(t target.Target, att *oci.AttestationSbom) (*oci.AttestationSbom, error) {
+	if att == nil || att.MediaType == "" || att.Sbom == "" {
+		return att, nil
+	}
+
+	formatTarget, ok := t.(target.FormatCapableTarget)
+	if !ok {
+		return att, nil
+	}
+
+	supported := formatTarget.SupportedMediaTypes()
+	if len(supported) == 0 {
+		return att, nil
+	}
+
+	for _, accepted := range supported {
+		if att.MediaType == accepted {
+			return att, nil
+		}
+	}
+
+	preferredMediaType := supported[0]
+	logrus.Infof("Converting SBOM (scope=%s) from '%s' to '%s' for target", att.Scope, att.MediaType, preferredMediaType)
+
+	convertedSbom, err := p.sy.ConvertSbom(att.Sbom, preferredMediaType)
+	if err != nil {
+		return nil, err
+	}
+
+	return &oci.AttestationSbom{
+		Scope:     att.Scope,
+		MediaType: preferredMediaType,
+		Sbom:      convertedSbom,
+	}, nil
 }
 
 func initTargets(k8s *kubernetes.KubeClient) []target.Target {

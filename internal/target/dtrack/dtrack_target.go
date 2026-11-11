@@ -5,10 +5,12 @@ import (
 	"context"
 	"fmt"
 	"regexp"
+	"slices"
 	"strings"
 	"time"
 
 	dtrack "github.com/DependencyTrack/client-go"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 	"github.com/google/uuid"
 	parser "github.com/novln/docker-parser"
 	"github.com/sirupsen/logrus"
@@ -299,7 +301,7 @@ func (g *DependencyTrackTarget) isPrefixMode() bool {
 }
 
 func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
-	if ctx.Attestation.MediaType != "" && ctx.Attestation.MediaType != oci.CycloneDXJSONMediaType && ctx.Attestation.MediaType != oci.CycloneDXXMLMediaType {
+	if ctx.Attestation.MediaType != "" && !slices.Contains(g.SupportedMediaTypes(), ctx.Attestation.MediaType) {
 		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Attestation.Scope, ctx.Attestation.MediaType)
 		return nil
 	}
@@ -1177,5 +1179,14 @@ func (g *DependencyTrackTarget) syncStageIntervalProperty(
 		"ISO-8601 deployment intervals in stage "+clusterId,
 	); err != nil {
 		logrus.WithError(err).Warnf("Could not sync deployment interval for project '%s:%s'", project.Name, project.Version)
+	}
+}
+
+// SupportedMediaTypes returns the SBOM media types accepted by Dependency-Track.
+// The first element is used by the processor as the default conversion target.
+func (g *DependencyTrackTarget) SupportedMediaTypes() []types.MediaType {
+	return []types.MediaType{
+		oci.CycloneDXJSONMediaType,
+		oci.CycloneDXXMLMediaType,
 	}
 }
