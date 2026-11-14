@@ -155,6 +155,15 @@ func TestGetTemplatedNameAndVersion_TemplateExecution(t *testing.T) {
 		assert.Empty(t, name)
 		assert.Empty(t, version)
 	})
+
+	t.Run("Use Sprig functions to extract plain version", func(t *testing.T) {
+		tmpl := `{{ .PredefinedName }}:{{ $v := .PredefinedVersion | nospace }}{{ $v = regexReplaceAll "^(?:.*-)?v?([0-9]+\\.[0-9]+\\.[0-9]+.*)$" $v "${1}" }}{{ regexReplaceAll "^([0-9]+\\.[0-9]+\\.[0-9]+)-[0-9a-fA-F]{7,40}$" $v "${1}-SNAPSHOT" }}`
+		name, version, err := dtrackTarget.getTemplatedNameAndVersion(ctx, tmpl, containers, "payment-api", "test-v1.2.3-1234567")
+
+		assert.NoError(t, err)
+		assert.Equal(t, "payment-api", name)
+		assert.Equal(t, "1.2.3-SNAPSHOT", version)
+	})
 }
 
 func TestIdentifyProjectNameAndVersion_PredefinedChaining(t *testing.T) {

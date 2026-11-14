@@ -9,6 +9,7 @@ import (
 	"time"
 
 	dtrack "github.com/DependencyTrack/client-go"
+	"github.com/Masterminds/sprig/v3"
 	"github.com/google/uuid"
 	parser "github.com/novln/docker-parser"
 	"github.com/sirupsen/logrus"
@@ -128,7 +129,7 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 		}
 	}
 	if g.templateProjectName != "" {
-		tmpl, err := template.New("GlobalNameTemplate").Option("missingkey=error").Parse(g.templateProjectName)
+		tmpl, err := createTemplate("GlobalNameTemplate", g.templateProjectName)
 		if err != nil {
 			return fmt.Errorf("invalid global project name template %q: %w", g.templateProjectName, err)
 		}
@@ -527,6 +528,10 @@ func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.Con
 	}
 }
 
+func createTemplate(templateName string, templateContent string) (*template.Template, error) {
+	return template.New(templateName).Option("missingkey=error").Funcs(sprig.TxtFuncMap()).Parse(templateContent)
+}
+
 // getTemplatedNameAndVersion parses and executes a template string (used for dynamic pod annotations).
 func (g *DependencyTrackTarget) getTemplatedNameAndVersion(ctx *target.TargetContext, templateContent string, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) (string, string, error) {
 	if templateContent == "" {
@@ -539,7 +544,7 @@ func (g *DependencyTrackTarget) getTemplatedNameAndVersion(ctx *target.TargetCon
 		tmpl = g.parsedProjectTemplate
 	} else {
 		var err error
-		tmpl, err = template.New("NameTemplate").Option("missingkey=error").Parse(templateContent)
+		tmpl, err = createTemplate("NameTemplate", templateContent)
 		if err != nil {
 			return predefinedName, predefinedVersion, err
 		}

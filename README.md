@@ -230,30 +230,32 @@ The `autoCreate` option of DT is used. You have to set the `--format` flag to `c
 
 ---
 ### Project Name & Version Resolution (Templating & Annotations)
- 
+
+Project naming supports [GO templates](https://pkg.go.dev/text/template), including [Sprig functions](https://coveooss.github.io/gotemplate/docs/functions_reference/sprig-regex/).
+
 For the Dependency-Track target, the operator resolves the project name and version (`<name>:<version>`) using a **4-stage enrichment pipeline**. Each stage has access to the resolved name and version from the previous stage via `{{.PredefinedName}}` and `{{.PredefinedVersion}}`.
- 
+
 #### Resolution Hierarchy (Lowest to Highest Priority)
- 
+
 1. **Image Fallback (Default):**
    Extracts the repository name (or short name if `--dtrack-use-short-name` is enabled) and image tag/digest.
-2. **Global Cluster Template (`--dtrack-templated-project-name` / `SBOM_DTRACK_TEMPLATE_PROJECT_NAME`):**
+2. **Global Cluster Template (`--dtrack-templated-project-name` / `SBOM_DTRACK_TEMPLATED_PROJECT_NAME`):**
    If configured, evaluates a Go `text/template` across all images in the cluster.
 3. **Pod-Wide Annotation (`--dtrack-project-name-annotation-key`):**
    Evaluates the annotation `<annotation-key>` on the Pod. Applies to all containers in the Pod unless overridden by a container-specific annotation.
 4. **Container-Specific Annotation (`<annotation-key>/<container-name>`):**
    Evaluates the annotation targeting a specific container within the Pod. **Always takes precedence** over the pod-wide annotation.
- 
+
 > **Note:** Both the global cluster configuration and the pod annotations support Go [`text/template`](https://pkg.go.dev/text/template) syntax and expect the rendered output in the format `<project-name>:<project-version>`. If a stage fails to parse or evaluates to an empty string, the operator safely falls back to the result of the previous stage.
- 
+
 > **Note:** In case no `version` is defined at all, it falls back to version `latest`
 
 ---
  
 #### Available Template Fields (`TemplateData`)
- 
+
 The following fields are available in both `--dtrack-templated-project-name` and pod annotations:
- 
+
 | Field | Type | Description | Example |
 | :--- | :--- | :--- | :--- |
 | `.PredefinedName` | `string` | The project name resolved by the preceding stage in the hierarchy. | `eu-prod-order-service` |
@@ -266,14 +268,14 @@ The following fields are available in both `--dtrack-templated-project-name` and
 | `.Tag` | `string` | The image tag (empty if deployed purely by digest). | `1.4.2` |
 | `.ContainerNames` | `[]string` | Slice of container names sharing the image in the Pod. | `["order-api", "migrations"]` |
 | `.SbomScope` | `string` | The scope of the processed SBOM attestation. | `all` |
- 
+
 ---
- 
+
 #### Configuration Examples
- 
+
 ##### 1. Enforcing a Cluster-Wide Naming Convention
 To prefix every project in Dependency-Track with its Kubernetes namespace while keeping the original image version:
- 
+
 ```yaml
 # Operator configuration (CLI flag or Environment Variable)
 SBOM_DTRACK_USE_SHORT_NAME: "true"
@@ -281,10 +283,10 @@ SBOM_DTRACK_TEMPLATE_PROJECT_NAME: "{{.Namespace}}-{{.ShortName}}:{{.PredefinedV
 ```
 *Result for `ghcr.io/my-org/order-service:1.4.2` in namespace `payment`:*
 `payment-order-service` (Version: `1.4.2`)
- 
+
 ##### 2. Overriding Only the Version via Pod Annotation (Chaining)
 Because `.PredefinedName` holds the result of the global cluster template, a Pod can override **only** the version via annotation while preserving the global naming convention:
- 
+
 ```yaml
 apiVersion: v1
 kind: Pod
@@ -296,10 +298,10 @@ metadata:
     dtrack.project.name: "{{.PredefinedName}}:2026.10-release"
 ```
 *Result:* `payment-order-service` (Version: `2026.10-release`)
- 
+
 ##### 3. Pod-Wide Default with Container-Specific Override
 In multi-container Pods, you can combine a pod-wide annotation with a container-specific annotation (`<key>/<container-name>`). The container-specific annotation always takes precedence for that container:
- 
+
 ```yaml
 apiVersion: v1
 kind: Pod
