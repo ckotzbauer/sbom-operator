@@ -59,7 +59,8 @@ sbom-git-operator/
 │       │   ├── git_target.go        # Git target: stores SBOMs as files in a git repository
 │       │   └── git_target_test.go   # Tests for ImageIDToFilePath
 │       ├── dtrack/
-│       │   └── dtrack_target.go     # Dependency Track target: uploads BOMs, manages project tags, project active/inactive lifecycle
+│       │   ├── dtrack_target.go     # Dependency Track target: uploads BOMs, manages project tags, project active/inactive lifecycle
+│       │   └── workload_identity.go # Workload identity federation: token exchange, optional workload JWT header
 │       ├── oci/
 │       │   ├── oci_target.go        # OCI registry target: pushes SBOMs as OCI artifacts
 │       │   ├── oci.go               # OCI image/layer construction, media type mapping
@@ -221,6 +222,7 @@ The `hack/run-tests.sh` script:
 | `internal/target/git/git_target_test.go`       | `ImageIDToFilePath` conversion logic                                                                                                                       |
 | `internal/target/oci/oci_target_test.go`       | OCI target integration test (requires `TEST_DIGEST` and `DATE` env vars)                                                                                   |
 | `internal/target/dtrack/dtrack_target_test.go` | Project active/inactive lifecycle, sibling deactivation, orphan deactivation, LoadImages inactive filter, reactivation without re-upload                   |
+| `internal/target/dtrack/workload_identity_test.go` | Token exchange form, token file re-read and trimming, error handling, workload JWT header, one exchange per client                                     |
 
 ### SBOM Format Test Coverage
 

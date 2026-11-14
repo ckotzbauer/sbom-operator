@@ -178,10 +178,145 @@ func TestInitialize(t *testing.T) {
 
 func TestValidateConfig(t *testing.T) {
 	tests := []struct {
-		name    string
-		target  *DependencyTrackTarget
-		wantErr bool
+		name        string
+		target      *DependencyTrackTarget
+		wantErr     bool
+		errContains []string
 	}{
+		{
+			name: "Workload identity without apiKey",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+			},
+			wantErr: false,
+		},
+		{
+			name: "apiKey and workload identity are mutually exclusive",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				apiKey:            "apikey",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-api-key", "dtrack-wif-token-file"},
+		},
+		{
+			name: "Workload identity without provider",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifServiceAccount: "sbom-operator",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-provider"},
+		},
+		{
+			name: "Workload identity without service account",
+			target: &DependencyTrackTarget{
+				baseUrl:      "http://localhost:8080",
+				wifTokenFile: "/var/run/secrets/dependency-track/token",
+				wifProvider:  "kubernetes",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-service-account"},
+		},
+		{
+			name: "Workload identity with mTLS is not supported",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				caCertFile:        "ca.crt",
+				clientCertFile:    "client.crt",
+				clientKeyFile:     "client.key",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-token-file", "dtrack-ca-cert-file"},
+		},
+		{
+			name: "Workload identity with JWT header",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x-workload-token",
+			},
+			wantErr:     false,
+			errContains: []string{},
+		},
+		{
+			name: "JWT header without workload identity",
+			target: &DependencyTrackTarget{
+				baseUrl:      "http://localhost:8080",
+				apiKey:       "apikey",
+				wifJwtHeader: "x-workload-token",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header", "dtrack-wif-token-file"},
+		},
+		{
+			name: "JWT header Authorization",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "Authorization",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header authorization lowercase",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "authorization",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header with space",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x workload",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header with colon",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x-token:",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "Neither apiKey nor workload identity",
+			target: &DependencyTrackTarget{
+				baseUrl: "http://localhost:8080",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-api-key", "dtrack-wif-token-file"},
+		},
 		{
 			name: "Valid config",
 			target: &DependencyTrackTarget{
@@ -258,6 +393,9 @@ func TestValidateConfig(t *testing.T) {
 			err := tt.target.ValidateConfig()
 			if tt.wantErr {
 				assert.Error(t, err)
+				for _, s := range tt.errContains {
+					assert.ErrorContains(t, err, s)
+				}
 			} else {
 				assert.NoError(t, err)
 			}

@@ -209,7 +209,11 @@ not present in the cluster anymore are removed from the configured targets (exce
 | Parameter | Required | Default | Description |
 |-----------|----------|---------|-------------|
 | `dtrack-base-url` | `true` when `dtrack` target is used | `""` | Dependency-Track base URL, e.g. 'https://dtrack.example.com' |
-| `dtrack-api-key` | `true` when `dtrack` target is used | `""` | Dependency-Track API key |
+| `dtrack-api-key` | `true` when `dtrack` target is used, unless `dtrack-wif-token-file` is set | `""` | Dependency-Track API key |
+| `dtrack-wif-token-file` | `false` | `""` | Path of a projected service account token. Enables [workload identity federation](#dependency-track-workload-identity-federation) instead of an API key |
+| `dtrack-wif-provider` | `true` when `dtrack-wif-token-file` is provided | `""` | Name of the workload identity provider in Dependency-Track |
+| `dtrack-wif-service-account` | `true` when `dtrack-wif-token-file` is provided | `""` | Name of the Dependency-Track service account the token is exchanged for |
+| `dtrack-wif-jwt-header` | `false` | `""` | Also send the workload identity token in this request header on every request, e.g. `x-workload-token` for a proxy in front of Dependency-Track that validates it |
 | `dtrack-label-tag-matcher` | `false` | `""` | Dependency-Track Pod-Label-Tag matcher regex |
 | `dtrack-ca-cert-file` | `false` | `""` | CA-Certificate filepath when using mTLS to connect to dtrack |
 | `dtrack-client-cert-file` | `true` when `dtrack-ca-cert-file` is provided | `""` | Client-Certificate filepath when using mTLS to connect to dtrack |
@@ -227,6 +231,43 @@ not present in the cluster anymore are removed from the configured targets (exce
 Each image in the cluster is created as project with the full-image name (registry and image-path without tag) and the image-tag as project-version.
 When there's no image-tag, but a digest, the digest is used as project-version.
 The `autoCreate` option of DT is used. You have to set the `--format` flag to `cyclonedx` with this target.
+
+#### Dependency-Track workload identity federation
+
+Instead of a long-lived API key, the operator can authenticate with its Kubernetes service account token
+([workload identity federation](https://dependencytrack.github.io/docs/next/guides/administration/configuring-workload-identity-federation/),
+Dependency-Track 5.2.0 or newer). Before each operation (uploading an SBOM, loading projects, removing orphans) the operator
+reads a projected service account token and exchanges it at `/api/v2/oauth/token` for a Dependency-Track session,
+which it uses as `Authorization: Bearer` for that operation.
+
+In Dependency-Track, create:
+
+- a workload identity provider for the cluster's service account issuer, with a dedicated audience such as `dependency-track`
+(use discovery or a JWKS URL if the issuer is publicly reachable, otherwise paste the cluster's JWK Set from `kubectl get --raw /openid/v1/jwks`),
+- a service account with the permissions the operator needs (the same ones an API-key team would get),
+- a binding of that service account to the subject `system:serviceaccount:<operator-namespace>:<operator-service-account>`.
+
+Then configure the operator with a projected token for that audience, for example with the Helm chart:
+
+```yaml
+args:
+  dtrack-base-url: https://dtrack.example.com
+  dtrack-wif-token-file: /var/run/secrets/dependency-track/token
+  dtrack-wif-provider: kubernetes
+  dtrack-wif-service-account: sbom-operator
+extraVolumes:
+  - name: dependency-track-token
+    projected:
+      sources:
+        - serviceAccountToken:
+            audience: dependency-track
+            expirationSeconds: 600
+            path: token
+extraVolumeMounts:
+  - name: dependency-track-token
+    mountPath: /var/run/secrets/dependency-track
+    readOnly: true
+```
 
 ---
 ### Project Name & Version Resolution (Templating & Annotations)

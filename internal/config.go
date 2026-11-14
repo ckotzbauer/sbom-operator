@@ -34,6 +34,10 @@ type Config struct {
 	DtrackKubernetesClusterIdMode    string   `yaml:"dtrackKubernetesClusterIdMode" env:"SBOM_DTRACK_KUBERNETES_CLUSTER_ID_MODE" flag:"dtrack-kubernetes-cluster-id-mode"`
 	DtrackTemplatedProjectName       string   `yaml:"dtrackTemplatedProjectName" env:"SBOM_DTRACK_TEMPLATED_PROJECT_NAME" flag:"dtrack-templated-project-name"`
 	DtrackDeploymentHistory          bool     `yaml:"dtrackDeploymentHistory" env:"SBOM_DTRACK_DEPLOYMENT_HISTORY" flag:"dtrack-deployment-history"`
+	DtrackWifTokenFile               string   `yaml:"dtrackWifTokenFile" env:"SBOM_DTRACK_WIF_TOKEN_FILE" flag:"dtrack-wif-token-file"`
+	DtrackWifProvider                string   `yaml:"dtrackWifProvider" env:"SBOM_DTRACK_WIF_PROVIDER" flag:"dtrack-wif-provider"`
+	DtrackWifServiceAccount          string   `yaml:"dtrackWifServiceAccount" env:"SBOM_DTRACK_WIF_SERVICE_ACCOUNT" flag:"dtrack-wif-service-account"`
+	DtrackWifJwtHeader               string   `yaml:"dtrackWifJwtHeader" env:"SBOM_DTRACK_WIF_JWT_HEADER" flag:"dtrack-wif-jwt-header"`
 	KubernetesClusterId              string   `yaml:"kubernetesClusterId" env:"SBOM_KUBERNETES_CLUSTER_ID" flag:"kubernetes-cluster-id"`
 	JobImage                         string   `yaml:"jobImage" env:"SBOM_JOB_IMAGE" flag:"job-image"`
 	JobImagePullSecret               string   `yaml:"jobImagePullSecret" env:"SBOM_JOB_IMAGE_PULL_SECRET" flag:"job-image-pull-secret"`
@@ -100,6 +104,11 @@ var (
 	ConfigKeyRegistryProxy      = "registry-proxy"
 	ConfigKeyFormatVersion      = "format-version"
 	ConfigKeyStripCpes          = "strip-cpes"
+	/* #nosec */
+	ConfigKeyDependencyTrackWifTokenFile      = "dtrack-wif-token-file"
+	ConfigKeyDependencyTrackWifProvider       = "dtrack-wif-provider"
+	ConfigKeyDependencyTrackWifServiceAccount = "dtrack-wif-service-account"
+	ConfigKeyDependencyTrackWifJwtHeader      = "dtrack-wif-jwt-header"
 
 	OperatorConfig *Config
 )
