@@ -382,7 +382,7 @@ require (
 	github.com/sigstore/cosign/v3 v3.1.3
 	github.com/spf13/pflag v1.0.10 // indirect
 	golang.org/x/net v0.61.0 // indirect
-	golang.org/x/oauth2 v0.37.0
+	golang.org/x/oauth2 v0.38.0
 	golang.org/x/sys v0.49.0 // indirect
 	golang.org/x/term v0.47.0 // indirect
 	golang.org/x/text v0.43.0 // indirect
