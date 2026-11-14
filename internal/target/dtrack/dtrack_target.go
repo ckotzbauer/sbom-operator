@@ -466,34 +466,73 @@ type TemplateData struct {
 	ShortName         string
 	Repository        string
 	Tag               string
+	Digest            string
 	Namespace         string // Helpful for cluster-wide templates!
 	PredefinedName    string
 	PredefinedVersion string
 }
 
-func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) TemplateData {
-	var shortName, repository, tag string
-
-	imageRef, err := parser.Parse(ctx.Image.ImageID)
+func parseImageRef(ref string) (shortName, repository, tag, digest string, hasTagAndDigest bool, err error) {
+	imageRef, err := parser.Parse(ref)
 	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
-	} else if imageRef != nil {
-		shortName = imageRef.ShortName()
-		repository = imageRef.Repository()
-		tag = imageRef.Tag()
+		return "", "", "", "", false, err
+	}
+	if imageRef == nil {
+		return "", "", "", "", false, nil
 	}
 
-	if strings.Index(ctx.Image.Image, "sha256") != 0 {
-		if parsedImg, err := parser.Parse(ctx.Image.Image); err != nil {
+	shortName = imageRef.ShortName()
+	repository = imageRef.Repository()
+	tag = imageRef.Tag()
+
+	if beforeAt, afterAt, ok := strings.Cut(ref, "@"); ok {
+		digest = afterAt
+		lastSlash := strings.LastIndex(beforeAt, "/")
+		if strings.Contains(beforeAt[lastSlash+1:], ":") {
+			if taggedRef, tagErr := parser.Parse(beforeAt); tagErr == nil && taggedRef != nil {
+				tag = taggedRef.Tag()
+				hasTagAndDigest = true
+			}
+		}
+	}
+
+	return shortName, repository, tag, digest, hasTagAndDigest, nil
+}
+
+func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) TemplateData {
+	data, _ := extractTemplateDataWithDigestFlag(ctx, containers, predefinedName, predefinedVersion)
+	return data
+}
+
+func extractTemplateDataWithDigestFlag(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) (TemplateData, bool) {
+	var shortName, repository, tag, digest string
+	var hasTagAndDigest bool
+
+	if s, r, t, d, td, err := parseImageRef(ctx.Image.ImageID); err != nil {
+		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
+	} else {
+		shortName = s
+		repository = r
+		tag = t
+		digest = d
+		hasTagAndDigest = td
+	}
+
+	if !strings.HasPrefix(ctx.Image.Image, "sha256") {
+		if s, r, t, d, td, err := parseImageRef(ctx.Image.Image); err != nil {
 			logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.Image)
-		} else if parsedImg != nil {
+		} else {
 			if shortName == "" {
-				shortName = parsedImg.ShortName()
+				shortName = s
 			}
 			if repository == "" {
-				repository = parsedImg.Repository()
+				repository = r
 			}
-			tag = parsedImg.Tag()
+			tag = t
+			if d != "" {
+				digest = d
+			}
+			hasTagAndDigest = td
 		}
 	}
 
@@ -522,10 +561,11 @@ func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.Con
 		ShortName:         shortName,
 		Repository:        repository,
 		Tag:               tag,
+		Digest:            digest,
 		Namespace:         namespace,
 		PredefinedName:    predefinedName,
 		PredefinedVersion: predefinedVersion,
-	}
+	}, hasTagAndDigest
 }
 
 func createTemplate(templateName string, templateContent string) (*template.Template, error) {
@@ -859,7 +899,7 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 }
 
 func getNameAndVersionFromString(input string, delimiter string) (string, string) {
-	parts := strings.Split(input, delimiter)
+	parts := strings.SplitN(input, delimiter, 2)
 	name := strings.TrimSpace(parts[0])
 	version := ""
 	if len(parts) == 2 {
@@ -924,7 +964,7 @@ func rotateRawImageIdTag(tags []dtrack.Tag, currentImageID string) []dtrack.Tag 
 }
 
 func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, useShortName bool, k8sClusterId string) (string, string) {
-	data := extractTemplateData(ctx, ctx.Containers, "", "")
+	data, hasTagAndDigest := extractTemplateDataWithDigestFlag(ctx, ctx.Containers, "", "")
 
 	var projectName string
 	//add Cluster prefix to projectName if prefix mode is set
@@ -940,7 +980,12 @@ func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, us
 		projectName += "-" + data.SbomScope
 	}
 
-	return projectName, data.Tag
+	version := data.Tag
+	if hasTagAndDigest && data.Tag != "" && data.Digest != "" {
+		version = data.Tag + "@" + data.Digest
+	}
+
+	return projectName, version
 }
 
 // handleProjectDeactivation removes the current cluster tag in "tag" mode

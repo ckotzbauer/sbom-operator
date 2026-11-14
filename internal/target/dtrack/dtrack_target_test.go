@@ -85,6 +85,42 @@ func TestGetRepoWithVersion(t *testing.T) {
 			expectedName:     "library/alpine-testScope",
 			expectedVersion:  "3.14",
 		},
+		{
+			name:             "Tag and digest version",
+			image:            &liboci.RegistryImage{ImageID: "docker.io/library/redis@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952", Image: "docker.io/library/redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952"},
+			useShortName:     false,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "tag",
+			expectedName:     "docker.io/library/redis",
+			expectedVersion:  "7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
+		},
+		{
+			name:             "Tag and digest version with registry port and short name",
+			image:            &liboci.RegistryImage{ImageID: "localhost:5000/redis@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952", Image: "localhost:5000/redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952"},
+			useShortName:     true,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "tag",
+			expectedName:     "redis",
+			expectedVersion:  "7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
+		},
+		{
+			name:             "Tag-only image with digest ImageID keeps tag-only version",
+			image:            &liboci.RegistryImage{ImageID: "docker.io/library/nginx@sha256:1111111111111111111111111111111111111111111111111111111111111111", Image: "docker.io/library/nginx:1.28.0-alpine"},
+			useShortName:     false,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "tag",
+			expectedName:     "docker.io/library/nginx",
+			expectedVersion:  "1.28.0-alpine",
+		},
+		{
+			name:             "Digest-only image with registry port keeps digest version",
+			image:            &liboci.RegistryImage{ImageID: "localhost:5000/memcached@sha256:e93269864a7d8f94d0ddfba2a2b863ceaeb8b98073db7fa6df74b8f39783b856", Image: "localhost:5000/memcached@sha256:e93269864a7d8f94d0ddfba2a2b863ceaeb8b98073db7fa6df74b8f39783b856"},
+			useShortName:     false,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "tag",
+			expectedName:     "localhost:5000/memcached",
+			expectedVersion:  "sha256:e93269864a7d8f94d0ddfba2a2b863ceaeb8b98073db7fa6df74b8f39783b856",
+		},
 	}
 
 	for _, tt := range tests {
@@ -132,9 +168,56 @@ func TestGetNameAndVersionFromString(t *testing.T) {
 	assert.Equal(t, "name", n)
 	assert.Equal(t, "version", v)
 
+	n, v = getNameAndVersionFromString("name:1.28.0-alpine@sha256:abcdef", ":")
+	assert.Equal(t, "name", n)
+	assert.Equal(t, "1.28.0-alpine@sha256:abcdef", v)
+
 	n, v = getNameAndVersionFromString("name", ":")
 	assert.Equal(t, "name", n)
 	assert.Equal(t, "", v)
+}
+
+func TestIdentifyProjectNameAndVersion_TagAndDigestTemplate(t *testing.T) {
+	dtrackTarget := &DependencyTrackTarget{
+		baseUrl:             "https://dtrack.example.com",
+		apiKey:              "test-key",
+		k8sClusterIdMode:    "tag",
+		templateProjectName: "{{.Repository}}:{{.Tag}}@{{.Digest}}",
+	}
+	require.NoError(t, dtrackTarget.ValidateConfig())
+
+	tests := []struct {
+		name            string
+		image           *liboci.RegistryImage
+		expectedName    string
+		expectedVersion string
+	}{
+		{
+			name:            "Tag-only image opts into tag@digest via template",
+			image:           &liboci.RegistryImage{ImageID: "docker.io/library/nginx@sha256:1111111111111111111111111111111111111111111111111111111111111111", Image: "docker.io/library/nginx:1.28.0-alpine"},
+			expectedName:    "docker.io/library/nginx",
+			expectedVersion: "1.28.0-alpine@sha256:1111111111111111111111111111111111111111111111111111111111111111",
+		},
+		{
+			name:            "Tag@digest image renders without duplicating digest",
+			image:           &liboci.RegistryImage{ImageID: "docker.io/library/redis@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952", Image: "docker.io/library/redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952"},
+			expectedName:    "docker.io/library/redis",
+			expectedVersion: "7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
+		},
+	}
+
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			ctx := &target.TargetContext{
+				Image:       tt.image,
+				Pod:         &libk8s_real.PodInfo{PodNamespace: "default"},
+				Attestation: &oci.AttestationSbom{Scope: oci.ScopeAll},
+			}
+			name, version := dtrackTarget.identifyProjectNameAndVersion(ctx)
+			assert.Equal(t, tt.expectedName, name)
+			assert.Equal(t, tt.expectedVersion, version)
+		})
+	}
 }
 
 func TestGetContainerNameFromAnnotationKey(t *testing.T) {
