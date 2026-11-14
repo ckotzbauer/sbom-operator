@@ -31,6 +31,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 	"github.com/sirupsen/logrus"
 )
 
@@ -59,7 +60,7 @@ func (s Syft) WithSyftVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
+func (s *Syft) ExecuteSyft(img *oci.RegistryImage, catalogers []string) (string, types.MediaType, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	oriImage := img.Image
@@ -67,7 +68,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 
 	err := kubernetes.ApplyProxyRegistry(img, true, s.proxyRegistryMap)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 	opts := image.RegistryOptions{InsecureUseHTTP: internal.OperatorConfig.InsecureHttpRegistry, Credentials: internaloci.ResolveCredentials(img, s.proxyRegistryMap)}
 	src, err := getSource(context.Background(), &opts, img.ImageID)
@@ -77,7 +78,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
-		return "", err
+		return "", "", err
 	}
 
 	defer func() {
@@ -108,11 +109,13 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	if s.stripCpes {
 		cfg = cfg.WithDataGenerationConfig(cataloging.DefaultDataGenerationConfig().WithGenerateCPEs(false))
 	}
-
+	if len(catalogers) > 0 {
+		cfg = cfg.WithCatalogerSelection(BuildCatalogerSelection(catalogers))
+	}
 	result, err := syft.CreateSBOM(context.Background(), src, cfg)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM-Creation failed")
-		return "", err
+		return "", "", err
 	}
 
 	if s.stripCpes {
@@ -127,17 +130,17 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	encoder, err := GetEncoderWithVersion(resolved, s.sbomFormat)
 	if err != nil {
 		logrus.WithError(err).Error("Could not resolve encoder")
-		return "", err
+		return "", "", err
 	}
 
 	b, err := format.Encode(*result, encoder)
 	if err != nil {
 		logrus.WithError(err).Error("Encoding of result failed")
-		return "", err
+		return "", "", err
 	}
 
 	bom := string(b)
-	return bom, nil
+	return bom, internaloci.GetMediaType(s.sbomFormat), nil
 }
 
 // stripCPEs removes all CPE attributes from the SBOM's packages. CPEs are
@@ -250,4 +253,24 @@ func closeOrLog(c io.Closer) {
 	if err := c.Close(); err != nil {
 		logrus.WithError(err).Warnf("Could not close file")
 	}
+}
+
+// buildCatalogerSelection translates the configured cataloger expressions into Syft's SelectionRequest.
+// Syft's WithExpression natively handles:
+// - "+expr": adds catalogers to the default set
+// - "-expr": removes catalogers from the default set
+// - "expr" (without prefix): restricts selection to the specified catalogers or tags
+func BuildCatalogerSelection(expressions []string) cataloging.SelectionRequest {
+	req := cataloging.NewSelectionRequest()
+
+	for _, raw := range expressions {
+		for _, token := range strings.Split(raw, ",") {
+			expr := strings.TrimSpace(token)
+			if expr != "" {
+				req = req.WithExpression(expr)
+			}
+		}
+	}
+
+	return req
 }
