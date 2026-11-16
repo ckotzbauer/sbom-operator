@@ -24,18 +24,36 @@ const (
 
 func GetMediaType(format string) types.MediaType {
 	switch format {
-	case "json", SyftMediaType:
+	case "json", "syftjson", SyftMediaType:
 		return types.MediaType(SyftMediaType)
-	case "cyclonedx", CycloneDXXMLMediaType:
+	case "cyclone", "cyclonedx", "cyclonedxxml", CycloneDXXMLMediaType:
 		return types.MediaType(CycloneDXXMLMediaType)
 	case "cyclonedxjson", CycloneDXJSONMediaType:
 		return types.MediaType(CycloneDXJSONMediaType)
-	case "spdx", SPDXMediaType:
+	case "spdx", "spdxtagvalue", SPDXMediaType:
 		return types.MediaType(SPDXMediaType)
 	case "spdxjson", SPDXJSONMediaType:
 		return types.MediaType(SPDXJSONMediaType)
 	default:
-		return types.MediaType(SyftMediaType)
+		return ""
+	}
+}
+
+// GetFormat returns the canonical format alias for a given OCI SBOM media type.
+func GetFormat(mediaType types.MediaType) (string, error) {
+	switch mediaType {
+	case types.MediaType(SyftMediaType):
+		return "json", nil
+	case types.MediaType(CycloneDXXMLMediaType):
+		return "cyclonedx", nil
+	case types.MediaType(CycloneDXJSONMediaType):
+		return "cyclonedxjson", nil
+	case types.MediaType(SPDXMediaType):
+		return "spdx", nil
+	case types.MediaType(SPDXJSONMediaType):
+		return "spdxjson", nil
+	default:
+		return "", fmt.Errorf("unsupported media type for format conversion: %s", mediaType)
 	}
 }
 
