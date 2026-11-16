@@ -69,7 +69,7 @@ func writeErroredSbom(t *testing.T, assertResult bool, data, name, format string
 func testJsonSbom(t *testing.T, name, imageID string) {
 	format := "json"
 	s := syft.New(format, map[string]string{}, "0.0.0", nil, false).WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, _, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 
 	assert.NoError(t, err)
 
@@ -97,7 +97,7 @@ func testJsonSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbom(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format, map[string]string{}, "0.0.0", nil, false).WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, _, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput
@@ -118,7 +118,7 @@ func testCyclonedxSbom(t *testing.T, name, imageID string) {
 func testSpdxSbom(t *testing.T, name, imageID string) {
 	format := "spdxjson"
 	s := syft.New(format, map[string]string{}, "0.0.0", nil, false).WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, _, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftSpdxOutput
@@ -146,7 +146,7 @@ func testSpdxSbom(t *testing.T, name, imageID string) {
 func testCyclonedxSbomWithoutPullSecrets(t *testing.T, name, imageID string) {
 	format := "cyclonedx"
 	s := syft.New(format, map[string]string{}, "0.0.0", nil, false).WithSyftVersion("v9.9.9")
-	sbom, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
+	sbom, _, err := s.ExecuteSyft(&oci.RegistryImage{ImageID: imageID, PullSecrets: []*oci.KubeCreds{}})
 	assert.NoError(t, err)
 
 	var output syftCyclonedxOutput

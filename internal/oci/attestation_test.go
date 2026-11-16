@@ -455,4 +455,7 @@ func TestGetFormat(t *testing.T) {
 			assert.Equal(t, tc.expected, fmtStr)
 		}
 	}
+	assert.Equal(t, types.MediaType(CycloneDXXMLMediaType), GetMediaType("cyclone"))
+	assert.Equal(t, types.MediaType(CycloneDXXMLMediaType), GetMediaType("cyclonedxxml"))
+	assert.Equal(t, types.MediaType(SyftMediaType), GetMediaType("syftjson"))
 }

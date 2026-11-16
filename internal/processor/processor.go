@@ -365,14 +365,14 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 			}
 
 			if !foundDefaultScopeSbom {
-				sbom, err := p.sy.ExecuteSyft(image)
+				sbom, mt, err := p.sy.ExecuteSyft(image)
 				if err != nil {
 					logrus.WithError(err).Debugf("Scan of image %s failed and will be retried", imgID)
 					continue
 				}
 				attestations = append(attestations, &oci.AttestationSbom{
 					Scope:     oci.ScopeAll,
-					MediaType: oci.CycloneDXJSONMediaType,
+					MediaType: mt,
 					Sbom:      sbom,
 				})
 			}

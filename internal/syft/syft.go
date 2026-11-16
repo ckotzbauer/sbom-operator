@@ -60,7 +60,7 @@ func (s Syft) WithSyftVersion(version string) Syft {
 	return s
 }
 
-func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
+func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, types.MediaType, error) {
 	logrus.Infof("Processing image %s", img.ImageID)
 
 	oriImage := img.Image
@@ -68,7 +68,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 
 	err := kubernetes.ApplyProxyRegistry(img, true, s.proxyRegistryMap)
 	if err != nil {
-		return "", err
+		return "", "", err
 	}
 	opts := image.RegistryOptions{InsecureUseHTTP: internal.OperatorConfig.InsecureHttpRegistry, Credentials: internaloci.ResolveCredentials(img, s.proxyRegistryMap)}
 	src, err := getSource(context.Background(), &opts, img.ImageID)
@@ -78,7 +78,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 
 	if err != nil {
 		logrus.WithError(fmt.Errorf("failed to construct source from input registry:%s: %w", img.ImageID, err)).Error("Source-Creation failed")
-		return "", err
+		return "", "", err
 	}
 
 	defer func() {
@@ -113,7 +113,7 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	result, err := syft.CreateSBOM(context.Background(), src, cfg)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM-Creation failed")
-		return "", err
+		return "", "", err
 	}
 
 	if s.stripCpes {
@@ -128,17 +128,17 @@ func (s *Syft) ExecuteSyft(img *oci.RegistryImage) (string, error) {
 	encoder, err := GetEncoderWithVersion(resolved, s.sbomFormat)
 	if err != nil {
 		logrus.WithError(err).Error("Could not resolve encoder")
-		return "", err
+		return "", "", err
 	}
 
 	b, err := format.Encode(*result, encoder)
 	if err != nil {
 		logrus.WithError(err).Error("Encoding of result failed")
-		return "", err
+		return "", "", err
 	}
 
 	bom := string(b)
-	return bom, nil
+	return bom, internaloci.GetMediaType(s.sbomFormat), nil
 }
 
 // stripCPEs removes all CPE attributes from the SBOM's packages. CPEs are
