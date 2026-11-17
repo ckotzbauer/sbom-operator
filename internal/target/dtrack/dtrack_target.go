@@ -467,11 +467,13 @@ type TemplateData struct {
 	Repository        string
 	Tag               string
 	Digest            string
+	ExplicitDigest    bool
 	Namespace         string // Helpful for cluster-wide templates!
 	PredefinedName    string
 	PredefinedVersion string
 }
 
+// novln/docker-parser's docker.Parse() strips the tag when parsing image references containing both tag and digest (e.g., image:tag@sha256:...). We manually extract the tag from the part before '@' so it is preserved.
 func parseImageRef(ref string) (shortName, repository, tag, digest string, hasTagAndDigest bool, err error) {
 	imageRef, err := parser.Parse(ref)
 	if err != nil {
@@ -500,13 +502,8 @@ func parseImageRef(ref string) (shortName, repository, tag, digest string, hasTa
 }
 
 func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) TemplateData {
-	data, _ := extractTemplateDataWithDigestFlag(ctx, containers, predefinedName, predefinedVersion)
-	return data
-}
-
-func extractTemplateDataWithDigestFlag(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) (TemplateData, bool) {
 	var shortName, repository, tag, digest string
-	var hasTagAndDigest bool
+	var explicitDigest bool
 
 	if s, r, t, d, td, err := parseImageRef(ctx.Image.ImageID); err != nil {
 		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
@@ -515,7 +512,7 @@ func extractTemplateDataWithDigestFlag(ctx *target.TargetContext, containers []*
 		repository = r
 		tag = t
 		digest = d
-		hasTagAndDigest = td
+		explicitDigest = td
 	}
 
 	if !strings.HasPrefix(ctx.Image.Image, "sha256") {
@@ -532,7 +529,7 @@ func extractTemplateDataWithDigestFlag(ctx *target.TargetContext, containers []*
 			if d != "" {
 				digest = d
 			}
-			hasTagAndDigest = td
+			explicitDigest = td
 		}
 	}
 
@@ -562,10 +559,11 @@ func extractTemplateDataWithDigestFlag(ctx *target.TargetContext, containers []*
 		Repository:        repository,
 		Tag:               tag,
 		Digest:            digest,
+		ExplicitDigest:    explicitDigest,
 		Namespace:         namespace,
 		PredefinedName:    predefinedName,
 		PredefinedVersion: predefinedVersion,
-	}, hasTagAndDigest
+	}
 }
 
 func createTemplate(templateName string, templateContent string) (*template.Template, error) {
@@ -964,7 +962,7 @@ func rotateRawImageIdTag(tags []dtrack.Tag, currentImageID string) []dtrack.Tag 
 }
 
 func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, useShortName bool, k8sClusterId string) (string, string) {
-	data, hasTagAndDigest := extractTemplateDataWithDigestFlag(ctx, ctx.Containers, "", "")
+	data := extractTemplateData(ctx, ctx.Containers, "", "")
 
 	var projectName string
 	//add Cluster prefix to projectName if prefix mode is set
@@ -980,8 +978,11 @@ func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, us
 		projectName += "-" + data.SbomScope
 	}
 
+	// In default mode, keep tag-only images as-is and only append @<digest> when the
+	// image reference explicitly specified both tag and digest. Template mode
+	// (e.g. "{{.Repository}}:{{.Tag}}@{{.Digest}}") intentionally lets tag-only images opt in.
 	version := data.Tag
-	if hasTagAndDigest && data.Tag != "" && data.Digest != "" {
+	if data.ExplicitDigest && data.Tag != "" && data.Digest != "" {
 		version = data.Tag + "@" + data.Digest
 	}
 
