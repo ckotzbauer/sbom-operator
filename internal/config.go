@@ -45,6 +45,8 @@ type Config struct {
 	RegistryProxies                  []string `yaml:"registryProxy" env:"SBOM_REGISTRY_PROXY" flag:"registry-proxy"`
 	FormatVersion                    string   `yaml:"formatVersion" env:"SBOM_FORMAT_VERSION" flag:"format-version"`
 	StripCpes                        bool     `yaml:"stripCpes" env:"SBOM_STRIP_CPES" flag:"strip-cpes"`
+	SyftCatalogers                   []string `yaml:"syftCatalogers" env:"SBOM_SYFT_CATALOGERS" flag:"syft-catalogers"`
+	SyftCatalogersScopeRules         []string `yaml:"syftCatalogersScopeRules" env:"SBOM_SYFT_CATALOGERS_SCOPE_RULES" flag:"syft-catalogers-scope-rules"`
 	Verbosity                        string   `env:"SBOM_VERBOSITY" flag:"verbosity"`
 	FetchOciAttestations             bool     `yaml:"fetchOciAttestations" env:"FETCH_OCI_ATTESTATIONS" flag:"fetch-oci-attestations"`
 	InsecureHttpRegistry             bool     `yaml:"insecureHttpRegistry" env:"INSECURE_HTTP_REGISTRY" flag:"insecure-http-registry"`
@@ -100,6 +102,8 @@ var (
 	ConfigKeyRegistryProxy      = "registry-proxy"
 	ConfigKeyFormatVersion      = "format-version"
 	ConfigKeyStripCpes          = "strip-cpes"
+	ConfigKeySyftCatalogers     = "syft-catalogers"
+	ConfigKeySyftScopeRules     = "syft-catalogers-scope-rules"
 
 	OperatorConfig *Config
 )

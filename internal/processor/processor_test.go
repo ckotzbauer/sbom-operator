@@ -398,3 +398,95 @@ func TestScanPodAnnotatesOnlySuccessfulContainersAndRetries(t *testing.T) {
 		t.Fatal("failed container c2 was annotated as processed after retry")
 	}
 }
+
+func TestResolveSyftCatalogers(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() {
+		internal.OperatorConfig = origConfig
+	})
+
+	t.Run("Nil OperatorConfig returns nil safely", func(t *testing.T) {
+		internal.OperatorConfig = nil
+		assert.Nil(t, resolveSyftCatalogers(nil))
+	})
+
+	t.Run("Matching scope rule wins (case-insensitive contains) and overrides global catalogers", func(t *testing.T) {
+		internal.OperatorConfig = &internal.Config{
+			FetchOciAttestations:     true,
+			SyftCatalogers:           []string{"golang"},
+			SyftCatalogersScopeRules: []string{"application:os,alpine", "infra:python"},
+		}
+		attestations := []*internaloci.AttestationSbom{
+			{Scope: "my-APPLICATION-sbom"},
+		}
+
+		got := resolveSyftCatalogers(attestations)
+		assert.Equal(t, []string{"os", "alpine"}, got)
+	})
+
+	t.Run("Comma-split environment variable tokens are grouped into preceding rule", func(t *testing.T) {
+		// Simulates []string flag/env splitting "application:os,alpine,infra:golang" on commas
+		internal.OperatorConfig = &internal.Config{
+			FetchOciAttestations:     true,
+			SyftCatalogersScopeRules: []string{"application:os", "alpine", "infra:golang"},
+		}
+		attestations := []*internaloci.AttestationSbom{
+			{Scope: "application"},
+		}
+
+		got := resolveSyftCatalogers(attestations)
+		assert.Equal(t, []string{"os", "alpine"}, got)
+	})
+
+	t.Run("Rule ordering: first matching rule wins", func(t *testing.T) {
+		internal.OperatorConfig = &internal.Config{
+			FetchOciAttestations:     true,
+			SyftCatalogersScopeRules: []string{"app:os", "application:golang"},
+		}
+		attestations := []*internaloci.AttestationSbom{
+			{Scope: "application"},
+		}
+
+		got := resolveSyftCatalogers(attestations)
+		assert.Equal(t, []string{"os"}, got)
+	})
+
+	t.Run("Malformed scope rules are ignored and fall back to global catalogers", func(t *testing.T) {
+		internal.OperatorConfig = &internal.Config{
+			FetchOciAttestations:     true,
+			SyftCatalogers:           []string{"debian"},
+			SyftCatalogersScopeRules: []string{"orphan-token", ":missing-scope", "empty-cat:", "   "},
+		}
+		attestations := []*internaloci.AttestationSbom{
+			{Scope: "application"},
+		}
+
+		got := resolveSyftCatalogers(attestations)
+		assert.Equal(t, []string{"debian"}, got)
+	})
+
+	t.Run("No matching scope rule falls back to global catalogers", func(t *testing.T) {
+		internal.OperatorConfig = &internal.Config{
+			FetchOciAttestations:     true,
+			SyftCatalogers:           []string{"os"},
+			SyftCatalogersScopeRules: []string{"infra:golang"},
+		}
+		attestations := []*internaloci.AttestationSbom{
+			{Scope: "application"},
+		}
+
+		got := resolveSyftCatalogers(attestations)
+		assert.Equal(t, []string{"os"}, got)
+	})
+
+	t.Run("No attestations present falls back to global catalogers", func(t *testing.T) {
+		internal.OperatorConfig = &internal.Config{
+			FetchOciAttestations:     true,
+			SyftCatalogers:           []string{"golang,javascript"},
+			SyftCatalogersScopeRules: []string{"application:os"},
+		}
+
+		got := resolveSyftCatalogers(nil)
+		assert.Equal(t, []string{"golang,javascript"}, got)
+	})
+}
