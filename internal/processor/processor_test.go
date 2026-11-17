@@ -1,6 +1,7 @@
 package processor
 
 import (
+	"context"
 	"encoding/json"
 	"fmt"
 	"net/http"
@@ -82,18 +83,18 @@ func (m *mockTarget) Initialize() error { return nil }
 func (m *mockTarget) ValidateConfig() error {
 	return nil
 }
-func (m *mockTarget) ProcessSbom(ctx *target.TargetContext) error {
-	m.processedImages = append(m.processedImages, ctx.Image.ImageID)
-	if m.failImage != "" && ctx.Image.ImageID == m.failImage {
+func (m *mockTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
+	m.processedImages = append(m.processedImages, tctx.Image.ImageID)
+	if m.failImage != "" && tctx.Image.ImageID == m.failImage {
 		return fmt.Errorf("upload failed for %s", m.failImage)
 	}
 	return nil
 }
 func (m *mockTarget) IsNamespaceAware() bool { return m.namespaceAware }
-func (m *mockTarget) LoadImages() ([]*target.TargetImage, error) {
+func (m *mockTarget) LoadImages(ctx context.Context) ([]*target.TargetImage, error) {
 	return m.loadedImages, m.loadErr
 }
-func (m *mockTarget) Remove(images []*target.TargetImage) error {
+func (m *mockTarget) Remove(ctx context.Context, images []*target.TargetImage) error {
 	m.removeCalled = true
 	m.removedImages = images
 	return nil
@@ -111,7 +112,7 @@ func (m *mockDeactivateTarget) ShouldDeactivateOrphans() bool {
 	return m.shouldDeactivate
 }
 
-func (m *mockDeactivateTarget) Deactivate(images []*target.TargetImage) error {
+func (m *mockDeactivateTarget) Deactivate(ctx context.Context, images []*target.TargetImage) error {
 	m.deactivateCalled = true
 	m.deactivatedImages = images
 	return nil
@@ -489,4 +490,17 @@ func TestResolveSyftCatalogers(t *testing.T) {
 		got := resolveSyftCatalogers(nil)
 		assert.Equal(t, []string{"golang,javascript"}, got)
 	})
+}
+
+func TestRunCtxDefaultsToBackground(t *testing.T) {
+	p := &Processor{}
+	assert.NotNil(t, p.runCtx())
+	assert.NoError(t, p.runCtx().Err())
+}
+
+func TestRunCtxReturnsProcessorContext(t *testing.T) {
+	ctx, cancel := context.WithCancel(context.Background())
+	p := &Processor{ctx: ctx}
+	cancel()
+	assert.ErrorIs(t, p.runCtx().Err(), context.Canceled)
 }

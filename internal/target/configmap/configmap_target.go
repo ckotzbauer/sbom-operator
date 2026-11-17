@@ -1,6 +1,7 @@
 package configmap
 
 import (
+	"context"
 	"fmt"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/oci"
@@ -28,28 +29,28 @@ func (g *ConfigMapTarget) Initialize() error {
 	return nil
 }
 
-func (g *ConfigMapTarget) ProcessSbom(ctx *target.TargetContext) error {
-	b := []byte(ctx.Attestation.Sbom)
+func (g *ConfigMapTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
+	b := []byte(tctx.Attestation.Sbom)
 	compressed, err := libstandard.Compress(b)
 	if err != nil {
 		logrus.WithError(err).Error("Could not compress data.")
 		return err
 	}
 
-	for _, container := range ctx.Containers {
-		name := fmt.Sprintf("%s-%s", ctx.Pod.PodName, container.Name)
-		err = g.k8s.CreateConfigMap(ctx.Pod.PodNamespace, name, ctx.Image.ImageID, compressed)
+	for _, container := range tctx.Containers {
+		name := fmt.Sprintf("%s-%s", tctx.Pod.PodName, container.Name)
+		err = g.k8s.CreateConfigMap(tctx.Pod.PodNamespace, name, tctx.Image.ImageID, compressed)
 		if err != nil {
-			logrus.WithError(err).Errorf("Could not create configmap %s/%s.", ctx.Pod.PodNamespace, name)
+			logrus.WithError(err).Errorf("Could not create configmap %s/%s.", tctx.Pod.PodNamespace, name)
 		} else {
-			logrus.Debugf("Created configmap %s/%s.", ctx.Pod.PodNamespace, name)
+			logrus.Debugf("Created configmap %s/%s.", tctx.Pod.PodNamespace, name)
 		}
 	}
 
 	return err
 }
 
-func (g *ConfigMapTarget) LoadImages() ([]*target.TargetImage, error) {
+func (g *ConfigMapTarget) LoadImages(ctx context.Context) ([]*target.TargetImage, error) {
 	configMaps, err := g.k8s.ListConfigMaps()
 	if err != nil {
 		logrus.WithError(err).Error("Could not load configmaps.")
@@ -68,7 +69,7 @@ func (g *ConfigMapTarget) LoadImages() ([]*target.TargetImage, error) {
 	return images, nil
 }
 
-func (g *ConfigMapTarget) Remove(allImages []*target.TargetImage) error {
+func (g *ConfigMapTarget) Remove(ctx context.Context, allImages []*target.TargetImage) error {
 	configMaps, err := g.k8s.ListConfigMaps()
 	if err != nil {
 		logrus.WithError(err).Error("failed to load configmaps")

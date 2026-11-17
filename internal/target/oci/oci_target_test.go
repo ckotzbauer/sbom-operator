@@ -1,6 +1,7 @@
 package oci
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"testing"
@@ -21,6 +22,6 @@ func TestOci(t *testing.T) {
 	assert.NoError(t, err)
 
 	img := liboci.RegistryImage{ImageID: os.Getenv("TEST_DIGEST")}
-	err = oci.ProcessSbom(target.NewContext(&img, &kubernetes.PodInfo{}, &attestation.AttestationSbom{Sbom: string(sbom)}, time.Now(), time.Now(), nil))
+	err = oci.ProcessSbom(context.Background(), target.NewContext(&img, &kubernetes.PodInfo{}, &attestation.AttestationSbom{Sbom: string(sbom)}, time.Now(), time.Now(), nil))
 	assert.NoError(t, err)
 }

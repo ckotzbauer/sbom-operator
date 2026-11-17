@@ -4,6 +4,8 @@ import (
 	"bytes"
 	"context"
 	"fmt"
+	"net/http"
+	"net/url"
 	"regexp"
 	"strings"
 	"time"
@@ -44,6 +46,21 @@ type DependencyTrackTarget struct {
 	templateProjectName        string
 	parsedProjectTemplate      *template.Template
 	deploymentHistoryEnabled   bool
+	wifTokenFile               string
+	wifProvider                string
+	wifServiceAccount          string
+	wifJwtHeader               string
+	// session is a pointer, so that the token is not printed with the target (%v).
+	session *sessionCache
+}
+
+var jwtHeaderNamePattern = regexp.MustCompile(`^[A-Za-z0-9-]+$`)
+
+// isReservedJwtHeader reports headers that must not carry the workload identity JWT:
+// Authorization is used for the exchanged token, and a gateway may forward X-Api-Key
+// to Dependency-Track, which would read the JWT as an API key (persistent 401s).
+func isReservedJwtHeader(name string) bool {
+	return strings.EqualFold(name, "Authorization") || strings.EqualFold(name, "X-Api-Key")
 }
 
 const (
@@ -76,12 +93,53 @@ func NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, c
 	}
 }
 
+// WithWorkloadIdentity configures workload identity federation: instead of an API key,
+// the token in tokenFile is exchanged for a Dependency-Track session, which is reused
+// until shortly before it expires.
+func (g *DependencyTrackTarget) WithWorkloadIdentity(tokenFile, provider, serviceAccount string) *DependencyTrackTarget {
+	g.wifTokenFile = tokenFile
+	g.wifProvider = provider
+	g.wifServiceAccount = serviceAccount
+	g.session = &sessionCache{now: time.Now}
+	return g
+}
+
+// WithWorkloadIdentityJwtHeader additionally sends the workload identity token in the
+// given request header on every request (e.g. for a proxy in front of Dependency-Track).
+func (g *DependencyTrackTarget) WithWorkloadIdentityJwtHeader(name string) *DependencyTrackTarget {
+	g.wifJwtHeader = name
+	return g
+}
+
 func (g *DependencyTrackTarget) ValidateConfig() error {
 	if g.baseUrl == "" {
 		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackBaseUrl)
 	}
-	if g.apiKey == "" {
-		return fmt.Errorf("%s is empty", internal.ConfigKeyDependencyTrackApiKey)
+	if g.apiKey == "" && g.wifTokenFile == "" {
+		return fmt.Errorf("either %s or %s must be set", internal.ConfigKeyDependencyTrackApiKey, internal.ConfigKeyDependencyTrackWifTokenFile)
+	}
+	if g.apiKey != "" && g.wifTokenFile != "" {
+		return fmt.Errorf("%s and %s are mutually exclusive", internal.ConfigKeyDependencyTrackApiKey, internal.ConfigKeyDependencyTrackWifTokenFile)
+	}
+	if g.wifTokenFile != "" {
+		if g.wifProvider == "" {
+			return fmt.Errorf("%s provided but %s is empty", internal.ConfigKeyDependencyTrackWifTokenFile, internal.ConfigKeyDependencyTrackWifProvider)
+		}
+		if g.wifServiceAccount == "" {
+			return fmt.Errorf("%s provided but %s is empty", internal.ConfigKeyDependencyTrackWifTokenFile, internal.ConfigKeyDependencyTrackWifServiceAccount)
+		}
+		// The token exchange uses its own HTTP client without the mTLS settings.
+		if g.caCertFile != "" {
+			return fmt.Errorf("%s is not supported together with %s", internal.ConfigKeyDependencyTrackWifTokenFile, internal.ConfigKeyDependencyTrackCaCertFile)
+		}
+	}
+	if g.wifJwtHeader != "" {
+		if g.wifTokenFile == "" {
+			return fmt.Errorf("%s requires %s", internal.ConfigKeyDependencyTrackWifJwtHeader, internal.ConfigKeyDependencyTrackWifTokenFile)
+		}
+		if !jwtHeaderNamePattern.MatchString(g.wifJwtHeader) || isReservedJwtHeader(g.wifJwtHeader) {
+			return fmt.Errorf("%s: invalid header name %q", internal.ConfigKeyDependencyTrackWifJwtHeader, g.wifJwtHeader)
+		}
 	}
 	if g.caCertFile != "" {
 		if g.clientCertFile == "" {
@@ -141,13 +199,46 @@ func (g *DependencyTrackTarget) ValidateConfig() error {
 func (g *DependencyTrackTarget) Initialize() error {
 	g.clientOptions = []dtrack.ClientOption{}
 
-	g.clientOptions = append(g.clientOptions, dtrack.WithAPIKey(g.apiKey))
+	if g.apiKey != "" {
+		g.clientOptions = append(g.clientOptions, dtrack.WithAPIKey(g.apiKey))
+	}
 
 	if len(g.caCertFile) > 0 {
 		g.clientOptions = append(g.clientOptions, dtrack.WithMTLS(g.caCertFile, g.clientCertFile, g.clientKeyFile))
 	}
 
 	return nil
+}
+
+// newClient creates a Dependency-Track client. With workload identity federation
+// configured, the cached session is used, or a new one exchanged if it is (about to be)
+// expired or was rejected with 401.
+func (g *DependencyTrackTarget) newClient(ctx context.Context) (*dtrack.Client, error) {
+	if g.wifTokenFile == "" {
+		return dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	}
+
+	exchanger := newTokenExchanger(g.baseUrl, g.wifTokenFile, g.wifProvider, g.wifServiceAccount)
+	exchanger.jwtHeader = g.wifJwtHeader
+	token, err := g.session.get(ctx, exchanger.Exchange)
+	if err != nil {
+		return nil, fmt.Errorf("workload identity token exchange failed: %w", err)
+	}
+
+	base, err := url.Parse(g.baseUrl)
+	if err != nil {
+		return nil, fmt.Errorf("invalid %s: %w", internal.ConfigKeyDependencyTrackBaseUrl, err)
+	}
+	transport := http.DefaultTransport
+	if g.wifJwtHeader != "" {
+		transport = &jwtHeaderTransport{header: g.wifJwtHeader, tokenFile: g.wifTokenFile, host: hostPort(base), base: transport}
+	}
+	transport = &sessionInvalidatingTransport{cache: g.session, host: hostPort(base), base: transport}
+	// Must come first: WithBearerToken wraps the transport that is set at that point.
+	options := []dtrack.ClientOption{dtrack.WithHttpClient(&http.Client{Timeout: dtrack.DefaultTimeout, Transport: transport})}
+	options = append(options, g.clientOptions...)
+	options = append(options, dtrack.WithBearerToken(token))
+	return dtrack.NewClient(g.baseUrl, options...)
 }
 
 func (g *DependencyTrackTarget) identifyProjectNameAndVersion(ctx *target.TargetContext) (string, string) {
@@ -196,8 +287,8 @@ func (g *DependencyTrackTarget) identifyProjectNameAndVersion(ctx *target.Target
 	return projectName, version
 }
 
-func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx *target.TargetContext, client *dtrack.Client) *uuid.UUID {
-	if g.parentProjectAnnotationKey != "" && ctx.Pod != nil {
+func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx context.Context, tctx *target.TargetContext, client *dtrack.Client) *uuid.UUID {
+	if g.parentProjectAnnotationKey != "" && tctx.Pod != nil {
 		logrus.Debugf("Try to set parent project by configured annotationkey %s", g.parentProjectAnnotationKey)
 
 		parentProjectName := ""
@@ -206,10 +297,10 @@ func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx *target.TargetCont
 		matchedAnnotationValue := ""
 
 		// 1. Evaluate pod-wide parent annotation first (exact key match)
-		if podWideValue, ok := ctx.Pod.Annotations[g.parentProjectAnnotationKey]; ok {
-			found, name, version, err := g.getContainerNameAndVersion(parentProjectName, parentProjectVersion, g.parentProjectAnnotationKey, podWideValue, g.parentProjectAnnotationKey, ctx)
+		if podWideValue, ok := tctx.Pod.Annotations[g.parentProjectAnnotationKey]; ok {
+			found, name, version, err := g.getContainerNameAndVersion(parentProjectName, parentProjectVersion, g.parentProjectAnnotationKey, podWideValue, g.parentProjectAnnotationKey, tctx)
 			if err != nil {
-				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", ctx.Image.Image)
+				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", tctx.Image.Image)
 			} else if found {
 				parentProjectName = name
 				parentProjectVersion = version
@@ -220,15 +311,15 @@ func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx *target.TargetCont
 
 		// 2. Evaluate container-specific parent annotations ("<key>/<containerName>"), taking precedence
 		containerPrefix := g.parentProjectAnnotationKey + "/"
-		for podAnnotationKey, podAnnotationValue := range ctx.Pod.Annotations {
+		for podAnnotationKey, podAnnotationValue := range tctx.Pod.Annotations {
 			if !strings.HasPrefix(podAnnotationKey, containerPrefix) {
 				continue
 			}
 			logrus.Debugf("AnnotationKey %s starts with %s?", podAnnotationKey, g.parentProjectAnnotationKey)
 
-			found, name, version, err := g.getContainerNameAndVersion(parentProjectName, parentProjectVersion, podAnnotationKey, podAnnotationValue, g.parentProjectAnnotationKey, ctx)
+			found, name, version, err := g.getContainerNameAndVersion(parentProjectName, parentProjectVersion, podAnnotationKey, podAnnotationValue, g.parentProjectAnnotationKey, tctx)
 			if err != nil {
-				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", ctx.Image.Image)
+				logrus.WithError(err).Errorf("Wrong parent project configuration. Skipping parent for image '%s'", tctx.Image.Image)
 				continue
 			}
 			if found {
@@ -250,8 +341,8 @@ func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx *target.TargetCont
 			// Only check for explicit version if the annotation value actually contained ":"
 			// (because getNameAndVersionFromString defaults version to "latest" when ":" is absent)
 			hasExplicitVersion := strings.Contains(matchedAnnotationValue, ":")
-			logrus.Debugf("Try to find parent project by name from annotation \"%s\", for image %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", matchedAnnotationKey, ctx.Image.Image, parentProjectName, parentProjectVersion)
-			parentProjects, err := client.Project.GetProjectsForName(context.Background(), parentProjectName, false, true)
+			logrus.Debugf("Try to find parent project by name from annotation \"%s\", for image %s, parentProjectName \"%s\" and parentProjectVersion \"%s\"", matchedAnnotationKey, tctx.Image.Image, parentProjectName, parentProjectVersion)
+			parentProjects, err := client.Project.GetProjectsForName(ctx, parentProjectName, false, true)
 			if err != nil {
 				logrus.WithError(err).Errorf("Could not find parent project \"%s\"", parentProjectName)
 			} else if len(parentProjects) == 0 {
@@ -278,7 +369,7 @@ func (g *DependencyTrackTarget) identifyParentProjectUuid(ctx *target.TargetCont
 					found = true
 				}
 				if found {
-					logrus.Infof("Found parent project with name \"%s\" and UUID \"%s\" for image \"%s\"", parentProjectName, parentProject.UUID, ctx.Image.Image)
+					logrus.Infof("Found parent project with name \"%s\" and UUID \"%s\" for image \"%s\"", parentProjectName, parentProject.UUID, tctx.Image.Image)
 					return &parentProject.UUID
 				}
 			}
@@ -299,21 +390,21 @@ func (g *DependencyTrackTarget) isPrefixMode() bool {
 	return strings.HasPrefix(g.k8sClusterIdMode, "prefix")
 }
 
-func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
-	if ctx.Attestation.MediaType != "" && ctx.Attestation.MediaType != oci.CycloneDXJSONMediaType && ctx.Attestation.MediaType != oci.CycloneDXXMLMediaType {
-		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", ctx.Attestation.Scope, ctx.Attestation.MediaType)
+func (g *DependencyTrackTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
+	if tctx.Attestation.MediaType != "" && tctx.Attestation.MediaType != oci.CycloneDXJSONMediaType && tctx.Attestation.MediaType != oci.CycloneDXXMLMediaType {
+		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", tctx.Attestation.Scope, tctx.Attestation.MediaType)
 		return nil
 	}
 
 	logrus.Debugf("%v", g)
-	projectName, version := g.identifyProjectNameAndVersion(ctx)
+	projectName, version := g.identifyProjectNameAndVersion(tctx)
 
-	if ctx.Attestation.Sbom == "" {
-		logrus.Infof("Empty SBOM - skip image (image=%s)", ctx.Image.ImageID)
+	if tctx.Attestation.Sbom == "" {
+		logrus.Infof("Empty SBOM - skip image (image=%s)", tctx.Image.ImageID)
 		return nil
 	}
 
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	client, err := g.newClient(ctx)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return err
@@ -323,20 +414,20 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	// previously deployed image with a matching digest).
 	project, skipUpload := dtrack.Project{}, false
 	if g.manageProjectActiveStatus {
-		existing, lookupErr := client.Project.Lookup(context.Background(), projectName, version)
-		if lookupErr == nil && !existing.Active && getRawImageId(existing.Tags) == ctx.Image.ImageID {
+		existing, lookupErr := client.Project.Lookup(ctx, projectName, version)
+		if lookupErr == nil && !existing.Active && getRawImageId(existing.Tags) == tctx.Image.ImageID {
 			project = existing
 			skipUpload = true
 			logrus.Infof("Reactivating existing project %s:%s without re-uploading SBOM", projectName, version)
 		}
 	}
 
-	parentUuid := g.identifyParentProjectUuid(ctx, client)
+	parentUuid := g.identifyParentProjectUuid(ctx, tctx, client)
 	if !skipUpload {
 		logrus.Infof("Sending SBOM to Dependency Track (project=%s, version=%s, parent=%s)", projectName, version, parentUuid)
 		uploadToken, err := client.BOM.PostBom(
-			context.Background(),
-			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, ParentUUID: parentUuid, AutoCreate: true, BOM: ctx.Attestation.Sbom},
+			ctx,
+			dtrack.BOMUploadRequest{ProjectName: projectName, ProjectVersion: version, ParentUUID: parentUuid, AutoCreate: true, BOM: tctx.Attestation.Sbom},
 		)
 		if err != nil {
 			logrus.Errorf("Could not upload BOM: %v", err)
@@ -346,7 +437,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	}
 
 	if !skipUpload {
-		project, err = client.Project.Lookup(context.Background(), projectName, version)
+		project, err = client.Project.Lookup(ctx, projectName, version)
 		if err != nil {
 			logrus.Errorf("Could not find project '%s:%s': %v", projectName, version, err)
 			return err
@@ -359,10 +450,10 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	alreadyOnCluster := false
 	clusterId := g.k8sClusterId
 	if g.isNamespaceMode() {
-		clusterId += "/" + ctx.Pod.PodNamespace
+		clusterId += "/" + tctx.Pod.PodNamespace
 	} else {
 		// don't add namespace tag in namespace mode as it is already in clusterId tag
-		podNamespaceTag := podNamespaceTagKey + "=" + ctx.Pod.PodNamespace
+		podNamespaceTag := podNamespaceTagKey + "=" + tctx.Pod.PodNamespace
 		if !containsTag(project.Tags, podNamespaceTag) {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: podNamespaceTag})
 		}
@@ -397,9 +488,9 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 	// re-pushed tag, multiple pods), DT kept the first digest forever. During cleanup
 	// this caused `LoadImages()` to emit a stale digest and `Remove()` to operate on
 	// the still-live project, deleting it.
-	project.Tags = rotateRawImageIdTag(project.Tags, ctx.Image.ImageID)
-	if ctx.Attestation.Scope != "" && ctx.Attestation.Scope != oci.ScopeAll {
-		scopeTag := sbomScopeTagKey + "=" + ctx.Attestation.Scope
+	project.Tags = rotateRawImageIdTag(project.Tags, tctx.Image.ImageID)
+	if tctx.Attestation.Scope != "" && tctx.Attestation.Scope != oci.ScopeAll {
+		scopeTag := sbomScopeTagKey + "=" + tctx.Attestation.Scope
 		if !containsTag(project.Tags, scopeTag) {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: scopeTag})
 		}
@@ -413,7 +504,7 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		}
 	}
 
-	for podLabelKey, podLabelValue := range ctx.Pod.Labels {
+	for podLabelKey, podLabelValue := range tctx.Pod.Labels {
 		podLabel := fmt.Sprintf("%s=%s", podLabelKey, podLabelValue)
 		if !containsTag(project.Tags, podLabel) && (reg == nil || reg.MatchString(podLabelKey)) {
 			project.Tags = append(project.Tags, dtrack.Tag{Name: podLabel})
@@ -425,24 +516,24 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx *target.TargetContext) error {
 		project.IsLatest = dtrack.OptionalBoolOf(true)
 	}
 
-	_, err = client.Project.Update(context.Background(), project)
+	_, err = client.Project.Update(ctx, project)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not update project")
 	}
 
 	if g.manageProjectActiveStatus {
-		g.deactivateSiblingVersions(client, &project, ctx.Image, ctx.Pod)
+		g.deactivateSiblingVersions(ctx, client, &project, tctx.Image, tctx.Pod)
 	}
 
-	g.syncStageIntervalProperty(context.Background(), client, project, clusterId, alreadyOnCluster, ctx.DeploymentTime, ctx.PodCreationTime)
-	err = g.addProjectToCache(ctx.Pod.PodNamespace, ctx.Image.ImageID, project)
+	g.syncStageIntervalProperty(ctx, client, project, clusterId, alreadyOnCluster, tctx.DeploymentTime, tctx.PodCreationTime)
+	err = g.addProjectToCache(ctx, tctx.Pod.PodNamespace, tctx.Image.ImageID, project)
 	return err
 }
 
-func (g *DependencyTrackTarget) addProjectToCache(namespace string, imageId string, project dtrack.Project) error {
+func (g *DependencyTrackTarget) addProjectToCache(ctx context.Context, namespace string, imageId string, project dtrack.Project) error {
 	if g.imageProjectMap == nil {
 		// prepropulate imageProjectMap
-		_, err := g.LoadImages()
+		_, err := g.LoadImages(ctx)
 		if err != nil {
 			return err
 		}
@@ -628,8 +719,8 @@ func (g *DependencyTrackTarget) getContainerNameAndVersion(foundProjectName stri
 	return false, foundProjectName, foundVersion, nil
 }
 
-func (g *DependencyTrackTarget) LoadImages() ([]*target.TargetImage, error) {
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+func (g *DependencyTrackTarget) LoadImages(ctx context.Context) ([]*target.TargetImage, error) {
+	client, err := g.newClient(ctx)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return nil, err
@@ -650,7 +741,7 @@ func (g *DependencyTrackTarget) LoadImages() ([]*target.TargetImage, error) {
 
 	images := make([]*target.TargetImage, 0)
 	for {
-		projectsPage, err := client.Project.GetAll(context.Background(), dtrack.PageOptions{
+		projectsPage, err := client.Project.GetAll(ctx, dtrack.PageOptions{
 			PageNumber: pageNumber,
 			PageSize:   pageSize,
 		})
@@ -720,7 +811,7 @@ func (g *DependencyTrackTarget) LoadImages() ([]*target.TargetImage, error) {
 						RegistryImage: &libk8s.RegistryImage{ImageID: imageId},
 						Namespace:     ns,
 					})
-					_ = g.addProjectToCache(ns, imageId, project)
+					_ = g.addProjectToCache(ctx, ns, imageId, project)
 				}
 			}
 		}
@@ -766,15 +857,15 @@ func (g *DependencyTrackTarget) projectDeleted(project *dtrack.Project, img *tar
 	}
 }
 
-func (g *DependencyTrackTarget) removeOrDeactivate(images []*target.TargetImage, remove bool) error {
+func (g *DependencyTrackTarget) removeOrDeactivate(ctx context.Context, images []*target.TargetImage, remove bool) error {
 	if g.imageProjectMap == nil {
-		_, err := g.LoadImages()
+		_, err := g.LoadImages(ctx)
 		if err != nil {
 			return err
 		}
 	}
 
-	client, err := dtrack.NewClient(g.baseUrl, g.clientOptions...)
+	client, err := g.newClient(ctx)
 	if err != nil {
 		logrus.WithError(err).Errorf("failed to init dtrack client")
 		return err
@@ -799,28 +890,28 @@ func (g *DependencyTrackTarget) removeOrDeactivate(images []*target.TargetImage,
 				continue
 			}
 
-			project, err := client.Project.Get(context.Background(), projectUUID)
+			project, err := client.Project.Get(ctx, projectUUID)
 			if err != nil {
 				logrus.Errorf("Could not load project: %v", err)
 				continue
 			}
 
-			_ = g.handleProjectDeactivation(client, &project, img, remove)
+			_ = g.handleProjectDeactivation(ctx, client, &project, img, remove)
 		}
 	}
 
 	return nil
 }
 
-func (g *DependencyTrackTarget) Remove(images []*target.TargetImage) error {
-	return g.removeOrDeactivate(images, true)
+func (g *DependencyTrackTarget) Remove(ctx context.Context, images []*target.TargetImage) error {
+	return g.removeOrDeactivate(ctx, images, true)
 }
 
 // Deactivate sets the given projects as inactive (and not latest) instead of
 // deleting them, preserving them for version history. Only invoked when
 // ShouldDeactivateOrphans returns true. All tags are kept.
-func (g *DependencyTrackTarget) Deactivate(images []*target.TargetImage) error {
-	return g.removeOrDeactivate(images, false)
+func (g *DependencyTrackTarget) Deactivate(ctx context.Context, images []*target.TargetImage) error {
+	return g.removeOrDeactivate(ctx, images, false)
 }
 
 func (g *DependencyTrackTarget) ShouldDeactivateOrphans() bool {
@@ -830,12 +921,12 @@ func (g *DependencyTrackTarget) ShouldDeactivateOrphans() bool {
 // deactivateSiblingVersions sets all other versions of the same project name
 // under the same parent as inactive (and not latest), so that only the currently
 // running version stays active.
-func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client, project *dtrack.Project, img *libk8s.RegistryImage, pod *kubernetes.PodInfo) {
+func (g *DependencyTrackTarget) deactivateSiblingVersions(ctx context.Context, client *dtrack.Client, project *dtrack.Project, img *libk8s.RegistryImage, pod *kubernetes.PodInfo) {
 	if project.ParentRef == nil {
 		return
 	}
 
-	siblings, err := client.Project.GetProjectsForName(context.Background(), project.Name, false, false)
+	siblings, err := client.Project.GetProjectsForName(ctx, project.Name, false, false)
 	if err != nil {
 		logrus.WithError(err).Errorf("Could not load sibling projects for name %s", project.Name)
 		return
@@ -854,7 +945,7 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(client *dtrack.Client,
 		if !sibling.Active {
 			continue
 		}
-		_ = g.handleProjectDeactivation(client, &sibling, &target.TargetImage{RegistryImage: img, Namespace: pod.PodNamespace}, false)
+		_ = g.handleProjectDeactivation(ctx, client, &sibling, &target.TargetImage{RegistryImage: img, Namespace: pod.PodNamespace}, false)
 	}
 }
 
@@ -946,8 +1037,7 @@ func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, us
 // handleProjectDeactivation removes the current cluster tag in "tag" mode
 // and persists the updated tags. If no other clusters are referencing the
 // project anymore, it patches the project to be inactive (and not latest).
-func (g *DependencyTrackTarget) handleProjectDeactivation(client *dtrack.Client, project *dtrack.Project, img *target.TargetImage, deleteProject bool) error {
-	ctx := context.Background()
+func (g *DependencyTrackTarget) handleProjectDeactivation(ctx context.Context, client *dtrack.Client, project *dtrack.Project, img *target.TargetImage, deleteProject bool) error {
 	podNsPrefix := podNamespaceTagKey + "="
 	clusterPrefix := kubernetesCluster + "="
 

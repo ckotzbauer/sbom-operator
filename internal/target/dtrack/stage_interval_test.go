@@ -125,7 +125,7 @@ func TestSyncAndCloseStageIntervalProperty_Lifecycle(t *testing.T) {
 		RegistryImage: &oci.RegistryImage{ImageID: "app:1.0"},
 		Namespace:     "payment",
 	}
-	err = g.handleProjectDeactivation(client, &proj, img, false)
+	err = g.handleProjectDeactivation(context.Background(), client, &proj, img, false)
 	assert.NoError(t, err)
 
 	assert.True(t, patchCalled)
@@ -208,7 +208,7 @@ func TestHandleProjectDeactivation_MultiClusterClosesCurrentClusterIntervalOnly(
 		Namespace:     "default",
 	}
 
-	err = g.handleProjectDeactivation(client, &proj, img, false)
+	err = g.handleProjectDeactivation(context.Background(), client, &proj, img, false)
 	require.NoError(t, err)
 
 	// Project must remain active because cluster-b still uses it
@@ -258,7 +258,7 @@ func TestHandleProjectDeactivation_DeleteModeDeletesAlreadyInactiveProject(t *te
 		Namespace:     "default",
 	}
 
-	err = g.handleProjectDeactivation(client, &proj, img, true)
+	err = g.handleProjectDeactivation(context.Background(), client, &proj, img, true)
 	require.NoError(t, err)
 	assert.True(t, deleteCalled, "already-inactive orphan project must still be deleted when deleteProject is true")
 }

@@ -1,6 +1,7 @@
 package dtrack
 
 import (
+	"context"
 	"encoding/json"
 	"io"
 	"net/http"
@@ -178,10 +179,181 @@ func TestInitialize(t *testing.T) {
 
 func TestValidateConfig(t *testing.T) {
 	tests := []struct {
-		name    string
-		target  *DependencyTrackTarget
-		wantErr bool
+		name        string
+		target      *DependencyTrackTarget
+		wantErr     bool
+		errContains []string
 	}{
+		{
+			name: "Workload identity without apiKey",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+			},
+			wantErr: false,
+		},
+		{
+			name: "apiKey and workload identity are mutually exclusive",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				apiKey:            "apikey",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-api-key", "dtrack-wif-token-file"},
+		},
+		{
+			name: "Workload identity without provider",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifServiceAccount: "sbom-operator",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-provider"},
+		},
+		{
+			name: "Workload identity without service account",
+			target: &DependencyTrackTarget{
+				baseUrl:      "http://localhost:8080",
+				wifTokenFile: "/var/run/secrets/dependency-track/token",
+				wifProvider:  "kubernetes",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-service-account"},
+		},
+		{
+			name: "Workload identity with mTLS is not supported",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				caCertFile:        "ca.crt",
+				clientCertFile:    "client.crt",
+				clientKeyFile:     "client.key",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-token-file", "dtrack-ca-cert-file"},
+		},
+		{
+			name: "Workload identity with JWT header",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x-workload-token",
+			},
+			wantErr:     false,
+			errContains: []string{},
+		},
+		{
+			name: "JWT header without workload identity",
+			target: &DependencyTrackTarget{
+				baseUrl:      "http://localhost:8080",
+				apiKey:       "apikey",
+				wifJwtHeader: "x-workload-token",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header", "dtrack-wif-token-file"},
+		},
+		{
+			name: "JWT header Authorization",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "Authorization",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header authorization lowercase",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "authorization",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header X-Api-Key",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "X-Api-Key",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header x-api-key lowercase",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x-api-key",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header AUTHORIZATION uppercase",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "AUTHORIZATION",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header with space",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x workload",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "JWT header with colon",
+			target: &DependencyTrackTarget{
+				baseUrl:           "http://localhost:8080",
+				wifTokenFile:      "/var/run/secrets/dependency-track/token",
+				wifProvider:       "kubernetes",
+				wifServiceAccount: "sbom-operator",
+				wifJwtHeader:      "x-token:",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-wif-jwt-header"},
+		},
+		{
+			name: "Neither apiKey nor workload identity",
+			target: &DependencyTrackTarget{
+				baseUrl: "http://localhost:8080",
+			},
+			wantErr:     true,
+			errContains: []string{"dtrack-api-key", "dtrack-wif-token-file"},
+		},
 		{
 			name: "Valid config",
 			target: &DependencyTrackTarget{
@@ -258,6 +430,9 @@ func TestValidateConfig(t *testing.T) {
 			err := tt.target.ValidateConfig()
 			if tt.wantErr {
 				assert.Error(t, err)
+				for _, s := range tt.errContains {
+					assert.ErrorContains(t, err, s)
+				}
 			} else {
 				assert.NoError(t, err)
 			}
@@ -273,7 +448,7 @@ func TestProcessSbomUnsupportedMediaType(t *testing.T) {
 		Attestation: &oci.AttestationSbom{MediaType: "unsupported"},
 	}
 	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "", false)
-	err := g.ProcessSbom(ctx)
+	err := g.ProcessSbom(context.Background(), ctx)
 	assert.NoError(t, err)
 }
 
@@ -304,7 +479,7 @@ func TestProcessSbomMinimal(t *testing.T) {
 		Attestation: &oci.AttestationSbom{},
 	}
 
-	_ = g.ProcessSbom(ctx)
+	_ = g.ProcessSbom(context.Background(), ctx)
 }
 
 func TestProcessSbomParentProject(t *testing.T) {
@@ -388,7 +563,7 @@ func TestProcessSbomParentProject(t *testing.T) {
 				Attestation: &oci.AttestationSbom{Sbom: "{}"},
 			}
 
-			err = g.ProcessSbom(ctx)
+			err = g.ProcessSbom(context.Background(), ctx)
 			assert.NoError(t, err)
 
 			if tt.expectParentRef {
@@ -418,7 +593,7 @@ func TestRemoveMinimal(t *testing.T) {
 
 	images := []*target.TargetImage{{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"}}}
 
-	_ = g.Remove(images)
+	_ = g.Remove(context.Background(), images)
 }
 
 // TestRawImageIdTagIsRotated ensures the raw-image-id tag is updated to reflect
@@ -521,7 +696,7 @@ func TestLoadImagesResetsImageProjectMap(t *testing.T) {
 		},
 	}
 
-	images, err := g.LoadImages()
+	images, err := g.LoadImages(context.Background())
 	assert.NoError(t, err)
 
 	// Returned set reflects the current DT state only.
@@ -566,7 +741,7 @@ func TestLoadImagesTagMode(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	_, _ = g.LoadImages()
+	_, _ = g.LoadImages(context.Background())
 }
 
 func TestGetRawImageId(t *testing.T) {
@@ -624,7 +799,7 @@ func TestProcessSbomReactivateWithoutUpload(t *testing.T) {
 		Attestation: &oci.AttestationSbom{},
 	}
 
-	_ = g.ProcessSbom(ctx)
+	_ = g.ProcessSbom(context.Background(), ctx)
 	assert.Equal(t, 0, postBomCount, "BOM must not be re-uploaded when reactivating an existing project")
 }
 
@@ -686,7 +861,7 @@ func TestProcessSbomDeactivatesSiblings(t *testing.T) {
 		Pod:         &libk8s_real.PodInfo{PodName: "p", PodNamespace: "default"},
 		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
 	}
-	err = g.ProcessSbom(ctx)
+	err = g.ProcessSbom(context.Background(), ctx)
 	assert.NoError(t, err)
 
 	assert.Equal(t, []string{siblingUUID}, patchUUIDs)
@@ -732,7 +907,7 @@ func TestDeactivate(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	_, _ = g.LoadImages()
+	_, _ = g.LoadImages(context.Background())
 	g.imageProjectMap["alpine:3.13"] = map[string]map[uuid.UUID]struct{}{
 		"": {uuid.MustParse(projectUUID): {}},
 	}
@@ -744,7 +919,7 @@ func TestDeactivate(t *testing.T) {
 		{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"}},
 		{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.12", Image: "alpine:3.12"}},
 	}
-	_ = g.Deactivate(targetImages)
+	_ = g.Deactivate(context.Background(), targetImages)
 	assert.Equal(t, 1, patchCount, "only the active project should be patched as inactive")
 	assert.Equal(t, 0, deleteCount, "project must not be deleted")
 	assert.True(t, g.ShouldDeactivateOrphans())
@@ -801,7 +976,7 @@ func TestDeactivateTagModeMultiCluster(t *testing.T) {
 	assert.NoError(t, err)
 
 	targetImages := []*target.TargetImage{{RegistryImage: &liboci.RegistryImage{ImageID: "alpine:3.13", Image: "alpine:3.13"}}}
-	_ = g.Deactivate(targetImages)
+	_ = g.Deactivate(context.Background(), targetImages)
 
 	// Exactly one PATCH call: keeps project active while removing my-cluster tag
 	require.Len(t, patchBodies, 1)
@@ -852,7 +1027,7 @@ func TestLoadImagesSkipsInactiveProjects(t *testing.T) {
 	err := g.Initialize()
 	assert.NoError(t, err)
 
-	images, err := g.LoadImages()
+	images, err := g.LoadImages(context.Background())
 	assert.NoError(t, err)
 	assert.Len(t, images, 1)
 	assert.Equal(t, "alpine:3.14", images[0].ImageID)
@@ -973,7 +1148,7 @@ func TestDeactivateSiblingVersions_TagMode_MultiCluster(t *testing.T) {
 		ParentRef: parent,
 	}
 
-	target.deactivateSiblingVersions(client, &currentProject, &liboci.RegistryImage{}, &libk8s_real.PodInfo{})
+	target.deactivateSiblingVersions(context.Background(), client, &currentProject, &liboci.RegistryImage{}, &libk8s_real.PodInfo{})
 
 	// Scenario 2 (siblingSharedClusterUUID): Tag-Update via PATCH, stays active: true
 	require.Len(t, updatedProjects, 1)
@@ -1075,7 +1250,7 @@ func TestPrefixMode_RemoveAndDeactivateOrphans(t *testing.T) {
 			assert.False(t, g.IsNamespaceAware(), "Prefix mode must not be namespace-aware")
 
 			// Step 1: LoadImages populates imageProjectMap under the real namespace ("production"), NOT ""
-			loaded, err := g.LoadImages()
+			loaded, err := g.LoadImages(context.Background())
 			require.NoError(t, err)
 			require.Len(t, loaded, 1)
 			require.Contains(t, g.imageProjectMap[imageID], "production")
@@ -1089,9 +1264,9 @@ func TestPrefixMode_RemoveAndDeactivateOrphans(t *testing.T) {
 			}
 
 			if tt.removeAction {
-				err = g.Remove(orphanInput)
+				err = g.Remove(context.Background(), orphanInput)
 			} else {
-				err = g.Deactivate(orphanInput)
+				err = g.Deactivate(context.Background(), orphanInput)
 			}
 			require.NoError(t, err)
 
@@ -1170,7 +1345,7 @@ func TestHandleProjectDeactivation_TagMode_RemovesNamespaceTagAndProtectsUnscann
 		Namespace: "ns-a",
 	}
 
-	err = g.handleProjectDeactivation(client, project, img, false)
+	err = g.handleProjectDeactivation(context.Background(), client, project, img, false)
 	require.NoError(t, err)
 
 	assert.True(t, patchCalled, "Expected Project.Patch to persist removal of stale namespace=ns-a tag")
@@ -1239,7 +1414,7 @@ func TestHandleProjectDeactivation_TagMode_KeepsIntervalOpenWhileOtherNamespaceA
 
 	client, err := dtrack.NewClient(ts.URL)
 	require.NoError(t, err)
-	err = g.handleProjectDeactivation(client, project, targetImage, false)
+	err = g.handleProjectDeactivation(context.Background(), client, project, targetImage, false)
 	assert.NoError(t, err)
 	assert.False(t, propertyCalled, "Deployment interval must not be closed while another namespace is still active")
 	assert.True(t, project.Active, "Project must remain active while another namespace uses it")

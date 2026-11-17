@@ -1,6 +1,7 @@
 package dtrack
 
 import (
+	"context"
 	"net/http"
 	"net/http/httptest"
 	"strings"
@@ -48,7 +49,7 @@ func TestLoadImages_NamespaceMode(t *testing.T) {
 	err := g.Initialize()
 	require.NoError(t, err)
 
-	images, err := g.LoadImages()
+	images, err := g.LoadImages(context.Background())
 	require.NoError(t, err)
 
 	// Check if image was loaded with correct namespace
@@ -109,7 +110,7 @@ func TestHandleProjectDeactivation_NamespaceMode(t *testing.T) {
 
 	client, err := dtrack.NewClient(ts.URL)
 	require.NoError(t, err)
-	err = g.handleProjectDeactivation(client, project, targetImage, false)
+	err = g.handleProjectDeactivation(context.Background(), client, project, targetImage, false)
 	assert.NoError(t, err)
 
 	// Only tag "cluster-A/ns-staging" should be removed.

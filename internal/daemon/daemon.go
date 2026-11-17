@@ -1,6 +1,7 @@
 package daemon
 
 import (
+	"context"
 	"sync"
 	"time"
 
@@ -77,7 +78,7 @@ func (c *CronService) runBackgroundService() {
 				logrus.WithError(err).Fatal("Target could not be initialized,")
 			}
 
-			_, err = t.LoadImages()
+			_, err = t.LoadImages(context.Background())
 			if err != nil {
 				logrus.WithError(err).Error("Failed to load images from target")
 			}

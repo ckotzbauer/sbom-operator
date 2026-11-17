@@ -1,6 +1,7 @@
 package oci
 
 import (
+	"context"
 	"fmt"
 
 	"github.com/ckotzbauer/sbom-operator/internal"
@@ -52,14 +53,14 @@ func (g *OciTarget) Initialize() error {
 	return nil
 }
 
-func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
-	ref, err := name.ParseReference(ctx.Image.ImageID)
+func (g *OciTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
+	ref, err := name.ParseReference(tctx.Image.ImageID)
 	if err != nil {
-		logrus.WithError(err).Errorf("failed to parse reference %s", ctx.Image.ImageID)
+		logrus.WithError(err).Errorf("failed to parse reference %s", tctx.Image.ImageID)
 		return err
 	}
 
-	b := []byte(ctx.Attestation.Sbom)
+	b := []byte(tctx.Attestation.Sbom)
 	opts := []remote.Option{
 		remote.WithAuth(authn.FromConfig(authn.AuthConfig{
 			Username:      g.userName,
@@ -92,11 +93,11 @@ func (g *OciTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return err
 }
 
-func (g *OciTarget) LoadImages() ([]*target.TargetImage, error) {
+func (g *OciTarget) LoadImages(ctx context.Context) ([]*target.TargetImage, error) {
 	return []*target.TargetImage{}, nil
 }
 
-func (g *OciTarget) Remove(allImages []*target.TargetImage) error {
+func (g *OciTarget) Remove(ctx context.Context, allImages []*target.TargetImage) error {
 	return nil
 }
 
