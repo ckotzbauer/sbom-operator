@@ -1,6 +1,7 @@
 package git
 
 import (
+	"context"
 	"fmt"
 	"os"
 	"path"
@@ -65,8 +66,8 @@ func (g *GitTarget) Initialize() error {
 	return g.gitAccount.PrepareRepository(g.repository, g.workingTree, g.branch)
 }
 
-func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
-	imageID := ctx.Image.ImageID
+func (g *GitTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
+	imageID := tctx.Image.ImageID
 	filePath := g.ImageIDToFilePath(imageID)
 
 	dir := filepath.Dir(filePath)
@@ -78,7 +79,7 @@ func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
 	}
 
 	/* #nosec */
-	err = os.WriteFile(filePath, []byte(ctx.Attestation.Sbom), 0640)
+	err = os.WriteFile(filePath, []byte(tctx.Attestation.Sbom), 0640)
 	if err != nil {
 		logrus.WithError(err).Error("SBOM could not be saved")
 	}
@@ -86,7 +87,7 @@ func (g *GitTarget) ProcessSbom(ctx *target.TargetContext) error {
 	return g.gitAccount.CommitAll(g.workingTree, fmt.Sprintf("Created new SBOM for image %s", imageID))
 }
 
-func (g *GitTarget) LoadImages() ([]*target.TargetImage, error) {
+func (g *GitTarget) LoadImages(ctx context.Context) ([]*target.TargetImage, error) {
 	ignoreDirs := []string{".git"}
 	fileName := syft.GetFileName(g.sbomFormat)
 	basePath := filepath.Join(g.workingTree, g.workPath)
@@ -124,7 +125,7 @@ func (g *GitTarget) LoadImages() ([]*target.TargetImage, error) {
 	return images, nil
 }
 
-func (g *GitTarget) Remove(images []*target.TargetImage) error {
+func (g *GitTarget) Remove(ctx context.Context, images []*target.TargetImage) error {
 	logrus.Debug("Start to remove old SBOMs")
 	sbomFiles := g.mapToFiles(images)
 

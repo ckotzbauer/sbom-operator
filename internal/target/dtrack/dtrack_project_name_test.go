@@ -1,6 +1,7 @@
 package dtrack
 
 import (
+	"context"
 	"testing"
 
 	"github.com/google/uuid"
@@ -388,7 +389,7 @@ func TestIdentifyParentProjectUuid_ContainerSpecificPrecedence(t *testing.T) {
 
 	// Verify deterministic precedence across multiple runs (independent of Go map iteration order)
 	for i := 0; i < 20; i++ {
-		actualUUID := g.identifyParentProjectUuid(ctx, nil)
+		actualUUID := g.identifyParentProjectUuid(context.Background(), ctx, nil)
 		require.NotNil(t, actualUUID)
 		assert.Equal(t, containerSpecificUUID, *actualUUID, "Container-specific parent annotation must always take precedence over pod-wide annotation")
 	}

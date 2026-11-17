@@ -1,6 +1,7 @@
 package processor
 
 import (
+	"context"
 	"errors"
 	"testing"
 
@@ -83,11 +84,11 @@ type recordingTarget struct {
 	processErr        error
 }
 
-func (r *recordingTarget) ProcessSbom(ctx *target.TargetContext) error {
+func (r *recordingTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
 	if r.processErr != nil {
 		return r.processErr
 	}
-	r.processedContexts = append(r.processedContexts, ctx)
+	r.processedContexts = append(r.processedContexts, tctx)
 	return nil
 }
 
@@ -278,7 +279,7 @@ func TestCache_NotMarkedAsProcessedWhenTargetFails(t *testing.T) {
 	imageErr := false
 	for _, a := range cachedAtt {
 		for _, tgt := range p.Targets {
-			if err := tgt.ProcessSbom(&target.TargetContext{Attestation: a}); err != nil {
+			if err := tgt.ProcessSbom(context.Background(), &target.TargetContext{Attestation: a}); err != nil {
 				imageErr = true
 			}
 		}

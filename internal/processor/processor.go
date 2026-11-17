@@ -39,6 +39,9 @@ type Processor struct {
 	// scanMu serialises scanPod across the informer handlers, the initial
 	// sync and the retry loop so imageMap is never accessed concurrently.
 	scanMu sync.Mutex
+
+	// ctx is set only by runInformerAsync (nil in cron mode, where runCtx falls back to context.Background()).
+	ctx context.Context
 }
 
 // cachedImage holds the scanned SBOM attestations once per image ID
@@ -56,6 +59,15 @@ func New(k8s *kubernetes.KubeClient, sy *syft.Syft) *Processor {
 	}
 
 	return &Processor{K8s: k8s, sy: sy, Targets: targets, imageMap: make(map[string]*cachedImage), allowedNamespaces: make(map[string]bool)}
+}
+
+// runCtx returns the processor's lifetime context, or context.Background()
+// when the Processor was not created via New.
+func (p *Processor) runCtx() context.Context {
+	if p.ctx == nil {
+		return context.Background()
+	}
+	return p.ctx
 }
 
 func (p *Processor) ListenForPods() {
@@ -384,7 +396,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		for _, att := range attestations {
 			for _, t := range p.Targets {
 				ctx := target.NewContext(image, &pod, att, releaseTime, podTime, containerList)
-				if err := t.ProcessSbom(ctx); err != nil {
+				if err := t.ProcessSbom(p.runCtx(), ctx); err != nil {
 					imageErr = true
 					logrus.WithError(err).Warnf("Upload of image %s failed and will be retried", imgID)
 				}
@@ -519,7 +531,13 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			manageProjectActiveStatus := internal.OperatorConfig.DtrackManageProjectActiveStatus
 			templateProjectName := internal.OperatorConfig.DtrackTemplatedProjectName
 			deploymentTimestampsEnabled := internal.OperatorConfig.DtrackDeploymentHistory
-			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName, deploymentTimestampsEnabled)
+			wifTokenFile := internal.OperatorConfig.DtrackWifTokenFile
+			wifProvider := internal.OperatorConfig.DtrackWifProvider
+			wifServiceAccount := internal.OperatorConfig.DtrackWifServiceAccount
+			wifJwtHeader := internal.OperatorConfig.DtrackWifJwtHeader
+			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName, deploymentTimestampsEnabled).
+				WithWorkloadIdentity(wifTokenFile, wifProvider, wifServiceAccount).
+				WithWorkloadIdentityJwtHeader(wifJwtHeader)
 			err = t.ValidateConfig()
 			targets = append(targets, t)
 		} else if ta == "oci" {
@@ -610,7 +628,7 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages map[string
 
 	// Reconcile orphan images per target
 	for _, t := range p.Targets {
-		targetImages, err := t.LoadImages()
+		targetImages, err := t.LoadImages(p.runCtx())
 		if err != nil {
 			logrus.WithError(err).Error("Failed to load images from target")
 			continue
@@ -822,22 +840,26 @@ func (p *Processor) handleOrphanImages(t target.Target, images []*target.TargetI
 	}
 
 	if shouldDeactivate {
-		if err := dt.Deactivate(actualOrphanedImages); err != nil {
+		if err := dt.Deactivate(p.runCtx(), actualOrphanedImages); err != nil {
 			logrus.WithError(err).Error("Failed to deactivate images in target")
 		}
 		return
 	}
 
-	if err := t.Remove(actualOrphanedImages); err != nil {
+	if err := t.Remove(p.runCtx(), actualOrphanedImages); err != nil {
 		logrus.WithError(err).Error("Failed to remove images from target")
 	}
 }
 
 func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
+	// p.ctx is written before the informer handlers and retryFailedScans, its only readers, start.
+	ctx, cancel := context.WithCancel(context.Background())
+	p.ctx = ctx
 	stop := make(chan struct{})
 	sigs := make(chan os.Signal, 1)
 	signal.Notify(sigs, syscall.SIGINT, syscall.SIGTERM)
-	go func() {
+	// cancel is passed as a parameter so gosec (G118) sees it called.
+	go func(cancel context.CancelFunc) {
 		run := true
 		for run {
 			sig := <-sigs
@@ -845,10 +867,11 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			case syscall.SIGTERM, syscall.SIGINT:
 				logrus.Infof("Received signal %s", sig)
 				close(stop)
+				cancel()
 				run = false
 			}
 		}
-	}()
+	}(cancel)
 
 	go func() {
 		if !HasJobImage() {
@@ -902,7 +925,7 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			}
 			var activeTargets []loadedTarget
 			for _, t := range p.Targets {
-				targetImages, err := t.LoadImages()
+				targetImages, err := t.LoadImages(p.runCtx())
 				if err != nil {
 					logrus.WithError(err).Error("Failed to load images from target")
 					continue
