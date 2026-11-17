@@ -1,3 +1,28 @@
+## Version 0.50.0 (2026-11-17)
+
+### Features and improvements
+
+* [[`4642652c`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4642652c)] - **feat**: syft scanning catalogers configuration incl. per sbom scope configuration (#1088)
+
+### Dependency updates
+
+* [[`7e5f9a2e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/7e5f9a2e)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to e397061 (#1125)
+* [[`f567a2ef`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f567a2ef)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 5635e9e (#1122)
+* [[`5635e9e1`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/5635e9e1)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.57.1 (#1117)
+* [[`d85dd26e`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d85dd26e)] - **deps**: update golang.org&#x2F;x&#x2F;exp digest to 47ce03d (#1107)
+* [[`449554af`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/449554af)] - **deps**: update module golang.org&#x2F;x&#x2F;oauth2 to v0.38.0 (#1118)
+* [[`f5e784a8`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/f5e784a8)] - **deps**: update module modernc.org&#x2F;sqlite to v1.62.0 (#1119)
+* [[`3751540b`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3751540b)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to f692f77 (#1115)
+* [[`62ab13a5`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/62ab13a5)] - **deps**: update module go.opentelemetry.io&#x2F;otel&#x2F;sdk to v1.47.0 [security] (#1120)
+* [[`0fa4698a`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/0fa4698a)] - **deps**: update aws-sdk-go-v2 monorepo (#1108)
+* [[`824913b4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/824913b4)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to b9b8a2b (#1116)
+
+### Common changes
+
+* [[`3ea46f05`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/3ea46f05)] - **dtrack**: support workload identity federation (#1109)
+* [[`528fd701`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/528fd701)] - **dtrack**: templated project names support sprig template extensions (#1112)
+
+
 ## Version 0.49.1 (2026-11-10)
 
 ### Dependency updates
