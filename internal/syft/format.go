@@ -9,6 +9,8 @@ import (
 	"github.com/anchore/syft/syft/format/spdxjson"
 	"github.com/anchore/syft/syft/format/spdxtagvalue"
 	"github.com/anchore/syft/syft/sbom"
+	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 )
 
 // FormatVersion holds the resolved CycloneDX or SPDX family and concrete
@@ -477,5 +479,40 @@ func GetEncoderWithVersion(fv FormatVersion, sbomFormat string) (sbom.FormatEnco
 	default:
 		// Non-version-aware format — delegate to the existing resolver.
 		return GetEncoder(sbomFormat)
+	}
+}
+
+// EffectiveFamily returns the version-aware family the encoder is chosen from,
+// like GetEncoderWithVersion: the resolved family if a version selected one,
+// otherwise the family GetEncoder picks for the exact format name ("" for
+// non-version-aware formats and anything GetEncoder doesn't know).
+func EffectiveFamily(format string, fv FormatVersion) string {
+	if fv.Family != "" {
+		return fv.Family
+	}
+	if family := formatToCycloneX(format); family != "" {
+		return family
+	}
+	return formatToSPDX(format)
+}
+
+// MediaTypeForFormat returns the media type of the SBOMs encoded for format and fv,
+// or "" for formats without one (github, text, table).
+func MediaTypeForFormat(format string, fv FormatVersion) types.MediaType {
+	switch EffectiveFamily(format, fv) {
+	case "cyclonedxjson":
+		return internaloci.CycloneDXJSONMediaType
+	case "cyclonedxxml":
+		return internaloci.CycloneDXXMLMediaType
+	case "spdxjson":
+		return internaloci.SPDXJSONMediaType
+	case "spdxtagvalue":
+		return internaloci.SPDXMediaType
+	}
+	switch format {
+	case "github", "githubjson", "text", "table":
+		return ""
+	default:
+		return internaloci.SyftMediaType
 	}
 }

@@ -7,7 +7,9 @@ import (
 	"github.com/anchore/syft/syft/format/cyclonedxxml"
 	"github.com/anchore/syft/syft/format/spdxjson"
 	"github.com/anchore/syft/syft/format/spdxtagvalue"
+	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/syft"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 	"github.com/stretchr/testify/assert"
 )
 
@@ -466,4 +468,57 @@ func TestSPDXFormatVersionErrorMessages(t *testing.T) {
 	assert.Contains(t, errStr, "spdxtagvalue", "error should mention family")
 	assert.Contains(t, errStr, "3.0", "error should mention supplied version")
 	assert.Contains(t, errStr, "must be one of", "error should list supported versions")
+}
+
+func TestMediaTypeForFormat(t *testing.T) {
+	tests := []struct {
+		name          string
+		format        string
+		formatVersion string
+		want          types.MediaType
+	}{
+		{"cyclonedx alias without version", "cyclonedx", "", internaloci.CycloneDXXMLMediaType},
+		{"cyclone alias", "cyclone", "", internaloci.CycloneDXXMLMediaType},
+		{"cyclonedxjson", "cyclonedxjson", "", internaloci.CycloneDXJSONMediaType},
+		{"version selects cyclonedx json encoder", "json", "1.5", internaloci.CycloneDXJSONMediaType},
+		{"spdxjson", "spdxjson", "", internaloci.SPDXJSONMediaType},
+		{"spdx tag-value", "spdx", "", internaloci.SPDXMediaType},
+		{"syft json", "json", "", internaloci.SyftMediaType},
+		{"syftjson alias", "syftjson", "", internaloci.SyftMediaType},
+		{"unknown format uses syft json encoder", "custom", "", internaloci.SyftMediaType},
+		{"text has no media type", "text", "", ""},
+		{"github has no media type", "github", "", ""},
+		// GetEncoder matches format names exactly; anything else encodes Syft JSON.
+		{"bare version as format encodes syft json", "1.6", "", internaloci.SyftMediaType},
+		{"padded format name encodes syft json", " cyclonedx", "", internaloci.SyftMediaType},
+	}
+	for _, tt := range tests {
+		t.Run(tt.name, func(t *testing.T) {
+			fv := syft.ResolveFormatVersionWithFamily(tt.format, tt.formatVersion)
+			assert.Equal(t, tt.want, syft.MediaTypeForFormat(tt.format, fv))
+			assert.Equal(t, tt.want, syft.New(tt.format, nil, "test", &fv, false).MediaType())
+		})
+	}
+}
+
+func TestEffectiveFamily(t *testing.T) {
+	tests := []struct {
+		format, formatVersion, want string
+	}{
+		{"cyclonedx", "", "cyclonedxxml"},
+		{"cyclonedxjson", "", "cyclonedxjson"},
+		{"json", "1.5", "cyclonedxjson"},
+		{"spdxjson", "", "spdxjson"},
+		{"json", "", ""},
+		{"text", "", ""},
+		{"1.6", "", ""},
+		{" cyclonedx", "", ""},
+		{"spdxtv", "", "spdxtagvalue"},
+	}
+	for _, tt := range tests {
+		t.Run(tt.format+"/"+tt.formatVersion, func(t *testing.T) {
+			fv := syft.ResolveFormatVersionWithFamily(tt.format, tt.formatVersion)
+			assert.Equal(t, tt.want, syft.EffectiveFamily(tt.format, fv))
+		})
+	}
 }

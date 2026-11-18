@@ -2,6 +2,8 @@ package processor
 
 import (
 	"context"
+	"errors"
+	"fmt"
 	"os"
 	"os/signal"
 	"strings"
@@ -22,6 +24,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/target/dtrack"
 	"github.com/ckotzbauer/sbom-operator/internal/target/git"
 	targetoci "github.com/ckotzbauer/sbom-operator/internal/target/oci"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 	"github.com/sirupsen/logrus"
 	"k8s.io/client-go/tools/cache"
 
@@ -29,9 +32,15 @@ import (
 	"k8s.io/apimachinery/pkg/labels"
 )
 
+// sbomScanner is the part of *syft.Syft the processor uses.
+type sbomScanner interface {
+	ExecuteSyft(img *liboci.RegistryImage, catalogers []string) (string, error)
+	MediaType() types.MediaType
+}
+
 type Processor struct {
 	K8s               *kubernetes.KubeClient
-	sy                *syft.Syft
+	sy                sbomScanner
 	Targets           []target.Target
 	imageMap          map[string]*cachedImage
 	allowedNamespaces map[string]bool
@@ -46,8 +55,12 @@ type Processor struct {
 
 // cachedImage holds the scanned SBOM attestations once per image ID
 // and tracks which namespaces have already processed them via ProcessSbom.
+// fallback is the Syft SBOM for targets that can't use any fetched
+// whole-image SBOM; it is kept apart from attestations so targets that
+// accepted a fetched SBOM never receive it.
 type cachedImage struct {
 	attestations []*oci.AttestationSbom
+	fallback     *oci.AttestationSbom
 	namespaces   map[string]struct{}
 }
 
@@ -291,6 +304,26 @@ func (p *Processor) imageScanned(namespace string, imageId string, attestations 
 	entry.namespaces[namespace] = struct{}{}
 }
 
+// cacheScanResult caches the attestations of imageId without marking any
+// namespace as processed. An existing entry is kept.
+func (p *Processor) cacheScanResult(imageId string, attestations []*oci.AttestationSbom) {
+	if p.imageMap == nil {
+		p.imageMap = make(map[string]*cachedImage)
+	}
+	if _, exists := p.imageMap[imageId]; !exists {
+		p.imageMap[imageId] = &cachedImage{attestations: attestations, namespaces: make(map[string]struct{})}
+	}
+}
+
+// cachedFallback returns the cached Syft SBOM for targets that rejected the
+// fetched whole-image SBOM of imageId, or nil.
+func (p *Processor) cachedFallback(imageId string) *oci.AttestationSbom {
+	if entry, exists := p.imageMap[imageId]; exists {
+		return entry.fallback
+	}
+	return nil
+}
+
 // getCachedAttestations checks the cache:
 // - alreadyInNamespace == true: ProcessSbom was already called for this namespace (skip everything).
 // - attestations != nil: Image was scanned in another namespace (skip Syft, but run ProcessSbom).
@@ -385,25 +418,77 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 				}
 				attestations = append(attestations, &oci.AttestationSbom{
 					Scope:     oci.ScopeAll,
-					MediaType: oci.CycloneDXJSONMediaType,
+					MediaType: p.sy.MediaType(),
 					Sbom:      sbom,
 				})
 			}
 		}
 
+		// Cache the scan before uploading, so a retry after a failed upload doesn't scan again
+		p.cacheScanResult(imgID, attestations)
+
 		// Send attestations to all targets for the current pod's namespace
 		imageErr := false
+		fallback := p.cachedFallback(imgID)
+		// A target that can't use any whole-image SBOM gets a Syft SBOM instead.
+		rejected := make(map[target.Target]error)
+		accepted := make(map[target.Target]bool)
 		for _, att := range attestations {
 			for _, t := range p.Targets {
 				ctx := target.NewContext(image, &pod, att, releaseTime, podTime, containerList)
-				if err := t.ProcessSbom(p.runCtx(), ctx); err != nil {
+				err := t.ProcessSbom(p.runCtx(), ctx)
+				switch {
+				case errors.Is(err, target.ErrUnsupportedSbom) && att.Scope == oci.ScopeAll:
+					if rejected[t] == nil {
+						rejected[t] = err
+					}
+				case errors.Is(err, target.ErrUnsupportedSbom):
+					// err names the scope and media type
+					logrus.WithError(err).Warnf("Skipping SBOM of image %s for target %T", imgID, t)
+				case err != nil:
 					imageErr = true
 					logrus.WithError(err).Warnf("Upload of image %s failed and will be retried", imgID)
+				case att.Scope == oci.ScopeAll:
+					accepted[t] = true
 				}
 			}
 		}
 
-		// Mark this namespace as processed and cache the attestations for other namespaces
+		var needFallback []target.Target
+		for _, t := range p.Targets {
+			if rejected[t] != nil && !accepted[t] {
+				needFallback = append(needFallback, t)
+			}
+		}
+		for i, t := range needFallback {
+			logrus.WithError(rejected[t]).Infof("Falling back to a Syft SBOM of image %s for target %T", imgID, t)
+			if fallback == nil {
+				// Match scope rules as a regular scan would, i.e. without the rejected whole-image SBOMs.
+				sbom, err := p.sy.ExecuteSyft(image, resolveSyftCatalogers(scopedAttestations(attestations)))
+				if err != nil {
+					imageErr = true
+					skipped := make([]string, 0, len(needFallback)-i)
+					for _, s := range needFallback[i:] {
+						skipped = append(skipped, fmt.Sprintf("%T", s))
+					}
+					logrus.WithError(err).Warnf("Fallback scan of image %s failed and will be retried; skipped targets: %v", imgID, skipped)
+					break
+				}
+				fallback = &oci.AttestationSbom{
+					Scope:     oci.ScopeAll,
+					MediaType: p.sy.MediaType(),
+					Sbom:      sbom,
+				}
+				p.imageMap[imgID].fallback = fallback
+			}
+			ctx := target.NewContext(image, &pod, fallback, releaseTime, podTime, containerList)
+			if err := t.ProcessSbom(p.runCtx(), ctx); err != nil {
+				imageErr = true
+				logrus.WithError(err).Warnf("Upload of image %s failed and will be retried", imgID)
+			}
+		}
+
+		// Mark this namespace as processed
 		if !imageErr {
 			p.imageScanned(pod.PodNamespace, imgID, attestations)
 			for _, c := range containerList {
@@ -465,6 +550,17 @@ func parseScopeCatalogerRules(rawRules []string) []scopeCatalogerRule {
 	return rules
 }
 
+// scopedAttestations returns the attestations that do not cover the whole image.
+func scopedAttestations(attestations []*oci.AttestationSbom) []*oci.AttestationSbom {
+	scoped := make([]*oci.AttestationSbom, 0, len(attestations))
+	for _, att := range attestations {
+		if att != nil && att.Scope != oci.ScopeAll {
+			scoped = append(scoped, att)
+		}
+	}
+	return scoped
+}
+
 // resolveSyftCatalogers determines which Syft cataloger expressions to apply for a container image.
 // Precedence:
 //  1. Scope-based rules (--syft-catalogers-scope-rules): evaluated in configured order using
@@ -489,6 +585,15 @@ func resolveSyftCatalogers(attestations []*oci.AttestationSbom) []string {
 		}
 	}
 	return internal.OperatorConfig.SyftCatalogers
+}
+
+// validateDtrackFormat checks that Syft encodes CycloneDX, the only format Dependency-Track accepts.
+func validateDtrackFormat(format, formatVersion string) error {
+	switch syft.EffectiveFamily(format, syft.ResolveFormatVersionWithFamily(format, formatVersion)) {
+	case "cyclonedxjson", "cyclonedxxml":
+		return nil
+	}
+	return fmt.Errorf("dependency-track only accepts CycloneDX: --%s must be one of cyclonedx, cyclone, cyclonedxxml, cyclonedxjson (got %q)", internal.ConfigKeyFormat, format)
 }
 
 func initTargets(k8s *kubernetes.KubeClient) []target.Target {
@@ -538,7 +643,10 @@ func initTargets(k8s *kubernetes.KubeClient) []target.Target {
 			t := dtrack.NewDependencyTrackTarget(baseUrl, apiKey, podLabelTagMatcher, caCertFile, clientCertFile, clientKeyFile, k8sClusterId, k8sClusterIdMode, defaultParentProject, parentProjectAnnotationKey, projectNameAnnotationKey, useShortName, manageProjectActiveStatus, templateProjectName, deploymentTimestampsEnabled).
 				WithWorkloadIdentity(wifTokenFile, wifProvider, wifServiceAccount).
 				WithWorkloadIdentityJwtHeader(wifJwtHeader)
-			err = t.ValidateConfig()
+			err = validateDtrackFormat(internal.OperatorConfig.Format, internal.OperatorConfig.FormatVersion)
+			if err == nil {
+				err = t.ValidateConfig()
+			}
 			targets = append(targets, t)
 		} else if ta == "oci" {
 			registry := internal.OperatorConfig.OciRegistry
@@ -617,6 +725,10 @@ func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages map[string
 
 	// Sync Processor cache with cluster reality (independent of target configurations)
 	for imgID, cached := range p.imageMap {
+		if _, running := globalActiveIDs[imgID]; !running && len(cached.namespaces) == 0 {
+			p.imageRemoved(imgID, "") // Scanned, never uploaded, and no longer running
+			continue
+		}
 		for ns := range cached.namespaces {
 			if activeInNs, ok := nsActiveIDs[ns]; !ok {
 				p.imageRemoved(imgID, ns) // Entire namespace has no active images anymore

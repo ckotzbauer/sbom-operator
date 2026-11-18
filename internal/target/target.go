@@ -2,6 +2,7 @@ package target
 
 import (
 	"context"
+	"errors"
 	"time"
 
 	libk8s "github.com/ckotzbauer/libk8soci/pkg/kubernetes"
@@ -17,6 +18,10 @@ type TargetContext struct {
 	DeploymentTime  time.Time // Birth date, i.e. first deployment
 	PodCreationTime time.Time // Pod creation timestamp. Useful for rollbacks.
 }
+
+// ErrUnsupportedSbom is returned (wrapped) by ProcessSbom when the target can't use the
+// SBOM's format. The processor then falls back to a Syft SBOM for that target.
+var ErrUnsupportedSbom = errors.New("unsupported SBOM")
 
 type Target interface {
 	Initialize() error
