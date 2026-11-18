@@ -373,7 +373,8 @@ The following fields are available in both `--dtrack-templated-project-name` and
 | `.Repository` | `string` | The full image repository path (excluding tag/digest). | `ghcr.io/my-org/order-service` |
 | `.ImageName` | `string` | The full image reference as specified in the Pod spec. | `ghcr.io/my-org/order-service:1.4.2` |
 | `.ImageId` | `string` | The resolved image digest reference. | `ghcr.io/my-org/order-service@sha256:...` |
-| `.Tag` | `string` | The image tag (empty if deployed purely by digest). | `1.4.2` |
+| `.Tag` | `string` | The image tag (or digest if deployed purely by digest). | `1.4.2` |
+| `.Digest` | `string` | The image digest (empty if not present). | `sha256:...` |
 | `.ContainerNames` | `[]string` | Slice of container names sharing the image in the Pod. | `["order-api", "migrations"]` |
 | `.SbomScope` | `string` | The scope of the processed SBOM attestation. | `all` |
 

@@ -557,34 +557,70 @@ type TemplateData struct {
 	ShortName         string
 	Repository        string
 	Tag               string
+	Digest            string
+	ExplicitDigest    bool
 	Namespace         string // Helpful for cluster-wide templates!
 	PredefinedName    string
 	PredefinedVersion string
 }
 
-func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) TemplateData {
-	var shortName, repository, tag string
-
-	imageRef, err := parser.Parse(ctx.Image.ImageID)
+// novln/docker-parser's docker.Parse() strips the tag when parsing image references containing both tag and digest (e.g., image:tag@sha256:...). We manually extract the tag from the part before '@' so it is preserved.
+func parseImageRef(ref string) (shortName, repository, tag, digest string, hasTagAndDigest bool, err error) {
+	imageRef, err := parser.Parse(ref)
 	if err != nil {
-		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
-	} else if imageRef != nil {
-		shortName = imageRef.ShortName()
-		repository = imageRef.Repository()
-		tag = imageRef.Tag()
+		return "", "", "", "", false, err
+	}
+	if imageRef == nil {
+		return "", "", "", "", false, nil
 	}
 
-	if strings.Index(ctx.Image.Image, "sha256") != 0 {
-		if parsedImg, err := parser.Parse(ctx.Image.Image); err != nil {
+	shortName = imageRef.ShortName()
+	repository = imageRef.Repository()
+	tag = imageRef.Tag()
+
+	if beforeAt, afterAt, ok := strings.Cut(ref, "@"); ok {
+		digest = afterAt
+		lastSlash := strings.LastIndex(beforeAt, "/")
+		if strings.Contains(beforeAt[lastSlash+1:], ":") {
+			if taggedRef, tagErr := parser.Parse(beforeAt); tagErr == nil && taggedRef != nil {
+				tag = taggedRef.Tag()
+				hasTagAndDigest = true
+			}
+		}
+	}
+
+	return shortName, repository, tag, digest, hasTagAndDigest, nil
+}
+
+func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.ContainerInfo, predefinedName string, predefinedVersion string) TemplateData {
+	var shortName, repository, tag, digest string
+	var explicitDigest bool
+
+	if s, r, t, d, td, err := parseImageRef(ctx.Image.ImageID); err != nil {
+		logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.ImageID)
+	} else {
+		shortName = s
+		repository = r
+		tag = t
+		digest = d
+		explicitDigest = td
+	}
+
+	if !strings.HasPrefix(ctx.Image.Image, "sha256") {
+		if s, r, t, d, td, err := parseImageRef(ctx.Image.Image); err != nil {
 			logrus.WithError(err).Errorf("Could not parse image %s", ctx.Image.Image)
-		} else if parsedImg != nil {
+		} else {
 			if shortName == "" {
-				shortName = parsedImg.ShortName()
+				shortName = s
 			}
 			if repository == "" {
-				repository = parsedImg.Repository()
+				repository = r
 			}
-			tag = parsedImg.Tag()
+			tag = t
+			if d != "" {
+				digest = d
+			}
+			explicitDigest = td
 		}
 	}
 
@@ -613,6 +649,8 @@ func extractTemplateData(ctx *target.TargetContext, containers []*kubernetes.Con
 		ShortName:         shortName,
 		Repository:        repository,
 		Tag:               tag,
+		Digest:            digest,
+		ExplicitDigest:    explicitDigest,
 		Namespace:         namespace,
 		PredefinedName:    predefinedName,
 		PredefinedVersion: predefinedVersion,
@@ -950,7 +988,7 @@ func (g *DependencyTrackTarget) deactivateSiblingVersions(ctx context.Context, c
 }
 
 func getNameAndVersionFromString(input string, delimiter string) (string, string) {
-	parts := strings.Split(input, delimiter)
+	parts := strings.SplitN(input, delimiter, 2)
 	name := strings.TrimSpace(parts[0])
 	version := ""
 	if len(parts) == 2 {
@@ -1031,7 +1069,15 @@ func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, us
 		projectName += "-" + data.SbomScope
 	}
 
-	return projectName, data.Tag
+	// In default mode, keep tag-only images as-is and only append @<digest> when the
+	// image reference explicitly specified both tag and digest. Template mode
+	// (e.g. "{{.Repository}}:{{.Tag}}@{{.Digest}}") intentionally lets tag-only images opt in.
+	version := data.Tag
+	if data.ExplicitDigest && data.Tag != "" && data.Digest != "" {
+		version = data.Tag + "@" + data.Digest
+	}
+
+	return projectName, version
 }
 
 // handleProjectDeactivation removes the current cluster tag in "tag" mode
