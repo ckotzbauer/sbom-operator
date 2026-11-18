@@ -532,6 +532,19 @@ func TestProcessSbomUnsupportedMediaType(t *testing.T) {
 	}
 	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "", false)
 	err := g.ProcessSbom(context.Background(), ctx)
+	assert.ErrorIs(t, err, target.ErrUnsupportedSbom)
+	assert.Contains(t, err.Error(), "media type unsupported")
+}
+
+func TestProcessSbomEmptyMediaTypeIsNotRejected(t *testing.T) {
+	ctx := &target.TargetContext{
+		Image:       &liboci.RegistryImage{ImageID: "alpine:3.14", Image: "alpine:3.14"},
+		Pod:         &libk8s_real.PodInfo{PodNamespace: "default"},
+		Containers:  []*libk8s_real.ContainerInfo{{Name: "alpine"}},
+		Attestation: &oci.AttestationSbom{MediaType: "", Sbom: ""},
+	}
+	g := NewDependencyTrackTarget("", "apikey", "", "", "", "", "my-cluster", "tag", "", "", "", true, false, "", false)
+	err := g.ProcessSbom(context.Background(), ctx)
 	assert.NoError(t, err)
 }
 

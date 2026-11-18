@@ -392,8 +392,7 @@ func (g *DependencyTrackTarget) isPrefixMode() bool {
 
 func (g *DependencyTrackTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
 	if tctx.Attestation.MediaType != "" && tctx.Attestation.MediaType != oci.CycloneDXJSONMediaType && tctx.Attestation.MediaType != oci.CycloneDXXMLMediaType {
-		logrus.Warnf("Skipping attestation SBOM (scope=%s) with unsupported mediaType %s for Dependency-Track", tctx.Attestation.Scope, tctx.Attestation.MediaType)
-		return nil
+		return fmt.Errorf("%w: media type %s (scope=%s) for Dependency-Track", target.ErrUnsupportedSbom, tctx.Attestation.MediaType, tctx.Attestation.Scope)
 	}
 
 	logrus.Debugf("%v", g)

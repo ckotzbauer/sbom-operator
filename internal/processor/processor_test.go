@@ -3,6 +3,7 @@ package processor
 import (
 	"context"
 	"encoding/json"
+	"errors"
 	"fmt"
 	"net/http"
 	"net/http/httptest"
@@ -15,6 +16,9 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
 	"github.com/ckotzbauer/sbom-operator/internal/target"
+	"github.com/google/go-containerregistry/pkg/v1/types"
+	"github.com/sirupsen/logrus"
+	logtest "github.com/sirupsen/logrus/hooks/test"
 	"github.com/stretchr/testify/assert"
 	"github.com/stretchr/testify/require"
 	corev1 "k8s.io/api/core/v1"
@@ -28,6 +32,7 @@ func TestInitTargets(t *testing.T) {
 		Targets:       []string{"dtrack", "configmap"},
 		DtrackBaseUrl: "http://localhost",
 		DtrackApiKey:  "api",
+		Format:        "cyclonedx",
 	}
 
 	targets := initTargets(nil)
@@ -77,6 +82,10 @@ type mockTarget struct {
 	// failImage makes ProcessSbom fail for the given ImageID
 	failImage       string
 	processedImages []string
+
+	// rejectMediaType makes ProcessSbom return target.ErrUnsupportedSbom for that media type
+	rejectMediaType types.MediaType
+	received        []*internaloci.AttestationSbom
 }
 
 func (m *mockTarget) Initialize() error { return nil }
@@ -85,6 +94,10 @@ func (m *mockTarget) ValidateConfig() error {
 }
 func (m *mockTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
 	m.processedImages = append(m.processedImages, tctx.Image.ImageID)
+	m.received = append(m.received, tctx.Attestation)
+	if m.rejectMediaType != "" && tctx.Attestation.MediaType == m.rejectMediaType {
+		return fmt.Errorf("%w: %s", target.ErrUnsupportedSbom, m.rejectMediaType)
+	}
 	if m.failImage != "" && tctx.Image.ImageID == m.failImage {
 		return fmt.Errorf("upload failed for %s", m.failImage)
 	}
@@ -335,38 +348,11 @@ func TestExecuteSyftScans_NamespaceFiltering(t *testing.T) {
 func TestScanPodAnnotatesOnlySuccessfulContainersAndRetries(t *testing.T) {
 	internal.OperatorConfig = &internal.Config{}
 
-	var updated corev1.Pod
-	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
-		w.Header().Set("Content-Type", "application/json")
-		switch {
-		case r.Method == http.MethodGet && strings.HasSuffix(r.URL.Path, "/pods/app-pod-1"):
-			_ = json.NewEncoder(w).Encode(&corev1.Pod{
-				ObjectMeta: metav1.ObjectMeta{Name: "app-pod-1", Namespace: "prod"},
-				Status: corev1.PodStatus{
-					ContainerStatuses: []corev1.ContainerStatus{
-						{Name: "c1", ImageID: "img-good"},
-						{Name: "c2", ImageID: "img-bad"},
-					},
-				},
-			})
-		case r.Method == http.MethodPut && strings.HasSuffix(r.URL.Path, "/pods/app-pod-1"):
-			_ = json.NewDecoder(r.Body).Decode(&updated)
-			_ = json.NewEncoder(w).Encode(&updated)
-		default:
-			w.WriteHeader(http.StatusNotFound)
-		}
-	}))
-	defer ts.Close()
-
-	clientset, err := k8s.NewForConfig(&rest.Config{
-		Host:          ts.URL,
-		ContentConfig: rest.ContentConfig{ContentType: "application/json"},
-	})
-	require.NoError(t, err)
+	kc, updated := fakeKubeClient(t, podWith("app-pod-1", "prod", "img-good", "img-bad"))
 
 	mt := &mockTarget{failImage: "img-bad"}
 	p := &Processor{
-		K8s:     &kubernetes.KubeClient{Client: &libk8s.KubeClient{Client: clientset}},
+		K8s:     kc,
 		Targets: []target.Target{mt},
 		imageMap: map[string]*cachedImage{
 			"img-good": {attestations: []*internaloci.AttestationSbom{{Scope: internaloci.ScopeAll, Sbom: "{}"}}, namespaces: map[string]struct{}{}},
@@ -386,16 +372,16 @@ func TestScanPodAnnotatesOnlySuccessfulContainersAndRetries(t *testing.T) {
 
 	// First attempt: c1 succeeds, c2 fails.
 	p.scanPod(pod)
-	assert.Equal(t, "img-good", updated.Annotations["ckotzbauer.sbom-operator.io/c1"])
-	if _, ok := updated.Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
+	assert.Equal(t, "img-good", updated["app-pod-1"].Annotations["ckotzbauer.sbom-operator.io/c1"])
+	if _, ok := updated["app-pod-1"].Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
 		t.Fatal("failed container c2 was annotated as processed")
 	}
 
 	// Retry (as the periodic resync would do): c1 is skipped via its annotation,
 	// c2 is uploaded again because it was never marked as processed.
 	p.scanPod(pod)
-	assert.Equal(t, []string{"img-good", "img-bad", "img-bad"}, mt.processedImages)
-	if _, ok := updated.Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
+	assert.ElementsMatch(t, []string{"img-good", "img-bad", "img-bad"}, mt.processedImages)
+	if _, ok := updated["app-pod-1"].Annotations["ckotzbauer.sbom-operator.io/c2"]; ok {
 		t.Fatal("failed container c2 was annotated as processed after retry")
 	}
 }
@@ -503,4 +489,425 @@ func TestRunCtxReturnsProcessorContext(t *testing.T) {
 	p := &Processor{ctx: ctx}
 	cancel()
 	assert.ErrorIs(t, p.runCtx().Err(), context.Canceled)
+}
+
+// podWith returns a pod whose containers c1, c2, ... run the given image IDs.
+func podWith(name, namespace string, imageIDs ...string) *corev1.Pod {
+	pod := &corev1.Pod{ObjectMeta: metav1.ObjectMeta{Name: name, Namespace: namespace}}
+	for i, id := range imageIDs {
+		pod.Status.ContainerStatuses = append(pod.Status.ContainerStatuses,
+			corev1.ContainerStatus{Name: fmt.Sprintf("c%d", i+1), ImageID: id})
+	}
+	return pod
+}
+
+// podInfo is the scanner's view of a pod from podWith, without annotations.
+func podInfo(pod *corev1.Pod) libk8s.PodInfo {
+	info := libk8s.PodInfo{PodName: pod.Name, PodNamespace: pod.Namespace, Annotations: map[string]string{}}
+	for _, cs := range pod.Status.ContainerStatuses {
+		info.Containers = append(info.Containers, &libk8s.ContainerInfo{Name: cs.Name, Image: &liboci.RegistryImage{ImageID: cs.ImageID}})
+	}
+	return info
+}
+
+// fakeKubeClient serves GET and PUT for the given pods. The returned map holds
+// the last pod written per name (empty until the operator annotates it).
+func fakeKubeClient(t *testing.T, pods ...*corev1.Pod) (*kubernetes.KubeClient, map[string]*corev1.Pod) {
+	t.Helper()
+	updated := make(map[string]*corev1.Pod)
+	for _, p := range pods {
+		updated[p.Name] = &corev1.Pod{}
+	}
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		for _, p := range pods {
+			if !strings.HasSuffix(r.URL.Path, "/namespaces/"+p.Namespace+"/pods/"+p.Name) {
+				continue
+			}
+			switch r.Method {
+			case http.MethodGet:
+				_ = json.NewEncoder(w).Encode(p)
+			case http.MethodPut:
+				u := &corev1.Pod{}
+				_ = json.NewDecoder(r.Body).Decode(u)
+				updated[p.Name] = u
+				_ = json.NewEncoder(w).Encode(u)
+			}
+			return
+		}
+		w.WriteHeader(http.StatusNotFound)
+	}))
+	t.Cleanup(ts.Close)
+
+	clientset, err := k8s.NewForConfig(&rest.Config{
+		Host:          ts.URL,
+		ContentConfig: rest.ContentConfig{ContentType: "application/json"},
+	})
+	require.NoError(t, err)
+	return &kubernetes.KubeClient{Client: &libk8s.KubeClient{Client: clientset}}, updated
+}
+
+type fakeScanner struct {
+	sbom       string
+	err        error
+	calls      int
+	catalogers []string
+	mediaType  types.MediaType
+}
+
+func (f *fakeScanner) MediaType() types.MediaType {
+	if f.mediaType == "" {
+		return internaloci.CycloneDXJSONMediaType
+	}
+	return f.mediaType
+}
+
+func (f *fakeScanner) ExecuteSyft(img *liboci.RegistryImage, catalogers []string) (string, error) {
+	f.calls++
+	f.catalogers = catalogers
+	return f.sbom, f.err
+}
+
+var (
+	spdxSbom  = &internaloci.AttestationSbom{Scope: internaloci.ScopeAll, MediaType: internaloci.SPDXJSONMediaType, Sbom: "{spdx}"}
+	spdxSbom2 = &internaloci.AttestationSbom{Scope: internaloci.ScopeAll, MediaType: internaloci.SPDXJSONMediaType, Sbom: "{spdx2}"}
+	cdxSbom   = &internaloci.AttestationSbom{Scope: internaloci.ScopeAll, MediaType: internaloci.CycloneDXJSONMediaType, Sbom: "{cdx}"}
+)
+
+// fallbackProcessor returns a processor with dt (rejects SPDX) and cm (accepts all), and
+// the image "img" cached from namespace "other" with the given attestations.
+func fallbackProcessor(kc *kubernetes.KubeClient, sc *fakeScanner, atts ...*internaloci.AttestationSbom) (*Processor, *mockTarget, *mockTarget) {
+	internal.OperatorConfig = &internal.Config{}
+	dt := &mockTarget{rejectMediaType: internaloci.SPDXJSONMediaType}
+	cm := &mockTarget{}
+	p := &Processor{
+		K8s:     kc,
+		sy:      sc,
+		Targets: []target.Target{dt, cm},
+		imageMap: map[string]*cachedImage{
+			"img": {attestations: atts, namespaces: map[string]struct{}{"other": {}}},
+		},
+	}
+	return p, dt, cm
+}
+
+func sbomsOf(atts []*internaloci.AttestationSbom) []string {
+	out := make([]string, 0, len(atts))
+	for _, a := range atts {
+		out = append(out, a.Sbom)
+	}
+	return out
+}
+
+const annotationC1 = "ckotzbauer.sbom-operator.io/c1"
+
+func TestScanPodFallsBackToSyftOnlyForRejectingTarget(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, cm := fallbackProcessor(kc, sc, spdxSbom)
+
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Equal(t, []string{"{spdx}", "{syft}"}, sbomsOf(dt.received))
+	assert.Equal(t, types.MediaType(internaloci.CycloneDXJSONMediaType), dt.received[1].MediaType)
+	assert.Equal(t, internaloci.ScopeAll, dt.received[1].Scope)
+	assert.Equal(t, []string{"{spdx}"}, sbomsOf(cm.received))
+	assert.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+	require.NotNil(t, p.imageMap["img"].fallback)
+	assert.Equal(t, "{syft}", p.imageMap["img"].fallback.Sbom)
+}
+
+func TestScanPodReusesFallbackInOtherNamespace(t *testing.T) {
+	podA := podWith("pod-a", "prod", "img")
+	podB := podWith("pod-b", "staging", "img")
+	kc, updated := fakeKubeClient(t, podA, podB)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, cm := fallbackProcessor(kc, sc, spdxSbom)
+
+	p.scanPod(podInfo(podA))
+	p.scanPod(podInfo(podB))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Equal(t, []string{"{spdx}", "{syft}", "{spdx}", "{syft}"}, sbomsOf(dt.received))
+	assert.Equal(t, []string{"{spdx}", "{spdx}"}, sbomsOf(cm.received))
+	assert.Equal(t, "img", updated["pod-b"].Annotations[annotationC1])
+}
+
+func TestScanPodFallbackScanFailureIsRetried(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{err: errors.New("syft failed")}
+	p, _, _ := fallbackProcessor(kc, sc, spdxSbom)
+
+	p.scanPod(podInfo(pod))
+	_, annotated := updated["pod-a"].Annotations[annotationC1]
+	assert.False(t, annotated, "pod annotated although the fallback scan failed")
+	_, processed := p.imageMap["img"].namespaces["prod"]
+	assert.False(t, processed, "namespace cached as processed although the fallback scan failed")
+
+	p.scanPod(podInfo(pod))
+	assert.Equal(t, 2, sc.calls)
+}
+
+func TestScanPodFallbackUploadFailureIsRetried(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, _ := fallbackProcessor(kc, sc, spdxSbom)
+	dt.failImage = "img"
+
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, []string{"{spdx}", "{syft}"}, sbomsOf(dt.received))
+	_, annotated := updated["pod-a"].Annotations[annotationC1]
+	assert.False(t, annotated, "pod annotated although the fallback upload failed")
+}
+
+func TestScanPodFallbackSentOnceForTwoRejectedSboms(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, _ := fallbackProcessor(kc, sc, spdxSbom, spdxSbom2)
+
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Equal(t, []string{"{spdx}", "{spdx2}", "{syft}"}, sbomsOf(dt.received))
+	assert.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+}
+
+func TestScanPodNoFallbackWhenAWholeImageSbomWasAccepted(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, _ := fallbackProcessor(kc, sc, cdxSbom, spdxSbom)
+
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 0, sc.calls)
+	assert.Equal(t, []string{"{cdx}", "{spdx}"}, sbomsOf(dt.received))
+	assert.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+}
+
+func TestScanPodScopedRejectDoesNotFallBack(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	scoped := &internaloci.AttestationSbom{Scope: "application", MediaType: internaloci.SPDXJSONMediaType, Sbom: "{app}"}
+	p, dt, _ := fallbackProcessor(kc, sc, cdxSbom, scoped)
+
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 0, sc.calls)
+	assert.Equal(t, []string{"{cdx}", "{app}"}, sbomsOf(dt.received))
+	assert.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+}
+
+// A retry after a failed upload reuses the cached fallback instead of scanning again.
+func TestScanPodFallbackReusedAfterUploadFailure(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, _ := fallbackProcessor(kc, sc, spdxSbom)
+	dt.failImage = "img"
+
+	p.scanPod(podInfo(pod))
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Equal(t, []string{"{spdx}", "{syft}", "{spdx}", "{syft}"}, sbomsOf(dt.received))
+	require.NotNil(t, p.imageMap["img"].fallback)
+	assert.Equal(t, "{syft}", p.imageMap["img"].fallback.Sbom)
+	assert.NotContains(t, p.imageMap["img"].namespaces, "prod")
+}
+
+func TestScanPodSyftResultReusedAfterUploadFailure(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, _, cm := fallbackProcessor(kc, sc)
+	p.imageMap = map[string]*cachedImage{}
+	cm.failImage = "img"
+
+	p.scanPod(podInfo(pod))
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Equal(t, []string{"{syft}", "{syft}"}, sbomsOf(cm.received))
+}
+
+func TestScanPodPendingScanReusedInOtherNamespace(t *testing.T) {
+	podA := podWith("pod-a", "prod", "img")
+	podB := podWith("pod-b", "staging", "img")
+	kc, updated := fakeKubeClient(t, podA, podB)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, _, cm := fallbackProcessor(kc, sc)
+	p.imageMap = map[string]*cachedImage{}
+	cm.failImage = "img"
+
+	p.scanPod(podInfo(podA))
+	cm.failImage = ""
+	p.scanPod(podInfo(podB))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Contains(t, p.imageMap["img"].namespaces, "staging")
+	assert.NotContains(t, p.imageMap["img"].namespaces, "prod")
+	assert.Equal(t, "img", updated["pod-b"].Annotations[annotationC1])
+	_, annotated := updated["pod-a"].Annotations[annotationC1]
+	assert.False(t, annotated)
+}
+
+func TestImageRemovedFreesPendingEntry(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, _, cm := fallbackProcessor(kc, sc)
+	p.imageMap = map[string]*cachedImage{}
+	cm.failImage = "img"
+
+	p.scanPod(podInfo(pod))
+	require.Contains(t, p.imageMap, "img")
+	p.imageRemoved("img", "prod")
+
+	assert.NotContains(t, p.imageMap, "img")
+}
+
+// Scope rules are matched as for a regular scan: the rejected whole-image SBOM
+// must not match, but the image's scoped SBOMs do.
+func TestScanPodFallbackResolvesCatalogersFromScopedSboms(t *testing.T) {
+	appSbom := &internaloci.AttestationSbom{Scope: "application", MediaType: internaloci.CycloneDXJSONMediaType, Sbom: "{app}"}
+
+	t.Run("whole-image SBOM does not match a scope rule", func(t *testing.T) {
+		pod := podWith("pod-a", "prod", "img")
+		kc, _ := fakeKubeClient(t, pod)
+		sc := &fakeScanner{sbom: "{syft}"}
+		p, _, _ := fallbackProcessor(kc, sc, spdxSbom)
+		internal.OperatorConfig.SyftCatalogers = []string{"debian"}
+		internal.OperatorConfig.SyftCatalogersScopeRules = []string{"all:golang"}
+
+		p.scanPod(podInfo(pod))
+
+		assert.Equal(t, []string{"debian"}, sc.catalogers)
+	})
+
+	t.Run("scoped SBOM matches a scope rule", func(t *testing.T) {
+		pod := podWith("pod-a", "prod", "img")
+		kc, _ := fakeKubeClient(t, pod)
+		sc := &fakeScanner{sbom: "{syft}"}
+		p, _, _ := fallbackProcessor(kc, sc, spdxSbom, appSbom)
+		internal.OperatorConfig.SyftCatalogers = []string{"debian"}
+		internal.OperatorConfig.SyftCatalogersScopeRules = []string{"all:golang", "application:os"}
+
+		p.scanPod(podInfo(pod))
+
+		assert.Equal(t, []string{"os"}, sc.catalogers)
+	})
+}
+
+func TestScanPodFallbackUsesScannerMediaType(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}", mediaType: internaloci.CycloneDXXMLMediaType}
+	p, dt, _ := fallbackProcessor(kc, sc, spdxSbom)
+
+	p.scanPod(podInfo(pod))
+
+	require.Len(t, dt.received, 2)
+	assert.Equal(t, types.MediaType(internaloci.CycloneDXXMLMediaType), dt.received[1].MediaType)
+}
+
+func TestScanPodSyftSbomUsesScannerMediaType(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}", mediaType: internaloci.CycloneDXXMLMediaType}
+	p, dt, _ := fallbackProcessor(kc, sc)
+	p.imageMap = map[string]*cachedImage{}
+
+	p.scanPod(podInfo(pod))
+
+	require.Len(t, dt.received, 1)
+	assert.Equal(t, types.MediaType(internaloci.CycloneDXXMLMediaType), dt.received[0].MediaType)
+}
+
+func TestValidateDtrackFormat(t *testing.T) {
+	valid := []struct{ format, formatVersion string }{
+		{"cyclonedx", ""}, {"cyclone", ""}, {"cyclonedxxml", ""}, {"cyclonedxjson", ""}, {"json", "1.5"},
+	}
+	for _, tt := range valid {
+		assert.NoError(t, validateDtrackFormat(tt.format, tt.formatVersion), "%s/%s", tt.format, tt.formatVersion)
+	}
+	for _, format := range []string{"json", "spdxjson", "text", "", "1.6", " cyclonedx"} {
+		err := validateDtrackFormat(format, "")
+		require.Error(t, err, format)
+		assert.Contains(t, err.Error(), "dependency-track only accepts CycloneDX")
+	}
+}
+
+func TestScanPodFallbackSharedByTwoRejectingTargets(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt1, cm := fallbackProcessor(kc, sc, spdxSbom)
+	dt2 := &mockTarget{rejectMediaType: internaloci.SPDXJSONMediaType}
+	p.Targets = []target.Target{dt1, dt2, cm}
+
+	p.scanPod(podInfo(pod))
+
+	assert.Equal(t, 1, sc.calls)
+	assert.Equal(t, []string{"{spdx}", "{syft}"}, sbomsOf(dt1.received))
+	assert.Equal(t, []string{"{spdx}", "{syft}"}, sbomsOf(dt2.received))
+	assert.Equal(t, []string{"{spdx}"}, sbomsOf(cm.received))
+	assert.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+}
+
+// fallbackLogs returns the log entries a scanPod run wrote, at all levels.
+func fallbackLogs(t *testing.T, run func()) []*logrus.Entry {
+	t.Helper()
+	hook := logtest.NewGlobal()
+	t.Cleanup(hook.Reset)
+	run()
+	return hook.AllEntries()
+}
+
+func TestScanPodFallbackLogsRejectionOnce(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, _, _ := fallbackProcessor(kc, sc, spdxSbom)
+
+	entries := fallbackLogs(t, func() { p.scanPod(podInfo(pod)) })
+
+	var mentions []*logrus.Entry
+	for _, e := range entries {
+		if err, ok := e.Data[logrus.ErrorKey].(error); ok && errors.Is(err, target.ErrUnsupportedSbom) {
+			mentions = append(mentions, e)
+		}
+	}
+	require.Len(t, mentions, 1, "the rejection is logged exactly once")
+	assert.Equal(t, logrus.InfoLevel, mentions[0].Level)
+	assert.Contains(t, mentions[0].Message, "Falling back to a Syft SBOM of image img for target")
+}
+
+func TestScanPodFallbackScanFailureLogsSkippedTargets(t *testing.T) {
+	pod := podWith("pod-a", "prod", "img")
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{err: errors.New("syft failed")}
+	p, dt1, cm := fallbackProcessor(kc, sc, spdxSbom)
+	dt2 := &mockTarget{rejectMediaType: internaloci.SPDXJSONMediaType}
+	p.Targets = []target.Target{dt1, dt2, cm}
+
+	entries := fallbackLogs(t, func() { p.scanPod(podInfo(pod)) })
+
+	var failures []*logrus.Entry
+	for _, e := range entries {
+		if strings.Contains(e.Message, "Fallback scan of image img failed") {
+			failures = append(failures, e)
+		}
+	}
+	require.Len(t, failures, 1)
+	assert.Equal(t, logrus.WarnLevel, failures[0].Level)
+	assert.Contains(t, failures[0].Message, "skipped targets: [*processor.mockTarget *processor.mockTarget]")
+	assert.Equal(t, 1, sc.calls)
 }

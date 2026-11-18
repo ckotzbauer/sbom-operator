@@ -31,6 +31,7 @@ import (
 	"github.com/ckotzbauer/sbom-operator/internal"
 	"github.com/ckotzbauer/sbom-operator/internal/kubernetes"
 	internaloci "github.com/ckotzbauer/sbom-operator/internal/oci"
+	"github.com/google/go-containerregistry/pkg/v1/types"
 	"github.com/sirupsen/logrus"
 )
 
@@ -57,6 +58,15 @@ func New(sbomFormat string, proxyRegistryMap map[string]string, appVersion strin
 func (s Syft) WithSyftVersion(version string) Syft {
 	s.resolveVersion = func() string { return version }
 	return s
+}
+
+// MediaType returns the media type of the SBOMs ExecuteSyft produces.
+func (s *Syft) MediaType() types.MediaType {
+	var resolved FormatVersion
+	if s.resolvedFormat != nil {
+		resolved = *s.resolvedFormat
+	}
+	return MediaTypeForFormat(s.sbomFormat, resolved)
 }
 
 func (s *Syft) ExecuteSyft(img *oci.RegistryImage, catalogers []string) (string, error) {

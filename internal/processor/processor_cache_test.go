@@ -254,6 +254,26 @@ func TestExecuteSyftScans_SyncsProcessorCacheWithClusterState(t *testing.T) {
 	assert.NotContains(t, p.imageMap, "img-gone", "Stopped image must be evicted from RAM")
 }
 
+// An image scanned but never uploaded successfully has no namespaces yet; the
+// sync must still free it once it no longer runs anywhere.
+func TestExecuteSyftScans_FreesPendingEntryOfStoppedImage(t *testing.T) {
+	att := []*oci.AttestationSbom{{Sbom: `{"bomFormat":"CycloneDX"}`}}
+	p := &Processor{
+		imageMap: map[string]*cachedImage{
+			"img-pending-running": {attestations: att, namespaces: map[string]struct{}{}},
+			"img-pending-gone":    {attestations: att, namespaces: map[string]struct{}{}},
+		},
+		Targets: []target.Target{},
+	}
+
+	p.executeSyftScans([]libk8s.PodInfo{}, map[string][]*liboci.RegistryImage{
+		"ns-active": {{ImageID: "img-pending-running"}},
+	})
+
+	assert.Contains(t, p.imageMap, "img-pending-running", "pending entry of a running image is kept for the retry")
+	assert.NotContains(t, p.imageMap, "img-pending-gone", "pending entry of a stopped image must be evicted")
+}
+
 // 3. Target Failure Resilience (Do not cache if ProcessSbom fails)
 func TestCache_NotMarkedAsProcessedWhenTargetFails(t *testing.T) {
 	att := []*oci.AttestationSbom{{Scope: oci.ScopeAll, Sbom: `{"bomFormat":"CycloneDX"}`}}
