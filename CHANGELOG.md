@@ -1,3 +1,17 @@
+## Version 0.50.1 (2026-11-20)
+
+### Dependency updates
+
+* [[`264d8b0d`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/264d8b0d)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.58.1 (#993)
+* [[`809b2fd9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/809b2fd9)] - **deps**: update alpine:3.24 docker digest to f59abe6 (#1103)
+
+### Common changes
+
+* [[`689750bd`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/689750bd)] - **dtrack**: scan with Syft for incompatible fetched SBOMs (#1126)
+* [[`8b2b3fbf`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/8b2b3fbf)] - **dtrack**: preserve tag in Dependency-Track version for tag@digest images (#1123)
+* [[`85638675`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/85638675)] - **oci**: scope cloud registry credentials to verified host (GHSA-mj53-xx5r-q8h2) (#1127)
+
+
 ## Version 0.50.0 (2026-11-17)
 
 ### Features and improvements
