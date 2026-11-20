@@ -59,13 +59,14 @@ func (c *tokenCache) put(registry, username, password string, expires time.Time)
 // via PullSecrets (libk8soci) or Cloud-Provider-Fallbacks (GCP / AWS ECR).
 func ResolveCredentials(img *liboci.RegistryImage, proxyRegistryMap map[string]string) []image.RegistryCredentials {
 	credentials := liboci.ConvertSecrets(*img, proxyRegistryMap)
+	gcpHost, isGCP := gcpRegistryHost(img.ImageID)
 
 	switch {
 	case hasUsableCredentials(credentials):
 		return credentials
-	case isGCPArtifactRegistry(img.ImageID):
-		logrus.Debugf("No pull secrets found for GCP Artifact Registry %s, attempting default credentials", img.ImageID)
-		if gcpCreds := getGCPCredentials(context.Background()); gcpCreds != nil {
+	case isGCP:
+		logrus.Debugf("No pull secrets found for GCP Artifact Registry %s, attempting default credentials", gcpHost)
+		if gcpCreds := getGCPCredentials(context.Background(), gcpHost); gcpCreds != nil {
 			return []image.RegistryCredentials{*gcpCreds}
 		}
 		logrus.Debugf("Failed to get GCP credentials, using empty options")
@@ -84,20 +85,64 @@ func ResolveCredentials(img *liboci.RegistryImage, proxyRegistryMap map[string]s
 
 // RemoteAuthOption translates the resolved Credentials in go-containerregistry Option.
 func RemoteAuthOption(creds []image.RegistryCredentials) ggcrremote.Option {
-	for _, c := range creds {
-		if c.Username != "" || c.Password != "" || c.Token != "" {
-			return ggcrremote.WithAuth(authn.FromConfig(authn.AuthConfig{
+	return ggcrremote.WithAuthFromKeychain(&credKeychain{creds: creds})
+}
+
+// credKeychain narrows the resolved credentials to the registry actually being
+// accessed, so credentials (e.g. a GCP access token) never leak to a different
+// registry (GHSA-mj53-xx5r-q8h2). Empty Authority matches every registry so
+// pull secrets without an explicit host keep the previous behavior.
+type credKeychain struct {
+	creds []image.RegistryCredentials
+}
+
+func (k *credKeychain) Resolve(target authn.Resource) (authn.Authenticator, error) {
+	registry := target.RegistryStr()
+	for _, c := range k.creds {
+		if c.Authority != "" && !registryMatches(c.Authority, registry) {
+			continue
+		}
+		if c.Authenticator != nil {
+			return c.Authenticator, nil
+		}
+		if (c.Username != "" && c.Password != "") || c.Token != "" {
+			return authn.FromConfig(authn.AuthConfig{
 				Username:      c.Username,
 				Password:      c.Password,
 				RegistryToken: c.Token,
-			}))
+			}), nil
 		}
 	}
-	return ggcrremote.WithAuthFromKeychain(authn.DefaultKeychain)
+	// No scoutable credentials for this registry: fall back to the host's
+	// docker config (DefaultKeychain) like the pre-fix code did, before
+	// giving up with anonymous.
+	return authn.DefaultKeychain.Resolve(target)
 }
 
-func isGCPArtifactRegistry(imageID string) bool {
-	return strings.Contains(imageID, "-docker.pkg.dev/")
+// registryMatches normalizes the docker.io aliases like stereoscope does.
+func registryMatches(authority, registry string) bool {
+	aliases := map[string]bool{
+		"registry-1.docker.io": true,
+		"index.docker.io":      true,
+		"docker.io":            true,
+	}
+	if aliases[authority] && aliases[registry] {
+		return true
+	}
+	return authority == registry
+}
+
+// gcpRegistryHost returns the registry host if the image reference names a
+// Google Artifact Registry host (suffix "-docker.pkg.dev") and false otherwise.
+func gcpRegistryHost(imageID string) (string, bool) {
+	host := imageID
+	if slash := strings.Index(host, "/"); slash >= 0 {
+		host = host[:slash]
+	}
+	if !strings.HasSuffix(host, "-docker.pkg.dev") {
+		return "", false
+	}
+	return host, true
 }
 
 // hasUsableCredentials reports whether at least one credential entry can
@@ -180,7 +225,7 @@ func getECRCredentials(ctx context.Context, imageID string) *image.RegistryCrede
 	return &image.RegistryCredentials{Authority: registry, Username: username, Password: password}
 }
 
-func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
+func getGCPCredentials(ctx context.Context, host string) *image.RegistryCredentials {
 	creds, err := google.FindDefaultCredentials(ctx, "https://www.googleapis.com/auth/cloud-platform")
 	if err != nil {
 		logrus.WithError(err).Debug("Failed to find default GCP credentials")
@@ -195,9 +240,12 @@ func getGCPCredentials(ctx context.Context) *image.RegistryCredentials {
 
 	logrus.Debugf("Successfully obtained GCP access token via default credentials (expires: %v)", token.Expiry)
 
+	// Authority must be set so the token is only sent to the verified host
+	// (GHSA-mj53-xx5r-q8h2); an empty Authority matches every registry.
 	return &image.RegistryCredentials{
-		Username: "oauth2accesstoken",
-		Password: token.AccessToken,
+		Authority: host,
+		Username:  "oauth2accesstoken",
+		Password:  token.AccessToken,
 	}
 }
 
