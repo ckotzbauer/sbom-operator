@@ -13,6 +13,6 @@ permissions:
 
 jobs:
   scan-scan:
-    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan.yml@70492262e47019908260a22d989ea8c55c549cdb # 0.58.1
+    uses: ckotzbauer/actions-toolkit/.github/workflows/toolkit-scan.yml@3e8ffeb9c11a5b7d61f8a33ec27a9ca5ca3180e3 # 0.58.2
     with:
       docker-tag: ghcr.io/ckotzbauer/sbom-operator:latest
