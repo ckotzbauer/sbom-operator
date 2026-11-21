@@ -5,7 +5,7 @@ go 1.26.8
 require (
 	github.com/DependencyTrack/client-go v0.19.0
 	github.com/Masterminds/sprig/v3 v3.3.0
-	github.com/anchore/stereoscope v0.4.1
+	github.com/anchore/stereoscope v0.4.2
 	github.com/anchore/syft v1.57.1
 	github.com/aws/aws-sdk-go-v2/config v1.33.20
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.69.0
@@ -135,7 +135,7 @@ require (
 	github.com/digitorus/timestamp v0.0.0-20231217203849-220c5c2851b7 // indirect
 	github.com/diskfs/go-diskfs v1.9.4 // indirect
 	github.com/distribution/reference v0.6.0 // indirect
-	github.com/docker/cli v29.9.2+incompatible // indirect
+	github.com/docker/cli v29.9.3+incompatible // indirect
 	github.com/docker/docker v28.5.2+incompatible // indirect
 	github.com/docker/docker-credential-helpers v0.9.10 // indirect
 	github.com/docker/go-connections v0.8.2 // indirect
