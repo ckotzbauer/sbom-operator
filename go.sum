@@ -189,6 +189,8 @@ github.com/anchore/stereoscope v0.4.0 h1:MDL7YFRDaGzhCdjm/s+em1D/X9HwnZMYupfgg+m
 github.com/anchore/stereoscope v0.4.0/go.mod h1:hYJsi3M8a8N1O66u+rMQSgv5TREGM7QIjKBjPPnwiD8=
 github.com/anchore/stereoscope v0.4.1 h1:7mxw24JCabbJIAcyvQDjBd2pbzo+0HSFVgjYlE8Zm+k=
 github.com/anchore/stereoscope v0.4.1/go.mod h1:hYJsi3M8a8N1O66u+rMQSgv5TREGM7QIjKBjPPnwiD8=
+github.com/anchore/stereoscope v0.4.2 h1:tiLX01TpChU4+k1Jlv+uwF5lVdSCJVKuh8hQXl8iqQI=
+github.com/anchore/stereoscope v0.4.2/go.mod h1:Cru29+t2nps1BJxWzAEc4RN9RQI7AAizzoCVM9cheR0=
 github.com/anchore/syft v1.55.0 h1:IeBZJrF/g75ba3k0ITQ8v4NCVGiGsWU3Wa1P/eSAFa0=
 github.com/anchore/syft v1.55.0/go.mod h1:mBfgoR36a4J2XG7L6EPThwJjUjdQb/fUyxghW3U72Zk=
 github.com/anchore/syft v1.56.0 h1:hpIzQsvlNPCgrz7KJZ79HX59I44yE/AyqTbvO5Q92jM=
@@ -565,6 +567,8 @@ github.com/docker/cli v29.8.2+incompatible h1:2zgdFuoFst2T80oS42vhKGxkd0JRo305eI
 github.com/docker/cli v29.8.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/cli v29.9.2+incompatible h1:trup/vUxx5uUo2t+87Cd9AmITR+DvKUe4H2tTtZN8FY=
 github.com/docker/cli v29.9.2+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
+github.com/docker/cli v29.9.3+incompatible h1:SBaMp7ecohadEHMDrUJg22t9I3awqsAVhnJ7GOcWpfE=
+github.com/docker/cli v29.9.3+incompatible/go.mod h1:JLrzqnKDaYBop7H2jaqPtU4hHvMKP+vjCwu2uszcLI8=
 github.com/docker/distribution v2.8.3+incompatible h1:AtKxIZ36LoNK51+Z6RpzLpddBirtxJnzDrHLEKxTAYk=
 github.com/docker/distribution v2.8.3+incompatible/go.mod h1:J2gT2udsDAN96Uj4KfcMRqY0/ypR+oyYUYmja8H+y+w=
 github.com/docker/docker v28.5.2+incompatible h1:DBX0Y0zAjZbSrm1uzOkdr1onVghKaftjlSWt4AFexzM=
