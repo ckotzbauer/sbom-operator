@@ -6,7 +6,7 @@ require (
 	github.com/DependencyTrack/client-go v0.19.0
 	github.com/Masterminds/sprig/v3 v3.3.0
 	github.com/anchore/stereoscope v0.4.2
-	github.com/anchore/syft v1.57.1
+	github.com/anchore/syft v1.57.2
 	github.com/aws/aws-sdk-go-v2/config v1.33.20
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.69.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20261022050137-d2781e9ca0bf
