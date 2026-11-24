@@ -1,3 +1,17 @@
+## Version 0.50.2 (2026-11-24)
+
+### Dependency updates
+
+* [[`c5ed5060`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c5ed5060)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to e61d33b (#1133)
+* [[`e61d33b4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e61d33b4)] - **deps**: update module github.com&#x2F;aws&#x2F;aws-sdk-go-v2&#x2F;config to v1.33.21 (#1134)
+* [[`c15513d4`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/c15513d4)] - **deps**: update module github.com&#x2F;anchore&#x2F;syft to v1.57.2 (#1132)
+* [[`22853607`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/22853607)] - **deps**: update module github.com&#x2F;anchore&#x2F;stereoscope to v0.4.2 (#1131)
+* [[`e48473e9`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/e48473e9)] - **deps**: update ckotzbauer&#x2F;actions-toolkit action to v0.58.2 (#1130)
+* [[`d60addc7`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/d60addc7)] - **deps**: update aws-sdk-go-v2 monorepo (#1129)
+* [[`4f58b118`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/4f58b118)] - **deps**: update ckotzbauer&#x2F;sbom-operator digest to 7082211 (#1124)
+* [[`83c50d21`](https://github.com/ckotzbauer&#x2F;sbom-operator/commit/83c50d21)] - **deps**: update ckotzbauer&#x2F;helm-charts digest to 20008a8 (#1128)
+
+
 ## Version 0.50.1 (2026-11-20)
 
 ### Dependency updates
