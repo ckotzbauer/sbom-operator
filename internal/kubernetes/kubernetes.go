@@ -50,9 +50,7 @@ func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cach
 		return nil, err
 	}
 
-	err = informer.SetTransform(transformPod)
-
-	return informer, err
+	return informer, informer.SetTransform(transformPod)
 }
 
 // transformPod strips the cached pod to what the processor reads. The containers' names and
@@ -85,25 +83,24 @@ func transformPod(x interface{}) (interface{}, error) {
 }
 
 func containerImages(containers []corev1.Container) []corev1.Container {
-	if containers == nil {
-		return nil
-	}
-	out := make([]corev1.Container, 0, len(containers))
-	for _, c := range containers {
-		out = append(out, corev1.Container{Name: c.Name, Image: c.Image})
-	}
-	return out
+	return keepNameAndImage(containers, func(c corev1.Container) corev1.Container {
+		return corev1.Container{Name: c.Name, Image: c.Image}
+	})
 }
 
 func ephemeralContainerImages(containers []corev1.EphemeralContainer) []corev1.EphemeralContainer {
+	return keepNameAndImage(containers, func(c corev1.EphemeralContainer) corev1.EphemeralContainer {
+		return corev1.EphemeralContainer{EphemeralContainerCommon: corev1.EphemeralContainerCommon{Name: c.Name, Image: c.Image}}
+	})
+}
+
+func keepNameAndImage[C any](containers []C, strip func(C) C) []C {
 	if containers == nil {
 		return nil
 	}
-	out := make([]corev1.EphemeralContainer, 0, len(containers))
+	out := make([]C, 0, len(containers))
 	for _, c := range containers {
-		out = append(out, corev1.EphemeralContainer{
-			EphemeralContainerCommon: corev1.EphemeralContainerCommon{Name: c.Name, Image: c.Image},
-		})
+		out = append(out, strip(c))
 	}
 	return out
 }
