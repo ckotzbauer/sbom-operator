@@ -50,30 +50,59 @@ func (client *KubeClient) StartPodInformer(podLabelSelector string, handler cach
 		return nil, err
 	}
 
-	err = informer.SetTransform(func(x interface{}) (interface{}, error) {
-		pod := x.(*corev1.Pod).DeepCopy()
-		logrus.Tracef("Transform %s/%s", pod.Namespace, pod.Name)
+	return informer, informer.SetTransform(transformPod)
+}
 
-		return &corev1.Pod{
-				ObjectMeta: meta.ObjectMeta{
-					Name:        pod.Name,
-					Namespace:   pod.Namespace,
-					Annotations: pod.Annotations,
-					Labels:      pod.Labels,
-				},
-				Status: corev1.PodStatus{
-					InitContainerStatuses:      pod.Status.InitContainerStatuses,
-					EphemeralContainerStatuses: pod.Status.EphemeralContainerStatuses,
-					ContainerStatuses:          pod.Status.ContainerStatuses,
-				},
-				Spec: corev1.PodSpec{
-					ImagePullSecrets: pod.Spec.ImagePullSecrets,
-				},
+// transformPod strips the cached pod to what the processor reads. The containers' names and
+// images stay: libk8soci takes the image reference from the spec, because the status holds the
+// runtime's local image ID for images pulled by digest (containerd) and loses the tag.
+func transformPod(x interface{}) (interface{}, error) {
+	pod := x.(*corev1.Pod).DeepCopy()
+	logrus.Tracef("Transform %s/%s", pod.Namespace, pod.Name)
+
+	return &corev1.Pod{
+			ObjectMeta: meta.ObjectMeta{
+				Name:        pod.Name,
+				Namespace:   pod.Namespace,
+				Annotations: pod.Annotations,
+				Labels:      pod.Labels,
 			},
-			nil
-	})
+			Status: corev1.PodStatus{
+				InitContainerStatuses:      pod.Status.InitContainerStatuses,
+				EphemeralContainerStatuses: pod.Status.EphemeralContainerStatuses,
+				ContainerStatuses:          pod.Status.ContainerStatuses,
+			},
+			Spec: corev1.PodSpec{
+				ImagePullSecrets:    pod.Spec.ImagePullSecrets,
+				Containers:          containerImages(pod.Spec.Containers),
+				InitContainers:      containerImages(pod.Spec.InitContainers),
+				EphemeralContainers: ephemeralContainerImages(pod.Spec.EphemeralContainers),
+			},
+		},
+		nil
+}
 
-	return informer, err
+func containerImages(containers []corev1.Container) []corev1.Container {
+	return keepNameAndImage(containers, func(c corev1.Container) corev1.Container {
+		return corev1.Container{Name: c.Name, Image: c.Image}
+	})
+}
+
+func ephemeralContainerImages(containers []corev1.EphemeralContainer) []corev1.EphemeralContainer {
+	return keepNameAndImage(containers, func(c corev1.EphemeralContainer) corev1.EphemeralContainer {
+		return corev1.EphemeralContainer{EphemeralContainerCommon: corev1.EphemeralContainerCommon{Name: c.Name, Image: c.Image}}
+	})
+}
+
+func keepNameAndImage[C any](containers []C, strip func(C) C) []C {
+	if containers == nil {
+		return nil
+	}
+	out := make([]C, 0, len(containers))
+	for _, c := range containers {
+		out = append(out, strip(c))
+	}
+	return out
 }
 
 func (client *KubeClient) StartNamespaceInformer(namespaceLabelSelector string, handler cache.ResourceEventHandlerFuncs) (cache.SharedIndexInformer, error) {

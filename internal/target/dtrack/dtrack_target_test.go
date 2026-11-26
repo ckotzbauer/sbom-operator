@@ -105,6 +105,15 @@ func TestGetRepoWithVersion(t *testing.T) {
 			expectedVersion:  "7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
 		},
 		{
+			name:             "containerd tag@digest from spec, default naming",
+			image:            &liboci.RegistryImage{ImageID: "docker.io/library/redis@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952", Image: "docker.io/library/redis:7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952"},
+			useShortName:     false,
+			k8sClusterId:     "my-cluster",
+			k8sClusterIdMode: "tag",
+			expectedName:     "docker.io/library/redis",
+			expectedVersion:  "7.4.2-alpine@sha256:02419de7eddf55aa5bcf49efb74e88fa8d931b4d77c07eff8a6b2144472b6952",
+		},
+		{
 			name:             "Tag-only image with digest ImageID keeps tag-only version",
 			image:            &liboci.RegistryImage{ImageID: "docker.io/library/nginx@sha256:1111111111111111111111111111111111111111111111111111111111111111", Image: "docker.io/library/nginx:1.28.0-alpine"},
 			useShortName:     false,
