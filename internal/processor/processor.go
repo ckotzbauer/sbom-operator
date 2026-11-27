@@ -190,17 +190,26 @@ func (p *Processor) ListenForPods() {
 		return
 	}
 
-	p.runInformerAsync(informer)
-
 	// Periodically retry pods whose scan or upload failed (they stay unannotated).
 	retryInterval := 5 * time.Minute
-	if s := internal.OperatorConfig.RetryInterval; s != "" {
+	if s := strings.TrimSpace(internal.OperatorConfig.RetryInterval); s != "" {
 		parsed, err := time.ParseDuration(s)
-		if err != nil {
+		if err != nil || parsed < 0 {
 			logrus.WithError(err).Fatal("Invalid value for retry-interval")
 		}
 		retryInterval = parsed
 	}
+
+	var reconcileInterval time.Duration
+	if raw := strings.TrimSpace(internal.OperatorConfig.ReconcileInterval); raw != "" {
+		parsed, err := time.ParseDuration(raw)
+		if err != nil || parsed < 0 {
+			logrus.WithError(err).Fatal("Invalid value for reconcile-interval")
+		}
+		reconcileInterval = parsed
+	}
+
+	p.runInformerAsync(informer, reconcileInterval)
 
 	// shortcut: with ignore-annotations=true annotation presence can't distinguish
 	// failed from processed containers, so the retry loop would rescan the whole
@@ -715,10 +724,10 @@ func (p *Processor) imageRemoved(imageId string, namespace string) {
 }
 
 func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage) {
-	p.executeSyftScansInternal(pods, allImages, false)
+	p.executeSyftScansInternal(pods, allImages, false, nil)
 }
 
-func (p *Processor) executeSyftScansInternal(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage, forceRescan bool) {
+func (p *Processor) executeSyftScansInternal(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage, forceRescan bool, preloaded map[target.Target][]*target.TargetImage) {
 	for _, pod := range pods {
 		p.scanPodInternal(pod, forceRescan)
 	}
@@ -753,10 +762,16 @@ func (p *Processor) executeSyftScansInternal(pods []libk8s.PodInfo, allImages ma
 
 	// Reconcile orphan images per target
 	for _, t := range p.Targets {
-		targetImages, err := t.LoadImages(p.runCtx())
-		if err != nil {
-			logrus.WithError(err).Error("Failed to load images from target")
-			continue
+		var targetImages []*target.TargetImage
+		if cached, ok := preloaded[t]; ok {
+			targetImages = cached
+		} else {
+			var err error
+			targetImages, err = t.LoadImages(p.runCtx())
+			if err != nil {
+				logrus.WithError(err).Error("Failed to load images from target")
+				continue
+			}
 		}
 
 		var removableImages []*target.TargetImage
@@ -976,7 +991,7 @@ func (p *Processor) handleOrphanImages(t target.Target, images []*target.TargetI
 	}
 }
 
-func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
+func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer, reconcileInterval time.Duration) {
 	// p.ctx is written before the informer handlers and retryFailedScans, its only readers, start.
 	ctx, cancel := context.WithCancel(context.Background())
 	p.ctx = ctx
@@ -1013,7 +1028,6 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 		logrus.Info("Pod-informer has stopped")
 		os.Exit(0)
 	}()
-
 	go func() {
 		if !HasJobImage() {
 			logrus.Info("Wait for cache to be synced")
@@ -1022,57 +1036,94 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			}
 
 			logrus.Info("Finished cache sync")
+			p.reconcileInformer(informer)
 
-			p.scanMu.Lock()
-			defer p.scanMu.Unlock()
-
-			validPods := p.collectValidPods(informer)
-			missingPods := make([]libk8s.PodInfo, 0)
-
-			type loadedTarget struct {
-				target target.Target
-				images []*target.TargetImage
+			if reconcileInterval > 0 {
+				p.reconcileLoop(informer, reconcileInterval)
 			}
-			var activeTargets []loadedTarget
-			for _, t := range p.Targets {
-				targetImages, err := t.LoadImages(p.runCtx())
-				if err != nil {
-					logrus.WithError(err).Error("Failed to load images from target")
-					continue
-				}
-				activeTargets = append(activeTargets, loadedTarget{target: t, images: targetImages})
-			}
-
-			// Compare every running container against active target images regardless of pod annotations,
-			// so projects that were deactivated or deleted externally are detected as drift and healed.
-			for _, info := range validPods {
-				podNeedsScan := false
-				for _, c := range info.Containers {
-					for _, lt := range activeTargets {
-						expectedNs := ""
-						if lt.target.IsNamespaceAware() {
-							expectedNs = info.PodNamespace
-						}
-						if !containsImage(lt.images, expectedNs, c.Image.ImageID) {
-							podNeedsScan = true
-							break
-						}
-					}
-					if podNeedsScan {
-						break
-					}
-				}
-
-				if podNeedsScan {
-					missingPods = append(missingPods, info)
-					logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
-				}
-			}
-
-			allImages := collectAllImages(validPods)
-			p.executeSyftScansInternal(missingPods, allImages, true)
 		}
 	}()
+
+}
+
+// reconcileLoop periodically compares running cluster pods against all targets
+// to heal external drift (e.g. projects deactivated or deleted directly in
+// Dependency-Track) and clean up any missed orphans.
+func (p *Processor) reconcileLoop(informer cache.SharedIndexInformer, interval time.Duration) {
+	ticker := time.NewTicker(interval)
+	defer ticker.Stop()
+
+	for {
+		select {
+		case <-p.runCtx().Done():
+			return
+		case <-ticker.C:
+			p.reconcileInformer(informer)
+		}
+	}
+}
+
+func (p *Processor) reconcileInformer(informer cache.SharedIndexInformer) {
+	p.scanMu.Lock()
+	defer p.scanMu.Unlock()
+
+	p.reconcilePods(p.collectValidPods(informer))
+}
+
+func (p *Processor) reconcilePods(validPods []libk8s.PodInfo) {
+	type loadedTarget struct {
+		target target.Target
+		images []*target.TargetImage
+	}
+
+	activeTargets := make([]loadedTarget, 0, len(p.Targets))
+	preloaded := make(map[target.Target][]*target.TargetImage, len(p.Targets))
+	for _, t := range p.Targets {
+		targetImages, err := t.LoadImages(p.runCtx())
+		if err != nil {
+			logrus.WithError(err).Error("Failed to load images from target")
+			continue
+		}
+		activeTargets = append(activeTargets, loadedTarget{target: t, images: targetImages})
+		preloaded[t] = targetImages
+	}
+
+	if len(activeTargets) == 0 {
+		return
+	}
+
+	missingPods := make([]libk8s.PodInfo, 0)
+	for _, info := range validPods {
+		podNeedsScan := false
+		for _, c := range info.Containers {
+			for _, lt := range activeTargets {
+				expectedNs := ""
+				if lt.target.IsNamespaceAware() {
+					expectedNs = info.PodNamespace
+				}
+				if !containsImage(lt.images, expectedNs, c.Image.ImageID) {
+					podNeedsScan = true
+					break
+				}
+			}
+			if podNeedsScan {
+				break
+			}
+		}
+
+		if podNeedsScan {
+			missingPods = append(missingPods, info)
+			logrus.Debugf("Pod %s/%s needs to be analyzed", info.PodNamespace, info.PodName)
+		}
+	}
+
+	allImages := collectAllImages(validPods)
+	// Reuse preloaded target images for orphan reconciliation when no pods were
+	// re-scanned; otherwise reload so newly uploaded images are reflected.
+	if len(missingPods) > 0 {
+		preloaded = nil
+	}
+	p.executeSyftScansInternal(missingPods, allImages, true, preloaded)
 }
 
 func (p *Processor) collectValidPods(informer cache.SharedIndexInformer) []libk8s.PodInfo {
