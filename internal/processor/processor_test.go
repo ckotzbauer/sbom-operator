@@ -911,3 +911,70 @@ func TestScanPodFallbackScanFailureLogsSkippedTargets(t *testing.T) {
 	assert.Contains(t, failures[0].Message, "skipped targets: [*processor.mockTarget *processor.mockTarget]")
 	assert.Equal(t, 1, sc.calls)
 }
+
+func TestScanPodInternal_ForceRescanHealsAnnotatedPodDrift(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() { internal.OperatorConfig = origConfig })
+	internal.OperatorConfig = &internal.Config{}
+
+	const imageID = "registry.example.io/dlcm/cc-shell@sha256:1dc026e889"
+
+	pod := podWith("cc-shell-abc", "dlcm", imageID)
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{err: errors.New("syft must not be called when cache is populated")}
+	mt := &mockTarget{}
+	p := &Processor{
+		K8s:      kc,
+		sy:       sc,
+		Targets:  []target.Target{mt},
+		imageMap: make(map[string]*cachedImage),
+	}
+
+	// Annotate the pod through the real KubeClient so HasAnnotation matches the configured key format
+	initialInfo := podInfo(pod)
+	kc.UpdatePodAnnotation(initialInfo, []string{initialInfo.Containers[0].Name})
+	updatedPod := updated[pod.Name]
+	require.NotEmpty(t, updatedPod.Annotations)
+
+	annotatedInfo := podInfo(pod)
+	annotatedInfo.Annotations = updatedPod.Annotations
+	require.True(t, kc.HasAnnotation(annotatedInfo.Annotations, annotatedInfo.Containers[0]))
+
+	p.imageScanned("dlcm", imageID, []*internaloci.AttestationSbom{cdxSbom})
+
+	// Normal scan skips annotated/cached pod
+	p.scanPodInternal(annotatedInfo, false)
+	assert.Empty(t, mt.received, "expected regular scan to skip annotated & cached pod")
+	assert.Equal(t, 0, sc.calls)
+
+	// Forced drift rescan dispatches cached SBOM without re-running Syft
+	p.scanPodInternal(annotatedInfo, true)
+	assert.Equal(t, []string{"{cdx}"}, sbomsOf(mt.received), "expected forceRescan to re-process pod and heal target drift")
+	assert.Equal(t, 0, sc.calls)
+}
+
+func TestScanPodInternal_ForceRescanReusesCachedFallback(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() { internal.OperatorConfig = origConfig })
+
+	pod := podWith("pod-a", "dlcm", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, cm := fallbackProcessor(kc, sc, spdxSbom)
+
+	// Initial scan generates and caches the Syft fallback for dt and annotates the pod
+	p.scanPod(podInfo(pod))
+	require.Equal(t, 1, sc.calls)
+	require.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+
+	annotatedInfo := podInfo(pod)
+	annotatedInfo.Annotations = updated["pod-a"].Annotations
+	dt.received = nil
+	cm.received = nil
+
+	// Forced rescan must re-dispatch both cached attestations and cached fallback without invoking Syft again
+	p.scanPodInternal(annotatedInfo, true)
+	assert.Equal(t, 1, sc.calls, "expected forceRescan to reuse cached fallback without running Syft again")
+	assert.Equal(t, []string{"{spdx}", "{syft}"}, sbomsOf(dt.received))
+	assert.Equal(t, []string{"{spdx}"}, sbomsOf(cm.received))
+}

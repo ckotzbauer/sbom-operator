@@ -531,20 +531,45 @@ func (g *DependencyTrackTarget) ProcessSbom(ctx context.Context, tctx *target.Ta
 
 func (g *DependencyTrackTarget) addProjectToCache(ctx context.Context, namespace string, imageId string, project dtrack.Project) error {
 	if g.imageProjectMap == nil {
-		// prepropulate imageProjectMap
-		_, err := g.LoadImages(ctx)
-		if err != nil {
+		// prepopulate imageProjectMap
+		if _, err := g.LoadImages(ctx); err != nil {
 			return err
 		}
 	}
+
+	g.putProjectInCache(namespace, imageId, project.UUID)
+	return nil
+}
+
+// putProjectInCache inserts (imageId, namespace, projectUUID) into g.imageProjectMap
+// and evicts any stale digest entries for the same projectUUID within the same namespace.
+func (g *DependencyTrackTarget) putProjectInCache(namespace string, imageId string, projectUUID uuid.UUID) {
+	if g.imageProjectMap == nil {
+		g.imageProjectMap = make(map[string]map[string]map[uuid.UUID]struct{})
+	}
+
+	for oldImageId, nsMap := range g.imageProjectMap {
+		if oldImageId == imageId {
+			continue
+		}
+		if projects, ok := nsMap[namespace]; ok {
+			delete(projects, projectUUID)
+			if len(projects) == 0 {
+				delete(nsMap, namespace)
+				if len(nsMap) == 0 {
+					delete(g.imageProjectMap, oldImageId)
+				}
+			}
+		}
+	}
+
 	if _, ok := g.imageProjectMap[imageId]; !ok {
 		g.imageProjectMap[imageId] = make(map[string]map[uuid.UUID]struct{})
 	}
 	if _, ok := g.imageProjectMap[imageId][namespace]; !ok {
 		g.imageProjectMap[imageId][namespace] = make(map[uuid.UUID]struct{})
 	}
-	g.imageProjectMap[imageId][namespace][project.UUID] = struct{}{}
-	return nil
+	g.imageProjectMap[imageId][namespace][projectUUID] = struct{}{}
 }
 
 // TemplateData holds the context fields exposed to project name templates.
@@ -843,12 +868,22 @@ func (g *DependencyTrackTarget) LoadImages(ctx context.Context) ([]*target.Targe
 			}
 
 			if imageRelatesToCluster && sbomOperatorPropFound && len(imageId) > 0 {
+				if !g.isNamespaceMode() && len(namespaces) == 0 {
+					namespaces = []string{""}
+				}
+
+				seenNs := make(map[string]struct{}, len(namespaces))
 				for _, ns := range namespaces {
+					if _, dup := seenNs[ns]; dup {
+						continue
+					}
+					seenNs[ns] = struct{}{}
+
 					images = append(images, &target.TargetImage{
 						RegistryImage: &libk8s.RegistryImage{ImageID: imageId},
 						Namespace:     ns,
 					})
-					_ = g.addProjectToCache(ctx, ns, imageId, project)
+					g.putProjectInCache(ns, imageId, project.UUID)
 				}
 			}
 		}
@@ -1083,6 +1118,14 @@ func (g *DependencyTrackTarget) getRepoWithVersion(ctx *target.TargetContext, us
 // and persists the updated tags. If no other clusters are referencing the
 // project anymore, it patches the project to be inactive (and not latest).
 func (g *DependencyTrackTarget) handleProjectDeactivation(ctx context.Context, client *dtrack.Client, project *dtrack.Project, img *target.TargetImage, deleteProject bool) error {
+	if img != nil && img.ImageID != "" {
+		if currentRawId := getRawImageId(project.Tags); currentRawId != "" && currentRawId != img.ImageID {
+			logrus.Infof("Skipping deactivation of project '%s:%s' for image '%s' - already updated to '%s'", project.Name, project.Version, img.ImageID, currentRawId)
+			g.projectDeleted(project, img)
+			return nil
+		}
+	}
+
 	podNsPrefix := podNamespaceTagKey + "="
 	clusterPrefix := kubernetesCluster + "="
 

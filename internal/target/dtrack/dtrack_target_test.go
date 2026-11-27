@@ -1532,3 +1532,236 @@ func TestHandleProjectDeactivation_TagMode_KeepsIntervalOpenWhileOtherNamespaceA
 	assert.Contains(t, tagNames, podNamespaceTagKey+"=ns-b")
 	assert.Contains(t, tagNames, "kubernetes-cluster=my-cluster")
 }
+
+func TestPutProjectInCache_EvictsStaleDigestInSameNamespace(t *testing.T) {
+	projectUUID := uuid.New()
+	oldDigest := "dlcmdevsharedacrregistry.azurecr.io/dlcm/order-service@sha256:6840ffbfd8"
+	newDigest := "dlcmdevsharedacrregistry.azurecr.io/dlcm/order-service@sha256:1dc026e889"
+
+	g := &DependencyTrackTarget{}
+
+	// Initial rollout in namespace "dlcm" and parallel deployment in "other-ns"
+	g.putProjectInCache("dlcm", oldDigest, projectUUID)
+	g.putProjectInCache("other-ns", oldDigest, projectUUID)
+
+	// Rolling update of mutable SNAPSHOT version updates digest in "dlcm"
+	g.putProjectInCache("dlcm", newDigest, projectUUID)
+
+	// Stale mapping in "dlcm" must be evicted, while "other-ns" remains untouched
+	_, staleInDlcm := g.imageProjectMap[oldDigest]["dlcm"][projectUUID]
+	assert.False(t, staleInDlcm, "expected stale digest mapping in dlcm to be evicted")
+
+	_, keptInOtherNs := g.imageProjectMap[oldDigest]["other-ns"][projectUUID]
+	assert.True(t, keptInOtherNs, "expected mapping in unrelated namespace to remain intact")
+
+	_, registeredInDlcm := g.imageProjectMap[newDigest]["dlcm"][projectUUID]
+	assert.True(t, registeredInDlcm, "expected new digest mapping to be registered in dlcm")
+}
+
+func TestLoadImages_EmptyNamespaceFallbackAndDeduplication(t *testing.T) {
+	legacyUUID := uuid.New()
+	nsModeUUID := uuid.New()
+	legacyImageID := "registry.example.io/app/legacy@sha256:aaa111"
+	nsModeImageID := "registry.example.io/dlcm/order-service@sha256:bbb222"
+
+	t.Run("tag mode includes projects without namespace tag under empty namespace", func(t *testing.T) {
+		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			switch {
+			case r.URL.Path == "/api/version" || r.URL.Path == "/api/v1/version":
+				_, _ = w.Write([]byte(`{"version": "4.12.0"}`))
+			case r.URL.Path == "/api/v1/project" && r.Method == http.MethodGet:
+				projects := []dtrack.Project{
+					{
+						UUID:    legacyUUID,
+						Name:    "app/legacy",
+						Version: "1.0.0",
+						Active:  true,
+						Tags: []dtrack.Tag{
+							{Name: sbomOperator},
+							{Name: kubernetesCluster + "=dev_eu"},
+							{Name: rawImageId + "=" + legacyImageID},
+						},
+					},
+				}
+				_ = json.NewEncoder(w).Encode(projects)
+			default:
+				_, _ = w.Write([]byte(`[]`))
+			}
+		}))
+		defer ts.Close()
+
+		g := &DependencyTrackTarget{
+			baseUrl:                   ts.URL,
+			k8sClusterId:              "dev_eu",
+			k8sClusterIdMode:          "tag",
+			manageProjectActiveStatus: true,
+		}
+
+		images, err := g.LoadImages(context.Background())
+		require.NoError(t, err)
+		require.Len(t, images, 1)
+		assert.Equal(t, legacyImageID, images[0].ImageID)
+		assert.Equal(t, "", images[0].Namespace)
+
+		_, cached := g.imageProjectMap[legacyImageID][""][legacyUUID]
+		assert.True(t, cached, "expected legacy project without namespace tag to be cached under empty namespace")
+	})
+
+	t.Run("tag-namespace mode deduplicates identical namespaces from cluster and namespace tags", func(t *testing.T) {
+		ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+			w.Header().Set("Content-Type", "application/json")
+			switch {
+			case r.URL.Path == "/api/version" || r.URL.Path == "/api/v1/version":
+				_, _ = w.Write([]byte(`{"version": "4.12.0"}`))
+			case r.URL.Path == "/api/v1/project" && r.Method == http.MethodGet:
+				projects := []dtrack.Project{
+					{
+						UUID:    nsModeUUID,
+						Name:    "order-service/container",
+						Version: "1.2.0-SNAPSHOT",
+						Active:  true,
+						Tags: []dtrack.Tag{
+							{Name: sbomOperator},
+							{Name: podNamespaceTagKey + "=dlcm"},
+							{Name: kubernetesCluster + "=dev_eu/dlcm"},
+							{Name: rawImageId + "=" + nsModeImageID},
+						},
+					},
+				}
+				_ = json.NewEncoder(w).Encode(projects)
+			default:
+				_, _ = w.Write([]byte(`[]`))
+			}
+		}))
+		defer ts.Close()
+
+		g := &DependencyTrackTarget{
+			baseUrl:                   ts.URL,
+			k8sClusterId:              "dev_eu",
+			k8sClusterIdMode:          "tag-namespace",
+			manageProjectActiveStatus: true,
+		}
+
+		images, err := g.LoadImages(context.Background())
+		require.NoError(t, err)
+		require.Len(t, images, 1, "expected duplicate dlcm namespace entries to be deduplicated")
+		assert.Equal(t, nsModeImageID, images[0].ImageID)
+		assert.Equal(t, "dlcm", images[0].Namespace)
+	})
+}
+
+func TestDeactivate_SkipsProjectWhenRawImageIDMovedToNewerDigest(t *testing.T) {
+	projectUUID := uuid.New()
+	oldDigest := "dlcmdevsharedacrregistry.azurecr.io/dlcm/order-service@sha256:6840ffbfd8"
+	newDigest := "dlcmdevsharedacrregistry.azurecr.io/dlcm/corder-service@sha256:1dc026e889"
+
+	writeCalled := false
+
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		switch {
+		case r.URL.Path == "/api/version" || r.URL.Path == "/api/v1/version":
+			_, _ = w.Write([]byte(`{"version": "4.12.0"}`))
+		case r.URL.Path == "/api/v1/project/"+projectUUID.String() && r.Method == http.MethodGet:
+			// Project in Dependency-Track has already been rotated to newDigest
+			proj := dtrack.Project{
+				UUID:    projectUUID,
+				Name:    "order-service/container",
+				Version: "1.2.0-SNAPSHOT",
+				Active:  true,
+				Tags: []dtrack.Tag{
+					{Name: sbomOperator},
+					{Name: kubernetesCluster + "=dev_eu/dlcm"},
+					{Name: rawImageId + "=" + newDigest},
+				},
+			}
+			_ = json.NewEncoder(w).Encode(proj)
+		case r.Method == http.MethodPatch || r.Method == http.MethodPost || r.Method == http.MethodPut || r.Method == http.MethodDelete:
+			writeCalled = true
+			w.WriteHeader(http.StatusOK)
+			_, _ = w.Write([]byte(`{}`))
+		default:
+			_, _ = w.Write([]byte(`{}`))
+		}
+	}))
+	defer ts.Close()
+
+	g := &DependencyTrackTarget{
+		baseUrl:                   ts.URL,
+		k8sClusterId:              "dev_eu",
+		k8sClusterIdMode:          "tag-namespace",
+		manageProjectActiveStatus: true,
+		imageProjectMap: map[string]map[string]map[uuid.UUID]struct{}{
+			// Simulate stale cache entry still pointing oldDigest -> projectUUID
+			oldDigest: {
+				"dlcm": {projectUUID: {}},
+			},
+		},
+	}
+
+	err := g.Deactivate(context.Background(), []*target.TargetImage{
+		{
+			RegistryImage: &liboci.RegistryImage{ImageID: oldDigest},
+			Namespace:     "dlcm",
+		},
+	})
+	require.NoError(t, err)
+	assert.False(t, writeCalled, "must not patch, update, or delete project already updated to a newer digest")
+
+	_, staleStillPresent := g.imageProjectMap[oldDigest]["dlcm"][projectUUID]
+	assert.False(t, staleStillPresent, "expected stale in-memory cache entry to be cleaned up")
+}
+
+func TestMutableSnapshotRollingUpdate_TerminatingOldPodDoesNotDeactivateProject(t *testing.T) {
+	projectUUID := uuid.New()
+	oldDigest := "dlcmdevsharedacrregistry.azurecr.io/dlcm/order-service@sha256:6840ffbfd8"
+	newDigest := "dlcmdevsharedacrregistry.azurecr.io/dlcm/order-service@sha256:1dc026e889"
+
+	var projectAPICalls []string
+	ts := httptest.NewServer(http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Set("Content-Type", "application/json")
+		if r.URL.Path == "/api/version" || r.URL.Path == "/api/v1/version" {
+			_, _ = w.Write([]byte(`{"version": "4.12.0"}`))
+			return
+		}
+		projectAPICalls = append(projectAPICalls, r.Method+" "+r.URL.Path)
+		w.WriteHeader(http.StatusOK)
+		_, _ = w.Write([]byte(`{}`))
+	}))
+	defer ts.Close()
+
+	g := &DependencyTrackTarget{
+		baseUrl:                   ts.URL,
+		k8sClusterId:              "dev_eu",
+		k8sClusterIdMode:          "tag-namespace",
+		manageProjectActiveStatus: true,
+		imageProjectMap:           make(map[string]map[string]map[uuid.UUID]struct{}),
+	}
+
+	proj := dtrack.Project{
+		UUID:    projectUUID,
+		Name:    "order-service/container",
+		Version: "1.2.0-SNAPSHOT",
+		Active:  true,
+	}
+
+	// 1. Old pod (oldDigest) was processed first
+	require.NoError(t, g.addProjectToCache(context.Background(), "dlcm", oldDigest, proj))
+
+	// 2. Rolling update deploys new pod (newDigest) with identical project name & version (1.2.0-SNAPSHOT)
+	require.NoError(t, g.addProjectToCache(context.Background(), "dlcm", newDigest, proj))
+
+	// 3. Old pod terminates seconds later -> Deactivate(oldDigest) must be a no-op
+	err := g.Deactivate(context.Background(), []*target.TargetImage{
+		{
+			RegistryImage: &liboci.RegistryImage{ImageID: oldDigest},
+			Namespace:     "dlcm",
+		},
+	})
+	require.NoError(t, err)
+	assert.Empty(t, projectAPICalls, "expected no Dependency-Track project API calls when deactivating evicted digest")
+
+	_, newStillCached := g.imageProjectMap[newDigest]["dlcm"][projectUUID]
+	assert.True(t, newStillCached, "expected active new digest mapping to remain in cache")
+}

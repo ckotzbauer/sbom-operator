@@ -342,6 +342,10 @@ func (p *Processor) getCachedAttestations(namespace string, imageId string) (alr
 }
 
 func (p *Processor) scanPod(pod libk8s.PodInfo) {
+	p.scanPodInternal(pod, false)
+}
+
+func (p *Processor) scanPodInternal(pod libk8s.PodInfo, forceRescan bool) {
 	p.K8s.InjectPullSecrets(pod)
 	// Only the dtrack target consumes deployment timestamps; resolve them lazily
 	// so other targets do not pay two extra Kubernetes API calls per pod per cycle.
@@ -363,7 +367,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 	successful := make(map[string]bool)
 
 	for _, container := range pod.Containers {
-		if p.K8s.HasAnnotation(pod.Annotations, container) {
+		if !forceRescan && p.K8s.HasAnnotation(pod.Annotations, container) {
 			logrus.Debugf("Skip image %s", container.Image.ImageID)
 			continue
 		}
@@ -377,7 +381,7 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		image := imageByID[imgID]
 
 		alreadyInNs, cachedAttestations := p.getCachedAttestations(pod.PodNamespace, imgID)
-		if alreadyInNs {
+		if !forceRescan && alreadyInNs {
 			// Image was already processed for this namespace -> nothing to do, but
 			// the container counts as processed and may be annotated.
 			for _, c := range containerList {
@@ -387,6 +391,11 @@ func (p *Processor) scanPod(pod libk8s.PodInfo) {
 		}
 
 		attestations := cachedAttestations
+		if forceRescan && len(attestations) == 0 {
+			if entry, exists := p.imageMap[imgID]; exists {
+				attestations = entry.attestations
+			}
+		}
 		if len(attestations) == 0 {
 			// Image has not been scanned in any namespace yet -> fetch OCI or run Syft
 			foundDefaultScopeSbom := false
@@ -706,8 +715,12 @@ func (p *Processor) imageRemoved(imageId string, namespace string) {
 }
 
 func (p *Processor) executeSyftScans(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage) {
+	p.executeSyftScansInternal(pods, allImages, false)
+}
+
+func (p *Processor) executeSyftScansInternal(pods []libk8s.PodInfo, allImages map[string][]*liboci.RegistryImage, forceRescan bool) {
 	for _, pod := range pods {
-		p.scanPod(pod)
+		p.scanPodInternal(pod, forceRescan)
 	}
 
 	// Build O(1) lookup sets of currently active images in the cluster
@@ -1009,27 +1022,12 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 			}
 
 			logrus.Info("Finished cache sync")
-			pods := informer.GetStore().List()
+
+			p.scanMu.Lock()
+			defer p.scanMu.Unlock()
+
+			validPods := p.collectValidPods(informer)
 			missingPods := make([]libk8s.PodInfo, 0)
-
-			validPods := make([]libk8s.PodInfo, 0, len(pods))
-			for _, po := range pods {
-				pod, ok := po.(*corev1.Pod)
-				if !ok {
-					continue
-				}
-				if !p.isNamespaceAllowed(pod.Namespace) {
-					logrus.Tracef("Skipping pod %s/%s during initial sync - namespace not in allowed list", pod.Namespace, pod.Name)
-					continue
-				}
-
-				info := p.K8s.Client.ExtractPodInfos(*pod)
-				validPods = append(validPods, info)
-			}
-
-			// Collect every running container's image, independent of scan need,
-			// so SBOMs of already-processed containers are not removed as orphans.
-			allImages := collectAllImages(validPods)
 
 			type loadedTarget struct {
 				target target.Target
@@ -1045,18 +1043,16 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 				activeTargets = append(activeTargets, loadedTarget{target: t, images: targetImages})
 			}
 
+			// Compare every running container against active target images regardless of pod annotations,
+			// so projects that were deactivated or deleted externally are detected as drift and healed.
 			for _, info := range validPods {
 				podNeedsScan := false
 				for _, c := range info.Containers {
-					if p.K8s.HasAnnotation(info.Annotations, c) {
-						continue
-					}
 					for _, lt := range activeTargets {
 						expectedNs := ""
 						if lt.target.IsNamespaceAware() {
 							expectedNs = info.PodNamespace
 						}
-
 						if !containsImage(lt.images, expectedNs, c.Image.ImageID) {
 							podNeedsScan = true
 							break
@@ -1073,9 +1069,25 @@ func (p *Processor) runInformerAsync(informer cache.SharedIndexInformer) {
 				}
 			}
 
-			p.scanMu.Lock()
-			p.executeSyftScans(missingPods, allImages)
-			p.scanMu.Unlock()
+			allImages := collectAllImages(validPods)
+			p.executeSyftScansInternal(missingPods, allImages, true)
 		}
 	}()
+}
+
+func (p *Processor) collectValidPods(informer cache.SharedIndexInformer) []libk8s.PodInfo {
+	pods := informer.GetStore().List()
+	validPods := make([]libk8s.PodInfo, 0, len(pods))
+	for _, po := range pods {
+		pod, ok := po.(*corev1.Pod)
+		if !ok {
+			continue
+		}
+		if !p.isNamespaceAllowed(pod.Namespace) {
+			logrus.Tracef("Skipping pod %s/%s during sync - namespace not in allowed list", pod.Namespace, pod.Name)
+			continue
+		}
+		validPods = append(validPods, p.K8s.Client.ExtractPodInfos(*pod))
+	}
+	return validPods
 }
