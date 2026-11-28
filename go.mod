@@ -10,7 +10,7 @@ require (
 	github.com/aws/aws-sdk-go-v2/config v1.33.21
 	github.com/aws/aws-sdk-go-v2/service/ecr v1.69.0
 	github.com/ckotzbauer/libk8soci v0.0.0-20261125142513-07efeca9b4ff
-	github.com/ckotzbauer/libstandard v0.0.0-20261107091313-f658acacaebc
+	github.com/ckotzbauer/libstandard v0.0.0-20261126180249-5663f19c6d2a
 	github.com/google/uuid v1.6.0
 	github.com/novln/docker-parser v1.0.0
 	github.com/robfig/cron v1.2.0
