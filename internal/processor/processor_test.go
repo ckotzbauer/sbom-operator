@@ -911,3 +911,183 @@ func TestScanPodFallbackScanFailureLogsSkippedTargets(t *testing.T) {
 	assert.Contains(t, failures[0].Message, "skipped targets: [*processor.mockTarget *processor.mockTarget]")
 	assert.Equal(t, 1, sc.calls)
 }
+
+func TestScanPodInternal_ForceRescanHealsAnnotatedPodDrift(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() { internal.OperatorConfig = origConfig })
+	internal.OperatorConfig = &internal.Config{}
+
+	const imageID = "registry.example.io/dlcm/cc-shell@sha256:1dc026e889"
+
+	pod := podWith("cc-shell-abc", "dlcm", imageID)
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{err: errors.New("syft must not be called when cache is populated")}
+	mt := &mockTarget{}
+	p := &Processor{
+		K8s:      kc,
+		sy:       sc,
+		Targets:  []target.Target{mt},
+		imageMap: make(map[string]*cachedImage),
+	}
+
+	// Annotate the pod through the real KubeClient so HasAnnotation matches the configured key format
+	initialInfo := podInfo(pod)
+	kc.UpdatePodAnnotation(initialInfo, []string{initialInfo.Containers[0].Name})
+	updatedPod := updated[pod.Name]
+	require.NotEmpty(t, updatedPod.Annotations)
+
+	annotatedInfo := podInfo(pod)
+	annotatedInfo.Annotations = updatedPod.Annotations
+	require.True(t, kc.HasAnnotation(annotatedInfo.Annotations, annotatedInfo.Containers[0]))
+
+	p.imageScanned("dlcm", imageID, []*internaloci.AttestationSbom{cdxSbom})
+
+	// Normal scan skips annotated/cached pod
+	p.scanPodInternal(annotatedInfo, false)
+	assert.Empty(t, mt.received, "expected regular scan to skip annotated & cached pod")
+	assert.Equal(t, 0, sc.calls)
+
+	// Forced drift rescan dispatches cached SBOM without re-running Syft
+	p.scanPodInternal(annotatedInfo, true)
+	assert.Equal(t, []string{"{cdx}"}, sbomsOf(mt.received), "expected forceRescan to re-process pod and heal target drift")
+	assert.Equal(t, 0, sc.calls)
+}
+
+func TestScanPodInternal_ForceRescanReusesCachedFallback(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() { internal.OperatorConfig = origConfig })
+
+	pod := podWith("pod-a", "dlcm", "img")
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{sbom: "{syft}"}
+	p, dt, cm := fallbackProcessor(kc, sc, spdxSbom)
+
+	// Initial scan generates and caches the Syft fallback for dt and annotates the pod
+	p.scanPod(podInfo(pod))
+	require.Equal(t, 1, sc.calls)
+	require.Equal(t, "img", updated["pod-a"].Annotations[annotationC1])
+
+	annotatedInfo := podInfo(pod)
+	annotatedInfo.Annotations = updated["pod-a"].Annotations
+	dt.received = nil
+	cm.received = nil
+
+	// Forced rescan must re-dispatch both cached attestations and cached fallback without invoking Syft again
+	p.scanPodInternal(annotatedInfo, true)
+	assert.Equal(t, 1, sc.calls, "expected forceRescan to reuse cached fallback without running Syft again")
+	assert.Equal(t, []string{"{spdx}", "{syft}"}, sbomsOf(dt.received))
+	assert.Equal(t, []string{"{spdx}"}, sbomsOf(cm.received))
+}
+
+type reconcileMockTarget struct {
+	mockTarget
+	namespaceAware bool
+	loadImages     []*target.TargetImage
+	loadCalls      int
+	removed        []*target.TargetImage
+}
+
+func (m *reconcileMockTarget) IsNamespaceAware() bool { return m.namespaceAware }
+
+func (m *reconcileMockTarget) LoadImages(ctx context.Context) ([]*target.TargetImage, error) {
+	m.loadCalls++
+	out := make([]*target.TargetImage, len(m.loadImages))
+	copy(out, m.loadImages)
+	return out, nil
+}
+
+func (m *reconcileMockTarget) ProcessSbom(ctx context.Context, tctx *target.TargetContext) error {
+	if err := m.mockTarget.ProcessSbom(ctx, tctx); err != nil {
+		return err
+	}
+	// Reflect newly synced image in subsequent LoadImages calls
+	ns := ""
+	if m.namespaceAware && tctx.Pod != nil {
+		ns = tctx.Pod.PodNamespace
+	}
+	m.loadImages = append(m.loadImages, &target.TargetImage{
+		RegistryImage: &liboci.RegistryImage{ImageID: tctx.Image.ImageID},
+		Namespace:     ns,
+	})
+	return nil
+}
+
+func (m *reconcileMockTarget) Remove(ctx context.Context, images []*target.TargetImage) error {
+	m.removed = append(m.removed, images...)
+	return nil
+}
+
+func TestReconcilePods_HealsAnnotatedPodDriftAndRemovesOrphans(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() { internal.OperatorConfig = origConfig })
+	internal.OperatorConfig = &internal.Config{DeleteOrphanImages: true}
+
+	const runningImg = "registry.example.io/dlcm/cc-shell@sha256:1dc026e889"
+	const orphanImg = "registry.example.io/dlcm/old-app@sha256:deadbeef00"
+
+	pod := podWith("cc-shell-abc", "dlcm", runningImg)
+	kc, updated := fakeKubeClient(t, pod)
+	sc := &fakeScanner{err: errors.New("syft must not run when cache has attestations")}
+
+	// Target has only the orphan image; runningImg was externally deactivated/deleted -> drift
+	tgt := &reconcileMockTarget{
+		namespaceAware: true,
+		loadImages: []*target.TargetImage{
+			{RegistryImage: &liboci.RegistryImage{ImageID: orphanImg}, Namespace: "dlcm"},
+		},
+	}
+
+	p := &Processor{
+		K8s:      kc,
+		sy:       sc,
+		Targets:  []target.Target{tgt},
+		imageMap: make(map[string]*cachedImage),
+	}
+
+	// Mark pod as already annotated and cached (simulating prior successful scan)
+	kc.UpdatePodAnnotation(podInfo(pod), []string{"c1"})
+	annotated := podInfo(pod)
+	annotated.Annotations = updated[pod.Name].Annotations
+	require.True(t, kc.HasAnnotation(annotated.Annotations, annotated.Containers[0]))
+	p.imageScanned("dlcm", runningImg, []*internaloci.AttestationSbom{cdxSbom})
+
+	p.reconcilePods([]libk8s.PodInfo{annotated})
+
+	assert.Equal(t, []string{"{cdx}"}, sbomsOf(tgt.received), "expected drift on annotated pod to be healed")
+	assert.Equal(t, 0, sc.calls, "expected cached attestation reuse without running Syft")
+	require.Len(t, tgt.removed, 1)
+	assert.Equal(t, orphanImg, tgt.removed[0].ImageID)
+}
+
+func TestReconcilePods_HealthyClusterLoadsImagesOnce(t *testing.T) {
+	origConfig := internal.OperatorConfig
+	t.Cleanup(func() { internal.OperatorConfig = origConfig })
+	internal.OperatorConfig = &internal.Config{DeleteOrphanImages: true}
+
+	const runningImg = "registry.example.io/dlcm/cc-shell@sha256:1dc026e889"
+
+	pod := podWith("cc-shell-abc", "dlcm", runningImg)
+	kc, _ := fakeKubeClient(t, pod)
+	sc := &fakeScanner{err: errors.New("syft must not run on healthy cluster")}
+
+	tgt := &reconcileMockTarget{
+		namespaceAware: true,
+		loadImages: []*target.TargetImage{
+			{RegistryImage: &liboci.RegistryImage{ImageID: runningImg}, Namespace: "dlcm"},
+		},
+	}
+
+	p := &Processor{
+		K8s:      kc,
+		sy:       sc,
+		Targets:  []target.Target{tgt},
+		imageMap: make(map[string]*cachedImage),
+	}
+
+	p.reconcilePods([]libk8s.PodInfo{podInfo(pod)})
+
+	assert.Equal(t, 1, tgt.loadCalls, "healthy reconcile tick must call LoadImages only once per target")
+	assert.Empty(t, tgt.received)
+	assert.Empty(t, tgt.removed)
+	assert.Equal(t, 0, sc.calls)
+}

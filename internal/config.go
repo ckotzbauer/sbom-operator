@@ -55,6 +55,7 @@ type Config struct {
 	FetchOciAttestations             bool     `yaml:"fetchOciAttestations" env:"FETCH_OCI_ATTESTATIONS" flag:"fetch-oci-attestations"`
 	InsecureHttpRegistry             bool     `yaml:"insecureHttpRegistry" env:"INSECURE_HTTP_REGISTRY" flag:"insecure-http-registry"`
 	RetryInterval                    string   `yaml:"retryInterval" env:"SBOM_RETRY_INTERVAL" flag:"retry-interval"`
+	ReconcileInterval                string   `yaml:"reconcileInterval" env:"SBOM_RECONCILE_INTERVAL" flag:"reconcile-interval"`
 }
 
 var (
@@ -96,6 +97,7 @@ var (
 	ConfigKeyFetchOciAttestations                            = "fetch-oci-attestations"
 	ConfigKeyInsecureHttpRegistry                            = "insecure-http-registry"
 	ConfigKeyRetryInterval                                   = "retry-interval"
+	ConfigKeyReconcileInterval                               = "reconcile-interval"
 	/* #nosec */
 	ConfigKeyJobImagePullSecret = "job-image-pull-secret"
 	ConfigKeyJobTimeout         = "job-timeout"
