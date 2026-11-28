@@ -30,7 +30,7 @@ jobs:
       ghcr-password: ${{ secrets.GHCR_PASSWORD }}
 
   job-image-vcn:
-    uses: ckotzbauer/sbom-operator/.github/workflows/release-job-image.yml@2128c22f5741f78c870bd5366936ba3cc26453bc # main
+    uses: ckotzbauer/sbom-operator/.github/workflows/release-job-image.yml@8e7054213dfbccf086a5a0198b97f4646cd88c92 # main
     needs: [release]
     with:
       version: ${{ github.event.inputs.version }}
